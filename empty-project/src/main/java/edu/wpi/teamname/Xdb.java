@@ -33,13 +33,13 @@ public class Xdb {
     // creates tables
     try {
       Statement initialization = connection.createStatement();
-      initialization.execute(
-          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
-              + "xCoord INT NOT NULL, yCoord INT NOT NULL, "
-              + "floor VARCHAR(2) NOT NULL, "
-              + "building VARCHAR(10) NOT NULL, "
-              + "nodeType CHAR(4) NOT NULL, "
-              + "longName VARCHAR(50) NOT NULL, shortName VARCHAR(30))");
+            initialization.execute(
+                "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
+                    + "xCoord INT NOT NULL, yCoord INT NOT NULL, "
+                    + "floor VARCHAR(2) NOT NULL, "
+                    + "building VARCHAR(10) NOT NULL, "
+                    + "nodeType CHAR(4) NOT NULL, "
+                    + "longName VARCHAR(50) NOT NULL, shortName VARCHAR(30))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();

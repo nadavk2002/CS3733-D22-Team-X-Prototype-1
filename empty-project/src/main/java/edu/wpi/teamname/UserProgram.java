@@ -1,5 +1,9 @@
 package edu.wpi.teamname;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserProgram {
@@ -53,6 +57,31 @@ public class UserProgram {
           System.out.println("Your input should be one number between 1 and 6, try again");
           break;
       }
+    }
+  }
+
+  private static void loadCSV() {
+    List<Location> locationsFromCSV = new ArrayList<Location>();
+    try {
+      Scanner sc =
+          new Scanner(
+              new File("empty-project/src/main/resources/edu/wpi/teamname/TowerLocations.csv"));
+      sc.nextLine();
+      while (sc.hasNextLine()) {
+        locationsFromCSV.add(
+            new Location(
+                sc.next(),
+                Integer.parseInt(sc.next()),
+                Integer.parseInt(sc.next()),
+                sc.next(),
+                sc.next(),
+                sc.next(),
+                sc.next(),
+                sc.next()));
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
     }
   }
 }
