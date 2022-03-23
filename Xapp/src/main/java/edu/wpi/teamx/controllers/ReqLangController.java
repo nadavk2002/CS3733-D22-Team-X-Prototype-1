@@ -1,2 +1,3 @@
-package edu.wpi.teamx.controllers;public class ReqLangController {
-}
+package edu.wpi.teamx.controllers;
+
+public class ReqLangController {}
