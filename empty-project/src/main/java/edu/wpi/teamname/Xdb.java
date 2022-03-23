@@ -4,6 +4,8 @@ import java.sql.*;
 
 /** Created by Darren Kwee */
 public class Xdb {
+
+
   public static void main(String args[]) {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
