@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 public class AppController {
   @FXML private Button ReqLangButton;
   @FXML private Button ReqInTransportButton;
+  @FXML private Button mealReqButton;
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -19,8 +20,13 @@ public class AppController {
 
   @FXML
   void ReqInTransportButton() throws IOException {
-    Parent root =
-        FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/ReqInTransport.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/ReqInTransport.fxml"));
+    App.getPrimaryStage().getScene().setRoot(root);
+  }
+  
+  @FXML
+  void mealReqButton() throws IOException {
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/mealRequest.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 }
