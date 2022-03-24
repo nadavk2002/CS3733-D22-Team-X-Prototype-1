@@ -69,4 +69,36 @@ public class Location {
   public void setShortName(String shortName) {
     this.shortName = shortName;
   }
+
+  public String getNodeID() {
+    return nodeID;
+  }
+
+  public int getxCoord() {
+    return xCoord;
+  }
+
+  public int getyCoord() {
+    return yCoord;
+  }
+
+  public String getFloor() {
+    return floor;
+  }
+
+  public String getBuilding() {
+    return building;
+  }
+
+  public String getNodeType() {
+    return nodeType;
+  }
+
+  public String getLongName() {
+    return longName;
+  }
+
+  public String getShortName() {
+    return shortName;
+  }
 }
