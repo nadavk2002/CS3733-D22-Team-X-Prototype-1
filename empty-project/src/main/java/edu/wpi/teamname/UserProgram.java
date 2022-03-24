@@ -2,8 +2,6 @@ package edu.wpi.teamname;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.Scanner;
 
 public class UserProgram {
   private static List<Location> locationsFromCSV;
-  private static List<Location> locationsFromDB;
 
   /**
    * Starts the program that the user will interact with. This method runs until the user cannot
@@ -30,20 +27,22 @@ public class UserProgram {
 
     loadCSV(connection);
 
+    System.out.println(
+        "1 – Location Information\n"
+            + "2 – Change Floor and Type\n"
+            + "3 – Enter Location\n"
+            + "4 – Delete Location\n"
+            + "5 – Save Locations to CSV file\n"
+            + "6 – Exit Program");
+
     // This loop will end when the user selects option 6
     while (true) {
-      System.out.println(
-          "1 – Location Information\n"
-              + "2 – Change Floor and Type\n"
-              + "3 – Enter Location\n"
-              + "4 – Delete Location\n"
-              + "5 – Save Locations to CSV file\n"
-              + "6 – Exit Program");
       Scanner input = new Scanner(System.in);
       String option = input.nextLine();
       switch (option) {
         case ("1"):
           System.out.println("option 1 placeholder");
+          printLocation(connection); // go to method
           break;
         case ("2"):
           System.out.println("option 2 placeholder");
@@ -55,10 +54,7 @@ public class UserProgram {
           System.out.println("option 4 placeholder");
           break;
         case ("5"):
-          System.out.println("Enter file name");
-          Scanner inputFive = new Scanner(System.in);
-          String fileName = inputFive.nextLine();
-          createCSV(connection, fileName);
+          System.out.println("option 5 placeholder");
           break;
         case ("6"):
           return;
@@ -135,12 +131,13 @@ public class UserProgram {
       Statement statement =
           connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
+        locationsFromCSV.add(new Location(nodeID));
         System.out.println("Location with nodeID " + nodeID + " added successfully.");
       } else {
         System.out.println(
             "Location with nodeID "
                 + nodeID
-                + " could not be added. Perhaps this is because it already exsits.");
+                + " could not be added. Perhaps this is because it already exists.");
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -153,6 +150,7 @@ public class UserProgram {
       Statement statement =
           connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + nodeID + "'") > 0) {
+        locationsFromCSV.remove(new Location(nodeID));
         System.out.println("Location with nodeID " + nodeID + " successfully deleted.");
       } else {
         System.out.println("Location with nodeID " + nodeID + " not found");
@@ -164,46 +162,33 @@ public class UserProgram {
   }
 
   /**
-   * @param connection used to connect to embedded database in Xdb
-   * @param csvFileName the name of the csv file to be created (input from the menu)
+   * prints locations within the db to the serial monitor
+   *
+   * @param connection
    */
-  private static void createCSV(Connection connection, String csvFileName) {
-    locationsFromDB = new ArrayList<Location>();
+  private static void printLocation(Connection connection) {
     try {
+      // create the statement
       Statement statement = connection.createStatement();
-      ResultSet rSet = statement.executeQuery("SELECT * FROM Location");
-      while (rSet.next()) {
-        locationsFromDB.add(
-            new Location(
-                rSet.getString("nodeID"),
-                rSet.getInt("xCoord"),
-                rSet.getInt("yCoord"),
-                rSet.getString("floor"),
-                rSet.getString("building"),
-                rSet.getString("nodeType"),
-                rSet.getString("longName"),
-                rSet.getString("shortName")));
+      // execute query to see all locations and store it to a result set
+      ResultSet resultSet = statement.executeQuery("Select * FROM Location");
+      ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+      int columnsNumber = resultSetMetaData.getColumnCount();
+      while (resultSet.next()) {
+        for (int i = 1; i <= columnsNumber; i++) {
+          // print column of data
+          System.out.print(
+              resultSetMetaData.getColumnName(i).replace("_", " ")
+                  + ": "
+                  + resultSet.getString(i)
+                  + " ");
+          // resultSetMetaData.getColumnName(i).replace("_", " ") + ": " + resultSet.getString(i));
+        }
+        // create new line
+        System.out.println(" ");
       }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
 
-    try {
-      FileWriter csvFile = new FileWriter(csvFileName);
-      csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
-      for (int i = 0; i < locationsFromDB.size(); i++) {
-        csvFile.write("\n" + locationsFromDB.get(i).getNodeID() + ",");
-        csvFile.write(locationsFromDB.get(i).getxCoord() + ",");
-        csvFile.write(locationsFromDB.get(i).getyCoord() + ",");
-        csvFile.write(locationsFromDB.get(i).getFloor() + ",");
-        csvFile.write(locationsFromDB.get(i).getBuilding() + ",");
-        csvFile.write(locationsFromDB.get(i).getNodeType() + ",");
-        csvFile.write(locationsFromDB.get(i).getLongName() + ",");
-        csvFile.write(locationsFromDB.get(i).getShortName());
-      }
-      csvFile.flush();
-      csvFile.close();
-    } catch (IOException e) {
+    } catch (SQLException e) {
       e.printStackTrace();
     }
   }
