@@ -162,9 +162,9 @@ public class UserProgram {
   }
 
   /**
-   * prints locations within the db to the serial monitor
+   * prints locations within the database to the monitor
    *
-   * @param connection
+   * @param connection SQL database connection to use.
    */
   private static void printLocation(Connection connection) {
     try {
