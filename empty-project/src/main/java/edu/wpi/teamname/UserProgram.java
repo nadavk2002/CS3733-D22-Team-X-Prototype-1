@@ -76,8 +76,7 @@ public class UserProgram {
     try {
       Scanner sc =
           new Scanner(
-              new File(
-                  "C:\\Users\\nrmoy\\Documents\\GitHub\\CS3733-D22-Team-X-Prototype-1\\empty-project\\src\\main\\resources\\edu\\wpi\\teamname\\TowerLocations.csv"));
+              new File("empty-project/src/main/resources/edu/wpi/teamname/TowerLocations.csv"));
       sc.nextLine();
       while (sc.hasNextLine()) {
         String[] currLine = sc.nextLine().replaceAll("\r\n", "").split(",");
