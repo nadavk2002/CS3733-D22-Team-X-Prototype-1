@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamx.controllers.AppController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamx.controllers.AppController">
    <children>
       <Label layoutX="219.0" layoutY="14.0" text="Team X JavaFX Starting Page" />
       <Button layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onAction="#ReqLangButton" text="Request Language Interpreter" />
       <Button layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#ReqMedicineDelivery" text="Request Medicine Delivery" />
+      <Button layoutX="14.0" layoutY="99.0" mnemonicParsing="false" onAction="#ReqInTransportButton" text="Request Internal Patient Transportation" />
+      <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onAction="#mealReqButton" text="Request Patient Meal" />
    </children>
 </AnchorPane>
