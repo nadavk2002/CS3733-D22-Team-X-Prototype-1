@@ -33,13 +33,13 @@ public class Xdb {
     // creates table
     try {
       Statement initialization = connection.createStatement();
-      //      initialization.execute(
-      //          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
-      //              + "xCoord INT NOT NULL, yCoord INT NOT NULL, "
-      //              + "floor VARCHAR(2) NOT NULL, "
-      //              + "building VARCHAR(10) NOT NULL, "
-      //              + "nodeType CHAR(4) NOT NULL, "
-      //              + "longName VARCHAR(50) NOT NULL, shortName VARCHAR(30))");
+      initialization.execute(
+          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
+              + "xCoord INT, yCoord INT, "
+              + "floor VARCHAR(2), "
+              + "building VARCHAR(10), "
+              + "nodeType CHAR(4), "
+              + "longName VARCHAR(50), shortName VARCHAR(30))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
@@ -60,19 +60,21 @@ public class Xdb {
     try {
       Statement statement =
           connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-      //      if (statement.executeUpdate("INSERT INTO Location VALUES ()")) {
-      //        System.out.println("Location with nodeID " + nodeID + " added successfully.");
-      //      } else {
-      //        System.out.println("Location with nodeID " + nodeID + " could not be added. Perhaps
-      // this is because it already exsits.");
-      //      }
+      if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
+        System.out.println("Location with nodeID " + nodeID + " added successfully.");
+      } else {
+        System.out.println(
+            "Location with nodeID "
+                + nodeID
+                + " could not be added. Perhaps this is because it already exsits.");
+      }
     } catch (SQLException e) {
       e.printStackTrace();
       return;
     }
   }
 
-  public static void removeLocationFromDB(Connection connection, String nodeID) {
+  public static void removeLocation(Connection connection, String nodeID) {
     try {
       Statement statement =
           connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
