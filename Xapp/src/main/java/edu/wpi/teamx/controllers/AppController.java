@@ -13,7 +13,7 @@ public class AppController {
   @FXML private Button ReqMedicineDelivery;
   @FXML private Button ReqInTransportButton;
   @FXML private Button mealReqButton;
-
+  @FXML private Button LabRequestButton;
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -26,22 +26,30 @@ public class AppController {
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/ReqLaundry.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
-  
+
   @FXML
   void ReqMedicineDelivery() throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/Medicine_Delivery.fxml"));
+    Parent root =
+        FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/Medicine_Delivery.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
-  
+
   @FXML
   void ReqInTransportButton() throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/ReqInTransport.fxml"));
+    Parent root =
+        FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/ReqInTransport.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
-  
+
   @FXML
   void mealReqButton() throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/mealRequest.fxml"));
+    App.getPrimaryStage().getScene().setRoot(root);
+  }
+
+  @FXML
+  void LabRequestButton() throws IOException {
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/LabRequest.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 }

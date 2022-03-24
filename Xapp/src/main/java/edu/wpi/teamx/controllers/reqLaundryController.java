@@ -14,7 +14,9 @@ public class reqLaundryController {
 
   @FXML
   public void initialize() {
-    selectLaundryType.getItems().addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
+    selectLaundryType
+        .getItems()
+        .addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
   }
 
   /**
