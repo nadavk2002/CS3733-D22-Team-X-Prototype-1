@@ -2,16 +2,16 @@ package edu.wpi.teamname;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserProgram {
   private static List<Location> locationsFromCSV;
+  private static List<Location> locationsFromDB;
 
   /**
    * Starts the program that the user will interact with. This method runs until the user cannot
@@ -30,16 +30,15 @@ public class UserProgram {
 
     loadCSV(connection);
 
-    System.out.println(
-        "1 – Location Information\n"
-            + "2 – Change Floor and Type\n"
-            + "3 – Enter Location\n"
-            + "4 – Delete Location\n"
-            + "5 – Save Locations to CSV file\n"
-            + "6 – Exit Program");
-
     // This loop will end when the user selects option 6
     while (true) {
+      System.out.println(
+          "1 – Location Information\n"
+              + "2 – Change Floor and Type\n"
+              + "3 – Enter Location\n"
+              + "4 – Delete Location\n"
+              + "5 – Save Locations to CSV file\n"
+              + "6 – Exit Program");
       Scanner input = new Scanner(System.in);
       String option = input.nextLine();
       switch (option) {
@@ -56,7 +55,10 @@ public class UserProgram {
           System.out.println("option 4 placeholder");
           break;
         case ("5"):
-          System.out.println("option 5 placeholder");
+          System.out.println("Enter file name");
+          Scanner inputFive = new Scanner(System.in);
+          String fileName = inputFive.nextLine();
+          createCSV(connection, fileName);
           break;
         case ("6"):
           return;
@@ -69,6 +71,7 @@ public class UserProgram {
 
   /**
    * Read the locations from CSV file. Put locations into db table "Location"
+   *
    * @param connection used to connect to embedded database in Xdb
    */
   private static void loadCSV(Connection connection) {
@@ -130,14 +133,14 @@ public class UserProgram {
   public static void addNewLocation(Connection connection, String nodeID) {
     try {
       Statement statement =
-              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
         System.out.println("Location with nodeID " + nodeID + " added successfully.");
       } else {
         System.out.println(
-                "Location with nodeID "
-                        + nodeID
-                        + " could not be added. Perhaps this is because it already exsits.");
+            "Location with nodeID "
+                + nodeID
+                + " could not be added. Perhaps this is because it already exsits.");
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -148,7 +151,7 @@ public class UserProgram {
   public static void removeLocation(Connection connection, String nodeID) {
     try {
       Statement statement =
-              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + nodeID + "'") > 0) {
         System.out.println("Location with nodeID " + nodeID + " successfully deleted.");
       } else {
@@ -157,6 +160,51 @@ public class UserProgram {
     } catch (SQLException e) {
       e.printStackTrace();
       return;
+    }
+  }
+
+  /**
+   * @param connection used to connect to embedded database in Xdb
+   * @param csvFileName the name of the csv file to be created (input from the menu)
+   */
+  private static void createCSV(Connection connection, String csvFileName) {
+    locationsFromDB = new ArrayList<Location>();
+    try {
+      Statement statement = connection.createStatement();
+      ResultSet rSet = statement.executeQuery("SELECT * FROM Location");
+      while (rSet.next()) {
+        locationsFromDB.add(
+            new Location(
+                rSet.getString("nodeID"),
+                rSet.getInt("xCoord"),
+                rSet.getInt("yCoord"),
+                rSet.getString("floor"),
+                rSet.getString("building"),
+                rSet.getString("nodeType"),
+                rSet.getString("longName"),
+                rSet.getString("shortName")));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    try {
+      FileWriter csvFile = new FileWriter(csvFileName);
+      csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
+      for (int i = 0; i < locationsFromDB.size(); i++) {
+        csvFile.write("\n" + locationsFromDB.get(i).getNodeID() + ",");
+        csvFile.write(locationsFromDB.get(i).getxCoord() + ",");
+        csvFile.write(locationsFromDB.get(i).getyCoord() + ",");
+        csvFile.write(locationsFromDB.get(i).getFloor() + ",");
+        csvFile.write(locationsFromDB.get(i).getBuilding() + ",");
+        csvFile.write(locationsFromDB.get(i).getNodeType() + ",");
+        csvFile.write(locationsFromDB.get(i).getLongName() + ",");
+        csvFile.write(locationsFromDB.get(i).getShortName());
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 }
