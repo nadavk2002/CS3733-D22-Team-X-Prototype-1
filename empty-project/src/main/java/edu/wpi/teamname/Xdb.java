@@ -30,7 +30,7 @@ public class Xdb {
     }
     System.out.println("Apache Derby connection established :D");
 
-    // creates tables
+    // creates table
     try {
       Statement initialization = connection.createStatement();
       //      initialization.execute(
@@ -53,6 +53,37 @@ public class Xdb {
       return;
     } else {
       UserProgram.executeProgram(args[0], args[1]);
+    }
+  }
+
+  public static void addNewLocation(Connection connection, String nodeID) {
+    try {
+      Statement statement =
+          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      //      if (statement.executeUpdate("INSERT INTO Location VALUES ()")) {
+      //        System.out.println("Location with nodeID " + nodeID + " added successfully.");
+      //      } else {
+      //        System.out.println("Location with nodeID " + nodeID + " could not be added. Perhaps
+      // this is because it already exsits.");
+      //      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return;
+    }
+  }
+
+  public static void removeLocationFromDB(Connection connection, String nodeID) {
+    try {
+      Statement statement =
+          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      if (statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + nodeID + "'") > 0) {
+        System.out.println("Location with nodeID " + nodeID + " successfully deleted.");
+      } else {
+        System.out.println("Location with nodeID " + nodeID + " not found");
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return;
     }
   }
 }
