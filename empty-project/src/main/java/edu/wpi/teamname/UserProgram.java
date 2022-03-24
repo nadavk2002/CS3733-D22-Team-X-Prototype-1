@@ -3,6 +3,7 @@ package edu.wpi.teamname;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -66,7 +67,12 @@ public class UserProgram {
     }
   }
 
+  /**
+   * Read the locations from CSV file. Put locations into db table "Location"
+   * @param connection used to connect to embedded database in Xdb
+   */
   private static void loadCSV(Connection connection) {
+    // Read locations into List "locationsFromCSV"
     locationsFromCSV = new ArrayList<Location>();
     try {
       Scanner sc =
@@ -97,6 +103,7 @@ public class UserProgram {
       System.out.println("File not found!");
     }
 
+    // Insert locations from locationsFromCSV into db table
     for (int i = 0; i < locationsFromCSV.size(); i++) {
       try {
         Statement initialization = connection.createStatement();
@@ -117,6 +124,39 @@ public class UserProgram {
         e.printStackTrace();
         return;
       }
+    }
+  }
+
+  public static void addNewLocation(Connection connection, String nodeID) {
+    try {
+      Statement statement =
+              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
+        System.out.println("Location with nodeID " + nodeID + " added successfully.");
+      } else {
+        System.out.println(
+                "Location with nodeID "
+                        + nodeID
+                        + " could not be added. Perhaps this is because it already exsits.");
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return;
+    }
+  }
+
+  public static void removeLocation(Connection connection, String nodeID) {
+    try {
+      Statement statement =
+              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      if (statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + nodeID + "'") > 0) {
+        System.out.println("Location with nodeID " + nodeID + " successfully deleted.");
+      } else {
+        System.out.println("Location with nodeID " + nodeID + " not found");
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return;
     }
   }
 }
