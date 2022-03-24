@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserProgram {
+  private static List<Location> locationsFromCSV;
 
   /**
    * Starts the program that the user will interact with. This method runs until the user cannot
@@ -22,6 +23,8 @@ public class UserProgram {
       System.out.println("Incorrect username or password");
       return;
     }
+
+    loadCSV();
 
     System.out.println(
         "1 – Location Information\n"
@@ -61,23 +64,30 @@ public class UserProgram {
   }
 
   private static void loadCSV() {
-    List<Location> locationsFromCSV = new ArrayList<Location>();
+    locationsFromCSV = new ArrayList<Location>();
     try {
       Scanner sc =
           new Scanner(
               new File("empty-project/src/main/resources/edu/wpi/teamname/TowerLocations.csv"));
       sc.nextLine();
       while (sc.hasNextLine()) {
-        locationsFromCSV.add(
-            new Location(
-                sc.next(),
-                Integer.parseInt(sc.next()),
-                Integer.parseInt(sc.next()),
-                sc.next(),
-                sc.next(),
-                sc.next(),
-                sc.next(),
-                sc.next()));
+        String[] currLine = sc.nextLine().replaceAll("\r\n", "").split(",");
+        if (currLine.length == 8) {
+          Location lnode =
+              new Location(
+                  currLine[0],
+                  Integer.parseInt(currLine[1]),
+                  Integer.parseInt(currLine[2]),
+                  currLine[3],
+                  currLine[4],
+                  currLine[5],
+                  currLine[6],
+                  currLine[7]);
+          locationsFromCSV.add(lnode);
+        } else {
+          System.out.println("CSV file formatted improperly");
+          System.exit(1);
+        }
       }
     } catch (FileNotFoundException e) {
       e.printStackTrace();

@@ -8,6 +8,17 @@ public class Location {
   private String nodeType;
   private String longName, shortName;
 
+  public Location() {
+    nodeID = null;
+    xCoord = -1;
+    yCoord = -1;
+    floor = null;
+    building = null;
+    nodeType = null;
+    longName = null;
+    shortName = null;
+  }
+
   public Location(
       String nodeID,
       int xCoord,
@@ -24,6 +35,38 @@ public class Location {
     this.building = building;
     this.nodeType = nodeType;
     this.longName = longName;
+    this.shortName = shortName;
+  }
+
+  public void setNodeID(String nodeID) {
+    this.nodeID = nodeID;
+  }
+
+  public void setxCoord(int xCoord) {
+    this.xCoord = xCoord;
+  }
+
+  public void setyCoord(int yCoord) {
+    this.yCoord = yCoord;
+  }
+
+  public void setFloor(String floor) {
+    this.floor = floor;
+  }
+
+  public void setBuilding(String building) {
+    this.building = building;
+  }
+
+  public void setNodeType(String nodeType) {
+    this.nodeType = nodeType;
+  }
+
+  public void setLongName(String longName) {
+    this.longName = longName;
+  }
+
+  public void setShortName(String shortName) {
     this.shortName = shortName;
   }
 }
