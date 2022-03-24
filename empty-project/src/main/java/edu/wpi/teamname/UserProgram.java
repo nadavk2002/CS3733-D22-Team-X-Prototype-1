@@ -2,10 +2,7 @@ package edu.wpi.teamname;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -45,6 +42,7 @@ public class UserProgram {
       switch (option) {
         case ("1"):
           System.out.println("option 1 placeholder");
+          printLocation(connection); // go to method
           break;
         case ("2"):
           System.out.println("option 2 placeholder");
@@ -69,6 +67,7 @@ public class UserProgram {
 
   /**
    * Read the locations from CSV file. Put locations into db table "Location"
+   *
    * @param connection used to connect to embedded database in Xdb
    */
   private static void loadCSV(Connection connection) {
@@ -77,7 +76,8 @@ public class UserProgram {
     try {
       Scanner sc =
           new Scanner(
-              new File("empty-project/src/main/resources/edu/wpi/teamname/TowerLocations.csv"));
+              new File(
+                  "C:\\Users\\nrmoy\\Documents\\GitHub\\CS3733-D22-Team-X-Prototype-1\\empty-project\\src\\main\\resources\\edu\\wpi\\teamname\\TowerLocations.csv"));
       sc.nextLine();
       while (sc.hasNextLine()) {
         String[] currLine = sc.nextLine().replaceAll("\r\n", "").split(",");
@@ -130,14 +130,14 @@ public class UserProgram {
   public static void addNewLocation(Connection connection, String nodeID) {
     try {
       Statement statement =
-              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
         System.out.println("Location with nodeID " + nodeID + " added successfully.");
       } else {
         System.out.println(
-                "Location with nodeID "
-                        + nodeID
-                        + " could not be added. Perhaps this is because it already exsits.");
+            "Location with nodeID "
+                + nodeID
+                + " could not be added. Perhaps this is because it already exsits.");
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -148,7 +148,7 @@ public class UserProgram {
   public static void removeLocation(Connection connection, String nodeID) {
     try {
       Statement statement =
-              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + nodeID + "'") > 0) {
         System.out.println("Location with nodeID " + nodeID + " successfully deleted.");
       } else {
@@ -157,6 +157,38 @@ public class UserProgram {
     } catch (SQLException e) {
       e.printStackTrace();
       return;
+    }
+  }
+
+  /**
+   * prints locations within the db to the serial monitor
+   *
+   * @param connection
+   */
+  private static void printLocation(Connection connection) {
+    try {
+      // create the statement
+      Statement statement = connection.createStatement();
+      // execute query to see all locations and store it to a result set
+      ResultSet resultSet = statement.executeQuery("Select * FROM Location");
+      ResultSetMetaData resultSetMetaData = resultSet.getMetaData();
+      int columnsNumber = resultSetMetaData.getColumnCount();
+      while (resultSet.next()) {
+        for (int i = 1; i <= columnsNumber; i++) {
+          // print column of data
+          System.out.print(
+              resultSetMetaData.getColumnName(i).replace("_", " ")
+                  + ": "
+                  + resultSet.getString(i)
+                  + " ");
+          // resultSetMetaData.getColumnName(i).replace("_", " ") + ": " + resultSet.getString(i));
+        }
+        // create new line
+        System.out.println(" ");
+      }
+
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
   }
 }
