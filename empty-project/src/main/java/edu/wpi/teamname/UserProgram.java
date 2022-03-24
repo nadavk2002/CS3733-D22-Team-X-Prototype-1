@@ -2,6 +2,9 @@ package edu.wpi.teamname;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -16,7 +19,7 @@ public class UserProgram {
    * @param username used to login
    * @param password used to login
    */
-  public static void executeProgram(String username, String password) {
+  public static void executeProgram(String username, String password, Connection connection) {
     if (username.equals("admin") && password.equals("admin")) {
       System.out.println("Successfully logged in!");
     } else {
@@ -24,7 +27,7 @@ public class UserProgram {
       return;
     }
 
-    loadCSV();
+    loadCSV(connection);
 
     System.out.println(
         "1 – Location Information\n"
@@ -63,7 +66,7 @@ public class UserProgram {
     }
   }
 
-  private static void loadCSV() {
+  private static void loadCSV(Connection connection) {
     locationsFromCSV = new ArrayList<Location>();
     try {
       Scanner sc =
@@ -92,6 +95,28 @@ public class UserProgram {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
       System.out.println("File not found!");
+    }
+
+    for (int i = 0; i < locationsFromCSV.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder insertLocation = new StringBuilder();
+        insertLocation.append("INSERT INTO Location VALUES(");
+        insertLocation.append("'" + locationsFromCSV.get(i).getNodeID() + "'" + ", ");
+        insertLocation.append(locationsFromCSV.get(i).getxCoord() + ", ");
+        insertLocation.append(locationsFromCSV.get(i).getyCoord() + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getFloor() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getBuilding() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getNodeType() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getLongName() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getShortName() + "'");
+        insertLocation.append(")");
+        initialization.execute(insertLocation.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for Location " + i + " failed");
+        e.printStackTrace();
+        return;
+      }
     }
   }
 }

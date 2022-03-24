@@ -2,6 +2,8 @@ package edu.wpi.teamname;
 
 import java.sql.*;
 
+// change Xdb to something else
+// change csv file path to something else, if it changes
 /** Created by Darren Kwee */
 public class Xdb {
   public static void main(String[] args) {
@@ -33,13 +35,13 @@ public class Xdb {
     // creates tables
     try {
       Statement initialization = connection.createStatement();
-      //      initialization.execute(
-      //          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
-      //              + "xCoord INT NOT NULL, yCoord INT NOT NULL, "
-      //              + "floor VARCHAR(2) NOT NULL, "
-      //              + "building VARCHAR(10) NOT NULL, "
-      //              + "nodeType CHAR(4) NOT NULL, "
-      //              + "longName VARCHAR(50) NOT NULL, shortName VARCHAR(30))");
+      initialization.execute(
+          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
+              + "xCoord INT NOT NULL, yCoord INT NOT NULL, "
+              + "floor VARCHAR(2) NOT NULL, "
+              + "building VARCHAR(10) NOT NULL, "
+              + "nodeType CHAR(4) NOT NULL, "
+              + "longName VARCHAR(50) NOT NULL, shortName VARCHAR(30))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
@@ -52,7 +54,7 @@ public class Xdb {
       System.out.println("Enter username and password as arguments I.E. \"Xdb username password\"");
       return;
     } else {
-      UserProgram.executeProgram(args[0], args[1]);
+      UserProgram.executeProgram(args[0], args[1], connection);
     }
   }
 }
