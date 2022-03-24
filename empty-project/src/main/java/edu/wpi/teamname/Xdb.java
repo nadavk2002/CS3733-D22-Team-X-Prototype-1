@@ -54,7 +54,7 @@ public class Xdb {
       System.out.println("Enter username and password as arguments I.E. \"Xdb username password\"");
       return;
     } else {
-      UserProgram.executeProgram(args[0], args[1]);
+      UserProgram.executeProgram(args[0], args[1], connection);
     }
   }
 
