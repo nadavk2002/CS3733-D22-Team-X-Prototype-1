@@ -133,7 +133,7 @@ public class UserProgram {
       Statement statement =
           connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
-        locationsFromCSV.add(new Location(nodeID));
+        //locationsFromCSV.add(new Location(nodeID));
         System.out.println("Location with nodeID " + nodeID + " added successfully.");
       } else {
         System.out.println(
@@ -152,7 +152,7 @@ public class UserProgram {
       Statement statement =
           connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + nodeID + "'") > 0) {
-        locationsFromCSV.remove(new Location(nodeID));
+        //locationsFromCSV.remove(new Location(nodeID));
         System.out.println("Location with nodeID " + nodeID + " successfully deleted.");
       } else {
         System.out.println("Location with nodeID " + nodeID + " not found");
