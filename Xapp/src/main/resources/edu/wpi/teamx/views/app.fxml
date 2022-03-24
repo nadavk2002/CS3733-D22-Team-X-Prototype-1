@@ -8,5 +8,6 @@
    <children>
       <Label layoutX="219.0" layoutY="14.0" text="Team X JavaFX Starting Page" />
       <Button layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onAction="#ReqLangButton" text="Request Language Interpreter" />
+      <Button layoutX="14.0" layoutY="80.0" mnemonicParsing="false" onAction="#ReqMedicineDelivery" text="Request Medicine Delivery" />
    </children>
 </AnchorPane>
