@@ -49,16 +49,20 @@ public class UserProgram {
         case ("2"):
           System.out.println("Please input a nodeID:");
           String myNodeID = input.nextLine();
+          // All apostraphes and semi-colons will be removed from the input
+          myNodeID = myNodeID.replaceAll("'", "").replaceAll(";", "");
           editLocation(connection, myNodeID);
           break;
         case ("3"):
           System.out.println("Input a nodeID");
           String nodeIDThree = input.nextLine();
+          nodeIDThree = nodeIDThree.replaceAll("'", "").replaceAll(";", "");
           addNewLocation(connection, nodeIDThree);
           break;
         case ("4"):
           System.out.println("Input a nodeID");
           String nodeIDFour = input.nextLine();
+          nodeIDFour = nodeIDFour.replaceAll("'", "").replaceAll(";", "");
           removeLocation(connection, nodeIDFour);
           break;
         case ("5"):
