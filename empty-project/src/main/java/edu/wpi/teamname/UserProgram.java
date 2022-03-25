@@ -33,12 +33,12 @@ public class UserProgram {
     // This loop will end when the user selects option 6
     while (true) {
       System.out.println(
-          "1 – Location Information\n"
-              + "2 – Change Floor and Type\n"
-              + "3 – Enter Location\n"
-              + "4 – Delete Location\n"
-              + "5 – Save Locations to CSV file\n"
-              + "6 – Exit Program");
+              "1 – Location Information\n"
+                      + "2 – Change Floor and Type\n"
+                      + "3 – Enter Location\n"
+                      + "4 – Delete Location\n"
+                      + "5 – Save Locations to CSV file\n"
+                      + "6 – Exit Program");
       Scanner input = new Scanner(System.in);
       String option = input.nextLine();
       switch (option) {
@@ -61,8 +61,9 @@ public class UserProgram {
           removeLocation(connection, nodeIDFour);
           break;
         case ("5"):
-          System.out.println("Enter file name");
+          System.out.println("Enter file name (without file extension)");
           String fileName = input.nextLine();
+          fileName += ".csv";
           createCSV(connection, fileName);
           break;
         case ("6"):
@@ -90,15 +91,15 @@ public class UserProgram {
         String[] currLine = sc.nextLine().replaceAll("\r\n", "").split(",");
         if (currLine.length == 8) {
           Location lnode =
-              new Location(
-                  currLine[0],
-                  Integer.parseInt(currLine[1]),
-                  Integer.parseInt(currLine[2]),
-                  currLine[3],
-                  currLine[4],
-                  currLine[5],
-                  currLine[6],
-                  currLine[7]);
+                  new Location(
+                          currLine[0],
+                          Integer.parseInt(currLine[1]),
+                          Integer.parseInt(currLine[2]),
+                          currLine[3],
+                          currLine[4],
+                          currLine[5],
+                          currLine[6],
+                          currLine[7]);
           locationsFromCSV.add(lnode);
         } else {
           System.out.println("CSV file formatted improperly");
@@ -151,11 +152,10 @@ public class UserProgram {
         for (int i = 1; i <= columnsNumber; i++) {
           // print column of data
           System.out.print(
-              resultSetMetaData.getColumnName(i).replace("_", " ")
-                  + ": "
-                  + resultSet.getString(i)
-                  + " ");
-          // resultSetMetaData.getColumnName(i).replace("_", " ") + ": " + resultSet.getString(i));
+                  resultSetMetaData.getColumnName(i).replace("_", " ")
+                          + ": "
+                          + resultSet.getString(i)
+                          + " ");
         }
         // create new line
         System.out.println(" ");
@@ -176,48 +176,54 @@ public class UserProgram {
     try {
       Scanner floor = new Scanner(System.in);
       Statement statement =
-          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-      if (statement.execute("SELECT nodeID FROM Location WHERE nodeID = '" + nodeID + "'")) {
+              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      ResultSet locationNodeID =
+              statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + nodeID + "'");
+      if (locationNodeID.next()) {
         System.out.println("Location with nodeID " + nodeID + " successfully found.");
         System.out.println(
-            "On a new line please enter the new floor then the new location type...");
+                "On a new line please enter the new floor then the new location type...");
         System.out.println("Enter the new floor:");
         String newFloor = floor.nextLine();
         System.out.println("\n" + "Enter the new location type:");
         String newType = floor.nextLine();
-        statement.executeUpdate(
-            "UPDATE Location SET floor = '"
-                + newFloor
-                + "', nodeType = '"
-                + newType
-                + "' WHERE nodeID = '"
-                + nodeID
-                + "'");
-        ResultSet newLocation =
-            statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + nodeID + "'");
-        while (newLocation.next()) {
-          System.out.println("Location updated.");
-          System.out.println(
-              "NodeID:"
-                  + newLocation.getString("nodeId")
-                  + "X-Coordinate:"
-                  + newLocation.getInt("xCoord")
-                  + "Y-Coordinate:"
-                  + newLocation.getInt("yCoord")
-                  + "Floor:"
-                  + newLocation.getString("floor")
-                  + "Building:"
-                  + newLocation.getString("building")
-                  + "Node Type:"
-                  + newLocation.getString("nodeType")
-                  + "Long Name:"
-                  + newLocation.getString("longName")
-                  + "Short Name:"
-                  + newLocation.getString("shortName"));
+        if (newFloor.length() > 2 || newType.length() > 4) {
+          System.out.println("Invalid floor or type input");
+          return;
         }
+        statement.executeUpdate(
+                "UPDATE Location SET floor = '"
+                        + newFloor
+                        + "', nodeType = '"
+                        + newType
+                        + "' WHERE nodeID = '"
+                        + nodeID
+                        + "'");
+        ResultSet confirmedLocationNodeID =
+                statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + nodeID + "'");
+        confirmedLocationNodeID.next();
+        System.out.println("Location updated.");
+        System.out.println(
+                "NodeID:"
+                        + confirmedLocationNodeID.getString("nodeId")
+                        + "X-Coordinate:"
+                        + confirmedLocationNodeID.getInt("xCoord")
+                        + "Y-Coordinate:"
+                        + confirmedLocationNodeID.getInt("yCoord")
+                        + "Floor:"
+                        + confirmedLocationNodeID.getString("floor")
+                        + "Building:"
+                        + confirmedLocationNodeID.getString("building")
+                        + "Node Type:"
+                        + confirmedLocationNodeID.getString("nodeType")
+                        + "Long Name:"
+                        + confirmedLocationNodeID.getString("longName")
+                        + "Short Name:"
+                        + confirmedLocationNodeID.getString("shortName"));
+        // }
 
       } else {
-        System.out.println("Location with nodeID " + nodeID + " successfully not found.");
+        System.out.println("Location with nodeID " + nodeID + " not found.");
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -234,14 +240,14 @@ public class UserProgram {
   private static void addNewLocation(Connection connection, String nodeID) {
     try {
       Statement statement =
-          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
         System.out.println("Location with nodeID " + nodeID + " added successfully.");
       } else {
         System.out.println(
-            "Location with nodeID "
-                + nodeID
-                + " could not be added. Perhaps this is because it already exists.");
+                "Location with nodeID "
+                        + nodeID
+                        + " could not be added. Perhaps this is because it already exists.");
       }
     } catch (SQLException e) {
       e.printStackTrace();
@@ -258,7 +264,7 @@ public class UserProgram {
   private static void removeLocation(Connection connection, String nodeID) {
     try {
       Statement statement =
-          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+              connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
       if (statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + nodeID + "'") > 0) {
         System.out.println("Location with nodeID " + nodeID + " successfully deleted.");
       } else {
@@ -283,15 +289,15 @@ public class UserProgram {
       ResultSet rSet = statement.executeQuery("SELECT * FROM Location");
       while (rSet.next()) {
         locationsFromDB.add(
-            new Location(
-                rSet.getString("nodeID"),
-                rSet.getInt("xCoord"),
-                rSet.getInt("yCoord"),
-                rSet.getString("floor"),
-                rSet.getString("building"),
-                rSet.getString("nodeType"),
-                rSet.getString("longName"),
-                rSet.getString("shortName")));
+                new Location(
+                        rSet.getString("nodeID"),
+                        rSet.getInt("xCoord"),
+                        rSet.getInt("yCoord"),
+                        rSet.getString("floor"),
+                        rSet.getString("building"),
+                        rSet.getString("nodeType"),
+                        rSet.getString("longName"),
+                        rSet.getString("shortName")));
       }
     } catch (SQLException e) {
       e.printStackTrace();

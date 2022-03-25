@@ -18,7 +18,7 @@ public class Xdb {
     // tries to create the database and establish a connection
     Connection connection = null;
     try {
-      connection = DriverManager.getConnection("jdbc:derby:Xdb;create=true");
+      connection = DriverManager.getConnection("jdbc:derby:spike_b_db;create=true");
       // Statement testStatement = connection.createStatement();
       //      testStatement.execute("CREATE TABLE TEST(ID INT PRIMARY KEY)");
       //      testStatement.execute("INSERT INTO TEST VALUES(3)");
