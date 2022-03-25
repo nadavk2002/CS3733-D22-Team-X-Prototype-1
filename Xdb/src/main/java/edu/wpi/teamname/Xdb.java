@@ -30,13 +30,13 @@ public class Xdb {
     // creates table
     try {
       Statement initialization = connection.createStatement();
-      //      initialization.execute(
-      //          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
-      //              + "xCoord INT, yCoord INT, "
-      //              + "floor VARCHAR(2), "
-      //              + "building VARCHAR(10), "
-      //              + "nodeType CHAR(4), "
-      //              + "longName VARCHAR(50), shortName VARCHAR(30))");
+      initialization.execute(
+          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
+              + "xCoord INT, yCoord INT, "
+              + "floor VARCHAR(2), "
+              + "building VARCHAR(10), "
+              + "nodeType CHAR(4), "
+              + "longName VARCHAR(50), shortName VARCHAR(30))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
@@ -44,12 +44,6 @@ public class Xdb {
     }
     System.out.println("Database created successfully");
 
-    // Ensures username and password are passed as arguments
-    if (args.length < 2 || args[0] == null || args[1] == null) {
-      System.out.println("Enter username and password as arguments I.E. \"Xdb username password\"");
-      return;
-    } else {
-      UserProgram.executeProgram(args[0], args[1], connection);
-    }
+    UserProgram.executeProgram(connection);
   }
 }

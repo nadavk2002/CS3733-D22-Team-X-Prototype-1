@@ -17,18 +17,9 @@ public class UserProgram {
    * Starts the program that the user will interact with. This method runs until the user cannot
    * login or they enter "6" to exit the program
    *
-   * @param username used to login
-   * @param password used to login
    * @param connection used to connect to embedded database
    */
-  public static void executeProgram(String username, String password, Connection connection) {
-    if (username.equals("admin") && password.equals("admin")) {
-      System.out.println("Successfully logged in!");
-    } else {
-      System.out.println("Incorrect username or password");
-      return;
-    }
-
+  public static void executeProgram(Connection connection) {
     loadCSV(connection);
 
     // This loop will end when the user selects option 6
