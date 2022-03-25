@@ -2,9 +2,6 @@ package edu.wpi.teamname;
 
 import java.sql.*;
 
-// change Xdb to something else
-// change csv file path to something else, if it changes
-/** Created by Darren Kwee */
 public class Xdb {
   public static void main(String[] args) {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
