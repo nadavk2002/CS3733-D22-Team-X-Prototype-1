@@ -47,7 +47,9 @@ public class UserProgram {
           printLocation(connection); // go to method
           break;
         case ("2"):
-          System.out.println("option 2 placeholder");
+          System.out.println("Please input a nodeID:");
+          String myNodeID = input.nextLine();
+          editLocation(connection, myNodeID);
           break;
         case ("3"):
           System.out.println("option 3 placeholder");
@@ -195,6 +197,55 @@ public class UserProgram {
 
     } catch (SQLException e) {
       e.printStackTrace();
+    }
+  }
+
+  private static void editLocation(Connection connection, String nodeID) {
+    try {
+      Scanner floor = new Scanner(System.in);
+      Statement statement =
+          connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      if (statement.execute("SELECT nodeID FROM Location WHERE nodeID = '" + nodeID + "'")) {
+        System.out.println("Location with nodeID " + nodeID + " successfully found.");
+        System.out.println(
+            "On a new line please enter the new floor then the new location type...");
+        System.out.println("Enter the new floor:");
+        int newFloor = floor.nextInt();
+        System.out.println("\n" + "Enter the new location type:");
+        int newType = floor.nextInt();
+        statement.executeUpdate(
+            "UPDATE Location SET floor = newFloor, nodeType = newType WHERE nodeID = '"
+                + nodeID
+                + "'");
+        ResultSet newLocation =
+            statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + nodeID + "'");
+        while (newLocation.next()) {
+          System.out.println("Location updated.");
+          System.out.println(
+              "NodeID:"
+                  + newLocation.getString("nodeId")
+                  + "X-Coordinate:"
+                  + newLocation.getInt("xCoord")
+                  + "Y-Coordinate:"
+                  + newLocation.getInt("yCoord")
+                  + "Floor:"
+                  + newLocation.getString("floor")
+                  + "Building:"
+                  + newLocation.getString("building")
+                  + "Node Type:"
+                  + newLocation.getString("nodeType")
+                  + "Long Name:"
+                  + newLocation.getString("longName")
+                  + "Short Name:"
+                  + newLocation.getString("shortName"));
+        }
+
+      } else {
+        System.out.println("Location with nodeID " + nodeID + " successfully not found.");
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return;
     }
   }
 
