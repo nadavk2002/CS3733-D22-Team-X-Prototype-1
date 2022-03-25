@@ -18,7 +18,8 @@ public class Xdb {
     // tries to create the database and establish a connection
     Connection connection = null;
     try {
-      connection = DriverManager.getConnection("jdbc:derby:spike_b_db;create=true");
+      connection =
+          DriverManager.getConnection("jdbc:derby:spike_b_db;create=true", "admin", "admin");
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console.");
       e.printStackTrace();
@@ -29,13 +30,13 @@ public class Xdb {
     // creates table
     try {
       Statement initialization = connection.createStatement();
-      initialization.execute(
-          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
-              + "xCoord INT, yCoord INT, "
-              + "floor VARCHAR(2), "
-              + "building VARCHAR(10), "
-              + "nodeType CHAR(4), "
-              + "longName VARCHAR(50), shortName VARCHAR(30))");
+      //      initialization.execute(
+      //          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
+      //              + "xCoord INT, yCoord INT, "
+      //              + "floor VARCHAR(2), "
+      //              + "building VARCHAR(10), "
+      //              + "nodeType CHAR(4), "
+      //              + "longName VARCHAR(50), shortName VARCHAR(30))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
