@@ -210,11 +210,15 @@ public class UserProgram {
         System.out.println(
             "On a new line please enter the new floor then the new location type...");
         System.out.println("Enter the new floor:");
-        int newFloor = floor.nextInt();
+        String newFloor = floor.nextLine();
         System.out.println("\n" + "Enter the new location type:");
-        int newType = floor.nextInt();
+        String newType = floor.nextLine();
         statement.executeUpdate(
-            "UPDATE Location SET floor = newFloor, nodeType = newType WHERE nodeID = '"
+            "UPDATE Location SET floor = '"
+                + newFloor
+                + "', nodeType = '"
+                + newType
+                + "' WHERE nodeID = '"
                 + nodeID
                 + "'");
         ResultSet newLocation =
