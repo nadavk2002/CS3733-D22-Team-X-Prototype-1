@@ -13,5 +13,6 @@
       <Button layoutX="14.0" layoutY="99.0" mnemonicParsing="false" onAction="#ReqInTransportButton" text="Request Internal Patient Transportation" />
       <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onAction="#mealReqButton" text="Request Patient Meal" />
       <Button layoutX="14.0" layoutY="200.0" mnemonicParsing="false" onAction="#LabRequestButton" text="Request Lab Service" />
+      <Button layoutX="14.0" layoutY="234.0" mnemonicParsing="false" onAction="#equipmentRequestButton" text="Request Equipment Delivery" />
    </children>
 </AnchorPane>

@@ -14,6 +14,7 @@ public class AppController {
   @FXML private Button ReqInTransportButton;
   @FXML private Button mealReqButton;
   @FXML private Button LabRequestButton;
+  @FXML private Button equipmentRequestButton;
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -50,6 +51,13 @@ public class AppController {
   @FXML
   void LabRequestButton() throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/LabRequest.fxml"));
+    App.getPrimaryStage().getScene().setRoot(root);
+  }
+
+  @FXML
+  void equipmentRequestButton() throws IOException {
+    Parent root =
+        FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/equipmentDelivery.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 }
