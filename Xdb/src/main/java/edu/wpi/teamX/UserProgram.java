@@ -1,4 +1,4 @@
-package edu.wpi.teamname;
+package edu.wpi.teamX;
 
 import java.io.File;
 import java.io.FileNotFoundException;
