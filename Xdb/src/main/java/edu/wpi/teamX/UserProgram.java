@@ -81,7 +81,7 @@ public class UserProgram {
     // Read locations into List "locationsFromCSV"
     locationsFromCSV = new ArrayList<Location>();
     try {
-      Scanner sc = new Scanner(new File("src/main/resources/edu/wpi/teamname/TowerLocations.csv"));
+      Scanner sc = new Scanner(new File("src/main/resources/edu/wpi/teamX/TowerLocations.csv"));
       sc.nextLine();
       while (sc.hasNextLine()) {
         String[] currLine = sc.nextLine().replaceAll("\r\n", "").split(",");
