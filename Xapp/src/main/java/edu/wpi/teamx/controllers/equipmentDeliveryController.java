@@ -27,7 +27,7 @@ public class equipmentDeliveryController {
   void ToMainMenu() throws IOException {
     Parent root =
         FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/edu/wpi/teamx/views/App.fxml")));
+            Objects.requireNonNull(getClass().getResource("/edu/wpi/teamx/views/app.fxml")));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 }

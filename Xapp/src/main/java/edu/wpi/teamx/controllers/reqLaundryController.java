@@ -26,7 +26,7 @@ public class reqLaundryController {
    */
   @FXML
   void ToMainMenu() throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/App.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/app.fxml"));
     App.getPrimaryStage().getScene().setRoot(root);
   }
 }
