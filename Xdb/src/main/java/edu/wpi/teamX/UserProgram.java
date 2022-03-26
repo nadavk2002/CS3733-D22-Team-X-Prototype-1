@@ -216,8 +216,6 @@ public class UserProgram {
                 + confirmedLocationNodeID.getString("longName")
                 + "Short Name:"
                 + confirmedLocationNodeID.getString("shortName"));
-        // }
-
       } else {
         System.out.println("Location with nodeID " + nodeID + " not found.");
       }
@@ -247,7 +245,7 @@ public class UserProgram {
         System.out.println("This location cannot be added");
         return;
       }
-      if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
+      if (statement.executeUpdate("INSERT INTO Location (nodeID) VALUES ('" + nodeID + "')") > 0) {
         System.out.println("Location with nodeID " + nodeID + " added successfully.");
       } else {
         System.out.println(
@@ -316,11 +314,29 @@ public class UserProgram {
         csvFile.write("\n" + locationsFromDB.get(i).getNodeID() + ",");
         csvFile.write(locationsFromDB.get(i).getxCoord() + ",");
         csvFile.write(locationsFromDB.get(i).getyCoord() + ",");
-        csvFile.write(locationsFromDB.get(i).getFloor() + ",");
-        csvFile.write(locationsFromDB.get(i).getBuilding() + ",");
-        csvFile.write(locationsFromDB.get(i).getNodeType() + ",");
-        csvFile.write(locationsFromDB.get(i).getLongName() + ",");
-        csvFile.write(locationsFromDB.get(i).getShortName());
+        if (locationsFromDB.get(i).getFloor() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locationsFromDB.get(i).getFloor() + ",");
+        }
+        if (locationsFromDB.get(i).getBuilding() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locationsFromDB.get(i).getBuilding() + ",");
+        }
+        if (locationsFromDB.get(i).getNodeType() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locationsFromDB.get(i).getNodeType() + ",");
+        }
+        if (locationsFromDB.get(i).getLongName() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locationsFromDB.get(i).getLongName() + ",");
+        }
+        if (locationsFromDB.get(i).getShortName() != null) {
+          csvFile.write(locationsFromDB.get(i).getShortName());
+        }
       }
       csvFile.flush();
       csvFile.close();

@@ -29,6 +29,13 @@ public class Main {
 
     // creates table
     try {
+      Statement dropLocation = connection.createStatement();
+      try {
+
+        dropLocation.execute("DROP TABLE Location");
+      } catch (SQLException e) {
+        System.out.println("Table does not exist...\nCreating table...");
+      }
       Statement initialization = connection.createStatement();
       initialization.execute(
           "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
