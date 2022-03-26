@@ -52,5 +52,11 @@ public class Main {
     System.out.println("Database created successfully");
 
     UserProgram.executeProgram(connection);
+
+    try {
+      connection.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 }
