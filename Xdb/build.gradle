@@ -107,3 +107,16 @@ spotless {
         googleJavaFormat()
     }
 }
+
+// Include dependent libraries in archive.
+mainClassName = "com.company.application.Main"
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
