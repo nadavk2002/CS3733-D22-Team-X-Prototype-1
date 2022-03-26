@@ -235,8 +235,18 @@ public class UserProgram {
    */
   private static void addNewLocation(Connection connection, String nodeID) {
     try {
+      if (nodeID.length() > 10) {
+        System.out.println("nodeID must be 10 characters or less");
+        return;
+      }
       Statement statement =
           connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+      ResultSet rSet =
+          statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + nodeID + "'");
+      if (rSet.next()) {
+        System.out.println("This location cannot be added");
+        return;
+      }
       if (statement.executeUpdate("INSERT INTO Location (NODEID) VALUES ('" + nodeID + "')") > 0) {
         System.out.println("Location with nodeID " + nodeID + " added successfully.");
       } else {
