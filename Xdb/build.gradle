@@ -109,7 +109,7 @@ spotless {
 }
 
 // Include dependent libraries in archive.
-mainClassName = "com.company.application.Main"
+mainClassName = "edu.wpi.teamX.Main"
 
 jar {
     manifest {
