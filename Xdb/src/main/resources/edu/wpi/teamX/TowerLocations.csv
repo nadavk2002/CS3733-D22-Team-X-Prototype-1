@@ -123,3 +123,18 @@ CHALL010L2,2130,849,L2,Tower,HALL,Hallway 10 Floor L2,Hallway C010L2
 WELEV00LL2,1785,924,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 WELEV00ML2,1820,1280,L2,Tower,ELEV,Elevator M Floor L2,Elevator ML2
 WHALL001L2,1745,1524,L2,Tower,HALL,Hallway Connector 1 Floor L2,Hallway W01L2
+xSTOR001L1,1680,910,L1,Tower,STOR,OR Bed Park Floor L1,OR Bed Park Floor L1
+xSTOR00201,1540,930,1,Tower,STOR,West Plaza,West Plaza
+xSTOR00303,1520,760,3,Tower,STOR,Clean Equipment Storage 1,Clean ES 1
+xSTOR00403,1520,1090,3,Tower,STOR,Clean Equipment Storage 2,Clean ES 2
+xDIRT00103,1590,930,3,Tower,DIRT,Dirty Equipment Storage,Dirty ES
+xPATI00103,1570,710,3,Tower,PATI,Patient Room 1,Patient Room 1
+xPATI00203,1500,700,3,Tower,PATI,Patient Room 2,Patient Room 2
+xPATI00303,1450,750,3,Tower,PATI,Patient Room 3,Patient Room 3
+xPATI00403,1460,820,3,Tower,PATI,Patient Room 4,Patient Room 4
+xPATI00503,1460,1040,3,Tower,PATI,Patient Room 5,Patient Room 5
+xPATI00603,1450,1110,3,Tower,PATI,Patient Room 6,Patient Room 6
+xPATI00703,1500,1160,3,Tower,PATI,Patient Room 7,Patient Room 7
+xPATI00803,1570,1150,3,Tower,PATI,Patient Room 8,Patient Room 8
+xSTOR00503,1670,810,3,Tower,STOR,Bed and Recliner Parking 1,BRP 1
+xSTOR00603,1670,1040,3,Tower,STOR,Bed and Recliner Parking 2,BRP 2
