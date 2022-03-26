@@ -1,144 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamx.controllers.LabRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamx.controllers.LabRequestController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#9ccfe7" height="511.0" layoutY="-10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="223.0" />
-      <Text fill="#5a86b5" layoutX="301.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Lab Request Service" textAlignment="CENTER" underline="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdc" height="44.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="601.0" />
+      <Text fill="#446fdc" layoutX="242.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Lab Request Service" textAlignment="CENTER">
          <font>
-            <Font size="26.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <MenuBar layoutY="4.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Exit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-        </menus>
-         <effect>
-            <Blend />
-         </effect>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </MenuBar>
-      <Text layoutX="88.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-      <Text layoutX="93.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DOB, age, F" />
       <ImageView fitHeight="44.0" fitWidth="25.0" layoutX="14.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../../Downloads/NicePng_time-icon-png_1333715.png" />
          </image>
       </ImageView>
-      <Text layoutX="53.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Past activity" wrappingWidth="91.37629699707031" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="61.0" layoutX="7.0" layoutY="160.0" stroke="TRANSPARENT" strokeType="INSIDE" width="205.0" />
-      <Text layoutX="61.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Background Information" />
-      <Text layoutX="20.0" layoutY="214.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mar" wrappingWidth="32.0">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <Text layoutX="18.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" text="01" wrappingWidth="39.973958015441895">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="61.0" layoutX="7.0" layoutY="234.0" stroke="TRANSPARENT" strokeType="INSIDE" width="205.0" />
-      <Text layoutX="79.0" layoutY="268.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prescription Refill" />
-      <Text layoutX="19.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="12" wrappingWidth="39.973958015441895">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Text>
-      <Text layoutX="22.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Feb" wrappingWidth="32.0">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="61.0" layoutX="7.0" layoutY="307.0" stroke="TRANSPARENT" strokeType="INSIDE" width="205.0" />
-      <Text layoutX="77.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bloodwork Results" />
-      <Text layoutX="19.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="30" wrappingWidth="39.973958015441895">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Text>
-      <Text layoutX="22.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Jan" wrappingWidth="32.0">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Text>
-      <Label layoutX="242.0" layoutY="73.0" prefHeight="31.0" prefWidth="119.0" text="Request Lab exam" />
       <Group layoutX="280.0" layoutY="182.0" />
-      <MenuButton layoutX="248.0" layoutY="110.0" mnemonicParsing="false" text="Lab service">
-        <items>
-          <MenuItem mnemonicParsing="false" text="Blood smaple" />
-          <MenuItem mnemonicParsing="false" text="Urine sample" />
-            <MenuItem mnemonicParsing="false" text="X-ray" />
-            <MenuItem mnemonicParsing="false" text="CAT scan" />
-            <MenuItem mnemonicParsing="false" text="MRI" />
-        </items>
-      </MenuButton>
-      <Text layoutX="248.0" layoutY="274.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requested service tracking" wrappingWidth="205.0" />
       <ImageView fitHeight="44.0" fitWidth="74.0" layoutX="235.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../../Downloads/blood-test.png" />
          </image>
       </ImageView>
-      <Text layoutX="288.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blood Sample" />
-      <ProgressBar layoutX="288.0" layoutY="319.0" prefWidth="200.0" progress="0.19" />
-      <Text layoutX="498.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Received sample" />
       <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="235.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../../Downloads/x-ray.png" />
          </image>
       </ImageView>
-      <ProgressBar layoutX="288.0" layoutY="376.0" prefWidth="200.0" progress="0.73" />
-      <Text layoutX="288.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X-ray" />
-      <Text layoutX="498.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Waiting for image" />
       <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="235.0" layoutY="415.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../../../../../Downloads/mri.png" />
          </image>
       </ImageView>
-      <Text layoutX="288.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MRI" />
-      <ProgressBar layoutX="288.0" layoutY="438.0" prefWidth="200.0" progress="0.12" />
-      <Text layoutX="498.0" layoutY="451.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In the wait list" />
-      <MenuButton layoutX="495.0" layoutY="110.0" mnemonicParsing="false" text="Lab staff">
-         <items>
-            <MenuItem mnemonicParsing="false" text="Kelly X" />
-            <MenuItem mnemonicParsing="false" text="Jim X" />
-            <MenuItem mnemonicParsing="false" text="Alexa X" />
-            <MenuItem mnemonicParsing="false" text="Jason X" />
-            <MenuItem mnemonicParsing="false" text="Emily X" />
-         </items>
-      </MenuButton>
-      <Label layoutX="491.0" layoutY="73.0" prefHeight="31.0" prefWidth="119.0" text="Assign Lab exam to" />
-      <Button layoutX="599.0" layoutY="459.0" mnemonicParsing="false" onAction="#ReturnToMain" text="Back to home" />
+      <ImageView fitHeight="31.0" fitWidth="200.0" layoutY="9.0">
+         <image>
+            <Image url="@../assets/brigham%20logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="208.0" layoutY="58.0" text="OTHER REQUEST" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Line endX="-115.79997253417969" endY="-50.00001525878906" layoutX="286.0" layoutY="134.0" startX="-115.79997253417969" startY="-72.40000915527344" stroke="WHITE" />
+      <Line endX="-115.79997253417969" endY="-50.00001525878906" layoutX="515.0" layoutY="134.0" startX="-115.79997253417969" startY="-72.40000915527344" stroke="WHITE" />
+      <Label layoutX="77.0" layoutY="58.0" text="MAP" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="428.0" layoutY="58.0" text="CONTACT US" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="14.0" layoutY="104.0" onAction="#ReturnToMain" text="&lt;--  Main Menu" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="116.0" layoutY="170.0" prefHeight="100.0" prefWidth="386.0">
+         <children>
+            <MenuButton mnemonicParsing="false" text="Lab service">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Blood smaple" />
+                <MenuItem mnemonicParsing="false" text="Urine sample" />
+                  <MenuItem mnemonicParsing="false" text="X-ray" />
+                  <MenuItem mnemonicParsing="false" text="CAT scan" />
+                  <MenuItem mnemonicParsing="false" text="MRI" />
+              </items>
+            </MenuButton>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="40.0" />
+            <MenuButton mnemonicParsing="false" text="Assign Staff">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Kelly X" />
+                  <MenuItem mnemonicParsing="false" text="Jim X" />
+                  <MenuItem mnemonicParsing="false" text="Alexa X" />
+                  <MenuItem mnemonicParsing="false" text="Jason X" />
+                  <MenuItem mnemonicParsing="false" text="Emily X" />
+               </items>
+            </MenuButton>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="40.0" />
+            <MenuButton mnemonicParsing="false" text="Assign Patient">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Kelly X" />
+                  <MenuItem mnemonicParsing="false" text="Jim X" />
+                  <MenuItem mnemonicParsing="false" text="Alexa X" />
+                  <MenuItem mnemonicParsing="false" text="Jason X" />
+                  <MenuItem mnemonicParsing="false" text="Emily X" />
+               </items>
+            </MenuButton>
+         </children>
+      </HBox>
+      <Button layoutX="244.0" layoutY="257.0" mnemonicParsing="false" text="Submit Request" />
+      <Label layoutX="123.0" layoutY="148.0" text="Select Service" />
+      <Label layoutX="265.0" layoutY="148.0" text="Select Staff" />
+      <Label layoutX="399.0" layoutY="148.0" text="Select Patient" />
    </children>
 </AnchorPane>
