@@ -4,10 +4,8 @@ import edu.wpi.teamx.App;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -22,10 +20,7 @@ public class mealReqController {
 
   @FXML
   void returnHomeButton() throws IOException {
-    Parent root =
-        FXMLLoader.load(
-            Objects.requireNonNull(getClass().getResource("/edu/wpi/teamx/views/app.fxml")));
-    App.getPrimaryStage().getScene().setRoot(root);
+    App.switchScene(FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/app.fxml")));
   }
 
   @FXML

@@ -4,7 +4,6 @@ import edu.wpi.teamx.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 
 public class LabRequestController {
@@ -12,7 +11,6 @@ public class LabRequestController {
 
   @FXML
   public void ReturnToMain() throws IOException {
-    Parent root = FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/app.fxml"));
-    App.getPrimaryStage().getScene().setRoot(root);
+    App.switchScene(FXMLLoader.load(getClass().getResource("/edu/wpi/teamx/views/app.fxml")));
   }
 }

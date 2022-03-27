@@ -5,50 +5,17 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamx.controllers.ReqLangController">
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamx.controllers.ReqLangController">
    <children>
-      <ChoiceBox fx:id="selectLang" layoutX="273.0" layoutY="160.0" prefWidth="150.0" />
-      <Label layoutX="179.0" layoutY="164.0" text="Select Language:" />
-      <Label layoutX="157.0" layoutY="204.0" text="Enter Room Number:" />
-      <TextField layoutX="273.0" layoutY="200.0" />
-      <Button layoutX="242.0" layoutY="251.0" mnemonicParsing="false" text="Submit Request" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdc" height="44.0" layoutX="-1.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="607.0" />
-      <Text fill="#446fdc" layoutX="224.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Request Language Interpreter" textAlignment="CENTER">
-         <font>
-            <Font name="System Bold" size="26.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="31.0" fitWidth="200.0" layoutX="5.0" layoutY="9.0">
-         <image>
-            <Image url="@../assets/brigham%20logo.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="213.0" layoutY="58.0" text="OTHER REQUEST" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Line endX="-115.79997253417969" endY="-50.00001525878906" layoutX="291.0" layoutY="134.0" startX="-115.79997253417969" startY="-72.40000915527344" stroke="WHITE" />
-      <Line endX="-115.79997253417969" endY="-50.00001525878906" layoutX="520.0" layoutY="134.0" startX="-115.79997253417969" startY="-72.40000915527344" stroke="WHITE" />
-      <Label layoutX="82.0" layoutY="58.0" text="MAP" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="433.0" layoutY="58.0" text="CONTACT US" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <JFXButton layoutX="19.0" layoutY="105.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
+      <ChoiceBox fx:id="selectLang" layoutX="926.0" layoutY="418.0" prefWidth="150.0" />
+      <Label layoutX="832.0" layoutY="422.0" text="Select Language:" />
+      <Label layoutX="810.0" layoutY="462.0" text="Enter Room Number:" />
+      <TextField layoutX="926.0" layoutY="458.0" />
+      <Button layoutX="895.0" layoutY="509.0" mnemonicParsing="false" text="Submit Request" />
+      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

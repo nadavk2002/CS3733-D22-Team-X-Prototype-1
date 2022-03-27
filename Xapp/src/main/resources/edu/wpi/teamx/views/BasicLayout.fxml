@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamx.controllers.BasicLayoutController">
+   <children>
+      <ImageView fitHeight="61.0" fitWidth="219.0" layoutX="824.0" layoutY="3.0" preserveRatio="true">
+         <image>
+            <Image url="@../assets/brigham%20logo.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdc" height="44.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" />
+      <AnchorPane fx:id="appContent" layoutY="98.0" prefHeight="982.0" prefWidth="1920.0" />
+      <JFXComboBox fx:id="ChoosePage" focusColor="#446fdc" layoutX="817.0" layoutY="55.0" onAction="#SwitchPage" prefHeight="41.0" prefWidth="227.0" promptText="Choose a Page " unFocusColor="#446fdc" />
+   </children>
+</AnchorPane>
