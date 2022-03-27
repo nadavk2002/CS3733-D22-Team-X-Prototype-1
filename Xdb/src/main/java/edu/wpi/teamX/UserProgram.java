@@ -1,9 +1,6 @@
 package edu.wpi.teamX;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +22,12 @@ public class UserProgram {
     // This loop will end when the user selects option 6
     while (true) {
       System.out.println(
-          "1 – Location Information\n"
-              + "2 – Change Floor and Type\n"
-              + "3 – Enter Location\n"
-              + "4 – Delete Location\n"
-              + "5 – Save Locations to CSV file\n"
-              + "6 – Exit Program");
+          "1 - Location Information\n"
+              + "2 - Change Floor and Type\n"
+              + "3 - Enter Location\n"
+              + "4 - Delete Location\n"
+              + "5 - Save Locations to CSV file\n"
+              + "6 - Exit Program");
       Scanner input = new Scanner(System.in);
       String option = input.nextLine();
       switch (option) {
@@ -81,10 +78,12 @@ public class UserProgram {
     // Read locations into List "locationsFromCSV"
     locationsFromCSV = new ArrayList<Location>();
     try {
-      Scanner sc = new Scanner(new File("src/main/resources/edu/wpi/teamX/TowerLocations.csv"));
-      sc.nextLine();
-      while (sc.hasNextLine()) {
-        String[] currLine = sc.nextLine().replaceAll("\r\n", "").split(",");
+      InputStream tlCSV = UserProgram.class.getResourceAsStream("TowerLocations.csv");
+      BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
+      tlCSVReader.readLine();
+      String nextFileLine;
+      while ((nextFileLine = tlCSVReader.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 8) {
           Location lnode =
               new Location(
@@ -105,6 +104,8 @@ public class UserProgram {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
       System.out.println("File not found!");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
 
     // Insert locations from locationsFromCSV into db table
