@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 //https://www.tutorialspoint.com/design_pattern/data_access_object_pattern.htm
 
-//in theory alot of the functionallity of this thing is handled in userProgram but cannot be used because of the private flag (3/27/22)
 public class LocationDAOImpl implements LocationDAO{
     List<Location> locations; //location storage
     Connection connection; //store connection info
