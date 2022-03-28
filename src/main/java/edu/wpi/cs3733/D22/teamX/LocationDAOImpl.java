@@ -1,16 +1,15 @@
 package edu.wpi.cs3733.D22.teamX;
 
 import java.sql.*;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 //https://www.tutorialspoint.com/design_pattern/data_access_object_pattern.htm
 
 //in theory alot of the functionallity of this thing is handled in userProgram but cannot be used because of the private flag (3/27/22)
 public class LocationDAOImpl implements LocationDAO{
-    LinkedList<Location> locations; //location storage
+    List<Location> locations; //location storage
     Connection connection; //store connection info
 
-    //constructor
-    //loads from the Database
     /**
      * constructor loads data from database
      * @param connection db to connect to to get location data from
@@ -80,7 +79,7 @@ public class LocationDAOImpl implements LocationDAO{
     /**
      * gets locations linkedList
      */
-    public LinkedList<Location> getAllLocations() {
+    public List<Location> getAllLocations() {
         return locations; //returns locations
     }
 
@@ -110,7 +109,7 @@ public class LocationDAOImpl implements LocationDAO{
      * @param location location being updated
      */
     public void updateLocation(Location location) {
-        LinkedList<Location> newLocationList = new LinkedList<Location>(); //location list being updated.
+        List<Location> newLocationList = new ArrayList<Location>(); //location list being updated.
         //update location in linked list
 
         //this is horrible probably
@@ -168,7 +167,7 @@ public class LocationDAOImpl implements LocationDAO{
      * @param location location to be removed.
      */
     public void deleteLocation(Location location) {
-        LinkedList<Location> newLocationList = new LinkedList<Location>(); //location list being updated.
+        ArrayList<Location> newLocationList = new ArrayList<Location>(); //location list being updated.
         //update location in linked list
 
         //this is horrible probably
