@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
 import java.io.IOException;
+
+import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -12,6 +14,7 @@ public class equipmentDeliveryController {
   @FXML private Button ToMainMenu;
   @FXML private ChoiceBox<String> selectEquipmentType;
   @FXML private TextField amountField, roomField;
+  private EquipmentServiceRequest request;
 
   @FXML
   public void initialize() {
