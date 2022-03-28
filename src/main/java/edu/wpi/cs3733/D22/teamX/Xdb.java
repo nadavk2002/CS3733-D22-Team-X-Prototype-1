@@ -3,7 +3,7 @@ package edu.wpi.cs3733.D22.teamX;
 import java.sql.*;
 
 public class Xdb {
-  public static void main(String[] args) {
+  public static void runDB(String[] args) {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
     try {
