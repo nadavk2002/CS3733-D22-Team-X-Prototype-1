@@ -7,20 +7,19 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class equipmentDeliveryController {
   @FXML private Button ToMainMenu;
   @FXML private ChoiceBox<String> selectEquipmentType;
   @FXML private TextField amountField, roomField;
+  @FXML private Label requestStatus;
   private EquipmentServiceRequest request;
-
-  public equipmentDeliveryController(EquipmentServiceRequest request) {
-    this.request = request;
-  }
 
   @FXML
   public void initialize() {
+    request = new EquipmentServiceRequest();
     selectEquipmentType.getItems().addAll("Beds (20)", "X-Rays (1)", "Pumps (30)", "Recliners (6)");
   }
 
@@ -45,10 +44,11 @@ public class equipmentDeliveryController {
 
   @FXML
   public void submitRequest() {
-    request.setAssignee(""); //empty for now
-    request.setRequestingUser(""); //empty for now
+    request.setAssignee(""); // empty for now
+    request.setRequestingUser(""); // empty for now
     request.setEquipmentType(selectEquipmentType.getValue());
     request.setRoomNumber(roomField.getText());
     request.setNumOfEquipment(Integer.parseInt(amountField.getText()));
+    this.resetFields();
   }
 }
