@@ -30,8 +30,7 @@ public class Xdb {
     // tries to create the database and establish a connection
     Connection connection = null;
     try {
-      connection =
-          DriverManager.getConnection("jdbc:derby:spike_b_db;create=true", "admin", "admin");
+      connection = DriverManager.getConnection("jdbc:derby:embed_db;create=true", "admin", "admin");
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console.");
       e.printStackTrace();
