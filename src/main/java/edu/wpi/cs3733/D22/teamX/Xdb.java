@@ -38,14 +38,20 @@ public class Xdb {
     }
     System.out.println("Apache Derby connection established :D");
 
-    // creates table
+    createLocationTable(connection);
+
+    System.out.println("Database created successfully");
+
+    return connection;
+  }
+
+  private static void createLocationTable(Connection connection) {
     try {
       Statement dropLocation = connection.createStatement();
       try {
-
         dropLocation.execute("DROP TABLE Location");
       } catch (SQLException e) {
-        System.out.println("Table does not exist...\nCreating table...");
+        System.out.println("Creating Location Table...");
       }
       Statement initialization = connection.createStatement();
       initialization.execute(
@@ -60,8 +66,28 @@ public class Xdb {
       e.printStackTrace();
       System.exit(1);
     }
-    System.out.println("Database created successfully");
+  }
 
-    return connection;
+  private static void createMedicalEquipmentServiceRequestTable(Connection connection) {
+    try {
+      Statement dropLocation = connection.createStatement();
+      try {
+        dropLocation.execute("DROP TABLE Location");
+      } catch (SQLException e) {
+        System.out.println("Creating MedicalEquipmentServiceRequest Table...");
+      }
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE MedicalEquipmentServiceRequest(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
+              + "xCoord INT, yCoord INT, "
+              + "floor VARCHAR(2), "
+              + "building VARCHAR(10), "
+              + "nodeType CHAR(4), "
+              + "longName VARCHAR(50), shortName VARCHAR(30))");
+    } catch (SQLException e) {
+      System.out.println("Table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
   }
 }
