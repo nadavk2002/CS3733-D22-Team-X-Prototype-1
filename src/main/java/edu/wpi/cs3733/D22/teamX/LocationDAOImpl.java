@@ -133,7 +133,7 @@ public class LocationDAOImpl implements LocationDAO{
         try{
             // create the statement
             Statement statement = connection.createStatement();
-            // execute query to see if location even exists? something else needs to be done maybe?
+            // execute query to see if location even exists? something else needs to be done maybe? (throw exception?)
             statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + location.getNodeID() + "'");
 
             //update sql object
@@ -163,7 +163,44 @@ public class LocationDAOImpl implements LocationDAO{
     }
 
     @Override
+    /**
+     * removes location from database.
+     * @param location location to be removed.
+     */
     public void deleteLocation(Location location) {
+        LinkedList<Location> newLocationList = new LinkedList<Location>(); //location list being updated.
+        //update location in linked list
+
+        //this is horrible probably
+        //iterate through the linked list of locations to find the object and update it on new list
+        for(int i = 0; i < locations.size(); i++){ //check if exits correctly [0.1,2,3].size = 4 exit when i = 3
+            //if location node id matches
+            if(locations.get(i).getNodeID().equals(location.getNodeID())){
+                //do nothing.
+            }
+            else{
+                //append old location data
+                newLocationList.add(locations.get(i));
+            }
+        }
+        //update running locations linkedlist
+        locations = newLocationList;
+
+        //update DB table from darren kwee ctrl+c ctrl+v + some stuff
+        try{
+            // create the statement
+            Statement statement = connection.createStatement();
+            // execute query to see if location even exists? something else needs to be done maybe? (throw exception?)
+            statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + location.getNodeID() + "'");
+            //remove location from DB table
+            statement.executeUpdate("DELETE FROM Location WHERE nodeID = '" + location.getNodeID() + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //done
+
+    }
+
 
     }
 }
