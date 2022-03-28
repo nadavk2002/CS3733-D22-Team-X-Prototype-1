@@ -201,6 +201,4 @@ public class LocationDAOImpl implements LocationDAO{
 
     }
 
-
-    }
 }
