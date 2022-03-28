@@ -24,6 +24,18 @@ public class EquipmentServiceRequest extends ServiceRequest {
     return roomNumber;
   }
 
+  public void setEquipmentType(String equipmentType) {
+    this.equipmentType = equipmentType;
+  }
+
+  public void setRoomNumber(String roomNumber) {
+    this.roomNumber = roomNumber;
+  }
+
+  public void setNumOfEquipment(int numOfEquipment) {
+    this.numOfEquipment = numOfEquipment;
+  }
+
   public int getNumOfEquipment() {
     return numOfEquipment;
   }

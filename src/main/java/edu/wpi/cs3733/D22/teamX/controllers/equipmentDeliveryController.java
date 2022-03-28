@@ -1,9 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import java.io.IOException;
-
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -15,6 +14,10 @@ public class equipmentDeliveryController {
   @FXML private ChoiceBox<String> selectEquipmentType;
   @FXML private TextField amountField, roomField;
   private EquipmentServiceRequest request;
+
+  public equipmentDeliveryController(EquipmentServiceRequest request) {
+    this.request = request;
+  }
 
   @FXML
   public void initialize() {
@@ -38,5 +41,14 @@ public class equipmentDeliveryController {
     amountField.setText("");
     roomField.setText("");
     selectEquipmentType.setValue("");
+  }
+
+  @FXML
+  public void submitRequest() {
+    request.setAssignee(""); //empty for now
+    request.setRequestingUser(""); //empty for now
+    request.setEquipmentType(selectEquipmentType.getValue());
+    request.setRoomNumber(roomField.getText());
+    request.setNumOfEquipment(Integer.parseInt(amountField.getText()));
   }
 }
