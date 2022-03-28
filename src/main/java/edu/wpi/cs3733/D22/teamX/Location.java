@@ -130,15 +130,29 @@ public class Location {
 
   @Override
   public String toString() {
-    return "Location{" +
-            "nodeID='" + nodeID + '\'' +
-            ", xCoord=" + xCoord +
-            ", yCoord=" + yCoord +
-            ", floor='" + floor + '\'' +
-            ", building='" + building + '\'' +
-            ", nodeType='" + nodeType + '\'' +
-            ", longName='" + longName + '\'' +
-            ", shortName='" + shortName + '\'' +
-            '}';
+    return "Location{"
+        + "nodeID='"
+        + nodeID
+        + '\''
+        + ", xCoord="
+        + xCoord
+        + ", yCoord="
+        + yCoord
+        + ", floor='"
+        + floor
+        + '\''
+        + ", building='"
+        + building
+        + '\''
+        + ", nodeType='"
+        + nodeType
+        + '\''
+        + ", longName='"
+        + longName
+        + '\''
+        + ", shortName='"
+        + shortName
+        + '\''
+        + '}';
   }
 }

@@ -133,8 +133,9 @@ public class UserProgram {
   }
 
   /**
-   * prints locations within the database to the monitor
-   * Source: https://stackoverflow.com/questions/24229442/print-the-data-in-resultset-along-with-column-names
+   * prints locations within the database to the monitor Source:
+   * https://stackoverflow.com/questions/24229442/print-the-data-in-resultset-along-with-column-names
+   *
    * @param connection SQL database connection to use.
    */
   private static void printLocation(Connection connection) {
