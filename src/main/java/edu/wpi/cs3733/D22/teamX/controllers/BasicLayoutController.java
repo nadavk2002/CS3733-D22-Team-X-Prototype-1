@@ -23,6 +23,7 @@ public class BasicLayoutController {
     pages.put("Request Transport", "ReqInTransport.fxml");
     pages.put("Request Language Interpreter", "ReqLang.fxml");
     pages.put("Request Laundry Services", "ReqLaundry.fxml");
+    pages.put("Hospital Locations", "HospitalLocations.fxml");
     ChoosePage.setItems(
         FXCollections.observableArrayList(
             "Main Menu",
@@ -33,7 +34,8 @@ public class BasicLayoutController {
             "Request Transport",
             "Request Transport",
             "Request Language Interpreter",
-            "Request Laundry Services"));
+            "Request Laundry Services",
+            "Hospital Locations"));
     ChoosePage.setValue("Main Menu");
   }
 
