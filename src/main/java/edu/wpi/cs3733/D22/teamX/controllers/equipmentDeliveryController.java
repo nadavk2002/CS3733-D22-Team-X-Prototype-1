@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;

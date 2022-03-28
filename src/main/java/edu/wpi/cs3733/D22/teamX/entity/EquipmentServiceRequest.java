@@ -18,9 +18,9 @@ public class EquipmentServiceRequest extends ServiceRequest {
 
   public EquipmentServiceRequest() {
     super();
-    this.equipmentType="";
-    this.roomNumber="";
-    this.numOfEquipment=-1;
+    this.equipmentType = "";
+    this.roomNumber = "";
+    this.numOfEquipment = -1;
   }
 
   public String getEquipmentType() {

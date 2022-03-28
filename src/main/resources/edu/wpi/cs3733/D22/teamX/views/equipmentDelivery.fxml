@@ -19,7 +19,7 @@
     <TextField fx:id="amountField" layoutX="928.0" layoutY="434.0" />
     <Label layoutX="808.0" layoutY="392.0" text="Equipment Selection:" />
     <Label layoutX="874.0" layoutY="438.0" text="Amount:" />
-    <Button layoutX="1009.0" layoutY="514.0" mnemonicParsing="false" text="Submit Request" />
+    <Button layoutX="1009.0" layoutY="514.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" />
       <TextField fx:id="roomField" layoutX="928.0" layoutY="474.0" />
       <Label layoutX="839.0" layoutY="478.0" text="Room Number:" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">

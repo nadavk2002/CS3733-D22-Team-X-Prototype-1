@@ -8,6 +8,7 @@ public class ServiceRequest {
     this.requestingUser = requestingUser;
     this.assignee = assignee;
   }
+
   public ServiceRequest() {
     this.serviceCompleted = "";
     this.requestingUser = "";
