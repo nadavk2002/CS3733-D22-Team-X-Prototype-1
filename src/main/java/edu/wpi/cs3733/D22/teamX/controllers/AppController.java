@@ -68,6 +68,5 @@ public class AppController {
   @FXML
   void ExitApplication() throws IOException {
     Platform.exit();
-    System.exit(0);
   }
 }

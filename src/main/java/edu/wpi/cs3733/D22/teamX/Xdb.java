@@ -3,7 +3,19 @@ package edu.wpi.cs3733.D22.teamX;
 import java.sql.*;
 
 public class Xdb {
-  public static void runDB(String[] args) {
+  /** Initializes the db and runs the user program from Spike B */
+  public static void initializeAndRunDBProgram() {
+    Connection dbConn = initializeDB();
+    UserProgram.executeProgram(dbConn);
+    try {
+      dbConn.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /** Initializes the database with tables and establishes a connection */
+  public static Connection initializeDB() {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
     try {
@@ -11,7 +23,7 @@ public class Xdb {
     } catch (ClassNotFoundException e) {
       System.out.println("Apache Derby Driver not found.");
       e.printStackTrace();
-      return;
+      System.exit(1);
     }
     System.out.println("Apache Derby driver registered!");
 
@@ -23,7 +35,7 @@ public class Xdb {
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console.");
       e.printStackTrace();
-      return;
+      System.exit(1);
     }
     System.out.println("Apache Derby connection established :D");
 
@@ -47,16 +59,10 @@ public class Xdb {
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
-      return;
+      System.exit(1);
     }
     System.out.println("Database created successfully");
 
-    UserProgram.executeProgram(connection);
-
-    try {
-      connection.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
+    return connection;
   }
 }
