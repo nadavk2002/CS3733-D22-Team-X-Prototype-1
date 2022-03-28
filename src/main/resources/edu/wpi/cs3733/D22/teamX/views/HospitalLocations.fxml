@@ -12,8 +12,6 @@
       <TableView fx:id="table" layoutX="322.0" layoutY="160.0" prefHeight="758.0" prefWidth="1276.0" AnchorPane.leftAnchor="322.0" AnchorPane.rightAnchor="322.0">
         <columns>
           <TableColumn fx:id="nodeID" prefWidth="146.22225952148438" text="Node ID" />
-          <TableColumn prefWidth="123.40731811523438" text="X Coordinates" fx:id="xCoord" />
-            <TableColumn fx:id="yCoord" minWidth="0.0" prefWidth="135.40740966796875" text="Y Coordinates" />
             <TableColumn fx:id="floor" prefWidth="94.66668701171875" text="Floor" />
             <TableColumn fx:id="building" prefWidth="187.5556640625" text="Building" />
             <TableColumn fx:id="nodeType" prefWidth="118.37042236328125" text="Node Type" />

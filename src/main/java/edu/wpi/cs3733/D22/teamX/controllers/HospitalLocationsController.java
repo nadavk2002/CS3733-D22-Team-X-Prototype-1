@@ -17,8 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class HospitalLocationsController implements Initializable {
   @FXML private TableView<Location> table;
   @FXML private TableColumn<Location, String> nodeID;
-  @FXML private TableColumn<Location, Integer> xCoord;
-  @FXML private TableColumn<Location, Integer> yCoord;
+  // @FXML private TableColumn<Location, Integer> xCoord;
+  // @FXML private TableColumn<Location, Integer> yCoord;
   @FXML private TableColumn<Location, String> floor;
   @FXML private TableColumn<Location, String> building;
   @FXML private TableColumn<Location, String> nodeType; // Add more columns or remove if need be
@@ -36,14 +36,14 @@ public class HospitalLocationsController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
-    xCoord.setCellValueFactory(new PropertyValueFactory<Location, Integer>("xCoord"));
-    yCoord.setCellValueFactory(new PropertyValueFactory<Location, Integer>("yCoord"));
-    floor.setCellValueFactory(new PropertyValueFactory<Location, String>("floor"));
-    building.setCellValueFactory(new PropertyValueFactory<Location, String>("building"));
-    nodeType.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeType"));
-    longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
-    shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
+    nodeID.setCellValueFactory(new PropertyValueFactory<>("nodeID"));
+    // xCoord.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
+    // yCoord.setCellValueFactory(new PropertyValueFactory>("yCoord"));
+    floor.setCellValueFactory(new PropertyValueFactory<>("floor"));
+    building.setCellValueFactory(new PropertyValueFactory<>("building"));
+    nodeType.setCellValueFactory(new PropertyValueFactory<>("nodeType"));
+    longName.setCellValueFactory(new PropertyValueFactory<>("longName"));
+    shortName.setCellValueFactory(new PropertyValueFactory<>("shortName"));
     table.getItems().addAll(fillTable());
   }
 
