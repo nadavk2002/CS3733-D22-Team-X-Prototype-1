@@ -16,16 +16,17 @@
             <Insets />
         </opaqueInsets>
     </ChoiceBox>
-    <TextField fx:id="roomField" layoutX="935.0" layoutY="434.0" />
+    <TextField fx:id="amountField" layoutX="935.0" layoutY="434.0" />
     <Label layoutX="815.0" layoutY="392.0" text="Equipment Selection:" />
     <Label layoutX="881.0" layoutY="438.0" text="Amount:" />
-    <Button layoutX="960.0" layoutY="523.0" mnemonicParsing="false" text="Submit Request" />
-      <TextField fx:id="roomField1" layoutX="935.0" layoutY="474.0" />
+    <Button layoutX="1016.0" layoutY="514.0" mnemonicParsing="false" text="Submit Request" />
+      <TextField fx:id="roomField" layoutX="935.0" layoutY="474.0" />
       <Label layoutX="846.0" layoutY="478.0" text="Room Number:" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
+      <Button layoutX="927.0" layoutY="514.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
 </children>
 </AnchorPane>
