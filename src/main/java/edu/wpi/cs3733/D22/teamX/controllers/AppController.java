@@ -15,6 +15,7 @@ public class AppController {
   @FXML private Button mealReqButton;
   @FXML private Button LabRequestButton;
   @FXML private Button equipmentRequestButton;
+  @FXML private Button hospitalLocationsButton;
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -63,6 +64,13 @@ public class AppController {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/equipmentDelivery.fxml")));
+  }
+
+  @FXML
+  void hospitalLocationsButton() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/HospitalLocations.fxml")));
   }
 
   @FXML
