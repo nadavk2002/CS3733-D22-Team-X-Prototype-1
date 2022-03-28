@@ -76,7 +76,7 @@ public class LocationDAOImpl implements LocationDAO{
      * @param location location being updated
      */
     public void updateLocation(Location location) {
-        //iterate through the linked list of locations to find the object and update it on new list
+        //iterate through the list of locations to find the object and update it on new list
         int locationInd = 0;
         while(locationInd < locations.size())
         {
