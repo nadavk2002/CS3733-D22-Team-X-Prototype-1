@@ -81,6 +81,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
+            <JFXButton onAction="#EquipReqTableButton" text="Equipment Request Queue" textFill="#446fdc">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
          </children>
       </VBox>
       <JFXButton cache="true" layoutX="1862.0" layoutY="939.0" onAction="#ExitApplication" text="Exit" textFill="#446fdc">
