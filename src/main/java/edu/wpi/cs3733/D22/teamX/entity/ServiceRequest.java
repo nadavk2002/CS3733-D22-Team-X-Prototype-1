@@ -1,21 +1,25 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 public class ServiceRequest {
-  private boolean serviceCompleted; // false if incomplete
-  private String requestingUser, assignee;
+  private String requestingUser, assignee, serviceCompleted;
 
   public ServiceRequest(String requestingUser, String assignee) {
-    this.serviceCompleted = false;
+    this.serviceCompleted = "";
     this.requestingUser = requestingUser;
     this.assignee = assignee;
   }
+  public ServiceRequest() {
+    this.serviceCompleted = "";
+    this.requestingUser = "";
+    this.assignee = "";
+  }
 
-  public boolean isServiceCompleted() {
+  public String serviceStatus() {
     return serviceCompleted;
   }
 
-  public void completeService() {
-    this.serviceCompleted = true;
+  public void updateStatus(String status) {
+    this.serviceCompleted = status;
   }
 
   public String getRequestingUser() {

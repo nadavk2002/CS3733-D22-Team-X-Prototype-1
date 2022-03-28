@@ -11,22 +11,23 @@
 
 <AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.equipmentDeliveryController">
 <children>
-    <ChoiceBox fx:id="selectEquipmentType" layoutX="935.0" layoutY="388.0" prefWidth="150.0">
+    <ChoiceBox fx:id="selectEquipmentType" layoutX="928.0" layoutY="388.0" prefWidth="150.0">
         <opaqueInsets>
             <Insets />
         </opaqueInsets>
     </ChoiceBox>
-    <TextField fx:id="amountField" layoutX="935.0" layoutY="434.0" />
-    <Label layoutX="815.0" layoutY="392.0" text="Equipment Selection:" />
-    <Label layoutX="881.0" layoutY="438.0" text="Amount:" />
-    <Button layoutX="1016.0" layoutY="514.0" mnemonicParsing="false" text="Submit Request" />
-      <TextField fx:id="roomField" layoutX="935.0" layoutY="474.0" />
-      <Label layoutX="846.0" layoutY="478.0" text="Room Number:" />
+    <TextField fx:id="amountField" layoutX="928.0" layoutY="434.0" />
+    <Label layoutX="808.0" layoutY="392.0" text="Equipment Selection:" />
+    <Label layoutX="874.0" layoutY="438.0" text="Amount:" />
+    <Button layoutX="1009.0" layoutY="514.0" mnemonicParsing="false" text="Submit Request" />
+      <TextField fx:id="roomField" layoutX="928.0" layoutY="474.0" />
+      <Label layoutX="839.0" layoutY="478.0" text="Room Number:" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Button layoutX="927.0" layoutY="514.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
+      <Button layoutX="920.0" layoutY="514.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
+      <Label fx:id="requestStatus" layoutX="960.0" layoutY="554.0" />
 </children>
 </AnchorPane>
