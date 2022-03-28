@@ -4,13 +4,15 @@ import java.sql.*;
 import java.util.LinkedList;
 //https://www.tutorialspoint.com/design_pattern/data_access_object_pattern.htm
 
+//in theory alot of the functionallity of this thing is handled in userProgram but cannot be used because of the private flag (3/27/22)
 public class LocationDAOImpl implements LocationDAO{
     LinkedList<Location> locations; //location storage
+    Connection connection; //store connection info
 
     //constructor
     //loads from the Database
     /**
-     * creates the DAO and loads data from database
+     * constructor loads data from database
      * @param connection db to connect to to get location data from
      */
     public LocationDAOImpl(Connection connection){
@@ -66,28 +68,97 @@ public class LocationDAOImpl implements LocationDAO{
                 //append location on to the end of the linked list
                 locations.add(location);
             }
-            //creation done
-
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        this.connection = connection; //store connection information
 
     }
 
 
     @Override
+    /**
+     * gets locations linkedList
+     */
     public LinkedList<Location> getAllLocations() {
-        return null;
+        return locations; //returns locations
     }
 
     @Override
+    /**
+     * gets induvidual location
+     * @param nodeID node id of location being looked up
+     */
     public Location getLocation(String nodeID) {
-        return null;
+        Location location = new Location(); //location being returned
+        //is there a contains for parameter of object in linklist?
+        //iterate through the linked list of locations to find the object
+        for(Location element: locations){
+            //if the object has the same nodeID
+            if (element.getNodeID().equals(nodeID)){
+                location = element; //record element that had matching ID
+                break; //exit for loop;
+            }
+        }
+        return location; //return location
+        //what happens when there is an invalid location ID? guess we return a blank location.
     }
 
     @Override
+    /**
+     * updates location based off matching nodeIDs.
+     * @param location location being updated
+     */
     public void updateLocation(Location location) {
+        LinkedList<Location> newLocationList = new LinkedList<Location>(); //location list being updated.
+        //update location in linked list
+
+        //this is horrible probably
+        //iterate through the linked list of locations to find the object and update it on new list
+        for(int i = 0; i < locations.size(); i++){ //check if exits correctly [0.1,2,3].size = 4 exit when i = 3
+            //if location node id matches
+            if(locations.get(i).getNodeID().equals(location.getNodeID())){
+                //append updated location data
+                newLocationList.add(location);
+            }
+            else{
+                //append old location data
+                newLocationList.add(locations.get(i));
+            }
+        }
+        //update running locations linkedlist
+        locations = newLocationList;
+
+        //update DB table from darren kwee ctrl+c ctrl+v + some stuff
+        try{
+            // create the statement
+            Statement statement = connection.createStatement();
+            // execute query to see if location even exists? something else needs to be done maybe?
+            statement.executeQuery("SELECT * FROM Location WHERE nodeID = '" + location.getNodeID() + "'");
+
+            //update sql object
+            statement.executeUpdate(
+                    "UPDATE Location SET floor = '"
+                            + location.getFloor()
+                            + "', nodeType = '"
+                            + location.getNodeType()
+                            + "', xCoord = '"
+                            + location.getxCoord()
+                            + "', yCoord = '"
+                            + location.getyCoord()
+                            + "', building = '"
+                            + location.getBuilding()
+                            + "', longName = '"
+                            + location.getLongName()
+                            + "', shortName = '"
+                            + location.getShortName()
+                            + "' WHERE nodeID = '"
+                            + location.getNodeID()
+                            + "'");
+
+        } catch (SQLException e) {
+        e.printStackTrace();
+         }
 
     }
 

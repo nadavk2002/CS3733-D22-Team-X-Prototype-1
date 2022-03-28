@@ -8,4 +8,7 @@ public interface LocationDAO {
     public Location getLocation (String nodeID); //gets induviduvidual
     public void updateLocation (Location location); //updates induvidual location
     public void deleteLocation (Location location); //removes induvidual location
+
+    //should there be a method to update the linkedlist from sql?
+    //add method?
 }
