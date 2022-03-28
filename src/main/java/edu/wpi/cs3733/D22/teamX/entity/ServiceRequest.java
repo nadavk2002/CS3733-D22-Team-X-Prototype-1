@@ -1,9 +1,10 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 public class ServiceRequest {
-  private String requestingUser, assignee, serviceCompleted;
+  private String requestingUser, assignee, serviceCompleted, serviceID;
 
-  public ServiceRequest(String requestingUser, String assignee) {
+  public ServiceRequest(String requestingUser, String assignee, String serviceID) {
+    this.serviceID = serviceID;
     this.serviceCompleted = "";
     this.requestingUser = requestingUser;
     this.assignee = assignee;
@@ -13,6 +14,7 @@ public class ServiceRequest {
     this.serviceCompleted = "";
     this.requestingUser = "";
     this.assignee = "";
+    this.serviceID = "";
   }
 
   public String serviceStatus() {
@@ -37,5 +39,13 @@ public class ServiceRequest {
 
   public void setAssignee(String assignee) {
     this.assignee = assignee;
+  }
+
+  public String getServiceID() {
+    return serviceID;
+  }
+
+  public void setServiceID(String serviceID) {
+    this.serviceID = serviceID;
   }
 }
