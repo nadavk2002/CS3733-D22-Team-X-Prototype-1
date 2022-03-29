@@ -5,7 +5,7 @@ import java.util.List;
 public interface EquipmentSeviceRequestDAO {
   public List<EquipmentServiceRequest> getAllEquipmentServiceRequests();
 
-  public EquipmentServiceRequest getEquipmentServiceRequest(); // add ids
+  public EquipmentServiceRequest getEquipmentServiceRequest(String requestID);
 
   public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest);
 
