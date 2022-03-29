@@ -77,11 +77,13 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
 
   /**
    * deletes object from DAO and database.
+   *
    * @param equipmentServiceRequest medical equipment service request to be updated
    * @throws NoSuchElementException when the medical equipment service request does not exist.
    */
   @Override
-  public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) throws NoSuchElementException {
+  public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest)
+      throws NoSuchElementException {
     // remove from list
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
@@ -113,11 +115,13 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
 
   /**
    * updates DAO and database element
+   *
    * @param equipmentServiceRequest equipment service request to be updated
    * @throws NoSuchElementException when the element does not exist in the list
    */
   @Override
-  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) throws NoSuchElementException{
+  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest)
+      throws NoSuchElementException {
     // update in local list
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
@@ -131,7 +135,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
       }
       index++; // increment if not found yet
     }
-    //if we have gone through all and have not found the thing
+    // if we have gone through all and have not found the thing
     if (index == medicalEquipmentServiceRequests.size()) {
       throw new NoSuchElementException("request does not exist");
     }
