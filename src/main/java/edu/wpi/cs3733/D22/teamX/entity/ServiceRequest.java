@@ -1,51 +1,65 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-public class ServiceRequest {
-  private String requestingUser, assignee, serviceCompleted, serviceID;
+import edu.wpi.cs3733.D22.teamX.Location;
 
-  public ServiceRequest(String requestingUser, String assignee, String serviceID) {
-    this.serviceID = serviceID;
-    this.serviceCompleted = "";
-    this.requestingUser = requestingUser;
-    this.assignee = assignee;
+public abstract class ServiceRequest {
+
+  private String requestID;
+  private Location destination;
+  private String status;
+
+
+
+  //private String requestingUser, assignee, serviceCompleted, serviceID;
+
+  public ServiceRequest(String requestID, Location destination, String status) {
+    this.requestID = requestID;
+    this.destination = destination;
+    this.status = "";
   }
 
   public ServiceRequest() {
-    this.serviceCompleted = "";
-    this.requestingUser = "";
-    this.assignee = "";
-    this.serviceID = "";
+    this.requestID = "";
+    this.destination = new Location();
+    this.status = "";
   }
 
-  public String serviceStatus() {
-    return serviceCompleted;
+  public String getRequestID() {
+    return requestID;
+  }
+
+  public String getStatus() {
+    return status;
+  }
+
+  public Location getDestination() {
+    return destination;
+  }
+
+  public void setRequestID(String requestID) {
+    this.requestID = requestID;
   }
 
   public void updateStatus(String status) {
-    this.serviceCompleted = status;
+    this.status = status;
   }
 
-  public String getRequestingUser() {
-    return requestingUser;
-  }
+//  public String getRequestingUser() {
+//    return requestingUser;
+//  }
 
-  public void setRequestingUser(String requestingUser) {
-    this.requestingUser = requestingUser;
-  }
+//  public void setRequestingUser(String requestingUser) {
+//    this.requestingUser = requestingUser;
+//  }
 
-  public String getAssignee() {
-    return assignee;
-  }
+//  public String getAssignee() {
+//    return assignee;
+//  }
 
-  public void setAssignee(String assignee) {
-    this.assignee = assignee;
-  }
+//  public void setAssignee(String assignee) {
+//    this.assignee = assignee;
+//  }
 
-  public String getServiceID() {
-    return serviceID;
-  }
 
-  public void setServiceID(String serviceID) {
-    this.serviceID = serviceID;
-  }
+
 }
