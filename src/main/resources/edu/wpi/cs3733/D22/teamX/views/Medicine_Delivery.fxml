@@ -32,9 +32,9 @@
       <Button layoutX="959.0" layoutY="154.0" mnemonicParsing="false" text="Submit Request" />
       <VBox layoutX="935.0" layoutY="41.0" spacing="10.0">
          <children>
-            <TextField />
-            <TextField />
-            <TextField />
+            <TextField fx:id="patientName" />
+            <TextField fx:id="rxNum" />
+            <TextField fx:id="roomNum" />
          </children>
       </VBox>
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ReturnToMain" text="&lt;--  Main Menu" textFill="#446fdc">
@@ -42,5 +42,6 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
+      <Button layoutX="971.0" layoutY="189.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" />
    </children>
 </AnchorPane>

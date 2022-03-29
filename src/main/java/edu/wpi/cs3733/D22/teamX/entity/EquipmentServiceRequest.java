@@ -9,8 +9,9 @@ public class EquipmentServiceRequest extends ServiceRequest {
       String assignee,
       String equipmentType,
       String roomNumber,
+      String serviceID,
       int numOfEquipment) {
-    super(requestingUser, assignee);
+    super(requestingUser, assignee, serviceID);
     this.equipmentType = equipmentType;
     this.roomNumber = roomNumber;
     this.numOfEquipment = numOfEquipment;
