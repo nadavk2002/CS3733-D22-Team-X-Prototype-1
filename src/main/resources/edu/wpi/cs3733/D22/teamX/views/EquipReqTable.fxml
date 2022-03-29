@@ -9,10 +9,17 @@
 
 <AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.EquipReqTableController">
    <children>
-      <TableView fx:id="table" layoutX="497.0" layoutY="246.0" prefHeight="538.0" prefWidth="940.0">
+      <TableView fx:id="table" layoutX="330.0" layoutY="238.0" prefHeight="538.0" prefWidth="1246.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+            <TableColumn fx:id="requestID" prefWidth="200.2667236328125" text="Request ID" />
+          <TableColumn fx:id="requester" prefWidth="37.33331298828125" text="Requester" />
+          <TableColumn fx:id="equipType" prefWidth="121.86663818359375" text="Equipment" />
+            <TableColumn fx:id="amount" prefWidth="83.2000732421875" text="Amount" />
+            <TableColumn fx:id="equipStatus" prefWidth="184.00006103515625" text="Equipment Status" />
+            <TableColumn fx:id="prevLocation" prefWidth="168.2667236328125" text="Previous Location" />
+            <TableColumn fx:id="futureLocation" prefWidth="130.93310546875" text="Sent Location" />
+            <TableColumn fx:id="requestTime" prefWidth="146.933349609375" text="Time of Request" />
+            <TableColumn fx:id="fulfillRequest" prefWidth="180.2667236328125" text="Fulfill Request" />
         </columns>
       </TableView>
       <JFXButton fx:id="ToMainMenu" layoutX="34.0" layoutY="34.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
