@@ -193,7 +193,7 @@ public class Xdb {
     // Read locations into List "MedEquipReqCSV"
     List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
     try {
-      LocationDAO destination = new LocationDAOImpl(connection);
+      LocationDAO locDestination = new LocationDAOImpl(connection);
       InputStream tlCSV = UserProgram.class.getResourceAsStream("MedEquipReq.csv");
       BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
       tlCSVReader.readLine();
@@ -204,7 +204,7 @@ public class Xdb {
           EquipmentServiceRequest lnode =
               new EquipmentServiceRequest(
                   currLine[0],
-                  destination.getLocation(currLine[1]),
+                  locDestination.getLocation(currLine[1]),
                   currLine[2],
                   currLine[3],
                   Integer.parseInt(currLine[4]));
