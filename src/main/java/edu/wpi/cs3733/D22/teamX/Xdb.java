@@ -78,12 +78,8 @@ public class Xdb {
       }
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE MedicalEquipmentServiceRequest(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
-              + "xCoord INT, yCoord INT, "
-              + "floor VARCHAR(2), "
-              + "building VARCHAR(10), "
-              + "nodeType CHAR(4), "
-              + "longName VARCHAR(50), shortName VARCHAR(30))");
+          "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
+                  + "destination CHAR(10) FOREIGN KEY REFERENCES Location(nodeID))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
