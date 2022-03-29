@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
 import java.sql.Connection;
+import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,10 +39,34 @@ public class EquipmentServiceRequestTests {
             .equals(esrDAOImpl.getEquipmentServiceRequest("MER_0001")));
   }
 
-  @Test //test for correct values
+  @Test // test for correct values
   public void TestDBWgetRequest2() {
     EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
     assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 1);
   }
 
+  @Test // test for updating values
+  public void testDBeqRequestUpdate() {
+    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
+    assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 1);
+    // update
+    EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MER_0001");
+    esr.setQuantity(2);
+    esrDAOImpl.updateEquipmentServiceRequest(esr); // send to db
+    assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 2);
+  }
+
+  @Test // test for deleting values
+  public void testDBeqRequestDelete() {
+    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
+    assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0003").getQuantity() == 3);
+    // removes
+    EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MER_0003");
+    esrDAOImpl.deleteEquipmentServiceRequest(esr);
+    try {
+      esrDAOImpl.getEquipmentServiceRequest("MER_0003");
+    } catch (NoSuchElementException s) {
+      assertTrue(true);
+    }
+  }
 }

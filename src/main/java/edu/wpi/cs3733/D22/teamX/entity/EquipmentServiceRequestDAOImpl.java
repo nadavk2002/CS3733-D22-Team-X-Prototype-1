@@ -60,7 +60,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
    *
    * @param requestID requestID of the induvidual service request
    * @return a medical equipment service request with a matching requestID
-   * @throws NoSuchElementException when there is no object with a matching requestID
+   * @throw NoSuchElementException when there is no object with a matching requestID
    */
   @Override
   public EquipmentServiceRequest getEquipmentServiceRequest(String requestID)
@@ -79,11 +79,10 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
    * deletes object from DAO and database.
    *
    * @param equipmentServiceRequest medical equipment service request to be updated
-   * @throws NoSuchElementException when the medical equipment service request does not exist.
+   * @throw NoSuchElementException when the medical equipment service request does not exist.
    */
   @Override
-  public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest)
-      throws NoSuchElementException {
+  public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
     // remove from list
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
@@ -117,11 +116,10 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
    * updates DAO and database element
    *
    * @param equipmentServiceRequest equipment service request to be updated
-   * @throws NoSuchElementException when the element does not exist in the list
+   * @throw NoSuchElementException when the element does not exist in the list
    */
   @Override
-  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest)
-      throws NoSuchElementException {
+  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
     // update in local list
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
