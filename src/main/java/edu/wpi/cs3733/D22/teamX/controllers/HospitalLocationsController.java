@@ -17,8 +17,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class HospitalLocationsController implements Initializable {
   @FXML private TableView<Location> table;
   @FXML private TableColumn<Location, String> nodeID;
-  // @FXML private TableColumn<Location, Integer> xCoord;
-  // @FXML private TableColumn<Location, Integer> yCoord;
+  @FXML private TableColumn<Location, Integer> xCoord;
+  @FXML private TableColumn<Location, Integer> yCoord;
   @FXML private TableColumn<Location, String> floor;
   @FXML private TableColumn<Location, String> building;
   @FXML private TableColumn<Location, String> nodeType; // Add more columns or remove if need be
@@ -28,28 +28,27 @@ public class HospitalLocationsController implements Initializable {
 
   @FXML private TableColumn<Location, String> shortName;
 
-  @FXML
-  void ToMainMenu() throws IOException {
-    App.switchScene(
-        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
-  }
+  public ObservableList<Location> list =
+      FXCollections.observableArrayList(
+          new Location("ID1", 1, 2, "L1", "Tower", "STOR", "OR Bed Park", "OR Bed Park"),
+          new Location("ID2", 500, 300, "3", "Tower", "PATI", "Patient Room", "PR"));
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     nodeID.setCellValueFactory(new PropertyValueFactory<>("nodeID"));
-    // xCoord.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
-    // yCoord.setCellValueFactory(new PropertyValueFactory>("yCoord"));
+    xCoord.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
+    yCoord.setCellValueFactory(new PropertyValueFactory<>("yCoord"));
     floor.setCellValueFactory(new PropertyValueFactory<>("floor"));
     building.setCellValueFactory(new PropertyValueFactory<>("building"));
     nodeType.setCellValueFactory(new PropertyValueFactory<>("nodeType"));
     longName.setCellValueFactory(new PropertyValueFactory<>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<>("shortName"));
-    table.getItems().addAll(fillTable());
+    table.setItems(list);
   }
 
-  private ObservableList<Location> fillTable() { // Helper to fill list displayed in table
-    ObservableList<Location> items = FXCollections.observableArrayList();
-    items.add(new Location("ID", 1, 2, "L1", "Tower", "STOR", "OR Bed Park", "OR Bed Park"));
-    return items;
+  @FXML
+  void ToMainMenu() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
 }

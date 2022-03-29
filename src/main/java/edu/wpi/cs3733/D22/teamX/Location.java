@@ -34,8 +34,8 @@ public class Location {
 
   public Location(
       String nodeID,
-      Integer xCoord,
-      Integer yCoord,
+      int xCoord,
+      int yCoord,
       String floor,
       String building,
       String nodeType,
