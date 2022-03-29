@@ -10,9 +10,9 @@
 
 <AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqInTransportController">
    <children>
-      <TextField layoutX="984.0" layoutY="41.0" />
+      <TextField fx:id="patientName" layoutX="984.0" layoutY="41.0" />
       <ChoiceBox fx:id="transportLocation" layoutX="983.0" layoutY="125.0" prefWidth="150.0" />
-      <TextField layoutX="984.0" layoutY="83.0" />
+      <TextField fx:id="roomNum" layoutX="984.0" layoutY="83.0" />
       <ChoiceBox fx:id="addAccommodations" layoutX="983.0" layoutY="167.0" prefWidth="150.0" />
       <Label alignment="CENTER" layoutX="869.0" layoutY="45.0" text="Enter Patient Name:" textAlignment="RIGHT" />
       <Label alignment="CENTER" layoutX="862.0" layoutY="87.0" text="Enter Room Number:" textAlignment="RIGHT" />
@@ -24,5 +24,6 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
+      <Button layoutX="944.0" layoutY="251.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
    </children>
 </AnchorPane>

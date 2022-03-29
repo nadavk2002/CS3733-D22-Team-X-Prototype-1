@@ -13,12 +13,13 @@
       <ChoiceBox fx:id="selectLang" layoutX="926.0" layoutY="418.0" prefWidth="150.0" />
       <Label layoutX="832.0" layoutY="422.0" text="Select Language:" />
       <Label layoutX="810.0" layoutY="462.0" text="Enter Room Number:" />
-      <TextField layoutX="926.0" layoutY="458.0" />
+      <TextField fx:id="roomNum" layoutX="926.0" layoutY="458.0" />
       <Button layoutX="895.0" layoutY="509.0" mnemonicParsing="false" text="Submit Request" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
+      <Button layoutX="906.0" layoutY="542.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
    </children>
 </AnchorPane>

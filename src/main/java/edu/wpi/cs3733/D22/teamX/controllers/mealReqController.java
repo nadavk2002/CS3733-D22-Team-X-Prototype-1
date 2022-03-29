@@ -25,6 +25,15 @@ public class mealReqController {
   }
 
   @FXML
+  void resetFields() {
+    patientNames.setValue("");
+    drinkSel.setValue("");
+    mainSel.setValue("");
+    sideSel.setValue("");
+    addedToQueue.setText("");
+  }
+
+  @FXML
   public void initialize() {
     addedToQueue.setText("");
     // patient names choice box---------------------------------------

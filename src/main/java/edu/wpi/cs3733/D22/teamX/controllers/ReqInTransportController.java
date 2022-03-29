@@ -9,11 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class ReqInTransportController implements Initializable {
   @FXML private Button AppButton;
   @FXML private ChoiceBox<String> transportLocation;
   @FXML private ChoiceBox<String> addAccommodations;
+  @FXML private TextField patientName, roomNum;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -25,5 +27,13 @@ public class ReqInTransportController implements Initializable {
   void AppButton() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+  }
+
+  @FXML
+  void resetFields() {
+    patientName.setText("");
+    roomNum.setText("");
+    transportLocation.setValue("");
+    addAccommodations.setValue("");
   }
 }
