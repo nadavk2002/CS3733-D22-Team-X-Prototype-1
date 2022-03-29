@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AllServiceRequestsController">
+   <children>
+      <Label layoutX="802.0" layoutY="19.0" text="All Service Requests">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="ToMainMenu" layoutX="24.0" layoutY="24.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <TableView fx:id="serviceTable" layoutX="31.0" layoutY="130.0" prefHeight="847.0" prefWidth="1854.0">
+        <columns>
+          <TableColumn id="requestingUser" fx:id="requestingUser" prefWidth="367.2000389099121" text="Requesting User" />
+          <TableColumn fx:id="assignee" minWidth="9.066688537597656" prefWidth="475.1999816894531" text="Assignee" />
+            <TableColumn fx:id="completedService" prefWidth="736.800048828125" text="Completed Service" />
+            <TableColumn fx:id="serviceID" prefWidth="276.79998779296875" text="Service ID" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
