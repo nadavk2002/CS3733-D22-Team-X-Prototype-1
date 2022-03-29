@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -48,10 +47,10 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
 
   @Override
   public EquipmentServiceRequest getEquipmentServiceRequest(String requestID) {
-    //iterate through list to find element with matching requestID
-    for(EquipmentServiceRequest esr : medicalEquipmentServiceRequests){
-      //if matching IDs
-      if(esr.getRequestID().equals(requestID)){
+    // iterate through list to find element with matching requestID
+    for (EquipmentServiceRequest esr : medicalEquipmentServiceRequests) {
+      // if matching IDs
+      if (esr.getRequestID().equals(requestID)) {
         return esr;
       }
     }
@@ -60,6 +59,28 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
 
   @Override
   public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
+    //remove from list
+    int index = 0; //create indexer varible for while loop
+    while(index < medicalEquipmentServiceRequests.size()){
+      if(medicalEquipmentServiceRequests.get(index).getRequestID().equals(equipmentServiceRequest.getRequestID())){
+        medicalEquipmentServiceRequests.remove(index);//removes object from list
+        break; //exit
+      }
+      index++; //increment if not found
+    }
+
+    //remove from database
+    try {
+      // create the statement
+      Statement statement = connection.createStatement();
+      // remove location from DB table
+      statement.executeUpdate(
+              "DELETE FROM MedicalEquipmentServiceRequest WHERE requestID = '"
+                      + equipmentServiceRequest.getRequestID() + "'");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+    //done
 
   }
 
