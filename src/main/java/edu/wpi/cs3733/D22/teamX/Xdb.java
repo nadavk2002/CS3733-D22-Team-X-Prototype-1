@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.D22.teamX;
 
+import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
+import java.io.*;
 import java.sql.*;
+import java.util.*;
 
 public class Xdb {
   /** Initializes the db and runs the user program from Spike B */
@@ -41,6 +44,8 @@ public class Xdb {
     dropAllTables(connection);
     createLocationTable(connection);
     createMedicalEquipmentServiceRequestTable(connection);
+    loadLocationCSV(connection);
+    loadMedEqServiceReqCSV(connection);
 
     System.out.println("Database created successfully");
 
@@ -88,5 +93,134 @@ public class Xdb {
     } catch (SQLException e) {
       System.out.println("Creating MedicalEquipmentServiceRequest Table...");
     }
+  }
+
+  /**
+   * Read the locations from CSV file. Put locations into db table "Location"
+   *
+   * @param connection used to connect to embedded database
+   * @return
+   */
+  private static List<Location> loadLocationCSV(Connection connection) {
+    // Read locations into List "locationsFromCSV"
+    List<Location> locationsFromCSV = new ArrayList<Location>();
+    try {
+      InputStream tlCSV = UserProgram.class.getResourceAsStream("TowerLocations.csv");
+      BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
+      tlCSVReader.readLine();
+      String nextFileLine;
+      while ((nextFileLine = tlCSVReader.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 8) {
+          Location lnode =
+              new Location(
+                  currLine[0],
+                  Integer.parseInt(currLine[1]),
+                  Integer.parseInt(currLine[2]),
+                  currLine[3],
+                  currLine[4],
+                  currLine[5],
+                  currLine[6],
+                  currLine[7]);
+          locationsFromCSV.add(lnode);
+        } else {
+          System.out.println("CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+      tlCSV.close();
+      tlCSVReader.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    // Insert locations from locationsFromCSV into db table
+    for (int i = 0; i < locationsFromCSV.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder insertLocation = new StringBuilder();
+        insertLocation.append("INSERT INTO Location VALUES(");
+        insertLocation.append("'" + locationsFromCSV.get(i).getNodeID() + "'" + ", ");
+        insertLocation.append(locationsFromCSV.get(i).getxCoord() + ", ");
+        insertLocation.append(locationsFromCSV.get(i).getyCoord() + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getFloor() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getBuilding() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getNodeType() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getLongName() + "'" + ", ");
+        insertLocation.append("'" + locationsFromCSV.get(i).getShortName() + "'");
+        insertLocation.append(")");
+        initialization.execute(insertLocation.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for Location " + i + " failed");
+        e.printStackTrace();
+        return null;
+      }
+    }
+    return locationsFromCSV;
+  }
+
+  /**
+   * Read the MedEquipReq from CSV file. Put locations into db table
+   * "MedicalEquipmentServiceRequest"
+   *
+   * @param connection used to connect to embedded database
+   * @return
+   */
+  private static List<EquipmentServiceRequest> loadMedEqServiceReqCSV(Connection connection) {
+    // Read locations into List "MedEquipReqCSV"
+    List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
+    try {
+      LocationDAO destination = new LocationDAOImpl(connection);
+      InputStream tlCSV = UserProgram.class.getResourceAsStream("MedEquipReq.csv");
+      BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
+      tlCSVReader.readLine();
+      String nextFileLine;
+      while ((nextFileLine = tlCSVReader.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 5) {
+          EquipmentServiceRequest lnode =
+              new EquipmentServiceRequest(
+                  currLine[0],
+                  destination.getLocation(currLine[1]),
+                  currLine[2],
+                  currLine[3],
+                  Integer.parseInt(currLine[4]));
+          MedEquipReqFromCSV.add(lnode);
+        } else {
+          System.out.println("CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    // Insert locations from locationsFromCSV into db table
+    for (int i = 0; i < MedEquipReqFromCSV.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder medEquipReq = new StringBuilder();
+        medEquipReq.append("INSERT INTO MedicalEquipmentServiceRequest VALUES(");
+        medEquipReq.append("'" + MedEquipReqFromCSV.get(i).getRequestID() + "'" + ", ");
+        medEquipReq.append(
+            "'" + MedEquipReqFromCSV.get(i).getDestination().getNodeID() + "'" + ", ");
+        medEquipReq.append("'" + MedEquipReqFromCSV.get(i).getStatus() + "'" + ", ");
+        medEquipReq.append("'" + MedEquipReqFromCSV.get(i).getEquipmentType() + "'" + ", ");
+        medEquipReq.append(MedEquipReqFromCSV.get(i).getQuantity());
+        medEquipReq.append(")");
+        initialization.execute(medEquipReq.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for MedEquipReq " + i + " failed");
+        e.printStackTrace();
+        return null;
+      }
+    }
+    return MedEquipReqFromCSV;
   }
 }
