@@ -44,11 +44,12 @@ public class equipmentDeliveryController {
 
   @FXML
   public void submitRequest() {
-    request.setAssignee(""); // empty for now
-    request.setRequestingUser(""); // empty for now
+    // request.setAssignee(""); // empty for now
+    // request.setRequestingUser(""); // empty for now
     request.setEquipmentType(selectEquipmentType.getValue());
-    request.setRoomNumber(roomField.getText());
-    request.setNumOfEquipment(Integer.parseInt(amountField.getText()));
+    // Cant be text, must be selected from drop-down of nodeID's
+    // request.setDestination(roomField.getText());
+    request.setQuantity(Integer.parseInt(amountField.getText()));
     this.resetFields();
   }
 }
