@@ -59,31 +59,70 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
 
   @Override
   public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
-    //remove from list
-    int index = 0; //create indexer varible for while loop
-    while(index < medicalEquipmentServiceRequests.size()){
-      if(medicalEquipmentServiceRequests.get(index).getRequestID().equals(equipmentServiceRequest.getRequestID())){
-        medicalEquipmentServiceRequests.remove(index);//removes object from list
-        break; //exit
+    // remove from list
+    int index = 0; // create indexer varible for while loop
+    while (index < medicalEquipmentServiceRequests.size()) {
+      if (medicalEquipmentServiceRequests
+          .get(index)
+          .getRequestID()
+          .equals(equipmentServiceRequest.getRequestID())) {
+        medicalEquipmentServiceRequests.remove(index); // removes object from list
+        break; // exit
       }
-      index++; //increment if not found
+      index++; // increment if not found
     }
 
-    //remove from database
+    // remove from database
     try {
       // create the statement
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-              "DELETE FROM MedicalEquipmentServiceRequest WHERE requestID = '"
-                      + equipmentServiceRequest.getRequestID() + "'");
+          "DELETE FROM MedicalEquipmentServiceRequest WHERE requestID = '"
+              + equipmentServiceRequest.getRequestID()
+              + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
-    //done
-
   }
 
   @Override
-  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {}
+  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
+    // update in local list
+    int index = 0; // create indexer varible for while loop
+    while (index < medicalEquipmentServiceRequests.size()) {
+      if (medicalEquipmentServiceRequests
+          .get(index)
+          .getRequestID()
+          .equals(equipmentServiceRequest.getRequestID())) {
+        medicalEquipmentServiceRequests.set(
+            index, equipmentServiceRequest); // removes object from list
+        break; // exit
+      }
+      index++; // increment if not found yet
+    }
+
+    // update DB table
+
+    try {
+      // create the statement
+      Statement statement = connection.createStatement();
+      // update item in DB
+      statement.executeUpdate(
+          "UPDATE MedicalEquipmentServiceRequest SET"
+              + " destination = '"
+              + equipmentServiceRequest.getDestination()
+              + "', status = '"
+              + equipmentServiceRequest.getStatus()
+              + "', equipmentType = '"
+              + equipmentServiceRequest.getEquipmentType()
+              + "', quantity = "
+              + equipmentServiceRequest.getQuantity()
+              + " WHERE requestID = '"
+              + equipmentServiceRequest.getRequestID()
+              + "'");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 }
