@@ -21,7 +21,7 @@ public class EquipReqTableController implements Initializable {
   @FXML private TableColumn<Location, String> amount; // spike c, Quantity
   @FXML private TableColumn<Location, String> equipStatus; // spike c, Status
   @FXML private TableColumn<Location, String> prevLocation;
-  @FXML private TableColumn<Location, String> futureLocation; //spike c destination
+  @FXML private TableColumn<Location, String> futureLocation; // spike c destination
   @FXML private TableColumn<Location, String> requestTime;
   @FXML private TableColumn<Location, String> fulfillRequest;
   @FXML private TableColumn<Location, String> requestID; // spike c RequestID
