@@ -8,9 +8,7 @@ public abstract class ServiceRequest {
   private Location destination;
   private String status;
 
-
-
-  //private String requestingUser, assignee, serviceCompleted, serviceID;
+  // private String requestingUser, assignee, serviceCompleted, serviceID;
 
   public ServiceRequest(String requestID, Location destination, String status) {
     this.requestID = requestID;
@@ -40,26 +38,28 @@ public abstract class ServiceRequest {
     this.requestID = requestID;
   }
 
-  public void updateStatus(String status) {
+  public void setStatus(String status) {
     this.status = status;
   }
 
-//  public String getRequestingUser() {
-//    return requestingUser;
-//  }
+  public void setDestination(Location destination) {
+    this.destination = destination;
+  }
 
-//  public void setRequestingUser(String requestingUser) {
-//    this.requestingUser = requestingUser;
-//  }
+  //  public String getRequestingUser() {
+  //    return requestingUser;
+  //  }
 
-//  public String getAssignee() {
-//    return assignee;
-//  }
+  //  public void setRequestingUser(String requestingUser) {
+  //    this.requestingUser = requestingUser;
+  //  }
 
-//  public void setAssignee(String assignee) {
-//    this.assignee = assignee;
-//  }
+  //  public String getAssignee() {
+  //    return assignee;
+  //  }
 
-
+  //  public void setAssignee(String assignee) {
+  //    this.assignee = assignee;
+  //  }
 
 }

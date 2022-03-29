@@ -39,6 +39,7 @@ public class Xdb {
     System.out.println("Apache Derby connection established :D");
 
     createLocationTable(connection);
+    createMedicalEquipmentServiceRequestTable(connection);
 
     System.out.println("Database created successfully");
 
@@ -72,15 +73,17 @@ public class Xdb {
     try {
       Statement dropLocation = connection.createStatement();
       try {
-        dropLocation.execute("DROP TABLE Location");
+        dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
       } catch (SQLException e) {
         System.out.println("Creating MedicalEquipmentServiceRequest Table...");
       }
       Statement initialization = connection.createStatement();
-      initialization.execute("CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
-              + "destination CHAR(10) FOREIGN KEY REFERENCES Location(nodeID),"
-              + "status CHAR(4)"
-              + "INT equipmentQuantity)");
+      initialization.execute(
+          "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
+              + "destination CHAR(10),"
+              + "status CHAR(4),"
+              + "equipmentQuantity INT,"
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
