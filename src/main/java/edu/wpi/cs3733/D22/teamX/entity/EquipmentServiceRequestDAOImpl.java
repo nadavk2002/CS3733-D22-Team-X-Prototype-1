@@ -14,6 +14,11 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
   List<EquipmentServiceRequest> medicalEquipmentServiceRequests;
   Connection connection; // store connection info
 
+  /**
+   * constructor
+   *
+   * @param connection database connection used to connect to db
+   */
   public EquipmentServiceRequestDAOImpl(Connection connection) {
     medicalEquipmentServiceRequests = new ArrayList<>();
 
@@ -40,13 +45,26 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
     this.connection = connection;
   }
 
+  /**
+   * gets the list of all the medical equipment service requests
+   *
+   * @return a list of all the medical equipment service requests
+   */
   @Override
   public List<EquipmentServiceRequest> getAllEquipmentServiceRequests() {
     return medicalEquipmentServiceRequests;
   }
 
+  /**
+   * gets induviduial equipment service requests
+   *
+   * @param requestID requestID of the induvidual service request
+   * @return a medical equipment service request with a matching requestID
+   * @throws NoSuchElementException when there is no object with a matching requestID
+   */
   @Override
-  public EquipmentServiceRequest getEquipmentServiceRequest(String requestID) {
+  public EquipmentServiceRequest getEquipmentServiceRequest(String requestID)
+      throws NoSuchElementException {
     // iterate through list to find element with matching requestID
     for (EquipmentServiceRequest esr : medicalEquipmentServiceRequests) {
       // if matching IDs
@@ -57,8 +75,13 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
     throw new NoSuchElementException("request does not exist");
   }
 
+  /**
+   * deletes object from DAO and database.
+   * @param equipmentServiceRequest medical equipment service request to be updated
+   * @throws NoSuchElementException when the medical equipment service request does not exist.
+   */
   @Override
-  public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
+  public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) throws NoSuchElementException {
     // remove from list
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
@@ -71,7 +94,9 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
       }
       index++; // increment if not found
     }
-
+    if (index == medicalEquipmentServiceRequests.size()) {
+      throw new NoSuchElementException("request does not exist");
+    }
     // remove from database
     try {
       // create the statement
@@ -86,8 +111,13 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
     }
   }
 
+  /**
+   * updates DAO and database element
+   * @param equipmentServiceRequest equipment service request to be updated
+   * @throws NoSuchElementException when the element does not exist in the list
+   */
   @Override
-  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
+  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) throws NoSuchElementException{
     // update in local list
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
@@ -100,6 +130,10 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
         break; // exit
       }
       index++; // increment if not found yet
+    }
+    //if we have gone through all and have not found the thing
+    if (index == medicalEquipmentServiceRequests.size()) {
+      throw new NoSuchElementException("request does not exist");
     }
 
     // update DB table
