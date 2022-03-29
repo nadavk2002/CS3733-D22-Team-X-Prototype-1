@@ -1,0 +1,5 @@
+﻿RequestID,Destination,Status,equipmentType,Quantity
+MER_0001,FDEPT00101,PROC,Ventilator,1
+MER_0002,FHALL00801,DONE,hoyer,2
+MER_0003,FHALL01101,PROC,Iron_Lung,3
+MER_0004,FHALL01701,PROC,Blood_Pump,1
