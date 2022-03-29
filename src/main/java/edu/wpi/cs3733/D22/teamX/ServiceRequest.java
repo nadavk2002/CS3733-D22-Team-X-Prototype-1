@@ -1,14 +1,14 @@
 package edu.wpi.cs3733.D22.teamX;
 
 public abstract class ServiceRequest {
-  private String requestType;
-  private Location toLoc;
+  private String requestID;
+  private Location destination;
 
-  public String getRequestType() {
-    return requestType;
+  public String getRequestID() {
+    return requestID;
   }
 
-  public Location getToLoc() {
-    return toLoc;
+  public Location getDestination() {
+    return destination;
   }
 }
