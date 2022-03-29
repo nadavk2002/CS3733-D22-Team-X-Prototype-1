@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.*;
 
 public class Xdb {
-  /** Initializes the db and runs the user program from Spike B */
+  /** Initializes the db and runs the user program from Spike B. */
   public static void initializeAndRunDBProgram() {
     Connection dbConn = initializeDB();
     UserProgram.executeProgram(dbConn);
@@ -17,7 +17,11 @@ public class Xdb {
     }
   }
 
-  /** Initializes the database with tables and establishes a connection */
+  /**
+   * Initializes the database with tables and establishes a connection
+   *
+   * @return a connection to the database
+   */
   public static Connection initializeDB() {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
@@ -52,6 +56,11 @@ public class Xdb {
     return connection;
   }
 
+  /**
+   * Creates the location table in the database
+   *
+   * @param connection a connection to the database
+   */
   private static void createLocationTable(Connection connection) {
     try {
       Statement initialization = connection.createStatement();
@@ -69,6 +78,11 @@ public class Xdb {
     }
   }
 
+  /**
+   * creates the medical equipment request service table in the database
+   *
+   * @param connection a connection to the database
+   */
   private static void createMedicalEquipmentServiceRequestTable(Connection connection) {
     try {
       Statement initialization = connection.createStatement();
@@ -86,6 +100,11 @@ public class Xdb {
     }
   }
 
+  /**
+   * Drops all the tables in the database.
+   *
+   * @param connection a connection to the database
+   */
   private static void dropAllTables(Connection connection) {
     try {
       Statement dropLocation = connection.createStatement();
@@ -100,7 +119,7 @@ public class Xdb {
    * Read the locations from CSV file. Put locations into db table "Location"
    *
    * @param connection used to connect to embedded database
-   * @return
+   * @return a list of location objects from the "TowerLocations.CSV" file.
    */
   private static List<Location> loadLocationCSV(Connection connection) {
     // Read locations into List "locationsFromCSV"
@@ -224,4 +243,41 @@ public class Xdb {
     }
     return MedEquipReqFromCSV;
   }
+
+  /**
+   * Writes the content of the CSV files/Location object list to the database.
+   *
+   * @param connection a connection to the database.
+   * @param locations a list of location objects to be written to the database.
+   */
+  private static void saveLocationToDB(List<Location> locations, Connection connection) {
+    try {
+      Statement statement = connection.createStatement();
+      for (Location l : locations) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("INSERT INTO Location VALUES (");
+        sql.append(l.getNodeID() + ",");
+        sql.append(l.getxCoord() + ",");
+        sql.append(l.getyCoord() + ",");
+        sql.append(l.getFloor() + ",");
+        sql.append(l.getBuilding() + ",");
+        sql.append(l.getNodeType() + ",");
+        sql.append(l.getLongName() + ",");
+        sql.append(l.getShortName());
+        sql.append(")");
+        statement.executeUpdate(sql.toString());
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Writes the content of the CSV files/MedEquipServRequest object list to the database.
+   *
+   * @param connection a connection to the database.
+   * @param MedEquipServRequests a list of equipment service requests to be written to the database.
+   */
+  private static void saveMedEquipServRequestToDB(
+      List<EquipmentServiceRequest> MedEquipServRequests, Connection connection) {}
 }
