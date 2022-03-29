@@ -30,8 +30,7 @@ public class Xdb {
     // tries to create the database and establish a connection
     Connection connection = null;
     try {
-      connection =
-          DriverManager.getConnection("jdbc:derby:spike_b_db;create=true", "admin", "admin");
+      connection = DriverManager.getConnection("jdbc:derby:embed_db;create=true", "admin", "admin");
     } catch (SQLException e) {
       System.out.println("Connection failed. Check output console.");
       e.printStackTrace();
@@ -39,14 +38,20 @@ public class Xdb {
     }
     System.out.println("Apache Derby connection established :D");
 
-    // creates table
+    createLocationTable(connection);
+
+    System.out.println("Database created successfully");
+
+    return connection;
+  }
+
+  private static void createLocationTable(Connection connection) {
     try {
       Statement dropLocation = connection.createStatement();
       try {
-
         dropLocation.execute("DROP TABLE Location");
       } catch (SQLException e) {
-        System.out.println("Table does not exist...\nCreating table...");
+        System.out.println("Creating Location Table...");
       }
       Statement initialization = connection.createStatement();
       initialization.execute(
@@ -61,8 +66,24 @@ public class Xdb {
       e.printStackTrace();
       System.exit(1);
     }
-    System.out.println("Database created successfully");
+  }
 
-    return connection;
+  private static void createMedicalEquipmentServiceRequestTable(Connection connection) {
+    try {
+      Statement dropLocation = connection.createStatement();
+      try {
+        dropLocation.execute("DROP TABLE Location");
+      } catch (SQLException e) {
+        System.out.println("Creating MedicalEquipmentServiceRequest Table...");
+      }
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
+                  + "destination CHAR(10) FOREIGN KEY REFERENCES Location(nodeID))");
+    } catch (SQLException e) {
+      System.out.println("Table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
   }
 }

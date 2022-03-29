@@ -94,24 +94,24 @@ public class LocationDAOImpl implements LocationDAO {
         Statement statement = connection.createStatement();
         // update sql object
         statement.executeUpdate(
-                "UPDATE Location SET xCoord = "
-                        + location.getxCoord()
-                        + ", yCoord = "
-                        + location.getyCoord()
-                        + ", floor = '"
-                        + location.getFloor()
-                        + "', building = '"
-                        + location.getBuilding()
-                        + "', nodeType = '"
-                        + location.getNodeType()
-                        + "', longName = '"
-                        + location.getLongName()
-                        + "', shortName = '"
-                        + location.getShortName()
-                        + "' "
-                        + "WHERE nodeID = '"
-                        + location.getNodeID()
-                        + "'");
+            "UPDATE Location SET xCoord = "
+                + location.getxCoord()
+                + ", yCoord = "
+                + location.getyCoord()
+                + ", floor = '"
+                + location.getFloor()
+                + "', building = '"
+                + location.getBuilding()
+                + "', nodeType = '"
+                + location.getNodeType()
+                + "', longName = '"
+                + location.getLongName()
+                + "', shortName = '"
+                + location.getShortName()
+                + "' "
+                + "WHERE nodeID = '"
+                + location.getNodeID()
+                + "'");
 
       } catch (SQLException e) {
         e.printStackTrace();
@@ -144,7 +144,7 @@ public class LocationDAOImpl implements LocationDAO {
         Statement statement = connection.createStatement();
         // remove location from DB table
         statement.executeUpdate(
-                "DELETE FROM Location WHERE nodeID = '" + location.getNodeID() + "'");
+            "DELETE FROM Location WHERE nodeID = '" + location.getNodeID() + "'");
       } catch (SQLException e) {
         e.printStackTrace();
       }
