@@ -88,7 +88,7 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     // update Location table
-    if (locationInd == locations.size()) {
+    if (locationInd < locations.size()) {
       try {
         // create the statement
         Statement statement = connection.createStatement();
@@ -138,7 +138,7 @@ public class LocationDAOImpl implements LocationDAO {
       locationInd++;
     }
 
-    if (locationInd == locations.size()) {
+    if (locationInd < locations.size()) {
       try {
         // create the statement
         Statement statement = connection.createStatement();
