@@ -76,7 +76,8 @@ public class Xdb {
           "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
               + "destination CHAR(10),"
               + "status CHAR(4),"
-              + "equipmentQuantity INT,"
+              + "equipmentType VARCHAR(15),"
+              + "quantity INT,"
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");

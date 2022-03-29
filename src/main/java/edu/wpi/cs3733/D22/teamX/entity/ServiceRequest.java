@@ -13,7 +13,7 @@ public abstract class ServiceRequest {
   public ServiceRequest(String requestID, Location destination, String status) {
     this.requestID = requestID;
     this.destination = destination;
-    this.status = "";
+    this.status = status;
   }
 
   public ServiceRequest() {
