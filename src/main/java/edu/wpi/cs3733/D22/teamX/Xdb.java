@@ -246,6 +246,7 @@ public class Xdb {
 
   /**
    * Writes the content of the location table from the database into the TowerLocations.CSV
+   *
    * @param connection a connection to the database
    */
   private static void saveLocationDataToCSV(Connection connection) {
