@@ -77,7 +77,10 @@ public class Xdb {
         System.out.println("Creating MedicalEquipmentServiceRequest Table...");
       }
       Statement initialization = connection.createStatement();
-      initialization.execute(" ");
+      initialization.execute("CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
+              + "destination CHAR(10) FOREIGN KEY REFERENCES Location(nodeID),"
+              + "status CHAR(4)"
+              + "INT equipmentQuantity)");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
