@@ -9,10 +9,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class ReqLangController implements Initializable {
   @FXML private Button mainMenu;
   @FXML private ChoiceBox<String> selectLang;
+  @FXML private TextField roomNum;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -28,5 +30,11 @@ public class ReqLangController implements Initializable {
   public void mainMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+  }
+
+  @FXML
+  public void resetFields() {
+    selectLang.setValue("");
+    roomNum.setText("");
   }
 }

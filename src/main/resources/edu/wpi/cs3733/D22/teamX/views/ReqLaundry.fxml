@@ -25,5 +25,6 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
+      <Button layoutX="966.0" layoutY="567.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
    </children>
 </AnchorPane>
