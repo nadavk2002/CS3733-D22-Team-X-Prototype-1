@@ -17,69 +17,18 @@
       </ImageView>
       <VBox cache="true" layoutX="14.0" layoutY="20.0" prefHeight="113.0" prefWidth="254.0">
          <children>
-            <JFXButton cache="true" onAction="#LabRequestButton" text="Request Lab Service" textFill="#446fdc">
+            <JFXButton cache="true" contentDisplay="TOP" onAction="#LabRequestButton" text="Request Lab Service" textFill="#446fdc">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
-            </JFXButton>
-            <JFXButton onAction="#ReqMedicineDelivery" text="Request Medicine Delivery" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton onAction="#ReqLangButton" text="Request Language Interpreter" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton onAction="#mealReqButton" text="Request Patient Meal" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton onAction="#ReqInTransportButton" prefHeight="26.0" prefWidth="242.0" text="Request Internal Patient Transportation" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton onAction="#ReqLaundryButton" text="Request Laundry Service" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton onAction="#equipmentRequestButton" text="Request Equipment Delivery" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton onAction="#hospitalLocationsButton" text="Hospital Locations" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
+               <graphic>
+                  <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+                     <Image url="@../assets/beaker.png" />
+                  </ImageView>
+               </graphic>
             </JFXButton>
             <JFXButton onAction="#EquipReqTableButton" text="Equipment Request Queue" textFill="#446fdc">
                <font>
@@ -88,10 +37,106 @@
             </JFXButton>
          </children>
       </VBox>
-      <JFXButton cache="true" layoutX="1862.0" layoutY="939.0" onAction="#ExitApplication" text="Exit" textFill="#446fdc">
+      <JFXButton cache="true" contentDisplay="TOP" layoutX="1794.0" layoutY="836.0" onAction="#ExitApplication" text="Exit" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="92.0" fitWidth="88.0" preserveRatio="true">
+               <Image url="@../assets/exit.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="214.0" layoutY="20.0" onAction="#ReqMedicineDelivery" prefHeight="154.0" prefWidth="176.0" text="Request Medicine Delivery" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="126.0" preserveRatio="true">
+               <Image url="@../assets/prescription.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="414.0" layoutY="20.0" onAction="#ReqLangButton" text="Request Language Interpreter" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <Image url="@../assets/translation.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="225.0" layoutY="223.0" onAction="#ReqLaundryButton" text="Request Laundry Service" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <Image url="@../assets/laundry.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="414.0" layoutY="223.0" onAction="#ReqInTransportButton" prefHeight="26.0" prefWidth="242.0" text="Request Internal Patient Transportation" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <Image url="@../assets/patientTransport.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="231.0" layoutY="414.0" onAction="#hospitalLocationsButton" text="Hospital Locations" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <Image url="@../assets/mapIcon.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="22.0" layoutY="414.0" onAction="#equipmentRequestButton" text="Request Equipment Delivery" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <Image url="@../assets/stethoscope.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="22.0" layoutY="223.0" onAction="#mealReqButton" text="Request Patient Meal" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <Image url="@../assets/food.png" />
+            </ImageView>
+         </graphic>
       </JFXButton>
    </children>
 </AnchorPane>
