@@ -246,12 +246,65 @@ public class Xdb {
 
   /**
    * Writes the content of the location table from the database into the TowerLocations.CSV
+   *
    * @param connection a connection to the database
    */
-  private static void saveLocationDataToCSV(Connection connection) {
+  private static void saveLocationDataToCSV(Connection connection, String csvFileName) {
+    ArrayList<Location> locations = new ArrayList<Location>();
     try {
       Statement statement = connection.createStatement();
+      ResultSet locationRecords = statement.executeQuery("SELECT * FROM LOCATION");
+      while (locationRecords.next()) {
+        locations.add(
+            new Location(
+                locationRecords.getString("nodeID"),
+                locationRecords.getInt("xCoord"),
+                locationRecords.getInt("yCoord"),
+                locationRecords.getString("floor"),
+                locationRecords.getString("building"),
+                locationRecords.getString("nodeType"),
+                locationRecords.getString("longName"),
+                locationRecords.getString("shortName")));
+      }
     } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("An error occured when saving Location data to the CSV file.");
+    }
+
+    try {
+      FileWriter csvFile = new FileWriter(csvFileName, false);
+      csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
+      for (int i = 0; i < locations.size(); i++) {
+        csvFile.write("\n" + locations.get(i).getNodeID() + ",");
+        csvFile.write(locations.get(i).getxCoord() + ",");
+        csvFile.write(locations.get(i).getyCoord() + ",");
+        if (locations.get(i).getFloor() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getFloor() + ",");
+        }
+        if (locations.get(i).getBuilding() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getBuilding() + ",");
+        }
+        if (locations.get(i).getNodeType() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getNodeType() + ",");
+        }
+        if (locations.get(i).getLongName() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getLongName() + ",");
+        }
+        if (locations.get(i).getShortName() != null) {
+          csvFile.write(locations.get(i).getShortName());
+        }
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
       e.printStackTrace();
     }
   }
