@@ -103,7 +103,6 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
     }
 
     // update DB table
-
     try {
       // create the statement
       Statement statement = connection.createStatement();
