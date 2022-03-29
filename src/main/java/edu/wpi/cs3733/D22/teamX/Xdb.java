@@ -92,7 +92,7 @@ public class Xdb {
       dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
       dropLocation.execute("DROP TABLE Location");
     } catch (SQLException e) {
-      System.out.println("Creating MedicalEquipmentServiceRequest Table...");
+      System.out.println("Tables not dropped");
     }
   }
 
