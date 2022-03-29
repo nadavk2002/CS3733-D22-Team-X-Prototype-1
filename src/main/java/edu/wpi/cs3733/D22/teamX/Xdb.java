@@ -38,7 +38,9 @@ public class Xdb {
     }
     System.out.println("Apache Derby connection established :D");
 
+    dropAllTables(connection);
     createLocationTable(connection);
+    createMedicalEquipmentServiceRequestTable(connection);
 
     System.out.println("Database created successfully");
 
@@ -47,12 +49,6 @@ public class Xdb {
 
   private static void createLocationTable(Connection connection) {
     try {
-      Statement dropLocation = connection.createStatement();
-      try {
-        dropLocation.execute("DROP TABLE Location");
-      } catch (SQLException e) {
-        System.out.println("Creating Location Table...");
-      }
       Statement initialization = connection.createStatement();
       initialization.execute(
           "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
@@ -70,21 +66,27 @@ public class Xdb {
 
   private static void createMedicalEquipmentServiceRequestTable(Connection connection) {
     try {
-      Statement dropLocation = connection.createStatement();
-      try {
-        dropLocation.execute("DROP TABLE Location");
-      } catch (SQLException e) {
-        System.out.println("Creating MedicalEquipmentServiceRequest Table...");
-      }
       Statement initialization = connection.createStatement();
-      initialization.execute("CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
-              + "destination CHAR(10) FOREIGN KEY REFERENCES Location(nodeID),"
-              + "status CHAR(4)"
-              + "INT equipmentQuantity)");
+      initialization.execute(
+          "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
+              + "destination CHAR(10),"
+              + "status CHAR(4),"
+              + "equipmentQuantity INT,"
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
+    }
+  }
+
+  private static void dropAllTables(Connection connection) {
+    try {
+      Statement dropLocation = connection.createStatement();
+      dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
+      dropLocation.execute("DROP TABLE Location");
+    } catch (SQLException e) {
+      System.out.println("Creating MedicalEquipmentServiceRequest Table...");
     }
   }
 }
