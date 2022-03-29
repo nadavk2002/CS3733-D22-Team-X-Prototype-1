@@ -15,7 +15,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
   Connection connection; // store connection info
 
   public EquipmentServiceRequestDAOImpl(Connection connection) {
-    medicalEquipmentServiceRequests = new ArrayList<EquipmentServiceRequest>();
+    medicalEquipmentServiceRequests = new ArrayList<>();
 
     try {
       LocationDAO locDestination = new LocationDAOImpl(connection);
@@ -42,11 +42,12 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
 
   @Override
   public List<EquipmentServiceRequest> getAllEquipmentServiceRequests() {
-    return null;
+    return medicalEquipmentServiceRequests;
   }
 
   @Override
   public EquipmentServiceRequest getEquipmentServiceRequest(String requestID) {
+
     return null;
   }
 
