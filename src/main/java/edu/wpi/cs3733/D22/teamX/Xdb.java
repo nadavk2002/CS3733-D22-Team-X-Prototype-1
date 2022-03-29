@@ -245,39 +245,14 @@ public class Xdb {
   }
 
   /**
-   * Writes the content of the CSV files/Location object list to the database.
-   *
-   * @param connection a connection to the database.
-   * @param locations a list of location objects to be written to the database.
+   * Writes the content of the location table from the database into the TowerLocations.CSV
+   * @param connection a connection to the database
    */
-  private static void saveLocationToDB(List<Location> locations, Connection connection) {
+  private static void saveLocationDataToCSV(Connection connection) {
     try {
       Statement statement = connection.createStatement();
-      for (Location l : locations) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO Location VALUES (");
-        sql.append(l.getNodeID() + ",");
-        sql.append(l.getxCoord() + ",");
-        sql.append(l.getyCoord() + ",");
-        sql.append(l.getFloor() + ",");
-        sql.append(l.getBuilding() + ",");
-        sql.append(l.getNodeType() + ",");
-        sql.append(l.getLongName() + ",");
-        sql.append(l.getShortName());
-        sql.append(")");
-        statement.executeUpdate(sql.toString());
-      }
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
-
-  /**
-   * Writes the content of the CSV files/MedEquipServRequest object list to the database.
-   *
-   * @param connection a connection to the database.
-   * @param MedEquipServRequests a list of equipment service requests to be written to the database.
-   */
-  private static void saveMedEquipServRequestToDB(
-      List<EquipmentServiceRequest> MedEquipServRequests, Connection connection) {}
 }
