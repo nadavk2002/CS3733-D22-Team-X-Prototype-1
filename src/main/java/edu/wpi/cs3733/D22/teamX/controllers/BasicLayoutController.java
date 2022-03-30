@@ -49,8 +49,7 @@ public class BasicLayoutController {
   }
 
   @FXML
-  void ExitApplication() throws IOException {
+  void ExitApplication() {
     Platform.exit();
-    System.exit(0);
   }
 }

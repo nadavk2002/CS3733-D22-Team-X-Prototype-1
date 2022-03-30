@@ -1,9 +1,7 @@
 package edu.wpi.cs3733.D22.teamX;
 
-import java.sql.*;
-
 public class LocationDAODemo {
-  public static void demo(Connection connection) {
+  public static void demo() {
     LocationDAO lDAO = new LocationDAOImpl();
 
     // print all locations
