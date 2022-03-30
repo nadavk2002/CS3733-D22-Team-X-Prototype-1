@@ -70,7 +70,7 @@ public class EquipmentServiceRequest extends ServiceRequest {
     //      }
     //      return strID.toString();
     ////    }
-    EquipmentSeviceRequestDAO esrDAO = new EquipmentServiceRequestDAOImpl();
+    EquipmentServiceRequestDAO esrDAO = new EquipmentServiceRequestDAOImpl();
     int nextIDFinalNum = esrDAO.getAllEquipmentServiceRequests().size();
     return String.format("MER_%04d", nextIDFinalNum);
   }
