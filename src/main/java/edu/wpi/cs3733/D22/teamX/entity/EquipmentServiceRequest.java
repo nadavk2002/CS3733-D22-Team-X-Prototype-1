@@ -2,11 +2,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.Location;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-
 public class EquipmentServiceRequest extends ServiceRequest {
   private String equipmentType;
   private int quantity;
@@ -50,22 +45,33 @@ public class EquipmentServiceRequest extends ServiceRequest {
     this.quantity = quantity;
   }
 
+  /**
+   * Creates an eight character string constituting a requestID for a new MESR object
+   * @return a requestID that does not already exist in the MedicalEquipmentServiceRequest table
+   */
   @Override
-  public String getRandomID() { // currently unfinished, does not check against already created id's
-    Random rand = new Random();
-    StringBuilder strID = new StringBuilder();
-    List<Character> alphanumerics = new ArrayList<Character>(Arrays.asList('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D',
-            'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y',
-            'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
-//    while(true)
-//    {
-      for(int i = 0; i < 8; i++)
-      {
-        int range = rand.nextInt(alphanumerics.size());
-        strID.append(alphanumerics.get(range));
-      }
-      return strID.toString();
-//    }
+  public String
+      makeRequestID() {
+    //    Random rand = new Random();
+    //    StringBuilder strID = new StringBuilder();
+    //    List<Character> alphanumerics = new ArrayList<Character>(Arrays.asList('a', 'b', 'c', 'd',
+    // 'e', 'f', 'g', 'h', 'i',
+    //            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
+    // 'z', 'A', 'B', 'C', 'D',
+    //            'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+    // 'U', 'V', 'W', 'X', 'Y',
+    //            'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
+    ////    while(true)
+    ////    {
+    //      for(int i = 0; i < 8; i++)
+    //      {
+    //        int range = rand.nextInt(alphanumerics.size());
+    //        strID.append(alphanumerics.get(range));
+    //      }
+    //      return strID.toString();
+    ////    }
+    EquipmentSeviceRequestDAO esrDAO = new EquipmentServiceRequestDAOImpl();
+    int nextIDFinalNum = esrDAO.getAllEquipmentServiceRequests().size();
+    return String.format("MER_%04d", nextIDFinalNum);
   }
 }
