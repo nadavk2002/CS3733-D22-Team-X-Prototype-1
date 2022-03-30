@@ -6,16 +6,16 @@ import java.sql.*;
 import java.util.*;
 
 public class Xdb {
-  /** Initializes the db and runs the user program from Spike B. */
-  public static void initializeAndRunDBProgram() {
-    Connection dbConn = initializeDB();
-    UserProgram.executeProgram(dbConn);
-    try {
-      dbConn.close();
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+  //  /** Initializes the db and runs the user program from Spike B. */
+  //  public static void initializeAndRunDBProgram() {
+  //    Connection dbConn = initializeDB();
+  //    UserProgram.executeProgram(dbConn);
+  //    try {
+  //      dbConn.close();
+  //    } catch (SQLException e) {
+  //      e.printStackTrace();
+  //    }
+  //  }
 
   /**
    * Initializes the database with tables and establishes a connection
@@ -35,21 +35,21 @@ public class Xdb {
     System.out.println("Apache Derby driver registered!");
 
     // tries to create the database and establish a connection
-    Connection connection = null;
-    try {
-      connection = DriverManager.getConnection("jdbc:derby:embed_db;create=true", "admin", "admin");
-    } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
-      e.printStackTrace();
-      System.exit(1);
-    }
+    Connection connection = ConnectionMaker.getConnection();
+    //    try {
+    //
+    //    } catch (SQLException e) {
+    //      System.out.println("Connection failed. Check output console.");
+    //      e.printStackTrace();
+    //      System.exit(1);
+    //    }
     System.out.println("Apache Derby connection established :D");
 
-    dropAllTables(connection);
-    createLocationTable(connection);
-    createMedicalEquipmentServiceRequestTable(connection);
-    loadLocationCSV(connection);
-    loadMedEqServiceReqCSV(connection);
+    dropAllTables();
+    createLocationTable();
+    createMedicalEquipmentServiceRequestTable();
+    loadLocationCSV();
+    loadMedEqServiceReqCSV();
 
     System.out.println("Database created successfully");
 
@@ -57,11 +57,26 @@ public class Xdb {
   }
 
   /**
-   * Creates the location table in the database
+   * Saves the data from the database to the appropriate CSV files and closes the database.
    *
-   * @param connection a connection to the database
+   * @param connection connection to the database to be closed
+   * @param locationCSVFileName temporary, will be a part of the DB creation later on
+   * @param MedEquipServReqCSVFileName temporary, will be a part of the DB creation later on
    */
-  private static void createLocationTable(Connection connection) {
+  public static void closeDB(
+      Connection connection, String locationCSVFileName, String MedEquipServReqCSVFileName) {
+    saveLocationDataToCSV(locationCSVFileName);
+    saveMedEqDataToCSV(MedEquipServReqCSVFileName);
+    try {
+      connection.close();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  /** Creates the location table in the database */
+  private static void createLocationTable() {
+    Connection connection = ConnectionMaker.getConnection();
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
@@ -78,12 +93,9 @@ public class Xdb {
     }
   }
 
-  /**
-   * creates the medical equipment request service table in the database
-   *
-   * @param connection a connection to the database
-   */
-  private static void createMedicalEquipmentServiceRequestTable(Connection connection) {
+  /** creates the medical equipment request service table in the database */
+  private static void createMedicalEquipmentServiceRequestTable() {
+    Connection connection = ConnectionMaker.getConnection();
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
@@ -100,12 +112,9 @@ public class Xdb {
     }
   }
 
-  /**
-   * Drops all the tables in the database.
-   *
-   * @param connection a connection to the database
-   */
-  private static void dropAllTables(Connection connection) {
+  /** Drops all the tables in the database. */
+  private static void dropAllTables() {
+    Connection connection = ConnectionMaker.getConnection();
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
@@ -118,10 +127,10 @@ public class Xdb {
   /**
    * Read the locations from CSV file. Put locations into db table "Location"
    *
-   * @param connection used to connect to embedded database
    * @return a list of location objects from the "TowerLocations.CSV" file.
    */
-  private static List<Location> loadLocationCSV(Connection connection) {
+  private static List<Location> loadLocationCSV() {
+    Connection connection = ConnectionMaker.getConnection();
     // Read locations into List "locationsFromCSV"
     List<Location> locationsFromCSV = new ArrayList<Location>();
     try {
@@ -186,10 +195,10 @@ public class Xdb {
    * Read the MedEquipReq from CSV file. Put locations into db table
    * "MedicalEquipmentServiceRequest"
    *
-   * @param connection used to connect to embedded database
-   * @return
+   * @return a list of Medical Equipment Service Requests
    */
-  private static List<EquipmentServiceRequest> loadMedEqServiceReqCSV(Connection connection) {
+  private static List<EquipmentServiceRequest> loadMedEqServiceReqCSV() {
+    Connection connection = ConnectionMaker.getConnection();
     // Read locations into List "MedEquipReqCSV"
     List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
     try {
@@ -244,12 +253,9 @@ public class Xdb {
     return MedEquipReqFromCSV;
   }
 
-  /**
-   * Writes the content of the location table from the database into the TowerLocations.CSV
-   *
-   * @param connection a connection to the database
-   */
-  private static void saveLocationDataToCSV(Connection connection, String csvFileName) {
+  /** Writes the content of the location table from the database into the TowerLocations.CSV */
+  private static void saveLocationDataToCSV(String csvFileName) {
+    Connection connection = ConnectionMaker.getConnection();
     ArrayList<Location> locations = new ArrayList<Location>();
     try {
       Statement statement = connection.createStatement();
@@ -305,6 +311,59 @@ public class Xdb {
       csvFile.flush();
       csvFile.close();
     } catch (IOException e) {
+      System.out.println("Error occured when updating locations csv file.");
+      e.printStackTrace();
+    }
+  }
+
+  private static void saveMedEqDataToCSV(String csvFileName) {
+    Connection connection = ConnectionMaker.getConnection();
+    List<EquipmentServiceRequest> Equipment = new ArrayList<EquipmentServiceRequest>();
+    LocationDAO locDestination = new LocationDAOImpl();
+    try {
+      Statement statement = connection.createStatement();
+      ResultSet records = statement.executeQuery("SELECT * FROM MedicalEquipmentServiceRequest");
+      while (records.next()) {
+        Equipment.add(
+            new EquipmentServiceRequest(
+                records.getString("requestID"),
+                locDestination.getLocation(records.getString("destination")),
+                records.getString("status"),
+                records.getString("equipmentType"),
+                records.getInt("quantity")));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println(
+          "An error occurred when saving MedicalEquipServRequest data to the CSV file.");
+    }
+
+    try {
+      FileWriter csvFile = new FileWriter(csvFileName, false);
+      csvFile.write("RequestID,Destination,Status,equipmentType,Quantity");
+      for (int i = 0; i < Equipment.size(); i++) {
+        csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
+        if (Equipment.get(i).getDestination() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(Equipment.get(i).getDestination() + ",");
+        }
+        if (Equipment.get(i).getStatus() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(Equipment.get(i).getStatus() + ",");
+        }
+        if (Equipment.get(i).getEquipmentType() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(Equipment.get(i).getEquipmentType() + ",");
+        }
+        csvFile.write(Equipment.get(i).getQuantity());
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.print("An error occurred when trying to write to the CSV file.");
       e.printStackTrace();
     }
   }

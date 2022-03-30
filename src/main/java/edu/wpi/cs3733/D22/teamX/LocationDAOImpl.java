@@ -22,7 +22,7 @@ public class LocationDAOImpl implements LocationDAO {
       // execute query to see all locations and store it to a result set
       ResultSet resultSet = statement.executeQuery("Select * FROM Location");
       while (resultSet.next()) {
-        // create location varible to be appended to the list.
+        // create location variable to be appended to the list.
         Location location = new Location();
 
         // go through all the parameters of the location

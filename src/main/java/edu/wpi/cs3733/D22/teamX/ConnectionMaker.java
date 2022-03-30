@@ -14,7 +14,9 @@ public class ConnectionMaker {
     try {
       connection = DriverManager.getConnection(url, username, password);
     } catch (SQLException e) {
-      System.out.println("Connection not established");
+      System.out.println("Connection failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
     }
     return connection;
   }

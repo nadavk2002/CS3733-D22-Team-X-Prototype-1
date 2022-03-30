@@ -9,9 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
-/**
- * This represents the blue bar at the top of the app
- */
+/** This represents the blue bar at the top of the app */
 public class BasicLayoutController {
   @FXML private JFXComboBox<String> ChoosePage;
   private HashMap<String, String> pages;

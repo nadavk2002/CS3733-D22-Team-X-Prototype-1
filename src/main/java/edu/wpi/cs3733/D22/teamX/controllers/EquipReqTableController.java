@@ -3,8 +3,8 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentSeviceRequestDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -45,7 +45,7 @@ public class EquipReqTableController implements Initializable {
 
   private ObservableList<EquipmentServiceRequest> equipDeliveryList() {
     ObservableList<EquipmentServiceRequest> equipList = FXCollections.observableArrayList();
-    EquipmentSeviceRequestDAO allEquip = new EquipmentServiceRequestDAOImpl();
+    EquipmentServiceRequestDAO allEquip = new EquipmentServiceRequestDAOImpl();
     List<EquipmentServiceRequest> inpEquipList = allEquip.getAllEquipmentServiceRequests();
     equipList.addAll(inpEquipList);
     return equipList;
