@@ -11,13 +11,10 @@ public class LocationDAOImpl implements LocationDAO {
   List<Location> locations; // location storage
   Connection connection; // store connection info
 
-  /**
-   * constructor loads data from database
-   *
-   * @param connection db to connect to to get location data from
-   */
-  public LocationDAOImpl(Connection connection) {
+  /** constructor loads data from database */
+  public LocationDAOImpl() {
     // add locations from the database connection specified
+    Connection connection = ConnectionMaker.getConnection();
     locations = new ArrayList<Location>();
     try {
       // create the statement

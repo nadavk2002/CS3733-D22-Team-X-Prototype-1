@@ -21,7 +21,7 @@ public class EquipmentServiceRequest extends ServiceRequest {
 
   public EquipmentServiceRequest() {
     super();
-    this.equipmentType = "";
+    this.equipmentType = null;
     this.quantity = -1;
   }
 

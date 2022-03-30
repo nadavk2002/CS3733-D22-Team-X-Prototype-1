@@ -17,9 +17,9 @@ public abstract class ServiceRequest {
   }
 
   public ServiceRequest() {
-    this.requestID = "";
+    this.requestID = null;
     this.destination = new Location();
-    this.status = "";
+    this.status = null;
   }
 
   public String getRequestID() {
