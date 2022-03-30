@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX;
 
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import java.io.*;
+import java.net.URL;
 import java.sql.*;
 import java.util.*;
 
@@ -133,7 +134,7 @@ public class Xdb {
     // Read locations into List "locationsFromCSV"
     List<Location> locationsFromCSV = new ArrayList<Location>();
     try {
-      InputStream tlCSV = UserProgram.class.getResourceAsStream("TowerLocations.csv");
+      InputStream tlCSV = Xdb.class.getResourceAsStream(locationCSV);
       BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
       tlCSVReader.readLine();
       String nextFileLine;
@@ -202,7 +203,7 @@ public class Xdb {
     List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
     try {
       LocationDAO locDestination = new LocationDAOImpl();
-      InputStream tlCSV = UserProgram.class.getResourceAsStream("MedEquipReq.csv");
+      InputStream tlCSV = UserProgram.class.getResourceAsStream(medicalEquipmentCSV);
       BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
       tlCSVReader.readLine();
       String nextFileLine;
@@ -277,7 +278,8 @@ public class Xdb {
     }
 
     try {
-      FileWriter csvFile = new FileWriter(locationCSV, false);
+      URL url = Xdb.class.getResource(locationCSV);
+      FileWriter csvFile = new FileWriter(url.getFile(), false);
       csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
       for (int i = 0; i < locations.size(); i++) {
         csvFile.write("\n" + locations.get(i).getNodeID() + ",");
@@ -339,14 +341,15 @@ public class Xdb {
     }
 
     try {
-      FileWriter csvFile = new FileWriter(medicalEquipmentCSV, false);
+      URL url = Xdb.class.getResource(medicalEquipmentCSV);
+      FileWriter csvFile = new FileWriter(url.getFile(), false);
       csvFile.write("RequestID,Destination,Status,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
         if (Equipment.get(i).getDestination() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(Equipment.get(i).getDestination() + ",");
+          csvFile.write(Equipment.get(i).getDestination().getNodeID() + ",");
         }
         if (Equipment.get(i).getStatus() == null) {
           csvFile.write(',');
