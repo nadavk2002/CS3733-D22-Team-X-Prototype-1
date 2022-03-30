@@ -26,6 +26,7 @@ public class LabRequestController implements Initializable {
 
   @FXML
   public void submitRequest() {
+    request = new LabServiceRequest();
     request.setRequestID("SAMPLE12");
     request.setDestination(new Location());
     request.setStatus(serviceStatus.getText());
