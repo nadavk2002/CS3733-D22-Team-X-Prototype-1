@@ -49,7 +49,6 @@ public class EquipReqTableController implements Initializable {
     List<EquipmentServiceRequest> inpEquipList = allEquip.getAllEquipmentServiceRequests();
     equipList.addAll(inpEquipList);
     return equipList;
-    //lol
   }
 
   @FXML
