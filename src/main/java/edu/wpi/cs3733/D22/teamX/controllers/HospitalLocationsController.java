@@ -1,10 +1,9 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
-import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.Location;
-import edu.wpi.cs3733.D22.teamX.SimpleLoc;
+import edu.wpi.cs3733.D22.teamX.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,34 +37,33 @@ public class HospitalLocationsController implements Initializable {
 
   @FXML private TableColumn<SimpleLoc, String> shortName;
 
-  // private ObservableList<SimpleLoc> tableList;
-
   @FXML
   private void ToMainMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
 
-  //  private void locationListFill(){
-  //    tableList = FXCollections.observableArrayList();
-  //    List<Location> locationList = LocationDAOImpl.getAllLocations(); // UNCOMMENT THE COMMENTED
-  // SHIT WHEN FIXED !!!
-  //    for (Location loc: locationList) {
-  //      SimpleLoc simp = new SimpleLoc(loc);
-  //      tableList.add(simp);
-  //    }
-  //  }
+  private ObservableList<SimpleLoc> locationListFill() {
+    ObservableList<SimpleLoc> tableList = FXCollections.observableArrayList();
+    LocationDAO allLocations = new LocationDAOImpl();
+    List<Location> locationList = allLocations.getAllLocations();
+    for (Location loc : locationList) {
+      SimpleLoc simp = new SimpleLoc(loc);
+      tableList.add(simp);
+    }
+    return tableList;
+  }
 
-  ObservableList<SimpleLoc> tableList =
-      FXCollections.observableArrayList(
-          new SimpleLoc(
-              new Location("xSTOR001L1", 32, 64, "L1", "Tower", "STOR", "Storage", "Store")),
-          new SimpleLoc(
-              new Location("xSTOR00203", 128, 256, "3", "Tower", "STOR", "Storage", "Store")));
+  //  ObservableList<SimpleLoc> tableList =
+  //      FXCollections.observableArrayList(
+  //          new SimpleLoc(
+  //              new Location("xSTOR001L1", 32, 64, "L1", "Tower", "STOR", "Storage", "Store")),
+  //          new SimpleLoc(
+  //              new Location("xSTOR00203", 128, 256, "3", "Tower", "STOR", "Storage", "Store")));
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // locationListFill();
+    locationListFill();
     id.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("id"));
     x.setCellValueFactory(new PropertyValueFactory<SimpleLoc, Integer>("x"));
     y.setCellValueFactory(new PropertyValueFactory<SimpleLoc, Integer>("y"));
@@ -74,6 +72,6 @@ public class HospitalLocationsController implements Initializable {
     type.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("type"));
     longName.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("shortName"));
-    table.setItems(tableList);
+    table.setItems(locationListFill());
   }
 }
