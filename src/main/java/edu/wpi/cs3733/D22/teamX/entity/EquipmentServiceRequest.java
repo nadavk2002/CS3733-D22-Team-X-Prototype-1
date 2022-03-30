@@ -47,11 +47,11 @@ public class EquipmentServiceRequest extends ServiceRequest {
 
   /**
    * Creates an eight character string constituting a requestID for a new MESR object
+   *
    * @return a requestID that does not already exist in the MedicalEquipmentServiceRequest table
    */
   @Override
-  public String
-      makeRequestID() {
+  public String makeRequestID() {
     //    Random rand = new Random();
     //    StringBuilder strID = new StringBuilder();
     //    List<Character> alphanumerics = new ArrayList<Character>(Arrays.asList('a', 'b', 'c', 'd',

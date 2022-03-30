@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
-import edu.wpi.cs3733.D22.teamX.entity.ReqLaundyServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.LaundyServiceRequest;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +43,7 @@ public class reqLaundryController {
 
   @FXML
   void submitRequest() {
-    ReqLaundyServiceRequest request = new ReqLaundyServiceRequest();
+    LaundyServiceRequest request = new LaundyServiceRequest();
     request.setRequestID("SAMPLE12");
     request.setDestination(new Location());
     request.setStatus(serviceStatus.getText());

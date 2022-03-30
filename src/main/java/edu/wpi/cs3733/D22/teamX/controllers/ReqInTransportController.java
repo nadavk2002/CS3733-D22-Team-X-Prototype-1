@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
-import edu.wpi.cs3733.D22.teamX.entity.ReqInServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.InTransportServiceRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -43,7 +43,7 @@ public class ReqInTransportController implements Initializable {
 
   @FXML
   public void submitRequest() {
-    ReqInServiceRequest request = new ReqInServiceRequest();
+    InTransportServiceRequest request = new InTransportServiceRequest();
     request.setRequestID("SAMPLE12");
     request.setDestination(new Location());
     request.setStatus(serviceStatus.getText());

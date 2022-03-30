@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
-import edu.wpi.cs3733.D22.teamX.entity.ReqLangServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.LangServiceRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,7 +44,7 @@ public class ReqLangController implements Initializable {
 
   @FXML
   public void submitRequest() {
-    ReqLangServiceRequest request = new ReqLangServiceRequest();
+    LangServiceRequest request = new LangServiceRequest();
     request.setRequestID("SAMPLE12");
     request.setDestination(new Location());
     request.setStatus(serviceStatus.getText());
