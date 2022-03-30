@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
+import edu.wpi.cs3733.D22.teamX.Location;
+import edu.wpi.cs3733.D22.teamX.entity.MealServiceRequest;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class mealReqController {
@@ -17,6 +20,7 @@ public class mealReqController {
   @FXML private ChoiceBox<String> sideSel;
   @FXML private Label addedToQueue;
   @FXML private VBox queueBox;
+  @FXML private TextField assignStaff, serviceStatus;
 
   @FXML
   void returnHomeButton() throws IOException {
@@ -31,6 +35,8 @@ public class mealReqController {
     mainSel.setValue("");
     sideSel.setValue("");
     addedToQueue.setText("");
+    assignStaff.setText("");
+    serviceStatus.setText("");
   }
 
   @FXML
@@ -67,6 +73,10 @@ public class mealReqController {
         && (!drinkSel.getValue().equals("Choose Drink"))
         && (!sideSel.getValue().equals("Choose Side"))
         && (!mainSel.getValue().equals("Choose Main Course"))) {
+      MealServiceRequest request = new MealServiceRequest();
+      request.setRequestID("SAMPLE12");
+      request.setDestination(new Location());
+      request.setStatus(serviceStatus.getText());
 
       addedToQueue.setText(
           patientNames.getValue()
@@ -81,6 +91,7 @@ public class mealReqController {
               + mainSel.getValue());
       queueBox.setMaxSize(queueBox.getMaxWidth(), queueBox.getMaxHeight() + 100.0);
       addedToQueue.setMaxSize(addedToQueue.getMaxWidth(), addedToQueue.getMaxHeight() + 100.0);
+      this.resetFields();
     } else {
       addedToQueue.setText("ERROR: Please fill all boxes!");
     }

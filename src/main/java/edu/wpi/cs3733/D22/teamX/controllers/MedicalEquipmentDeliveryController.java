@@ -20,6 +20,7 @@ public class MedicalEquipmentDeliveryController {
   @FXML
   public void initialize() {
     submitButton.setDisable(true);
+    selectStatus.getItems().addAll("", "Processing", "Done");
     request = new EquipmentServiceRequest();
     selectEquipmentType.getItems().addAll("Beds (20)", "X-Rays (1)", "Pumps (30)", "Recliners (6)");
   }
