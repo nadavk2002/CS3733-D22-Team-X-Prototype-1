@@ -9,7 +9,8 @@ public class Main {
     System.setProperty(
         "prism.allowhidpi",
         "false"); // Disables windows DPI scaling so the application fits all 1920x1080 screens.
-    Connection dbConn = Xdb.initializeDB();
+    Connection dbConn = null;
+    dbConn = Xdb.initializeDB();
     App.launch(App.class, args);
     try {
       dbConn.close();

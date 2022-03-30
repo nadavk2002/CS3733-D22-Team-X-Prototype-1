@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionMaker;
 import edu.wpi.cs3733.D22.teamX.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import java.sql.Connection;
@@ -14,16 +15,12 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentSeviceRequestDAO
   List<EquipmentServiceRequest> medicalEquipmentServiceRequests;
   Connection connection; // store connection info
 
-  /**
-   * constructor
-   *
-   * @param connection database connection used to connect to db
-   */
-  public EquipmentServiceRequestDAOImpl(Connection connection) {
-    medicalEquipmentServiceRequests = new ArrayList<>();
-
+  /** constructor */
+  public EquipmentServiceRequestDAOImpl() {
+    Connection connection = ConnectionMaker.getConnection();
+    medicalEquipmentServiceRequests = new ArrayList<EquipmentServiceRequest>();
     try {
-      LocationDAO locDestination = new LocationDAOImpl(connection);
+      LocationDAO locDestination = new LocationDAOImpl();
       // create the statement
       Statement statement = connection.createStatement();
       // execute query to see all Medical Service Requests and store it to a result set

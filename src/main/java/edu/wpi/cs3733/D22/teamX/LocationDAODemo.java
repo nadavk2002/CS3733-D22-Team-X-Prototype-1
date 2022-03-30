@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class LocationDAODemo {
   public static void demo(Connection connection) {
-    LocationDAO lDAO = new LocationDAOImpl(connection);
+    LocationDAO lDAO = new LocationDAOImpl();
 
     // print all locations
     for (Location loc : lDAO.getAllLocations()) {

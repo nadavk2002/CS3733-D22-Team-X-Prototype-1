@@ -11,13 +11,10 @@ public class LocationDAOImpl implements LocationDAO {
   List<Location> locations; // location storage
   Connection connection; // store connection info
 
-  /**
-   * constructor loads data from database
-   *
-   * @param connection db to connect to to get location data from
-   */
-  public LocationDAOImpl(Connection connection) {
+  /** constructor loads data from database */
+  public LocationDAOImpl() {
     // add locations from the database connection specified
+    Connection connection = ConnectionMaker.getConnection();
     locations = new ArrayList<Location>();
     try {
       // create the statement
@@ -80,8 +77,9 @@ public class LocationDAOImpl implements LocationDAO {
     // iterate through the list of locations to find the object and update it on new list
     int locationInd = 0;
     while (locationInd < locations.size()) {
-      if (locations.get(locationInd).getNodeID().equals(location.getNodeID())) {
+      if (locations.get(locationInd).equals(location)) {
         locations.set(locationInd, location);
+
         break;
       }
       locationInd++;
@@ -118,6 +116,7 @@ public class LocationDAOImpl implements LocationDAO {
       }
     } else {
       System.out.println("location does not exist");
+      throw new NoSuchElementException("request does not exist");
     }
   }
 
@@ -131,7 +130,7 @@ public class LocationDAOImpl implements LocationDAO {
     // iterate through the linked list of locations to find the object and update it on new list
     int locationInd = 0;
     while (locationInd < locations.size()) {
-      if (locations.get(locationInd).getNodeID().equals(location.getNodeID())) {
+      if (locations.get(locationInd).equals(location)) {
         locations.remove(locationInd);
         break;
       }
@@ -150,6 +149,7 @@ public class LocationDAOImpl implements LocationDAO {
       }
     } else {
       System.out.println("Location does not exist");
+      throw new NoSuchElementException("request does not exist");
     }
   }
 }

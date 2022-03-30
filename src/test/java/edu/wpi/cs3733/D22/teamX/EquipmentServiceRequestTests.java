@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.NoSuchElementException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,13 +27,13 @@ public class EquipmentServiceRequestTests {
   // these test will fail if the csv file changes
   @Test
   public void TestDBListRequests() {
-    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
+    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
     assertTrue(esrDAOImpl.getAllEquipmentServiceRequests().size() == 15);
   }
 
   @Test
   public void TestDBWgetRequest() {
-    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
+    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
     assertTrue(
         esrDAOImpl
             .getEquipmentServiceRequest("MER_0001")
@@ -41,13 +42,13 @@ public class EquipmentServiceRequestTests {
 
   @Test // test for correct values
   public void TestDBWgetRequest2() {
-    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
+    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
     assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 1);
   }
 
   @Test // test for updating values
   public void testDBeqRequestUpdate() {
-    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
+    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
     assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 1);
     // update
     EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MER_0001");
@@ -58,7 +59,7 @@ public class EquipmentServiceRequestTests {
 
   @Test // test for deleting values
   public void testDBeqRequestDelete() {
-    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl(connection);
+    EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
     assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0003").getQuantity() == 3);
     // removes
     EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MER_0003");
