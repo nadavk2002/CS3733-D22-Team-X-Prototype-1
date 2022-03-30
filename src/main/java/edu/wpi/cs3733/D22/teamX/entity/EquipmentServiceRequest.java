@@ -25,6 +25,10 @@ public class EquipmentServiceRequest extends ServiceRequest {
     this.quantity = -1;
   }
 
+  public String getLocationNodeID() {
+    return getDestination().getNodeID();
+  }
+
   public String getEquipmentType() {
     return equipmentType;
   }
