@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Location {
   private String nodeID;
-  private int xCoord, yCoord;
+  public int xCoord, yCoord;
   private String floor;
   private String building;
   private String nodeType;
@@ -34,8 +34,8 @@ public class Location {
 
   public Location(
       String nodeID,
-      Integer xCoord,
-      Integer yCoord,
+      int xCoord,
+      int yCoord,
       String floor,
       String building,
       String nodeType,
