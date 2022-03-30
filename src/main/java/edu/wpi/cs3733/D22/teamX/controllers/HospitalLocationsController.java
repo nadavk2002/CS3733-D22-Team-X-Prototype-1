@@ -54,13 +54,6 @@ public class HospitalLocationsController implements Initializable {
     return tableList;
   }
 
-  //  ObservableList<SimpleLoc> tableList =
-  //      FXCollections.observableArrayList(
-  //          new SimpleLoc(
-  //              new Location("xSTOR001L1", 32, 64, "L1", "Tower", "STOR", "Storage", "Store")),
-  //          new SimpleLoc(
-  //              new Location("xSTOR00203", 128, 256, "3", "Tower", "STOR", "Storage", "Store")));
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     locationListFill();
