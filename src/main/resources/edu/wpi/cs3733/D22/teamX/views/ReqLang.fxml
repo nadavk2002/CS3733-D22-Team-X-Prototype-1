@@ -13,8 +13,8 @@
 <AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLangController">
    <children>
       <ChoiceBox fx:id="selectLang" layoutX="926.0" layoutY="418.0" prefWidth="150.0" />
-      <Label layoutX="826.0" layoutY="462.0" text="Select Language:" />
-      <Label layoutX="803.0" layoutY="422.0" text="Enter Room Number:" />
+      <Label layoutX="825.0" layoutY="423.0" text="Select Language:" />
+      <Label layoutX="806.0" layoutY="463.0" text="Enter Room Number:" />
       <TextField fx:id="roomNum" layoutX="926.0" layoutY="458.0" />
       <Button layoutX="901.0" layoutY="606.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">

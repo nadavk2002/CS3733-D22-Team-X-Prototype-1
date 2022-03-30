@@ -1,0 +1,16 @@
+RequestID,Destination,Status,equipmentType,Quantity
+MER_0001,Location{nodeID='FDEPT00101', xCoord=1617, yCoord=825, floor='1', building='Tower', nodeType='DEPT', longName='Center for International Medicine', shortName='CIM'},PROC,Ventilator,
+MER_0002,Location{nodeID='FHALL00801', xCoord=1758, yCoord=850, floor='1', building='Tower', nodeType='HALL', longName='Tower Hallway 1', shortName='Hallway F00801'},DONE,hoyer,
+MER_0003,Location{nodeID='FHALL01101', xCoord=1627, yCoord=930, floor='1', building='Tower', nodeType='HALL', longName='Tower Hallway 4', shortName='Hallway F01101'},PROC,Iron_Lung,
+MER_0004,Location{nodeID='FHALL01701', xCoord=1721, yCoord=956, floor='1', building='Tower', nodeType='HALL', longName='Tower Hallway 9', shortName='Hallway F01701'},PROC,Blood_Pump,
+MER_0005,Location{nodeID='FHALL01601', xCoord=1758, yCoord=1060, floor='1', building='Tower', nodeType='HALL', longName='Tower Hallway 8', shortName='Hallway F01601'},PROC,UltraSound,
+MER_0006,Location{nodeID='FEXIT00201', xCoord=1748, yCoord=1321, floor='1', building='Tower', nodeType='EXIT', longName='75 Francis Valet Drop-off', shortName='75 Francis Exit'},DONE,DeFibrilator,
+MER_0007,Location{nodeID='CHALL009L2', xCoord=1730, yCoord=849, floor='L2', building='Tower', nodeType='HALL', longName='Hallway 9 Floor L2', shortName='Hallway C009L2'},DONE,Hand_Drill,
+MER_0008,Location{nodeID='xPATI00303', xCoord=1450, yCoord=750, floor='3', building='Tower', nodeType='PATI', longName='Patient Room 3', shortName='Patient Room 3'},DONE,Vacumm_Pump,
+MER_0009,Location{nodeID='xSTOR00603', xCoord=1670, yCoord=1040, floor='3', building='Tower', nodeType='STOR', longName='Bed and Recliner Parking 2', shortName='BRP 2'},PROC,Scaple,
+MER_0010,Location{nodeID='WELEV00ML2', xCoord=1820, yCoord=1280, floor='L2', building='Tower', nodeType='ELEV', longName='Elevator M Floor L2', shortName='Elevator ML2'},DONE,Blow_Torch,
+MER_0011,Location{nodeID='HHALL00903', xCoord=1735, yCoord=820, floor='3', building='Tower', nodeType='HALL', longName='Hallway Connector 9 Floor 3', shortName='Hallway H00903'},PROC,Glass_Bottle,2
+MER_0012,Location{nodeID='WELEV00L03', xCoord=1790, yCoord=925, floor='3', building='Tower', nodeType='ELEV', longName='Elevator L Floor 3', shortName='Elevator L3'},PROC,Pneu_Saw,
+MER_0013,Location{nodeID='HHALL00503', xCoord=1680, yCoord=1290, floor='3', building='Tower', nodeType='HALL', longName='Hallway Connector 5 Floor 3', shortName='Hallway H00502'},PROC,Tweezers,
+MER_0014,Location{nodeID='HBATH00203', xCoord=1750, yCoord=985, floor='3', building='Tower', nodeType='BATH', longName='Bathroom 2 Tower Floor 3', shortName='Bathroom 0203'},PROC,C_Clamp,
+MER_0015,Location{nodeID='HHALL01003', xCoord=1785, yCoord=820, floor='3', building='Tower', nodeType='HALL', longName='Hallway Connector 10 Floor 3', shortName='Hallway H01003'},PROC,Hammer,*
