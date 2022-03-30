@@ -1,9 +1,15 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.Location;
+import edu.wpi.cs3733.D22.teamX.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAO;
+import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
 import java.io.IOException;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -20,11 +26,22 @@ public class MedicalEquipmentDeliveryController {
   @FXML
   public void initialize() {
     submitButton.setDisable(true);
-    selectStatus.getItems().addAll("", "Processing", "Done");
+    selectStatus.getItems().addAll("", "PROC", "DONE");
     request = new EquipmentServiceRequest();
     selectEquipmentType.getItems().addAll("Beds (20)", "X-Rays (1)", "Pumps (30)", "Recliners (6)");
+    selectDestination.setItems(equipDeliveryList());
   }
 
+  private ObservableList<String> equipDeliveryList() {
+    ObservableList<EquipmentServiceRequest> equipList = FXCollections.observableArrayList();
+    EquipmentServiceRequestDAO allEquip = new EquipmentServiceRequestDAOImpl();
+    List<EquipmentServiceRequest> inpEquipList = allEquip.getAllEquipmentServiceRequests();
+    ObservableList<String> nodeID = FXCollections.observableArrayList();
+    for (int i = 0; i < inpEquipList.size(); i++) {
+      nodeID.add(inpEquipList.get(i).getLocationNodeID());
+    }
+    return nodeID;
+  }
   /**
    * When "Main Menu" button is pressed, the app.fxml scene is loaded on the window.
    *
@@ -53,11 +70,14 @@ public class MedicalEquipmentDeliveryController {
 
   @FXML
   public void submitRequest() {
+    LocationDAO setLocation = new LocationDAOImpl();
     request.setEquipmentType(selectEquipmentType.getValue());
-    request.setRequestID("SAMPLE12");
-    request.setDestination(new Location());
+    request.setRequestID(request.makeRequestID());
+    request.setDestination(setLocation.getLocation(selectDestination.getValue()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
+    EquipmentServiceRequestDAO submit = new EquipmentServiceRequestDAOImpl();
+    submit.addEquipmentServiceRequest(request);
     this.resetFields();
   }
 }
