@@ -5,6 +5,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -19,12 +21,22 @@
       <TextField fx:id="roomField" layoutX="931.0" layoutY="470.0" />
       <Label layoutX="838.0" layoutY="428.0" text="Type of Service:" />
       <Label layoutX="839.0" layoutY="474.0" text="Room Number:" />
-      <Button layoutX="956.0" layoutY="533.0" mnemonicParsing="false" text="Submit Request" />
+      <Button layoutX="956.0" layoutY="566.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Button layoutX="966.0" layoutY="567.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
+      <Button layoutX="966.0" layoutY="600.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
+      <TextField fx:id="assignStaff" layoutX="931.0" layoutY="501.0" />
+      <Label layoutX="864.0" layoutY="505.0" text="Assignee:" />
+      <TextField fx:id="serviceStatus" layoutX="931.0" layoutY="530.0" />
+      <Label layoutX="842.0" layoutY="534.0" text="Service Status:" />
+      <TableView layoutX="1191.0" layoutY="409.0" prefHeight="433.0" prefWidth="645.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

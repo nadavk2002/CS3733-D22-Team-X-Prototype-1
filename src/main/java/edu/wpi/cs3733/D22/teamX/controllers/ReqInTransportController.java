@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
+import edu.wpi.cs3733.D22.teamX.Location;
+import edu.wpi.cs3733.D22.teamX.entity.ReqInServiceRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -15,7 +17,7 @@ public class ReqInTransportController implements Initializable {
   @FXML private Button AppButton;
   @FXML private ChoiceBox<String> transportLocation;
   @FXML private ChoiceBox<String> addAccommodations;
-  @FXML private TextField patientName, roomNum;
+  @FXML private TextField patientName, roomNum, serviceStatus, assignStaff;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -35,5 +37,16 @@ public class ReqInTransportController implements Initializable {
     roomNum.setText("");
     transportLocation.setValue("");
     addAccommodations.setValue("");
+    serviceStatus.setText("");
+    assignStaff.setText("");
+  }
+
+  @FXML
+  public void submitRequest() {
+    ReqInServiceRequest request = new ReqInServiceRequest();
+    request.setRequestID("SAMPLE12");
+    request.setDestination(new Location());
+    request.setStatus(serviceStatus.getText());
+    this.resetFields();
   }
 }

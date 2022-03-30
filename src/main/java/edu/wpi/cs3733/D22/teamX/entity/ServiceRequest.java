@@ -2,6 +2,9 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.Location;
 
+/**
+ * Represents a general service request
+ */
 public abstract class ServiceRequest {
 
   private String requestID;
