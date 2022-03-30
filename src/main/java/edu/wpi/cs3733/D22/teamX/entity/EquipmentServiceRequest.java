@@ -71,7 +71,7 @@ public class EquipmentServiceRequest extends ServiceRequest {
     //      return strID.toString();
     ////    }
     EquipmentServiceRequestDAO esrDAO = new EquipmentServiceRequestDAOImpl();
-    int nextIDFinalNum = esrDAO.getAllEquipmentServiceRequests().size();
+    int nextIDFinalNum = esrDAO.getAllEquipmentServiceRequests().size() + 1;
     return String.format("MER_%04d", nextIDFinalNum);
   }
 }
