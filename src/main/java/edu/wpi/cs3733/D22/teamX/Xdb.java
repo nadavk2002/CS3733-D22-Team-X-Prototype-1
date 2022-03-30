@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.*;
 
 public class Xdb {
+  private static final String locationCSV = "TowerLocations.csv";
+  private static final String medicalEquipmentCSV = "MedEquipReq.csv";
   //  /** Initializes the db and runs the user program from Spike B. */
   //  public static void initializeAndRunDBProgram() {
   //    Connection dbConn = initializeDB();
@@ -60,13 +62,10 @@ public class Xdb {
    * Saves the data from the database to the appropriate CSV files and closes the database.
    *
    * @param connection connection to the database to be closed
-   * @param locationCSVFileName temporary, will be a part of the DB creation later on
-   * @param MedEquipServReqCSVFileName temporary, will be a part of the DB creation later on
    */
-  public static void closeDB(
-      Connection connection, String locationCSVFileName, String MedEquipServReqCSVFileName) {
-    saveLocationDataToCSV(locationCSVFileName);
-    saveMedEqDataToCSV(MedEquipServReqCSVFileName);
+  public static void closeDB(Connection connection) {
+    saveLocationDataToCSV();
+    saveMedEqDataToCSV();
     try {
       connection.close();
     } catch (SQLException e) {
@@ -254,7 +253,7 @@ public class Xdb {
   }
 
   /** Writes the content of the location table from the database into the TowerLocations.CSV */
-  private static void saveLocationDataToCSV(String csvFileName) {
+  private static void saveLocationDataToCSV() {
     Connection connection = ConnectionMaker.getConnection();
     ArrayList<Location> locations = new ArrayList<Location>();
     try {
@@ -278,7 +277,7 @@ public class Xdb {
     }
 
     try {
-      FileWriter csvFile = new FileWriter(csvFileName, false);
+      FileWriter csvFile = new FileWriter(locationCSV, false);
       csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
       for (int i = 0; i < locations.size(); i++) {
         csvFile.write("\n" + locations.get(i).getNodeID() + ",");
@@ -316,7 +315,8 @@ public class Xdb {
     }
   }
 
-  private static void saveMedEqDataToCSV(String csvFileName) {
+  /** Saves Medical Equipment data to CSV on close */
+  private static void saveMedEqDataToCSV() {
     Connection connection = ConnectionMaker.getConnection();
     List<EquipmentServiceRequest> Equipment = new ArrayList<EquipmentServiceRequest>();
     LocationDAO locDestination = new LocationDAOImpl();
@@ -339,7 +339,7 @@ public class Xdb {
     }
 
     try {
-      FileWriter csvFile = new FileWriter(csvFileName, false);
+      FileWriter csvFile = new FileWriter(medicalEquipmentCSV, false);
       csvFile.write("RequestID,Destination,Status,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
