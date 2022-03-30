@@ -62,4 +62,10 @@ public abstract class ServiceRequest {
   //    this.assignee = assignee;
   //  }
 
+  /**
+   * Creates random requestID for new requests
+   * @return a String with a certain number of characters constituting an available requestID
+   */
+  public abstract String getRandomID();
+
 }
