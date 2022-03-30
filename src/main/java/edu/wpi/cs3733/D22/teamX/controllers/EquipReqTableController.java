@@ -3,8 +3,11 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.EquipmentSeviceRequestDAO;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -32,40 +35,21 @@ public class EquipReqTableController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    equipType.setCellValueFactory(
-        new PropertyValueFactory<EquipmentServiceRequest, String>("equipmentType"));
-    amount.setCellValueFactory(
-        new PropertyValueFactory<EquipmentServiceRequest, Integer>("quantity"));
-    equipStatus.setCellValueFactory(
-        new PropertyValueFactory<EquipmentServiceRequest, String>("status"));
-    destination.setCellValueFactory(
-        new PropertyValueFactory<EquipmentServiceRequest, Location>("locationNodeID"));
-    requestID.setCellValueFactory(
-        new PropertyValueFactory<EquipmentServiceRequest, String>("requestID"));
-    table.setItems(list);
+    equipType.setCellValueFactory(new PropertyValueFactory<>("equipmentType"));
+    amount.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+    equipStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+    destination.setCellValueFactory(new PropertyValueFactory<>("locationNodeID"));
+    requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    table.setItems(equipDeliveryList());
   }
 
-  ObservableList<EquipmentServiceRequest> list =
-      FXCollections.observableArrayList(
-          new EquipmentServiceRequest(
-              "EDR2034",
-              new Location("xSTOR001L1", 32, 64, "L1", "Tower", "STOR", "Storage", "Store"),
-              "Functional",
-              "Bed",
-              3));
-
-  //  private ObservableList<EquipmentServiceRequest> equipDeliveryList(EquipmentServiceRequest ESR)
-  // {
-  //    ObservableList<EquipmentServiceRequest> list =
-  //        FXCollections.observableArrayList(
-  //            new EquipmentServiceRequest(
-  //                "EDR2034",
-  //                new Location("xSTOR001L1", 32, 64, "L1", "Tower", "STOR", "Storage", "Store"),
-  //                "Functional",
-  //                "Bed",
-  //                3));
-  //    return list;
-  //  }
+  private ObservableList<EquipmentServiceRequest> equipDeliveryList() {
+    ObservableList<EquipmentServiceRequest> equipList = FXCollections.observableArrayList();
+    EquipmentSeviceRequestDAO allEquip = new EquipmentServiceRequestDAOImpl();
+    List<EquipmentServiceRequest> inpEquipList = allEquip.getAllEquipmentServiceRequests();
+    equipList.addAll(inpEquipList);
+    return equipList;
+  }
 
   @FXML
   void ToMainMenu() throws IOException {
