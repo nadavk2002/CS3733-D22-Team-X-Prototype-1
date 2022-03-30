@@ -30,11 +30,6 @@
                   </ImageView>
                </graphic>
             </JFXButton>
-            <JFXButton onAction="#EquipReqTableButton" text="Equipment Request Queue" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </JFXButton>
          </children>
       </VBox>
       <JFXButton cache="true" contentDisplay="TOP" layoutX="1794.0" layoutY="836.0" onAction="#ExitApplication" text="Exit" textFill="#446fdc">
@@ -60,7 +55,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="414.0" layoutY="20.0" onAction="#ReqLangButton" text="Request Language Interpreter" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="435.0" layoutY="20.0" onAction="#ReqLangButton" text="Request Language Interpreter" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -86,7 +81,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="414.0" layoutY="223.0" onAction="#ReqInTransportButton" prefHeight="26.0" prefWidth="242.0" text="Request Internal Patient Transportation" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="407.0" layoutY="223.0" onAction="#ReqInTransportButton" prefHeight="26.0" prefWidth="242.0" text="Request Internal Patient Transportation" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -125,7 +120,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="22.0" layoutY="223.0" onAction="#mealReqButton" text="Request Patient Meal" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="457.0" layoutY="414.0" onAction="#mealReqButton" text="Request Patient Meal" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -135,6 +130,16 @@
          <graphic>
             <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
                <Image url="@../assets/food.png" />
+            </ImageView>
+         </graphic>
+      </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="22.0" layoutY="223.0" onAction="#EquipReqTableButton" text="Equipment Request Queue" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <Image url="@../assets/waiting.png" />
             </ImageView>
          </graphic>
       </JFXButton>
