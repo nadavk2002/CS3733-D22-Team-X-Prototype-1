@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
+import edu.wpi.cs3733.D22.teamX.Location;
 import edu.wpi.cs3733.D22.teamX.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
@@ -33,11 +34,11 @@ public class MedicalEquipmentDeliveryController {
   }
 
   private ObservableList<String> equipDeliveryList() {
-    EquipmentServiceRequestDAO allEquip = new EquipmentServiceRequestDAOImpl();
-    List<EquipmentServiceRequest> inpEquipList = allEquip.getAllEquipmentServiceRequests();
+    LocationDAO locationsDAO = new LocationDAOImpl();
+    List<Location> locations = locationsDAO.getAllLocations();
     ObservableList<String> nodeID = FXCollections.observableArrayList();
-    for (int i = 0; i < inpEquipList.size(); i++) {
-      nodeID.add(inpEquipList.get(i).getLocationNodeID());
+    for (int i = 0; i < locations.size(); i++) {
+      nodeID.add(locations.get(i).getNodeID());
     }
     return nodeID;
   }
