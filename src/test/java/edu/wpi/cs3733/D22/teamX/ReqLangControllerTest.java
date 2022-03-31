@@ -12,23 +12,16 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-public class ReqInTransportControllerTest extends ApplicationTest {
+public class ReqLangControllerTest extends ApplicationTest {
   @Override
   public void start(Stage stage) throws IOException {
     Parent root =
         FXMLLoader.load(
             Objects.requireNonNull(
-                getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ReqInTransport.fxml")));
+                getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ReqLang.fxml")));
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-  }
-
-  @Test
-  public void testPatientNameTextField() {
-    clickOn("#patientName");
-    write("h");
-    verifyThat("#patientName", hasText("h"));
   }
 
   @Test
@@ -55,7 +48,6 @@ public class ReqInTransportControllerTest extends ApplicationTest {
   @Test
   public void testResetButton() {
     clickOn("#resetFields");
-    verifyThat("#patientName", hasText(""));
     verifyThat("#roomNum", hasText(""));
     verifyThat("#assignStaff", hasText(""));
     verifyThat("#serviceStatus", hasText(""));
