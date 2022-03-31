@@ -19,23 +19,23 @@ public class HospitalLocationsController implements Initializable {
 
   @FXML private Button ToMainMenu;
 
-  @FXML private TableView<SimpleLoc> table;
+  @FXML private TableView<Location> table;
 
-  @FXML private TableColumn<SimpleLoc, String> id;
+  @FXML private TableColumn<Location, String> nodeID;
 
-  @FXML private TableColumn<SimpleLoc, Integer> x;
+  @FXML private TableColumn<Location, String> x;
 
-  @FXML private TableColumn<SimpleLoc, Integer> y;
+  @FXML private TableColumn<Location, String> y;
 
-  @FXML private TableColumn<SimpleLoc, String> floor;
+  @FXML private TableColumn<Location, String> floor;
 
-  @FXML private TableColumn<SimpleLoc, String> building;
+  @FXML private TableColumn<Location, String> building;
 
-  @FXML private TableColumn<SimpleLoc, String> type;
+  @FXML private TableColumn<Location, String> nodeType;
 
-  @FXML private TableColumn<SimpleLoc, String> longName;
+  @FXML private TableColumn<Location, String> longName;
 
-  @FXML private TableColumn<SimpleLoc, String> shortName;
+  @FXML private TableColumn<Location, String> shortName;
 
   @FXML
   private void ToMainMenu() throws IOException {
@@ -43,13 +43,12 @@ public class HospitalLocationsController implements Initializable {
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
 
-  private ObservableList<SimpleLoc> locationListFill() {
-    ObservableList<SimpleLoc> tableList = FXCollections.observableArrayList();
+  private ObservableList<Location> locationListFill() {
+    ObservableList<Location> tableList = FXCollections.observableArrayList();
     LocationDAO allLocations = new LocationDAOImpl();
     List<Location> locationList = allLocations.getAllLocations();
     for (Location loc : locationList) {
-      SimpleLoc simp = new SimpleLoc(loc);
-      tableList.add(simp);
+      tableList.add(loc);
     }
     return tableList;
   }
@@ -57,14 +56,14 @@ public class HospitalLocationsController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     locationListFill();
-    id.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("id"));
-    x.setCellValueFactory(new PropertyValueFactory<SimpleLoc, Integer>("x"));
-    y.setCellValueFactory(new PropertyValueFactory<SimpleLoc, Integer>("y"));
-    floor.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("floor"));
-    building.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("building"));
-    type.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("type"));
-    longName.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("longName"));
-    shortName.setCellValueFactory(new PropertyValueFactory<SimpleLoc, String>("shortName"));
+    nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
+    x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
+    y.setCellValueFactory(new PropertyValueFactory<Location, String>("y"));
+    floor.setCellValueFactory(new PropertyValueFactory<Location, String>("floor"));
+    building.setCellValueFactory(new PropertyValueFactory<Location, String>("building"));
+    nodeType.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeType"));
+    longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
+    shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
     table.setItems(locationListFill());
   }
 }
