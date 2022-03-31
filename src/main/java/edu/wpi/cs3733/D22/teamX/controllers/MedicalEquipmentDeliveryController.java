@@ -28,12 +28,11 @@ public class MedicalEquipmentDeliveryController {
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
     request = new EquipmentServiceRequest();
-    selectEquipmentType.getItems().addAll("Beds (20)", "X-Rays (1)", "Pumps (30)", "Recliners (6)");
+    selectEquipmentType.getItems().addAll("Bed", "X-Ray", "Pump", "Recliner");
     selectDestination.setItems(equipDeliveryList());
   }
 
   private ObservableList<String> equipDeliveryList() {
-    ObservableList<EquipmentServiceRequest> equipList = FXCollections.observableArrayList();
     EquipmentServiceRequestDAO allEquip = new EquipmentServiceRequestDAOImpl();
     List<EquipmentServiceRequest> inpEquipList = allEquip.getAllEquipmentServiceRequests();
     ObservableList<String> nodeID = FXCollections.observableArrayList();
