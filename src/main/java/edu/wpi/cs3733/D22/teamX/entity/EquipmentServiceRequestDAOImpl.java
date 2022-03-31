@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.ConnectionMaker;
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import java.sql.Connection;
@@ -17,7 +17,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
 
   /** constructor */
   public EquipmentServiceRequestDAOImpl() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     medicalEquipmentServiceRequests = new ArrayList<EquipmentServiceRequest>();
     try {
       // To retrieve locations with specified destinations
@@ -136,7 +136,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
       statement.executeUpdate(
           "UPDATE MedicalEquipmentServiceRequest SET"
               + " destination = '"
-              + equipmentServiceRequest.getDestination()
+              + equipmentServiceRequest.getDestination().getNodeID()
               + "', status = '"
               + equipmentServiceRequest.getStatus()
               + "', equipmentType = '"

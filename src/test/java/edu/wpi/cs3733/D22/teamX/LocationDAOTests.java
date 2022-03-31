@@ -29,7 +29,7 @@ public class LocationDAOTests {
   public void TestLocationDAOList() {
     // create DAO object
     LocationDAO locationDAO = new LocationDAOImpl();
-    assertEquals(139, locationDAO.getAllLocations().size());
+    assertEquals(82, locationDAO.getAllLocations().size());
   }
 
   @Test // tests if pulls list
@@ -43,16 +43,16 @@ public class LocationDAOTests {
   public void TestLocationDAOupdate() {
     // create DAO object
     LocationDAO locationDAO = new LocationDAOImpl();
-    assertTrue(locationDAO.getLocation("xSTOR00201").getShortName().equals("West Plaza"));
+    assertEquals("West Plaza", locationDAO.getLocation("xSTOR00201").getShortName());
     Location loc = locationDAO.getLocation("xSTOR00201"); // store the location
     loc.setShortName("East Plaza");
     locationDAO.updateLocation(loc);
-    assertTrue(locationDAO.getLocation("xSTOR00201").getShortName().equals("East Plaza"));
+    assertEquals("East Plaza", locationDAO.getLocation("xSTOR00201").getShortName());
   }
 
   @Test // tests if thows exception
   public void TestLocationDAOupdate2() {
-    Boolean result = false;
+    boolean result = false;
     // create DAO object
     LocationDAO locationDAO = new LocationDAOImpl();
     Location loc = new Location();

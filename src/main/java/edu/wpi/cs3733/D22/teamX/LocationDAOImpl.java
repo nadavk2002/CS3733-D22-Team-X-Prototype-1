@@ -14,7 +14,7 @@ public class LocationDAOImpl implements LocationDAO {
   /** constructor loads data from database */
   public LocationDAOImpl() {
     // add locations from the database connection specified
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     locations = new ArrayList<Location>();
     try {
       // create the statement

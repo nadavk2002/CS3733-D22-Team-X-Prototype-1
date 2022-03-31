@@ -39,7 +39,7 @@ public class XdbTests {
     Connection connection = null;
     try {
       connection = Xdb.initializeDB();
-      assertTrue(Xdb.closeDB(ConnectionMaker.getConnection()));
+      assertTrue(Xdb.closeDB(ConnectionSingleton.getConnectionSingleton().getConnection()));
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       Assert.fail();
@@ -138,7 +138,7 @@ public class XdbTests {
   //    EquipmentServiceRequestDAOImpl equipmentServiceRequestDAO =
   //        new EquipmentServiceRequestDAOImpl();
   //    equipmentServiceRequestDAO.addEquipmentServiceRequest(
-  //        new EquipmentServiceRequest("MER_0016", new Location("xPATI00803"), "PROC",
+  //        new EquipmentServiceRequest("MESR0016", new Location("xPATI00803"), "PROC",
   // "Tweezers", 3));
   //
   //    Xdb.closeDB(

@@ -38,7 +38,7 @@ public class Xdb {
     System.out.println("Apache Derby driver registered!");
 
     // tries to create the database and establish a connection
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     //    try {
     //
     //    } catch (SQLException e) {
@@ -80,7 +80,7 @@ public class Xdb {
 
   /** Creates the location table in the database */
   private static void createLocationTable() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
@@ -99,7 +99,7 @@ public class Xdb {
 
   /** creates the medical equipment request service table in the database */
   private static void createMedicalEquipmentServiceRequestTable() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
@@ -118,7 +118,7 @@ public class Xdb {
 
   /** Drops all the tables in the database. */
   private static void dropAllTables() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
@@ -142,7 +142,7 @@ public class Xdb {
    * @return whether an exception was thrown when trying o read from the file.
    */
   private static boolean loadLocationCSV() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     // Read locations into List "locationsFromCSV"
     List<Location> locationsFromCSV = new ArrayList<Location>();
     try {
@@ -212,7 +212,7 @@ public class Xdb {
    * @return a list of Medical Equipment Service Requests
    */
   private static boolean loadMedEqServiceReqCSV() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     // Read locations into List "MedEquipReqCSV"
     List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
     try {
@@ -271,7 +271,7 @@ public class Xdb {
 
   /** Writes the content of the location table from the database into the TowerLocations.CSV */
   private static boolean saveLocationDataToCSV() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     ArrayList<Location> locations = new ArrayList<Location>();
     try {
       Statement statement = connection.createStatement();
@@ -339,7 +339,7 @@ public class Xdb {
 
   /** Saves Medical Equipment data to CSV on close */
   private static boolean saveMedEqDataToCSV() {
-    Connection connection = ConnectionMaker.getConnection();
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     List<EquipmentServiceRequest> Equipment = new ArrayList<EquipmentServiceRequest>();
     LocationDAO locDestination = new LocationDAOImpl();
     try {

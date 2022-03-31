@@ -1,22 +1,18 @@
 package edu.wpi.cs3733.D22.teamX;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import java.sql.Connection;
 import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
 public class EquipmentServiceRequestTests {
 
-  // based on the CSV file as of 3/29/22
-
-  // connection variable
-  Connection connection;
-  EquipmentServiceRequest esr;
+  // based on the CSV file as of 3/31/22
 
   @Before
   public void setupDB() {
@@ -32,44 +28,42 @@ public class EquipmentServiceRequestTests {
   @Test
   public void TestDBListRequests() {
     EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
-    assertTrue(esrDAOImpl.getAllEquipmentServiceRequests().size() == 15);
+    assertEquals(15, esrDAOImpl.getAllEquipmentServiceRequests().size());
   }
 
   @Test
   public void TestDBWgetRequest() {
     EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
-    assertTrue(
-        esrDAOImpl
-            .getEquipmentServiceRequest("MER_0001")
-            .equals(esrDAOImpl.getEquipmentServiceRequest("MER_0001")));
+    assertEquals(esrDAOImpl
+            .getEquipmentServiceRequest("MESR0001"), esrDAOImpl.getEquipmentServiceRequest("MESR0001"));
   }
 
   @Test // test for correct values
   public void TestDBWgetRequest2() {
     EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
-    assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 1);
+    assertEquals(1, esrDAOImpl.getEquipmentServiceRequest("MESR0001").getQuantity());
   }
 
   @Test // test for updating values
   public void testDBeqRequestUpdate() {
     EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
-    assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 1);
+    assertEquals(1, esrDAOImpl.getEquipmentServiceRequest("MESR0001").getQuantity());
     // update
-    EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MER_0001");
+    EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MESR0001");
     esr.setQuantity(2);
     esrDAOImpl.updateEquipmentServiceRequest(esr); // send to db
-    assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0001").getQuantity() == 2);
+    assertEquals(2, esrDAOImpl.getEquipmentServiceRequest("MESR0001").getQuantity());
   }
 
   @Test // test for deleting values
   public void testDBeqRequestDelete() {
     EquipmentServiceRequestDAOImpl esrDAOImpl = new EquipmentServiceRequestDAOImpl();
-    assertTrue(esrDAOImpl.getEquipmentServiceRequest("MER_0003").getQuantity() == 3);
+    assertEquals(3, esrDAOImpl.getEquipmentServiceRequest("MESR0003").getQuantity());
     // removes
-    EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MER_0003");
+    EquipmentServiceRequest esr = esrDAOImpl.getEquipmentServiceRequest("MESR0003");
     esrDAOImpl.deleteEquipmentServiceRequest(esr);
     try {
-      esrDAOImpl.getEquipmentServiceRequest("MER_0003");
+      esrDAOImpl.getEquipmentServiceRequest("MESR0003");
     } catch (NoSuchElementException s) {
       assertTrue(true);
     }
