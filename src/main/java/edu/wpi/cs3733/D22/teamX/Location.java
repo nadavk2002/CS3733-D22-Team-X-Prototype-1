@@ -91,8 +91,16 @@ public class Location {
     return xCoord;
   }
 
+  public String getX() {
+    return String.valueOf(xCoord);
+  }
+
   public int getyCoord() {
     return yCoord;
+  }
+
+  public String getY() {
+    return String.valueOf(yCoord);
   }
 
   public String getFloor() {
