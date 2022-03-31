@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX;
 
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
@@ -22,7 +23,7 @@ public class Xdb {
    *
    * @return a connection to the database
    */
-  public static Connection initializeDB() {
+  public static Connection initializeDB() throws loadSaveFromCSVException {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
     try {
@@ -48,8 +49,9 @@ public class Xdb {
     dropAllTables();
     createLocationTable();
     createMedicalEquipmentServiceRequestTable();
-    loadLocationCSV();
-    loadMedEqServiceReqCSV();
+    if (!loadLocationCSV() || !loadMedEqServiceReqCSV()) {
+      throw new loadSaveFromCSVException("Error when loading from CSV files.");
+    }
 
     System.out.println("Database created successfully");
 
@@ -63,15 +65,20 @@ public class Xdb {
    * @param locationCSVFileName temporary, will be a part of the DB creation later on
    * @param MedEquipServReqCSVFileName temporary, will be a part of the DB creation later on
    */
-  public static void closeDB(
-      Connection connection, String locationCSVFileName, String MedEquipServReqCSVFileName) {
-    saveLocationDataToCSV(locationCSVFileName);
-    saveMedEqDataToCSV(MedEquipServReqCSVFileName);
+  public static boolean closeDB(
+      Connection connection, String locationCSVFileName, String MedEquipServReqCSVFileName)
+      throws loadSaveFromCSVException {
+    if (!saveLocationDataToCSV(locationCSVFileName)
+        || !saveMedEqDataToCSV(MedEquipServReqCSVFileName)) {
+      throw new loadSaveFromCSVException("Error when writing to CSV file.");
+    }
     try {
       connection.close();
     } catch (SQLException e) {
       e.printStackTrace();
+      return false;
     }
+    return true;
   }
 
   /** Creates the location table in the database */
@@ -118,18 +125,26 @@ public class Xdb {
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
+    } catch (SQLException e) {
+      System.out.println("Tables not dropped");
+      e.printStackTrace();
+    }
+
+    try {
+      Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE Location");
     } catch (SQLException e) {
       System.out.println("Tables not dropped");
+      e.printStackTrace();
     }
   }
 
   /**
    * Read the locations from CSV file. Put locations into db table "Location"
    *
-   * @return a list of location objects from the "TowerLocations.CSV" file.
+   * @return whether an exception was thrown when trying o read from the file.
    */
-  private static List<Location> loadLocationCSV() {
+  private static boolean loadLocationCSV() {
     Connection connection = ConnectionMaker.getConnection();
     // Read locations into List "locationsFromCSV"
     List<Location> locationsFromCSV = new ArrayList<Location>();
@@ -162,8 +177,10 @@ public class Xdb {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
       System.out.println("File not found!");
+      return false;
     } catch (IOException e) {
       e.printStackTrace();
+      return false;
     }
 
     // Insert locations from locationsFromCSV into db table
@@ -185,10 +202,10 @@ public class Xdb {
       } catch (SQLException e) {
         System.out.println("Input for Location " + i + " failed");
         e.printStackTrace();
-        return null;
+        return false;
       }
     }
-    return locationsFromCSV;
+    return true;
   }
 
   /**
@@ -197,7 +214,7 @@ public class Xdb {
    *
    * @return a list of Medical Equipment Service Requests
    */
-  private static List<EquipmentServiceRequest> loadMedEqServiceReqCSV() {
+  private static boolean loadMedEqServiceReqCSV() {
     Connection connection = ConnectionMaker.getConnection();
     // Read locations into List "MedEquipReqCSV"
     List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
@@ -226,8 +243,10 @@ public class Xdb {
     } catch (FileNotFoundException e) {
       e.printStackTrace();
       System.out.println("File not found!");
+      return false;
     } catch (IOException e) {
       e.printStackTrace();
+      return false;
     }
 
     // Insert locations from locationsFromCSV into db table
@@ -247,14 +266,14 @@ public class Xdb {
       } catch (SQLException e) {
         System.out.println("Input for MedEquipReq " + i + " failed");
         e.printStackTrace();
-        return null;
+        return false;
       }
     }
-    return MedEquipReqFromCSV;
+    return true;
   }
 
   /** Writes the content of the location table from the database into the TowerLocations.CSV */
-  private static void saveLocationDataToCSV(String csvFileName) {
+  private static boolean saveLocationDataToCSV(String csvFileName) {
     Connection connection = ConnectionMaker.getConnection();
     ArrayList<Location> locations = new ArrayList<Location>();
     try {
@@ -275,6 +294,7 @@ public class Xdb {
     } catch (SQLException e) {
       e.printStackTrace();
       System.out.println("An error occured when saving Location data to the CSV file.");
+      return false;
     }
 
     try {
@@ -313,10 +333,12 @@ public class Xdb {
     } catch (IOException e) {
       System.out.println("Error occured when updating locations csv file.");
       e.printStackTrace();
+      return false;
     }
+    return true;
   }
 
-  private static void saveMedEqDataToCSV(String csvFileName) {
+  private static boolean saveMedEqDataToCSV(String csvFileName) {
     Connection connection = ConnectionMaker.getConnection();
     List<EquipmentServiceRequest> Equipment = new ArrayList<EquipmentServiceRequest>();
     LocationDAO locDestination = new LocationDAOImpl();
@@ -336,6 +358,7 @@ public class Xdb {
       e.printStackTrace();
       System.out.println(
           "An error occurred when saving MedicalEquipServRequest data to the CSV file.");
+      return false;
     }
 
     try {
@@ -365,6 +388,8 @@ public class Xdb {
     } catch (IOException e) {
       System.out.print("An error occurred when trying to write to the CSV file.");
       e.printStackTrace();
+      return false;
     }
+    return true;
   }
 }
