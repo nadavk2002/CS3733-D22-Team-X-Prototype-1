@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
 
-public class MedicineEquipmentDeliveryControllerTest extends ApplicationTest {
+public class MedicalEquipDeliveryControllerTest extends ApplicationTest {
   @Override
   public void start(Stage stage) throws IOException {
     Parent root =
@@ -25,31 +25,15 @@ public class MedicineEquipmentDeliveryControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testRoomNumTextField() {
-    clickOn("#roomNum");
+  public void testAmountTextField() {
+    clickOn("#amountField");
     write("h");
-    verifyThat("#roomNum", hasText("h"));
-  }
-
-  @Test
-  public void testAssignStaffTextField() {
-    clickOn("#assignStaff");
-    write("h");
-    verifyThat("#assignStaff", hasText("h"));
-  }
-
-  @Test
-  public void testServiceStatusTextField() {
-    clickOn("#serviceStatus");
-    write("h");
-    verifyThat("#serviceStatus", hasText("h"));
+    verifyThat("#amountField", hasText("h"));
   }
 
   @Test
   public void testResetButton() {
     clickOn("#resetFields");
-    verifyThat("#roomNum", hasText(""));
-    verifyThat("#assignStaff", hasText(""));
-    verifyThat("#serviceStatus", hasText(""));
+    verifyThat("#amountField", hasText(""));
   }
 }
