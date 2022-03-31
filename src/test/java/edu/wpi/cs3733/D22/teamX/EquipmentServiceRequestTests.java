@@ -1,13 +1,13 @@
 package edu.wpi.cs3733.D22.teamX;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
 import java.sql.Connection;
 import java.util.NoSuchElementException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class EquipmentServiceRequestTests {
 
@@ -17,10 +17,10 @@ public class EquipmentServiceRequestTests {
   Connection connection;
   EquipmentServiceRequest esr;
 
-  @BeforeEach
+  @Before
   public void setupDB() {
     // initialize Xdb
-    connection = Xdb.initializeDB();
+    Xdb.initializeDB();
   }
 
   // these test will fail if the csv file changes
