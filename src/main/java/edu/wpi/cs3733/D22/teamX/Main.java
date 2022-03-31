@@ -11,6 +11,6 @@ public class Main {
     Connection dbConn = null;
     dbConn = Xdb.initializeDB();
     App.launch(App.class, args);
-    Xdb.closeDB(dbConn, "TowerLocations.csv", "MedEquipReq.csv");
+    Xdb.closeDB(dbConn);
   }
 }
