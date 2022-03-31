@@ -1,12 +1,12 @@
 package edu.wpi.cs3733.D22.teamX;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Connection;
 import java.util.NoSuchElementException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 
 public class LocationDAOTests {
   // based on the CSV file as of 3/29/22
@@ -14,7 +14,7 @@ public class LocationDAOTests {
   // connection varible
   Connection connection;
 
-  @BeforeEach
+  @Before
   public void setupDB() {
     // initialize Xdb cannot reinitiallized
     connection = Xdb.initializeDB();
