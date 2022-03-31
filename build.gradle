@@ -33,6 +33,7 @@ dependencies {
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
     )
+    implementation 'org.testng:testng:7.1.0'
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
@@ -102,5 +103,18 @@ compileJava.dependsOn 'spotlessApply'
 spotless {
     java {
         googleJavaFormat()
+    }
+}
+
+// Include dependent libraries in archive.
+mainClassName = "edu.wpi.cs3733.D22.teamX.Main"
+
+jar {
+    manifest {
+        attributes "Main-Class": "$mainClassName"
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }

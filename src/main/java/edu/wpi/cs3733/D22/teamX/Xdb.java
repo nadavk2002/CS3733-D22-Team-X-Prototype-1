@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX;
 
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import java.io.*;
-import java.net.URL;
 import java.sql.*;
 import java.util.*;
 
@@ -203,7 +202,7 @@ public class Xdb {
     List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
     try {
       LocationDAO locDestination = new LocationDAOImpl();
-      InputStream tlCSV = UserProgram.class.getResourceAsStream(medicalEquipmentCSV);
+      InputStream tlCSV = Xdb.class.getResourceAsStream(medicalEquipmentCSV);
       BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
       tlCSVReader.readLine();
       String nextFileLine;
@@ -278,8 +277,9 @@ public class Xdb {
     }
 
     try {
-      URL url = Xdb.class.getResource(locationCSV);
-      FileWriter csvFile = new FileWriter(url.getFile(), false);
+      //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
+      //      FileWriter csvFile = new FileWriter(csv, false);
+      FileWriter csvFile = new FileWriter(locationCSV, false);
       csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
       for (int i = 0; i < locations.size(); i++) {
         csvFile.write("\n" + locations.get(i).getNodeID() + ",");
@@ -341,8 +341,9 @@ public class Xdb {
     }
 
     try {
-      URL url = Xdb.class.getResource(medicalEquipmentCSV);
-      FileWriter csvFile = new FileWriter(url.getFile(), false);
+      //      URL url = Xdb.class.getResource(medicalEquipmentCSV);
+      //      FileWriter csvFile = new FileWriter(url.getFile(), false);
+      FileWriter csvFile = new FileWriter(medicalEquipmentCSV, false);
       csvFile.write("RequestID,Destination,Status,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
@@ -361,7 +362,7 @@ public class Xdb {
         } else {
           csvFile.write(Equipment.get(i).getEquipmentType() + ",");
         }
-        csvFile.write(Equipment.get(i).getQuantity());
+        csvFile.write(Integer.toString(Equipment.get(i).getQuantity()));
       }
       csvFile.flush();
       csvFile.close();
