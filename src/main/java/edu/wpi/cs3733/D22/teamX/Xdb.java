@@ -6,7 +6,7 @@ import java.sql.*;
 import java.util.*;
 
 public class Xdb {
-  private static final String locationCSV = "TowerLocations.csv";
+  private static final String locationCSV = "TowerLocationsX.csv";
   private static final String medicalEquipmentCSV = "MedEquipReq.csv";
   //  /** Initializes the db and runs the user program from Spike B. */
   //  public static void initializeAndRunDBProgram() {
