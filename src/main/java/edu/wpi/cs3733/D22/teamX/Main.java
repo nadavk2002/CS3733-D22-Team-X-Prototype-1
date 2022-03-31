@@ -20,7 +20,7 @@ public class Main {
     App.launch(App.class, args);
 
     try {
-      Xdb.closeDB(dbConn, "TowerLocations.csv", "MedEquipReq.csv");
+      Xdb.closeDB(dbConn);
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       System.exit(1);

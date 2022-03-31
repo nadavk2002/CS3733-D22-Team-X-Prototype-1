@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamX;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.sql.Connection;
 import java.util.NoSuchElementException;
 import org.junit.Before;
@@ -17,7 +18,11 @@ public class LocationDAOTests {
   @Before
   public void setupDB() {
     // initialize Xdb cannot reinitiallized
-    connection = Xdb.initializeDB();
+    try {
+      connection = Xdb.initializeDB();
+    } catch (loadSaveFromCSVException e) {
+      e.printStackTrace();
+    }
   }
 
   @Test // tests if pulls list

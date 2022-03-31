@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.sql.Connection;
 import java.util.NoSuchElementException;
 import org.junit.Before;
@@ -20,7 +21,11 @@ public class EquipmentServiceRequestTests {
   @Before
   public void setupDB() {
     // initialize Xdb
-    Xdb.initializeDB();
+    try {
+      Xdb.initializeDB();
+    } catch (loadSaveFromCSVException e) {
+      e.printStackTrace();
+    }
   }
 
   // these test will fail if the csv file changes

@@ -28,7 +28,7 @@ public class XdbTests {
     assertNotNull(connection);
 
     try {
-      Xdb.closeDB(connection, "TowerLocations.csv", "MedEquipReq.csv");
+      Xdb.closeDB(connection);
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -39,15 +39,14 @@ public class XdbTests {
     Connection connection = null;
     try {
       connection = Xdb.initializeDB();
-      assertTrue(
-          Xdb.closeDB(ConnectionMaker.getConnection(), "TowerLocations.csv", "MedEquipReq.csv"));
+      assertTrue(Xdb.closeDB(ConnectionMaker.getConnection()));
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       Assert.fail();
     }
 
     try {
-      Xdb.closeDB(connection, "TowerLocations.csv", "MedEquipReq.csv");
+      Xdb.closeDB(connection);
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -72,7 +71,7 @@ public class XdbTests {
     }
 
     try {
-      Xdb.closeDB(connection, "TowerLocations.csv", "MedEquipReq.csv");
+      Xdb.closeDB(connection);
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -97,7 +96,7 @@ public class XdbTests {
     }
 
     try {
-      Xdb.closeDB(connection, "TowerLocations.csv", "MedEquipReq.csv");
+      Xdb.closeDB(connection);
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -114,7 +113,7 @@ public class XdbTests {
     }
 
     try {
-      Xdb.closeDB(connection, "TowerLocations.csv", "MedEquipReq.csv");
+      Xdb.closeDB(connection);
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }

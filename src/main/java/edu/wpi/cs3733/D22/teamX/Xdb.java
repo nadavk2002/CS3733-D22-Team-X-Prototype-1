@@ -64,14 +64,9 @@ public class Xdb {
    * Saves the data from the database to the appropriate CSV files and closes the database.
    *
    * @param connection connection to the database to be closed
-   * @param locationCSVFileName temporary, will be a part of the DB creation later on
-   * @param MedEquipServReqCSVFileName temporary, will be a part of the DB creation later on
    */
-  public static boolean closeDB(
-      Connection connection, String locationCSVFileName, String MedEquipServReqCSVFileName)
-      throws loadSaveFromCSVException {
-    if (!saveLocationDataToCSV(locationCSVFileName)
-        || !saveMedEqDataToCSV(MedEquipServReqCSVFileName)) {
+  public static boolean closeDB(Connection connection) throws loadSaveFromCSVException {
+    if (!saveLocationDataToCSV() || !saveMedEqDataToCSV()) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     try {
