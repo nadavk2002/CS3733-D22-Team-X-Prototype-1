@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLangController">
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLangController">
    <children>
       <ChoiceBox fx:id="selectLang" layoutX="926.0" layoutY="418.0" prefWidth="150.0" />
       <Label layoutX="825.0" layoutY="423.0" text="Select Language:" />
@@ -22,7 +17,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Button layoutX="912.0" layoutY="639.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
+      <Button fx:id="resetFields" layoutX="912.0" layoutY="639.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
       <Label layoutX="866.0" layoutY="495.0" text="Assignee:" />
       <TextField fx:id="assignStaff" layoutX="926.0" layoutY="491.0" />
       <Label layoutX="839.0" layoutY="527.0" text="Service Status:" />
