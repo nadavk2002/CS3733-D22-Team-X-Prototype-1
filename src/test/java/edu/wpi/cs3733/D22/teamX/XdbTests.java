@@ -135,10 +135,10 @@ public class XdbTests {
   //    LocationDAOImpl locationDAO = new LocationDAOImpl();
   //    locationDAO.deleteLocation(new Location("xSTOR00503"));
   //
-  //    EquipmentServiceRequestDAOImpl equipmentServiceRequestDAO =
-  //        new EquipmentServiceRequestDAOImpl();
+  //    MedicalEquipmentServiceRequestDAOImpl equipmentServiceRequestDAO =
+  //        new MedicalEquipmentServiceRequestDAOImpl();
   //    equipmentServiceRequestDAO.addEquipmentServiceRequest(
-  //        new EquipmentServiceRequest("MESR0016", new Location("xPATI00803"), "PROC",
+  //        new MedicalEquipmentServiceRequest("MESR0016", new Location("xPATI00803"), "PROC",
   // "Tweezers", 3));
   //
   //    Xdb.closeDB(

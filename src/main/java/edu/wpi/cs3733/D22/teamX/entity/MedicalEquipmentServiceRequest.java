@@ -2,11 +2,11 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.Location;
 
-public class EquipmentServiceRequest extends ServiceRequest {
+public class MedicalEquipmentServiceRequest extends ServiceRequest {
   private String equipmentType;
   private int quantity;
 
-  public EquipmentServiceRequest(
+  public MedicalEquipmentServiceRequest(
       String requestID,
       Location destination,
       String status,
@@ -19,7 +19,7 @@ public class EquipmentServiceRequest extends ServiceRequest {
     this.quantity = quantity;
   }
 
-  public EquipmentServiceRequest() {
+  public MedicalEquipmentServiceRequest() {
     super();
     this.equipmentType = null;
     this.quantity = -1;
@@ -70,8 +70,8 @@ public class EquipmentServiceRequest extends ServiceRequest {
     //      }
     //      return strID.toString();
     ////    }
-    EquipmentServiceRequestDAO esrDAO = new EquipmentServiceRequestDAOImpl();
-    int nextIDFinalNum = esrDAO.getAllEquipmentServiceRequests().size() + 1;
+    MedicalEquipmentServiceRequestDAO esrDAO = new MedicalEquipmentServiceRequestDAOImpl();
+    int nextIDFinalNum = esrDAO.getAllMedicalEquipmentServiceRequests().size() + 1;
     return String.format("MESR%04d", nextIDFinalNum);
   }
 }

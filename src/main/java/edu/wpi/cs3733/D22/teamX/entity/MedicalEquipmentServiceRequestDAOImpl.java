@@ -11,14 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDAO {
-  List<EquipmentServiceRequest> medicalEquipmentServiceRequests;
+public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentServiceRequestDAO {
+  List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests;
   Connection connection; // store connection info
 
   /** constructor */
-  public EquipmentServiceRequestDAOImpl() {
+  public MedicalEquipmentServiceRequestDAOImpl() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
-    medicalEquipmentServiceRequests = new ArrayList<EquipmentServiceRequest>();
+    medicalEquipmentServiceRequests = new ArrayList<MedicalEquipmentServiceRequest>();
     try {
       // To retrieve locations with specified destinations
       LocationDAO locDestination = new LocationDAOImpl();
@@ -28,7 +28,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
       ResultSet resultSet = statement.executeQuery("Select * FROM MedicalEquipmentServiceRequest");
       // go through the results
       while (resultSet.next()) {
-        EquipmentServiceRequest esr = new EquipmentServiceRequest();
+        MedicalEquipmentServiceRequest esr = new MedicalEquipmentServiceRequest();
         esr.setRequestID(resultSet.getString("requestID"));
         esr.setDestination(locDestination.getLocation(resultSet.getString("destination")));
         esr.setStatus(resultSet.getString("status"));
@@ -49,7 +49,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
    * @return a list of all the medical equipment service requests
    */
   @Override
-  public List<EquipmentServiceRequest> getAllEquipmentServiceRequests() {
+  public List<MedicalEquipmentServiceRequest> getAllMedicalEquipmentServiceRequests() {
     return medicalEquipmentServiceRequests;
   }
 
@@ -60,10 +60,10 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
    * @return a medical equipment service request with a matching requestID
    */
   @Override
-  public EquipmentServiceRequest getEquipmentServiceRequest(String requestID)
+  public MedicalEquipmentServiceRequest getMedicalEquipmentServiceRequest(String requestID)
       throws NoSuchElementException {
     // iterate through list to find element with matching requestID
-    for (EquipmentServiceRequest esr : medicalEquipmentServiceRequests) {
+    for (MedicalEquipmentServiceRequest esr : medicalEquipmentServiceRequests) {
       // if matching IDs
       if (esr.getRequestID().equals(requestID)) {
         return esr;
@@ -75,16 +75,16 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
   /**
    * deletes object from DAO and database.
    *
-   * @param equipmentServiceRequest medical equipment service request to be updated
+   * @param medicalEquipmentServiceRequest medical equipment service request to be updated
    */
   @Override
-  public void deleteEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest)
-      throws NoSuchElementException {
+  public void deleteMedicalEquipmentServiceRequest(
+      MedicalEquipmentServiceRequest medicalEquipmentServiceRequest) throws NoSuchElementException {
     // remove from list
     int index = 0; // create index variable for while loop
     int initialSize = medicalEquipmentServiceRequests.size();
     while (index < medicalEquipmentServiceRequests.size()) {
-      if (medicalEquipmentServiceRequests.get(index).equals(equipmentServiceRequest)) {
+      if (medicalEquipmentServiceRequests.get(index).equals(medicalEquipmentServiceRequest)) {
         medicalEquipmentServiceRequests.remove(index); // removes object from list
         break; // exit
       }
@@ -100,7 +100,7 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
       // remove location from DB table
       statement.executeUpdate(
           "DELETE FROM MedicalEquipmentServiceRequest WHERE requestID = '"
-              + equipmentServiceRequest.getRequestID()
+              + medicalEquipmentServiceRequest.getRequestID()
               + "'");
     } catch (SQLException e) {
       e.printStackTrace();
@@ -110,15 +110,15 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
   /**
    * updates DAO and database element
    *
-   * @param equipmentServiceRequest equipment service request to be updated
+   * @param medicalEquipmentServiceRequest equipment service request to be updated
    */
   @Override
-  public void updateEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest)
-      throws NoSuchElementException {
+  public void updateMedicalEquipmentServiceRequest(
+      MedicalEquipmentServiceRequest medicalEquipmentServiceRequest) throws NoSuchElementException {
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
-      if (medicalEquipmentServiceRequests.get(index).equals(equipmentServiceRequest)) {
-        medicalEquipmentServiceRequests.set(index, equipmentServiceRequest);
+      if (medicalEquipmentServiceRequests.get(index).equals(medicalEquipmentServiceRequest)) {
+        medicalEquipmentServiceRequests.set(index, medicalEquipmentServiceRequest);
         break; // exit
       }
       index++; // increment if not found yet
@@ -136,15 +136,15 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
       statement.executeUpdate(
           "UPDATE MedicalEquipmentServiceRequest SET"
               + " destination = '"
-              + equipmentServiceRequest.getDestination().getNodeID()
+              + medicalEquipmentServiceRequest.getDestination().getNodeID()
               + "', status = '"
-              + equipmentServiceRequest.getStatus()
+              + medicalEquipmentServiceRequest.getStatus()
               + "', equipmentType = '"
-              + equipmentServiceRequest.getEquipmentType()
+              + medicalEquipmentServiceRequest.getEquipmentType()
               + "', quantity = "
-              + equipmentServiceRequest.getQuantity()
+              + medicalEquipmentServiceRequest.getQuantity()
               + " WHERE requestID = '"
-              + equipmentServiceRequest.getRequestID()
+              + medicalEquipmentServiceRequest.getRequestID()
               + "'");
     } catch (SQLException e) {
       e.printStackTrace();
@@ -152,18 +152,20 @@ public class EquipmentServiceRequestDAOImpl implements EquipmentServiceRequestDA
   }
 
   @Override
-  public void addEquipmentServiceRequest(EquipmentServiceRequest equipmentServiceRequest) {
-    medicalEquipmentServiceRequests.add(equipmentServiceRequest);
+  public void addMedicalEquipmentServiceRequest(
+      MedicalEquipmentServiceRequest medicalEquipmentServiceRequest) {
+    medicalEquipmentServiceRequests.add(medicalEquipmentServiceRequest);
 
     try {
       Statement initialization = connection.createStatement();
       StringBuilder medEquipReq = new StringBuilder();
       medEquipReq.append("INSERT INTO MedicalEquipmentServiceRequest VALUES(");
-      medEquipReq.append("'" + equipmentServiceRequest.getRequestID() + "'" + ", ");
-      medEquipReq.append("'" + equipmentServiceRequest.getDestination().getNodeID() + "'" + ", ");
-      medEquipReq.append("'" + equipmentServiceRequest.getStatus() + "'" + ", ");
-      medEquipReq.append("'" + equipmentServiceRequest.getEquipmentType() + "'" + ", ");
-      medEquipReq.append(equipmentServiceRequest.getQuantity());
+      medEquipReq.append("'" + medicalEquipmentServiceRequest.getRequestID() + "'" + ", ");
+      medEquipReq.append(
+          "'" + medicalEquipmentServiceRequest.getDestination().getNodeID() + "'" + ", ");
+      medEquipReq.append("'" + medicalEquipmentServiceRequest.getStatus() + "'" + ", ");
+      medEquipReq.append("'" + medicalEquipmentServiceRequest.getEquipmentType() + "'" + ", ");
+      medEquipReq.append(medicalEquipmentServiceRequest.getQuantity());
       medEquipReq.append(")");
       initialization.execute(medEquipReq.toString());
     } catch (SQLException e) {

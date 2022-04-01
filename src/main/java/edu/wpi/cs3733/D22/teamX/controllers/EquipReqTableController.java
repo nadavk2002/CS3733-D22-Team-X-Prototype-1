@@ -2,9 +2,9 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAO;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAOImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -20,16 +20,21 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EquipReqTableController implements Initializable {
-  @FXML private TableView<EquipmentServiceRequest> table;
-  // @FXML private TableColumn<EquipmentServiceRequest, String> requester;
-  @FXML private TableColumn<EquipmentServiceRequest, String> equipType; // spike c, equipmentType
-  @FXML private TableColumn<EquipmentServiceRequest, Integer> amount; // spike c, Quantity
-  @FXML private TableColumn<EquipmentServiceRequest, String> equipStatus; // spike c, Status
-  // @FXML private TableColumn<EquipmentServiceRequest, String> prevLocation;
-  @FXML private TableColumn<EquipmentServiceRequest, Location> destination; // spike c destination
-  // @FXML private TableColumn<EquipmentServiceRequest, String> requestTime;
-  // @FXML private TableColumn<EquipmentServiceRequest, String> fulfillRequest;
-  @FXML private TableColumn<EquipmentServiceRequest, String> requestID; // spike c RequestID
+  @FXML private TableView<MedicalEquipmentServiceRequest> table;
+  // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requester;
+  @FXML
+  private TableColumn<MedicalEquipmentServiceRequest, String> equipType; // spike c, equipmentType
+
+  @FXML private TableColumn<MedicalEquipmentServiceRequest, Integer> amount; // spike c, Quantity
+
+  @FXML
+  private TableColumn<MedicalEquipmentServiceRequest, String> requestStatus; // spike c, Status
+  // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> prevLocation;
+  @FXML
+  private TableColumn<MedicalEquipmentServiceRequest, Location> destination; // spike c destination
+  // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requestTime;
+  // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> fulfillRequest;
+  @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requestID; // spike c RequestID
   // @FXML private Button requestComplete;
 
   @Override
@@ -37,16 +42,17 @@ public class EquipReqTableController implements Initializable {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     equipType.setCellValueFactory(new PropertyValueFactory<>("equipmentType"));
     amount.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-    equipStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+    requestStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
     destination.setCellValueFactory(new PropertyValueFactory<>("locationNodeID"));
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     table.setItems(equipDeliveryList());
   }
 
-  private ObservableList<EquipmentServiceRequest> equipDeliveryList() {
-    ObservableList<EquipmentServiceRequest> equipList = FXCollections.observableArrayList();
-    EquipmentServiceRequestDAO allEquip = new EquipmentServiceRequestDAOImpl();
-    List<EquipmentServiceRequest> inpEquipList = allEquip.getAllEquipmentServiceRequests();
+  private ObservableList<MedicalEquipmentServiceRequest> equipDeliveryList() {
+    ObservableList<MedicalEquipmentServiceRequest> equipList = FXCollections.observableArrayList();
+    MedicalEquipmentServiceRequestDAO allEquip = new MedicalEquipmentServiceRequestDAOImpl();
+    List<MedicalEquipmentServiceRequest> inpEquipList =
+        allEquip.getAllMedicalEquipmentServiceRequests();
     equipList.addAll(inpEquipList);
     return equipList;
   }

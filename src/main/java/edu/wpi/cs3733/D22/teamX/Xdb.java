@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamX;
 
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.*;
 import java.sql.*;
@@ -214,7 +214,8 @@ public class Xdb {
   private static boolean loadMedEqServiceReqCSV() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     // Read locations into List "MedEquipReqCSV"
-    List<EquipmentServiceRequest> MedEquipReqFromCSV = new ArrayList<EquipmentServiceRequest>();
+    List<MedicalEquipmentServiceRequest> MedEquipReqFromCSV =
+        new ArrayList<MedicalEquipmentServiceRequest>();
     try {
       LocationDAO locDestination = new LocationDAOImpl();
       InputStream tlCSV = Xdb.class.getResourceAsStream(medicalEquipmentCSV);
@@ -224,8 +225,8 @@ public class Xdb {
       while ((nextFileLine = tlCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 5) {
-          EquipmentServiceRequest lnode =
-              new EquipmentServiceRequest(
+          MedicalEquipmentServiceRequest lnode =
+              new MedicalEquipmentServiceRequest(
                   currLine[0],
                   locDestination.getLocation(currLine[1]),
                   currLine[2],
@@ -340,14 +341,15 @@ public class Xdb {
   /** Saves Medical Equipment data to CSV on close */
   private static boolean saveMedEqDataToCSV() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
-    List<EquipmentServiceRequest> Equipment = new ArrayList<EquipmentServiceRequest>();
+    List<MedicalEquipmentServiceRequest> Equipment =
+        new ArrayList<MedicalEquipmentServiceRequest>();
     LocationDAO locDestination = new LocationDAOImpl();
     try {
       Statement statement = connection.createStatement();
       ResultSet records = statement.executeQuery("SELECT * FROM MedicalEquipmentServiceRequest");
       while (records.next()) {
         Equipment.add(
-            new EquipmentServiceRequest(
+            new MedicalEquipmentServiceRequest(
                 records.getString("requestID"),
                 locDestination.getLocation(records.getString("destination")),
                 records.getString("status"),

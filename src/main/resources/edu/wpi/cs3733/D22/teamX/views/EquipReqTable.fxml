@@ -13,7 +13,7 @@
           <TableColumn prefWidth="37.33331298828125" text="Requester" />
           <TableColumn fx:id="equipType" prefWidth="121.86663818359375" text="Equipment" />
             <TableColumn fx:id="amount" prefWidth="83.2000732421875" text="Amount" />
-            <TableColumn fx:id="equipStatus" prefWidth="184.00006103515625" text="Equipment Status" />
+            <TableColumn fx:id="requestStatus" prefWidth="184.00006103515625" text="Request Status" />
             <TableColumn prefWidth="168.2667236328125" text="Previous Location" />
             <TableColumn fx:id="destination" prefWidth="130.93310546875" text="Sent Location" />
             <TableColumn prefWidth="146.933349609375" text="Time of Request" />

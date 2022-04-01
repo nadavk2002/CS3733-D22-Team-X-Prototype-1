@@ -4,9 +4,9 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
 import edu.wpi.cs3733.D22.teamX.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAO;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAOImpl;
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -22,13 +22,13 @@ public class MedicalEquipmentDeliveryController {
   @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus;
   @FXML private TextField amountField;
   @FXML private Button submitButton;
-  private EquipmentServiceRequest request;
+  private MedicalEquipmentServiceRequest request;
 
   @FXML
   public void initialize() {
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
-    request = new EquipmentServiceRequest();
+    request = new MedicalEquipmentServiceRequest();
     selectEquipmentType.getItems().addAll("Bed", "X-Ray", "Pump", "Recliner");
     selectDestination.setItems(equipDeliveryList());
   }
@@ -45,7 +45,7 @@ public class MedicalEquipmentDeliveryController {
   /**
    * When "Main Menu" button is pressed, the app.fxml scene is loaded on the window.
    *
-   * @throws IOException
+   * @throws IOException if the main menu is not switched to
    */
   @FXML
   void ToMainMenu() throws IOException {
@@ -76,8 +76,8 @@ public class MedicalEquipmentDeliveryController {
     request.setDestination(setLocation.getLocation(selectDestination.getValue()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
-    EquipmentServiceRequestDAO submit = new EquipmentServiceRequestDAOImpl();
-    submit.addEquipmentServiceRequest(request);
+    MedicalEquipmentServiceRequestDAO submit = new MedicalEquipmentServiceRequestDAOImpl();
+    submit.addMedicalEquipmentServiceRequest(request);
     this.resetFields();
   }
 }
