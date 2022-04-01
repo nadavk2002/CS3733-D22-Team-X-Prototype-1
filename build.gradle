@@ -36,8 +36,8 @@ dependencies {
     implementation 'junit:junit:4.13.2'
 
     testCompile(
-            "org.testfx:testfx-core:4.0.16-alpha"
-            ,
+            "org.testfx:testfx-core:4.0.16-alpha",
+            "junit:junit:4.13.2",
             "org.testfx:testfx-junit:4.0.16-alpha"
     )
 }
