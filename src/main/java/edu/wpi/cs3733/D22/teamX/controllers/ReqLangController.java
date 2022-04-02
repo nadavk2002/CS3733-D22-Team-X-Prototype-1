@@ -1,53 +1,47 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
-import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
+import edu.wpi.cs3733.D22.teamX.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamX.entity.LangServiceRequest;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-public class ReqLangController implements Initializable {
-  @FXML private Button mainMenu;
-  @FXML private ChoiceBox<String> selectLang;
-  @FXML private TextField roomNum, serviceStatus, assignStaff;
+public class ReqLangController {
 
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
+  public ReqLangController() {}
+
+  public void getDestinations() {
+    LocationDAO locationDAO = new LocationDAOImpl();
+    List<Location> locations = locationDAO.getAllLocations();
   }
 
-  /**
-   * When "Main Menu" button is pressed, the app.fxml scene is loaded on the window.
-   *
-   * @throws IOException
-   */
-  @FXML
-  public void mainMenu() throws IOException {
-    App.switchScene(
-        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+  public ObservableList<String> getLocationNames() {
+    LocationDAO locationsDAO = new LocationDAOImpl();
+    List<Location> locations = locationsDAO.getAllLocations();
+    ObservableList<String> locationNames = FXCollections.observableArrayList();
+    for (int i = 0; i < locations.size(); i++) {
+      locationNames.add(locations.get(i).getShortName());
+    }
+    return locationNames;
   }
 
-  @FXML
-  public void resetFields() {
-    selectLang.setValue("");
-    roomNum.setText("");
-    serviceStatus.setText("");
-    assignStaff.setText("");
+  private String locationToNodeId(String shortName) {
+    LocationDAO locationsDAO = new LocationDAOImpl();
+    List<Location> locations = locationsDAO.getAllLocations();
+    for (int i = 0; i < locations.size(); i++) {
+      if (locations.get(i).getShortName().equals(shortName)) return locations.get(i).getNodeID();
+    }
+    return "ERROR";
   }
 
-  @FXML
-  public void submitRequest() {
+  public void submitRequest(String location, String status, String id) {
     LangServiceRequest request = new LangServiceRequest();
-    request.setRequestID("SAMPLE12");
-    request.setDestination(new Location());
-    request.setStatus(serviceStatus.getText());
-    this.resetFields();
+    LocationDAO locationDAO = new LocationDAOImpl();
+
+    request.setRequestID(id);
+    request.setDestination(locationDAO.getLocation(locationToNodeId(location)));
+    request.setStatus(status);
   }
 }
