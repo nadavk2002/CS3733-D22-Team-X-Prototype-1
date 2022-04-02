@@ -28,6 +28,7 @@ public class BasicLayoutController {
     pages.put("Hospital Locations", "HospitalLocations.fxml");
     ChoosePage.setItems(
         FXCollections.observableArrayList(
+            "Choose a Page",
             "Main Menu",
             "Equipment Delivery",
             "Lab Request",
@@ -37,16 +38,18 @@ public class BasicLayoutController {
             "Request Language Interpreter",
             "Request Laundry Services",
             "Hospital Locations"));
-    ChoosePage.setValue("Main Menu");
+    ChoosePage.setValue("Choose a Page");
   }
 
   @FXML
   public void SwitchPage() throws IOException {
-    App.switchScene(
-        FXMLLoader.load(
-            getClass()
-                .getResource(
-                    "/edu/wpi/cs3733/D22/teamX/views/" + pages.get(ChoosePage.getValue()))));
+    String newPage = ChoosePage.getValue();
+    if (!newPage.equals("Choose a Page")) {
+      App.switchScene(
+          FXMLLoader.load(
+              App.class.getResource("/edu/wpi/cs3733/D22/teamX/views/" + pages.get(newPage))));
+      ChoosePage.setValue("Choose a Page");
+    }
   }
 
   @FXML
