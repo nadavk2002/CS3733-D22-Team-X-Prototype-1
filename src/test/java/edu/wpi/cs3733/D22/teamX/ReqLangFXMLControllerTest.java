@@ -26,9 +26,8 @@ public class ReqLangFXMLControllerTest extends ApplicationTest {
 
   @Test
   public void testRoomNumTextField() {
-    clickOn("#roomNum");
-    write("h");
-    verifyThat("#roomNum", hasText("h"));
+    clickOn("#roomNum").clickOn("CIM");
+    verifyThat("#roomNum", hasText("CIM"));
   }
 
   @Test

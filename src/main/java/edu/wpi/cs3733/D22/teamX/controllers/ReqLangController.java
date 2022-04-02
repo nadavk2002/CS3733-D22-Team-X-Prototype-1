@@ -27,7 +27,7 @@ public class ReqLangController {
     return locationNames;
   }
 
-  private String locationToNodeId(String shortName) {
+  public String locationToNodeId(String shortName) {
     LocationDAO locationsDAO = new LocationDAOImpl();
     List<Location> locations = locationsDAO.getAllLocations();
     for (int i = 0; i < locations.size(); i++) {
