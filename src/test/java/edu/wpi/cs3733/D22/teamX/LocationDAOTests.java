@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import java.sql.Connection;
 import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,14 +11,11 @@ import org.junit.Test;
 public class LocationDAOTests {
   // based on the CSV file as of 3/29/22
 
-  // connection varible
-  Connection connection;
-
   @Before
   public void setupDB() {
     // initialize Xdb cannot reinitiallized
     try {
-      connection = Xdb.initializeDB();
+      Xdb.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }

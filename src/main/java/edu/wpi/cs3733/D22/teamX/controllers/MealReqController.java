@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class mealReqController {
+public class MealReqController {
   @FXML private ChoiceBox<String> patientNames;
   @FXML private ChoiceBox<String> drinkSel;
   @FXML private ChoiceBox<String> mainSel;

@@ -22,10 +22,8 @@ public class Xdb {
 
   /**
    * Initializes the database with tables and establishes a connection
-   *
-   * @return a connection to the database
    */
-  public static Connection initializeDB() throws loadSaveFromCSVException {
+  public static void initializeDB() throws loadSaveFromCSVException {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
     try {
@@ -56,21 +54,16 @@ public class Xdb {
     }
 
     System.out.println("Database created successfully");
-
-    return connection;
   }
 
-  /**
-   * Saves the data from the database to the appropriate CSV files and closes the database.
-   *
-   * @param connection connection to the database to be closed
-   */
-  public static boolean closeDB(Connection connection) throws loadSaveFromCSVException {
+  /** Saves the data from the database to the appropriate CSV files and closes the database. */
+  public static boolean closeDB() throws loadSaveFromCSVException {
     if (!saveLocationDataToCSV() || !saveMedEqDataToCSV()) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     try {
-      connection.close();
+      ConnectionSingleton.getConnectionSingleton().getConnection().close();
+      System.out.println("Connection closed successfully");
     } catch (SQLException e) {
       e.printStackTrace();
       return false;

@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
-public class reqLaundryController {
+public class ReqLaundryController {
   @FXML private Button ToMainMenu;
   @FXML private ChoiceBox<String> selectLaundryType;
   @FXML private TextField roomField, assignStaff, serviceStatus;
@@ -25,7 +25,7 @@ public class reqLaundryController {
   /**
    * When "Main Menu" button is pressed, the app.fxml scene is loaded on the window.
    *
-   * @throws IOException
+   * @throws IOException if main menu not switched to
    */
   @FXML
   void ToMainMenu() throws IOException {

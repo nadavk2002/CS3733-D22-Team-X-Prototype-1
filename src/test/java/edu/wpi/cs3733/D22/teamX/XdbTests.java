@@ -8,7 +8,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,18 +16,17 @@ import org.junit.*;
 public class XdbTests {
   @Test
   public void testInitializeDB() {
-    Connection connection = null;
     try {
-      connection = Xdb.initializeDB();
+      Xdb.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       Assert.fail();
     }
 
-    assertNotNull(connection);
+    assertNotNull(ConnectionSingleton.getConnectionSingleton().getConnection());
 
     try {
-      Xdb.closeDB(connection);
+      Xdb.closeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -36,17 +34,16 @@ public class XdbTests {
 
   @Test
   public void testCloseDB() {
-    Connection connection = null;
     try {
-      connection = Xdb.initializeDB();
-      assertTrue(Xdb.closeDB(ConnectionSingleton.getConnectionSingleton().getConnection()));
+      Xdb.initializeDB();
+      assertTrue(Xdb.closeDB());
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       Assert.fail();
     }
 
     try {
-      Xdb.closeDB(connection);
+      Xdb.closeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -54,16 +51,16 @@ public class XdbTests {
 
   @Test
   public void testCreateLocationTable() {
-    Connection connection = null;
     try {
-      connection = Xdb.initializeDB();
+      Xdb.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       Assert.fail();
     }
 
     try {
-      Statement statement = connection.createStatement();
+      Statement statement =
+          ConnectionSingleton.getConnectionSingleton().getConnection().createStatement();
       ResultSet resultSet = statement.executeQuery("SELECT * FROM Location");
     } catch (SQLException e) {
       e.printStackTrace();
@@ -71,7 +68,7 @@ public class XdbTests {
     }
 
     try {
-      Xdb.closeDB(connection);
+      Xdb.closeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -79,16 +76,16 @@ public class XdbTests {
 
   @Test
   public void testCreateMedicalEquipmentServiceRequestTable() {
-    Connection connection = null;
     try {
-      connection = Xdb.initializeDB();
+      Xdb.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       Assert.fail();
     }
 
     try {
-      Statement statement = connection.createStatement();
+      Statement statement =
+          ConnectionSingleton.getConnectionSingleton().getConnection().createStatement();
       ResultSet resultSet = statement.executeQuery("SELECT * FROM MedicalEquipmentServiceRequest");
     } catch (SQLException e) {
       e.printStackTrace();
@@ -96,7 +93,7 @@ public class XdbTests {
     }
 
     try {
-      Xdb.closeDB(connection);
+      Xdb.closeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -104,16 +101,15 @@ public class XdbTests {
 
   @Test
   public void testLoadAndSaveToCSV() {
-    Connection connection = null;
     try {
-      connection = Xdb.initializeDB();
+      Xdb.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
       Assert.fail();
     }
 
     try {
-      Xdb.closeDB(connection);
+      Xdb.closeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }

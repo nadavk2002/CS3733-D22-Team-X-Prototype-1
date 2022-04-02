@@ -9,9 +9,18 @@ public class ConnectionSingleton {
   private static final String username = "admin";
   private static final String password = "admin";
 
-  private static ConnectionSingleton connSing;
+  private Connection connection;
 
-  private ConnectionSingleton() {}
+  private ConnectionSingleton() {
+    connection = null;
+    try {
+      connection = DriverManager.getConnection(url, username, password);
+    } catch (SQLException e) {
+      System.out.println("Connection failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
 
   private static class ConnectionSingletonHelper {
     private static final ConnectionSingleton conn = new ConnectionSingleton();
@@ -22,14 +31,6 @@ public class ConnectionSingleton {
   }
 
   public Connection getConnection() {
-    Connection connection = null;
-    try {
-      connection = DriverManager.getConnection(url, username, password);
-    } catch (SQLException e) {
-      System.out.println("Connection failed. Check output console.");
-      e.printStackTrace();
-      System.exit(1);
-    }
     return connection;
   }
 }
