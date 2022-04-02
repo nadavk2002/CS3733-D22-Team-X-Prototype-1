@@ -10,16 +10,15 @@ import javafx.collections.ObservableList;
 
 public class ReqLangController {
 
-  public ReqLangController() {}
+  private LocationDAO locationDAO;
+  private List<Location> locations;
 
-  public void getDestinations() {
-    LocationDAO locationDAO = new LocationDAOImpl();
-    List<Location> locations = locationDAO.getAllLocations();
+  public ReqLangController() {
+    locationDAO = new LocationDAOImpl();
+    locations = locationDAO.getAllLocations();
   }
 
   public ObservableList<String> getLocationNames() {
-    LocationDAO locationsDAO = new LocationDAOImpl();
-    List<Location> locations = locationsDAO.getAllLocations();
     ObservableList<String> locationNames = FXCollections.observableArrayList();
     for (int i = 0; i < locations.size(); i++) {
       locationNames.add(locations.get(i).getShortName());
@@ -27,21 +26,11 @@ public class ReqLangController {
     return locationNames;
   }
 
-  public String locationToNodeId(String shortName) {
-    LocationDAO locationsDAO = new LocationDAOImpl();
-    List<Location> locations = locationsDAO.getAllLocations();
-    for (int i = 0; i < locations.size(); i++) {
-      if (locations.get(i).getShortName().equals(shortName)) return locations.get(i).getNodeID();
-    }
-    return "ERROR";
-  }
-
-  public void submitRequest(String location, String status, String language) {
+  public void submitRequest(int locationIndex, String status, String language) {
     LangServiceRequest request = new LangServiceRequest();
-    LocationDAO locationDAO = new LocationDAOImpl();
 
     request.setRequestID(request.makeRequestID());
-    request.setDestination(locationDAO.getLocation(locationToNodeId(location)));
+    request.setDestination(locations.get(locationIndex));
     request.setStatus(status);
     request.setLanguage(language);
   }

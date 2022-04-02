@@ -20,9 +20,7 @@ public class Xdb {
   //    }
   //  }
 
-  /**
-   * Initializes the database with tables and establishes a connection
-   */
+  /** Initializes the database with tables and establishes a connection */
   public static void initializeDB() throws loadSaveFromCSVException {
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working

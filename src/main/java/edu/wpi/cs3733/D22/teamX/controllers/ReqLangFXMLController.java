@@ -56,7 +56,10 @@ public class ReqLangFXMLController implements Initializable {
 
   @FXML
   public void submitRequest() {
-    controller.submitRequest(roomNum.getValue(), serviceStatus.getValue(), selectLang.getValue());
+    controller.submitRequest(
+        roomNum.getSelectionModel().getSelectedIndex(),
+        serviceStatus.getValue(),
+        selectLang.getValue());
     this.resetFields();
   }
 }
