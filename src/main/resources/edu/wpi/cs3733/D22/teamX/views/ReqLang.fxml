@@ -15,7 +15,7 @@
       <ChoiceBox fx:id="selectLang" layoutX="926.0" layoutY="418.0" prefWidth="150.0" />
       <Label layoutX="825.0" layoutY="423.0" text="Select Language:" />
       <Label layoutX="806.0" layoutY="463.0" text="Enter Room Number:" />
-      <Button layoutX="901.0" layoutY="606.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" />
+      <Button fx:id="submitButton" layoutX="901.0" layoutY="606.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -25,7 +25,6 @@
       <Label layoutX="866.0" layoutY="495.0" text="Assignee:" />
       <TextField fx:id="assignStaff" layoutX="926.0" layoutY="491.0" />
       <Label layoutX="839.0" layoutY="527.0" text="Service Status:" />
-      <TextField fx:id="serviceStatus" layoutX="926.0" layoutY="523.0" />
       <TableView layoutX="1249.0" layoutY="458.0" prefHeight="479.0" prefWidth="640.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
@@ -33,5 +32,6 @@
         </columns>
       </TableView>
       <ChoiceBox fx:id="roomNum" layoutX="925.0" layoutY="458.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="serviceStatus" layoutX="925.0" layoutY="523.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

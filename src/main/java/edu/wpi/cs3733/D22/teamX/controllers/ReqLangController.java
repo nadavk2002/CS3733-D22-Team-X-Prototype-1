@@ -36,12 +36,13 @@ public class ReqLangController {
     return "ERROR";
   }
 
-  public void submitRequest(String location, String status, String id) {
+  public void submitRequest(String location, String status, String language) {
     LangServiceRequest request = new LangServiceRequest();
     LocationDAO locationDAO = new LocationDAOImpl();
 
-    request.setRequestID(id);
+    request.setRequestID(request.makeRequestID());
     request.setDestination(locationDAO.getLocation(locationToNodeId(location)));
     request.setStatus(status);
+    request.setLanguage(language);
   }
 }
