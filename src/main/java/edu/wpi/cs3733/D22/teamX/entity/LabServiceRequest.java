@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D22.teamX.Location;
 
 /** Represents a lab work service request */
 public class LabServiceRequest extends ServiceRequest {
-  private String assignee; // employee id
   private String service;
   private String patientFor; // patient id
 
@@ -16,8 +15,7 @@ public class LabServiceRequest extends ServiceRequest {
       String assignee,
       String service,
       String patientFor) {
-    super(requestID, destination, status);
-    this.assignee = assignee;
+    super(requestID, destination, status, assignee);
     this.service = service;
     this.patientFor = patientFor;
   }
@@ -25,17 +23,8 @@ public class LabServiceRequest extends ServiceRequest {
   // blank
   public LabServiceRequest() {
     super();
-    this.assignee = null;
     this.service = null;
     this.patientFor = null;
-  }
-
-  public String getAssignee() {
-    return assignee;
-  }
-
-  public void setAssignee(String assignee) {
-    this.assignee = assignee;
   }
 
   public String getService() {

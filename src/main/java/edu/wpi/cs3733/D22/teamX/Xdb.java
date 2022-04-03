@@ -97,6 +97,7 @@ public class Xdb {
           "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
               + "destination CHAR(10),"
               + "status CHAR(4),"
+              + "assignee CHAR(8),"
               + "equipmentType VARCHAR(15),"
               + "quantity INT,"
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
@@ -215,15 +216,16 @@ public class Xdb {
       String nextFileLine;
       while ((nextFileLine = tlCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 5) {
-          MedicalEquipmentServiceRequest lnode =
+        if (currLine.length == 6) {
+          MedicalEquipmentServiceRequest mesrNode =
               new MedicalEquipmentServiceRequest(
                   currLine[0],
                   locDestination.getLocation(currLine[1]),
                   currLine[2],
                   currLine[3],
-                  Integer.parseInt(currLine[4]));
-          MedEquipReqFromCSV.add(lnode);
+                  currLine[4],
+                  Integer.parseInt(currLine[5]));
+          MedEquipReqFromCSV.add(mesrNode);
         } else {
           System.out.println("CSV file formatted improperly");
           System.exit(1);
@@ -238,7 +240,7 @@ public class Xdb {
       return false;
     }
 
-    // Insert locations from locationsFromCSV into db table
+    // Insert medical equipment service requests from MedEquipReqFromCSV into db table
     for (int i = 0; i < MedEquipReqFromCSV.size(); i++) {
       try {
         Statement initialization = connection.createStatement();
@@ -248,6 +250,7 @@ public class Xdb {
         medEquipReq.append(
             "'" + MedEquipReqFromCSV.get(i).getDestination().getNodeID() + "'" + ", ");
         medEquipReq.append("'" + MedEquipReqFromCSV.get(i).getStatus() + "'" + ", ");
+        medEquipReq.append("'" + MedEquipReqFromCSV.get(i).getAssignee() + "'" + ", ");
         medEquipReq.append("'" + MedEquipReqFromCSV.get(i).getEquipmentType() + "'" + ", ");
         medEquipReq.append(MedEquipReqFromCSV.get(i).getQuantity());
         medEquipReq.append(")");
@@ -344,6 +347,7 @@ public class Xdb {
                 records.getString("requestID"),
                 locDestination.getLocation(records.getString("destination")),
                 records.getString("status"),
+                records.getString("assignee"),
                 records.getString("equipmentType"),
                 records.getInt("quantity")));
       }
@@ -358,7 +362,7 @@ public class Xdb {
       //      URL url = Xdb.class.getResource(medicalEquipmentCSV);
       //      FileWriter csvFile = new FileWriter(url.getFile(), false);
       FileWriter csvFile = new FileWriter(medicalEquipmentCSV, false);
-      csvFile.write("RequestID,Destination,Status,equipmentType,Quantity");
+      csvFile.write("RequestID,Destination,Status,assignee,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
         if (Equipment.get(i).getDestination() == null) {
@@ -370,6 +374,11 @@ public class Xdb {
           csvFile.write(',');
         } else {
           csvFile.write(Equipment.get(i).getStatus() + ",");
+        }
+        if (Equipment.get(i).getAssignee() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(Equipment.get(i).getAssignee() + ",");
         }
         if (Equipment.get(i).getEquipmentType() == null) {
           csvFile.write(',');
