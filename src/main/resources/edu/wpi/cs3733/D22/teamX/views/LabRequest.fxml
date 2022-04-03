@@ -31,14 +31,16 @@
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Staff " />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service Status" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" />
                            </children>
                         </VBox>
                         <VBox fx:id="dropdownCol" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <ChoiceBox fx:id="patientName" prefHeight="30.0" prefWidth="159.0" />
-                              <ChoiceBox fx:id="SelectLab" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="selectLab" prefHeight="30.0" prefWidth="159.0" />
                               <ChoiceBox fx:id="assigneeDrop" prefHeight="30.0" prefWidth="159.0" />
                               <ChoiceBox fx:id="serviceStatus" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="selectDestination" prefHeight="30.0" prefWidth="159.0" />
                            </children>
                         </VBox>
                      </children>
@@ -46,7 +48,7 @@
                   <HBox fx:id="buttonRow" alignment="CENTER" prefHeight="62.0" prefWidth="346.0">
                      <children>
                         <Button fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" prefHeight="30.0" prefWidth="114.0" text="Reset Form" />
-                        <Button mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="114.0" text="Submit Request" />
+                        <Button fx:id="submitRequest" mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="114.0" text="Submit Request" />
                      </children>
                   </HBox>
                </children>
