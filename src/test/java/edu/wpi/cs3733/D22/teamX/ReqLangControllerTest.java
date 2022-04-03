@@ -1,14 +1,47 @@
 package edu.wpi.cs3733.D22.teamX;
 
-import edu.wpi.cs3733.D22.teamX.controllers.ReqLangController;
-import org.junit.Before;
+import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.util.NodeQueryUtils.hasText;
 
-public class ReqLangControllerTest {
+import java.io.IOException;
+import java.util.Objects;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import org.junit.Test;
+import org.testfx.framework.junit.ApplicationTest;
 
-  private ReqLangController controller;
+public class ReqLangControllerTest extends ApplicationTest {
+  @Override
+  public void start(Stage stage) throws IOException {
+    Parent root =
+        FXMLLoader.load(
+            Objects.requireNonNull(
+                getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ReqLang.fxml")));
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+  }
 
-  @Before
-  public void setup() {
-    controller = new ReqLangController();
+  @Test
+  public void testRoomNumTextField() {
+    clickOn("#roomNum").clickOn("CIM");
+    // verifyThat("#roomNum", getValue("CIM"));
+  }
+
+  @Test
+  public void testAssignStaffTextField() {
+    clickOn("#assignStaff");
+    write("h");
+    verifyThat("#assignStaff", hasText("h"));
+  }
+
+  @Test
+  public void testResetButton() {
+    clickOn("#resetFields");
+    // verifyThat("#roomNum", hasText(""));
+    verifyThat("#assignStaff", hasText(""));
+    // verifyThat("#serviceStatus", hasText(""));
   }
 }
