@@ -35,6 +35,10 @@ public abstract class ServiceRequest {
     return destination;
   }
 
+  public String getLocationShortName() {
+    return destination.getShortName();
+  }
+
   public void setRequestID(String requestID) {
     this.requestID = requestID;
   }
