@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Location;
-
 public class MedicalEquipmentServiceRequest extends ServiceRequest {
   private String equipmentType;
   private int quantity;

@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.*;
+import edu.wpi.cs3733.D22.teamX.entity.Location;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
