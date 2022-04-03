@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLangFXMLController">
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLangController">
    <children>
       <ChoiceBox fx:id="selectLang" layoutX="926.0" layoutY="418.0" prefWidth="150.0" />
       <Label layoutX="825.0" layoutY="423.0" text="Select Language:" />

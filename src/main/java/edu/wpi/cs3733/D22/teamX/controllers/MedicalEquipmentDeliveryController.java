@@ -22,20 +22,21 @@ public class MedicalEquipmentDeliveryController {
   @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus;
   @FXML private TextField amountField;
   @FXML private Button submitButton;
-  private MedicalEquipmentServiceRequest request;
+
+  private LocationDAO locationDAO;
+  private List<Location> locations;
 
   @FXML
   public void initialize() {
+    locationDAO = new LocationDAOImpl();
+    locations = locationDAO.getAllLocations();
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
-    request = new MedicalEquipmentServiceRequest();
     selectEquipmentType.getItems().addAll("Bed", "X-Ray", "Pump", "Recliner");
-    selectDestination.setItems(equipDeliveryList());
+    selectDestination.setItems(this.getLocationNames());
   }
 
   private ObservableList<String> equipDeliveryList() {
-    LocationDAO locationsDAO = new LocationDAOImpl();
-    List<Location> locations = locationsDAO.getAllLocations();
     ObservableList<String> nodeID = FXCollections.observableArrayList();
     for (int i = 0; i < locations.size(); i++) {
       nodeID.add(locations.get(i).getNodeID());
@@ -68,14 +69,29 @@ public class MedicalEquipmentDeliveryController {
         !amountField.getText().matches("[0-9]+") || amountField.getText().length() == 0);
   }
 
+  /**
+   * Creates a list of all locations with their short names.
+   *
+   * @return List of short names of all destinations
+   */
+  public ObservableList<String> getLocationNames() {
+    ObservableList<String> locationNames = FXCollections.observableArrayList();
+    for (int i = 0; i < locations.size(); i++) {
+      locationNames.add(locations.get(i).getShortName());
+    }
+    return locationNames;
+  }
+
   @FXML
   public void submitRequest() {
-    LocationDAO setLocation = new LocationDAOImpl();
+    MedicalEquipmentServiceRequest request = new MedicalEquipmentServiceRequest();
+
     request.setEquipmentType(selectEquipmentType.getValue());
     request.setRequestID(request.makeRequestID());
-    request.setDestination(setLocation.getLocation(selectDestination.getValue()));
+    request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
+
     MedicalEquipmentServiceRequestDAO submit = new MedicalEquipmentServiceRequestDAOImpl();
     submit.addMedicalEquipmentServiceRequest(request);
     this.resetFields();
