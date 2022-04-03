@@ -11,16 +11,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class LabRequestController implements Initializable {
+  @FXML private VBox dropdownCol;
+  @FXML private VBox labelCol;
+  @FXML private VBox submitCol;
+  @FXML private HBox buttonRow;
   @FXML private Button ReturnToMain;
-  @FXML private ChoiceBox<String> SelectLab;
-  @FXML private TextField patientName, assignStaff, serviceStatus;
+  @FXML private ChoiceBox<String> SelectLab, patientName, assignee, serviceStatus;
   LabServiceRequest request;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
+    submitCol.setSpacing(20);
+    buttonRow.setSpacing(20);
+    dropdownCol.setSpacing(20);
+    labelCol.setSpacing(28);
     SelectLab.getItems().addAll("Blood Sample", "Urine Sample", "X-Ray", "CAT Scan", "MRI");
   }
 
@@ -29,7 +37,7 @@ public class LabRequestController implements Initializable {
     request = new LabServiceRequest();
     request.setRequestID("SAMPLE12");
     request.setDestination(new Location());
-    request.setStatus(serviceStatus.getText());
+    // request.setStatus(serviceStatus.getText());
     this.resetFields();
   }
 
@@ -42,9 +50,9 @@ public class LabRequestController implements Initializable {
   /** When Reset Fields button is pressed, the fields on the screen are reset to default. */
   @FXML
   public void resetFields() {
-    patientName.setText("");
-    assignStaff.setText("");
-    serviceStatus.setText("");
+    patientName.setValue("");
+    assignee.setValue("");
+    serviceStatus.setValue("");
     SelectLab.setValue("");
   }
 }
