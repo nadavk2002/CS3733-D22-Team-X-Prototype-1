@@ -27,7 +27,7 @@ public class ReqLangController implements Initializable {
   private LocationDAO locationDAO;
   private List<Location> locations;
   private TableColumn<LangServiceRequest, String> idColumn = new TableColumn("Request ID");
-  private TableColumn<LangServiceRequest, String> requesterColumn = new TableColumn("Requester");
+  private TableColumn<LangServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
   private TableColumn<LangServiceRequest, String> locationColumn = new TableColumn("Location");
   private TableColumn<LangServiceRequest, String> statusColumn = new TableColumn("Request Status");
   private TableColumn<LangServiceRequest, String> languageColumn = new TableColumn("Language");
@@ -47,11 +47,12 @@ public class ReqLangController implements Initializable {
     tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     tbView
         .getColumns()
-        .addAll(idColumn, requesterColumn, locationColumn, statusColumn, languageColumn);
+        .addAll(idColumn, assigneeColumn, locationColumn, statusColumn, languageColumn);
     idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
     languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
+    assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
   /**
@@ -101,6 +102,7 @@ public class ReqLangController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
+    request.setAssignee(assignStaff.getText());
     this.resetFields();
     tbView.getItems().add(request);
   }
