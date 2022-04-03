@@ -94,7 +94,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="231.0" layoutY="414.0" onAction="#hospitalLocationsButton" text="Hospital Locations" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="231.0" layoutY="414.0" onAction="#graphicalMapEditorButton" text="Hospital Locations" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

@@ -10,14 +10,21 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 
-public class HospitalLocationsController implements Initializable {
+public class GraphicalMapEditorController implements Initializable {
 
   @FXML private Button ToMainMenu;
+
+  @FXML private HBox hBox1;
+
+  @FXML private TabPane tabPane;
+
+  @FXML private Tab tabLL2;
+
+  @FXML private Tab tabLL1;
 
   @FXML private TableView<Location> table;
 
@@ -55,6 +62,11 @@ public class HospitalLocationsController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // hBox1 = new HBox(90, tabPane, table);
+    hBox1.getChildren().add(tabPane);
+    hBox1.getChildren().add(table);
+    hBox1.setSpacing(90);
+    // Tab tabLL2 = new Tab("Lower Level 2", new ImageView(Crop_LL2_Floor.png));
     locationListFill();
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
