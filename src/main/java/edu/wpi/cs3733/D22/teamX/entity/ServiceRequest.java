@@ -56,6 +56,10 @@ public abstract class ServiceRequest {
     this.assignee = assignee;
   }
 
+  public String getLocationShortName() {
+    return destination.getShortName();
+  }
+
   //  public String getRequestingUser() {
   //    return requestingUser;
   //  }
