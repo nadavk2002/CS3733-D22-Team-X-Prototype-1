@@ -55,6 +55,7 @@ public class HospitalLocationsController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     locationListFill();
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));

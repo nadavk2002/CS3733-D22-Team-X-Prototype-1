@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
 import edu.wpi.cs3733.D22.teamX.entity.LabServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -11,6 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -19,12 +22,20 @@ public class LabRequestController implements Initializable {
   @FXML private VBox labelCol;
   @FXML private VBox submitCol;
   @FXML private HBox buttonRow;
+  @FXML private TableColumn<LabServiceRequest, String> requestID;
+  @FXML private TableColumn<LabServiceRequest, String> patientID;
+  @FXML private TableColumn<LabServiceRequest, String> assigneeTable;
+  @FXML private TableColumn<LabServiceRequest, String> service;
+  @FXML private TableColumn<LabServiceRequest, String> status;
+  @FXML private TableColumn<LabServiceRequest, String> destination;
+  @FXML private TableView<MedicalEquipmentServiceRequest> table;
   @FXML private Button ReturnToMain;
-  @FXML private ChoiceBox<String> SelectLab, patientName, assignee, serviceStatus;
+  @FXML private ChoiceBox<String> SelectLab, patientName, assigneeDrop, serviceStatus;
   LabServiceRequest request;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     submitCol.setSpacing(20);
     buttonRow.setSpacing(20);
     dropdownCol.setSpacing(20);
@@ -51,7 +62,7 @@ public class LabRequestController implements Initializable {
   @FXML
   public void resetFields() {
     patientName.setValue("");
-    assignee.setValue("");
+    assigneeDrop.setValue("");
     serviceStatus.setValue("");
     SelectLab.setValue("");
   }
