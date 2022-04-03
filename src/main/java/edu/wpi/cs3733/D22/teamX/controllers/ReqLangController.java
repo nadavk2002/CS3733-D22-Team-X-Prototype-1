@@ -18,6 +18,10 @@ public class ReqLangController {
     locations = locationDAO.getAllLocations();
   }
 
+  /**
+   * Creates a list of all locations with their short names.
+   * @return List of short names of all destinations
+   */
   public ObservableList<String> getLocationNames() {
     ObservableList<String> locationNames = FXCollections.observableArrayList();
     for (int i = 0; i < locations.size(); i++) {
@@ -26,6 +30,12 @@ public class ReqLangController {
     return locationNames;
   }
 
+  /**
+   * Creates a service request for a language interpreter
+   * @param locationIndex Index of location in choicebox on the page
+   * @param status status of the request
+   * @param language language of the request
+   */
   public void submitRequest(int locationIndex, String status, String language) {
     LangServiceRequest request = new LangServiceRequest();
 

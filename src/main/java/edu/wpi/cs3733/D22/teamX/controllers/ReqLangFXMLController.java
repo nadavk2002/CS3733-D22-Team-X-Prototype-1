@@ -31,6 +31,9 @@ public class ReqLangFXMLController implements Initializable {
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
   }
 
+  /**
+   * Checks if the submit button can be enabled depending on the inputs in fields on the page.
+   */
   public void enableSubmitButton() {
     submitButton.setDisable(roomNum.getValue().equals("") || selectLang.getValue().equals(""));
   }
@@ -46,6 +49,9 @@ public class ReqLangFXMLController implements Initializable {
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
 
+  /**
+   * Resets all fields on the page.
+   */
   @FXML
   public void resetFields() {
     selectLang.setValue("");
@@ -54,6 +60,9 @@ public class ReqLangFXMLController implements Initializable {
     assignStaff.setText("");
   }
 
+  /**
+   * Sends data to create a request
+   */
   @FXML
   public void submitRequest() {
     controller.submitRequest(
