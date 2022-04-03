@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -25,9 +27,10 @@ public class ReqLangControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testRoomNumTextField() {
+  public void testRoomNumDropdown() {
+    //checks if its populated
     clickOn("#roomNum").clickOn("CIM");
-    // verifyThat("#roomNum", getValue("CIM"));
+    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals("CIM"));
   }
 
   @Test
@@ -39,9 +42,18 @@ public class ReqLangControllerTest extends ApplicationTest {
 
   @Test
   public void testResetButton() {
+    clickOn("#roomNum").clickOn("CIM");
+    clickOn("#selectLang").clickOn("English");
+    clickOn("#serviceStatus").clickOn("PROC");
+    clickOn("#assignStaff");
+    write("h");
+    verifyThat("#submitButton", (Button c) -> !c.isDisabled());
+
     clickOn("#resetFields");
-    // verifyThat("#roomNum", hasText(""));
     verifyThat("#assignStaff", hasText(""));
-    // verifyThat("#serviceStatus", hasText(""));
+    verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#selectLang", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#submitButton", (Button c) -> c.isDisabled());
   }
 }

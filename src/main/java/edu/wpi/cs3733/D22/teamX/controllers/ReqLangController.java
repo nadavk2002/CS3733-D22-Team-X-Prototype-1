@@ -15,17 +15,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ReqLangController implements Initializable {
   @FXML private Button mainMenu, submitButton;
   @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus;
   @FXML private TextField assignStaff;
+  @FXML private TableView<LangServiceRequest> tbView;
 
   private LocationDAO locationDAO;
   private List<Location> locations;
+  private TableColumn<LangServiceRequest, String> idColumn = new TableColumn("Request ID");
+  private TableColumn<LangServiceRequest, String> requesterColumn = new TableColumn("Requester");
+  private TableColumn<LangServiceRequest, String> locationColumn = new TableColumn("Location");
+  private TableColumn<LangServiceRequest, String> statusColumn = new TableColumn("Request Status");
+  private TableColumn<LangServiceRequest, String> languageColumn = new TableColumn("Language");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -38,6 +43,15 @@ public class ReqLangController implements Initializable {
     roomNum.setItems(getLocationNames());
     selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
+
+    tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    tbView
+        .getColumns()
+        .addAll(idColumn, requesterColumn, locationColumn, statusColumn, languageColumn);
+    idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
+    statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+    languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
   }
 
   /**
@@ -88,5 +102,6 @@ public class ReqLangController implements Initializable {
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
     this.resetFields();
+    tbView.getItems().add(request);
   }
 }

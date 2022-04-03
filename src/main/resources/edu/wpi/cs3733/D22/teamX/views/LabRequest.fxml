@@ -1,34 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LabRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LabRequestController">
    <children>
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ReturnToMain" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <HBox layoutX="745.0" layoutY="92.0" prefHeight="100.0" prefWidth="386.0">
+      <VBox layoutX="141.0" layoutY="74.0" prefHeight="200.0" prefWidth="345.0" />
+      <HBox layoutX="447.0" layoutY="238.0" prefHeight="500.0" prefWidth="1100.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="40.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1f93ff00" height="10.0" stroke="TRANSPARENT" strokeType="INSIDE" width="40.0" />
+            <VBox fx:id="submitCol" prefHeight="200.0" prefWidth="281.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox fx:id="labelCol" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Staff " />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service Status" />
+                           </children>
+                        </VBox>
+                        <VBox fx:id="dropdownCol" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <ChoiceBox fx:id="patientName" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="SelectLab" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="assignee" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="serviceStatus" prefHeight="30.0" prefWidth="159.0" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox fx:id="buttonRow" alignment="CENTER" prefHeight="62.0" prefWidth="346.0">
+                     <children>
+                        <Button fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" prefHeight="30.0" prefWidth="114.0" text="Reset Form" />
+                        <Button mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="114.0" text="Submit Request" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <TableView fx:id="currentRequests" prefHeight="500.0" prefWidth="820.0" />
          </children>
       </HBox>
-      <Button layoutX="574.0" layoutY="525.0" mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="114.0" text="Submit Request" />
-      <ChoiceBox fx:id="SelectLab" layoutX="573.0" layoutY="299.0" prefHeight="30.0" prefWidth="159.0" />
-      <Text layoutX="459.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service" />
-      <Text layoutX="470.0" layoutY="371.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Staff " />
-      <Text layoutX="466.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Status" />
-      <TextField fx:id="assignStaff" layoutX="573.0" layoutY="353.0" prefHeight="26.0" prefWidth="161.0" />
-      <TextField fx:id="serviceStatus" layoutX="573.0" layoutY="399.0" prefHeight="26.0" prefWidth="161.0" />
-      <Text layoutX="461.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" />
-      <TextField fx:id="patientName" layoutX="572.0" layoutY="255.0" prefHeight="26.0" prefWidth="161.0" />
-      <Button fx:id="resetFields" layoutX="456.0" layoutY="525.0" mnemonicParsing="false" onAction="#resetFields" prefHeight="30.0" prefWidth="114.0" text="Reset Form" />
-      <TableView fx:id="currentRequests" layoutX="1046.0" layoutY="390.0" prefHeight="500.0" prefWidth="820.0" />
    </children>
 </AnchorPane>
