@@ -20,10 +20,10 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <TableView layoutX="796.0" layoutY="251.0" prefHeight="433.0" prefWidth="645.0">
+      <TableView fx:id="table" layoutX="796.0" layoutY="251.0" prefHeight="433.0" prefWidth="645.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="c1" prefWidth="75.0" text="C1" />
+          <TableColumn fx:id="c2" prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
       <VBox fx:id="submitColumn" layoutX="497.0" layoutY="392.0" prefHeight="200.0" prefWidth="250.0">

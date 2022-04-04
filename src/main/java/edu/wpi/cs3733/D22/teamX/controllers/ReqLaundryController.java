@@ -14,9 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -28,6 +26,8 @@ public class ReqLaundryController implements Initializable {
   @FXML private Button ToMainMenu;
   @FXML private ChoiceBox<String> selectLaundryType, roomNum;
   @FXML private TextField assignStaff, serviceStatus;
+  @FXML private TableView table;
+  @FXML private TableColumn c1, c2;
 
   private LocationDAO locationDAO;
   private List<Location> locations;
