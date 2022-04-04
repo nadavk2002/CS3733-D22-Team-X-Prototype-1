@@ -43,11 +43,22 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
     }
   }
 
+  /**
+   * gets the list of all the Lab Exam Service Requests
+   *
+   * @return a list of all the Lab Exam Service Requests
+   */
   @Override
   public List<LabServiceRequest> getAllLabServiceRequests() {
     return labServiceRequests;
   }
 
+  /**
+   * gets individual Lab Exam Service Request
+   *
+   * @param requestID requestID of the individual Lab Exam Service Request
+   * @return a Lab Exam Service Request with a matching requestID
+   */
   @Override
   public LabServiceRequest getLabServiceRequest(String requestID) {
     // iterate through list to find object with matching ID
@@ -59,6 +70,11 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
     throw new NoSuchElementException("request does not exist");
   }
 
+  /**
+   * deletes object from DAO and database.
+   *
+   * @param labServiceRequest Lab Exam Service Request to be removed
+   */
   @Override
   public void deleteLabServiceRequest(LabServiceRequest labServiceRequest) {
     // remove from list
@@ -88,7 +104,11 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
       e.printStackTrace();
     }
   }
-
+  /**
+   * updates object from DAO and database.
+   *
+   * @param labServiceRequest Lab Exam Service Request to be updated
+   */
   @Override
   public void updateLabServiceRequest(LabServiceRequest labServiceRequest) {
     // add item to list
@@ -130,6 +150,12 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
     }
   }
 
+
+  /**
+   * adds object from DAO and database.
+   *
+   * @param labServiceRequest Lab Exam Service Request to be added
+   */
   @Override
   public void addLabServiceRequest(LabServiceRequest labServiceRequest) {
     //list
