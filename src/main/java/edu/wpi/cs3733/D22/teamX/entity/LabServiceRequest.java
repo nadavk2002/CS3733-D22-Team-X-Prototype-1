@@ -25,6 +25,10 @@ public class LabServiceRequest extends ServiceRequest {
     this.patientFor = null;
   }
 
+  public String getLocationNodeID() {
+    return getDestination().getNodeID();
+  }
+
   public String getService() {
     return service;
   }

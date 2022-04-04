@@ -38,18 +38,20 @@ public class LabRequestController implements Initializable {
   @FXML
   private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus, selectDestination;
   private List<Location> locations;
+  private LocationDAO locationDAO;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
+    locationDAO = new LocationDAOImpl();
+    locations = locationDAO.getAllLocations();
+
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     patientID.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
     assigneeTable.setCellValueFactory(new PropertyValueFactory<>("assignee"));
     service.setCellValueFactory(new PropertyValueFactory<>("service"));
     status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    destination.setCellValueFactory(new PropertyValueFactory<>("destination"));
+    destination.setCellValueFactory(new PropertyValueFactory<>("locationNodeID"));
     table.setItems(labDeliveryList());
-    LocationDAO locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
 
     selectDestination.setItems(this.getLocationNames());
     submitRequest.setDisable(true);
@@ -126,6 +128,7 @@ public class LabRequestController implements Initializable {
   @FXML
   public void submitRequest() {
     LabServiceRequest request = new LabServiceRequest();
+
     request.setRequestID(request.makeRequestID()); //
     request.setPatientFor(patientName.getValue());
     request.setAssignee(assigneeDrop.getValue());
@@ -136,6 +139,7 @@ public class LabRequestController implements Initializable {
     LabServiceRequestDAO submit = new LabServiceRequestDAOImpl();
     submit.addLabServiceRequest(request);
     this.resetFields();
+    table.setItems(labDeliveryList());
   }
 
   @FXML
