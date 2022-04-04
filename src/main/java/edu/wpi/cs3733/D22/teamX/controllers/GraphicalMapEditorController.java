@@ -187,6 +187,8 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setShortName(shortNameText.getText());
         locDAO.updateLocation(replaceLoc);
         loadLocation(replaceLoc.getFloor());
+        table.getItems().clear();
+        table.setItems(locationListFill());
 
         return;
       }
