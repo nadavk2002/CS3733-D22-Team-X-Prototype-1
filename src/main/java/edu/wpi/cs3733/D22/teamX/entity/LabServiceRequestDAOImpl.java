@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
-import edu.wpi.cs3733.D22.teamX.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
