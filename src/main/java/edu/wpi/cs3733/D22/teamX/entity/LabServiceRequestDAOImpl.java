@@ -22,7 +22,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
       // create the statement
       Statement statement = connection.createStatement();
       // execute query to see all Medical Service Requests and store it to a result set
-      ResultSet resultSet = statement.executeQuery("Select * FROM LabServiceRequests");
+      ResultSet resultSet = statement.executeQuery("Select * FROM LabServiceRequest");
       // go through results
       while (resultSet.next()) {
         LabServiceRequest lsr = new LabServiceRequest();
@@ -95,7 +95,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-          "DELETE FROM LabServiceRequests WHERE requestID = '"
+          "DELETE FROM LabServiceRequest WHERE requestID = '"
               + labServiceRequest.getRequestID()
               + "'");
     } catch (SQLException e) {
@@ -129,7 +129,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE LabServiceRequests SET"
+          "UPDATE LabServiceRequest SET"
               + " destination = '"
               + labServiceRequest.getDestination().getNodeID()
               + "', status = '"
@@ -161,7 +161,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
     try {
       Statement initialization = connection.createStatement();
       StringBuilder lsr = new StringBuilder();
-      lsr.append("INSERT INTO LabServiceRequests VALUES (");
+      lsr.append("INSERT INTO LabServiceRequest VALUES (");
       lsr.append("'" + labServiceRequest.getRequestID() + "', ");
       lsr.append("'" + labServiceRequest.getDestination().getNodeID() + "', ");
       lsr.append("'" + labServiceRequest.getStatus() + "', ");
