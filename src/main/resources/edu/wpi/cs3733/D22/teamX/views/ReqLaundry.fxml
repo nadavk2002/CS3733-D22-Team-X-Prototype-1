@@ -20,13 +20,13 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <TableView layoutX="1125.0" layoutY="237.0" prefHeight="433.0" prefWidth="645.0">
+      <TableView layoutX="796.0" layoutY="251.0" prefHeight="433.0" prefWidth="645.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />
           <TableColumn prefWidth="75.0" text="C2" />
         </columns>
       </TableView>
-      <VBox fx:id="submitColumn" layoutX="758.0" layoutY="363.0" prefHeight="200.0" prefWidth="250.0">
+      <VBox fx:id="submitColumn" layoutX="497.0" layoutY="392.0" prefHeight="200.0" prefWidth="250.0">
          <children>
             <HBox prefHeight="102.0" prefWidth="219.0">
                <children>
@@ -47,7 +47,7 @@
                         </ChoiceBox>
                         <TextField fx:id="roomField" prefWidth="150.0" />
                         <TextField fx:id="assignStaff" prefWidth="150.0" />
-                        <TextField fx:id="serviceStatus" prefWidth="150.0" />
+                        <TextField fx:id="serviceStatus" />
                      </children>
                   </VBox>
                </children>
