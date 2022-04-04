@@ -43,6 +43,6 @@ public class LabServiceRequest extends ServiceRequest {
 
   @Override
   public String makeRequestID() {
-    return "sample";
+    return "sample00";
   }
 }

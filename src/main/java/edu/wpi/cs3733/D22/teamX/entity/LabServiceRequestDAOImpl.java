@@ -167,7 +167,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
       lsr.append("'" + labServiceRequest.getStatus() + "', ");
       lsr.append("'" + labServiceRequest.getAssignee() + "', ");
       lsr.append("'" + labServiceRequest.getService() + "', ");
-      lsr.append("'" + labServiceRequest.getPatientFor() + "', ");
+      lsr.append("'" + labServiceRequest.getPatientFor() + "'");
       lsr.append(")");
       initialization.execute(lsr.toString());
     } catch (SQLException e) {
