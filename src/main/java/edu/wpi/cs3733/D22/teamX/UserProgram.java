@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX;
 
+import edu.wpi.cs3733.D22.teamX.entity.Location;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;

@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Location;
-
 /** Represents a lab work service request */
 public class LabServiceRequest extends ServiceRequest {
   private String assignee; // employee id
@@ -18,6 +16,7 @@ public class LabServiceRequest extends ServiceRequest {
       String patientFor) {
     super(requestID, destination, status);
     this.assignee = assignee;
+    super(requestID, destination, status, assignee);
     this.service = service;
     this.patientFor = patientFor;
   }
@@ -25,17 +24,12 @@ public class LabServiceRequest extends ServiceRequest {
   // blank
   public LabServiceRequest() {
     super();
-    this.assignee = null;
     this.service = null;
     this.patientFor = null;
   }
 
-  public String getAssignee() {
-    return assignee;
-  }
-
-  public void setAssignee(String assignee) {
-    this.assignee = assignee;
+  public String getLocationNodeID() {
+    return getDestination().getNodeID();
   }
 
   public String getService() {
@@ -56,6 +50,8 @@ public class LabServiceRequest extends ServiceRequest {
 
   @Override
   public String makeRequestID() {
-    return "sample";
+    LabServiceRequestDAO esrDAO = new LabServiceRequestDAOImpl();
+    int nextIDFinalNum = esrDAO.getAllLabServiceRequests().size() + 1;
+    return String.format("LBSR%04d", nextIDFinalNum);
   }
 }
