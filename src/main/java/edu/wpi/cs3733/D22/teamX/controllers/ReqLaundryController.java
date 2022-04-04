@@ -2,10 +2,15 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Location;
+import edu.wpi.cs3733.D22.teamX.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamX.entity.LaundyServiceRequest;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,18 +26,38 @@ public class ReqLaundryController implements Initializable {
   @FXML private VBox submitColumn;
   @FXML private HBox buttonRow;
   @FXML private Button ToMainMenu;
-  @FXML private ChoiceBox<String> selectLaundryType;
-  @FXML private TextField roomField, assignStaff, serviceStatus;
+  @FXML private ChoiceBox<String> selectLaundryType, roomNum;
+  @FXML private TextField assignStaff, serviceStatus;
+
+  private LocationDAO locationDAO;
+  private List<Location> locations;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
+    locationDAO = new LocationDAOImpl();
+    locations = locationDAO.getAllLocations();
+    resetFields();
     selectionMenuColumn.setSpacing(20);
     labelColumn.setSpacing(28);
     submitColumn.setSpacing(20);
     buttonRow.setSpacing(20);
+    roomNum.setItems(getLocationNames());
     selectLaundryType
         .getItems()
         .addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
+  }
+
+  /**
+   * Creates a list of all locations with their short names.
+   *
+   * @return List of short names of all destinations
+   */
+  public ObservableList<String> getLocationNames() {
+    ObservableList<String> locationNames = FXCollections.observableArrayList();
+    for (int i = 0; i < locations.size(); i++) {
+      locationNames.add(locations.get(i).getShortName());
+    }
+    return locationNames;
   }
 
   @FXML
@@ -57,8 +82,8 @@ public class ReqLaundryController implements Initializable {
 
   @FXML
   void resetFields() {
-    roomField.setText("");
     selectLaundryType.setValue("");
+    roomNum.setValue("");
     assignStaff.setText("");
     serviceStatus.setText("");
   }

@@ -32,9 +32,9 @@
                <children>
                   <VBox fx:id="labelColumn" prefHeight="102.0" prefWidth="254.0">
                      <children>
-                        <Label text="Assignee:" />
                         <Label text="Type of Service:" />
                         <Label text="Room Number:" />
+                        <Label text="Assignee:" />
                         <Label text="Service Status:" />
                      </children>
                   </VBox>
@@ -45,7 +45,11 @@
                               <Insets />
                            </opaqueInsets>
                         </ChoiceBox>
-                        <TextField fx:id="roomField" prefWidth="150.0" />
+                        <ChoiceBox fx:id="roomNum" prefWidth="150.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ChoiceBox>
                         <TextField fx:id="assignStaff" prefWidth="150.0" />
                         <TextField fx:id="serviceStatus" />
                      </children>
