@@ -82,7 +82,7 @@ public class JanitorialRequestController implements Initializable {
 
   /** Creates a service request from the fields on the javafx page */
   @FXML
-  public void submitRequest() {
+  public void submitButton() {
     JanitorServiceRequest request = new JanitorServiceRequest();
 
     request.setRequestID(request.makeRequestID());
@@ -100,7 +100,7 @@ public class JanitorialRequestController implements Initializable {
    * @throws IOException
    */
   @FXML
-  public void ReturnToMain() throws IOException {
+  public void mainMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
