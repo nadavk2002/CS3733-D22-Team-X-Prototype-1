@@ -67,7 +67,7 @@ public class LabRequestController implements Initializable {
     checkAllBoxes(serviceStatus);
     checkAllBoxes(selectDestination);
     // FORMATTING----------------------------------------------------
-    serviceStatus.getItems().addAll("", "PROC", "DONE");
+    serviceStatus.getItems().addAll(" ", "PROC", "DONE");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
     assigneeDrop
         .getItems()
