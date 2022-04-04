@@ -10,4 +10,6 @@ public interface LocationDAO {
   void updateLocation(Location location); // updates induvidual location
 
   void deleteLocation(Location location); // removes induvidual location
+
+  void addLocation(Location location);
 }

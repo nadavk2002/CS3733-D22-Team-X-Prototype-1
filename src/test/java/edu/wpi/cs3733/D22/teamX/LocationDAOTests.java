@@ -63,4 +63,19 @@ public class LocationDAOTests {
     }
     assertTrue(result);
   }
+
+  @Test // tests if thows exception
+  public void TestLocationDAOadd() {
+    boolean result = true;
+    // create DAO object
+    LocationDAO locationDAO = new LocationDAOImpl();
+    Location loc = new Location();
+    loc.setNodeID("testNode");
+    try {
+      locationDAO.addLocation(loc);
+    } catch (NoSuchElementException s) {
+      result = false;
+    }
+    assertTrue(result);
+  }
 }
