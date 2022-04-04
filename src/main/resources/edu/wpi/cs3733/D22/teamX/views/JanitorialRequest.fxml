@@ -55,7 +55,7 @@
          <children>
             <ChoiceBox fx:id="roomNum" prefWidth="150.0" />
             <TextField fx:id="serviceType" />
-            <ChoiceBox fx:id="setStatus" prefWidth="150.0" />
+            <ChoiceBox fx:id="serviceStatus" prefWidth="150.0" />
             <TextField fx:id="assignStaff" />
          </children>
       </VBox>
