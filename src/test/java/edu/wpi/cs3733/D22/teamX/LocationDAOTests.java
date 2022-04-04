@@ -3,6 +3,9 @@ package edu.wpi.cs3733.D22.teamX;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import edu.wpi.cs3733.D22.teamX.entity.Location;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.util.NoSuchElementException;
 import org.junit.Before;
@@ -57,6 +60,21 @@ public class LocationDAOTests {
       locationDAO.updateLocation(loc);
     } catch (NoSuchElementException s) {
       result = true;
+    }
+    assertTrue(result);
+  }
+
+  @Test // tests if thows exception
+  public void TestLocationDAOadd() {
+    boolean result = true;
+    // create DAO object
+    LocationDAO locationDAO = new LocationDAOImpl();
+    Location loc = new Location();
+    loc.setNodeID("testNode");
+    try {
+      locationDAO.addLocation(loc);
+    } catch (NoSuchElementException s) {
+      result = false;
     }
     assertTrue(result);
   }

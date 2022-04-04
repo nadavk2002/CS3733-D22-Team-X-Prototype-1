@@ -1,8 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
-import edu.wpi.cs3733.D22.teamX.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.LocationDAOImpl;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,6 +30,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
         esr.setRequestID(resultSet.getString("requestID"));
         esr.setDestination(locDestination.getLocation(resultSet.getString("destination")));
         esr.setStatus(resultSet.getString("status"));
+        esr.setAssignee(resultSet.getString("assignee"));
         esr.setEquipmentType(resultSet.getString("equipmentType"));
         esr.setQuantity(Integer.parseInt(resultSet.getString("quantity")));
 
@@ -139,6 +138,8 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
               + medicalEquipmentServiceRequest.getDestination().getNodeID()
               + "', status = '"
               + medicalEquipmentServiceRequest.getStatus()
+              + "', assignee = '"
+              + medicalEquipmentServiceRequest.getAssignee()
               + "', equipmentType = '"
               + medicalEquipmentServiceRequest.getEquipmentType()
               + "', quantity = "
@@ -164,6 +165,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
       medEquipReq.append(
           "'" + medicalEquipmentServiceRequest.getDestination().getNodeID() + "'" + ", ");
       medEquipReq.append("'" + medicalEquipmentServiceRequest.getStatus() + "'" + ", ");
+      medEquipReq.append("'" + medicalEquipmentServiceRequest.getAssignee() + "'" + ", ");
       medEquipReq.append("'" + medicalEquipmentServiceRequest.getEquipmentType() + "'" + ", ");
       medEquipReq.append(medicalEquipmentServiceRequest.getQuantity());
       medEquipReq.append(")");

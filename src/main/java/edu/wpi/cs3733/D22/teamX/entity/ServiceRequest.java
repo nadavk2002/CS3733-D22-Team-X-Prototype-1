@@ -1,26 +1,27 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Location;
-
 /** Represents a general service request */
 public abstract class ServiceRequest {
 
   private String requestID;
   private Location destination;
   private String status;
+  private String assignee;
 
-  // private String requestingUser, assignee, serviceCompleted, serviceID;
+  // private String requestingUser
 
-  public ServiceRequest(String requestID, Location destination, String status) {
+  public ServiceRequest(String requestID, Location destination, String status, String assignee) {
     this.requestID = requestID;
     this.destination = destination;
     this.status = status;
+    this.assignee = assignee;
   }
 
   public ServiceRequest() {
     this.requestID = null;
     this.destination = new Location();
     this.status = null;
+    this.assignee = null;
   }
 
   public String getRequestID() {
@@ -35,6 +36,10 @@ public abstract class ServiceRequest {
     return destination;
   }
 
+  public String getAssignee() {
+    return assignee;
+  }
+
   public void setRequestID(String requestID) {
     this.requestID = requestID;
   }
@@ -45,6 +50,14 @@ public abstract class ServiceRequest {
 
   public void setDestination(Location destination) {
     this.destination = destination;
+  }
+
+  public void setAssignee(String assignee) {
+    this.assignee = assignee;
+  }
+
+  public String getLocationShortName() {
+    return destination.getShortName();
   }
 
   //  public String getRequestingUser() {

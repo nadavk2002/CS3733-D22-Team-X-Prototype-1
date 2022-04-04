@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Location;
-
 public class MedicalEquipmentServiceRequest extends ServiceRequest {
   private String equipmentType;
   private int quantity;
@@ -10,11 +8,12 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
       String requestID,
       Location destination,
       String status,
+      String assignee,
       //      String requestingUser,
       //      String assignee,
       String equipmentType,
       int quantity) {
-    super(requestID, destination, status);
+    super(requestID, destination, status, assignee);
     this.equipmentType = equipmentType;
     this.quantity = quantity;
   }
