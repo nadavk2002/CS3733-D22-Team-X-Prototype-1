@@ -9,8 +9,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-public class LabServiceRequestDAOImpl {
+public class LabServiceRequestDAOImpl implements LabServiceRequestDAO{
   List<LabServiceRequest> labServiceRequests;
   Connection connection;
 
@@ -40,5 +41,36 @@ public class LabServiceRequestDAOImpl {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public List<LabServiceRequest> getAllLabServiceRequests() {
+    return labServiceRequests;
+  }
+
+  @Override
+  public LabServiceRequest getLabServiceRequest(String requestID) {
+    //iterate through list to find object with matching ID
+    for(LabServiceRequest lsr : labServiceRequests){
+      if(lsr.getRequestID().equals(requestID)){
+        return lsr;
+      }
+    }
+    throw new NoSuchElementException("request does not exist");
+  }
+
+  @Override
+  public void deleteLabServiceRequest(LabServiceRequest labServiceRequest) {
+
+  }
+
+  @Override
+  public void updateLabServiceRequest(LabServiceRequest labServiceRequest) {
+
+  }
+
+  @Override
+  public void addLabServiceRequest(LabServiceRequest labServiceRequest) {
+
   }
 }
