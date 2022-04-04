@@ -29,6 +29,12 @@ public class LabServiceRequestDAOImpl {
         LabServiceRequest lsr = new LabServiceRequest();
         lsr.setRequestID(resultSet.getString("requestID"));
         lsr.setDestination(locDestination.getLocation(resultSet.getString("Destination")));
+        lsr.setStatus(resultSet.getString("status"));
+        lsr.setAssignee(resultSet.getString("assignee"));
+        lsr.setService(resultSet.getString("service"));
+        lsr.setPatientFor("patientFor");
+        // add lsr to the list
+        labServiceRequests.add(lsr);
       }
 
     } catch (SQLException e) {
