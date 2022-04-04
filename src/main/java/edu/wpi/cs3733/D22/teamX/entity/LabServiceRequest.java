@@ -47,6 +47,8 @@ public class LabServiceRequest extends ServiceRequest {
 
   @Override
   public String makeRequestID() {
-    return "sample00";
+    LabServiceRequestDAO esrDAO = new LabServiceRequestDAOImpl();
+    int nextIDFinalNum = esrDAO.getAllLabServiceRequests().size() + 1;
+    return String.format("LBSR%04d", nextIDFinalNum);
   }
 }
