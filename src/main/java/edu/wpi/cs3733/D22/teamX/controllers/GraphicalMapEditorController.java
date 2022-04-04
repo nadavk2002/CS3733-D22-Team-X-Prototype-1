@@ -7,6 +7,7 @@ import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,6 +52,16 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private TableColumn<Location, String> longName;
 
   @FXML private TableColumn<Location, String> shortName;
+
+  @FXML
+  private TextField nodeIdText,
+      xCordText,
+      yCordText,
+      floorText,
+      buildingText,
+      nodeTypeText,
+      longNameText,
+      shortNameText;
 
   @FXML
   private void ToMainMenu() throws IOException {
@@ -146,6 +157,7 @@ public class GraphicalMapEditorController implements Initializable {
   private void drawCirclesSetList(String floor) {
     LocationDAO allLocations = new LocationDAOImpl();
     List<Location> locationList = allLocations.getAllLocations();
+    locationChoice.setValue("");
     locationChoice.getItems().clear();
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
@@ -166,6 +178,53 @@ public class GraphicalMapEditorController implements Initializable {
     LocationDAO locDAO = new LocationDAOImpl();
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
     drawCirclesSetList(locDAO.getLocation(locationToDelete).getFloor());
+  }
+
+  @FXML
+  public void locationSelected() {
+    LocationDAO locDAO = new LocationDAOImpl();
+    try {
+      Location selected = locDAO.getLocation(locationChoice.getValue());
+      nodeIdText.setText(selected.getNodeID());
+      xCordText.setText(selected.getX());
+      yCordText.setText(selected.getY());
+      floorText.setText(selected.getFloor());
+      buildingText.setText(selected.getBuilding());
+      nodeTypeText.setText(selected.getNodeType());
+      longNameText.setText(selected.getLongName());
+      shortNameText.setText(selected.getShortName());
+    } catch (NoSuchElementException e) {
+      nodeIdText.setText("");
+      xCordText.setText("");
+      yCordText.setText("");
+      floorText.setText("");
+      buildingText.setText("");
+      nodeTypeText.setText("");
+      longNameText.setText("");
+      shortNameText.setText("");
+    }
+  }
+
+  @FXML
+  public void submitLocation() {
+    LocationDAO locDAO = new LocationDAOImpl();
+    List<Location> allLocations = locDAO.getAllLocations();
+    for (int i = 0; i < allLocations.size(); i++) {
+      if (allLocations.get(i).getNodeID().equals(nodeIdText.getText())) {
+        Location replaceLoc = allLocations.get(i);
+        replaceLoc.setxCoord(Integer.parseInt(xCordText.getText()));
+        replaceLoc.setyCoord(Integer.parseInt(yCordText.getText()));
+        replaceLoc.setFloor(floorText.getText());
+        replaceLoc.setBuilding(buildingText.getText());
+        replaceLoc.setNodeType(nodeTypeText.getText());
+        replaceLoc.setLongName(longNameText.getText());
+        replaceLoc.setShortName(shortNameText.getText());
+        locDAO.updateLocation(replaceLoc);
+        return;
+      }
+    }
+    // adding a new location will go here when implemented.
+
   }
 
   @Override
