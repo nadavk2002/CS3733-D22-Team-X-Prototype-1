@@ -71,77 +71,32 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML
   public void LL1Click() {
-    imageGroup.getChildren().clear();
-
-    Image img =
-        new Image(
-            getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_LL1_Floor.png"));
-    ImageView newImage = new ImageView(img);
-    imageGroup.getChildren().add(newImage);
-    drawCirclesSetList("L1");
+    loadLocation("L1");
   }
 
   @FXML
   public void LL2Click() {
-    imageGroup.getChildren().clear();
-
-    Image img =
-        new Image(
-            getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_LL2_Floor.png"));
-    ImageView newImage = new ImageView(img);
-    imageGroup.getChildren().add(newImage);
-    drawCirclesSetList("L2");
+    loadLocation("L2");
   }
 
   @FXML
   public void groundClick() {
-    imageGroup.getChildren().clear();
-
-    Image img =
-        new Image(
-            getClass()
-                .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_Ground_Floor.png"));
-    ImageView newImage = new ImageView(img);
-    imageGroup.getChildren().add(newImage);
-    drawCirclesSetList("G");
+    loadLocation("G");
   }
 
   @FXML
   public void firstClick() {
-    imageGroup.getChildren().clear();
-
-    Image img =
-        new Image(
-            getClass()
-                .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_First_Floor.png"));
-    ImageView newImage = new ImageView(img);
-    imageGroup.getChildren().add(newImage);
-    drawCirclesSetList("1");
+    loadLocation("1");
   }
 
   @FXML
   public void secondClick() {
-    imageGroup.getChildren().clear();
-
-    Image img =
-        new Image(
-            getClass()
-                .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_Second_Floor.png"));
-    ImageView newImage = new ImageView(img);
-    imageGroup.getChildren().add(newImage);
-    drawCirclesSetList("2");
+    loadLocation("2");
   }
 
   @FXML
   public void thirdClick() {
-    imageGroup.getChildren().clear();
-    Image img =
-        new Image(
-            getClass()
-                .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_Third_Floor.png"));
-    ImageView newImage = new ImageView(img);
-    imageGroup.getChildren().add(newImage);
-    drawCirclesSetList("3");
+    loadLocation("3");
   }
 
   private ObservableList<Location> locationListFill() {
@@ -205,6 +160,17 @@ public class GraphicalMapEditorController implements Initializable {
     }
   }
 
+  public void loadLocation(String location) {
+    imageGroup.getChildren().clear();
+    Image img =
+        new Image(
+            getClass()
+                .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/" + location + ".png"));
+    ImageView newImage = new ImageView(img);
+    imageGroup.getChildren().add(newImage);
+    drawCirclesSetList(location);
+  }
+
   @FXML
   public void submitLocation() {
     LocationDAO locDAO = new LocationDAOImpl();
@@ -220,6 +186,8 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setLongName(longNameText.getText());
         replaceLoc.setShortName(shortNameText.getText());
         locDAO.updateLocation(replaceLoc);
+        loadLocation(replaceLoc.getFloor());
+
         return;
       }
     }

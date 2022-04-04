@@ -59,7 +59,7 @@
                      <children>
                         <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/Crop_Ground_Floor.png" />
+                              <Image url="@../assets/G.png" />
                            </image>
                         </ImageView>
                      </children>
