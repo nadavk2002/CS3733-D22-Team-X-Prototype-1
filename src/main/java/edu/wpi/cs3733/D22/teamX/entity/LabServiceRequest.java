@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 /** Represents a lab work service request */
 public class LabServiceRequest extends ServiceRequest {
+  private String assignee; // employee id
   private String service;
   private String patientFor; // patient id
 
@@ -14,6 +15,7 @@ public class LabServiceRequest extends ServiceRequest {
       String service,
       String patientFor) {
     super(requestID, destination, status, assignee);
+    this.assignee = assignee;
     this.service = service;
     this.patientFor = patientFor;
   }
