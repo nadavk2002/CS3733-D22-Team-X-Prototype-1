@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
@@ -22,16 +24,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <TabPane fx:id="tabPane" layoutX="212.0" layoutY="236.0" prefHeight="610.0" prefWidth="610.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab fx:id="tabLL2" text="Lower  Level 2" />
-          <Tab fx:id="tabLL1" text="Lower Level 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-        </tabs>
-      </TabPane>
       <TableView fx:id="table" layoutX="843.0" layoutY="319.0" prefHeight="450.0" prefWidth="900.0">
         <columns>
           <TableColumn fx:id="nodeID" prefWidth="90.0" text="Node ID" />
@@ -44,6 +36,31 @@
             <TableColumn fx:id="shortName" prefWidth="168.4443359375" text="Short Name" />
         </columns>
       </TableView>
-      <HBox fx:id="hBox1" layoutX="160" layoutY="200" prefHeight="700" prefWidth="1600" />
+      <HBox fx:id="hBox1" layoutX="160" layoutY="200" prefHeight="700" prefWidth="1600">
+         <children>
+            <VBox prefHeight="700.0" prefWidth="670.0">
+               <children>
+                  <HBox prefHeight="35.0" prefWidth="682.0">
+                     <children>
+                        <JFXButton onAction="#LL2Click" text="LL2 Floor" />
+                        <JFXButton onAction="#LL1Click" text="LL1 Floor" />
+                        <JFXButton onAction="#groundClick" text="Ground Floor" />
+                        <JFXButton onAction="#firstClick" text="First Floor" />
+                        <JFXButton onAction="#secondClick" text="Second Floor" />
+                        <JFXButton onAction="#thirdClick" text="Third Floor" />
+                     </children>
+                  </HBox>
+                  <Group fx:id="imageGroup">
+                     <children>
+                        <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/Crop_Ground_Floor.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Group>
+               </children>
+            </VBox>
+         </children></HBox>
    </children>
 </AnchorPane>
