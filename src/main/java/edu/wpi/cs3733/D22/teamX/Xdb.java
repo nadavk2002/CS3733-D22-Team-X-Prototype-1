@@ -134,7 +134,6 @@ public class Xdb {
     }
   }
 
-
   /** Drops all the tables in the database. */
   private static void dropAllTables() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();

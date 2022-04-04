@@ -148,7 +148,6 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
     }
   }
 
-
   /**
    * adds object from DAO and database.
    *
@@ -156,9 +155,9 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
    */
   @Override
   public void addLabServiceRequest(LabServiceRequest labServiceRequest) {
-    //list
+    // list
     labServiceRequests.add(labServiceRequest);
-    //db
+    // db
     try {
       Statement initialization = connection.createStatement();
       StringBuilder lsr = new StringBuilder();
