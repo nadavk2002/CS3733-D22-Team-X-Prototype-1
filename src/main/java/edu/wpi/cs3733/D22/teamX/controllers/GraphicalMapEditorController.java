@@ -147,7 +147,7 @@ public class GraphicalMapEditorController implements Initializable {
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
         Circle circle = new Circle();
-        circle.setRadius(1);
+        circle.setRadius(3);
         circle.setCenterX(locationList.get(i).getxCoord());
         circle.setCenterY(locationList.get(i).getyCoord());
         circle.setFill(Paint.valueOf("RED"));
@@ -161,7 +161,6 @@ public class GraphicalMapEditorController implements Initializable {
 
     hBox1.getChildren().add(table);
     hBox1.setSpacing(90);
-    // Tab tabLL2 = new Tab("Lower Level 2", new ImageView(Crop_LL2_Floor.png));
     locationListFill();
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
