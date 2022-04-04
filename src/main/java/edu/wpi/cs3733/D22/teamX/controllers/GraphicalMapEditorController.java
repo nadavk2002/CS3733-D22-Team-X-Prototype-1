@@ -24,7 +24,9 @@ import javafx.scene.shape.Circle;
 
 public class GraphicalMapEditorController implements Initializable {
 
-  @FXML private Button ToMainMenu;
+  @FXML private Button ToMainMenu, deleteLocationButton;
+
+  @FXML private ChoiceBox<String> locationChoice;
 
   @FXML private HBox hBox1;
 
@@ -65,7 +67,7 @@ public class GraphicalMapEditorController implements Initializable {
             getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_LL1_Floor.png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCircles("L1");
+    drawCirclesSetList("L1");
   }
 
   @FXML
@@ -77,7 +79,7 @@ public class GraphicalMapEditorController implements Initializable {
             getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_LL2_Floor.png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCircles("L2");
+    drawCirclesSetList("L2");
   }
 
   @FXML
@@ -90,7 +92,7 @@ public class GraphicalMapEditorController implements Initializable {
                 .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_Ground_Floor.png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCircles("G");
+    drawCirclesSetList("G");
   }
 
   @FXML
@@ -103,7 +105,7 @@ public class GraphicalMapEditorController implements Initializable {
                 .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_First_Floor.png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCircles("1");
+    drawCirclesSetList("1");
   }
 
   @FXML
@@ -116,7 +118,7 @@ public class GraphicalMapEditorController implements Initializable {
                 .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_Second_Floor.png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCircles("2");
+    drawCirclesSetList("2");
   }
 
   @FXML
@@ -128,7 +130,7 @@ public class GraphicalMapEditorController implements Initializable {
                 .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/Crop_Third_Floor.png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCircles("3");
+    drawCirclesSetList("3");
   }
 
   private ObservableList<Location> locationListFill() {
@@ -141,9 +143,10 @@ public class GraphicalMapEditorController implements Initializable {
     return tableList;
   }
 
-  private void drawCircles(String floor) {
+  private void drawCirclesSetList(String floor) {
     LocationDAO allLocations = new LocationDAOImpl();
     List<Location> locationList = allLocations.getAllLocations();
+    locationChoice.getItems().clear();
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
         Circle circle = new Circle();
@@ -152,8 +155,17 @@ public class GraphicalMapEditorController implements Initializable {
         circle.setCenterY(locationList.get(i).getyCoord());
         circle.setFill(Paint.valueOf("RED"));
         imageGroup.getChildren().add(circle);
+        locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
     }
+  }
+
+  /** Deletes selected node id in the dropdown */
+  public void deleteLocation() {
+    String locationToDelete = locationChoice.getValue(); // Node ID
+    LocationDAO locDAO = new LocationDAOImpl();
+    locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
+    drawCirclesSetList(locDAO.getLocation(locationToDelete).getFloor());
   }
 
   @Override
@@ -170,6 +182,7 @@ public class GraphicalMapEditorController implements Initializable {
     nodeType.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeType"));
     longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
-    table.setItems(locationListFill());
+    ObservableList<Location> locationList = locationListFill();
+    table.setItems(locationList);
   }
 }
