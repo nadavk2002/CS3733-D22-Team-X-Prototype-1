@@ -70,6 +70,7 @@ public class GraphicalMapEditorController implements Initializable {
     hBox1.getChildren().add(table);
     hBox1.setSpacing(90);
     // Tab tabLL2 = new Tab("Lower Level 2", new ImageView(Crop_LL2_Floor.png));
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     locationListFill();
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
