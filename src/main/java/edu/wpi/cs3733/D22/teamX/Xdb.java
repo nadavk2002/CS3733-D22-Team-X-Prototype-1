@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX;
 
+import edu.wpi.cs3733.D22.teamX.entity.LabServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.*;
@@ -9,6 +10,7 @@ import java.util.*;
 public class Xdb {
   private static final String locationCSV = "TowerLocationsX.csv";
   private static final String medicalEquipmentCSV = "MedEquipReq.csv";
+  private static final String labServiceRequestsCSV = "LabServiceRequests.csv";
   //  /** Initializes the db and runs the user program from Spike B. */
   //  public static void initializeAndRunDBProgram() {
   //    Connection dbConn = initializeDB();
@@ -47,7 +49,8 @@ public class Xdb {
     dropAllTables();
     createLocationTable();
     createMedicalEquipmentServiceRequestTable();
-    if (!loadLocationCSV() || !loadMedEqServiceReqCSV()) {
+    createLabServiceRequestTable();
+    if (!loadLocationCSV() || !loadMedEqServiceReqCSV() || !loadLabServiceReqCSV()) {
       throw new loadSaveFromCSVException("Error when loading from CSV files.");
     }
 
@@ -56,7 +59,7 @@ public class Xdb {
 
   /** Saves the data from the database to the appropriate CSV files and closes the database. */
   public static boolean closeDB() throws loadSaveFromCSVException {
-    if (!saveLocationDataToCSV() || !saveMedEqDataToCSV()) {
+    if (!saveLocationDataToCSV() || !saveMedEqDataToCSV() || !saveLabServiceReqDataToCSV()) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     try {
@@ -108,9 +111,38 @@ public class Xdb {
     }
   }
 
+  /** Creates a lab service request table */
+  private static void createLabServiceRequestTable() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    try {
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE LabServiceRequest(requestID CHAR(8), "
+              + "destination CHAR(10),"
+              + "status CHAR(4),"
+              + "assignee CHAR(8),"
+              + "service VARCHAR(15),"
+              + "patientFor VARCHAR(15),"
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
+    } catch (SQLException e) {
+      System.out.println("Table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
+
   /** Drops all the tables in the database. */
   private static void dropAllTables() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    try {
+      Statement dropLocation = connection.createStatement();
+      dropLocation.execute("DROP TABLE LabServiceRequest");
+    } catch (SQLException e) {
+      System.out.println("Tables not dropped");
+      e.printStackTrace();
+    }
+
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
@@ -210,11 +242,11 @@ public class Xdb {
         new ArrayList<MedicalEquipmentServiceRequest>();
     try {
       LocationDAO locDestination = new LocationDAOImpl();
-      InputStream tlCSV = Xdb.class.getResourceAsStream(medicalEquipmentCSV);
-      BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
-      tlCSVReader.readLine();
+      InputStream medCSV = Xdb.class.getResourceAsStream(medicalEquipmentCSV);
+      BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
+      medCSVReader.readLine();
       String nextFileLine;
-      while ((nextFileLine = tlCSVReader.readLine()) != null) {
+      while ((nextFileLine = medCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 6) {
           MedicalEquipmentServiceRequest mesrNode =
@@ -257,6 +289,70 @@ public class Xdb {
         initialization.execute(medEquipReq.toString());
       } catch (SQLException e) {
         System.out.println("Input for MedEquipReq " + i + " failed");
+        e.printStackTrace();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * Loads the LabServiceReq.csv to the LabServiceRequest Table
+   *
+   * @return true if successful
+   */
+  private static boolean loadLabServiceReqCSV() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    // Read locations into List "LabServiceReqCSV"
+    List<LabServiceRequest> LabServiceRequestCSV = new ArrayList<LabServiceRequest>();
+    try {
+      LocationDAO locDestination = new LocationDAOImpl();
+      InputStream labCSV = Xdb.class.getResourceAsStream(labServiceRequestsCSV);
+      BufferedReader labCSVReader = new BufferedReader(new InputStreamReader(labCSV));
+      labCSVReader.readLine();
+      String nextFileLine;
+      while ((nextFileLine = labCSVReader.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 6) {
+          LabServiceRequest labNode =
+              new LabServiceRequest(
+                  currLine[0],
+                  locDestination.getLocation(currLine[1]),
+                  currLine[2],
+                  currLine[3],
+                  currLine[4],
+                  currLine[5]);
+          LabServiceRequestCSV.add(labNode);
+        } else {
+          System.out.println("CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+      return false;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+    // Insert locations from LabServiceReqCSV into db table
+    for (int i = 0; i < LabServiceRequestCSV.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder labServiceReq = new StringBuilder();
+        labServiceReq.append("INSERT INTO LabServiceRequest VALUES(");
+        labServiceReq.append("'" + LabServiceRequestCSV.get(i).getRequestID() + "'" + ", ");
+        labServiceReq.append(
+            "'" + LabServiceRequestCSV.get(i).getDestination().getNodeID() + "'" + ", ");
+        labServiceReq.append("'" + LabServiceRequestCSV.get(i).getStatus() + "'" + ", ");
+        labServiceReq.append("'" + LabServiceRequestCSV.get(i).getAssignee() + "'" + ", ");
+        labServiceReq.append("'" + LabServiceRequestCSV.get(i).getService() + "'" + ", ");
+        labServiceReq.append("'" + LabServiceRequestCSV.get(i).getPatientFor() + "'");
+        labServiceReq.append(")");
+        initialization.execute(labServiceReq.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for LabServiceReq " + i + " failed");
         e.printStackTrace();
         return false;
       }
@@ -391,6 +487,72 @@ public class Xdb {
       csvFile.close();
     } catch (IOException e) {
       System.out.print("An error occurred when trying to write to the CSV file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /** Writes the content of the location table from the database into the LabServiceReq.CSV */
+  private static boolean saveLabServiceReqDataToCSV() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    ArrayList<LabServiceRequest> LabServiceReq = new ArrayList<LabServiceRequest>();
+    LocationDAO locDestination = new LocationDAOImpl();
+    try {
+      Statement statement = connection.createStatement();
+      ResultSet labServiceRecords = statement.executeQuery("SELECT * FROM LabServiceRequest");
+      while (labServiceRecords.next()) {
+        LabServiceReq.add(
+            new LabServiceRequest(
+                labServiceRecords.getString("requestID"),
+                locDestination.getLocation(labServiceRecords.getString("destination")),
+                labServiceRecords.getString("status"),
+                labServiceRecords.getString("assignee"),
+                labServiceRecords.getString("service"),
+                labServiceRecords.getString("patientFor")));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("An error occurred when saving Lab Service Request data to the CSV file.");
+      return false;
+    }
+
+    try {
+      FileWriter csvFile = new FileWriter(labServiceRequestsCSV, false);
+      csvFile.write("requestID,destination,status,assignee,service,patientFor");
+      for (int i = 0; i < LabServiceReq.size(); i++) {
+        csvFile.write("\n" + LabServiceReq.get(i).getRequestID() + ",");
+        if (LabServiceReq.get(i).getDestination() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(LabServiceReq.get(i).getDestination().getNodeID() + ",");
+        }
+        if (LabServiceReq.get(i).getStatus() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(LabServiceReq.get(i).getStatus() + ",");
+        }
+        if (LabServiceReq.get(i).getAssignee() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(LabServiceReq.get(i).getAssignee() + ",");
+        }
+        if (LabServiceReq.get(i).getService() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(LabServiceReq.get(i).getService() + ",");
+        }
+        if (LabServiceReq.get(i).getPatientFor() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(LabServiceReq.get(i).getPatientFor());
+        }
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.print(
+          "An error occurred when trying to write to the Lab Service Request CSV file.");
       e.printStackTrace();
       return false;
     }
