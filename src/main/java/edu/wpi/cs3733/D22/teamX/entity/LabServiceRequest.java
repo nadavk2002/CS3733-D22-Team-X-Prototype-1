@@ -14,9 +14,8 @@ public class LabServiceRequest extends ServiceRequest {
       String assignee,
       String service,
       String patientFor) {
-    super(requestID, destination, status);
-    this.assignee = assignee;
     super(requestID, destination, status, assignee);
+    this.assignee = assignee;
     this.service = service;
     this.patientFor = patientFor;
   }
