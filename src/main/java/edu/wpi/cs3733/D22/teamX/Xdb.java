@@ -106,7 +106,9 @@ public class Xdb {
               + "assignee CHAR(8),"
               + "equipmentType VARCHAR(15),"
               + "quantity INT,"
-              + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
+              + "CONSTRAINT MESR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
@@ -126,7 +128,9 @@ public class Xdb {
               + "assignee CHAR(8),"
               + "service VARCHAR(15),"
               + "patientFor VARCHAR(15),"
-              + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
+              + "CONSTRAINT LBSR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
