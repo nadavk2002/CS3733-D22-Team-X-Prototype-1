@@ -1,4 +1,4 @@
-package edu.wpi.cs3733.D22.teamX;
+package edu.wpi.cs3733.D22.teamX.entity;
 
 import java.util.Objects;
 

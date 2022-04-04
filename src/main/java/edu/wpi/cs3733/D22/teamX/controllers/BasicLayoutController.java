@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import java.io.IOException;
 import java.util.HashMap;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ public class BasicLayoutController {
     pages.put("Request Transport", "ReqInTransport.fxml");
     pages.put("Request Language Interpreter", "ReqLang.fxml");
     pages.put("Request Laundry Services", "ReqLaundry.fxml");
-    pages.put("Hospital Locations", "HospitalLocations.fxml");
+    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
     ChoosePage.setItems(
         FXCollections.observableArrayList(
             "Choose a Page",
@@ -37,7 +38,7 @@ public class BasicLayoutController {
             "Request Transport",
             "Request Language Interpreter",
             "Request Laundry Services",
-            "Hospital Locations"));
+            "Graphical Map Editor"));
     ChoosePage.setValue("Choose a Page");
   }
 
@@ -53,7 +54,10 @@ public class BasicLayoutController {
   }
 
   @FXML
-  void ExitApplication() {
+  void ExitApplication() throws IOException {
+//    App.switchScene(
+//        FXMLLoader.load(
+//            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
     Platform.exit();
   }
 }

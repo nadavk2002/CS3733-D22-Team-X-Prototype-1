@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Location;
-
 /** Represents a general service request */
 public abstract class ServiceRequest {
 
@@ -56,6 +54,10 @@ public abstract class ServiceRequest {
 
   public void setAssignee(String assignee) {
     this.assignee = assignee;
+  }
+
+  public String getLocationShortName() {
+    return destination.getShortName();
   }
 
   //  public String getRequestingUser() {

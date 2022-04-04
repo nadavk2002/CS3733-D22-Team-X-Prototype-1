@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class ReqLangControllerTest extends ApplicationTest {
 
   @Test
   public void testRoomNumDropdown() {
-    //checks if its populated
+    // checks if its populated
     clickOn("#roomNum").clickOn("CIM");
     verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals("CIM"));
   }

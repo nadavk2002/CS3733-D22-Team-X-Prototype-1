@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -30,14 +32,16 @@
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service" />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Staff " />
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service Status" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" />
                            </children>
                         </VBox>
                         <VBox fx:id="dropdownCol" prefHeight="200.0" prefWidth="100.0">
                            <children>
                               <ChoiceBox fx:id="patientName" prefHeight="30.0" prefWidth="159.0" />
-                              <ChoiceBox fx:id="SelectLab" prefHeight="30.0" prefWidth="159.0" />
-                              <ChoiceBox fx:id="assignee" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="selectLab" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="assigneeDrop" prefHeight="30.0" prefWidth="159.0" />
                               <ChoiceBox fx:id="serviceStatus" prefHeight="30.0" prefWidth="159.0" />
+                              <ChoiceBox fx:id="selectDestination" prefHeight="30.0" prefWidth="159.0" />
                            </children>
                         </VBox>
                      </children>
@@ -45,13 +49,26 @@
                   <HBox fx:id="buttonRow" alignment="CENTER" prefHeight="62.0" prefWidth="346.0">
                      <children>
                         <Button fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" prefHeight="30.0" prefWidth="114.0" text="Reset Form" />
-                        <Button mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="114.0" text="Submit Request" />
+                        <Button fx:id="submitRequest" mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="114.0" text="Submit Request" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <TableView fx:id="currentRequests" prefHeight="500.0" prefWidth="820.0" />
+            <TableView fx:id="table" prefHeight="500.0" prefWidth="596.0">
+               <columns>
+                  <TableColumn fx:id="requestID" prefWidth="75.0" text="Request ID" />
+                  <TableColumn fx:id="patientID" prefWidth="75.0" text="Patient ID" />
+                  <TableColumn fx:id="assigneeTable" prefWidth="75.0" text="Assignee" />
+                  <TableColumn fx:id="service" prefWidth="96.00013732910156" text="Service Type" />
+                  <TableColumn fx:id="status" prefWidth="100.0" text="Request Status" />
+                  <TableColumn fx:id="destination" prefWidth="100.0" text="Destination" />
+               </columns></TableView>
          </children>
       </HBox>
+      <Label layoutX="778.0" layoutY="47.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+   <children>
+      <JFXButton layoutX="24.0" layoutY="24.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <Label alignment="CENTER" layoutX="797.0" layoutY="61.0" prefHeight="60.0" prefWidth="330.0" text="Hospital Locations" textAlignment="CENTER" AnchorPane.leftAnchor="797.0" AnchorPane.rightAnchor="792.7777777777778">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <TabPane fx:id="tabPane" layoutX="212.0" layoutY="236.0" prefHeight="610.0" prefWidth="610.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabLL2" text="Lower  Level 2" />
+          <Tab fx:id="tabLL1" text="Lower Level 1">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <TableView fx:id="table" layoutX="843.0" layoutY="319.0" prefHeight="450.0" prefWidth="900.0">
+        <columns>
+          <TableColumn fx:id="nodeID" prefWidth="90.0" text="Node ID" />
+            <TableColumn text="X Coordinate" fx:id="x" />
+            <TableColumn fx:id="y" text="Y Coordinate" />
+            <TableColumn fx:id="floor" prefWidth="60.0" text="Floor" />
+            <TableColumn fx:id="building" prefWidth="90.0" text="Building " />
+            <TableColumn fx:id="nodeType" text="Node Type" />
+            <TableColumn fx:id="longName" prefWidth="250.0" text="Long Name" />
+            <TableColumn fx:id="shortName" prefWidth="168.4443359375" text="Short Name" />
+        </columns>
+      </TableView>
+      <HBox fx:id="hBox1" layoutX="160" layoutY="200" prefHeight="700" prefWidth="1600" />
+   </children>
+</AnchorPane>
