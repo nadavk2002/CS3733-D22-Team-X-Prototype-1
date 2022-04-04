@@ -202,6 +202,7 @@ public class GraphicalMapEditorController implements Initializable {
 
     hBox1.getChildren().add(table);
     hBox1.setSpacing(90);
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     locationListFill();
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
