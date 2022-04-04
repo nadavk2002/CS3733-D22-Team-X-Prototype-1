@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LabServiceRequestDAOImpl implements LabServiceRequestDAO{
+public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
   List<LabServiceRequest> labServiceRequests;
   Connection connection;
 
@@ -50,9 +50,9 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO{
 
   @Override
   public LabServiceRequest getLabServiceRequest(String requestID) {
-    //iterate through list to find object with matching ID
-    for(LabServiceRequest lsr : labServiceRequests){
-      if(lsr.getRequestID().equals(requestID)){
+    // iterate through list to find object with matching ID
+    for (LabServiceRequest lsr : labServiceRequests) {
+      if (lsr.getRequestID().equals(requestID)) {
         return lsr;
       }
     }
@@ -61,16 +61,95 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO{
 
   @Override
   public void deleteLabServiceRequest(LabServiceRequest labServiceRequest) {
-
+    // remove from list
+    int index = 0; // create index for while loop
+    int intitialSize = labServiceRequests.size(); // get size
+    // go thru list
+    while (index < labServiceRequests.size()) {
+      if (labServiceRequests.get(index).equals(labServiceRequest)) {
+        labServiceRequests.remove(index); // remove item at index from list
+        break; // exit loop
+      }
+      index++;
+    }
+    if (index == intitialSize) {
+      throw new NoSuchElementException("request does not exist");
+    }
+    // remove from Database
+    try {
+      // create the statement
+      Statement statement = connection.createStatement();
+      // remove location from DB table
+      statement.executeUpdate(
+          "DELETE FROM LabServiceRequests WHERE requestID = '"
+              + labServiceRequest.getRequestID()
+              + "'");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void updateLabServiceRequest(LabServiceRequest labServiceRequest) {
-
+    // add item to list
+    int index = 0; // create index for while loop
+    int intitialSize = labServiceRequests.size(); // get size
+    // go thru list
+    while (index < labServiceRequests.size()) {
+      if (labServiceRequests.get(index).equals(labServiceRequest)) {
+        labServiceRequests.set(index, labServiceRequest); // update lsr at index position
+        break; // exit loop
+      }
+      index++;
+    }
+    if (index == intitialSize) {
+      throw new NoSuchElementException("request does not exist");
+    }
+    // update db table.
+    try {
+      // create the statement
+      Statement statement = connection.createStatement();
+      // update item in DB
+      statement.executeUpdate(
+          "UPDATE LabServiceRequests SET"
+              + " destination = '"
+              + labServiceRequest.getDestination().getNodeID()
+              + "', status = '"
+              + labServiceRequest.getStatus()
+              + "', assignee = '"
+              + labServiceRequest.getAssignee()
+              + "', service = '"
+              + labServiceRequest.getService()
+              + "', patientFor = '"
+              + labServiceRequest.getPatientFor()
+              + "' WHERE requestID = '"
+              + labServiceRequest.getRequestID()
+              + "'");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void addLabServiceRequest(LabServiceRequest labServiceRequest) {
-
+    //list
+    labServiceRequests.add(labServiceRequest);
+    //db
+    try {
+      Statement initialization = connection.createStatement();
+      StringBuilder lsr = new StringBuilder();
+      lsr.append("INSERT INTO LabServiceRequests VALUES (");
+      lsr.append("'" + labServiceRequest.getRequestID() + "', ");
+      lsr.append("'" + labServiceRequest.getDestination().getNodeID() + "', ");
+      lsr.append("'" + labServiceRequest.getStatus() + "', ");
+      lsr.append("'" + labServiceRequest.getAssignee() + "', ");
+      lsr.append("'" + labServiceRequest.getService() + "', ");
+      lsr.append("'" + labServiceRequest.getPatientFor() + "', ");
+      lsr.append(")");
+      initialization.execute(lsr.toString());
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("Database could not be updated");
+    }
   }
 }
