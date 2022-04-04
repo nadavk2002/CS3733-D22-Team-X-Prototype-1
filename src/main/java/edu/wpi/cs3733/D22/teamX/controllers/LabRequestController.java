@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -48,13 +49,18 @@ public class LabRequestController implements Initializable {
     locations = locationDAO.getAllLocations();
 
     selectDestination.setItems(this.getLocationNames());
-
+    submitRequest.setDisable(true);
     selectLab.getSelectionModel().select("");
     patientName.getSelectionModel().select("");
     assigneeDrop.getSelectionModel().select("");
     serviceStatus.getSelectionModel().select("");
     selectDestination.getSelectionModel().select("");
 
+    checkAllBoxes(selectLab);
+    checkAllBoxes(patientName);
+    checkAllBoxes(assigneeDrop);
+    checkAllBoxes(serviceStatus);
+    checkAllBoxes(selectDestination);
     // FORMATTING----------------------------------------------------
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
@@ -88,9 +94,28 @@ public class LabRequestController implements Initializable {
     return locationNames;
   }
 
+  /** When Reset Fields button is pressed, the fields on the screen are reset to default. */
   @FXML
-  public void checkAllBoxes(){
-    //submitRequest.setDisable(selectLab);
+  public void resetFields() {
+    patientName.setValue("");
+    assigneeDrop.setValue("");
+    serviceStatus.setValue("");
+    selectLab.setValue("");
+    selectDestination.setValue("");
+  }
+
+  public void checkAllBoxes(ChoiceBox<String> choiceBox) {
+    choiceBox
+        .getSelectionModel()
+        .selectedItemProperty()
+        .addListener(
+            (ObservableValue<? extends String> observable, String oldValue, String newValue) ->
+                submitRequest.setDisable(
+                    patientName.getValue().matches("")
+                        || selectLab.getValue().matches("")
+                        || assigneeDrop.getValue().matches("")
+                        || serviceStatus.getValue().matches("")
+                        || selectDestination.getValue().matches("")));
   }
 
   // UNCOMMENT WHEN DAO AND DAOIMPL ARE PULLED TO MAIN
@@ -127,15 +152,5 @@ public class LabRequestController implements Initializable {
   public void ReturnToMain() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
-  }
-
-  /** When Reset Fields button is pressed, the fields on the screen are reset to default. */
-  @FXML
-  public void resetFields() {
-    patientName.setValue("");
-    assigneeDrop.setValue("");
-    serviceStatus.setValue("");
-    selectLab.setValue("");
-    selectDestination.setValue("");
   }
 }
