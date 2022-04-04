@@ -1,13 +1,11 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.entity.LabServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -39,14 +37,21 @@ public class LabRequestController implements Initializable {
   @FXML private Button submitRequest;
   @FXML
   private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus, selectDestination;
-  private LabServiceRequest request;
-  private LocationDAO locationDAO;
   private List<Location> locations;
+  private LocationDAO locationDAO;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locationDAO = new LocationDAOImpl();
     locations = locationDAO.getAllLocations();
+
+    requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    patientID.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
+    assigneeTable.setCellValueFactory(new PropertyValueFactory<>("assignee"));
+    service.setCellValueFactory(new PropertyValueFactory<>("service"));
+    status.setCellValueFactory(new PropertyValueFactory<>("status"));
+    destination.setCellValueFactory(new PropertyValueFactory<>("locationNodeID"));
+    table.setItems(labDeliveryList());
 
     selectDestination.setItems(this.getLocationNames());
     submitRequest.setDisable(true);
@@ -62,7 +67,7 @@ public class LabRequestController implements Initializable {
     checkAllBoxes(serviceStatus);
     checkAllBoxes(selectDestination);
     // FORMATTING----------------------------------------------------
-    serviceStatus.getItems().addAll("", "PROC", "DONE");
+    serviceStatus.getItems().addAll(" ", "PROC", "DONE");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
     assigneeDrop
         .getItems()
@@ -77,13 +82,7 @@ public class LabRequestController implements Initializable {
     dropdownCol.setSpacing(20);
     labelCol.setSpacing(28);
     // TABLE COLUMN PLACING----------------------------------------------------
-    requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    patientID.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
-    assigneeTable.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    service.setCellValueFactory(new PropertyValueFactory<>("service"));
-    status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    destination.setCellValueFactory(new PropertyValueFactory<>("destination"));
-    // table.setItems(labDeliveryList());
+
   }
 
   public ObservableList<String> getLocationNames() {
@@ -118,39 +117,36 @@ public class LabRequestController implements Initializable {
                         || selectDestination.getValue().matches("")));
   }
 
-  // UNCOMMENT WHEN DAO AND DAOIMPL ARE PULLED TO MAIN
-  //  private ObservableList<LabServiceRequest> labDeliveryList() {
-
-  //    ObservableList<LabServiceRequest> labList = FXCollections.observableArrayList();
-  //    LabServiceRequestDAO allLabs = new LabServiceRequestDAOImpl();
-  //    List<LabServiceRequest> inpLabsList =
-  //            allLabs.getAllLabServiceRequests();
-  //    labList.addAll(inpLabsList);
-  //    return labList;
-  //  }
+  private ObservableList<LabServiceRequest> labDeliveryList() {
+    ObservableList<LabServiceRequest> labList = FXCollections.observableArrayList();
+    LabServiceRequestDAO allLabs = new LabServiceRequestDAOImpl();
+    List<LabServiceRequest> inpLabsList = allLabs.getAllLabServiceRequests();
+    labList.addAll(inpLabsList);
+    return labList;
+  }
 
   @FXML
   public void submitRequest() {
-    request = new LabServiceRequest();
-    request.setRequestID(request.makeRequestID());
+    LabServiceRequest request = new LabServiceRequest();
+
+    request.setRequestID(request.makeRequestID()); //
     request.setPatientFor(patientName.getValue());
     request.setAssignee(assigneeDrop.getValue());
     request.setService(selectLab.getValue());
     request.setStatus(serviceStatus.getValue());
-    request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
-    request.setStatus(serviceStatus.getValue());
-    // UNCOMMENT WHEN DAO AND DAOIMPL ARE PULLED TO MAIN
-    // LabServiceRequestDAO submit = new LabServiceRequestDAOImpl();
-    // submit.addLabServiceRequest(request);
+    request.setDestination(
+        locations.get(selectDestination.getSelectionModel().getSelectedIndex())); //
+    LabServiceRequestDAO submit = new LabServiceRequestDAOImpl();
+    submit.addLabServiceRequest(request);
     this.resetFields();
+    table.setItems(labDeliveryList());
   }
-
-  // private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus,
-  // selectDestination;
 
   @FXML
   public void ReturnToMain() throws IOException {
     App.switchScene(
-        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+        FXMLLoader.load(
+            Objects.requireNonNull(
+                getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml"))));
   }
 }
