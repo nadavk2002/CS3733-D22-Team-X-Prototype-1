@@ -1,11 +1,28 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-/** Represents a medicine delivery service request */
+/** Represents a gift delivery service request */
 public class GiftDeliveryRequest extends ServiceRequest {
   String Notes;
-  private String patient;
+  String giftType;
 
-  @Override
+  public GiftDeliveryRequest() {
+    super();
+    this.Notes = "";
+    this.giftType = "";
+  }
+
+  public GiftDeliveryRequest(
+      String requestID,
+      Location destination,
+      String status,
+      String assignee,
+      String Notes,
+      String giftType) {
+    super(requestID, destination, status, assignee);
+    this.Notes = Notes;
+    this.giftType = giftType;
+  }
+
   public String makeRequestID() {
     return "sample";
   }
@@ -18,11 +35,11 @@ public class GiftDeliveryRequest extends ServiceRequest {
     this.Notes = Notes;
   }
 
-  public String getPatient() {
-    return patient;
+  public String getGiftType() {
+    return giftType;
   }
 
-  public void setPatient(String patient) {
-    this.patient = patient;
+  public void setGiftType(String giftType) {
+    this.giftType = giftType;
   }
 }

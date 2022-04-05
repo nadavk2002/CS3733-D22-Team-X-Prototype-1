@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -16,7 +17,7 @@
             <Insets />
         </opaqueInsets>
     </ChoiceBox>
-    <TextField fx:id="giftNoteField" layoutX="929.0" layoutY="419.0"  prefHeight="26.0" prefWidth="150.0" />
+    <TextField fx:id="giftNoteField" layoutX="929.0" layoutY="419.0" prefHeight="26.0" prefWidth="150.0" />
     <Label layoutX="850.0" layoutY="389.0" text="Assign Staff:" />
     <Label layoutX="866.0" layoutY="421.0" text="Gift Note:" />
     <Button fx:id="submitButton" layoutX="996.0" layoutY="491.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" />
@@ -32,14 +33,19 @@
             <Insets />
          </opaqueInsets>
       </ChoiceBox>
-      <Label layoutX="831.0" layoutY="357.0" text="Gift Destination: " />
+      <Label layoutX="830.0" layoutY="357.0" text="Gift Destination: " />
       <ChoiceBox fx:id="selectStatus" layoutX="928.0" layoutY="453.0" prefWidth="150.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ChoiceBox>
       <Label layoutX="879.0" layoutY="456.0" text="Status:" />
-      <Label layoutX="841.0" layoutY="326.0" text="Patient Name:" />
-      <TextField fx:id="patientNameField" layoutX="929.0" layoutY="322.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="863.0" layoutY="326.0" text="Gift Type:" />
+      <TableView fx:id="tbView" layoutX="776.0" layoutY="556.0" prefHeight="373.0" prefWidth="456.0" />
+      <ChoiceBox fx:id="selectGiftType" layoutX="929.0" layoutY="322.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
 </children>
 </AnchorPane>

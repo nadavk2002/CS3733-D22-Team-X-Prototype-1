@@ -19,7 +19,7 @@
          <children>
             <JFXButton cache="true" contentDisplay="TOP" onAction="#LabRequestButton" text="Request Lab Service" textFill="#446fdc">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -42,9 +42,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="214.0" layoutY="20.0" onAction="#ReqMedicineDelivery" prefHeight="154.0" prefWidth="176.0" text="Request Medicine Delivery" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="224.0" layoutY="20.0" onAction="#ReqMedicineDelivery" prefHeight="154.0" prefWidth="176.0" text="Request Medicine Delivery" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -55,9 +55,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="435.0" layoutY="20.0" onAction="#ReqLangButton" text="Request Language Interpreter" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="418.0" layoutY="20.0" onAction="#ReqLangButton" text="Request Language Interpreter" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -68,9 +68,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="225.0" layoutY="223.0" onAction="#ReqLaundryButton" text="Request Laundry Service" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="208.0" layoutY="219.0" onAction="#ReqLaundryButton" text="Request Laundry Service" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -81,9 +81,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="407.0" layoutY="223.0" onAction="#ReqInTransportButton" prefHeight="26.0" prefWidth="242.0" text="Request Internal Patient Transportation" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="400.0" layoutY="219.0" onAction="#ReqInTransportButton" prefHeight="160.0" prefWidth="301.0" text="Request Internal Patient Transportation" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -94,9 +94,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="231.0" layoutY="414.0" onAction="#graphicalMapEditorButton" text="Hospital Locations" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="229.0" layoutY="410.0" onAction="#graphicalMapEditorButton" text="Hospital Locations" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -107,9 +107,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="22.0" layoutY="414.0" onAction="#equipmentRequestButton" text="Request Equipment Delivery" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="14.0" layoutY="411.0" onAction="#equipmentRequestButton" text="Request Equipment Delivery" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -122,7 +122,7 @@
       </JFXButton>
       <JFXButton contentDisplay="TOP" layoutX="649.0" layoutY="20.0" onAction="#ReqJanitorButton" text="Request Janitorial Services" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -133,9 +133,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="457.0" layoutY="414.0" onAction="#mealReqButton" text="Request Patient Meal" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="447.0" layoutY="404.0" onAction="#mealReqButton" text="Request Patient Meal" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -146,9 +146,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="22.0" layoutY="223.0" onAction="#EquipReqTableButton" text="Equipment Request Queue" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="1.0" layoutY="219.0" onAction="#EquipReqTableButton" text="Equipment Request Queue" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <graphic>
             <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
@@ -156,9 +156,9 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXButton contentDisplay="TOP" layoutX="663.0" layoutY="223.0" onAction="#GiftDeliveryButton" text="Gift Delivery" textFill="#446fdc">
+      <JFXButton contentDisplay="TOP" layoutX="670.0" layoutY="219.0" onAction="#GiftDeliveryButton" text="Gift Delivery" textFill="#446fdc">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -166,7 +166,7 @@
          <graphic>
             <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
                <image>
-                  <Image url="@../assets/mapIcon.png" />
+                  <Image url="@../../../../../../../../../../../../Downloads/bouquet.png" />
                </image>
             </ImageView>
          </graphic>
