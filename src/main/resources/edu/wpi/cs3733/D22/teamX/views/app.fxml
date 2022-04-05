@@ -143,5 +143,20 @@
             </ImageView>
          </graphic>
       </JFXButton>
+      <JFXButton contentDisplay="TOP" layoutX="663.0" layoutY="223.0" onAction="#GiftDeliveryButton" text="Gift Delivery" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/mapIcon.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
    </children>
 </AnchorPane>

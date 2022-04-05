@@ -100,13 +100,15 @@ public class Xdb {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8), "
+          "CREATE TABLE MedicalEquipmentServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
               + "equipmentType VARCHAR(15),"
               + "quantity INT,"
-              + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
+              + "CONSTRAINT MESR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
@@ -120,13 +122,15 @@ public class Xdb {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE LabServiceRequest(requestID CHAR(8), "
+          "CREATE TABLE LabServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
               + "service VARCHAR(15),"
               + "patientFor VARCHAR(15),"
-              + "FOREIGN KEY (destination) REFERENCES Location(nodeID))");
+              + "CONSTRAINT LBSR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();

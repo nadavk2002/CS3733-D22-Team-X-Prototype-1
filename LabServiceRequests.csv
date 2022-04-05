@@ -1,4 +1,4 @@
-﻿requestID,destination,status,assignee,service,patientFor
+requestID,destination,status,assignee,service,patientFor
 LBSR0001,HHALL01203,DONE,EMPL0001,Blood Sample,PATT0001
 LBSR0002,HHALL01303,PROC,EMPL0002,Urine Sample,PATT0002
 LBSR0003,HHALL01403,DONE,EMPL0003,X-Ray,PATT0003
