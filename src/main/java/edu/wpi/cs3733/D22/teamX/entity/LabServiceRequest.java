@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /** Represents a lab work service request */
 public class LabServiceRequest extends ServiceRequest {
   private String assignee; // employee id
@@ -49,8 +52,9 @@ public class LabServiceRequest extends ServiceRequest {
 
   @Override
   public String makeRequestID() {
-    LabServiceRequestDAO esrDAO = new LabServiceRequestDAOImpl();
-    int nextIDFinalNum = esrDAO.getAllLabServiceRequests().size() + 1;
+    LabServiceRequestDAO lsrDAO = new LabServiceRequestDAOImpl(); //gets list of all ids
+    int nextIDFinalNum = lsrDAO.getAllLabServiceRequests().size() + 1;
+
     return String.format("LBSR%04d", nextIDFinalNum);
   }
 }
