@@ -2,9 +2,8 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamX.*;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -73,6 +72,7 @@ public class GraphicalMapEditorController implements Initializable {
       typeText;
 
   private LocationDAO locDAO;
+  private EquipmentUnitDAO equipDAO;
 
   @FXML
   private void ToMainMenu() throws IOException {
@@ -120,10 +120,17 @@ public class GraphicalMapEditorController implements Initializable {
     return tableList;
   }
 
-  private void drawCirclesSetList(String floor) {
-    List<Location> locationList = locDAO.getAllLocations();
+  private void loadMap(String floor) {
     locationChoice.setValue("");
     locationChoice.getItems().clear();
+    equipmentChoice.setValue("");
+    equipmentChoice.getItems().clear();
+    drawCirclesSetLocationList(floor);
+
+  }
+
+  private void drawCirclesSetLocationList(String floor) {
+    List<Location> locationList = locDAO.getAllLocations();
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
         Circle circle = new Circle();
@@ -180,7 +187,7 @@ public class GraphicalMapEditorController implements Initializable {
                 .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/" + location + ".png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCirclesSetList(location);
+    drawCirclesSetLocationList(location);
   }
 
   @FXML
@@ -226,6 +233,7 @@ public class GraphicalMapEditorController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     // hBox1.getChildren().add(table);
+
     hBox1.setSpacing(90);
     locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -239,5 +247,6 @@ public class GraphicalMapEditorController implements Initializable {
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
     ObservableList<Location> locationList = locationListFill();
     locationTable.setItems(locationList);
+    equipDAO = new EquipmentUnitDAOImpl();
   }
 }
