@@ -126,7 +126,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
    * @param equipmentUnit equipment unit to be added
    */
   @Override
-  public void addUpdateEquipmentUnit(EquipmentUnit equipmentUnit) {
+  public void addEquipmentUnit(EquipmentUnit equipmentUnit) {
     // list
     equipmentUnits.add(equipmentUnit);
     // db
@@ -137,7 +137,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       record.append("'" + equipmentUnit.getUnitID() + "', ");
       record.append("'" + equipmentUnit.getType() + "', ");
       record.append("'" + equipmentUnit.getIsAvailableChar() + "',");
-      record.append("'" + equipmentUnit.getCurrLocation().getNodeID());
+      record.append("'" + equipmentUnit.getCurrLocation().getNodeID() + "'");
       record.append(")");
       initialization.execute(record.toString());
     } catch (SQLException e) {

@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.Objects;
+
 public class EquipmentUnit {
   private String unitID;
   private String type;
@@ -83,5 +85,13 @@ public class EquipmentUnit {
 
   public void setCurrLocation(Location currLocation) {
     this.currLocation = currLocation;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    EquipmentUnit equipmentUnit = (EquipmentUnit) o;
+    return Objects.equals(unitID, equipmentUnit.unitID);
   }
 }
