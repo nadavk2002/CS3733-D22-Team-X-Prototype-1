@@ -264,7 +264,7 @@ public class GraphicalMapEditorController implements Initializable {
     newEquipment.setType(typeText.getText());
     newEquipment.setUnitID(unitIdText.getText());
 
-    equipDAO.addUpdateEquipmentUnit(newEquipment);
+    equipDAO.addEquipmentUnit(newEquipment);
     loadLocation(newEquipment.getCurrLocation().getFloor());
     equipTable.getItems().clear();
     equipTable.setItems(equipmentListFill());

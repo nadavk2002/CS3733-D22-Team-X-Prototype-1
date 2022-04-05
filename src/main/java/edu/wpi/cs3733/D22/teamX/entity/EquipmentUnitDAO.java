@@ -11,5 +11,5 @@ public interface EquipmentUnitDAO {
 
   void updateEquipmentUnit(EquipmentUnit equipmentUnit);
 
-  void addUpdateEquipmentUnit(EquipmentUnit equipmentUnit);
+  void addEquipmentUnit(EquipmentUnit equipmentUnit);
 }
