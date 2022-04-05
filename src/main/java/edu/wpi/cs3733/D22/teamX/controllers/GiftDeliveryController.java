@@ -19,7 +19,7 @@ public class GiftDeliveryController implements Initializable {
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
-    submitButton.setDisable(true);
+    // submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
     selectAssignStaff.getItems().addAll("B", "X", "PPump", "R");
     selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
