@@ -38,7 +38,8 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML private ImageView imageView;
 
-  @FXML private TableView<Location> locationTable, equipTable;
+  @FXML private TableView<Location> locationTable;
+  @FXML private TableView<EquipmentUnit> equipTable;
 
   @FXML private TableColumn<Location, String> nodeID;
 
@@ -56,6 +57,8 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML private TableColumn<Location, String> shortName;
 
+  @FXML private TableColumn<EquipmentUnit, String> unitIdCol, typeCol, availableCol, curLocationCol;
+
   @FXML private JFXCheckBox availableCheck;
 
   @FXML
@@ -67,7 +70,7 @@ public class GraphicalMapEditorController implements Initializable {
       nodeTypeText,
       longNameText,
       shortNameText,
-      UnitIdText,
+      unitIdText,
       typeText;
 
   private LocationDAO locDAO;
@@ -119,6 +122,15 @@ public class GraphicalMapEditorController implements Initializable {
     return tableList;
   }
 
+  private ObservableList<EquipmentUnit> equipmentListFill() {
+    ObservableList<EquipmentUnit> tableList = FXCollections.observableArrayList();
+    List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
+    for (EquipmentUnit equip : equipment) {
+      tableList.add(equip);
+    }
+    return tableList;
+  }
+
   private void loadMap(String floor) {
     locationChoice.setValue("");
     locationChoice.getItems().clear();
@@ -148,7 +160,7 @@ public class GraphicalMapEditorController implements Initializable {
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
         Circle circle = new Circle();
-        circle.setRadius(3);
+        circle.setRadius(2);
         circle.setCenterX(equipment.get(i).getCurrLocation().getxCoord());
         circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
         circle.setFill(Paint.valueOf("GREEN"));
@@ -167,6 +179,32 @@ public class GraphicalMapEditorController implements Initializable {
     loadLocation(floor);
     locationTable.getItems().clear();
     locationTable.setItems(locationListFill());
+  }
+
+  /** Deletes selected node id in the dropdown */
+  public void deleteEquipment() {
+    String equipmentToDelete = equipmentChoice.getValue();
+    String floor = equipDAO.getEquipmentUnit(equipmentToDelete).getCurrLocation().getFloor();
+    equipDAO.deleteEquipmentUnit(equipDAO.getEquipmentUnit(equipmentToDelete));
+    loadLocation(floor);
+    equipTable.getItems().clear();
+    equipTable.setItems(equipmentListFill());
+  }
+
+  @FXML
+  public void equipmentSelected() {
+    try {
+      EquipmentUnit equipment = equipDAO.getEquipmentUnit(equipmentChoice.getValue());
+      unitIdText.setText(equipment.getUnitID());
+      typeText.setText(equipment.getType());
+      availableCheck.setSelected(equipment.isAvailable());
+      equipLocationChoice.setValue(equipment.getCurrLocation().getNodeID());
+    } catch (NoSuchElementException e) {
+      unitIdText.setText("");
+      typeText.setText("");
+      availableCheck.setSelected(false);
+      equipLocationChoice.setValue("");
+    }
   }
 
   @FXML
@@ -201,7 +239,35 @@ public class GraphicalMapEditorController implements Initializable {
                 .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/" + location + ".png"));
     ImageView newImage = new ImageView(img);
     imageGroup.getChildren().add(newImage);
-    drawCirclesSetLocationList(location);
+    loadMap(location);
+  }
+
+  @FXML
+  public void submitEquipment() {
+    List<EquipmentUnit> allEquipment = equipDAO.getAllEquipmentUnits();
+    for (int i = 0; i < allEquipment.size(); i++) {
+      if (allEquipment.get(i).getUnitID().equals(unitIdText.getText())) {
+        EquipmentUnit replaceEquip = allEquipment.get(i);
+        replaceEquip.setAvailable(availableCheck.isSelected());
+        replaceEquip.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
+        replaceEquip.setType(typeText.getText());
+        equipDAO.updateEquipmentUnit(replaceEquip);
+        loadLocation(replaceEquip.getCurrLocation().getFloor());
+        equipTable.getItems().clear();
+        equipTable.setItems(equipmentListFill());
+        return;
+      }
+    }
+    EquipmentUnit newEquipment = new EquipmentUnit();
+    newEquipment.setAvailable(availableCheck.isSelected());
+    newEquipment.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
+    newEquipment.setType(typeText.getText());
+    newEquipment.setUnitID(unitIdText.getText());
+
+    equipDAO.addUpdateEquipmentUnit(newEquipment);
+    loadLocation(newEquipment.getCurrLocation().getFloor());
+    equipTable.getItems().clear();
+    equipTable.setItems(equipmentListFill());
   }
 
   @FXML
@@ -238,9 +304,6 @@ public class GraphicalMapEditorController implements Initializable {
     loadLocation(newLocation.getFloor());
     locationTable.getItems().clear();
     locationTable.setItems(locationListFill());
-    //    for (int i = 0; i < locDAO.getAllLocations().size(); i++) {
-    //      System.out.println(locDAO.getAllLocations().get(i));
-    //    }
   }
 
   @Override
@@ -250,7 +313,6 @@ public class GraphicalMapEditorController implements Initializable {
 
     hBox1.setSpacing(90);
     locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
     y.setCellValueFactory(new PropertyValueFactory<Location, String>("y"));
@@ -261,6 +323,21 @@ public class GraphicalMapEditorController implements Initializable {
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
     ObservableList<Location> locationList = locationListFill();
     locationTable.setItems(locationList);
+
     equipDAO = new EquipmentUnitDAOImpl();
+    equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    unitIdCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("unitID"));
+    typeCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("type"));
+    availableCol.setCellValueFactory(
+        new PropertyValueFactory<EquipmentUnit, String>("isAvailableChar"));
+    curLocationCol.setCellValueFactory(
+        new PropertyValueFactory<EquipmentUnit, String>("currLocationShortName"));
+    ObservableList<EquipmentUnit> equipmentList = equipmentListFill();
+    equipTable.setItems(equipmentList);
+
+    List<Location> locs = locDAO.getAllLocations();
+    for (Location newLocation : locs) {
+      equipLocationChoice.getItems().add(newLocation.getNodeID());
+    }
   }
 }

@@ -77,6 +77,10 @@ public class EquipmentUnit {
     return currLocation;
   }
 
+  public String getCurrLocationShortName() {
+    return currLocation.getShortName();
+  }
+
   public void setCurrLocation(Location currLocation) {
     this.currLocation = currLocation;
   }
