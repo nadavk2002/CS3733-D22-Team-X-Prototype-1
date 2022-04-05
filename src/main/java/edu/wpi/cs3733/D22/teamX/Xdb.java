@@ -104,7 +104,7 @@ public class Xdb {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE EquipmentTypes(model VARCHAR(15) PRIMARY KEY NOT NULL, "
+          "CREATE TABLE EquipmentType(model VARCHAR(15) PRIMARY KEY NOT NULL, "
               + "numUnitsTotal INT,"
               + "numUnitsAvailable INT)");
     } catch (SQLException e) {
@@ -129,7 +129,7 @@ public class Xdb {
               + "CONSTRAINT MESR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
               + "ON DELETE SET NULL)");
-      //       + "FOREIGN KEY (equipmentType) REFERENCES EquipmentTypes(model))");
+      //       + "FOREIGN KEY (equipmentType) REFERENCES EquipmentType(model))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
@@ -170,7 +170,7 @@ public class Xdb {
               + "isAvailable CHAR(1),"
               + "currLocation CHAR(10),"
               + "FOREIGN KEY (currLocation) REFERENCES Location(nodeID))");
-      //              + "FOREIGN KEY (EquipmentType) REFERENCES EquipmentTypes(model))");
+      //              + "FOREIGN KEY (EquipmentType) REFERENCES EquipmentType(model))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
