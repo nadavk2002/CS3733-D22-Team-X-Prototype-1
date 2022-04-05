@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamX.*;
 import edu.wpi.cs3733.D22.teamX.entity.Location;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
@@ -25,9 +26,13 @@ import javafx.scene.shape.Circle;
 
 public class GraphicalMapEditorController implements Initializable {
 
-  @FXML private Button ToMainMenu, deleteLocationButton;
-
-  @FXML private ChoiceBox<String> locationChoice;
+  @FXML
+  private Button ToMainMenu,
+      deleteLocationButton,
+      submitLocationButton,
+      deleteEquipment,
+      submitEquipment;
+  @FXML private ChoiceBox<String> locationChoice, equipmentChoice, equipLocationChoice;
 
   @FXML private HBox hBox1;
 
@@ -35,7 +40,7 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML private ImageView imageView;
 
-  @FXML private TableView<Location> table;
+  @FXML private TableView<Location> locationTable, equipTable;
 
   @FXML private TableColumn<Location, String> nodeID;
 
@@ -53,6 +58,8 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML private TableColumn<Location, String> shortName;
 
+  @FXML private JFXCheckBox availableCheck;
+
   @FXML
   private TextField nodeIdText,
       xCordText,
@@ -61,7 +68,9 @@ public class GraphicalMapEditorController implements Initializable {
       buildingText,
       nodeTypeText,
       longNameText,
-      shortNameText;
+      shortNameText,
+      UnitIdText,
+      typeText;
 
   @FXML
   private void ToMainMenu() throws IOException {
@@ -134,8 +143,8 @@ public class GraphicalMapEditorController implements Initializable {
     String floor = locDAO.getLocation(locationToDelete).getFloor();
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
     loadLocation(floor);
-    table.getItems().clear();
-    table.setItems(locationListFill());
+    locationTable.getItems().clear();
+    locationTable.setItems(locationListFill());
   }
 
   @FXML
@@ -185,28 +194,39 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setyCoord(Integer.parseInt(yCordText.getText()));
         replaceLoc.setFloor(floorText.getText());
         replaceLoc.setBuilding(buildingText.getText());
-        replaceLoc.setNodeType(nodeTypeText.getText());
         replaceLoc.setLongName(longNameText.getText());
         replaceLoc.setShortName(shortNameText.getText());
+        replaceLoc.setNodeType(nodeTypeText.getText());
         locDAO.updateLocation(replaceLoc);
         loadLocation(replaceLoc.getFloor());
-        table.getItems().clear();
-        table.setItems(locationListFill());
-
+        locationTable.getItems().clear();
+        locationTable.setItems(locationListFill());
         return;
       }
     }
-    // adding a new location will go here when implemented.
+    Location newLocation = new Location();
 
+    newLocation.setxCoord(Integer.parseInt(xCordText.getText()));
+    newLocation.setyCoord(Integer.parseInt(yCordText.getText()));
+    newLocation.setFloor(floorText.getText());
+    newLocation.setBuilding(buildingText.getText());
+    newLocation.setNodeID(nodeIdText.getText());
+    newLocation.setNodeType(nodeTypeText.getText());
+    newLocation.setLongName(longNameText.getText());
+    newLocation.setShortName(shortNameText.getText());
+    locDAO.addLocation(newLocation);
+    loadLocation(newLocation.getFloor());
+    locationTable.getItems().clear();
+    locationTable.setItems(locationListFill());
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    hBox1.getChildren().add(table);
+    // hBox1.getChildren().add(table);
     hBox1.setSpacing(90);
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    locationListFill();
+    locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
     y.setCellValueFactory(new PropertyValueFactory<Location, String>("y"));
@@ -216,6 +236,6 @@ public class GraphicalMapEditorController implements Initializable {
     longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
     ObservableList<Location> locationList = locationListFill();
-    table.setItems(locationList);
+    locationTable.setItems(locationList);
   }
 }
