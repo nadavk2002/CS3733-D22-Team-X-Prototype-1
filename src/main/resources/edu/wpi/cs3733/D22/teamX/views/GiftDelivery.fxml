@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GiftDeliveryController">
+<children>
+    <ChoiceBox fx:id="selectAssignStaff" layoutX="928.0" layoutY="388.0" prefWidth="150.0">
+        <opaqueInsets>
+            <Insets />
+        </opaqueInsets>
+    </ChoiceBox>
+    <TextField fx:id="giftNoteField" layoutX="929.0" layoutY="419.0"  prefHeight="26.0" prefWidth="150.0" />
+    <Label layoutX="850.0" layoutY="389.0" text="Assign Staff:" />
+    <Label layoutX="866.0" layoutY="421.0" text="Gift Note:" />
+    <Button fx:id="submitButton" layoutX="996.0" layoutY="491.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" />
+      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ReturnToMain" text="&lt;--  Main Menu" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <Button fx:id="resetFields" layoutX="907.0" layoutY="491.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
+      <Label fx:id="requestStatus" layoutX="960.0" layoutY="554.0" />
+      <ChoiceBox fx:id="selectGiftDestination" layoutX="928.0" layoutY="356.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <Label layoutX="831.0" layoutY="357.0" text="Gift Destination: " />
+      <ChoiceBox fx:id="selectStatus" layoutX="928.0" layoutY="453.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <Label layoutX="879.0" layoutY="456.0" text="Status:" />
+      <Label layoutX="841.0" layoutY="326.0" text="Patient Name:" />
+      <TextField fx:id="patientNameField" layoutX="929.0" layoutY="322.0" prefHeight="26.0" prefWidth="150.0" />
+</children>
+</AnchorPane>
