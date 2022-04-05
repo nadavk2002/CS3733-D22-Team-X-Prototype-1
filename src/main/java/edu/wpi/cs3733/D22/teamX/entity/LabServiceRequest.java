@@ -1,8 +1,5 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /** Represents a lab work service request */
 public class LabServiceRequest extends ServiceRequest {
   private String assignee; // employee id
