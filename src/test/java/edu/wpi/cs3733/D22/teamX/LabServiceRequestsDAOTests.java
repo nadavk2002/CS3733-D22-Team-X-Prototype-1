@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX;
 
 import static org.junit.Assert.assertEquals;
 
+import edu.wpi.cs3733.D22.teamX.entity.LabServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.LabServiceRequestDAOImpl;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
@@ -46,5 +47,17 @@ public class LabServiceRequestsDAOTests {
     assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getStatus(), "DONE");
     assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getAssignee(), "EMPL0001");
     assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getService(), "Blood Sample");
+    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getPatientFor(), "PATT0001");
   }
+
+  @Test
+  public void testDBLSRequestUpdate() {
+    LabServiceRequestDAOImpl lsrDAOImpl = new LabServiceRequestDAOImpl();
+    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0002").getStatus(), "PROC");
+    LabServiceRequest lsr = lsrDAOImpl.getLabServiceRequest("LBSR0002");
+    lsr.setStatus("DONE");
+    lsrDAOImpl.updateLabServiceRequest(lsr);
+    assertEquals("DONE", lsrDAOImpl.getLabServiceRequest("LBSR0002").getStatus());
+  }
+  
 }
