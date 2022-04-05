@@ -22,7 +22,7 @@ public class GiftDeliveryController implements Initializable {
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
     selectAssignStaff.getItems().addAll("B", "X", "PPump", "R");
-    selectGiftDestination.getSelectionModel().select("");
+    selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
   }
 
   @FXML
@@ -46,6 +46,10 @@ public class GiftDeliveryController implements Initializable {
     request.setRequestID("SAMPLE12");
     request.setDestination(new Location());
     request.setStatus(selectStatus.getValue());
+    request.setNotes(giftNoteField.getText());
+    request.setPatient(patientNameField.getText());
+    request.setAssignee(selectAssignStaff.getValue());
+
     this.resetFields();
   }
 }
