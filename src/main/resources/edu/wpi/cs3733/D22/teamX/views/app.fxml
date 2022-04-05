@@ -166,7 +166,7 @@
          <graphic>
             <ImageView fitHeight="125.0" fitWidth="127.0" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../../../Downloads/bouquet.png" />
+                  <Image url="@../assets/bouquet.png" />
                </image>
             </ImageView>
          </graphic>
