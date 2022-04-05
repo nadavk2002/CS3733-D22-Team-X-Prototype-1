@@ -117,7 +117,7 @@ public class LocationDAOImpl implements LocationDAO {
       }
     } else {
       System.out.println("location does not exist");
-      throw new NoSuchElementException("request does not exist");
+      throw new NoSuchElementException("request does not exist (in update)");
     }
   }
 
@@ -133,6 +133,7 @@ public class LocationDAOImpl implements LocationDAO {
     while (locationInd < locations.size()) {
       if (locations.get(locationInd).equals(location)) {
         locations.remove(locationInd);
+        locationInd--;
         break;
       }
       locationInd++;
@@ -150,7 +151,7 @@ public class LocationDAOImpl implements LocationDAO {
       }
     } else {
       System.out.println("Location does not exist");
-      throw new NoSuchElementException("request does not exist");
+      throw new NoSuchElementException("request does not exist (in delete)");
     }
   }
 
