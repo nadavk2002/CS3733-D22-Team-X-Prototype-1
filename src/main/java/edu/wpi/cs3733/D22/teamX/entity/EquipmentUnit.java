@@ -18,6 +18,7 @@ public class EquipmentUnit {
   public EquipmentUnit(String unitID, String type, char isAvailable, Location currLocation) {
     this.unitID = unitID;
     this.type = type;
+    // Converts CHAR(1) to boolean
     if (isAvailable == 'Y') {
       this.isAvailable = true;
     } else {
