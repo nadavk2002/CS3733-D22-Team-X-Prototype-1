@@ -1,37 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLaundryController">
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLaundryController">
    <children>
-      <ChoiceBox fx:id="selectLaundryType" layoutX="931.0" layoutY="424.0" prefWidth="150.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ChoiceBox>
-      <TextField fx:id="roomField" layoutX="931.0" layoutY="470.0" />
-      <Label layoutX="838.0" layoutY="428.0" text="Type of Service:" />
-      <Label layoutX="839.0" layoutY="474.0" text="Room Number:" />
-      <Button layoutX="956.0" layoutY="566.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Button fx:id="resetFields" layoutX="966.0" layoutY="600.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
-      <TextField fx:id="assignStaff" layoutX="931.0" layoutY="501.0" />
-      <Label layoutX="864.0" layoutY="505.0" text="Assignee:" />
-      <TextField fx:id="serviceStatus" layoutX="931.0" layoutY="530.0" />
-      <Label layoutX="842.0" layoutY="534.0" text="Service Status:" />
-      <TableView layoutX="1191.0" layoutY="409.0" prefHeight="433.0" prefWidth="645.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
+      <TableView fx:id="table" layoutX="796.0" layoutY="251.0" prefHeight="433.0" prefWidth="645.0" />
+      <VBox fx:id="submitColumn" layoutX="497.0" layoutY="392.0" prefHeight="200.0" prefWidth="250.0">
+         <children>
+            <HBox prefHeight="102.0" prefWidth="219.0">
+               <children>
+                  <VBox fx:id="labelColumn" prefHeight="102.0" prefWidth="254.0">
+                     <children>
+                        <Label text="Type of Service:" />
+                        <Label text="Room Number:" />
+                        <Label text="Assignee:" />
+                        <Label text="Service Status:" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="selectionMenuColumn" prefHeight="102.0" prefWidth="307.0">
+                     <children>
+                        <ChoiceBox fx:id="selectLaundryType" prefWidth="150.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ChoiceBox>
+                        <ChoiceBox fx:id="roomNum" prefWidth="150.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ChoiceBox>
+                        <TextField fx:id="assignStaff" prefWidth="150.0" />
+                        <ChoiceBox fx:id="serviceStatus" prefWidth="150.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </ChoiceBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="buttonRow" prefHeight="175.0" prefWidth="307.0">
+               <children>
+                  <JFXButton fx:id="resetFields" buttonType="RAISED" onAction="#resetFields" prefHeight="30.0" prefWidth="114.0" ripplerFill="#446fdbe6" text="Reset Fields" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="submitButton" buttonType="RAISED" prefWidth="114.0" ripplerFill="#446fdbe5" onAction="#submitRequest" text="Submit Request" textFill="#446fdb">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>

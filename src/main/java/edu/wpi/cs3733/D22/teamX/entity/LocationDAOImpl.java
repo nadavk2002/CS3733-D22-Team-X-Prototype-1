@@ -117,7 +117,7 @@ public class LocationDAOImpl implements LocationDAO {
       }
     } else {
       System.out.println("location does not exist");
-      throw new NoSuchElementException("request does not exist");
+      throw new NoSuchElementException("request does not exist (in update)");
     }
   }
 
@@ -133,6 +133,7 @@ public class LocationDAOImpl implements LocationDAO {
     while (locationInd < locations.size()) {
       if (locations.get(locationInd).equals(location)) {
         locations.remove(locationInd);
+        locationInd--;
         break;
       }
       locationInd++;
@@ -150,7 +151,31 @@ public class LocationDAOImpl implements LocationDAO {
       }
     } else {
       System.out.println("Location does not exist");
-      throw new NoSuchElementException("request does not exist");
+      throw new NoSuchElementException("request does not exist (in delete)");
+    }
+  }
+
+  @Override
+  public void addLocation(Location location) {
+    locations.add(location);
+
+    try {
+      Statement initialization = connection.createStatement();
+      StringBuilder insertLocation = new StringBuilder();
+      insertLocation.append("INSERT INTO Location VALUES(");
+      insertLocation.append("'" + location.getNodeID() + "'" + ", ");
+      insertLocation.append(location.getxCoord() + ", ");
+      insertLocation.append(location.getyCoord() + ", ");
+      insertLocation.append("'" + location.getFloor() + "'" + ", ");
+      insertLocation.append("'" + location.getBuilding() + "'" + ", ");
+      insertLocation.append("'" + location.getNodeType() + "'" + ", ");
+      insertLocation.append("'" + location.getLongName() + "'" + ", ");
+      insertLocation.append("'" + location.getShortName() + "'");
+      insertLocation.append(")");
+      initialization.execute(insertLocation.toString());
+    } catch (SQLException e) {
+      System.out.println("Database could not be updated");
+      return;
     }
   }
 }

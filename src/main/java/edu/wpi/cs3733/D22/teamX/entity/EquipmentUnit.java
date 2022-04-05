@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.Objects;
+
 public class EquipmentUnit {
   private String unitID;
   private String type;
@@ -10,6 +12,17 @@ public class EquipmentUnit {
     this.unitID = unitID;
     this.type = type;
     this.isAvailable = isAvailable;
+    this.currLocation = currLocation;
+  }
+
+  public EquipmentUnit(String unitID, String type, char isAvailable, Location currLocation) {
+    this.unitID = unitID;
+    this.type = type;
+    if (isAvailable == 'Y') {
+      this.isAvailable = true;
+    } else {
+      this.isAvailable = false;
+    }
     this.currLocation = currLocation;
   }
 
@@ -40,15 +53,45 @@ public class EquipmentUnit {
     return isAvailable;
   }
 
+  public char getIsAvailableChar() {
+    if (isAvailable) {
+      return 'Y';
+    } else {
+      return 'N';
+    }
+  }
+
   public void setAvailable(boolean available) {
     isAvailable = available;
+  }
+
+  public void setAvailable(char available) {
+    if (available == 'Y') {
+      this.isAvailable = true;
+    } else if (available == 'N') {
+      this.isAvailable = false;
+    }
+
+    // should probably throw an exception here
   }
 
   public Location getCurrLocation() {
     return currLocation;
   }
 
+  public String getCurrLocationShortName() {
+    return currLocation.getShortName();
+  }
+
   public void setCurrLocation(Location currLocation) {
     this.currLocation = currLocation;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    EquipmentUnit equipmentUnit = (EquipmentUnit) o;
+    return Objects.equals(unitID, equipmentUnit.unitID);
   }
 }

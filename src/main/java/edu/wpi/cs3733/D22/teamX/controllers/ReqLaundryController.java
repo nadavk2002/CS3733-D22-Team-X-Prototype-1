@@ -3,23 +3,107 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.LaundyServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.Location;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
 import java.io.IOException;
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-public class ReqLaundryController {
-  @FXML private Button ToMainMenu;
-  @FXML private ChoiceBox<String> selectLaundryType;
-  @FXML private TextField roomField, assignStaff, serviceStatus;
+public class ReqLaundryController implements Initializable {
+  @FXML private VBox selectionMenuColumn;
+  @FXML private VBox labelColumn;
+  @FXML private VBox submitColumn;
+  @FXML private HBox buttonRow;
+  @FXML private Button ToMainMenu, submitButton;
+  @FXML private ChoiceBox<String> selectLaundryType, roomNum, serviceStatus;
+  @FXML private TextField assignStaff;
 
-  @FXML
-  public void initialize() {
+  @FXML private TableView table;
+  private TableColumn<LaundyServiceRequest, String> ID = new TableColumn("Request ID");
+  private TableColumn<LaundyServiceRequest, String> assignee = new TableColumn("Assignee");
+  private TableColumn<LaundyServiceRequest, String> status = new TableColumn("Status");
+  private TableColumn<LaundyServiceRequest, String> locationColumn = new TableColumn("Location");
+  private TableColumn<LaundyServiceRequest, String> laundryService =
+      new TableColumn("Laundry Service");
+
+  private LocationDAO locationDAO;
+  private List<Location> locations;
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    locationDAO = new LocationDAOImpl();
+    locations = locationDAO.getAllLocations();
+    resetFields();
+    selectionMenuColumn.setSpacing(20);
+    labelColumn.setSpacing(28);
+    submitColumn.setSpacing(20);
+    buttonRow.setSpacing(20);
+    roomNum.setItems(getLocationNames());
+    submitButton.setDisable(true);
+
     selectLaundryType
         .getItems()
         .addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
+    serviceStatus.getItems().addAll("", "PROC", "DONE");
+
+    selectLaundryType.setOnAction((ActionEvent event) -> enableSubmitButton());
+    roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
+    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
+    serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
+
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    table.getColumns().addAll(ID, assignee, locationColumn, status, laundryService);
+    ID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
+    status.setCellValueFactory(new PropertyValueFactory<>("status"));
+    laundryService.setCellValueFactory(new PropertyValueFactory<>("laundry"));
+    assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
+  }
+
+  /**
+   * Creates a list of all locations with their short names.
+   *
+   * @return List of short names of all destinations
+   */
+  public ObservableList<String> getLocationNames() {
+    ObservableList<String> locationNames = FXCollections.observableArrayList();
+    for (int i = 0; i < locations.size(); i++) {
+      locationNames.add(locations.get(i).getShortName());
+    }
+    return locationNames;
+  }
+
+  /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
+  public void enableSubmitButton() {
+    submitButton.setDisable(
+        assignStaff.getText().equals("")
+            || serviceStatus.getValue().equals("")
+            || roomNum.getValue().equals("")
+            || selectLaundryType.getValue().equals(""));
+  }
+
+  @FXML
+  public void submitRequest() {
+    LaundyServiceRequest request = new LaundyServiceRequest();
+
+    request.setRequestID(request.makeRequestID());
+    request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
+    request.setStatus(serviceStatus.getValue());
+    request.setAssignee(assignStaff.getText());
+    request.setLaundry(selectLaundryType.getValue());
+    this.resetFields();
+    table.getItems().add(request);
   }
 
   /**
@@ -28,25 +112,16 @@ public class ReqLaundryController {
    * @throws IOException if main menu not switched to
    */
   @FXML
-  void ToMainMenu() throws IOException {
+  public void ToMainMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
 
   @FXML
-  void resetFields() {
-    roomField.setText("");
+  public void resetFields() {
     selectLaundryType.setValue("");
+    roomNum.setValue("");
     assignStaff.setText("");
-    serviceStatus.setText("");
-  }
-
-  @FXML
-  void submitRequest() {
-    LaundyServiceRequest request = new LaundyServiceRequest();
-    request.setRequestID("SAMPLE12");
-    request.setDestination(new Location());
-    request.setStatus(serviceStatus.getText());
-    this.resetFields();
+    serviceStatus.setValue("");
   }
 }

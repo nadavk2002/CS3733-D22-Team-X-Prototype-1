@@ -25,6 +25,10 @@ public class LabServiceRequest extends ServiceRequest {
     this.patientFor = null;
   }
 
+  public String getLocationNodeID() {
+    return getDestination().getNodeID();
+  }
+
   public String getService() {
     return service;
   }
@@ -43,6 +47,9 @@ public class LabServiceRequest extends ServiceRequest {
 
   @Override
   public String makeRequestID() {
-    return "sample";
+    LabServiceRequestDAO lsrDAO = new LabServiceRequestDAOImpl(); // gets list of all ids
+    int nextIDFinalNum = lsrDAO.getAllLabServiceRequests().size() + 1;
+
+    return String.format("LBSR%04d", nextIDFinalNum);
   }
 }
