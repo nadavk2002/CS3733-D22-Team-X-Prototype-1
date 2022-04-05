@@ -51,8 +51,26 @@ public class EquipmentUnit {
     return isAvailable;
   }
 
+  public char getIsAvailableChar() {
+    if (isAvailable) {
+      return 'Y';
+    } else {
+      return 'N';
+    }
+  }
+
   public void setAvailable(boolean available) {
     isAvailable = available;
+  }
+
+  public void setAvailable(char available) {
+    if (available == 'Y') {
+      this.isAvailable = true;
+    } else if (available == 'N') {
+      this.isAvailable = false;
+    }
+
+    // should probably throw an exception here
   }
 
   public Location getCurrLocation() {
