@@ -73,7 +73,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
         Statement statement = connection.createStatement();
         // remove location from DB table
         statement.executeUpdate(
-            "DELETE FROM EquipmentUnits WHERE UNITID = '" + equipmentUnit.getUnitID() + "'");
+            "DELETE FROM EquipmentUnit WHERE UNITID = '" + equipmentUnit.getUnitID() + "'");
       } catch (SQLException e) {
         e.printStackTrace();
       }
@@ -105,7 +105,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE EquipmentUnits SET"
+          "UPDATE EquipmentUnit SET"
               + " TYPE = '"
               + equipmentUnit.getType()
               + "', ISAVAILIBLE = '"
@@ -133,7 +133,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
     try {
       Statement initialization = connection.createStatement();
       StringBuilder record = new StringBuilder();
-      record.append("INSERT INTO EquipmentUnits VALUES (");
+      record.append("INSERT INTO EquipmentUnit VALUES (");
       record.append("'" + equipmentUnit.getUnitID() + "', ");
       record.append("'" + equipmentUnit.getType() + "', ");
       record.append("'" + equipmentUnit.getIsAvailableChar() + "',");
