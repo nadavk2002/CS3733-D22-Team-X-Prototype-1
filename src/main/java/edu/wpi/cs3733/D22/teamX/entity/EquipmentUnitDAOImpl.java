@@ -27,7 +27,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       while (resultSet.next()) {
         EquipmentUnit eqUnit = new EquipmentUnit();
         eqUnit.setUnitID(resultSet.getString("unitID"));
-        eqUnit.setType(resultSet.getString("type"));
+        eqUnit.setType(resultSet.getString("EQUIPMENTTYPE"));
         eqUnit.setAvailable(resultSet.getString("isAvailable").charAt(0));
         eqUnit.setCurrLocation(locDestination.getLocation(resultSet.getString("currLocation")));
         // add lsr to the list
@@ -106,9 +106,9 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       // update item in DB
       statement.executeUpdate(
           "UPDATE EquipmentUnit SET"
-              + " TYPE = '"
+              + " EQUIPMENTTYPE = '"
               + equipmentUnit.getType()
-              + "', ISAVAILIBLE = '"
+              + "', ISAVAILABLE = '"
               + equipmentUnit.getIsAvailableChar()
               + "', CURRLOCATION = '"
               + equipmentUnit.getCurrLocation().getNodeID()
