@@ -9,7 +9,7 @@ public class LaundyServiceRequest extends ServiceRequest {
     return "sample";
   }
 
-  public String getLaundryType() {
+  public String getLaundry() {
     return Laundry;
   }
 
