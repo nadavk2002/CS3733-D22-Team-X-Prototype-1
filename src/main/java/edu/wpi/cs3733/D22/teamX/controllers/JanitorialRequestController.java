@@ -17,8 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class JanitorialRequestController implements Initializable {
   @FXML private Button mainMenu, submitButton;
-  @FXML private ChoiceBox<String> roomNum, serviceStatus;
-  @FXML private TextField assignStaff, serviceType;
+  @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
   @FXML private TableView<JanitorServiceRequest> tbView;
 
   private LocationDAO locationDAO;
@@ -38,9 +37,13 @@ public class JanitorialRequestController implements Initializable {
     resetFields();
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
+    serviceType.getItems().addAll("Bodily Fluids", "Chemical Spills", "Disinfection");
+    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());
+    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
+    serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
     tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     tbView
@@ -68,16 +71,20 @@ public class JanitorialRequestController implements Initializable {
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
-    submitButton.setDisable(roomNum.getValue().equals("") || serviceType.getText().equals(""));
+    submitButton.setDisable(
+        roomNum.getValue().equals("")
+            || serviceType.getValue().equals("")
+            || serviceStatus.getValue().equals("")
+            || assignStaff.getValue().equals(""));
   }
 
   /** Resets all fields on the page. */
   @FXML
   public void resetFields() {
-    serviceType.setText("");
+    serviceType.setValue("");
     roomNum.setValue("");
     serviceStatus.setValue("");
-    assignStaff.setText("");
+    assignStaff.setValue("");
   }
 
   /** Creates a service request from the fields on the javafx page */
@@ -88,8 +95,8 @@ public class JanitorialRequestController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(assignStaff.getText());
-    request.setServiceType(serviceType.getText());
+    request.setAssignee(assignStaff.getValue());
+    request.setServiceType(serviceType.getValue());
     this.resetFields();
     tbView.getItems().add(request);
   }
