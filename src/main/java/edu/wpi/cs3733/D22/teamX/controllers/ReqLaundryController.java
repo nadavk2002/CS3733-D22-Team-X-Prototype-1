@@ -32,7 +32,7 @@ public class ReqLaundryController implements Initializable {
   @FXML private TableView table;
   private TableColumn<LaundyServiceRequest, String> ID = new TableColumn("Request ID");
   private TableColumn<LaundyServiceRequest, String> assignee = new TableColumn("Assignee");
-  private TableColumn<LaundyServiceRequest, String> status = new TableColumn("Location");
+  private TableColumn<LaundyServiceRequest, String> status = new TableColumn("Status");
   private TableColumn<LaundyServiceRequest, String> locationColumn = new TableColumn("Location");
   private TableColumn<LaundyServiceRequest, String> laundryService =
       new TableColumn("Laundry Service");
@@ -67,7 +67,7 @@ public class ReqLaundryController implements Initializable {
     ID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    laundryService.setCellValueFactory(new PropertyValueFactory<>("Laundry Service"));
+    laundryService.setCellValueFactory(new PropertyValueFactory<>("laundry"));
     assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
