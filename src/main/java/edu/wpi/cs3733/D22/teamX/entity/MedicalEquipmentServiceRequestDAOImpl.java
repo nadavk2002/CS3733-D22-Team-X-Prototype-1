@@ -13,7 +13,6 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
   List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests;
   Connection connection; // store connection info
 
-  /** constructor */
   public MedicalEquipmentServiceRequestDAOImpl() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     medicalEquipmentServiceRequests = new ArrayList<MedicalEquipmentServiceRequest>();
