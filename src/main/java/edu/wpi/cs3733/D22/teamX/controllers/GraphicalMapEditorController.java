@@ -131,8 +131,11 @@ public class GraphicalMapEditorController implements Initializable {
   public void deleteLocation() {
     String locationToDelete = locationChoice.getValue(); // Node ID
     LocationDAO locDAO = new LocationDAOImpl();
+    String floor = locDAO.getLocation(locationToDelete).getFloor();
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
-    drawCirclesSetList(locDAO.getLocation(locationToDelete).getFloor());
+    loadLocation(floor);
+    table.getItems().clear();
+    table.setItems(locationListFill());
   }
 
   @FXML
