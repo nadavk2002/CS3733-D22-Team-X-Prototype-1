@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamX.*;
 import edu.wpi.cs3733.D22.teamX.entity.*;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -126,7 +125,7 @@ public class GraphicalMapEditorController implements Initializable {
     equipmentChoice.setValue("");
     equipmentChoice.getItems().clear();
     drawCirclesSetLocationList(floor);
-
+    drawCirclesSetEquipmentList(floor);
   }
 
   private void drawCirclesSetLocationList(String floor) {
@@ -140,6 +139,21 @@ public class GraphicalMapEditorController implements Initializable {
         circle.setFill(Paint.valueOf("RED"));
         imageGroup.getChildren().add(circle);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
+      }
+    }
+  }
+
+  private void drawCirclesSetEquipmentList(String floor) {
+    List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
+    for (int i = 0; i < equipment.size(); i++) {
+      if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
+        Circle circle = new Circle();
+        circle.setRadius(3);
+        circle.setCenterX(equipment.get(i).getCurrLocation().getxCoord());
+        circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
+        circle.setFill(Paint.valueOf("GREEN"));
+        imageGroup.getChildren().add(circle);
+        equipmentChoice.getItems().add(equipment.get(i).getUnitID());
       }
     }
   }
