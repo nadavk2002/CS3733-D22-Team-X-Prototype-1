@@ -17,6 +17,7 @@ public class AppController {
   @FXML private Button equipmentRequestButton;
   @FXML private Button graphicalMapEditorButton;
   @FXML private Button EquipReqTableButton;
+  @FXML private Button ReqJanitorButton;
   @FXML private Button GiftDeliveryButton;
 
   @FXML
@@ -39,6 +40,13 @@ public class AppController {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/Medicine_Delivery.fxml")));
+  }
+
+  @FXML
+  void ReqJanitorButton() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/JanitorialRequest.fxml")));
   }
 
   @FXML
