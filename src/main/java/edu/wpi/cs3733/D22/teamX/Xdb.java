@@ -51,8 +51,10 @@ public class Xdb {
 
     dropAllTables();
     createLocationTable();
+    creatEqTypesTable();
     createMedicalEquipmentServiceRequestTable();
     createLabServiceRequestTable();
+    createEqUnitsTable();
     if (!loadLocationCSV() || !loadMedEqServiceReqCSV() || !loadLabServiceReqCSV()) {
       throw new loadSaveFromCSVException("Error when loading from CSV files.");
     }
@@ -94,6 +96,22 @@ public class Xdb {
     }
   }
 
+  /** Creates a Equipment Types table */
+  private static void creatEqTypesTable() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    try {
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE EquipmentTypes(model VARCHAR(15) PRIMARY KEY NOT NULL, "
+              + "numUnitsTotal INT,"
+              + "numUnitsAvailable INT)");
+    } catch (SQLException e) {
+      System.out.println("Table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
   /** creates the medical equipment request service table in the database */
   private static void createMedicalEquipmentServiceRequestTable() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
@@ -109,6 +127,7 @@ public class Xdb {
               + "CONSTRAINT MESR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
               + "ON DELETE SET NULL)");
+      //       + "FOREIGN KEY (equipmentType) REFERENCES EquipmentTypes(model))");
     } catch (SQLException e) {
       System.out.println("Table creation failed. Check output console.");
       e.printStackTrace();
@@ -138,9 +157,35 @@ public class Xdb {
     }
   }
 
+  /** Creates a Equipment Units table */
+  private static void createEqUnitsTable() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    try {
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE EquipmentUnits(UnitID CHAR(8) PRIMARY KEY NOT NULL, "
+              + "EquipmentType CHAR(10),"
+              + "isAvailable CHAR(4),"
+              + "currLocation CHAR(10),"
+              + "FOREIGN KEY (currLocation) REFERENCES Location(nodeID))");
+      //              + "FOREIGN KEY (EquipmentType) REFERENCES EquipmentTypes(model))");
+    } catch (SQLException e) {
+      System.out.println("Table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
   /** Drops all the tables in the database. */
   private static void dropAllTables() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    try {
+      Statement dropLocation = connection.createStatement();
+      dropLocation.execute("DROP TABLE EquipmentUnits");
+    } catch (SQLException e) {
+      System.out.println("Tables not dropped");
+      e.printStackTrace();
+    }
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE LabServiceRequest");
@@ -156,7 +201,13 @@ public class Xdb {
       System.out.println("Tables not dropped");
       e.printStackTrace();
     }
-
+    try {
+      Statement dropLocation = connection.createStatement();
+      dropLocation.execute("DROP TABLE EquipmentTypes");
+    } catch (SQLException e) {
+      System.out.println("Tables not dropped");
+      e.printStackTrace();
+    }
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE Location");
