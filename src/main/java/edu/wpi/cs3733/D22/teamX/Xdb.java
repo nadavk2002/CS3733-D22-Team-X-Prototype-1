@@ -165,9 +165,9 @@ public class Xdb {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE EquipmentUnits(UnitID CHAR(8) PRIMARY KEY NOT NULL, "
-              + "EquipmentType CHAR(10),"
-              + "isAvailable CHAR(4),"
+          "CREATE TABLE EquipmentUnit(UnitID CHAR(8) PRIMARY KEY NOT NULL, "
+              + "EquipmentType VARCHAR(20),"
+              + "isAvailable CHAR(1),"
               + "currLocation CHAR(10),"
               + "FOREIGN KEY (currLocation) REFERENCES Location(nodeID))");
       //              + "FOREIGN KEY (EquipmentType) REFERENCES EquipmentTypes(model))");
