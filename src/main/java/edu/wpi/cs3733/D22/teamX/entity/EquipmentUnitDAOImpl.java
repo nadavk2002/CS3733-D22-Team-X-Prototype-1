@@ -73,7 +73,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
         Statement statement = connection.createStatement();
         // remove location from DB table
         statement.executeUpdate(
-                "DELETE FROM EquipmentUnits WHERE UNITID = '" + equipmentUnit.getUnitID() + "'");
+            "DELETE FROM EquipmentUnits WHERE UNITID = '" + equipmentUnit.getUnitID() + "'");
       } catch (SQLException e) {
         e.printStackTrace();
       }

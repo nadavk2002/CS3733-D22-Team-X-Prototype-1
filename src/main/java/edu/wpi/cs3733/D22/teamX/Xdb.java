@@ -200,15 +200,15 @@ public class Xdb {
 
     try {
       Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE EquipmentUnits");
+      dropLocation.execute("DROP TABLE EquipmentUnit");
     } catch (SQLException e) {
-      System.out.println("EquipmentUnits not dropped");
+      System.out.println("EquipmentUnit not dropped");
       e.printStackTrace();
     }
 
     try {
       Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE EquipmentTypes");
+      dropLocation.execute("DROP TABLE EquipmentType");
     } catch (SQLException e) {
       System.out.println("EquipmentType not dropped");
       e.printStackTrace();
@@ -424,61 +424,56 @@ public class Xdb {
   }
 
   private static boolean loadEquipmentUnitsCSV() {
-    //    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
-    //    List<EquipmentUnit> equipmentUnitList = new ArrayList<EquipmentUnit>();
-    //    try {
-    //      LocationDAO locationDAO = new LocationDAOImpl();
-    //      InputStream equipmentUnitStream = Xdb.class.getResourceAsStream(equipmentUnitsCSV);
-    //      BufferedReader equipmentUnitBuffer =
-    //          new BufferedReader(new InputStreamReader(equipmentUnitStream));
-    //      equipmentUnitBuffer.readLine();
-    //      String nextFileLine;
-    //      while ((nextFileLine = equipmentUnitBuffer.readLine()) != null) {
-    //        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-    //        if (currLine.length == 4) {
-    //          EquipmentUnit equipmentUnitNode =
-    //              new EquipmentUnit(
-    //                  currLine[0],
-    //                  currLine[1],
-    //                  currLine[2].charAt(0),
-    //                  locationDAO.getLocation(currLine[3]));
-    //          equipmentUnitList.add(equipmentUnitNode);
-    //        } else {
-    //          System.out.println("CSV file formatted improperly");
-    //          System.exit(1);
-    //        }
-    //      }
-    //    } catch (FileNotFoundException e) {
-    //      e.printStackTrace();
-    //      System.out.println("File not found!");
-    //      return false;
-    //    } catch (IOException e) {
-    //      e.printStackTrace();
-    //      return false;
-    //    }
-    //
-    //    for (int i = 0; i < equipmentUnitList.size(); i++) {
-    //      try {
-    //        Statement initialization = connection.createStatement();
-    //        StringBuilder equipmentUnit = new StringBuilder();
-    //        equipmentUnit.append("INSERT INTO EquipmentUnits VALUES(");
-    //        equipmentUnit.append("'" + equipmentUnitList.get(i).getUnitID() + "'" + ", ");
-    //        equipmentUnit.append("'" + equipmentUnitList.get(i).getType() + "'" + ", ");
-    //        if (equipmentUnitList.get(i).isAvailable()) {
-    //          equipmentUnit.append("Y,");
-    //        } else {
-    //          equipmentUnit.append("N,");
-    //        }
-    //        equipmentUnit.append(
-    //            "'" + equipmentUnitList.get(i).getCurrLocation().getNodeID() + "'" + ", ");
-    //        equipmentUnit.append(")");
-    //        initialization.execute(equipmentUnit.toString());
-    //      } catch (SQLException e) {
-    //        System.out.println("Input for EquipmentUnit " + i + " failed");
-    //        e.printStackTrace();
-    //        return false;
-    //      }
-    //    }
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    List<EquipmentUnit> equipmentUnitList = new ArrayList<EquipmentUnit>();
+    try {
+      LocationDAO locationDAO = new LocationDAOImpl();
+      InputStream equipmentUnitStream = Xdb.class.getResourceAsStream(equipmentUnitsCSV);
+      BufferedReader equipmentUnitBuffer =
+          new BufferedReader(new InputStreamReader(equipmentUnitStream));
+      equipmentUnitBuffer.readLine();
+      String nextFileLine;
+      while ((nextFileLine = equipmentUnitBuffer.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 4) {
+          EquipmentUnit equipmentUnitNode =
+              new EquipmentUnit(
+                  currLine[0],
+                  currLine[1],
+                  currLine[2].charAt(0),
+                  locationDAO.getLocation(currLine[3]));
+          equipmentUnitList.add(equipmentUnitNode);
+        } else {
+          System.out.println("CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+      return false;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+
+    for (int i = 0; i < equipmentUnitList.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder equipmentUnit = new StringBuilder();
+        equipmentUnit.append("INSERT INTO EquipmentUnit VALUES(");
+        equipmentUnit.append("'" + equipmentUnitList.get(i).getUnitID() + "'" + ", ");
+        equipmentUnit.append("'" + equipmentUnitList.get(i).getType() + "'" + ", ");
+        equipmentUnit.append("'" + equipmentUnitList.get(i).getIsAvailableChar() + "'" + ", ");
+        equipmentUnit.append("'" + equipmentUnitList.get(i).getCurrLocation().getNodeID() + "'");
+        equipmentUnit.append(")");
+        initialization.execute(equipmentUnit.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for EquipmentUnit " + i + " failed");
+        e.printStackTrace();
+        return false;
+      }
+    }
     return true;
   }
 
