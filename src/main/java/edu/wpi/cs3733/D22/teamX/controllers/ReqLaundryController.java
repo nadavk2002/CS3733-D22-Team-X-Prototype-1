@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -23,16 +25,22 @@ public class ReqLaundryController implements Initializable {
   @FXML private VBox labelColumn;
   @FXML private VBox submitColumn;
   @FXML private HBox buttonRow;
-  @FXML private Button ToMainMenu;
-  @FXML private ChoiceBox<String> selectLaundryType, roomNum;
-  @FXML private TextField assignStaff, serviceStatus;
+  @FXML private Button ToMainMenu, submitButton;
+  @FXML private ChoiceBox<String> selectLaundryType, roomNum, serviceStatus;
+  @FXML private TextField assignStaff;
+
   @FXML private TableView table;
-  @FXML private TableColumn c1, c2;
+  private TableColumn<LaundyServiceRequest, String> ID = new TableColumn("Request ID");
+  private TableColumn<LaundyServiceRequest, String> assignee = new TableColumn("Assignee");
+  private TableColumn<LaundyServiceRequest, String> status = new TableColumn("Location");
+  private TableColumn<LaundyServiceRequest, String> locationColumn = new TableColumn("Location");
+  private TableColumn<LaundyServiceRequest, String> laundryService =
+      new TableColumn("Laundry Service");
 
   private LocationDAO locationDAO;
   private List<Location> locations;
 
-  @FXML
+  @Override
   public void initialize(URL location, ResourceBundle resources) {
     locationDAO = new LocationDAOImpl();
     locations = locationDAO.getAllLocations();
@@ -42,9 +50,25 @@ public class ReqLaundryController implements Initializable {
     submitColumn.setSpacing(20);
     buttonRow.setSpacing(20);
     roomNum.setItems(getLocationNames());
+    submitButton.setDisable(true);
+
     selectLaundryType
         .getItems()
         .addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
+    serviceStatus.getItems().addAll("", "PROC", "DONE");
+
+    selectLaundryType.setOnAction((ActionEvent event) -> enableSubmitButton());
+    roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
+    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
+    serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
+
+    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    table.getColumns().addAll(ID, assignee, locationColumn, status, laundryService);
+    ID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
+    status.setCellValueFactory(new PropertyValueFactory<>("status"));
+    laundryService.setCellValueFactory(new PropertyValueFactory<>("Laundry Service"));
+    assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
   /**
@@ -60,13 +84,26 @@ public class ReqLaundryController implements Initializable {
     return locationNames;
   }
 
+  /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
+  public void enableSubmitButton() {
+    submitButton.setDisable(
+        assignStaff.getText().equals("")
+            || serviceStatus.getValue().equals("")
+            || roomNum.getValue().equals("")
+            || selectLaundryType.getValue().equals(""));
+  }
+
   @FXML
-  void submitRequest() {
+  public void submitRequest() {
     LaundyServiceRequest request = new LaundyServiceRequest();
-    request.setRequestID("SAMPLE12");
-    request.setDestination(new Location());
-    request.setStatus(serviceStatus.getText());
+
+    request.setRequestID(request.makeRequestID());
+    request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
+    request.setStatus(serviceStatus.getValue());
+    request.setAssignee(assignStaff.getText());
+    request.setLaundry(selectLaundryType.getValue());
     this.resetFields();
+    table.getItems().add(request);
   }
 
   /**
@@ -75,16 +112,16 @@ public class ReqLaundryController implements Initializable {
    * @throws IOException if main menu not switched to
    */
   @FXML
-  void ToMainMenu() throws IOException {
+  public void ToMainMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
 
   @FXML
-  void resetFields() {
+  public void resetFields() {
     selectLaundryType.setValue("");
     roomNum.setValue("");
     assignStaff.setText("");
-    serviceStatus.setText("");
+    serviceStatus.setValue("");
   }
 }
