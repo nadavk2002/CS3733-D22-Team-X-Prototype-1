@@ -31,7 +31,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
         lsr.setStatus(resultSet.getString("status"));
         lsr.setAssignee(resultSet.getString("assignee"));
         lsr.setService(resultSet.getString("service"));
-        lsr.setPatientFor("patientFor");
+        lsr.setPatientFor(resultSet.getString("patientFor"));
         // add lsr to the list
         labServiceRequests.add(lsr);
       }
