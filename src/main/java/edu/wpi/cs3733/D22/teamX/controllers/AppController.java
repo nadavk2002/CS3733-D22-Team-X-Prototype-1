@@ -17,6 +17,7 @@ public class AppController {
   @FXML private Button equipmentRequestButton;
   @FXML private Button graphicalMapEditorButton;
   @FXML private Button EquipReqTableButton;
+  @FXML private Button GiftDeliveryButton;
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -79,6 +80,13 @@ public class AppController {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EquipReqTable.fxml")));
+  }
+
+  @FXML
+  void GiftDeliveryButton() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GiftDelivery.fxml")));
   }
 
   @FXML
