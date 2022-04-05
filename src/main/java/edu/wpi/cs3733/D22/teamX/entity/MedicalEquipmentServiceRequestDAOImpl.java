@@ -85,6 +85,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
     while (index < medicalEquipmentServiceRequests.size()) {
       if (medicalEquipmentServiceRequests.get(index).equals(medicalEquipmentServiceRequest)) {
         medicalEquipmentServiceRequests.remove(index); // removes object from list
+        index--;
         break; // exit
       }
       index++; // increment if not found yet

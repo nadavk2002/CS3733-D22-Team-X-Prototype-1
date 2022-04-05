@@ -72,6 +72,8 @@ public class GraphicalMapEditorController implements Initializable {
       UnitIdText,
       typeText;
 
+  private LocationDAO locDAO;
+
   @FXML
   private void ToMainMenu() throws IOException {
     App.switchScene(
@@ -110,8 +112,8 @@ public class GraphicalMapEditorController implements Initializable {
 
   private ObservableList<Location> locationListFill() {
     ObservableList<Location> tableList = FXCollections.observableArrayList();
-    LocationDAO allLocations = new LocationDAOImpl();
-    List<Location> locationList = allLocations.getAllLocations();
+    locDAO = new LocationDAOImpl();
+    List<Location> locationList = locDAO.getAllLocations();
     for (Location loc : locationList) {
       tableList.add(loc);
     }
@@ -119,8 +121,7 @@ public class GraphicalMapEditorController implements Initializable {
   }
 
   private void drawCirclesSetList(String floor) {
-    LocationDAO allLocations = new LocationDAOImpl();
-    List<Location> locationList = allLocations.getAllLocations();
+    List<Location> locationList = locDAO.getAllLocations();
     locationChoice.setValue("");
     locationChoice.getItems().clear();
     for (int i = 0; i < locationList.size(); i++) {
@@ -139,8 +140,8 @@ public class GraphicalMapEditorController implements Initializable {
   /** Deletes selected node id in the dropdown */
   public void deleteLocation() {
     String locationToDelete = locationChoice.getValue(); // Node ID
-    LocationDAO locDAO = new LocationDAOImpl();
     String floor = locDAO.getLocation(locationToDelete).getFloor();
+    System.out.println(locDAO.getLocation(locationToDelete));
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
     loadLocation(floor);
     locationTable.getItems().clear();
@@ -149,7 +150,6 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML
   public void locationSelected() {
-    LocationDAO locDAO = new LocationDAOImpl();
     try {
       Location selected = locDAO.getLocation(locationChoice.getValue());
       nodeIdText.setText(selected.getNodeID());
@@ -185,7 +185,6 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML
   public void submitLocation() {
-    LocationDAO locDAO = new LocationDAOImpl();
     List<Location> allLocations = locDAO.getAllLocations();
     for (int i = 0; i < allLocations.size(); i++) {
       if (allLocations.get(i).getNodeID().equals(nodeIdText.getText())) {
@@ -218,6 +217,9 @@ public class GraphicalMapEditorController implements Initializable {
     loadLocation(newLocation.getFloor());
     locationTable.getItems().clear();
     locationTable.setItems(locationListFill());
+    //    for (int i = 0; i < locDAO.getAllLocations().size(); i++) {
+    //      System.out.println(locDAO.getAllLocations().get(i));
+    //    }
   }
 
   @Override
