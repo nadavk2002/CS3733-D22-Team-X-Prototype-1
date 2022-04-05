@@ -13,6 +13,17 @@ public class EquipmentUnit {
     this.currLocation = currLocation;
   }
 
+  public EquipmentUnit(String unitID, String type, char isAvailable, Location currLocation) {
+    this.unitID = unitID;
+    this.type = type;
+    if (isAvailable == 'Y') {
+      this.isAvailable = true;
+    } else {
+      this.isAvailable = false;
+    }
+    this.currLocation = currLocation;
+  }
+
   public EquipmentUnit() {
     unitID = null;
     type = null;

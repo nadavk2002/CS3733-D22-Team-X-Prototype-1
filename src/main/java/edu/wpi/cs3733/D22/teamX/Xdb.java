@@ -1,10 +1,6 @@
 package edu.wpi.cs3733.D22.teamX;
 
-import edu.wpi.cs3733.D22.teamX.entity.LabServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.*;
 import java.sql.*;
@@ -12,8 +8,10 @@ import java.util.*;
 
 public class Xdb {
   private static final String locationCSV = "TowerLocationsX.csv";
-  private static final String medicalEquipmentCSV = "MedEquipReq.csv";
+  private static final String medicalEquipmentServRequestCSV = "MedEquipReq.csv";
   private static final String labServiceRequestsCSV = "LabServiceRequests.csv";
+  // private static final String equipmentTypesCSV = "EquipmentTypes.csv";
+  private static final String equipmentUnitsCSV = "MedicalEquipmentUnits.csv";
   //  /** Initializes the db and runs the user program from Spike B. */
   //  public static void initializeAndRunDBProgram() {
   //    Connection dbConn = initializeDB();
@@ -51,11 +49,15 @@ public class Xdb {
 
     dropAllTables();
     createLocationTable();
-    creatEqTypesTable();
+    createEqTypeTable();
     createMedicalEquipmentServiceRequestTable();
     createLabServiceRequestTable();
     createEqUnitsTable();
-    if (!loadLocationCSV() || !loadMedEqServiceReqCSV() || !loadLabServiceReqCSV()) {
+
+    if (!loadLocationCSV()
+        || !loadMedEqServiceReqCSV()
+        || !loadLabServiceReqCSV()
+        || !loadEquipmentUnitsCSV()) {
       throw new loadSaveFromCSVException("Error when loading from CSV files.");
     }
 
@@ -97,7 +99,7 @@ public class Xdb {
   }
 
   /** Creates a Equipment Types table */
-  private static void creatEqTypesTable() {
+  private static void createEqTypeTable() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     try {
       Statement initialization = connection.createStatement();
@@ -179,18 +181,12 @@ public class Xdb {
   /** Drops all the tables in the database. */
   private static void dropAllTables() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
-    try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE EquipmentUnits");
-    } catch (SQLException e) {
-      System.out.println("Tables not dropped");
-      e.printStackTrace();
-    }
+
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE LabServiceRequest");
     } catch (SQLException e) {
-      System.out.println("Tables not dropped");
+      System.out.println("LabServiceRequest not dropped");
       e.printStackTrace();
     }
 
@@ -198,21 +194,31 @@ public class Xdb {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
     } catch (SQLException e) {
-      System.out.println("Tables not dropped");
+      System.out.println("MedicalEquipmentServiceRequest not dropped");
       e.printStackTrace();
     }
+
+    try {
+      Statement dropLocation = connection.createStatement();
+      dropLocation.execute("DROP TABLE EquipmentUnits");
+    } catch (SQLException e) {
+      System.out.println("EquipmentUnits not dropped");
+      e.printStackTrace();
+    }
+
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE EquipmentTypes");
     } catch (SQLException e) {
-      System.out.println("Tables not dropped");
+      System.out.println("EquipmentType not dropped");
       e.printStackTrace();
     }
+
     try {
       Statement dropLocation = connection.createStatement();
       dropLocation.execute("DROP TABLE Location");
     } catch (SQLException e) {
-      System.out.println("Tables not dropped");
+      System.out.println("Location not dropped");
       e.printStackTrace();
     }
   }
@@ -299,7 +305,7 @@ public class Xdb {
         new ArrayList<MedicalEquipmentServiceRequest>();
     try {
       LocationDAO locDestination = new LocationDAOImpl();
-      InputStream medCSV = Xdb.class.getResourceAsStream(medicalEquipmentCSV);
+      InputStream medCSV = Xdb.class.getResourceAsStream(medicalEquipmentServRequestCSV);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
       String nextFileLine;
@@ -417,6 +423,65 @@ public class Xdb {
     return true;
   }
 
+  private static boolean loadEquipmentUnitsCSV() {
+    //    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    //    List<EquipmentUnit> equipmentUnitList = new ArrayList<EquipmentUnit>();
+    //    try {
+    //      LocationDAO locationDAO = new LocationDAOImpl();
+    //      InputStream equipmentUnitStream = Xdb.class.getResourceAsStream(equipmentUnitsCSV);
+    //      BufferedReader equipmentUnitBuffer =
+    //          new BufferedReader(new InputStreamReader(equipmentUnitStream));
+    //      equipmentUnitBuffer.readLine();
+    //      String nextFileLine;
+    //      while ((nextFileLine = equipmentUnitBuffer.readLine()) != null) {
+    //        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+    //        if (currLine.length == 4) {
+    //          EquipmentUnit equipmentUnitNode =
+    //              new EquipmentUnit(
+    //                  currLine[0],
+    //                  currLine[1],
+    //                  currLine[2].charAt(0),
+    //                  locationDAO.getLocation(currLine[3]));
+    //          equipmentUnitList.add(equipmentUnitNode);
+    //        } else {
+    //          System.out.println("CSV file formatted improperly");
+    //          System.exit(1);
+    //        }
+    //      }
+    //    } catch (FileNotFoundException e) {
+    //      e.printStackTrace();
+    //      System.out.println("File not found!");
+    //      return false;
+    //    } catch (IOException e) {
+    //      e.printStackTrace();
+    //      return false;
+    //    }
+    //
+    //    for (int i = 0; i < equipmentUnitList.size(); i++) {
+    //      try {
+    //        Statement initialization = connection.createStatement();
+    //        StringBuilder equipmentUnit = new StringBuilder();
+    //        equipmentUnit.append("INSERT INTO EquipmentUnits VALUES(");
+    //        equipmentUnit.append("'" + equipmentUnitList.get(i).getUnitID() + "'" + ", ");
+    //        equipmentUnit.append("'" + equipmentUnitList.get(i).getType() + "'" + ", ");
+    //        if (equipmentUnitList.get(i).isAvailable()) {
+    //          equipmentUnit.append("Y,");
+    //        } else {
+    //          equipmentUnit.append("N,");
+    //        }
+    //        equipmentUnit.append(
+    //            "'" + equipmentUnitList.get(i).getCurrLocation().getNodeID() + "'" + ", ");
+    //        equipmentUnit.append(")");
+    //        initialization.execute(equipmentUnit.toString());
+    //      } catch (SQLException e) {
+    //        System.out.println("Input for EquipmentUnit " + i + " failed");
+    //        e.printStackTrace();
+    //        return false;
+    //      }
+    //    }
+    return true;
+  }
+
   /** Writes the content of the location table from the database into the TowerLocations.CSV */
   private static boolean saveLocationDataToCSV() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
@@ -514,7 +579,7 @@ public class Xdb {
     try {
       //      URL url = Xdb.class.getResource(medicalEquipmentCSV);
       //      FileWriter csvFile = new FileWriter(url.getFile(), false);
-      FileWriter csvFile = new FileWriter(medicalEquipmentCSV, false);
+      FileWriter csvFile = new FileWriter(medicalEquipmentServRequestCSV, false);
       csvFile.write("RequestID,Destination,Status,assignee,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
