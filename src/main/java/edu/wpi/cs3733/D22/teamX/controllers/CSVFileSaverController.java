@@ -57,5 +57,6 @@ public class CSVFileSaverController implements Initializable {
   public void mainMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+    loaded = false;
   }
 }
