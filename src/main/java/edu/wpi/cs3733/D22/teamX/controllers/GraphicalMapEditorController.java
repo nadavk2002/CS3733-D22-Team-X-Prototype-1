@@ -22,6 +22,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
+/**
+ * Controller for the map editor page. This graphically displays equipment and location data on a
+ * map of the tower at the hostpital.
+ */
 public class GraphicalMapEditorController implements Initializable {
 
   @FXML
@@ -76,42 +80,59 @@ public class GraphicalMapEditorController implements Initializable {
   private LocationDAO locDAO;
   private EquipmentUnitDAO equipDAO;
 
+  /**
+   * Returns to the main menu of the JavaFX App
+   *
+   * @throws IOException
+   */
   @FXML
   private void ToMainMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
   }
 
+  /** Loads the Lower Level 1 map */
   @FXML
   public void LL1Click() {
     loadLocation("L1");
   }
 
+  /** Loads the Lower Level 2 map */
   @FXML
   public void LL2Click() {
     loadLocation("L2");
   }
 
+  /** Loads the ground level map */
   @FXML
   public void groundClick() {
     loadLocation("G");
   }
 
+  /** Loads the 1st floor map */
   @FXML
   public void firstClick() {
     loadLocation("1");
   }
 
+  /** Loads the second floor map */
   @FXML
   public void secondClick() {
     loadLocation("2");
   }
 
+  /** Loads the third floor map */
   @FXML
   public void thirdClick() {
     loadLocation("3");
   }
 
+  /**
+   * Returns an observable list of location objects. This list can then be used to easily fill a
+   * table with the object data.
+   *
+   * @return ObservableList of all locations in the system
+   */
   private ObservableList<Location> locationListFill() {
     ObservableList<Location> tableList = FXCollections.observableArrayList();
     locDAO = new LocationDAOImpl();
@@ -122,6 +143,12 @@ public class GraphicalMapEditorController implements Initializable {
     return tableList;
   }
 
+  /**
+   * Returns an observable list of equipment objects. This list can then be used to easily fill a
+   * table with the object data.
+   *
+   * @return ObservableList of all the equipment in the system.
+   */
   private ObservableList<EquipmentUnit> equipmentListFill() {
     ObservableList<EquipmentUnit> tableList = FXCollections.observableArrayList();
     List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
@@ -131,6 +158,12 @@ public class GraphicalMapEditorController implements Initializable {
     return tableList;
   }
 
+  /**
+   * Loads all the map data for the floor. (Location drop down + map, equipment drop down + map),
+   * table data
+   *
+   * @param floor String of the floor number (L1, G, 1, etc.)
+   */
   private void loadMap(String floor) {
     locationChoice.setValue("");
     locationChoice.getItems().clear();
@@ -140,6 +173,11 @@ public class GraphicalMapEditorController implements Initializable {
     drawCirclesSetEquipmentList(floor);
   }
 
+  /**
+   * Draws red dots for all locations that are on the provided floor
+   *
+   * @param floor String of the floor number (L1, G, 1, etc.)
+   */
   private void drawCirclesSetLocationList(String floor) {
     List<Location> locationList = locDAO.getAllLocations();
     for (int i = 0; i < locationList.size(); i++) {
@@ -155,6 +193,11 @@ public class GraphicalMapEditorController implements Initializable {
     }
   }
 
+  /**
+   * Draws green dots for all equipment that are on the provided floor
+   *
+   * @param floor String of the floor number (L1, G, 1, etc.)
+   */
   private void drawCirclesSetEquipmentList(String floor) {
     List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
     for (int i = 0; i < equipment.size(); i++) {
@@ -191,6 +234,7 @@ public class GraphicalMapEditorController implements Initializable {
     equipTable.setItems(equipmentListFill());
   }
 
+  /** Fills text boxes with equipment data when a piece of equipment is chosen in the dropdown. */
   @FXML
   public void equipmentSelected() {
     try {
@@ -207,6 +251,7 @@ public class GraphicalMapEditorController implements Initializable {
     }
   }
 
+  /** Location data populates in their corresponding text fields */
   @FXML
   public void locationSelected() {
     try {
@@ -231,6 +276,11 @@ public class GraphicalMapEditorController implements Initializable {
     }
   }
 
+  /**
+   * Loads image for given floor, and then loads map data.
+   *
+   * @param location Floor level
+   */
   public void loadLocation(String location) {
     imageGroup.getChildren().clear();
     Image img =
@@ -242,6 +292,10 @@ public class GraphicalMapEditorController implements Initializable {
     loadMap(location);
   }
 
+  /**
+   * Submit new equipment to the database based on the filled in text data or updates equipment with
+   * a matching ID.
+   */
   @FXML
   public void submitEquipment() {
     List<EquipmentUnit> allEquipment = equipDAO.getAllEquipmentUnits();
@@ -270,6 +324,7 @@ public class GraphicalMapEditorController implements Initializable {
     equipTable.setItems(equipmentListFill());
   }
 
+  /** Submits a new location with the given data or updates the location with the matching id. */
   @FXML
   public void submitLocation() {
     List<Location> allLocations = locDAO.getAllLocations();
