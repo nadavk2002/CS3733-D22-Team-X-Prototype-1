@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import java.io.IOException;
 import java.util.HashMap;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,9 +57,9 @@ public class BasicLayoutController {
 
   @FXML
   void ExitApplication() throws IOException {
-    //    App.switchScene(
-    //        FXMLLoader.load(
-    //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
-    Platform.exit();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
+    // Platform.exit();
   }
 }

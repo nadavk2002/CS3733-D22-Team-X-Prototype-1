@@ -66,9 +66,9 @@ public class Xdb {
 
   /** Saves the data from the database to the appropriate CSV files and closes the database. */
   public static boolean closeDB() throws loadSaveFromCSVException {
-    if (!saveLocationDataToCSV() || !saveMedEqDataToCSV() || !saveLabServiceReqDataToCSV()) {
-      throw new loadSaveFromCSVException("Error when writing to CSV file.");
-    }
+    //    if (!saveLocationDataToCSV() || !saveMedEqDataToCSV() || !saveLabServiceReqDataToCSV()) {
+    //      throw new loadSaveFromCSVException("Error when writing to CSV file.");
+    //    }
     try {
       ConnectionSingleton.getConnectionSingleton().getConnection().close();
       System.out.println("Connection closed successfully");
@@ -483,7 +483,7 @@ public class Xdb {
   }
 
   /** Writes the content of the location table from the database into the TowerLocations.CSV */
-  private static boolean saveLocationDataToCSV() {
+  public static boolean saveLocationDataToCSV(String dirPath) {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     ArrayList<Location> locations = new ArrayList<Location>();
     try {
@@ -503,14 +503,14 @@ public class Xdb {
       }
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("An error occured when saving Location data to the CSV file.");
+      System.out.println("An error occurred when saving Location data to the CSV file.");
       return false;
     }
 
     try {
       //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
       //      FileWriter csvFile = new FileWriter(csv, false);
-      FileWriter csvFile = new FileWriter(locationCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + "\\" + locationCSV, false);
       csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
       for (int i = 0; i < locations.size(); i++) {
         csvFile.write("\n" + locations.get(i).getNodeID() + ",");
@@ -551,7 +551,7 @@ public class Xdb {
   }
 
   /** Saves Medical Equipment data to CSV on close */
-  private static boolean saveMedEqDataToCSV() {
+  public static boolean saveMedEqDataToCSV(String dirPath) {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     List<MedicalEquipmentServiceRequest> Equipment =
         new ArrayList<MedicalEquipmentServiceRequest>();
@@ -579,7 +579,7 @@ public class Xdb {
     try {
       //      URL url = Xdb.class.getResource(medicalEquipmentCSV);
       //      FileWriter csvFile = new FileWriter(url.getFile(), false);
-      FileWriter csvFile = new FileWriter(medicalEquipmentServRequestCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + "\\" + medicalEquipmentServRequestCSV, false);
       csvFile.write("RequestID,Destination,Status,assignee,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
@@ -616,7 +616,7 @@ public class Xdb {
   }
 
   /** Writes the content of the location table from the database into the LabServiceReq.CSV */
-  private static boolean saveLabServiceReqDataToCSV() {
+  public static boolean saveLabServiceReqDataToCSV(String dirPath) {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     ArrayList<LabServiceRequest> LabServiceReq = new ArrayList<LabServiceRequest>();
     LocationDAO locDestination = new LocationDAOImpl();
@@ -640,7 +640,7 @@ public class Xdb {
     }
 
     try {
-      FileWriter csvFile = new FileWriter(labServiceRequestsCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + "\\" + labServiceRequestsCSV, false);
       csvFile.write("requestID,destination,status,assignee,service,patientFor");
       for (int i = 0; i < LabServiceReq.size(); i++) {
         csvFile.write("\n" + LabServiceReq.get(i).getRequestID() + ",");
@@ -683,6 +683,7 @@ public class Xdb {
 
   /**
    * saves data from DAO to equipmentUnitCSV
+   *
    * @return whether the save was successful
    */
   private static boolean saveEquipmentUnitCSV() {

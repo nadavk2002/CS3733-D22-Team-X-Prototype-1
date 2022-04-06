@@ -6,9 +6,7 @@
 
 <AnchorPane fx:id="anchorCSVSaver" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CSVFileSaverController">
    <children>
-      <JFXButton fx:id="browser" layoutX="401.0" layoutY="187.0" onAction="#getDirectoryForSaving" text="Browse" />
-      <JFXTextField fx:id="directoryDisplayer" layoutX="209.0" layoutY="187.0" prefHeight="26.0" prefWidth="182.0" />
-      <Label layoutX="209.0" layoutY="162.0" text="Choose directory to save CSV Files" />
-      <JFXTextField fx:id="sayExiting" layoutX="233.0" layoutY="313.0" text="Exiting Application..." visible="false" />
+      <JFXButton fx:id="browser" layoutX="273.0" layoutY="187.0" onAction="#getDirectoryForSaving" text="Browse" />
+      <Label layoutX="209.0" layoutY="162.0" text="Choose directory to save CSV files" />
    </children>
 </AnchorPane>

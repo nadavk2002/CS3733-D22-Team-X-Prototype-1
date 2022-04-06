@@ -1,7 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextField;
+import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,9 +14,7 @@ import javafx.stage.DirectoryChooser;
 
 public class CSVFileSaverController implements Initializable {
   public JFXButton browser;
-  public JFXTextField directoryDisplayer;
   public AnchorPane anchorCSVSaver;
-  public JFXTextField sayExiting;
 
   //    DirectoryChooser csvSaverDC = new DirectoryChooser();
   //    File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
@@ -25,15 +24,17 @@ public class CSVFileSaverController implements Initializable {
     // System.out.println("Hello");
   }
 
-  public void getDirectoryForSaving(ActionEvent actionEvent) throws InterruptedException {
+  public void getDirectoryForSaving(ActionEvent actionEvent) throws loadSaveFromCSVException {
     DirectoryChooser csvSaverDC = new DirectoryChooser();
     File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
-    if (csvSaverDir != null) {
-      directoryDisplayer.setText(csvSaverDir.getAbsolutePath());
-    } else {
+    if (csvSaverDir == null) {
       csvSaverDir = new File("");
     }
-    sayExiting.setVisible(true);
+    if (!Xdb.saveLocationDataToCSV(csvSaverDir.getPath())
+        || !Xdb.saveMedEqDataToCSV(csvSaverDir.getPath())
+        || !Xdb.saveLabServiceReqDataToCSV(csvSaverDir.getPath())) {
+      throw new loadSaveFromCSVException("Error when writing to CSV file.");
+    }
     Platform.exit();
   }
 }
