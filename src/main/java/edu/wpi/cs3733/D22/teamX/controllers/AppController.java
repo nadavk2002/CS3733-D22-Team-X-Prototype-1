@@ -112,6 +112,7 @@ public class AppController implements Initializable {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
+    CSVFileSaverController.loaded = true;
     // Platform.exit();
   }
 

@@ -19,6 +19,7 @@ import javafx.stage.DirectoryChooser;
 public class CSVFileSaverController implements Initializable {
   public JFXButton browser;
   public AnchorPane anchorCSVSaver;
+  public static boolean loaded = false;
 
   //    DirectoryChooser csvSaverDC = new DirectoryChooser();
   //    File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
