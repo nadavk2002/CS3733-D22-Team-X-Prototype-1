@@ -510,7 +510,7 @@ public class Xdb {
     try {
       //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
       //      FileWriter csvFile = new FileWriter(csv, false);
-      FileWriter csvFile = new FileWriter(dirPath + "\\" + locationCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + locationCSV, false);
       csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
       for (int i = 0; i < locations.size(); i++) {
         csvFile.write("\n" + locations.get(i).getNodeID() + ",");
@@ -579,7 +579,7 @@ public class Xdb {
     try {
       //      URL url = Xdb.class.getResource(medicalEquipmentCSV);
       //      FileWriter csvFile = new FileWriter(url.getFile(), false);
-      FileWriter csvFile = new FileWriter(dirPath + "\\" + medicalEquipmentServRequestCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + medicalEquipmentServRequestCSV, false);
       csvFile.write("RequestID,Destination,Status,assignee,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
@@ -640,7 +640,7 @@ public class Xdb {
     }
 
     try {
-      FileWriter csvFile = new FileWriter(dirPath + "\\" + labServiceRequestsCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + labServiceRequestsCSV, false);
       csvFile.write("requestID,destination,status,assignee,service,patientFor");
       for (int i = 0; i < LabServiceReq.size(); i++) {
         csvFile.write("\n" + LabServiceReq.get(i).getRequestID() + ",");

@@ -28,11 +28,21 @@ public class CSVFileSaverController implements Initializable {
     DirectoryChooser csvSaverDC = new DirectoryChooser();
     File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
     if (csvSaverDir == null) {
-      csvSaverDir = new File("");
+      return;
     }
-    if (!Xdb.saveLocationDataToCSV(csvSaverDir.getPath())
-        || !Xdb.saveMedEqDataToCSV(csvSaverDir.getPath())
-        || !Xdb.saveLabServiceReqDataToCSV(csvSaverDir.getPath())) {
+    String csvSaverDirStr = csvSaverDir.getPath() + "\\";
+    if (!Xdb.saveLocationDataToCSV(csvSaverDirStr)
+        || !Xdb.saveMedEqDataToCSV(csvSaverDirStr)
+        || !Xdb.saveLabServiceReqDataToCSV(csvSaverDirStr)) {
+      throw new loadSaveFromCSVException("Error when writing to CSV file.");
+    }
+    Platform.exit();
+  }
+
+  public void saveToDefault(ActionEvent actionEvent) throws loadSaveFromCSVException {
+    if (!Xdb.saveLocationDataToCSV("")
+        || !Xdb.saveMedEqDataToCSV("")
+        || !Xdb.saveLabServiceReqDataToCSV("")) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     Platform.exit();
