@@ -36,12 +36,12 @@
                <children>
                   <HBox prefHeight="35.0" prefWidth="669.0">
                      <children>
-                        <JFXButton onAction="#LL2Click" text="LL2 Floor" />
-                        <JFXButton onAction="#LL1Click" text="LL1 Floor" />
-                        <JFXButton onAction="#groundClick" text="Ground Floor" />
-                        <JFXButton onAction="#firstClick" text="First Floor" />
-                        <JFXButton onAction="#secondClick" text="Second Floor" />
-                        <JFXButton onAction="#thirdClick" text="Third Floor" />
+                        <JFXButton fx:id="LL2Button" onAction="#LL2Click" text="LL2 Floor" />
+                        <JFXButton fx:id="LL1Button" onAction="#LL1Click" text="LL1 Floor" />
+                        <JFXButton fx:id="GButton" onAction="#groundClick" text="Ground Floor" />
+                        <JFXButton fx:id="OneButton" onAction="#firstClick" text="First Floor" />
+                        <JFXButton fx:id="TwoButton" onAction="#secondClick" text="Second Floor" />
+                        <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
                      </children>
                   </HBox>
                   <Group fx:id="imageGroup">
