@@ -50,5 +50,10 @@
             </ImageView>
          </children>
       </HBox>
+      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
