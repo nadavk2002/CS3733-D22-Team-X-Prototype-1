@@ -18,10 +18,10 @@ public abstract class ServiceRequest {
   }
 
   public ServiceRequest() {
-    this.requestID = null;
+    this.requestID = "";
     this.destination = new Location();
-    this.status = null;
-    this.assignee = null;
+    this.status = "";
+    this.assignee = "";
   }
 
   public String getRequestID() {

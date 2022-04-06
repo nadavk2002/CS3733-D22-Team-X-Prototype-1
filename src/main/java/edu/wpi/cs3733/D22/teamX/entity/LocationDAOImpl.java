@@ -75,7 +75,8 @@ public class LocationDAOImpl implements LocationDAO {
    */
   @Override
   public void updateLocation(Location location) {
-    // iterate through the list of locations to find the location passed in and update it in locations
+    // iterate through the list of locations to find the location passed in and update it in
+    // locations
     int locationInd = 0;
     while (locationInd < locations.size()) {
       if (locations.get(locationInd).equals(location)) {

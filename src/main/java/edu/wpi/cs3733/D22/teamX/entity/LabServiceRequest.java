@@ -21,8 +21,8 @@ public class LabServiceRequest extends ServiceRequest {
   // blank
   public LabServiceRequest() {
     super();
-    this.service = null;
-    this.patientFor = null;
+    this.service = "";
+    this.patientFor = "";
   }
 
   public String getLocationNodeID() {
