@@ -6,6 +6,7 @@ public class LangServiceRequest extends ServiceRequest {
 
   /**
    * Generates a request ID for the given request.
+   *
    * @return String representing the request id
    */
   @Override

@@ -11,14 +11,22 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.JanitorialRequestController">
    <children>
-      <Button fx:id="submitButton" layoutX="960.0" layoutY="222.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" />
+      <JFXButton fx:id="submitButton" layoutX="960.0" layoutY="222.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
       <VBox layoutX="935.0" layoutY="110.0" spacing="10.0" />
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Button layoutX="972.0" layoutY="257.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" />
+      <JFXButton layoutX="972.0" layoutY="257.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
       <TableView fx:id="tbView" layoutX="616.0" layoutY="299.0" prefHeight="494.0" prefWidth="786.0" />
       <VBox alignment="TOP_RIGHT" layoutX="835.0" layoutY="71.0" spacing="18.0">
          <children>
