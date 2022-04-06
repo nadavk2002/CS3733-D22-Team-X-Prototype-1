@@ -423,6 +423,11 @@ public class Xdb {
     return true;
   }
 
+  /**
+   * Loads the data from the equipmentUnitsCSV file into the DAO
+   *
+   * @return whether the load was successful.
+   */
   private static boolean loadEquipmentUnitsCSV() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     List<EquipmentUnit> equipmentUnitList = new ArrayList<EquipmentUnit>();
@@ -670,6 +675,60 @@ public class Xdb {
     } catch (IOException e) {
       System.out.print(
           "An error occurred when trying to write to the Lab Service Request CSV file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * saves data from DAO to equipmentUnitCSV
+   * @return whether the save was successful
+   */
+  private static boolean saveEquipmentUnitCSV() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    ArrayList<EquipmentUnit> equipmentUnits = new ArrayList<EquipmentUnit>();
+    try {
+      LocationDAO locationDAO = new LocationDAOImpl();
+      Statement statement = connection.createStatement();
+      ResultSet record = statement.executeQuery("SELECT * FROM EquipmentUnit");
+      while (record.next()) {
+        equipmentUnits.add(
+            new EquipmentUnit(
+                record.getString("unitID"),
+                record.getString("type"),
+                record.getString("isAvailible").charAt(0),
+                locationDAO.getLocation(record.getString("currLocation"))));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("An error occured when saving equipment unit data to the CSV file.");
+      return false;
+    }
+
+    try {
+      //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
+      //      FileWriter csvFile = new FileWriter(csv, false);
+      FileWriter csvFile = new FileWriter(equipmentUnitsCSV, false);
+      csvFile.write("unitID, type, isAvailible, currLocation");
+      for (int i = 0; i < equipmentUnits.size(); i++) {
+        csvFile.write("\n" + equipmentUnits.get(i).getUnitID() + ",");
+        if (equipmentUnits.get(i).getType() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(equipmentUnits.get(i).getType() + ",");
+        }
+        csvFile.write(equipmentUnits.get(i).getIsAvailableChar() + ",");
+        if (equipmentUnits.get(i).getCurrLocation() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(equipmentUnits.get(i).getCurrLocation().getNodeID());
+        }
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.println("Error occured when updating equipment units csv file.");
       e.printStackTrace();
       return false;
     }
