@@ -1,24 +1,35 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.App;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
+import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-public class AppController {
-  @FXML private Button ReqLangButton;
-  @FXML private Button ReqLaundryButton;
-  @FXML private Button ReqMedicineDelivery;
-  @FXML private Button ReqInTransportButton;
-  @FXML private Button mealReqButton;
-  @FXML private Button LabRequestButton;
-  @FXML private Button equipmentRequestButton;
-  @FXML private Button graphicalMapEditorButton;
-  @FXML private Button EquipReqTableButton;
-  @FXML private Button ReqJanitorButton;
-  @FXML private Button GiftDeliveryButton;
+public class AppController implements Initializable {
+  @FXML
+  private JFXButton ReqLang,
+      ReqLaundry,
+      ReqMedicineDelivery,
+      ReqInTransport,
+      mealReq,
+      LabRequest,
+      equipmentRequest,
+      graphicalMapEditor,
+      EquipReqTable,
+      ReqJanitor,
+      GiftDelivery;
+  @FXML private HBox firstRow, secondRow, thirdRow;
+  @FXML private VBox mainBox;
+  @FXML private Label mainTitle;
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -36,7 +47,7 @@ public class AppController {
   }
 
   @FXML
-  void ReqMedicineDelivery() throws IOException {
+  void ReqMedicineDeliveryButton() throws IOException {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/Medicine_Delivery.fxml")));
@@ -103,5 +114,14 @@ public class AppController {
     //        FXMLLoader.load(
     //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
     Platform.exit();
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
+    secondRow.getChildren().addAll(ReqMedicineDelivery, LabRequest, ReqInTransport, ReqLang);
+    thirdRow.getChildren().addAll(ReqLaundry, ReqJanitor, GiftDelivery, mealReq);
+    mainBox.getChildren().addAll(mainTitle, firstRow, secondRow, thirdRow);
+    mainBox.setMargin(mainTitle, new Insets(40, 0, 40, 0));
   }
 }
