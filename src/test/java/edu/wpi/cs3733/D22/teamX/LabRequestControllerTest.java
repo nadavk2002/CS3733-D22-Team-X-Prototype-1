@@ -1,13 +1,13 @@
 package edu.wpi.cs3733.D22.teamX;
 
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.util.NodeQueryUtils.hasText;
 
 import java.io.IOException;
 import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -25,31 +25,42 @@ public class LabRequestControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testPatientNameTextField() {
-    clickOn("#patientName");
-    write("h");
-    verifyThat("#patientName", hasText("h"));
+  public void testPatientNameDropDown() {
+    clickOn("#patientName").clickOn("Patient 1");
+    verifyThat("#patientName", (ChoiceBox<String> c) -> c.getValue().equals("Patient 1"));
   }
 
   @Test
-  public void testAssignStaffTextField() {
-    clickOn("#assignStaff");
-    write("h");
-    verifyThat("#assignStaff", hasText("h"));
+  public void testSelectServiceDropDown() {
+    clickOn("#selectLab").clickOn("Blood Work");
+    verifyThat("#selectLab", (ChoiceBox<String> c) -> c.getValue().equals("Blood Work"));
   }
 
   @Test
-  public void testServiceStatusTextField() {
-    clickOn("#serviceStatus");
-    write("h");
-    verifyThat("#serviceStatus", hasText("h"));
+  public void testAssignStaffDropDown() {
+    clickOn("#assigneeDrop").clickOn("Doctor 1");
+    verifyThat("#assigneeDrop", (ChoiceBox<String> c) -> c.getValue().equals("Doctor 1"));
+  }
+
+  @Test
+  public void testServiceStatusDropDown() {
+    clickOn("#serviceStatus").clickOn("PROC");
+    verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals("PROC"));
+  }
+
+  @Test
+  public void testDestinationDropDown() {
+    clickOn("#selectDestination").clickOn("CIM");
+    verifyThat("#selectDestination", (ChoiceBox<String> c) -> c.getValue().equals("CIM"));
   }
 
   @Test
   public void testResetButton() {
     clickOn("#resetFields");
-    verifyThat("#patientName", hasText(""));
-    verifyThat("#serviceStatus", hasText(""));
-    verifyThat("#assignStaff", hasText(""));
+    verifyThat("#patientName", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#selectLab", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#assigneeDrop", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#selectDestination", (ChoiceBox<String> c) -> c.getValue().equals(""));
   }
 }
