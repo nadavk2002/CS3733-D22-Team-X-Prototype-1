@@ -4,6 +4,10 @@ package edu.wpi.cs3733.D22.teamX.entity;
 public class LangServiceRequest extends ServiceRequest {
   String language;
 
+  /**
+   * Generates a request ID for the given request.
+   * @return String representing the request id
+   */
   @Override
   public String makeRequestID() {
     return "sample";
