@@ -127,12 +127,13 @@ public class LocationDAOImpl implements LocationDAO {
    */
   @Override
   public void deleteLocation(Location location) {
-    // iterate through the linked list of locations to find the location passed and remove it from locations
+    // iterate through the linked list of locations to find the location passed and remove it from
+    // locations
     int locationInd = 0;
     while (locationInd < locations.size()) {
       if (locations.get(locationInd).equals(location)) {
         locations.remove(locationInd);
-        locationInd--;  // decrement if found
+        locationInd--; // decrement if found
         break;
       }
       locationInd++;
