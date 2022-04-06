@@ -217,7 +217,6 @@ public class GraphicalMapEditorController implements Initializable {
   public void deleteLocation() {
     String locationToDelete = locationChoice.getValue(); // Node ID
     String floor = locDAO.getLocation(locationToDelete).getFloor();
-    System.out.println(locDAO.getLocation(locationToDelete));
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
     loadLocation(floor);
     locationTable.getItems().clear();
