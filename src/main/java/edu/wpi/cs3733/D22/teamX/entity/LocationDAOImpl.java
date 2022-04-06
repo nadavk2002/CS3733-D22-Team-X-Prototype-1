@@ -9,8 +9,8 @@ import java.util.NoSuchElementException;
 // https://www.tutorialspoint.com/design_pattern/data_access_object_pattern.htm
 
 public class LocationDAOImpl implements LocationDAO {
-  List<Location> locations; // location storage
-  Connection connection; // store connection info
+  private List<Location> locations; // location storage
+  private Connection connection; // store connection info
 
   /** constructor loads data from database */
   public LocationDAOImpl() {
@@ -45,18 +45,18 @@ public class LocationDAOImpl implements LocationDAO {
     this.connection = connection; // store connection information
   }
 
-  @Override
   /** gets locations linkedList */
+  @Override
   public List<Location> getAllLocations() {
     return locations; // returns locations
   }
 
-  @Override
   /**
-   * gets induvidual location
+   * gets individual location
    *
    * @param nodeID node id of location being looked up
    */
+  @Override
   public Location getLocation(String nodeID) {
     // iterate through the linked list of locations to find the object
     for (Location element : locations) {
@@ -68,25 +68,25 @@ public class LocationDAOImpl implements LocationDAO {
     throw new NoSuchElementException("Location does not exist");
   }
 
-  @Override
   /**
    * updates location based off matching nodeIDs.
    *
    * @param location location being updated
    */
+  @Override
   public void updateLocation(Location location) {
-    // iterate through the list of locations to find the object and update it on new list
+    // iterate through the list of locations to find the location passed in and update it in
+    // locations
     int locationInd = 0;
     while (locationInd < locations.size()) {
       if (locations.get(locationInd).equals(location)) {
         locations.set(locationInd, location);
-
         break;
       }
       locationInd++;
     }
 
-    // update Location table
+    // if the location is found, update the Location table
     if (locationInd < locations.size()) {
       try {
         // create the statement
@@ -121,24 +121,26 @@ public class LocationDAOImpl implements LocationDAO {
     }
   }
 
-  @Override
   /**
    * removes location from database.
    *
    * @param location location to be removed.
    */
+  @Override
   public void deleteLocation(Location location) {
-    // iterate through the linked list of locations to find the object and update it on new list
+    // iterate through the linked list of locations to find the location passed and remove it from
+    // locations
     int locationInd = 0;
     while (locationInd < locations.size()) {
       if (locations.get(locationInd).equals(location)) {
         locations.remove(locationInd);
-        locationInd--;
+        locationInd--; // decrement if found
         break;
       }
       locationInd++;
     }
 
+    // if the location is found, delete it from the Location table
     if (locationInd < locations.size()) {
       try {
         // create the statement

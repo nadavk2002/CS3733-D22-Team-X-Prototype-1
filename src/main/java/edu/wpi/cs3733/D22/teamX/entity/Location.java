@@ -11,25 +11,25 @@ public class Location {
   private String longName, shortName;
 
   public Location() {
-    nodeID = null;
-    xCoord = -1;
-    yCoord = -1;
-    floor = null;
-    building = null;
-    nodeType = null;
-    longName = null;
-    shortName = null;
+    this.nodeID = "";
+    this.xCoord = -1;
+    this.yCoord = -1;
+    this.floor = "";
+    this.building = "";
+    this.nodeType = "";
+    this.longName = "";
+    this.shortName = "";
   }
 
   public Location(String nodeID) {
     this.nodeID = nodeID;
     this.xCoord = -1;
     this.yCoord = -1;
-    this.floor = null;
-    this.building = null;
-    this.nodeType = null;
-    this.longName = null;
-    this.shortName = null;
+    this.floor = "";
+    this.building = "";
+    this.nodeType = "";
+    this.longName = "";
+    this.shortName = "";
   }
 
   public Location(

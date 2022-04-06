@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
-  List<EquipmentUnit> equipmentUnits;
-  Connection connection;
+  private List<EquipmentUnit> equipmentUnits;
+  private Connection connection;
 
   public EquipmentUnitDAOImpl() {
     this.connection = ConnectionSingleton.getConnectionSingleton().getConnection();
