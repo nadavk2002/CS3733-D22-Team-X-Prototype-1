@@ -57,10 +57,10 @@ public class ReqLaundryController implements Initializable {
         .addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
 
-    selectLaundryType.setOnAction((ActionEvent event) -> enableSubmitButton());
-    roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
-    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
-    serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
+    selectLaundryType.setOnAction((ActionEvent event) -> disableSubmitButton());
+    roomNum.setOnAction((ActionEvent event) -> disableSubmitButton());
+    assignStaff.setOnAction((ActionEvent event) -> disableSubmitButton());
+    serviceStatus.setOnAction((ActionEvent event) -> disableSubmitButton());
 
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     table.getColumns().addAll(ID, assignee, locationColumn, status, laundryService);
@@ -85,7 +85,7 @@ public class ReqLaundryController implements Initializable {
   }
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
-  public void enableSubmitButton() {
+  public void disableSubmitButton() {
     submitButton.setDisable(
         assignStaff.getText().equals("")
             || serviceStatus.getValue().equals("")

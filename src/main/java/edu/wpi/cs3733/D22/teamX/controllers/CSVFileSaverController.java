@@ -1,13 +1,17 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Xdb;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
@@ -15,6 +19,7 @@ import javafx.stage.DirectoryChooser;
 public class CSVFileSaverController implements Initializable {
   public JFXButton browser;
   public AnchorPane anchorCSVSaver;
+  public static boolean loaded = false;
 
   //    DirectoryChooser csvSaverDC = new DirectoryChooser();
   //    File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
@@ -46,5 +51,12 @@ public class CSVFileSaverController implements Initializable {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     Platform.exit();
+  }
+
+  @FXML
+  public void mainMenu() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+    loaded = false;
   }
 }

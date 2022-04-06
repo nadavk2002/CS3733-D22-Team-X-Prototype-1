@@ -55,5 +55,10 @@
             <Insets />
          </opaqueInsets>
       </ChoiceBox>
+      <Label layoutX="824.0" layoutY="193.0" text="Gift Delivery Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
 </children>
 </AnchorPane>

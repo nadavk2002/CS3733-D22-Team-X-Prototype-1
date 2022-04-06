@@ -8,6 +8,8 @@ import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -25,10 +27,9 @@ public class MedicineDeliveryControllerTest extends ApplicationTest {
   }
   //
   @Test
-  public void testPatientNameTextField() {
-    clickOn("#patientName");
-    write("h");
-    verifyThat("#patientName", hasText("h"));
+  public void testPatientNameDropdown() {
+    clickOn("#patientName").clickOn("Patient 1");
+    verifyThat("#patientName", (ChoiceBox<String> c) -> c.getValue().equals("Patient 1"));
   }
 
   @Test
@@ -39,33 +40,40 @@ public class MedicineDeliveryControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testRoomNumTextField() {
-    clickOn("#roomNum");
-    write("h");
-    verifyThat("#roomNum", hasText("h"));
+  public void testRoomNumDropdown() {
+    // checks if its populated
+    clickOn("#roomNum").clickOn("CIM");
+    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals("CIM"));
   }
 
   @Test
-  public void testAssignStaffTextField() {
-    clickOn("#assignStaff");
-    write("h");
-    verifyThat("#assignStaff", hasText("h"));
+  public void testAssignStaffDropdown() {
+    clickOn("#assignStaff").clickOn("Staff 1");
+    verifyThat("#assignStaff", (ChoiceBox<String> c) -> c.getValue().equals("Staff 1"));
   }
 
   @Test
-  public void testServiceStatusTextField() {
-    clickOn("#serviceStatus");
-    write("h");
-    verifyThat("#serviceStatus", hasText("h"));
+  public void testServiceStatusDropdown() {
+    clickOn("#serviceStatus").clickOn("PROC");
+    verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals("PROC"));
   }
 
   @Test
   public void testResetButton() {
+    clickOn("#patientName").clickOn("Patient 1");
+    clickOn("#roomNum").clickOn("CIM");
+    clickOn("#serviceStatus").clickOn("PROC");
+    clickOn("#assignStaff").clickOn("Staff 1");
+    clickOn("#rxNum");
+    write("h");
+    verifyThat("#submitRequest", (Button c) -> c.isDisabled());
+
     clickOn("#resetFields");
-    verifyThat("#patientName", hasText(""));
+    verifyThat("#patientName", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#assignStaff", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals(""));
     verifyThat("#rxNum", hasText(""));
-    verifyThat("#roomNum", hasText(""));
-    verifyThat("#assignStaff", hasText(""));
-    verifyThat("#serviceStatus", hasText(""));
+    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#submitRequest", (Button c) -> c.isDisabled());
   }
 }

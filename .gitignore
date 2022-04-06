@@ -4,6 +4,11 @@ derby.log
 # DB
 embed_db/
 
+# CSV_Created_Files
+LabServiceRequests.csv
+MedEquipReq.csv
+TowerLocationsX.csv
+
 # Created by https://www.gitignore.io/api/java,macos,gradle,intellij+all
 # Edit at https://www.gitignore.io/?templates=java,macos,gradle,intellij+all
 

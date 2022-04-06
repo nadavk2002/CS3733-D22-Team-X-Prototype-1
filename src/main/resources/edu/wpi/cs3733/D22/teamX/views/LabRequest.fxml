@@ -71,7 +71,7 @@
                </columns></TableView>
          </children>
       </HBox>
-      <Label layoutX="778.0" layoutY="47.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc">
+      <Label layoutX="825.0" layoutY="113.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
