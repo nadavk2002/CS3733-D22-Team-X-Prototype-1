@@ -183,32 +183,32 @@ public class Xdb {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE LabServiceRequest");
+      Statement dropLabServiceRequest = connection.createStatement();
+      dropLabServiceRequest.execute("DROP TABLE LabServiceRequest");
     } catch (SQLException e) {
       System.out.println("LabServiceRequest not dropped");
       e.printStackTrace();
     }
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
+      Statement dropMedicalEquipmentServiceRequest = connection.createStatement();
+      dropMedicalEquipmentServiceRequest.execute("DROP TABLE MedicalEquipmentServiceRequest");
     } catch (SQLException e) {
       System.out.println("MedicalEquipmentServiceRequest not dropped");
       e.printStackTrace();
     }
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE EquipmentUnit");
+      Statement dropEquipmentUnit = connection.createStatement();
+      dropEquipmentUnit.execute("DROP TABLE EquipmentUnit");
     } catch (SQLException e) {
       System.out.println("EquipmentUnit not dropped");
       e.printStackTrace();
     }
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE EquipmentType");
+      Statement dropEquipmentType = connection.createStatement();
+      dropEquipmentType.execute("DROP TABLE EquipmentType");
     } catch (SQLException e) {
       System.out.println("EquipmentType not dropped");
       e.printStackTrace();
