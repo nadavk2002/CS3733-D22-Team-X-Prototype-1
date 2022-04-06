@@ -20,13 +20,21 @@
     <TextField fx:id="giftNoteField" layoutX="929.0" layoutY="419.0" prefHeight="26.0" prefWidth="150.0" />
     <Label layoutX="850.0" layoutY="389.0" text="Assign Staff:" />
     <Label layoutX="866.0" layoutY="421.0" text="Gift Note:" />
-    <Button fx:id="submitButton" layoutX="996.0" layoutY="491.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" />
+    <JFXButton fx:id="submitButton" layoutX="996.0" layoutY="491.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+        <font>
+            <Font name="System Bold" size="13.0" />
+        </font>
+    </JFXButton>
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ReturnToMain" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Button fx:id="resetFields" layoutX="907.0" layoutY="491.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" />
+      <JFXButton fx:id="resetFields" layoutX="907.0" layoutY="491.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
+          <font>
+              <Font name="System Bold" size="13.0" />
+          </font>
+      </JFXButton>
       <Label fx:id="requestStatus" layoutX="960.0" layoutY="554.0" />
       <ChoiceBox fx:id="selectGiftDestination" layoutX="928.0" layoutY="356.0" prefWidth="150.0">
          <opaqueInsets>

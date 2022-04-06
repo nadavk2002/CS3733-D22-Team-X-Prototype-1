@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
@@ -10,51 +11,86 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqInTransportController">
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqInTransportController">
     <children>
-        <TextField fx:id="patientName" layoutX="472.0" layoutY="252.0"/>
-        <ChoiceBox fx:id="transportTo" layoutX="471.0" layoutY="336.0" prefWidth="150.0"/>
-        <ChoiceBox fx:id="transportFrom" layoutX="472.0" layoutY="294.0" prefWidth="150.0"/>
-        <ChoiceBox fx:id="addAccommodation" layoutX="471.0" layoutY="378.0" prefWidth="150.0"/>
-        <Label fx:id="l1" alignment="CENTER" layoutX="357.0" layoutY="256.0" text="Patient Name:"
-               textAlignment="RIGHT"/>
-        <Label fx:id="l2" alignment="CENTER" layoutX="350.0" layoutY="298.0" text="Transport From:"
-               textAlignment="RIGHT"/>
-        <Label fx:id="l3" alignment="CENTER" layoutX="326.0" layoutY="340.0" text="Transport To:"
-               textAlignment="RIGHT"/>
-        <Label fx:id="l4" alignment="CENTER" layoutX="275.0" layoutY="382.0" text="Additional Accommodations"
-               textAlignment="RIGHT"/>
-        <Label fx:id="l5" alignment="CENTER" layoutX="410.0" layoutY="422.0" text="Assigned Staff:"
-               textAlignment="RIGHT"/>
-        <Label fx:id="l6" alignment="CENTER" layoutX="383.0" layoutY="464.0" text="Service Status:"
-               textAlignment="RIGHT"/>
-        <JFXButton fx:id="submitButton" layoutX="392.0" layoutY="509.0" onAction="#submitRequest" text="Submit Request"
-                   textFill="#446fdc">
+      <VBox fx:id="pageVBox" alignment="CENTER" minHeight="900.0" prefHeight="900.0" prefWidth="1920.0" />
+      <VBox fx:id="leftSideVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" />
+        <HBox fx:id="tableHBox" alignment="CENTER" layoutX="160" layoutY="120" prefHeight="600.0" prefWidth="1920.0" />
+      <HBox fx:id="labelHBox1" alignment="CENTER" layoutX="170.0" layoutY="130.0" prefHeight="50.0" prefWidth="400.0" />
+      <HBox fx:id="labelHBox2" alignment="CENTER" layoutX="180.0" layoutY="140.0" prefHeight="50.0" prefWidth="400.0" />
+      <HBox fx:id="labelHBox3" alignment="CENTER" layoutX="180.0" layoutY="140.0" prefHeight="50.0" prefWidth="400.0" />
+      <HBox fx:id="inputHBox1" alignment="CENTER" layoutX="200.0" layoutY="160.0" prefHeight="30.0" prefWidth="400.0" />
+      <HBox fx:id="inputHBox2" alignment="CENTER" layoutX="200.0" layoutY="160.0" prefHeight="30.0" prefWidth="400.0" />
+      <HBox fx:id="inputHBox3" alignment="CENTER" layoutX="190.0" layoutY="150.0" prefHeight="30.0" prefWidth="400.0" />
+        <TextField fx:id="patientName" minWidth="150.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="transportTo" layoutX="471.0" layoutY="336.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="transportFrom" layoutX="472.0" layoutY="294.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="addAccommodation" layoutX="471.0" layoutY="378.0" prefWidth="150.0" />
+        <Label fx:id="l1" alignment="CENTER" layoutX="357.0" layoutY="256.0" minWidth="150.0" prefWidth="150.0" text="Patient Name:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding></Label>
+        <Label fx:id="l2" alignment="CENTER" layoutX="350.0" layoutY="298.0" minWidth="150.0" prefWidth="150.0" text="Transport From:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding></Label>
+        <Label fx:id="l3" alignment="CENTER" layoutX="326.0" layoutY="340.0" minWidth="150.0" prefWidth="150.0" text="Transport To:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding></Label>
+        <Label fx:id="l4" alignment="CENTER" layoutX="271.0" layoutY="382.0" minWidth="150.0" prefWidth="150.0" text="Accommodations:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding></Label>
+        <Label fx:id="l5" alignment="CENTER" layoutX="357.0" layoutY="422.0" minWidth="150.0" prefWidth="150.0" text="Assigned Staff:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </Label>
+        <Label fx:id="l6" alignment="CENTER" layoutX="383.0" layoutY="464.0" minWidth="150.0" prefWidth="150.0" text="Service Status:" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+         <padding>
+            <Insets top="20.0" />
+         </padding></Label>
+        <JFXButton fx:id="submitButton" layoutX="392.0" layoutY="509.0" onAction="#submitRequest" text="Submit Request" textFill="#446fdc">
             <font>
-                <Font name="System Bold" size="13.0"/>
+                <Font name="System Bold" size="18.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="ToMainMenu" layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu"
-                   textFill="#446fdc">
+        <JFXButton fx:id="ToMainMenu" layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
             <font>
-                <Font name="System Bold" size="13.0"/>
+                <Font name="System Bold" size="13.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="resetFields" layoutX="404.0" layoutY="536.0" onAction="#resetFields" text="Reset Fields"
-                   textFill="#446fdc">
+        <JFXButton fx:id="resetFields" layoutX="404.0" layoutY="536.0" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
             <font>
-                <Font name="System Bold" size="13.0"/>
+                <Font name="System Bold" size="18.0" />
             </font>
         </JFXButton>
-        <TextField fx:id="assignStaff" layoutX="472.0" layoutY="418.0"/>
-        <ChoiceBox fx:id="serviceStatus" layoutX="472.0" layoutY="460.0"/>
-        <TableView fx:id="table" layoutX="938.0" layoutY="163.0" prefHeight="534.0" prefWidth="950.0"/>
-        <HBox alignment="CENTER" fx:id="pageHBox" layoutX="160" layoutY="120" prefHeight="800" prefWidth="1600"/>
-        <VBox alignment="CENTER" fx:id="leftSideVBox" prefHeight="800.0" prefWidth="736.0"/>
-        <HBox alignment="CENTER" fx:id="upperHBox" prefHeight="400" prefWidth="400"/>
-        <VBox alignment="CENTER_RIGHT" fx:id="labelVBox" prefHeight="400" prefWidth="200"/>
-        <VBox alignment="CENTER_LEFT" fx:id="inputVBox" prefHeight="400" prefWidth="200"/>
+        <TextField fx:id="assignStaff" layoutX="472.0" layoutY="418.0" minWidth="150.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="serviceStatus" layoutX="472.0" layoutY="460.0" prefWidth="150.0" />
+        <TableView fx:id="table" layoutX="938.0" layoutY="163.0" minHeight="700.0" prefHeight="700.0" prefWidth="1000.0" />
+      <Label fx:id="title" alignment="CENTER" layoutX="927.0" layoutY="88.0" text="Internal Patient Transport" textAlignment="RIGHT" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

@@ -41,7 +41,11 @@
             </Label>
          </children>
       </VBox>
-      <Button fx:id="submitRequest" layoutX="960.0" layoutY="283.0" mnemonicParsing="false" onAction="#submitForm" text="Submit Request" />
+      <JFXButton fx:id="submitRequest" layoutX="960.0" layoutY="283.0" mnemonicParsing="false" onAction="#submitForm" text="Submit Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
       <VBox layoutX="935.0" layoutY="98.0" spacing="12.0">
          <children>
             <ChoiceBox fx:id="patientName" prefWidth="150.0" />
@@ -56,7 +60,11 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Button fx:id="resetFields" layoutX="972.0" layoutY="317.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" />
+      <JFXButton fx:id="resetFields" layoutX="972.0" layoutY="317.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
       <TableView fx:id="tbView" layoutX="616.0" layoutY="381.0" prefHeight="494.0" prefWidth="786.0" />
       <Label layoutX="860.0" layoutY="38.0" text="Request Medicine Delivery" textAlignment="CENTER" textFill="#446fdc">
          <font>

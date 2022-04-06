@@ -12,22 +12,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class ReqInTransportController implements Initializable {
-  @FXML private Label l1, l2, l3, l4, l5, l6;
+  @FXML private Label l1, l2, l3, l4, l5, l6, title;
   @FXML private Button ToMainMenu, submitButton, resetFields;
   @FXML private ChoiceBox<String> transportFrom, transportTo, addAccommodation, serviceStatus;
   @FXML private TextField patientName, assignStaff;
   @FXML private TableView<InTransportServiceRequest> table;
-  @FXML private VBox inputVBox;
-  @FXML private VBox labelVBox;
-  @FXML private HBox upperHBox;
-  @FXML private VBox leftSideVBox;
-  @FXML private HBox pageHBox;
+  @FXML
+  private HBox labelHBox1, labelHBox2, labelHBox3, inputHBox1, inputHBox2, inputHBox3, tableHBox;
+  @FXML private VBox leftSideVBox, pageVBox;
 
   private LocationDAO locationDAO;
   private List<Location> locations;
@@ -43,7 +42,7 @@ public class ReqInTransportController implements Initializable {
   private TableColumn<InTransportServiceRequest, String> patientNameColumn =
       new TableColumn("Patient Name");
   private TableColumn<InTransportServiceRequest, String> addAccommodationColumn =
-      new TableColumn("Additional Accommodations");
+      new TableColumn("Accommodations");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -85,14 +84,35 @@ public class ReqInTransportController implements Initializable {
     patientNameColumn.setCellValueFactory(new PropertyValueFactory<>("patientName"));
     addAccommodationColumn.setCellValueFactory(new PropertyValueFactory<>("addAccommodation"));
 
-    labelVBox.getChildren().addAll(l1, l2, l3, l4, l5, l6);
-    inputVBox
+    labelHBox1.getChildren().addAll(l2, l3);
+    labelHBox1.setSpacing(50);
+    inputHBox1.getChildren().addAll(transportFrom, transportTo);
+    inputHBox1.setSpacing(50);
+    labelHBox2.getChildren().addAll(l1, l5);
+    labelHBox2.setSpacing(50);
+    inputHBox2.getChildren().addAll(patientName, assignStaff);
+    inputHBox2.setSpacing(50);
+    labelHBox3.getChildren().addAll(l4, l6);
+    labelHBox3.setSpacing(50);
+    inputHBox3.getChildren().addAll(addAccommodation, serviceStatus);
+    inputHBox3.setSpacing(50);
+    leftSideVBox
         .getChildren()
         .addAll(
-            patientName, transportFrom, transportTo, addAccommodation, assignStaff, serviceStatus);
-    upperHBox.getChildren().addAll(labelVBox, inputVBox);
-    leftSideVBox.getChildren().addAll(upperHBox, submitButton, resetFields);
-    pageHBox.getChildren().addAll(leftSideVBox, table);
+            labelHBox1,
+            inputHBox1,
+            labelHBox2,
+            inputHBox2,
+            labelHBox3,
+            inputHBox3,
+            submitButton,
+            resetFields);
+    leftSideVBox.setSpacing(10);
+    leftSideVBox.setMargin(submitButton, new Insets(30, 0, 0, 0));
+    tableHBox.getChildren().addAll(leftSideVBox, table);
+    tableHBox.setMargin(table, new Insets(0, 0, 0, 50));
+    pageVBox.getChildren().addAll(title, tableHBox);
+    pageVBox.setMargin(title, new Insets(0, 0, 80, 0));
   }
 
   /**
