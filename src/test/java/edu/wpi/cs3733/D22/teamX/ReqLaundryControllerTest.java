@@ -8,6 +8,8 @@ import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 import org.junit.Test;
 import org.testfx.framework.junit.ApplicationTest;
@@ -25,10 +27,9 @@ public class ReqLaundryControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testRoomNumTextField() {
-    clickOn("#roomField");
-    write("h");
-    verifyThat("#roomField", hasText("h"));
+  public void testRoomNumDropDown() {
+    clickOn("#roomNum").clickOn("CIM");
+    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals("CIM"));
   }
 
   @Test
@@ -39,17 +40,25 @@ public class ReqLaundryControllerTest extends ApplicationTest {
   }
 
   @Test
-  public void testServiceStatusTextField() {
-    clickOn("#serviceStatus");
-    write("h");
-    verifyThat("#serviceStatus", hasText("h"));
+  public void testServiceStatusDropDown() {
+    clickOn("#serviceStatus").clickOn("PROC");
+    verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals("PROC"));
   }
 
   @Test
   public void testResetButton() {
+    clickOn("#selectLaundryType").clickOn("Gowns");
+    clickOn("#roomNum").clickOn("CIM");
+    clickOn("#assignStaff");
+    write("h");
+    clickOn("#serviceStatus").clickOn("PROC");
+    verifyThat("#submitButton", (Button c) -> !c.isDisabled());
+
     clickOn("#resetFields");
-    verifyThat("#roomField", hasText(""));
     verifyThat("#assignStaff", hasText(""));
-    verifyThat("#serviceStatus", hasText(""));
+    verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#selectLaundryType", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals(""));
+    verifyThat("#submitButton", (Button c) -> c.isDisabled());
   }
 }
