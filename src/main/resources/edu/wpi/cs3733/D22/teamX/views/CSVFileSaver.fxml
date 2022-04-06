@@ -1,14 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorCSVSaver" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CSVFileSaverController">
+<AnchorPane fx:id="anchorCSVSaver" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CSVFileSaverController">
    <children>
-      <JFXButton fx:id="browser" layoutX="401.0" layoutY="187.0" onAction="#getDirectoryForSaving" text="Browse" />
-      <JFXTextField fx:id="directoryDisplayer" layoutX="209.0" layoutY="187.0" prefHeight="26.0" prefWidth="182.0" />
-      <Label layoutX="209.0" layoutY="162.0" text="Choose directory to save CSV Files" />
-      <JFXTextField fx:id="sayExiting" layoutX="233.0" layoutY="313.0" text="Exiting Application..." visible="false" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1d1d1" height="90.0" layoutX="714.0" layoutY="224.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
+      <Label layoutX="837.0" layoutY="88.0" text="CSV File Saver" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <HBox layoutX="726.0" layoutY="234.0" prefHeight="100.0" prefWidth="468.0">
+         <children>
+            <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="368.0">
+               <children>
+                  <Label text="Choose directory to save CSV files">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="TOP_CENTER" prefHeight="10.0" prefWidth="266.0">
+                     <children>
+                        <JFXButton fx:id="browser" onAction="#getDirectoryForSaving" text="Browse" textFill="#446fdc" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton mnemonicParsing="false" onAction="#saveToDefault" text="Default Directory" textFill="#446fdc" underline="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <ImageView fitHeight="77.0" fitWidth="78.0">
+               <image>
+                  <Image url="@../assets/saveIcon.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

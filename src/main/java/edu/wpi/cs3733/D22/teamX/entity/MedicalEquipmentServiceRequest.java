@@ -20,7 +20,7 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
 
   public MedicalEquipmentServiceRequest() {
     super();
-    this.equipmentType = null;
+    this.equipmentType = "";
     this.quantity = -1;
   }
 

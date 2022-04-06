@@ -1,24 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
    <children>
       <JFXButton layoutX="24.0" layoutY="24.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
@@ -36,12 +25,12 @@
                <children>
                   <HBox prefHeight="35.0" prefWidth="669.0">
                      <children>
-                        <JFXButton onAction="#LL2Click" text="LL2 Floor" />
-                        <JFXButton onAction="#LL1Click" text="LL1 Floor" />
-                        <JFXButton onAction="#groundClick" text="Ground Floor" />
-                        <JFXButton onAction="#firstClick" text="First Floor" />
-                        <JFXButton onAction="#secondClick" text="Second Floor" />
-                        <JFXButton onAction="#thirdClick" text="Third Floor" />
+                        <JFXButton fx:id="LL2Button" onAction="#LL2Click" text="LL2 Floor" />
+                        <JFXButton fx:id="LL1Button" onAction="#LL1Click" text="LL1 Floor" />
+                        <JFXButton fx:id="GButton" onAction="#groundClick" text="Ground Floor" />
+                        <JFXButton fx:id="OneButton" onAction="#firstClick" text="First Floor" />
+                        <JFXButton fx:id="TwoButton" onAction="#secondClick" text="Second Floor" />
+                        <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
                      </children>
                   </HBox>
                   <Group fx:id="imageGroup">
@@ -133,7 +122,7 @@
             <TextField fx:id="shortNameText" GridPane.columnIndex="1" GridPane.rowIndex="7" />
          </children>
       </GridPane>
-      <JFXButton fx:id="submitLocationButton" layoutX="295.0" layoutY="933.0" onAction="#submitLocation" text="Submit Location" textFill="#446fdc">
+      <JFXButton fx:id="submitLocationButton" layoutX="295.0" layoutY="933.0" onAction="#submitLocation" text="Add/Update Location" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -179,7 +168,7 @@
             <ChoiceBox fx:id="equipLocationChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <JFXButton fx:id="submitEquipmentButton" layoutX="1241.0" layoutY="919.0" onAction="#submitEquipment" text="Submit Equipment" textFill="#446fdc">
+      <JFXButton fx:id="submitEquipmentButton" layoutX="1241.0" layoutY="919.0" onAction="#submitEquipment" text="Add/Update Equipment" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

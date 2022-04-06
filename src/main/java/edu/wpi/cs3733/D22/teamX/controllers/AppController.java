@@ -110,10 +110,10 @@ public class AppController implements Initializable {
 
   @FXML
   void ExitApplication() throws IOException {
-    //    App.switchScene(
-    //        FXMLLoader.load(
-    //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
-    Platform.exit();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
+    // Platform.exit();
   }
 
   @Override

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -36,12 +37,19 @@ public class GiftDeliveryController implements Initializable {
     locationDAO = new LocationDAOImpl();
     locations = locationDAO.getAllLocations();
     resetFields();
+    submitButton.setDisable(true);
 
     selectStatus.getItems().addAll("", "PROC", "DONE");
     selectAssignStaff.getItems().addAll("Staff1", "Staff2", "Staff3", "Staff4");
     selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
     selectGiftType.getItems().addAll("Toy", "Flower", "Chocolate");
     selectGiftDestination.setItems(getLocationNames());
+
+    selectGiftType.setOnAction((ActionEvent event) -> enableSubmitButton());
+    selectGiftDestination.setOnAction((ActionEvent event) -> enableSubmitButton());
+    selectAssignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
+    giftNoteField.setOnAction((ActionEvent event) -> enableSubmitButton());
+    selectStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
     tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     tbView
@@ -67,6 +75,16 @@ public class GiftDeliveryController implements Initializable {
       locationNames.add(locations.get(i).getShortName());
     }
     return locationNames;
+  }
+
+  /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
+  public void enableSubmitButton() {
+    submitButton.setDisable(
+        selectGiftType.getValue().equals("")
+            || selectGiftDestination.getValue().equals("")
+            || selectAssignStaff.getValue().equals("")
+            || giftNoteField.getText().equals("")
+            || selectStatus.getValue().equals(""));
   }
 
   @FXML

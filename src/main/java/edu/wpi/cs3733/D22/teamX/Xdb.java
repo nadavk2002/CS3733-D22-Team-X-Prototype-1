@@ -66,9 +66,9 @@ public class Xdb {
 
   /** Saves the data from the database to the appropriate CSV files and closes the database. */
   public static boolean closeDB() throws loadSaveFromCSVException {
-    if (!saveLocationDataToCSV() || !saveMedEqDataToCSV() || !saveLabServiceReqDataToCSV()) {
-      throw new loadSaveFromCSVException("Error when writing to CSV file.");
-    }
+    //    if (!saveLocationDataToCSV() || !saveMedEqDataToCSV() || !saveLabServiceReqDataToCSV()) {
+    //      throw new loadSaveFromCSVException("Error when writing to CSV file.");
+    //    }
     try {
       ConnectionSingleton.getConnectionSingleton().getConnection().close();
       System.out.println("Connection closed successfully");
@@ -183,32 +183,32 @@ public class Xdb {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE LabServiceRequest");
+      Statement dropLabServiceRequest = connection.createStatement();
+      dropLabServiceRequest.execute("DROP TABLE LabServiceRequest");
     } catch (SQLException e) {
       System.out.println("LabServiceRequest not dropped");
       e.printStackTrace();
     }
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE MedicalEquipmentServiceRequest");
+      Statement dropMedicalEquipmentServiceRequest = connection.createStatement();
+      dropMedicalEquipmentServiceRequest.execute("DROP TABLE MedicalEquipmentServiceRequest");
     } catch (SQLException e) {
       System.out.println("MedicalEquipmentServiceRequest not dropped");
       e.printStackTrace();
     }
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE EquipmentUnit");
+      Statement dropEquipmentUnit = connection.createStatement();
+      dropEquipmentUnit.execute("DROP TABLE EquipmentUnit");
     } catch (SQLException e) {
       System.out.println("EquipmentUnit not dropped");
       e.printStackTrace();
     }
 
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE EquipmentType");
+      Statement dropEquipmentType = connection.createStatement();
+      dropEquipmentType.execute("DROP TABLE EquipmentType");
     } catch (SQLException e) {
       System.out.println("EquipmentType not dropped");
       e.printStackTrace();
@@ -423,6 +423,11 @@ public class Xdb {
     return true;
   }
 
+  /**
+   * Loads the data from the equipmentUnitsCSV file into the DAO
+   *
+   * @return whether the load was successful.
+   */
   private static boolean loadEquipmentUnitsCSV() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     List<EquipmentUnit> equipmentUnitList = new ArrayList<EquipmentUnit>();
@@ -478,7 +483,7 @@ public class Xdb {
   }
 
   /** Writes the content of the location table from the database into the TowerLocations.CSV */
-  private static boolean saveLocationDataToCSV() {
+  public static boolean saveLocationDataToCSV(String dirPath) {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     ArrayList<Location> locations = new ArrayList<Location>();
     try {
@@ -498,14 +503,14 @@ public class Xdb {
       }
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("An error occured when saving Location data to the CSV file.");
+      System.out.println("An error occurred when saving Location data to the CSV file.");
       return false;
     }
 
     try {
       //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
       //      FileWriter csvFile = new FileWriter(csv, false);
-      FileWriter csvFile = new FileWriter(locationCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + locationCSV, false);
       csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
       for (int i = 0; i < locations.size(); i++) {
         csvFile.write("\n" + locations.get(i).getNodeID() + ",");
@@ -546,7 +551,7 @@ public class Xdb {
   }
 
   /** Saves Medical Equipment data to CSV on close */
-  private static boolean saveMedEqDataToCSV() {
+  public static boolean saveMedEqDataToCSV(String dirPath) {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     List<MedicalEquipmentServiceRequest> Equipment =
         new ArrayList<MedicalEquipmentServiceRequest>();
@@ -574,7 +579,7 @@ public class Xdb {
     try {
       //      URL url = Xdb.class.getResource(medicalEquipmentCSV);
       //      FileWriter csvFile = new FileWriter(url.getFile(), false);
-      FileWriter csvFile = new FileWriter(medicalEquipmentServRequestCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + medicalEquipmentServRequestCSV, false);
       csvFile.write("RequestID,Destination,Status,assignee,equipmentType,Quantity");
       for (int i = 0; i < Equipment.size(); i++) {
         csvFile.write("\n" + Equipment.get(i).getRequestID() + ",");
@@ -611,7 +616,7 @@ public class Xdb {
   }
 
   /** Writes the content of the location table from the database into the LabServiceReq.CSV */
-  private static boolean saveLabServiceReqDataToCSV() {
+  public static boolean saveLabServiceReqDataToCSV(String dirPath) {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     ArrayList<LabServiceRequest> LabServiceReq = new ArrayList<LabServiceRequest>();
     LocationDAO locDestination = new LocationDAOImpl();
@@ -635,7 +640,7 @@ public class Xdb {
     }
 
     try {
-      FileWriter csvFile = new FileWriter(labServiceRequestsCSV, false);
+      FileWriter csvFile = new FileWriter(dirPath + labServiceRequestsCSV, false);
       csvFile.write("requestID,destination,status,assignee,service,patientFor");
       for (int i = 0; i < LabServiceReq.size(); i++) {
         csvFile.write("\n" + LabServiceReq.get(i).getRequestID() + ",");
@@ -670,6 +675,61 @@ public class Xdb {
     } catch (IOException e) {
       System.out.print(
           "An error occurred when trying to write to the Lab Service Request CSV file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * saves data from DAO to equipmentUnitCSV
+   *
+   * @return whether the save was successful
+   */
+  private static boolean saveEquipmentUnitCSV() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    ArrayList<EquipmentUnit> equipmentUnits = new ArrayList<EquipmentUnit>();
+    try {
+      LocationDAO locationDAO = new LocationDAOImpl();
+      Statement statement = connection.createStatement();
+      ResultSet record = statement.executeQuery("SELECT * FROM EquipmentUnit");
+      while (record.next()) {
+        equipmentUnits.add(
+            new EquipmentUnit(
+                record.getString("unitID"),
+                record.getString("type"),
+                record.getString("isAvailible").charAt(0),
+                locationDAO.getLocation(record.getString("currLocation"))));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("An error occured when saving equipment unit data to the CSV file.");
+      return false;
+    }
+
+    try {
+      //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
+      //      FileWriter csvFile = new FileWriter(csv, false);
+      FileWriter csvFile = new FileWriter(equipmentUnitsCSV, false);
+      csvFile.write("unitID, type, isAvailible, currLocation");
+      for (int i = 0; i < equipmentUnits.size(); i++) {
+        csvFile.write("\n" + equipmentUnits.get(i).getUnitID() + ",");
+        if (equipmentUnits.get(i).getType() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(equipmentUnits.get(i).getType() + ",");
+        }
+        csvFile.write(equipmentUnits.get(i).getIsAvailableChar() + ",");
+        if (equipmentUnits.get(i).getCurrLocation() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(equipmentUnits.get(i).getCurrLocation().getNodeID());
+        }
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.println("Error occured when updating equipment units csv file.");
       e.printStackTrace();
       return false;
     }

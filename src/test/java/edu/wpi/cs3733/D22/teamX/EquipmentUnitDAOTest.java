@@ -1,9 +1,11 @@
 package edu.wpi.cs3733.D22.teamX;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
+import java.util.NoSuchElementException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +25,23 @@ public class EquipmentUnitDAOTest {
   public void testCreateList() {
     EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
     assertEquals(15, equipmentUnitDAO.getAllEquipmentUnits().size());
+  }
+
+  @Test
+  public void testDeleteRecord() {
+    EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
+    LocationDAO locationDAO = new LocationDAOImpl();
+    EquipmentUnit record =
+        new EquipmentUnit("MEUN9997", "Infusion Pump", 'Y', locationDAO.getLocation("CHALL009L2"));
+    equipmentUnitDAO.addEquipmentUnit(record);
+    equipmentUnitDAO.deleteEquipmentUnit(record);
+    boolean notFound = false;
+    try {
+      equipmentUnitDAO.deleteEquipmentUnit(record);
+    } catch (NoSuchElementException e) {
+      notFound = true;
+    }
+    assertTrue(notFound);
   }
 
   @Test

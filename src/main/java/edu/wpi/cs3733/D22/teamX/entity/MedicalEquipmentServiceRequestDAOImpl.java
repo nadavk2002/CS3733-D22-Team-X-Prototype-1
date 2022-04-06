@@ -10,10 +10,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentServiceRequestDAO {
-  List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests;
-  Connection connection; // store connection info
+  private List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests;
+  private Connection connection; // store connection info
 
-  /** constructor */
   public MedicalEquipmentServiceRequestDAOImpl() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     medicalEquipmentServiceRequests = new ArrayList<MedicalEquipmentServiceRequest>();
@@ -53,7 +52,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
   }
 
   /**
-   * gets induviduial equipment service requests
+   * gets individual equipment service requests
    *
    * @param requestID requestID of the induvidual service request
    * @return a medical equipment service request with a matching requestID
