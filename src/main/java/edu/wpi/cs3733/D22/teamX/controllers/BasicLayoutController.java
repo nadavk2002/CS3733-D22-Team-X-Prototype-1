@@ -2,8 +2,11 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
+import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
 import java.util.HashMap;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,14 +55,24 @@ public class BasicLayoutController {
           FXMLLoader.load(
               App.class.getResource("/edu/wpi/cs3733/D22/teamX/views/" + pages.get(newPage))));
       ChoosePage.setValue("Choose a Page");
+      CSVFileSaverController.loaded = false;
     }
   }
 
   @FXML
-  void ExitApplication() throws IOException {
-    App.switchScene(
-        FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
-    // Platform.exit();
+  void ExitApplication() throws IOException, loadSaveFromCSVException {
+    if (CSVFileSaverController.loaded) {
+      Platform.exit();
+      if (!Xdb.saveLocationDataToCSV("")
+          || !Xdb.saveMedEqDataToCSV("")
+          || !Xdb.saveLabServiceReqDataToCSV("")) {
+        throw new loadSaveFromCSVException("Error when writing to CSV file.");
+      }
+    } else {
+      App.switchScene(
+          FXMLLoader.load(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
+      CSVFileSaverController.loaded = true;
+    }
   }
 }
