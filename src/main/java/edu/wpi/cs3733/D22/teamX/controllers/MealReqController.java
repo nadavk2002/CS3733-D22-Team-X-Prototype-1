@@ -103,7 +103,7 @@ public class MealReqController implements Initializable {
 
     reqID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     patID.setCellValueFactory(new PropertyValueFactory<>("patientID"));
-    assignee.setCellValueFactory(new PropertyValueFactory<>("status"));
+    assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
     reqType.setCellValueFactory(new PropertyValueFactory<>("mealType"));
     status.setCellValueFactory(new PropertyValueFactory<>("status"));
     destination.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));

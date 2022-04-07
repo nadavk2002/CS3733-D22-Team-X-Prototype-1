@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
@@ -187,6 +189,14 @@ public class GraphicalMapEditorController implements Initializable {
         circle.setCenterX(locationList.get(i).getxCoord());
         circle.setCenterY(locationList.get(i).getyCoord());
         circle.setFill(Paint.valueOf("RED"));
+        circle.setOnMouseDragged(
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent event) {
+                circle.setCenterX(event.getX());
+                circle.setCenterY(event.getY());
+              }
+            });
         imageGroup.getChildren().add(circle);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
@@ -199,6 +209,7 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void drawCirclesSetEquipmentList(String floor) {
+    equipDAO = new EquipmentUnitDAOImpl();
     List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
@@ -338,9 +349,10 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setShortName(shortNameText.getText());
         replaceLoc.setNodeType(nodeTypeText.getText());
         locDAO.updateLocation(replaceLoc);
-        loadLocation(replaceLoc.getFloor());
+        // loadLocation(replaceLoc.getFloor());
         locationTable.getItems().clear();
         locationTable.setItems(locationListFill());
+        loadLocation(replaceLoc.getFloor());
         return;
       }
     }
