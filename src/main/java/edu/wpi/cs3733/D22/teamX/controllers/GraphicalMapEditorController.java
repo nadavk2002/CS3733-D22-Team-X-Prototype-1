@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -185,7 +186,9 @@ public class GraphicalMapEditorController implements Initializable {
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
         Circle circle = new Circle();
-        circle.setRadius(3);
+        circle.setCursor(Cursor.HAND);
+        circle.setUserData(locationList.get(i));
+        circle.setRadius(8);
         circle.setCenterX(locationList.get(i).getxCoord());
         circle.setCenterY(locationList.get(i).getyCoord());
         circle.setFill(Paint.valueOf("RED"));
@@ -193,8 +196,32 @@ public class GraphicalMapEditorController implements Initializable {
             new EventHandler<MouseEvent>() {
               @Override
               public void handle(MouseEvent event) {
-                circle.setCenterX(event.getX());
-                circle.setCenterY(event.getY());
+                circle.setCursor(Cursor.CLOSED_HAND);
+                circle.setFill(Paint.valueOf("LIGHTBLUE"));
+                if (event.getX() > imageView.getX()
+                    && event.getX() <= imageView.getX() + imageView.getBoundsInLocal().getWidth())
+                  circle.setCenterX(event.getX());
+                if (event.getY() > imageView.getY()
+                    && event.getY() <= imageView.getY() + imageView.getBoundsInLocal().getHeight())
+                  circle.setCenterY(event.getY());
+              }
+            });
+        circle.setOnMouseReleased(
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent event) {
+                Location l = (Location) circle.getUserData();
+                circle.setCursor(Cursor.HAND);
+                circle.setFill(Paint.valueOf("RED"));
+                locationChoice.setValue(l.getNodeID());
+                int x = (int) event.getX();
+                int y = (int) event.getY();
+                if (x > 610) x = 610;
+                if (x < 0) x = 0;
+                if (y < 0) y = 0;
+                if (y > 610) y = 610;
+                xCordText.setText(String.valueOf(x));
+                yCordText.setText(String.valueOf(y));
               }
             });
         imageGroup.getChildren().add(circle);
@@ -214,7 +241,7 @@ public class GraphicalMapEditorController implements Initializable {
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
         Circle circle = new Circle();
-        circle.setRadius(2);
+        circle.setRadius(4);
         circle.setCenterX(equipment.get(i).getCurrLocation().getxCoord());
         circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
         circle.setFill(Paint.valueOf("GREEN"));
