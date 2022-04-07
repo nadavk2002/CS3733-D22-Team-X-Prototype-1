@@ -38,7 +38,7 @@ HRETL00302,430,460,2,Tower,RETL,Gift Shop Tower Floor 2,Gift Shop
 HSTAI00202,300,540,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
 HSTAI00302,390,600,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2
 WELEV00L02,410,300,2,Tower,ELEV,Elevator L Floor 2,Elevator L2
-HBATH00103,410,210,3,Tower,BATH,Bathroom 1 Tower Floor 3,Bathroom 0103
+HBATH00103,417,215,3,Tower,BATH,Bathroom 1 Tower Floor 3,Bathroom 0103
 HBATH00203,370,360,3,Tower,BATH,Bathroom 2 Tower Floor 3,Bathroom 0203
 HDEPT00103,350,275,3,Tower,DEPT,Dialysis Waiting Room,Dialysis WR
 HDEPT00203,310,200,3,Tower,DEPT,MICU 3BC Waiting Room,MICU 3BC WR
@@ -63,9 +63,9 @@ CREST001L1,350,400,L1,Tower,REST,Restroom L Elevator Floor L1,Restroom C001L1
 WELEV00LL1,410,300,L1,Tower,ELEV,Elevator L Floor L1,Elevator LL1
 CHALL006L2,370,380,L2,Tower,HALL,Hallway 6 Floor L2,Hallway C006L2
 CHALL007L2,350,380,L2,Tower,HALL,Hallway 7 Floor L2,Hallway C007L2
-CHALL008L2,344,326,L2,Tower,HALL,Hallway 8 Floor L2,Hallway C008L2
-CHALL009L2,352,231,L2,Tower,HALL,Hallway 9 Floor L2,Hallway C009L2
-WELEV00LL2,416,301,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
+CHALL008L2,350,300,L2,Tower,HALL,Hallway 8 Floor L2,Hallway C008L2
+CHALL009L2,350,230,L2,Tower,HALL,Hallway 9 Floor L2,Hallway C009L2
+WELEV00LL2,410,300,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 xSTOR001L1,300,270,L1,Tower,STOR,OR Bed Park Floor L1,OR Bed Park Floor L1
 xSTOR00201,140,300,1,Tower,STOR,West Plaza,West Plaza
 xSTOR00303,180,160,3,Tower,STOR,Clean Equipment Storage 1,Clean ES 1

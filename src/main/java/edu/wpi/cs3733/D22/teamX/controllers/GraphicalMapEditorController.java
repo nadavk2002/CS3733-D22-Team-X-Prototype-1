@@ -174,6 +174,12 @@ public class GraphicalMapEditorController implements Initializable {
     locationChoice.getItems().clear();
     equipmentChoice.setValue("");
     equipmentChoice.getItems().clear();
+    equipLocationChoice.setValue("");
+    equipLocationChoice.getItems().clear();
+    List<Location> allLocations = locationListFill();
+    for (int i = 0; i < allLocations.size(); i++) {
+      equipLocationChoice.getItems().add(allLocations.get(i).getNodeID());
+    }
     drawCirclesSetLocationList(floor);
     drawCirclesSetEquipmentList(floor);
   }
