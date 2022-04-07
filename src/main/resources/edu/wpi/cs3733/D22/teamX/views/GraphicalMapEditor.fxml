@@ -44,15 +44,19 @@
                         <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
                      </children>
                   </HBox>
-                  <Group fx:id="imageGroup">
+                  <AnchorPane fx:id="mapViewPane" prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/G.png" />
-                           </image>
-                        </ImageView>
+                        <Group fx:id="imageGroup">
+                           <children>
+                              <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/G.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Group>
                      </children>
-                  </Group>
+                  </AnchorPane>
                </children>
             </VBox>
             <VBox prefHeight="650.0" prefWidth="906.0">

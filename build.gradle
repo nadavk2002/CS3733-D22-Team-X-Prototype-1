@@ -35,6 +35,7 @@ dependencies {
     )
     implementation 'junit:junit:4.13.2'
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'net.kurobako:gesturefx:0.7.1'
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",

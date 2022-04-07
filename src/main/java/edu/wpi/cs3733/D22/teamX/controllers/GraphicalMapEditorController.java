@@ -26,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import net.kurobako.gesturefx.GesturePane;
 
 /**
  * Controller for the map editor page. This graphically displays equipment and location data on a
@@ -82,6 +83,7 @@ public class GraphicalMapEditorController implements Initializable {
 
   private LocationDAO locDAO;
   private EquipmentUnitDAO equipDAO;
+  private GesturePane gesturePane;
 
   /**
    * Returns to the main menu of the JavaFX App
@@ -214,8 +216,8 @@ public class GraphicalMapEditorController implements Initializable {
                 circle.setCursor(Cursor.HAND);
                 circle.setFill(Paint.valueOf("RED"));
                 locationChoice.setValue(l.getNodeID());
-                int x = (int) event.getX();
-                int y = (int) event.getY();
+                int x = (int) circle.getCenterX();
+                int y = (int) circle.getCenterY();
                 if (x > 610) x = 610;
                 if (x < 0) x = 0;
                 if (y < 0) y = 0;
@@ -254,6 +256,7 @@ public class GraphicalMapEditorController implements Initializable {
     }
   }
 
+  /** Hides or displays the dots based on the two checkboxes above the map */
   private void showDots() {
     ObservableList<Node> nodes = imageGroup.getChildren();
     for (Node node : nodes) {
@@ -271,8 +274,7 @@ public class GraphicalMapEditorController implements Initializable {
     String floor = locDAO.getLocation(locationToDelete).getFloor();
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
     loadLocation(floor);
-    locationTable.getItems().clear();
-    locationTable.setItems(locationListFill());
+    loadTables();
   }
 
   /** Deletes selected node id in the dropdown */
@@ -280,9 +282,8 @@ public class GraphicalMapEditorController implements Initializable {
     String equipmentToDelete = equipmentChoice.getValue();
     String floor = equipDAO.getEquipmentUnit(equipmentToDelete).getCurrLocation().getFloor();
     equipDAO.deleteEquipmentUnit(equipDAO.getEquipmentUnit(equipmentToDelete));
+    loadTables();
     loadLocation(floor);
-    equipTable.getItems().clear();
-    equipTable.setItems(equipmentListFill());
   }
 
   /** Fills text boxes with equipment data when a piece of equipment is chosen in the dropdown. */
@@ -358,8 +359,7 @@ public class GraphicalMapEditorController implements Initializable {
         replaceEquip.setType(typeText.getText());
         equipDAO.updateEquipmentUnit(replaceEquip);
         loadLocation(replaceEquip.getCurrLocation().getFloor());
-        equipTable.getItems().clear();
-        equipTable.setItems(equipmentListFill());
+        loadTables();
         return;
       }
     }
@@ -390,9 +390,7 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setShortName(shortNameText.getText());
         replaceLoc.setNodeType(nodeTypeText.getText());
         locDAO.updateLocation(replaceLoc);
-        // loadLocation(replaceLoc.getFloor());
-        locationTable.getItems().clear();
-        locationTable.setItems(locationListFill());
+        loadTables();
         loadLocation(replaceLoc.getFloor());
         return;
       }
@@ -409,18 +407,24 @@ public class GraphicalMapEditorController implements Initializable {
     newLocation.setShortName(shortNameText.getText());
     locDAO.addLocation(newLocation);
     loadLocation(newLocation.getFloor());
+    loadTables();
+  }
+
+  /** Fill tables with location and equipment data from the database */
+  private void loadTables() {
     locationTable.getItems().clear();
     locationTable.setItems(locationListFill());
+    equipTable.getItems().clear();
+    equipTable.setItems(equipmentListFill());
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     showLocCheck.setSelected(true);
     showEquipCheck.setSelected(true);
-
-    // hBox1.getChildren().add(table);
-
     hBox1.setSpacing(90);
+
+    locDAO = new LocationDAOImpl();
     locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
@@ -430,8 +434,6 @@ public class GraphicalMapEditorController implements Initializable {
     nodeType.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeType"));
     longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
-    ObservableList<Location> locationList = locationListFill();
-    locationTable.setItems(locationList);
 
     equipDAO = new EquipmentUnitDAOImpl();
     equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -441,13 +443,7 @@ public class GraphicalMapEditorController implements Initializable {
         new PropertyValueFactory<EquipmentUnit, String>("isAvailableChar"));
     curLocationCol.setCellValueFactory(
         new PropertyValueFactory<EquipmentUnit, String>("currLocationShortName"));
-    ObservableList<EquipmentUnit> equipmentList = equipmentListFill();
-    equipTable.setItems(equipmentList);
 
-    List<Location> locs = locDAO.getAllLocations();
-    for (Location newLocation : locs) {
-      equipLocationChoice.getItems().add(newLocation.getNodeID());
-    }
     showEquipCheck.setOnAction(
         new EventHandler<ActionEvent>() {
           @Override
@@ -462,5 +458,8 @@ public class GraphicalMapEditorController implements Initializable {
             showDots();
           }
         });
+
+    loadTables();
+    loadLocation("G");
   }
 }
