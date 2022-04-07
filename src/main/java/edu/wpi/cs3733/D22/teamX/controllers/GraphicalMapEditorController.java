@@ -10,12 +10,14 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -65,9 +67,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private TableColumn<Location, String> shortName;
 
   @FXML private TableColumn<EquipmentUnit, String> unitIdCol, typeCol, availableCol, curLocationCol;
-
-  @FXML private JFXCheckBox availableCheck;
-
+  @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck;
   @FXML
   private TextField nodeIdText,
       xCordText,
@@ -224,6 +224,7 @@ public class GraphicalMapEditorController implements Initializable {
                 yCordText.setText(String.valueOf(y));
               }
             });
+        circle.setVisible(showLocCheck.isSelected());
         imageGroup.getChildren().add(circle);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
@@ -242,11 +243,24 @@ public class GraphicalMapEditorController implements Initializable {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
         Circle circle = new Circle();
         circle.setRadius(4);
+        circle.setUserData(equipment.get(i));
         circle.setCenterX(equipment.get(i).getCurrLocation().getxCoord());
         circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
         circle.setFill(Paint.valueOf("GREEN"));
+        circle.setVisible(showEquipCheck.isSelected());
         imageGroup.getChildren().add(circle);
         equipmentChoice.getItems().add(equipment.get(i).getUnitID());
+      }
+    }
+  }
+
+  private void showDots() {
+    ObservableList<Node> nodes = imageGroup.getChildren();
+    for (Node node : nodes) {
+      if (node instanceof Circle) {
+        if (node.getUserData() instanceof Location) node.setVisible(showLocCheck.isSelected());
+        else if (node.getUserData() instanceof EquipmentUnit)
+          node.setVisible(showEquipCheck.isSelected());
       }
     }
   }
@@ -401,6 +415,8 @@ public class GraphicalMapEditorController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    showLocCheck.setSelected(true);
+    showEquipCheck.setSelected(true);
 
     // hBox1.getChildren().add(table);
 
@@ -432,5 +448,19 @@ public class GraphicalMapEditorController implements Initializable {
     for (Location newLocation : locs) {
       equipLocationChoice.getItems().add(newLocation.getNodeID());
     }
+    showEquipCheck.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            showDots();
+          }
+        });
+    showLocCheck.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            showDots();
+          }
+        });
   }
 }

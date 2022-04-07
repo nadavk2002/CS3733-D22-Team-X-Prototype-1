@@ -189,5 +189,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
+      <JFXCheckBox fx:id="showLocCheck" layoutX="261.0" layoutY="77.0" text="Show Locations" />
+      <JFXCheckBox fx:id="showEquipCheck" layoutX="426.0" layoutY="77.0" text="Show Equipment" />
    </children>
 </AnchorPane>
