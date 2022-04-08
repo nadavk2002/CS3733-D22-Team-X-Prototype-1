@@ -38,25 +38,11 @@ public class Xdb {
 
     // tries to create the database and establish a connection
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
-    //    try {
-    //
-    //    } catch (SQLException e) {
-    //      System.out.println("Connection failed. Check output console.");
-    //      e.printStackTrace();
-    //      System.exit(1);
-    //    }
     System.out.println("Apache Derby connection established :D");
 
     dropAllTables();
     createAllTables();
-
-    if (!loadLocationCSV()
-        || !loadEquipmentTypesCSV()
-        || !loadMedEqServiceReqCSV()
-        || !loadLabServiceReqCSV()
-        || !loadEquipmentUnitsCSV()) {
-      throw new loadSaveFromCSVException("Error when loading from CSV files.");
-    }
+    loadAllCSV();
 
     System.out.println("Database created successfully");
   }
@@ -233,6 +219,40 @@ public class Xdb {
     createMedicalEquipmentServiceRequestTable();
     createLabServiceRequestTable();
     createEqUnitTable();
+  }
+
+  /**
+   * load all CSV files into the database
+   *
+   * @return true if all CSVs are successfully loaded
+   */
+  public static boolean loadAllCSV() throws loadSaveFromCSVException {
+    if (!loadLocationCSV()
+        || !loadEquipmentTypesCSV()
+        || !loadMedEqServiceReqCSV()
+        || !loadLabServiceReqCSV()
+        || !loadEquipmentUnitsCSV()) {
+      throw new loadSaveFromCSVException("Error when loading from CSV files.");
+    }
+    return true;
+  }
+
+  /**
+   * Saves all CSV files to the specified directory
+   *
+   * @param dirPath path to folder on local machine
+   * @return true if all CSV's are successfully saved
+   * @throws loadSaveFromCSVException
+   */
+  public static boolean saveAllCSV(String dirPath) throws loadSaveFromCSVException {
+    if (!Xdb.saveLocationDataToCSV(dirPath)
+        || !Xdb.saveEquipmentTypeCSV(dirPath)
+        || !Xdb.saveMedEqDataToCSV(dirPath)
+        || !Xdb.saveLabServiceReqDataToCSV(dirPath)
+        || !Xdb.saveEquipmentUnitCSV(dirPath)) {
+      throw new loadSaveFromCSVException("Error when writing to CSV file.");
+    }
+    return true;
   }
 
   /**
@@ -836,17 +856,6 @@ public class Xdb {
       System.out.println("Error occured when updating equipment types csv file.");
       e.printStackTrace();
       return false;
-    }
-    return true;
-  }
-
-  public static boolean saveAllCSV(String filePath) throws loadSaveFromCSVException {
-    if (!Xdb.saveLocationDataToCSV(filePath)
-        || !Xdb.saveMedEqDataToCSV(filePath)
-        || !Xdb.saveLabServiceReqDataToCSV(filePath)
-        || !Xdb.saveEquipmentUnitCSV(filePath)
-        || !Xdb.saveEquipmentTypeCSV(filePath)) {
-      throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;
   }

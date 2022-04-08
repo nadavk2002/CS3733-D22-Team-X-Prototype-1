@@ -17,7 +17,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
     this.connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     equipmentUnits = new ArrayList<EquipmentUnit>();
     try {
-      // To retrieve locations with specified destinations
+      // To retrieve EquipmentTypes with specified destinations
       LocationDAO locDestination = new LocationDAOImpl();
       // create the statement
       Statement statement = connection.createStatement();
@@ -27,7 +27,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       while (resultSet.next()) {
         EquipmentUnit eqUnit = new EquipmentUnit();
         eqUnit.setUnitID(resultSet.getString("unitID"));
-        eqUnit.setType(resultSet.getString("EQUIPMENTTYPE"));
+        eqUnit.setType(resultSet.getString("type"));
         eqUnit.setAvailable(resultSet.getString("isAvailable").charAt(0));
         eqUnit.setCurrLocation(locDestination.getLocation(resultSet.getString("currLocation")));
         // add lsr to the list
