@@ -5,15 +5,21 @@ import edu.wpi.cs3733.D22.teamX.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class AppController implements Initializable {
+  @FXML TextField searchBox;
   @FXML
   private JFXButton ReqLang,
       ReqLaundry,
@@ -29,6 +35,32 @@ public class AppController implements Initializable {
   @FXML private HBox firstRow, secondRow, thirdRow;
   @FXML private VBox mainBox;
   @FXML private Label mainTitle;
+  ObservableList<Button> buttonList = FXCollections.observableArrayList();
+
+  void searchButtons() {
+
+    FilteredList<Button> filteredButtons = new FilteredList<>(buttonList, b -> true);
+    searchBox
+        .textProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              filteredButtons.setPredicate(
+                  button -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                      button.setVisible(true);
+                      return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (button.getText().toLowerCase().contains(lowerCaseFilter)) {
+                      button.setVisible(true);
+                      return true;
+                    } else {
+                      button.setVisible(false);
+                      return false;
+                    }
+                  });
+            });
+  }
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -118,10 +150,25 @@ public class AppController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    buttonList.addAll(
+        ReqLang,
+        ReqLaundry,
+        ReqMedicineDelivery,
+        ReqInTransport,
+        mealReq,
+        LabRequest,
+        equipmentRequest,
+        graphicalMapEditor,
+        EquipReqTable,
+        GiftDelivery,
+        ReqJanitor);
+    searchBox.setPromptText("Search Here");
     firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
     secondRow.getChildren().addAll(ReqMedicineDelivery, LabRequest, ReqInTransport, ReqLang);
     thirdRow.getChildren().addAll(ReqLaundry, ReqJanitor, GiftDelivery, mealReq);
     mainBox.getChildren().addAll(mainTitle, firstRow, secondRow, thirdRow);
     mainBox.setMargin(mainTitle, new Insets(40, 0, 40, 0));
+    searchButtons();
   }
 }
