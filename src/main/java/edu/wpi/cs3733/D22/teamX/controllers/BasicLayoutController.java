@@ -63,11 +63,7 @@ public class BasicLayoutController {
   void ExitApplication() throws IOException, loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
-      if (!Xdb.saveLocationDataToCSV("")
-          || !Xdb.saveMedEqDataToCSV("")
-          || !Xdb.saveLabServiceReqDataToCSV("")) {
-        throw new loadSaveFromCSVException("Error when writing to CSV file.");
-      }
+      Xdb.saveAllCSV("");
     } else {
       App.switchScene(
           FXMLLoader.load(

@@ -36,20 +36,12 @@ public class CSVFileSaverController implements Initializable {
       return;
     }
     String csvSaverDirStr = csvSaverDir.getPath() + "\\";
-    if (!Xdb.saveLocationDataToCSV(csvSaverDirStr)
-        || !Xdb.saveMedEqDataToCSV(csvSaverDirStr)
-        || !Xdb.saveLabServiceReqDataToCSV(csvSaverDirStr)) {
-      throw new loadSaveFromCSVException("Error when writing to CSV file.");
-    }
+    Xdb.saveAllCSV(csvSaverDirStr);
     Platform.exit();
   }
 
   public void saveToDefault(ActionEvent actionEvent) throws loadSaveFromCSVException {
-    if (!Xdb.saveLocationDataToCSV("")
-        || !Xdb.saveMedEqDataToCSV("")
-        || !Xdb.saveLabServiceReqDataToCSV("")) {
-      throw new loadSaveFromCSVException("Error when writing to CSV file.");
-    }
+    Xdb.saveAllCSV("");
     Platform.exit();
   }
 

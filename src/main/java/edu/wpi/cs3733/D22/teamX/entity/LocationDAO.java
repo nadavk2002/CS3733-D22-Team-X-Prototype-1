@@ -16,7 +16,7 @@ public interface LocationDAO {
    * @param nodeID refers to a location
    * @return the location from the list of locations
    */
-  Location getLocation(String nodeID); // gets induviduvidual
+  Location getLocation(String nodeID); // gets individual location
 
   /**
    * replaces the location in the database with the same nodeID as the passed Location

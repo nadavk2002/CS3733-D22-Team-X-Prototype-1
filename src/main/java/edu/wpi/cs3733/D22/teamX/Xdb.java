@@ -10,7 +10,7 @@ public class Xdb {
   private static final String locationCSV = "TowerLocationsX.csv";
   private static final String medicalEquipmentServRequestCSV = "MedEquipReq.csv";
   private static final String labServiceRequestsCSV = "LabServiceRequests.csv";
-  // private static final String equipmentTypesCSV = "EquipmentTypes.csv";
+  private static final String equipmentTypesCSV = "EquipmentTypes.csv";
   private static final String equipmentUnitsCSV = "MedicalEquipmentUnits.csv";
   //  /** Initializes the db and runs the user program from Spike B. */
   //  public static void initializeAndRunDBProgram() {
@@ -52,9 +52,10 @@ public class Xdb {
     createEqTypeTable();
     createMedicalEquipmentServiceRequestTable();
     createLabServiceRequestTable();
-    createEqUnitsTable();
+    createEqUnitTable();
 
     if (!loadLocationCSV()
+        || !loadEquipmentTypesCSV()
         || !loadMedEqServiceReqCSV()
         || !loadLabServiceReqCSV()
         || !loadEquipmentUnitsCSV()) {
@@ -92,7 +93,7 @@ public class Xdb {
               + "nodeType CHAR(4), "
               + "longName VARCHAR(50), shortName VARCHAR(30))");
     } catch (SQLException e) {
-      System.out.println("Table creation failed. Check output console.");
+      System.out.println("Location table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
@@ -104,11 +105,11 @@ public class Xdb {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE EquipmentType(model VARCHAR(15) PRIMARY KEY NOT NULL, "
+          "CREATE TABLE EquipmentType(model VARCHAR(20) PRIMARY KEY NOT NULL, "
               + "numUnitsTotal INT,"
               + "numUnitsAvailable INT)");
     } catch (SQLException e) {
-      System.out.println("Table creation failed. Check output console.");
+      System.out.println("EquipmentType table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
@@ -124,14 +125,17 @@ public class Xdb {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-              + "equipmentType VARCHAR(15),"
+              + "equipmentType VARCHAR(20),"
               + "quantity INT,"
               + "CONSTRAINT MESR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT MESR_equipmentType_fk "
+              + "FOREIGN KEY (equipmentType) REFERENCES EquipmentType(model) "
               + "ON DELETE SET NULL)");
-      //       + "FOREIGN KEY (equipmentType) REFERENCES EquipmentType(model))");
     } catch (SQLException e) {
-      System.out.println("Table creation failed. Check output console.");
+      System.out.println(
+          "MedicalEquipmentServiceRequest table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
@@ -150,29 +154,33 @@ public class Xdb {
               + "service VARCHAR(15),"
               + "patientFor VARCHAR(15),"
               + "CONSTRAINT LBSR_dest_fk "
-              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
-      System.out.println("Table creation failed. Check output console.");
+      System.out.println("LabServiceRequest table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
   }
 
   /** Creates a Equipment Units table */
-  private static void createEqUnitsTable() {
+  private static void createEqUnitTable() {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
           "CREATE TABLE EquipmentUnit(UnitID CHAR(8) PRIMARY KEY NOT NULL, "
-              + "EquipmentType VARCHAR(20),"
+              + "type VARCHAR(20),"
               + "isAvailable CHAR(1),"
               + "currLocation CHAR(10),"
-              + "FOREIGN KEY (currLocation) REFERENCES Location(nodeID))");
-      //              + "FOREIGN KEY (EquipmentType) REFERENCES EquipmentType(model))");
+              + "CONSTRAINT MEUN_currLocation_fk "
+              + "FOREIGN KEY (currLocation) REFERENCES Location(nodeID) "
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT MEUN_EquipmentType_fk "
+              + "FOREIGN KEY (type) REFERENCES EquipmentType(model) "
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
-      System.out.println("Table creation failed. Check output console.");
+      System.out.println("EquipmentUnit table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
@@ -252,7 +260,7 @@ public class Xdb {
                   currLine[7]);
           locationsFromCSV.add(lnode);
         } else {
-          System.out.println("CSV file formatted improperly");
+          System.out.println("TowerLocationsX CSV file formatted improperly");
           System.exit(1);
         }
       }
@@ -322,7 +330,7 @@ public class Xdb {
                   Integer.parseInt(currLine[5]));
           MedEquipReqFromCSV.add(mesrNode);
         } else {
-          System.out.println("CSV file formatted improperly");
+          System.out.println("MedEquipReq CSV file formatted improperly");
           System.exit(1);
         }
       }
@@ -387,7 +395,7 @@ public class Xdb {
                   currLine[5]);
           LabServiceRequestCSV.add(labNode);
         } else {
-          System.out.println("CSV file formatted improperly");
+          System.out.println("LabServiceRequests CSV file formatted improperly");
           System.exit(1);
         }
       }
@@ -449,7 +457,7 @@ public class Xdb {
                   locationDAO.getLocation(currLine[3]));
           equipmentUnitList.add(equipmentUnitNode);
         } else {
-          System.out.println("CSV file formatted improperly");
+          System.out.println("MedicalEquipmentUnits CSV file formatted improperly");
           System.exit(1);
         }
       }
@@ -475,6 +483,55 @@ public class Xdb {
         initialization.execute(equipmentUnit.toString());
       } catch (SQLException e) {
         System.out.println("Input for EquipmentUnit " + i + " failed");
+        e.printStackTrace();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean loadEquipmentTypesCSV() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    List<EquipmentType> equipmentTypeList = new ArrayList<EquipmentType>();
+    try {
+      InputStream equipmentTypeStream = Xdb.class.getResourceAsStream(equipmentTypesCSV);
+      BufferedReader equipmentTypeBuffer =
+          new BufferedReader(new InputStreamReader(equipmentTypeStream));
+      equipmentTypeBuffer.readLine();
+      String nextFileLine;
+      while ((nextFileLine = equipmentTypeBuffer.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 3) {
+          EquipmentType equipmentTypeNode =
+              new EquipmentType(
+                  currLine[0], Integer.parseInt(currLine[1]), Integer.parseInt(currLine[2]));
+          equipmentTypeList.add(equipmentTypeNode);
+        } else {
+          System.out.println("EquipmentTypes CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+      return false;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+
+    for (int i = 0; i < equipmentTypeList.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder equipmentType = new StringBuilder();
+        equipmentType.append("INSERT INTO EquipmentType VALUES(");
+        equipmentType.append("'" + equipmentTypeList.get(i).getModel() + "'" + ", ");
+        equipmentType.append(equipmentTypeList.get(i).getNumUnitsTotal() + ", ");
+        equipmentType.append(equipmentTypeList.get(i).getNumUnitsAvailable());
+        equipmentType.append(")");
+        initialization.execute(equipmentType.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for EquipmentType " + i + " failed");
         e.printStackTrace();
         return false;
       }
@@ -686,7 +743,7 @@ public class Xdb {
    *
    * @return whether the save was successful
    */
-  private static boolean saveEquipmentUnitCSV() {
+  public static boolean saveEquipmentUnitCSV(String dirPath) {
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     ArrayList<EquipmentUnit> equipmentUnits = new ArrayList<EquipmentUnit>();
     try {
@@ -698,7 +755,7 @@ public class Xdb {
             new EquipmentUnit(
                 record.getString("unitID"),
                 record.getString("type"),
-                record.getString("isAvailible").charAt(0),
+                record.getString("isAvailable").charAt(0),
                 locationDAO.getLocation(record.getString("currLocation"))));
       }
     } catch (SQLException e) {
@@ -710,8 +767,8 @@ public class Xdb {
     try {
       //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
       //      FileWriter csvFile = new FileWriter(csv, false);
-      FileWriter csvFile = new FileWriter(equipmentUnitsCSV, false);
-      csvFile.write("unitID, type, isAvailible, currLocation");
+      FileWriter csvFile = new FileWriter(dirPath + equipmentUnitsCSV, false);
+      csvFile.write("unitID,type,isAvailable,currLocation");
       for (int i = 0; i < equipmentUnits.size(); i++) {
         csvFile.write("\n" + equipmentUnits.get(i).getUnitID() + ",");
         if (equipmentUnits.get(i).getType() == null) {
@@ -732,6 +789,60 @@ public class Xdb {
       System.out.println("Error occured when updating equipment units csv file.");
       e.printStackTrace();
       return false;
+    }
+    return true;
+  }
+
+  public static boolean saveEquipmentTypeCSV(String dirPath) {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    ArrayList<EquipmentType> equipmentTypes = new ArrayList<EquipmentType>();
+    try {
+      Statement statement = connection.createStatement();
+      ResultSet record = statement.executeQuery("SELECT * FROM EquipmentType");
+      while (record.next()) {
+        equipmentTypes.add(
+            new EquipmentType(
+                record.getString("model"),
+                record.getInt("numUnitsTotal"),
+                record.getInt("numUnitsAvailable")));
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      System.out.println("An error occured when saving equipment type data to the CSV file.");
+      return false;
+    }
+
+    try {
+      //      File csv = new File(Xdb.class.getResource(locationCSV).getPath());
+      //      FileWriter csvFile = new FileWriter(csv, false);
+      FileWriter csvFile = new FileWriter(dirPath + equipmentTypesCSV, false);
+      csvFile.write("model,numUnitsTotal,numUnitsAvailable");
+      for (int i = 0; i < equipmentTypes.size(); i++) {
+        csvFile.write("\n" + equipmentTypes.get(i).getModel() + ",");
+        if (equipmentTypes.get(i).getNumUnitsTotal() == -1) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(equipmentTypes.get(i).getNumUnitsTotal() + ",");
+        }
+        csvFile.write(equipmentTypes.get(i).getNumUnitsAvailable() + ",");
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.println("Error occured when updating equipment types csv file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  public static boolean saveAllCSV(String filePath) throws loadSaveFromCSVException {
+    if (!Xdb.saveLocationDataToCSV(filePath)
+        || !Xdb.saveMedEqDataToCSV(filePath)
+        || !Xdb.saveLabServiceReqDataToCSV(filePath)
+        || !Xdb.saveEquipmentUnitCSV(filePath)
+        || !Xdb.saveEquipmentTypeCSV(filePath)) {
+      throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;
   }
