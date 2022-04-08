@@ -82,6 +82,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
     while (index < labServiceRequests.size()) {
       if (labServiceRequests.get(index).equals(labServiceRequest)) {
         labServiceRequests.remove(index); // remove item at index from list
+        index--;
         break; // exit loop
       }
       index++;

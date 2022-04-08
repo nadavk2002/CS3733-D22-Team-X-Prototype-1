@@ -45,7 +45,7 @@ public class LocationDAOImpl implements LocationDAO {
     this.connection = connection; // store connection information
   }
 
-  /** gets locations linkedList */
+  /** gets locations list */
   @Override
   public List<Location> getAllLocations() {
     return locations; // returns locations
@@ -58,7 +58,7 @@ public class LocationDAOImpl implements LocationDAO {
    */
   @Override
   public Location getLocation(String nodeID) {
-    // iterate through the linked list of locations to find the object
+    // iterate through the list of locations to find the object
     for (Location element : locations) {
       // if the object has the same nodeID
       if (element.getNodeID().equals(nodeID)) {
@@ -128,7 +128,7 @@ public class LocationDAOImpl implements LocationDAO {
    */
   @Override
   public void deleteLocation(Location location) {
-    // iterate through the linked list of locations to find the location passed and remove it from
+    // iterate through the list of locations to find the location passed and remove it from
     // locations
     int locationInd = 0;
     while (locationInd < locations.size()) {

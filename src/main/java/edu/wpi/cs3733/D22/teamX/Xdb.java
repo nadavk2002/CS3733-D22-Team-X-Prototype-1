@@ -48,11 +48,7 @@ public class Xdb {
     System.out.println("Apache Derby connection established :D");
 
     dropAllTables();
-    createLocationTable();
-    createEqTypeTable();
-    createMedicalEquipmentServiceRequestTable();
-    createLabServiceRequestTable();
-    createEqUnitTable();
+    createAllTables();
 
     if (!loadLocationCSV()
         || !loadEquipmentTypesCSV()
@@ -229,6 +225,14 @@ public class Xdb {
       System.out.println("Location not dropped");
       e.printStackTrace();
     }
+  }
+
+  private static void createAllTables() {
+    createLocationTable();
+    createEqTypeTable();
+    createMedicalEquipmentServiceRequestTable();
+    createLabServiceRequestTable();
+    createEqUnitTable();
   }
 
   /**
