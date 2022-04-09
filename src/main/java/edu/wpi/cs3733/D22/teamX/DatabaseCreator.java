@@ -2,11 +2,9 @@ package edu.wpi.cs3733.D22.teamX;
 
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import java.io.*;
 import java.sql.*;
-import java.util.*;
 
-public class Xdb {
+public class DatabaseCreator {
   // Create impls in order to avoid FK errors
   private static final LocationDAO locDAO = new LocationDAOImpl();
   private static final EquipmentTypeDAO eqtDAO = new EquipmentTypeDAOImpl();

@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.*;
 import java.util.List;
@@ -187,7 +187,7 @@ public class LocationDAOImpl implements LocationDAO {
   @Override
   public boolean loadCSV() {
     try {
-      InputStream tlCSV = Xdb.class.getResourceAsStream(locationCSV);
+      InputStream tlCSV = DatabaseCreator.class.getResourceAsStream(locationCSV);
       BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
       tlCSVReader.readLine();
       String nextFileLine;

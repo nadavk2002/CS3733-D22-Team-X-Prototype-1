@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -192,7 +192,8 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = new LocationDAOImpl();
-      InputStream medCSV = Xdb.class.getResourceAsStream(medicalEquipmentServRequestCSV);
+      InputStream medCSV =
+          DatabaseCreator.class.getResourceAsStream(medicalEquipmentServRequestCSV);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
       String nextFileLine;

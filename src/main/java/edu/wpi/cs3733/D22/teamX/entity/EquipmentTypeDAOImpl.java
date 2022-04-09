@@ -1,7 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
-import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -174,7 +174,8 @@ public class EquipmentTypeDAOImpl implements EquipmentTypeDAO {
   @Override
   public boolean loadCSV() {
     try {
-      InputStream equipmentTypeStream = Xdb.class.getResourceAsStream(equipmentTypesCSV);
+      InputStream equipmentTypeStream =
+          DatabaseCreator.class.getResourceAsStream(equipmentTypesCSV);
       BufferedReader equipmentTypeBuffer =
           new BufferedReader(new InputStreamReader(equipmentTypeStream));
       equipmentTypeBuffer.readLine();

@@ -16,9 +16,9 @@ public class LocationDAOTests {
 
   @Before
   public void setupDB() {
-    // initialize Xdb cannot reinitiallized
+    // initialize DatabaseCreator cannot reinitiallized
     try {
-      Xdb.initializeDB();
+      DatabaseCreator.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }

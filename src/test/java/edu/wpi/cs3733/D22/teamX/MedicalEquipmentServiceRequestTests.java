@@ -16,9 +16,9 @@ public class MedicalEquipmentServiceRequestTests {
 
   @Before
   public void setupDB() {
-    // initialize Xdb
+    // initialize DatabaseCreator
     try {
-      Xdb.initializeDB();
+      DatabaseCreator.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }

@@ -1,6 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -188,7 +188,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = new LocationDAOImpl();
-      InputStream labCSV = Xdb.class.getResourceAsStream(labServiceRequestsCSV);
+      InputStream labCSV = DatabaseCreator.class.getResourceAsStream(labServiceRequestsCSV);
       BufferedReader labCSVReader = new BufferedReader(new InputStreamReader(labCSV));
       labCSVReader.readLine();
       String nextFileLine;
