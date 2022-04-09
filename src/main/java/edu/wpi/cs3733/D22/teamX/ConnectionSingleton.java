@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConnectionSingleton {
   private static final String embeddedURL = "jdbc:derby:embed_db;create=true";
-  private static final String clientURL = "jdbc:derby:client_db;create=true";
+  private static final String clientURL = "jdbc:derby://localhost:1527/client_db"; // ;create=true
   private static final String username = "admin";
   private static final String password = "admin";
 

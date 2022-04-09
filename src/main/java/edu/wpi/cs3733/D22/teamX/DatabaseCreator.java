@@ -19,13 +19,13 @@ public class DatabaseCreator {
     // checks whether the driver is working
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+      Class.forName("org.apache.derby.jdbc.ClientDriver");
     } catch (ClassNotFoundException e) {
       System.out.println("Apache Derby Driver not found.");
       e.printStackTrace();
       System.exit(1);
     }
     System.out.println("Apache Derby driver registered!");
-
     // tries to create the database and establish a connection
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     System.out.println("Apache Derby connection established :D");
