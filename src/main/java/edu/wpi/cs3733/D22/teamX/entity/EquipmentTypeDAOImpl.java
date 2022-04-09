@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import java.sql.ResultSet;
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
+import edu.wpi.cs3733.D22.teamX.Xdb;
+import java.io.*;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -8,29 +11,7 @@ import java.util.NoSuchElementException;
 
 public class EquipmentTypeDAOImpl implements EquipmentTypeDAO {
 
-  public EquipmentTypeDAOImpl() {
-    try {
-      // create the statement
-      Statement statement = connection.createStatement();
-      // execute query to see all locations and store it to a result set
-      ResultSet resultSet = statement.executeQuery("Select * FROM EquipmentType");
-      while (resultSet.next()) {
-        // create EquipmentType variable to be appended to the list.
-        EquipmentType equipmentType = new EquipmentType();
-
-        // go through all the fields of the EquipmentType
-        equipmentType.setModel(resultSet.getString("model"));
-        equipmentType.setNumUnitsTotal(Integer.parseInt(resultSet.getString("numUnitsTotal")));
-        equipmentType.setNumUnitsAvailable(
-            Integer.parseInt(resultSet.getString("numUnitsAvailable")));
-
-        // append equipmentType on to the end of the equipmentTypes list
-        equipmentTypes.add(equipmentType);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+  public EquipmentTypeDAOImpl() {}
 
   /**
    * Gets all stored EquipmentTypes
@@ -160,5 +141,105 @@ public class EquipmentTypeDAOImpl implements EquipmentTypeDAO {
       System.out.println("Database could not be updated");
       return;
     }
+  }
+
+  /** Creates a Equipment Types table */
+  @Override
+  public void createTable() {
+    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    try {
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE EquipmentType(model VARCHAR(20) PRIMARY KEY NOT NULL, "
+              + "numUnitsTotal INT,"
+              + "numUnitsAvailable INT)");
+    } catch (SQLException e) {
+      System.out.println("EquipmentType table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
+  @Override
+  public void dropTable() {
+    try {
+      Statement dropEquipmentType = connection.createStatement();
+      dropEquipmentType.execute("DROP TABLE EquipmentType");
+    } catch (SQLException e) {
+      System.out.println("EquipmentType not dropped");
+      e.printStackTrace();
+    }
+  }
+
+  @Override
+  public boolean loadCSV() {
+    try {
+      InputStream equipmentTypeStream = Xdb.class.getResourceAsStream(equipmentTypesCSV);
+      BufferedReader equipmentTypeBuffer =
+          new BufferedReader(new InputStreamReader(equipmentTypeStream));
+      equipmentTypeBuffer.readLine();
+      String nextFileLine;
+      while ((nextFileLine = equipmentTypeBuffer.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 3) {
+          EquipmentType equipmentTypeNode =
+              new EquipmentType(
+                  currLine[0], Integer.parseInt(currLine[1]), Integer.parseInt(currLine[2]));
+          equipmentTypes.add(equipmentTypeNode);
+        } else {
+          System.out.println("EquipmentTypes CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+      return false;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+
+    for (int i = 0; i < equipmentTypes.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder equipmentType = new StringBuilder();
+        equipmentType.append("INSERT INTO EquipmentType VALUES(");
+        equipmentType.append("'" + equipmentTypes.get(i).getModel() + "'" + ", ");
+        equipmentType.append(equipmentTypes.get(i).getNumUnitsTotal() + ", ");
+        equipmentType.append(equipmentTypes.get(i).getNumUnitsAvailable());
+        equipmentType.append(")");
+        initialization.execute(equipmentType.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for EquipmentType " + i + " failed");
+        e.printStackTrace();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  @Override
+  public boolean saveCSV(String dirPath) {
+    try {
+      FileWriter csvFile = new FileWriter(dirPath + equipmentTypesCSV, false);
+      csvFile.write("model,numUnitsTotal,numUnitsAvailable");
+      for (int i = 0; i < equipmentTypes.size(); i++) {
+        csvFile.write("\n" + equipmentTypes.get(i).getModel() + ",");
+        if (equipmentTypes.get(i).getNumUnitsTotal() == -1) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(equipmentTypes.get(i).getNumUnitsTotal() + ",");
+        }
+        csvFile.write(equipmentTypes.get(i).getNumUnitsAvailable() + ",");
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.println("Error occured when updating equipment types csv file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 }

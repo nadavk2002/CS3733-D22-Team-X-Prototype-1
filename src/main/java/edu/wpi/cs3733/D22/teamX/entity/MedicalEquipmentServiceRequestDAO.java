@@ -1,8 +1,16 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
-public interface MedicalEquipmentServiceRequestDAO {
+public interface MedicalEquipmentServiceRequestDAO extends DatabaseEntity {
+  List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests =
+      new ArrayList<MedicalEquipmentServiceRequest>();
+  Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+  String medicalEquipmentServRequestCSV = "MedEquipReq.csv";
+
   /**
    * get all Medical Equipment Service Requests (MESR) stored in the MESR list
    *
