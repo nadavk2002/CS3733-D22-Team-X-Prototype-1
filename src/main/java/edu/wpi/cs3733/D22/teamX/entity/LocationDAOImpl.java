@@ -1,51 +1,18 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import java.io.*;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
 // https://www.tutorialspoint.com/design_pattern/data_access_object_pattern.htm
 
 public class LocationDAOImpl implements LocationDAO {
-  private List<Location> locations; // location storage
-  private Connection connection; // store connection info
-
   /** constructor loads data from database */
-  public LocationDAOImpl() {
-    // add locations from the database connection specified
-    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
-    locations = new ArrayList<Location>();
-    try {
-      // create the statement
-      Statement statement = connection.createStatement();
-      // execute query to see all locations and store it to a result set
-      ResultSet resultSet = statement.executeQuery("Select * FROM Location");
-      while (resultSet.next()) {
-        // create location variable to be appended to the list.
-        Location location = new Location();
+  public LocationDAOImpl() {}
 
-        // go through all the parameters of the location
-        location.setNodeID(resultSet.getString("nodeID"));
-        location.setxCoord(Integer.parseInt(resultSet.getString("xCoord")));
-        location.setyCoord(Integer.parseInt(resultSet.getString("yCoord")));
-        location.setFloor(resultSet.getString("floor"));
-        location.setBuilding(resultSet.getString("building"));
-        location.setNodeType(resultSet.getString("nodeType"));
-        location.setLongName(resultSet.getString("longName"));
-        location.setShortName(resultSet.getString("shortName"));
-
-        // append location on to the end of the locations list
-        locations.add(location);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-    this.connection = connection; // store connection information
-  }
-
-  /** gets locations linkedList */
+  /** gets locations list */
   @Override
   public List<Location> getAllLocations() {
     return locations; // returns locations
@@ -58,7 +25,7 @@ public class LocationDAOImpl implements LocationDAO {
    */
   @Override
   public Location getLocation(String nodeID) {
-    // iterate through the linked list of locations to find the object
+    // iterate through the list of locations to find the object
     for (Location element : locations) {
       // if the object has the same nodeID
       if (element.getNodeID().equals(nodeID)) {
@@ -128,7 +95,7 @@ public class LocationDAOImpl implements LocationDAO {
    */
   @Override
   public void deleteLocation(Location location) {
-    // iterate through the linked list of locations to find the location passed and remove it from
+    // iterate through the list of locations to find the location passed and remove it from
     // locations
     int locationInd = 0;
     while (locationInd < locations.size()) {
@@ -179,5 +146,147 @@ public class LocationDAOImpl implements LocationDAO {
       System.out.println("Database could not be updated");
       return;
     }
+  }
+
+  /** Creates the location table in the database */
+  @Override
+  public void createTable() {
+    try {
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE Location(nodeID CHAR(10) PRIMARY KEY NOT NULL, "
+              + "xCoord INT, yCoord INT, "
+              + "floor VARCHAR(2), "
+              + "building VARCHAR(10), "
+              + "nodeType CHAR(4), "
+              + "longName VARCHAR(50), shortName VARCHAR(30))");
+    } catch (SQLException e) {
+      System.out.println("Location table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
+
+  /** Drops all the tables in the database. */
+  @Override
+  public void dropTable() {
+    try {
+      Statement dropLocation = connection.createStatement();
+      dropLocation.execute("DROP TABLE Location");
+    } catch (SQLException e) {
+      System.out.println("Location not dropped");
+      e.printStackTrace();
+    }
+  }
+
+  /**
+   * Read the locations from CSV file. Put locations into db table "Location"
+   *
+   * @return whether an exception was thrown when trying o read from the file.
+   */
+  @Override
+  public boolean loadCSV() {
+    try {
+      InputStream tlCSV = DatabaseCreator.class.getResourceAsStream(locationCSV);
+      BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
+      tlCSVReader.readLine();
+      String nextFileLine;
+      while ((nextFileLine = tlCSVReader.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 8) {
+          Location lnode =
+              new Location(
+                  currLine[0],
+                  Integer.parseInt(currLine[1]),
+                  Integer.parseInt(currLine[2]),
+                  currLine[3],
+                  currLine[4],
+                  currLine[5],
+                  currLine[6],
+                  currLine[7]);
+          locations.add(lnode);
+        } else {
+          System.out.println("TowerLocationsX CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+      tlCSV.close();
+      tlCSVReader.close();
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+      return false;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+
+    // Insert locations from locationsFromCSV into db table
+    for (int i = 0; i < locations.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder insertLocation = new StringBuilder();
+        insertLocation.append("INSERT INTO Location VALUES(");
+        insertLocation.append("'" + locations.get(i).getNodeID() + "'" + ", ");
+        insertLocation.append(locations.get(i).getxCoord() + ", ");
+        insertLocation.append(locations.get(i).getyCoord() + ", ");
+        insertLocation.append("'" + locations.get(i).getFloor() + "'" + ", ");
+        insertLocation.append("'" + locations.get(i).getBuilding() + "'" + ", ");
+        insertLocation.append("'" + locations.get(i).getNodeType() + "'" + ", ");
+        insertLocation.append("'" + locations.get(i).getLongName() + "'" + ", ");
+        insertLocation.append("'" + locations.get(i).getShortName() + "'");
+        insertLocation.append(")");
+        initialization.execute(insertLocation.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for Location " + i + " failed");
+        e.printStackTrace();
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /** Writes the content of the location table from the database into the TowerLocations.CSV */
+  @Override
+  public boolean saveCSV(String dirPath) {
+    try {
+      FileWriter csvFile = new FileWriter(dirPath + locationCSV, false);
+      csvFile.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName");
+      for (int i = 0; i < locations.size(); i++) {
+        csvFile.write("\n" + locations.get(i).getNodeID() + ",");
+        csvFile.write(locations.get(i).getxCoord() + ",");
+        csvFile.write(locations.get(i).getyCoord() + ",");
+        if (locations.get(i).getFloor() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getFloor() + ",");
+        }
+        if (locations.get(i).getBuilding() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getBuilding() + ",");
+        }
+        if (locations.get(i).getNodeType() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getNodeType() + ",");
+        }
+        if (locations.get(i).getLongName() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(locations.get(i).getLongName() + ",");
+        }
+        if (locations.get(i).getShortName() != null) {
+          csvFile.write(locations.get(i).getShortName());
+        }
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.println("Error occured when updating locations csv file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 }

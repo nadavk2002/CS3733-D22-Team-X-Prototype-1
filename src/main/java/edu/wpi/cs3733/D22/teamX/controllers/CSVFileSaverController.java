@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.File;
 import java.io.IOException;
@@ -36,20 +36,12 @@ public class CSVFileSaverController implements Initializable {
       return;
     }
     String csvSaverDirStr = csvSaverDir.getPath() + "\\";
-    if (!Xdb.saveLocationDataToCSV(csvSaverDirStr)
-        || !Xdb.saveMedEqDataToCSV(csvSaverDirStr)
-        || !Xdb.saveLabServiceReqDataToCSV(csvSaverDirStr)) {
-      throw new loadSaveFromCSVException("Error when writing to CSV file.");
-    }
+    DatabaseCreator.saveAllCSV(csvSaverDirStr);
     Platform.exit();
   }
 
   public void saveToDefault(ActionEvent actionEvent) throws loadSaveFromCSVException {
-    if (!Xdb.saveLocationDataToCSV("")
-        || !Xdb.saveMedEqDataToCSV("")
-        || !Xdb.saveLabServiceReqDataToCSV("")) {
-      throw new loadSaveFromCSVException("Error when writing to CSV file.");
-    }
+    DatabaseCreator.saveAllCSV("");
     Platform.exit();
   }
 

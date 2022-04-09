@@ -28,10 +28,10 @@ public class EquipmentUnit {
   }
 
   public EquipmentUnit() {
-    unitID = null;
-    type = null;
+    unitID = "";
+    type = "";
     isAvailable = false;
-    currLocation = null;
+    currLocation = new Location();
   }
 
   public String getUnitID() {

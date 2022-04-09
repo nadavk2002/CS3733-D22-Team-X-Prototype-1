@@ -1,8 +1,14 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
-public interface LocationDAO {
+public interface LocationDAO extends DatabaseEntity {
+  List<Location> locations = new ArrayList<Location>(); // location storage
+  String locationCSV = "TowerLocationsX.csv";
+
   /**
    * get all locations stored in the locations list
    *
@@ -16,7 +22,7 @@ public interface LocationDAO {
    * @param nodeID refers to a location
    * @return the location from the list of locations
    */
-  Location getLocation(String nodeID); // gets induviduvidual
+  Location getLocation(String nodeID); // gets individual location
 
   /**
    * replaces the location in the database with the same nodeID as the passed Location
