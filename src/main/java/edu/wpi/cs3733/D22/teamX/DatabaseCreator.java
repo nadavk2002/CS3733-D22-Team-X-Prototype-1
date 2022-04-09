@@ -49,9 +49,7 @@ public class DatabaseCreator {
     return true;
   }
 
-  /**
-   * Drops all database tables
-   */
+  /** Drops all database tables */
   private static void dropAllTables() {
     equDAO.dropTable();
     labDAO.dropTable();
@@ -60,9 +58,7 @@ public class DatabaseCreator {
     locDAO.dropTable();
   }
 
-  /**
-   * Creates all database tables
-   */
+  /** Creates all database tables */
   private static void createAllTables() {
     locDAO.createTable();
     eqtDAO.createTable();
@@ -72,7 +68,8 @@ public class DatabaseCreator {
   }
 
   /**
-   * Reads data from all resource csv files and loads them into the database tables and DAO Implementations
+   * Reads data from all resource csv files and loads them into the database tables and DAO
+   * Implementations
    */
   private static void loadAllCSV() {
     locDAO.loadCSV();

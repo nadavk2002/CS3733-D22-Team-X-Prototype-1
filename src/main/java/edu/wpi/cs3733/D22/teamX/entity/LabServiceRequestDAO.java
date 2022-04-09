@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
