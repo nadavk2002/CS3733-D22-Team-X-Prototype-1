@@ -12,8 +12,7 @@ public class LoginManager {
     // Only the hashcode of the password is stored.
     // The user's input is hashed and checked against the Integer stored in the value slot
     logins.put("admin", "admin".hashCode()); // default admin login
-    String testPwd = "helloworld";
-    logins.put("empl0000", testPwd.hashCode()); // default employee login
+    logins.put("staff", "staff".hashCode()); // default employee login
   }
 
   private static class LoginManagerHelper {
