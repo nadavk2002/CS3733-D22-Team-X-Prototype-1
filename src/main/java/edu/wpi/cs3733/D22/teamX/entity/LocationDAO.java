@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface LocationDAO extends DatabaseEntity {
   List<Location> locations = new ArrayList<Location>(); // location storage
-  Connection connection =
-      ConnectionSingleton.getConnectionSingleton().getConnection(); // store connection info
   String locationCSV = "TowerLocationsX.csv";
 
   /**

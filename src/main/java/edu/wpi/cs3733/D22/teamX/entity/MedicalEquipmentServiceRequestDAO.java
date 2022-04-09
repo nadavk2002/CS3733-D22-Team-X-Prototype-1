@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface MedicalEquipmentServiceRequestDAO extends DatabaseEntity {
-  List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests =
-      new ArrayList<MedicalEquipmentServiceRequest>();
-  Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+  List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests = new ArrayList<MedicalEquipmentServiceRequest>();
   String medicalEquipmentServRequestCSV = "MedEquipReq.csv";
 
   /**

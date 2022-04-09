@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface EquipmentUnitDAO extends DatabaseEntity {
   List<EquipmentUnit> equipmentUnits = new ArrayList<EquipmentUnit>();
-  Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
   String equipmentUnitsCSV = "MedicalEquipmentUnits.csv";
 
   /**

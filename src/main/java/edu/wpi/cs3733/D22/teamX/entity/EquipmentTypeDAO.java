@@ -7,8 +7,6 @@ import java.util.List;
 
 public interface EquipmentTypeDAO extends DatabaseEntity {
   List<EquipmentType> equipmentTypes = new ArrayList<EquipmentType>(); // EquipmentType storage
-  Connection connection =
-      ConnectionSingleton.getConnectionSingleton().getConnection(); // database connection
   String equipmentTypesCSV = "EquipmentTypes.csv";
 
   /**

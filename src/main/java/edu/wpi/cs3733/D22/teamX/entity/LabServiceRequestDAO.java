@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface LabServiceRequestDAO extends DatabaseEntity {
   List<LabServiceRequest> labServiceRequests = new ArrayList<LabServiceRequest>();
-  Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
   String labServiceRequestsCSV = "LabServiceRequests.csv";
 
   List<LabServiceRequest> getAllLabServiceRequests();
