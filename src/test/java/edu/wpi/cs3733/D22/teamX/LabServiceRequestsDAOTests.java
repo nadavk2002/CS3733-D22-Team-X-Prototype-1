@@ -14,9 +14,9 @@ public class LabServiceRequestsDAOTests {
   // based on CSV file as of 4/4
   @Before
   public void setupDB() {
-    // initialize Xdb
+    // initialize DatabaseCreator
     try {
-      Xdb.initializeDB();
+      DatabaseCreator.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }

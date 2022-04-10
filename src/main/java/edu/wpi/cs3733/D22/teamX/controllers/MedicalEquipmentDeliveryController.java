@@ -32,7 +32,7 @@ public class MedicalEquipmentDeliveryController {
     locations = locationDAO.getAllLocations();
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
-    selectEquipmentType.getItems().addAll("Bed", "X-Ray", "Pump", "Recliner");
+    selectEquipmentType.getItems().addAll("Bed", "X-Ray", "Infusion Pump", "Recliner");
     selectDestination.setItems(this.getLocationNames());
   }
 

@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -172,11 +173,12 @@
       <HBox fx:id="firstRow" alignment="CENTER" layoutX="214.0" layoutY="216.0" prefHeight="210.0" prefWidth="1400.0" />
       <HBox fx:id="secondRow" alignment="CENTER" layoutX="224.0" layoutY="226.0" prefHeight="210.0" prefWidth="1400.0" />
       <HBox fx:id="thirdRow" alignment="CENTER" layoutX="169.0" layoutY="133.0" prefHeight="210.0" prefWidth="1400.0" />
-      <VBox fx:id="mainBox" alignment="CENTER" cache="true" prefHeight="820.0" prefWidth="1920.0" />
+      <VBox fx:id="mainBox" alignment="CENTER" cache="true" layoutY="56.0" prefHeight="764.0" prefWidth="1920.0" />
       <Label fx:id="mainTitle" prefHeight="60.0" prefWidth="263.0" text="Main Menu" textAlignment="CENTER" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
+      <TextField fx:id="searchBox" layoutX="810.0" layoutY="19.0" prefHeight="45.0" prefWidth="245.0" />
    </children>
 </AnchorPane>

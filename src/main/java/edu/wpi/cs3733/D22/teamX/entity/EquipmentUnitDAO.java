@@ -1,8 +1,12 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public interface EquipmentUnitDAO {
+public interface EquipmentUnitDAO extends DatabaseEntity {
+  List<EquipmentUnit> equipmentUnits = new ArrayList<EquipmentUnit>();
+  String equipmentUnitsCSV = "MedicalEquipmentUnits.csv";
+
   /**
    * get all EquipmentUnits stored in the equipmentUnits list
    *

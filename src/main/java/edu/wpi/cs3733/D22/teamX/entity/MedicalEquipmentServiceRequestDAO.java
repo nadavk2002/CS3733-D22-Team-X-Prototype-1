@@ -1,8 +1,13 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public interface MedicalEquipmentServiceRequestDAO {
+public interface MedicalEquipmentServiceRequestDAO extends DatabaseEntity {
+  List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests =
+      new ArrayList<MedicalEquipmentServiceRequest>();
+  String medicalEquipmentServRequestCSV = "MedEquipReq.csv";
+
   /**
    * get all Medical Equipment Service Requests (MESR) stored in the MESR list
    *
