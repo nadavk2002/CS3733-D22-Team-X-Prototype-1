@@ -10,17 +10,26 @@ import java.util.NoSuchElementException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import net.kurobako.gesturefx.GesturePane;
 
 /**
  * Controller for the map editor page. This graphically displays equipment and location data on a
@@ -37,6 +46,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private ChoiceBox<String> locationChoice, equipmentChoice, equipLocationChoice;
 
   @FXML private HBox hBox1;
+  @FXML private VBox mapBox;
 
   @FXML private Group imageGroup;
 
@@ -61,10 +71,10 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML private TableColumn<Location, String> shortName;
 
+  @FXML private GesturePane pane;
+
   @FXML private TableColumn<EquipmentUnit, String> unitIdCol, typeCol, availableCol, curLocationCol;
-
-  @FXML private JFXCheckBox availableCheck;
-
+  @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck;
   @FXML
   private TextField nodeIdText,
       xCordText,
@@ -79,6 +89,7 @@ public class GraphicalMapEditorController implements Initializable {
 
   private LocationDAO locDAO;
   private EquipmentUnitDAO equipDAO;
+  private GesturePane gesturePane;
 
   /**
    * Returns to the main menu of the JavaFX App
@@ -169,6 +180,12 @@ public class GraphicalMapEditorController implements Initializable {
     locationChoice.getItems().clear();
     equipmentChoice.setValue("");
     equipmentChoice.getItems().clear();
+    equipLocationChoice.setValue("");
+    equipLocationChoice.getItems().clear();
+    List<Location> allLocations = locationListFill();
+    for (int i = 0; i < allLocations.size(); i++) {
+      equipLocationChoice.getItems().add(allLocations.get(i).getNodeID());
+    }
     drawCirclesSetLocationList(floor);
     drawCirclesSetEquipmentList(floor);
   }
@@ -180,14 +197,53 @@ public class GraphicalMapEditorController implements Initializable {
    */
   private void drawCirclesSetLocationList(String floor) {
     List<Location> locationList = locDAO.getAllLocations();
+    Image img = new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png");
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
-        Circle circle = new Circle();
-        circle.setRadius(3);
-        circle.setCenterX(locationList.get(i).getxCoord());
-        circle.setCenterY(locationList.get(i).getyCoord());
-        circle.setFill(Paint.valueOf("RED"));
-        imageGroup.getChildren().add(circle);
+        Rectangle rect = new Rectangle();
+        rect.setCursor(Cursor.HAND);
+        rect.setUserData(locationList.get(i));
+        rect.setHeight(24);
+        rect.setWidth(24);
+        rect.setX(locationList.get(i).getxCoord() - (rect.getWidth() / 2));
+        rect.setY(locationList.get(i).getyCoord() - rect.getHeight());
+        rect.setFill(new ImagePattern(img));
+        rect.setOnMouseDragged(
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent event) {
+                pane.setGestureEnabled(false);
+                rect.setCursor(Cursor.CLOSED_HAND);
+                rect.setFill(Paint.valueOf("LIGHTBLUE"));
+                if (event.getX() - (rect.getWidth() / 2) > imageView.getX()
+                    && event.getX() <= imageView.getX() + imageView.getBoundsInLocal().getWidth())
+                  rect.setX(event.getX() - (rect.getWidth() / 2));
+                if (event.getY() - (rect.getHeight() / 2) > imageView.getY()
+                    && event.getY() <= imageView.getY() + imageView.getBoundsInLocal().getHeight())
+                  rect.setY(event.getY() - rect.getHeight());
+              }
+            });
+        rect.setOnMouseReleased(
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent event) {
+                pane.setGestureEnabled(true);
+                Location l = (Location) rect.getUserData();
+                rect.setCursor(Cursor.HAND);
+                rect.setFill(new ImagePattern(img));
+                locationChoice.setValue(l.getNodeID());
+                int x = (int) (rect.getX() + (rect.getWidth() / 2));
+                int y = (int) (rect.getY() + rect.getHeight());
+                if (x > 610) x = 610;
+                if (x < 0) x = 0;
+                if (y < 0) y = 0;
+                if (y > 610) y = 610;
+                xCordText.setText(String.valueOf(x));
+                yCordText.setText(String.valueOf(y));
+              }
+            });
+        rect.setVisible(showLocCheck.isSelected());
+        imageGroup.getChildren().add(rect);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
     }
@@ -199,16 +255,31 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void drawCirclesSetEquipmentList(String floor) {
+    equipDAO = new EquipmentUnitDAOImpl();
     List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
         Circle circle = new Circle();
-        circle.setRadius(2);
+        circle.setRadius(4);
+        circle.setUserData(equipment.get(i));
         circle.setCenterX(equipment.get(i).getCurrLocation().getxCoord());
         circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
         circle.setFill(Paint.valueOf("GREEN"));
+        circle.setVisible(showEquipCheck.isSelected());
         imageGroup.getChildren().add(circle);
         equipmentChoice.getItems().add(equipment.get(i).getUnitID());
+      }
+    }
+  }
+
+  /** Hides or displays the dots based on the two checkboxes above the map */
+  private void showDots() {
+    ObservableList<Node> nodes = imageGroup.getChildren();
+    for (Node node : nodes) {
+      if (node instanceof Rectangle || node instanceof Circle) {
+        if (node.getUserData() instanceof Location) node.setVisible(showLocCheck.isSelected());
+        else if (node.getUserData() instanceof EquipmentUnit)
+          node.setVisible(showEquipCheck.isSelected());
       }
     }
   }
@@ -219,8 +290,7 @@ public class GraphicalMapEditorController implements Initializable {
     String floor = locDAO.getLocation(locationToDelete).getFloor();
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
     loadLocation(floor);
-    locationTable.getItems().clear();
-    locationTable.setItems(locationListFill());
+    loadTables();
   }
 
   /** Deletes selected node id in the dropdown */
@@ -228,9 +298,8 @@ public class GraphicalMapEditorController implements Initializable {
     String equipmentToDelete = equipmentChoice.getValue();
     String floor = equipDAO.getEquipmentUnit(equipmentToDelete).getCurrLocation().getFloor();
     equipDAO.deleteEquipmentUnit(equipDAO.getEquipmentUnit(equipmentToDelete));
+    loadTables();
     loadLocation(floor);
-    equipTable.getItems().clear();
-    equipTable.setItems(equipmentListFill());
   }
 
   /** Fills text boxes with equipment data when a piece of equipment is chosen in the dropdown. */
@@ -306,8 +375,7 @@ public class GraphicalMapEditorController implements Initializable {
         replaceEquip.setType(typeText.getText());
         equipDAO.updateEquipmentUnit(replaceEquip);
         loadLocation(replaceEquip.getCurrLocation().getFloor());
-        equipTable.getItems().clear();
-        equipTable.setItems(equipmentListFill());
+        loadTables();
         return;
       }
     }
@@ -338,9 +406,8 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setShortName(shortNameText.getText());
         replaceLoc.setNodeType(nodeTypeText.getText());
         locDAO.updateLocation(replaceLoc);
+        loadTables();
         loadLocation(replaceLoc.getFloor());
-        locationTable.getItems().clear();
-        locationTable.setItems(locationListFill());
         return;
       }
     }
@@ -356,16 +423,32 @@ public class GraphicalMapEditorController implements Initializable {
     newLocation.setShortName(shortNameText.getText());
     locDAO.addLocation(newLocation);
     loadLocation(newLocation.getFloor());
+    loadTables();
+  }
+
+  /** Fill tables with location and equipment data from the database */
+  private void loadTables() {
     locationTable.getItems().clear();
     locationTable.setItems(locationListFill());
+    equipTable.getItems().clear();
+    equipTable.setItems(equipmentListFill());
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
-    // hBox1.getChildren().add(table);
-
+    mapBox.getChildren().remove(imageGroup);
+    pane = new GesturePane(imageGroup);
+    mapBox.setMinWidth(610);
+    mapBox.getChildren().add(pane);
+    pane.setMinScale(1);
+    pane.setMaxScale(4.5);
+    pane.setScrollBarPolicy(GesturePane.ScrollBarPolicy.NEVER);
+    pane.setScrollMode(GesturePane.ScrollMode.ZOOM);
+    showLocCheck.setSelected(true);
+    showEquipCheck.setSelected(true);
     hBox1.setSpacing(90);
+
+    locDAO = new LocationDAOImpl();
     locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
@@ -375,8 +458,6 @@ public class GraphicalMapEditorController implements Initializable {
     nodeType.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeType"));
     longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
-    ObservableList<Location> locationList = locationListFill();
-    locationTable.setItems(locationList);
 
     equipDAO = new EquipmentUnitDAOImpl();
     equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -386,12 +467,23 @@ public class GraphicalMapEditorController implements Initializable {
         new PropertyValueFactory<EquipmentUnit, String>("isAvailableChar"));
     curLocationCol.setCellValueFactory(
         new PropertyValueFactory<EquipmentUnit, String>("currLocationShortName"));
-    ObservableList<EquipmentUnit> equipmentList = equipmentListFill();
-    equipTable.setItems(equipmentList);
 
-    List<Location> locs = locDAO.getAllLocations();
-    for (Location newLocation : locs) {
-      equipLocationChoice.getItems().add(newLocation.getNodeID());
-    }
+    showEquipCheck.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            showDots();
+          }
+        });
+    showLocCheck.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            showDots();
+          }
+        });
+
+    loadTables();
+    loadLocation("G");
   }
 }
