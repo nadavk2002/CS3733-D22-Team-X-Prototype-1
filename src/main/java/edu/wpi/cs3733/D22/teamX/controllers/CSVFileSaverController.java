@@ -21,9 +21,6 @@ public class CSVFileSaverController implements Initializable {
   public AnchorPane anchorCSVSaver;
   public static boolean loaded = false;
 
-  //    DirectoryChooser csvSaverDC = new DirectoryChooser();
-  //    File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // System.out.println("Hello");

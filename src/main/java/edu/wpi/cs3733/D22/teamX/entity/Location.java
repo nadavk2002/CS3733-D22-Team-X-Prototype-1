@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Location {
@@ -9,27 +11,21 @@ public class Location {
   private String building;
   private String nodeType;
   private String longName, shortName;
+  private List<ServiceRequest>
+      requestsAtLocation; // ServiceRequests with this Location as their destination
+  private List<EquipmentUnit>
+      unitsAtLocation; // EquipmentUnits with this Location as their currLocation
 
   public Location() {
-    this.nodeID = "";
-    this.xCoord = -1;
-    this.yCoord = -1;
-    this.floor = "";
-    this.building = "";
-    this.nodeType = "";
-    this.longName = "";
-    this.shortName = "";
+    this("", -1, -1, "", "", "", "", "");
+    requestsAtLocation = new ArrayList<ServiceRequest>();
+    unitsAtLocation = new ArrayList<EquipmentUnit>();
   }
 
   public Location(String nodeID) {
-    this.nodeID = nodeID;
-    this.xCoord = -1;
-    this.yCoord = -1;
-    this.floor = "";
-    this.building = "";
-    this.nodeType = "";
-    this.longName = "";
-    this.shortName = "";
+    this(nodeID, -1, -1, "", "", "", "", "");
+    requestsAtLocation = new ArrayList<ServiceRequest>();
+    unitsAtLocation = new ArrayList<EquipmentUnit>();
   }
 
   public Location(
@@ -49,6 +45,8 @@ public class Location {
     this.nodeType = nodeType;
     this.longName = longName;
     this.shortName = shortName;
+    requestsAtLocation = new ArrayList<ServiceRequest>();
+    unitsAtLocation = new ArrayList<EquipmentUnit>();
   }
 
   public void setNodeID(String nodeID) {
@@ -81,6 +79,14 @@ public class Location {
 
   public void setShortName(String shortName) {
     this.shortName = shortName;
+  }
+
+  public void setRequestsAtLocation(List<ServiceRequest> requestsAtLocation) {
+    this.requestsAtLocation = requestsAtLocation;
+  }
+
+  public void setUnitsAtLocation(List<EquipmentUnit> unitsAtLocation) {
+    this.unitsAtLocation = unitsAtLocation;
   }
 
   public String getNodeID() {
@@ -123,17 +129,36 @@ public class Location {
     return shortName;
   }
 
+  public List<ServiceRequest> getRequestsAtLocation() {
+    return requestsAtLocation;
+  }
+
+  public List<EquipmentUnit> getUnitsAtLocation() {
+    return unitsAtLocation;
+  }
+
+  public void addUnit(EquipmentUnit eqUnit) {
+    unitsAtLocation.add(eqUnit);
+  }
+
+  public void removeUnit(EquipmentUnit eqUnit) {
+    unitsAtLocation.remove(eqUnit);
+  }
+
+  public void addRequest(ServiceRequest sr) {
+    requestsAtLocation.add(sr);
+  }
+
+  public void removeRequest(ServiceRequest sr) {
+    requestsAtLocation.remove(sr);
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Location location = (Location) o;
     return Objects.equals(nodeID, location.nodeID);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(nodeID);
   }
 
   @Override

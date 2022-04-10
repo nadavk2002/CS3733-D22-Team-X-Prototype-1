@@ -1,12 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -32,7 +27,10 @@ public class MedicalEquipmentDeliveryController {
     locations = locationDAO.getAllLocations();
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
-    selectEquipmentType.getItems().addAll("Bed", "X-Ray", "Infusion Pump", "Recliner");
+    EquipmentTypeDAO eqtDAO = new EquipmentTypeDAOImpl();
+    for (int i = 0; i < eqtDAO.getAllEquipmentTypes().size(); i++) {
+      selectEquipmentType.getItems().add(eqtDAO.getAllEquipmentTypes().get(i).getModel());
+    }
     selectDestination.setItems(this.getLocationNames());
   }
 
