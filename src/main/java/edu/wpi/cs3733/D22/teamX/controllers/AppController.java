@@ -15,6 +15,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -53,6 +54,12 @@ public class AppController implements Initializable {
                     String lowerCaseFilter = newValue.toLowerCase();
                     if (button.getText().toLowerCase().contains(lowerCaseFilter)) {
                       button.setVisible(true);
+                      searchBox.setOnKeyPressed(
+                          event -> {
+                            if (event.getCode() == KeyCode.ENTER) {
+                              button.fire();
+                            }
+                          });
                       return true;
                     } else {
                       button.setVisible(false);
@@ -152,17 +159,17 @@ public class AppController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     buttonList.addAll(
-        ReqLang,
-        ReqLaundry,
-        ReqMedicineDelivery,
-        ReqInTransport,
         mealReq,
-        LabRequest,
-        equipmentRequest,
-        graphicalMapEditor,
-        EquipReqTable,
         GiftDelivery,
-        ReqJanitor);
+        ReqJanitor,
+        ReqLaundry,
+        ReqLang,
+        ReqInTransport,
+        LabRequest,
+        ReqMedicineDelivery,
+        EquipReqTable,
+        graphicalMapEditor,
+        equipmentRequest);
     searchBox.setPromptText("Search Here");
     firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
     secondRow.getChildren().addAll(ReqMedicineDelivery, LabRequest, ReqInTransport, ReqLang);
