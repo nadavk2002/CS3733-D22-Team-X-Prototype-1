@@ -32,7 +32,7 @@
       </Label>
       <HBox fx:id="hBox1" layoutX="157.0" layoutY="111.0" prefHeight="650.0" prefWidth="668.0">
          <children>
-            <VBox prefHeight="650.0" prefWidth="657.0">
+            <VBox fx:id="mapBox" prefHeight="650.0" prefWidth="657.0">
                <children>
                   <HBox prefHeight="35.0" prefWidth="669.0">
                      <children>
@@ -44,19 +44,15 @@
                         <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
                      </children>
                   </HBox>
-                  <AnchorPane fx:id="mapViewPane" prefHeight="200.0" prefWidth="200.0">
+                  <Group fx:id="imageGroup">
                      <children>
-                        <Group fx:id="imageGroup">
-                           <children>
-                              <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/G.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Group>
+                        <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/G.png" />
+                           </image>
+                        </ImageView>
                      </children>
-                  </AnchorPane>
+                  </Group>
                </children>
             </VBox>
             <VBox prefHeight="650.0" prefWidth="906.0">

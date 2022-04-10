@@ -24,8 +24,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import net.kurobako.gesturefx.GesturePane;
 
 /**
@@ -43,6 +46,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private ChoiceBox<String> locationChoice, equipmentChoice, equipLocationChoice;
 
   @FXML private HBox hBox1;
+  @FXML private VBox mapBox;
 
   @FXML private Group imageGroup;
 
@@ -66,6 +70,8 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private TableColumn<Location, String> longName;
 
   @FXML private TableColumn<Location, String> shortName;
+
+  @FXML private GesturePane pane;
 
   @FXML private TableColumn<EquipmentUnit, String> unitIdCol, typeCol, availableCol, curLocationCol;
   @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck;
@@ -191,39 +197,43 @@ public class GraphicalMapEditorController implements Initializable {
    */
   private void drawCirclesSetLocationList(String floor) {
     List<Location> locationList = locDAO.getAllLocations();
+    Image img = new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png");
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
-        Circle circle = new Circle();
-        circle.setCursor(Cursor.HAND);
-        circle.setUserData(locationList.get(i));
-        circle.setRadius(8);
-        circle.setCenterX(locationList.get(i).getxCoord());
-        circle.setCenterY(locationList.get(i).getyCoord());
-        circle.setFill(Paint.valueOf("RED"));
-        circle.setOnMouseDragged(
+        Rectangle rect = new Rectangle();
+        rect.setCursor(Cursor.HAND);
+        rect.setUserData(locationList.get(i));
+        rect.setHeight(24);
+        rect.setWidth(24);
+        rect.setX(locationList.get(i).getxCoord() - (rect.getWidth() / 2));
+        rect.setY(locationList.get(i).getyCoord() - rect.getHeight());
+        rect.setFill(new ImagePattern(img));
+        rect.setOnMouseDragged(
             new EventHandler<MouseEvent>() {
               @Override
               public void handle(MouseEvent event) {
-                circle.setCursor(Cursor.CLOSED_HAND);
-                circle.setFill(Paint.valueOf("LIGHTBLUE"));
-                if (event.getX() > imageView.getX()
+                pane.setGestureEnabled(false);
+                rect.setCursor(Cursor.CLOSED_HAND);
+                rect.setFill(Paint.valueOf("LIGHTBLUE"));
+                if (event.getX() - (rect.getWidth() / 2) > imageView.getX()
                     && event.getX() <= imageView.getX() + imageView.getBoundsInLocal().getWidth())
-                  circle.setCenterX(event.getX());
-                if (event.getY() > imageView.getY()
+                  rect.setX(event.getX() - (rect.getWidth() / 2));
+                if (event.getY() - (rect.getHeight() / 2) > imageView.getY()
                     && event.getY() <= imageView.getY() + imageView.getBoundsInLocal().getHeight())
-                  circle.setCenterY(event.getY());
+                  rect.setY(event.getY() - rect.getHeight());
               }
             });
-        circle.setOnMouseReleased(
+        rect.setOnMouseReleased(
             new EventHandler<MouseEvent>() {
               @Override
               public void handle(MouseEvent event) {
-                Location l = (Location) circle.getUserData();
-                circle.setCursor(Cursor.HAND);
-                circle.setFill(Paint.valueOf("RED"));
+                pane.setGestureEnabled(true);
+                Location l = (Location) rect.getUserData();
+                rect.setCursor(Cursor.HAND);
+                rect.setFill(new ImagePattern(img));
                 locationChoice.setValue(l.getNodeID());
-                int x = (int) circle.getCenterX();
-                int y = (int) circle.getCenterY();
+                int x = (int) (rect.getX() + (rect.getWidth() / 2));
+                int y = (int) (rect.getY() + rect.getHeight());
                 if (x > 610) x = 610;
                 if (x < 0) x = 0;
                 if (y < 0) y = 0;
@@ -232,8 +242,8 @@ public class GraphicalMapEditorController implements Initializable {
                 yCordText.setText(String.valueOf(y));
               }
             });
-        circle.setVisible(showLocCheck.isSelected());
-        imageGroup.getChildren().add(circle);
+        rect.setVisible(showLocCheck.isSelected());
+        imageGroup.getChildren().add(rect);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
     }
@@ -266,7 +276,7 @@ public class GraphicalMapEditorController implements Initializable {
   private void showDots() {
     ObservableList<Node> nodes = imageGroup.getChildren();
     for (Node node : nodes) {
-      if (node instanceof Circle) {
+      if (node instanceof Rectangle || node instanceof Circle) {
         if (node.getUserData() instanceof Location) node.setVisible(showLocCheck.isSelected());
         else if (node.getUserData() instanceof EquipmentUnit)
           node.setVisible(showEquipCheck.isSelected());
@@ -426,6 +436,14 @@ public class GraphicalMapEditorController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    mapBox.getChildren().remove(imageGroup);
+    pane = new GesturePane(imageGroup);
+    mapBox.setMinWidth(610);
+    mapBox.getChildren().add(pane);
+    pane.setMinScale(1);
+    pane.setMaxScale(4.5);
+    pane.setScrollBarPolicy(GesturePane.ScrollBarPolicy.NEVER);
+    pane.setScrollMode(GesturePane.ScrollMode.ZOOM);
     showLocCheck.setSelected(true);
     showEquipCheck.setSelected(true);
     hBox1.setSpacing(90);
