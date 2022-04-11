@@ -356,6 +356,8 @@ public class GraphicalMapEditorController implements Initializable {
             getClass()
                 .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/" + location + ".png"));
     ImageView newImage = new ImageView(img);
+    newImage.setFitHeight(610);
+    newImage.setFitWidth(610);
     imageGroup.getChildren().add(newImage);
     loadMap(location);
   }
