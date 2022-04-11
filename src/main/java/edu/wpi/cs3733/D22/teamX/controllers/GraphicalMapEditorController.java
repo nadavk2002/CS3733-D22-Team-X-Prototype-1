@@ -325,8 +325,8 @@ public class GraphicalMapEditorController implements Initializable {
   private void drawRequests(List<ServiceRequest> requests) {
     for (ServiceRequest s : requests) {
       Rectangle rect = new Rectangle();
-      rect.setWidth(3);
-      rect.setHeight(3);
+      rect.setWidth(15);
+      rect.setHeight(15);
       rect.setFill(Paint.valueOf("BLUE"));
       rect.setX(s.getDestination().getxCoord() + (rect.getWidth() / 2));
       rect.setY(s.getDestination().getyCoord() + (rect.getHeight() / 2));

@@ -45,8 +45,8 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
    * @param mesr medical equipment service request to be updated
    */
   @Override
-  public void deleteMedicalEquipmentServiceRequest(
-      MedicalEquipmentServiceRequest mesr) throws NoSuchElementException {
+  public void deleteMedicalEquipmentServiceRequest(MedicalEquipmentServiceRequest mesr)
+      throws NoSuchElementException {
     // add mesr to destination's list of service requests
     mesr.getDestination().removeRequest(mesr);
     // remove from list
