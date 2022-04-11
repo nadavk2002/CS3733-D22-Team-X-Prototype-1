@@ -27,6 +27,7 @@ public class DatabaseCreator {
     }
     System.out.println("Apache Derby driver registered!");
     // tries to create the database and establish a connection
+    ConnectionSingleton.getConnectionSingleton().setEmbedded();
     Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
     System.out.println("Apache Derby connection established :D");
 
