@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TreeTableColumn?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="content" prefHeight="476.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorTableOverlayController">
+   <children>
+      <JFXTreeTableView fx:id="table" layoutX="23.0" layoutY="62.0">
+         <columns>
+            <TreeTableColumn fx:id="nodeID" prefWidth="75.0" text="Node ID" />
+            <TreeTableColumn prefWidth="75.0" text="X Coordinate" fx:id="xCoord" />
+            <TreeTableColumn fx:id="yCoord" prefWidth="75.0" text="Y Coordinate" />
+            <TreeTableColumn fx:id="floor" prefWidth="75.0" text="Floor" />
+            <TreeTableColumn fx:id="building" prefWidth="75.0" text="Building" />
+            <TreeTableColumn fx:id="nodeType" prefWidth="75.0" text="Node Type" />
+            <TreeTableColumn fx:id="longName" prefWidth="75.0" text="Long Name" />
+            <TreeTableColumn fx:id="shortName" prefWidth="75.0" text="Short Name" />
+         </columns>
+      </JFXTreeTableView>
+      <TextField layoutX="23.0" layoutY="22.0" prefHeight="26.0" prefWidth="395.0" promptText="Search Locations..." />
+   </children>
+</AnchorPane>
