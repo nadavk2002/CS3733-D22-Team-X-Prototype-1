@@ -42,16 +42,18 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
   /**
    * deletes object from DAO and database.
    *
-   * @param medicalEquipmentServiceRequest medical equipment service request to be updated
+   * @param mesr medical equipment service request to be updated
    */
   @Override
   public void deleteMedicalEquipmentServiceRequest(
-      MedicalEquipmentServiceRequest medicalEquipmentServiceRequest) throws NoSuchElementException {
+      MedicalEquipmentServiceRequest mesr) throws NoSuchElementException {
+    // add mesr to destination's list of service requests
+    mesr.getDestination().removeRequest(mesr);
     // remove from list
     int index = 0; // create index variable for while loop
     int initialSize = medicalEquipmentServiceRequests.size();
     while (index < medicalEquipmentServiceRequests.size()) {
-      if (medicalEquipmentServiceRequests.get(index).equals(medicalEquipmentServiceRequest)) {
+      if (medicalEquipmentServiceRequests.get(index).equals(mesr)) {
         medicalEquipmentServiceRequests.remove(index); // removes object from list
         index--;
         break; // exit
@@ -68,7 +70,7 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
       // remove location from DB table
       statement.executeUpdate(
           "DELETE FROM MedicalEquipmentServiceRequest WHERE requestID = '"
-              + medicalEquipmentServiceRequest.getRequestID()
+              + mesr.getRequestID()
               + "'");
     } catch (SQLException e) {
       e.printStackTrace();
@@ -78,15 +80,21 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
   /**
    * updates DAO and database element
    *
-   * @param medicalEquipmentServiceRequest equipment service request to be updated
+   * @param mesr equipment service request to be updated
    */
   @Override
-  public void updateMedicalEquipmentServiceRequest(
-      MedicalEquipmentServiceRequest medicalEquipmentServiceRequest) throws NoSuchElementException {
+  public void updateMedicalEquipmentServiceRequest(MedicalEquipmentServiceRequest mesr)
+      throws NoSuchElementException {
+    // remove mesr from old location and add to new one if location changes in the update
+    if (!mesr.getDestination()
+        .equals(getMedicalEquipmentServiceRequest(mesr.getRequestID()).getDestination())) {
+      getMedicalEquipmentServiceRequest(mesr.getRequestID()).getDestination().removeRequest(mesr);
+      mesr.getDestination().addRequest(mesr);
+    }
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
-      if (medicalEquipmentServiceRequests.get(index).equals(medicalEquipmentServiceRequest)) {
-        medicalEquipmentServiceRequests.set(index, medicalEquipmentServiceRequest);
+      if (medicalEquipmentServiceRequests.get(index).equals(mesr)) {
+        medicalEquipmentServiceRequests.set(index, mesr);
         break; // exit
       }
       index++; // increment if not found yet
@@ -104,17 +112,17 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
       statement.executeUpdate(
           "UPDATE MedicalEquipmentServiceRequest SET"
               + " destination = '"
-              + medicalEquipmentServiceRequest.getDestination().getNodeID()
+              + mesr.getDestination().getNodeID()
               + "', status = '"
-              + medicalEquipmentServiceRequest.getStatus()
+              + mesr.getStatus()
               + "', assignee = '"
-              + medicalEquipmentServiceRequest.getAssignee()
+              + mesr.getAssignee()
               + "', equipmentType = '"
-              + medicalEquipmentServiceRequest.getEquipmentType()
+              + mesr.getEquipmentType()
               + "', quantity = "
-              + medicalEquipmentServiceRequest.getQuantity()
+              + mesr.getQuantity()
               + " WHERE requestID = '"
-              + medicalEquipmentServiceRequest.getRequestID()
+              + mesr.getRequestID()
               + "'");
     } catch (SQLException e) {
       e.printStackTrace();
@@ -122,27 +130,27 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
   }
 
   @Override
-  public void addMedicalEquipmentServiceRequest(
-      MedicalEquipmentServiceRequest medicalEquipmentServiceRequest) {
-    medicalEquipmentServiceRequests.add(medicalEquipmentServiceRequest);
+  public void addMedicalEquipmentServiceRequest(MedicalEquipmentServiceRequest mesr) {
+    medicalEquipmentServiceRequests.add(mesr);
 
     try {
       Statement initialization = connection.createStatement();
       StringBuilder medEquipReq = new StringBuilder();
       medEquipReq.append("INSERT INTO MedicalEquipmentServiceRequest VALUES(");
-      medEquipReq.append("'" + medicalEquipmentServiceRequest.getRequestID() + "'" + ", ");
-      medEquipReq.append(
-          "'" + medicalEquipmentServiceRequest.getDestination().getNodeID() + "'" + ", ");
-      medEquipReq.append("'" + medicalEquipmentServiceRequest.getStatus() + "'" + ", ");
-      medEquipReq.append("'" + medicalEquipmentServiceRequest.getAssignee() + "'" + ", ");
-      medEquipReq.append("'" + medicalEquipmentServiceRequest.getEquipmentType() + "'" + ", ");
-      medEquipReq.append(medicalEquipmentServiceRequest.getQuantity());
+      medEquipReq.append("'" + mesr.getRequestID() + "'" + ", ");
+      medEquipReq.append("'" + mesr.getDestination().getNodeID() + "'" + ", ");
+      medEquipReq.append("'" + mesr.getStatus() + "'" + ", ");
+      medEquipReq.append("'" + mesr.getAssignee() + "'" + ", ");
+      medEquipReq.append("'" + mesr.getEquipmentType() + "'" + ", ");
+      medEquipReq.append(mesr.getQuantity());
       medEquipReq.append(")");
       initialization.execute(medEquipReq.toString());
     } catch (SQLException e) {
       System.out.println("Database could not be updated");
       return;
     }
+    mesr.getDestination().addRequest(mesr); // add mesr to destination's list of service requests
+
     //    // If service request completed, update the availability of the equipment type
     //    // SHOULD BE BASED ON LOCATION ADDED TO
     //    if (medicalEquipmentServiceRequest.getStatus().equals("DONE")) {
@@ -217,6 +225,9 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
                   currLine[4],
                   Integer.parseInt(currLine[5]));
           medicalEquipmentServiceRequests.add(mesrNode);
+          mesrNode
+              .getDestination()
+              .addRequest(mesrNode); // add mesr to destination's list of service requests
         } else {
           System.out.println("MedEquipReq CSV file formatted improperly");
           System.exit(1);
