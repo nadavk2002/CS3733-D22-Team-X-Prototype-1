@@ -250,6 +250,7 @@ public class GraphicalMapEditorController implements Initializable {
               }
             });
         rect.setVisible(showLocCheck.isSelected());
+         this.drawRequests(locationList.get(i).getRequestsAtLocation());
         imageGroup.getChildren().add(rect);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
@@ -267,7 +268,7 @@ public class GraphicalMapEditorController implements Initializable {
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
         Circle circle = new Circle();
-        circle.setRadius(4);
+        circle.setRadius(7);
         circle.setUserData(equipment.get(i));
         circle.setCenterX(equipment.get(i).getCurrLocation().getxCoord());
         circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
@@ -285,6 +286,17 @@ public class GraphicalMapEditorController implements Initializable {
         imageGroup.getChildren().add(circle);
         equipmentChoice.getItems().add(equipment.get(i).getUnitID());
       }
+    }
+  }
+
+  private void drawRequests(List<ServiceRequest> requests) {
+    for (ServiceRequest s : requests) {
+      Rectangle rect = new Rectangle();
+      rect.setWidth(3);
+      rect.setHeight(3);
+      rect.setFill(Paint.valueOf("BLUE"));
+      rect.setX(s.getDestination().getxCoord() + (rect.getWidth() / 2));
+      rect.setY(s.getDestination().getyCoord() + (rect.getHeight() / 2));
     }
   }
 
