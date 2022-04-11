@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+<AnchorPane fx:id="content" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
    <children>
       <JFXButton layoutX="24.0" layoutY="24.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
@@ -161,7 +161,9 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXCheckBox fx:id="showLocCheck" layoutX="261.0" layoutY="77.0" text="Show Locations" />
-      <JFXCheckBox fx:id="showEquipCheck" layoutX="426.0" layoutY="77.0" text="Show Equipment" />
+      <JFXCheckBox fx:id="showLocCheck" layoutX="157.0" layoutY="77.0" text="Show Locations" />
+      <JFXCheckBox fx:id="showEquipCheck" layoutX="295.0" layoutY="77.0" text="Show Equipment" />
+      <JFXButton fx:id="toLocationTable" layoutX="471.0" layoutY="74.0" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
+      <JFXButton layoutX="604.0" layoutY="74.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
    </children>
 </AnchorPane>

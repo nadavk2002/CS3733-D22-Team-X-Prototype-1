@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="502.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorEquipmentTableOverlayController">
+   <children>
+      <TextField fx:id="searchEquipmentField" layoutX="33.0" layoutY="21.0" prefHeight="37.0" prefWidth="395.0" promptText="Search Equipment..." />
+      <TableView fx:id="table" layoutX="33.0" layoutY="85.0" prefHeight="390.0" prefWidth="610.0">
+        <columns>
+          <TableColumn fx:id="unitID" prefWidth="75.0" text="Unit ID" />
+          <TableColumn fx:id="type" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="availability" prefWidth="75.0" text="Availability" />
+            <TableColumn fx:id="currLoc" prefWidth="75.0" text="Current Location" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
