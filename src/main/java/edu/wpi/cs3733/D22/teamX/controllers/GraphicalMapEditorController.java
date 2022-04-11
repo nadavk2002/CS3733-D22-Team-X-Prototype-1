@@ -114,12 +114,6 @@ public class GraphicalMapEditorController implements Initializable {
     loadLocation("L2");
   }
 
-  /** Loads the ground level map */
-  @FXML
-  public void groundClick() {
-    loadLocation("G");
-  }
-
   /** Loads the 1st floor map */
   @FXML
   public void firstClick() {
@@ -136,6 +130,18 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML
   public void thirdClick() {
     loadLocation("3");
+  }
+
+  /** Loads the fourth floor map */
+  @FXML
+  public void fourthClick() {
+    loadLocation("4");
+  }
+
+  /** Loads the fifth floor map */
+  @FXML
+  public void fifthClick() {
+    loadLocation("5");
   }
 
   /**

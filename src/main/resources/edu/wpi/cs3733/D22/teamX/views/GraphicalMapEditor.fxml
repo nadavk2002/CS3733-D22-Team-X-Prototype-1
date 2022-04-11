@@ -38,10 +38,11 @@
                      <children>
                         <JFXButton fx:id="LL2Button" onAction="#LL2Click" text="LL2 Floor" />
                         <JFXButton fx:id="LL1Button" onAction="#LL1Click" text="LL1 Floor" />
-                        <JFXButton fx:id="GButton" onAction="#groundClick" text="Ground Floor" />
                         <JFXButton fx:id="OneButton" onAction="#firstClick" text="First Floor" />
                         <JFXButton fx:id="TwoButton" onAction="#secondClick" text="Second Floor" />
                         <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
+                        <JFXButton fx:id="FourButton" onAction="#fourthClick" text="Fourth Floor" />
+                        <JFXButton fx:id="fiveButton" onAction="#fifthClick" text="Fifth Floor" />
                      </children>
                   </HBox>
                   <Group fx:id="imageGroup">
