@@ -102,12 +102,28 @@ public class GraphicalMapEditorController implements Initializable {
         new FXMLLoader(
             getClass()
                 .getResource(
-                    "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorTableOverlay.fxml"));
+                    "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorLocationTableOverlay.fxml"));
     Parent root1 = (Parent) fxmlLoader.load();
     Stage stage = new Stage();
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.initStyle(StageStyle.DECORATED);
     stage.setTitle("Location Table");
+    stage.setScene(new Scene(root1));
+    stage.show();
+  }
+
+  @FXML
+  private void ToEquipmentTable() throws IOException {
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass()
+                .getResource(
+                    "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorEquipmentTableOverlay.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("Equipment Table");
     stage.setScene(new Scene(root1));
     stage.show();
   }

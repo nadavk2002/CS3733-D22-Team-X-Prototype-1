@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamX.entity.Location;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
-import java.awt.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -17,7 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class GraphicalMapEditorTableOverlayController implements Initializable {
+public class GraphicalMapEditorLocationTableOverlayController implements Initializable {
   @FXML private TableView<Location> table;
   @FXML private TableColumn<Location, String> nodeID;
   @FXML private TableColumn<Location, String> xCoord;

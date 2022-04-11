@@ -7,7 +7,7 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<AnchorPane fx:id="content" prefHeight="476.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorTableOverlayController">
+<AnchorPane fx:id="content" prefHeight="476.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorLocationTableOverlayController">
    <children>
       <TableView fx:id="table" layoutX="23.0" layoutY="62.0">
          <columns>
