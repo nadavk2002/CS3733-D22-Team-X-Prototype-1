@@ -19,12 +19,14 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -41,39 +43,16 @@ public class GraphicalMapEditorController implements Initializable {
       deleteLocationButton,
       submitLocationButton,
       deleteEquipment,
-      submitEquipment;
+      submitEquipmentButton;
   @FXML private ChoiceBox<String> locationChoice, equipmentChoice, equipLocationChoice;
 
   @FXML private HBox hBox1;
-  @FXML private VBox mapBox;
+  @FXML private VBox mapBox, infoVBox;
 
   @FXML private Group imageGroup;
 
   @FXML private ImageView imageView;
-  /*
-  @FXML private TableView<Location> locationTable;
-  @FXML private TableView<EquipmentUnit> equipTable;
 
-  @FXML private TableColumn<Location, String> nodeID;
-
-  @FXML private TableColumn<Location, String> x;
-
-  @FXML private TableColumn<Location, String> y;
-
-  @FXML private TableColumn<Location, String> floor;
-
-  @FXML private TableColumn<Location, String> building;
-
-  @FXML private TableColumn<Location, String> nodeType;
-
-  @FXML private TableColumn<Location, String> longName;
-
-  @FXML private TableColumn<Location, String> shortName;
-
-
-
-  @FXML private TableColumn<EquipmentUnit, String> unitIdCol, typeCol, availableCol, curLocationCol;
-  */
   @FXML private GesturePane pane;
   @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck;
   @FXML
@@ -328,8 +307,8 @@ public class GraphicalMapEditorController implements Initializable {
       rect.setWidth(15);
       rect.setHeight(15);
       rect.setFill(Paint.valueOf("BLUE"));
-      rect.setX(s.getDestination().getxCoord() + (rect.getWidth() / 2));
-      rect.setY(s.getDestination().getyCoord() + (rect.getHeight() / 2));
+      rect.setX(s.getDestination().getxCoord() - (rect.getWidth() / 2));
+      rect.setY(s.getDestination().getyCoord() - (rect.getHeight() / 2));
       imageGroup.getChildren().add(rect);
     }
   }
@@ -352,7 +331,6 @@ public class GraphicalMapEditorController implements Initializable {
     String floor = locDAO.getLocation(locationToDelete).getFloor();
     locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
     loadLocation(floor);
-    loadTables();
   }
 
   /** Deletes selected node id in the dropdown */
@@ -360,7 +338,7 @@ public class GraphicalMapEditorController implements Initializable {
     String equipmentToDelete = equipmentChoice.getValue();
     String floor = equipDAO.getEquipmentUnit(equipmentToDelete).getCurrLocation().getFloor();
     equipDAO.deleteEquipmentUnit(equipDAO.getEquipmentUnit(equipmentToDelete));
-    loadTables();
+
     loadLocation(floor);
   }
 
@@ -381,11 +359,46 @@ public class GraphicalMapEditorController implements Initializable {
     }
   }
 
+  private void loadLocationInfo(String nodeID) {
+    locDAO = new LocationDAOImpl();
+    equipDAO = new EquipmentUnitDAOImpl();
+    Location location = locDAO.getLocation(nodeID);
+    infoVBox.getChildren().clear();
+    infoVBox.setSpacing(25);
+    Label locationInfo = new Label();
+    locationInfo.setFont(Font.font(16));
+    String info = "Equipment:\n";
+    for (int i = 0; i < location.getUnitsAtLocation().size(); i++) {
+      info +=
+          "- "
+              + location.getUnitsAtLocation().get(i).getType()
+              + ": "
+              + location.getUnitsAtLocation().get(i).getUnitID()
+              + "\n";
+    }
+    locationInfo.setText(info);
+    if (location.getUnitsAtLocation().size() != 0) infoVBox.getChildren().add(locationInfo);
+    Label requestsAtLoc = new Label();
+    requestsAtLoc.setFont(Font.font(16));
+    String requests = "Requests:\n";
+    for (int i = 0; i < location.getRequestsAtLocation().size(); i++) {
+      requests +=
+          "- "
+              + location.getRequestsAtLocation().get(i).getClass().getSimpleName()
+              + ": "
+              + location.getRequestsAtLocation().get(i).getRequestID()
+              + "\n";
+    }
+    requestsAtLoc.setText(requests);
+    if (location.getRequestsAtLocation().size() != 0) infoVBox.getChildren().add(requestsAtLoc);
+  }
+
   /** Location data populates in their corresponding text fields */
   @FXML
   public void locationSelected() {
     try {
       Location selected = locDAO.getLocation(locationChoice.getValue());
+      submitLocationButton.setDisable(false);
       nodeIdText.setText(selected.getNodeID());
       xCordText.setText(selected.getX());
       yCordText.setText(selected.getY());
@@ -394,6 +407,7 @@ public class GraphicalMapEditorController implements Initializable {
       nodeTypeText.setText(selected.getNodeType());
       longNameText.setText(selected.getLongName());
       shortNameText.setText(selected.getShortName());
+      loadLocationInfo(selected.getNodeID());
     } catch (NoSuchElementException e) {
       nodeIdText.setText("");
       xCordText.setText("");
@@ -412,6 +426,7 @@ public class GraphicalMapEditorController implements Initializable {
    * @param location Floor level
    */
   public void loadLocation(String location) {
+    locDAO = new LocationDAOImpl();
     imageGroup.getChildren().clear();
     Image img =
         new Image(
@@ -422,6 +437,25 @@ public class GraphicalMapEditorController implements Initializable {
     newImage.setFitWidth(610);
     imageGroup.getChildren().add(newImage);
     loadMap(location);
+  }
+
+  private void activateSubmitLocationButton() {
+    submitLocationButton.setDisable(
+        nodeIdText.getText().equals("")
+            || (xCordText.getText().equals("") || !xCordText.getText().matches("[0-9]+"))
+            || (yCordText.getText().equals("") || !yCordText.getText().matches("[0-9]+"))
+            || floorText.getText().equals("")
+            || buildingText.getText().equals("")
+            || nodeTypeText.getText().equals("")
+            || longNameText.getText().equals("")
+            || shortNameText.getText().equals(""));
+  }
+
+  private void activateSubmitEquipmentButton() {
+    submitEquipmentButton.setDisable(
+        unitIdText.getText().equals("")
+            || typeText.getText().equals("")
+            || equipLocationChoice.getValue().equals(""));
   }
 
   /**
@@ -439,7 +473,7 @@ public class GraphicalMapEditorController implements Initializable {
         replaceEquip.setType(typeText.getText());
         equipDAO.updateEquipmentUnit(replaceEquip);
         loadLocation(replaceEquip.getCurrLocation().getFloor());
-        loadTables();
+        loadLocationInfo(replaceEquip.getCurrLocation().getNodeID());
         return;
       }
     }
@@ -451,8 +485,7 @@ public class GraphicalMapEditorController implements Initializable {
 
     equipDAO.addEquipmentUnit(newEquipment);
     loadLocation(newEquipment.getCurrLocation().getFloor());
-    // equipTable.getItems().clear();
-    // equipTable.setItems(equipmentListFill());
+    loadLocationInfo(newEquipment.getCurrLocation().getNodeID());
   }
 
   /** Submits a new location with the given data or updates the location with the matching id. */
@@ -470,8 +503,9 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setShortName(shortNameText.getText());
         replaceLoc.setNodeType(nodeTypeText.getText());
         locDAO.updateLocation(replaceLoc);
-        loadTables();
+
         loadLocation(replaceLoc.getFloor());
+        loadLocationInfo(replaceLoc.getNodeID());
         return;
       }
     }
@@ -487,18 +521,7 @@ public class GraphicalMapEditorController implements Initializable {
     newLocation.setShortName(shortNameText.getText());
     locDAO.addLocation(newLocation);
     loadLocation(newLocation.getFloor());
-    loadTables();
-  }
-
-  /** Fill tables with location and equipment data from the database */
-  private void loadTables() {
-    /*
-    locationTable.getItems().clear();
-    locationTable.setItems(locationListFill());
-    equipTable.getItems().clear();
-    equipTable.setItems(equipmentListFill());
-     */
-    return;
+    loadLocationInfo(newLocation.getNodeID());
   }
 
   @Override
@@ -517,28 +540,8 @@ public class GraphicalMapEditorController implements Initializable {
     hBox1.setSpacing(90);
 
     locDAO = new LocationDAOImpl();
-    /*
-    locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
-    x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
-    y.setCellValueFactory(new PropertyValueFactory<Location, String>("y"));
-    floor.setCellValueFactory(new PropertyValueFactory<Location, String>("floor"));
-    building.setCellValueFactory(new PropertyValueFactory<Location, String>("building"));
-    nodeType.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeType"));
-    longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
-    shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
-     */
-
     equipDAO = new EquipmentUnitDAOImpl();
-    /*
-        equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        unitIdCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("unitID"));
-        typeCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("type"));
-        availableCol.setCellValueFactory(
-            new PropertyValueFactory<EquipmentUnit, String>("isAvailableChar"));
-        curLocationCol.setCellValueFactory(
-            new PropertyValueFactory<EquipmentUnit, String>("currLocationShortName"));
-    */
+
     showEquipCheck.setOnAction(
         new EventHandler<ActionEvent>() {
           @Override
@@ -553,8 +556,21 @@ public class GraphicalMapEditorController implements Initializable {
             showDots();
           }
         });
+    submitEquipmentButton.setDisable(true);
+    submitLocationButton.setDisable(true);
+    nodeIdText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    xCordText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    yCordText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    floorText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    buildingText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    nodeTypeText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    longNameText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    shortNameText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
 
-    loadTables();
-    loadLocation("G");
+    unitIdText.setOnKeyTyped((KeyEvent e) -> activateSubmitEquipmentButton());
+    typeText.setOnKeyTyped((KeyEvent e) -> activateSubmitEquipmentButton());
+    equipLocationChoice.setOnAction((ActionEvent a) -> activateSubmitEquipmentButton());
+
+    loadLocation("1");
   }
 }

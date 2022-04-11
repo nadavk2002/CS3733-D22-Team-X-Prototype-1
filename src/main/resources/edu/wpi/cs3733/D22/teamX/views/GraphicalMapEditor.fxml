@@ -54,7 +54,6 @@
                   </Group>
                </children>
             </VBox>
-            <VBox prefHeight="644.0" prefWidth="906.0" />
          </children></HBox>
       <GridPane layoutX="157.0" layoutY="766.0" prefHeight="60.0" prefWidth="298.0">
         <columnConstraints>
@@ -165,5 +164,11 @@
       <JFXCheckBox fx:id="showEquipCheck" layoutX="295.0" layoutY="77.0" text="Show Equipment" />
       <JFXButton fx:id="toLocationTable" layoutX="471.0" layoutY="74.0" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
       <JFXButton layoutX="604.0" layoutY="74.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
+      <VBox fx:id="infoVBox" layoutX="855.0" layoutY="146.0" prefHeight="580.0" prefWidth="774.0" />
+      <Label layoutX="1175.0" layoutY="118.0" text="At this location:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
