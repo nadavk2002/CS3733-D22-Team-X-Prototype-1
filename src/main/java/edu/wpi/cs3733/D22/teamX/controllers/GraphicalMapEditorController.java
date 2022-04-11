@@ -203,6 +203,7 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void drawCirclesSetLocationList(String floor) {
+    locDAO = new LocationDAOImpl();
     List<Location> locationList = locDAO.getAllLocations();
     Image img = new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png");
     for (int i = 0; i < locationList.size(); i++) {
@@ -250,7 +251,7 @@ public class GraphicalMapEditorController implements Initializable {
               }
             });
         rect.setVisible(showLocCheck.isSelected());
-         this.drawRequests(locationList.get(i).getRequestsAtLocation());
+        this.drawRequests(locationList.get(i).getRequestsAtLocation());
         imageGroup.getChildren().add(rect);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
@@ -297,6 +298,7 @@ public class GraphicalMapEditorController implements Initializable {
       rect.setFill(Paint.valueOf("BLUE"));
       rect.setX(s.getDestination().getxCoord() + (rect.getWidth() / 2));
       rect.setY(s.getDestination().getyCoord() + (rect.getHeight() / 2));
+      imageGroup.getChildren().add(rect);
     }
   }
 
