@@ -55,6 +55,8 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       System.out.println("equipment unit does not exist");
       throw new NoSuchElementException("equipment unit does not exist");
     }
+    equipmentUnit.getCurrLocation().removeUnit(equipmentUnit); // remove unit from currLocation's list of units
+
     // Update total units and units available for equipment type
     eqtDAOImpl.decreaseNumTotal(equipmentUnit.getType(), 1);
     if (equipmentUnit.getIsAvailableChar() == 'Y') {
@@ -64,6 +66,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
 
   @Override
   public void updateEquipmentUnit(EquipmentUnit equipmentUnit) {
+    // if unit changed to be available or unavailable, adjust availability of EquipmentType
     if (equipmentUnit.getIsAvailableChar() == 'Y'
         && getEquipmentUnit(equipmentUnit.getUnitID()).getIsAvailableChar() == 'N') {
       eqtDAOImpl.increaseAvailability(equipmentUnit.getType(), 1);
@@ -71,6 +74,12 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
     if (equipmentUnit.getIsAvailableChar() == 'N'
         && getEquipmentUnit(equipmentUnit.getUnitID()).getIsAvailableChar() == 'Y') {
       eqtDAOImpl.decreaseAvailability(equipmentUnit.getType(), 1);
+    }
+    // remove unit from old location and add to new one if location changes in the update
+    if(!equipmentUnit.getCurrLocation().equals(getEquipmentUnit(equipmentUnit.getUnitID()).getCurrLocation()))
+    {
+      getEquipmentUnit(equipmentUnit.getUnitID()).getCurrLocation().removeUnit(equipmentUnit);
+      equipmentUnit.getCurrLocation().addUnit(equipmentUnit);
     }
     // add item to list
     int index = 0; // create index for while loop
@@ -137,6 +146,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
     if (equipmentUnit.getIsAvailableChar() == 'Y') {
       eqtDAOImpl.increaseAvailability(equipmentUnit.getType(), 1);
     }
+    equipmentUnit.getCurrLocation().addUnit(equipmentUnit); // add unit to currLocation's list of units
   }
 
   /** Creates a Equipment Units table */
@@ -180,8 +190,8 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
    */
   @Override
   public boolean loadCSV() {
+    LocationDAO locationDAO = new LocationDAOImpl();
     try {
-      LocationDAO locationDAO = new LocationDAOImpl();
       InputStream equipmentUnitStream =
           DatabaseCreator.class.getResourceAsStream(equipmentUnitsCSV);
       BufferedReader equipmentUnitBuffer =
@@ -198,6 +208,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
                   currLine[2].charAt(0),
                   locationDAO.getLocation(currLine[3]));
           equipmentUnits.add(equipmentUnitNode);
+          equipmentUnitNode.getCurrLocation().addUnit(equipmentUnitNode); // add unit to currLocation's list of units
         } else {
           System.out.println("MedicalEquipmentUnits CSV file formatted improperly");
           System.exit(1);
@@ -213,6 +224,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
     }
 
     for (int i = 0; i < equipmentUnits.size(); i++) {
+      // add equipmentUnit to EquipmentUnit table
       try {
         Statement initialization = connection.createStatement();
         StringBuilder equipmentUnit = new StringBuilder();
