@@ -43,7 +43,7 @@
                               <Insets />
                            </opaqueInsets>
                         </ChoiceBox>
-                        <TextField fx:id="assignStaff" prefWidth="150.0" />
+                        <ChoiceBox fx:id="assignStaff" prefWidth="150.0" />
                         <ChoiceBox fx:id="serviceStatus" prefWidth="150.0">
                            <opaqueInsets>
                               <Insets />

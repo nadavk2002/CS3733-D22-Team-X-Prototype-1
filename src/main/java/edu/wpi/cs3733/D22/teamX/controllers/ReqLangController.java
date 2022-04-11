@@ -20,8 +20,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ReqLangController implements Initializable {
   @FXML private Button mainMenu, submitButton;
-  @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus;
-  @FXML private TextField assignStaff;
+  @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus, assignStaff;
+  // @FXML private TextField assignStaff;
   @FXML private TableView<LangServiceRequest> tbView;
 
   private LocationDAO locationDAO;
@@ -40,6 +40,7 @@ public class ReqLangController implements Initializable {
     submitButton.setDisable(true);
     selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
+    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
     roomNum.setItems(getLocationNames());
     selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -70,7 +71,10 @@ public class ReqLangController implements Initializable {
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
-    submitButton.setDisable(roomNum.getValue().equals("") || selectLang.getValue().equals(""));
+    submitButton.setDisable(
+        roomNum.getValue().equals("")
+            || selectLang.getValue().equals("")
+            || assignStaff.getValue().equals(""));
   }
 
   /**
@@ -90,7 +94,7 @@ public class ReqLangController implements Initializable {
     selectLang.setValue("");
     roomNum.setValue("");
     serviceStatus.setValue("");
-    assignStaff.setText("");
+    assignStaff.setValue("");
   }
 
   /** Creates a service request from the fields on the javafx page */
@@ -102,7 +106,7 @@ public class ReqLangController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
-    request.setAssignee(assignStaff.getText());
+    request.setAssignee(assignStaff.getValue());
     this.resetFields();
     tbView.getItems().add(request);
   }

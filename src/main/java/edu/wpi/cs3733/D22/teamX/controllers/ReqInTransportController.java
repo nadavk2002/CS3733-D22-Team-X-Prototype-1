@@ -21,8 +21,13 @@ import javafx.scene.layout.VBox;
 public class ReqInTransportController implements Initializable {
   @FXML private Label l1, l2, l3, l4, l5, l6, title;
   @FXML private Button ToMainMenu, submitButton, resetFields;
-  @FXML private ChoiceBox<String> transportFrom, transportTo, addAccommodation, serviceStatus;
-  @FXML private TextField patientName, assignStaff;
+  @FXML
+  private ChoiceBox<String> transportFrom,
+      transportTo,
+      addAccommodation,
+      serviceStatus,
+      assignStaff,
+      patientName;
   @FXML private TableView<InTransportServiceRequest> table;
   @FXML
   private HBox labelHBox1, labelHBox2, labelHBox3, inputHBox1, inputHBox2, inputHBox3, tableHBox;
@@ -57,6 +62,8 @@ public class ReqInTransportController implements Initializable {
         .addAll(
             new String[] {"Bed", "Recliner", "Intubator", "Extra Nurse", "Language Interpreter"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
+    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
+    patientName.getItems().addAll("Patient1", "Patient2", "Patient3", "Patient4", "Patient5");
     transportFrom.setOnAction((ActionEvent event) -> enableSubmitButton());
     transportTo.setOnAction((ActionEvent event) -> enableSubmitButton());
     addAccommodation.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -135,8 +142,8 @@ public class ReqInTransportController implements Initializable {
             || transportFrom.getValue().equals("")
             || addAccommodation.getValue().equals("")
             || serviceStatus.getValue().equals("")
-            || patientName.getText().equals("")
-            || assignStaff.getText().equals(""));
+            || patientName.getValue().equals("")
+            || assignStaff.getValue().equals(""));
   }
 
   /**
@@ -153,11 +160,11 @@ public class ReqInTransportController implements Initializable {
   /** Resets all fields on the page. */
   @FXML
   public void resetFields() {
-    assignStaff.setText("");
+    assignStaff.setValue("");
     transportFrom.setValue("");
     transportTo.setValue("");
     serviceStatus.setValue("");
-    patientName.setText("");
+    patientName.setValue("");
     addAccommodation.setValue("");
   }
 
@@ -169,9 +176,9 @@ public class ReqInTransportController implements Initializable {
     request.setDestination(locations.get(transportFrom.getSelectionModel().getSelectedIndex()));
     request.setTransportTo(locations.get(transportTo.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setPatientName(patientName.getText());
+    request.setPatientName(patientName.getValue());
     request.setAddAccommodation(addAccommodation.getValue());
-    request.setAssignee(assignStaff.getText());
+    request.setAssignee(assignStaff.getValue());
     this.resetFields();
     table.getItems().add(request);
   }
