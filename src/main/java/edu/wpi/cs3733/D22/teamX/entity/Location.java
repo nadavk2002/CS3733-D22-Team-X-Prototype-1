@@ -1,10 +1,11 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Location {
+public class Location extends RecursiveTreeObject<Location> {
   private String nodeID;
   private int xCoord, yCoord;
   private String floor;
