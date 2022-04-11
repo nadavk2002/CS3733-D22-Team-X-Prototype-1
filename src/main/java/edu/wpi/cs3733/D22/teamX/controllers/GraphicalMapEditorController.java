@@ -19,7 +19,6 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,7 +50,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private Group imageGroup;
 
   @FXML private ImageView imageView;
-
+  /*
   @FXML private TableView<Location> locationTable;
   @FXML private TableView<EquipmentUnit> equipTable;
 
@@ -71,9 +70,11 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML private TableColumn<Location, String> shortName;
 
-  @FXML private GesturePane pane;
+
 
   @FXML private TableColumn<EquipmentUnit, String> unitIdCol, typeCol, availableCol, curLocationCol;
+  */
+  @FXML private GesturePane pane;
   @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck;
   @FXML
   private TextField nodeIdText,
@@ -272,6 +273,15 @@ public class GraphicalMapEditorController implements Initializable {
         circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
         circle.setFill(Paint.valueOf("GREEN"));
         circle.setVisible(showEquipCheck.isSelected());
+        circle.setOnMouseReleased(
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent event) {
+                EquipmentUnit e = (EquipmentUnit) circle.getUserData();
+                circle.setFill(Paint.valueOf("GREEN"));
+                equipmentChoice.setValue(e.getUnitID());
+              }
+            });
         imageGroup.getChildren().add(circle);
         equipmentChoice.getItems().add(equipment.get(i).getUnitID());
       }
@@ -395,8 +405,8 @@ public class GraphicalMapEditorController implements Initializable {
 
     equipDAO.addEquipmentUnit(newEquipment);
     loadLocation(newEquipment.getCurrLocation().getFloor());
-    equipTable.getItems().clear();
-    equipTable.setItems(equipmentListFill());
+    // equipTable.getItems().clear();
+    // equipTable.setItems(equipmentListFill());
   }
 
   /** Submits a new location with the given data or updates the location with the matching id. */
@@ -436,10 +446,13 @@ public class GraphicalMapEditorController implements Initializable {
 
   /** Fill tables with location and equipment data from the database */
   private void loadTables() {
+    /*
     locationTable.getItems().clear();
     locationTable.setItems(locationListFill());
     equipTable.getItems().clear();
     equipTable.setItems(equipmentListFill());
+     */
+    return;
   }
 
   @Override
@@ -457,6 +470,7 @@ public class GraphicalMapEditorController implements Initializable {
     hBox1.setSpacing(90);
 
     locDAO = new LocationDAOImpl();
+    /*
     locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
@@ -466,16 +480,18 @@ public class GraphicalMapEditorController implements Initializable {
     nodeType.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeType"));
     longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
+     */
 
     equipDAO = new EquipmentUnitDAOImpl();
-    equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    unitIdCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("unitID"));
-    typeCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("type"));
-    availableCol.setCellValueFactory(
-        new PropertyValueFactory<EquipmentUnit, String>("isAvailableChar"));
-    curLocationCol.setCellValueFactory(
-        new PropertyValueFactory<EquipmentUnit, String>("currLocationShortName"));
-
+    /*
+        equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        unitIdCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("unitID"));
+        typeCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("type"));
+        availableCol.setCellValueFactory(
+            new PropertyValueFactory<EquipmentUnit, String>("isAvailableChar"));
+        curLocationCol.setCellValueFactory(
+            new PropertyValueFactory<EquipmentUnit, String>("currLocationShortName"));
+    */
     showEquipCheck.setOnAction(
         new EventHandler<ActionEvent>() {
           @Override

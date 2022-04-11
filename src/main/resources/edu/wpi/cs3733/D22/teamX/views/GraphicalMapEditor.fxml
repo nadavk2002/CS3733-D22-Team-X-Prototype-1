@@ -5,8 +5,6 @@
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -56,34 +54,7 @@
                   </Group>
                </children>
             </VBox>
-            <VBox prefHeight="650.0" prefWidth="906.0">
-               <children>
-                  <TableView fx:id="locationTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="906.0">
-                    <columns>
-                      <TableColumn fx:id="nodeID" prefWidth="80.79998779296875" text="Node ID" />
-                        <TableColumn prefWidth="89.5999755859375" text="X Coordinate" fx:id="x" />
-                        <TableColumn fx:id="y" prefWidth="79.199951171875" text="Y Coordinate" />
-                        <TableColumn fx:id="floor" prefWidth="48.800048828125" text="Floor" />
-                        <TableColumn fx:id="building" prefWidth="82.4000244140625" text="Building " />
-                        <TableColumn fx:id="nodeType" prefWidth="90.4000244140625" text="Node Type" />
-                        <TableColumn fx:id="longName" prefWidth="234.4000244140625" text="Long Name" />
-                        <TableColumn fx:id="shortName" prefWidth="195.199951171875" text="Short Name" />
-                    </columns>
-                  </TableView>
-                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="906.0" text="Equipment:" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="11.0" />
-                     </font>
-                  </Label>
-                  <TableView fx:id="equipTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="906.0">
-                     <columns>
-                        <TableColumn fx:id="unitIdCol" prefWidth="160.80005490779877" text="Unit ID" />
-                        <TableColumn fx:id="typeCol" prefWidth="167.99993896484375" text="Type" />
-                        <TableColumn fx:id="availableCol" prefWidth="182.39999389648438" text="Availability" />
-                        <TableColumn fx:id="curLocationCol" prefWidth="237.5999755859375" text="Current Location" />
-                     </columns></TableView>
-               </children>
-            </VBox>
+            <VBox prefHeight="644.0" prefWidth="906.0" />
          </children></HBox>
       <GridPane layoutX="157.0" layoutY="766.0" prefHeight="60.0" prefWidth="298.0">
         <columnConstraints>
