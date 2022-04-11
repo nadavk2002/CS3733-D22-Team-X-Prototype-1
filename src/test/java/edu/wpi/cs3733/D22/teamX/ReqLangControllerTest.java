@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamX;
 
 import static org.testfx.api.FxAssert.verifyThat;
-import static org.testfx.util.NodeQueryUtils.hasText;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -29,28 +28,27 @@ public class ReqLangControllerTest extends ApplicationTest {
   @Test
   public void testRoomNumDropdown() {
     // checks if its populated
-    clickOn("#roomNum").clickOn("CIM");
-    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals("CIM"));
+    clickOn("#roomNum").clickOn("Gift Shop");
+    verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals("Gift Shop"));
   }
 
   @Test
-  public void testAssignStaffTextField() {
-    clickOn("#assignStaff");
-    write("h");
-    verifyThat("#assignStaff", hasText("h"));
+  public void testAssignStaffDropdown() {
+    // checks if its populated
+    clickOn("#assignStaff").clickOn("Staff1");
+    verifyThat("#assignStaff", (ChoiceBox<String> c) -> c.getValue().equals("Staff1"));
   }
 
   @Test
   public void testResetButton() {
-    clickOn("#roomNum").clickOn("CIM");
+    clickOn("#roomNum").clickOn("Gift Shop");
     clickOn("#selectLang").clickOn("English");
     clickOn("#serviceStatus").clickOn("PROC");
-    clickOn("#assignStaff");
-    write("h");
+    clickOn("#assignStaff").clickOn("Staff1");
     verifyThat("#submitButton", (Button c) -> !c.isDisabled());
 
     clickOn("#resetFields");
-    verifyThat("#assignStaff", hasText(""));
+    verifyThat("#assignStaff", (ChoiceBox<String> c) -> c.getValue().equals(""));
     verifyThat("#serviceStatus", (ChoiceBox<String> c) -> c.getValue().equals(""));
     verifyThat("#selectLang", (ChoiceBox<String> c) -> c.getValue().equals(""));
     verifyThat("#roomNum", (ChoiceBox<String> c) -> c.getValue().equals(""));
