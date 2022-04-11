@@ -143,6 +143,39 @@ public class EquipmentTypeDAOImpl implements EquipmentTypeDAO {
     }
   }
 
+  public void decreaseAvailability(String model, int quantityMadeUnavailable) {
+    EquipmentType et = new EquipmentType();
+    et.setModel(model);
+    et.setNumUnitsTotal(getEquipmentType(model).getNumUnitsTotal());
+    et.setNumUnitsAvailable(
+        getEquipmentType(model).getNumUnitsAvailable() - quantityMadeUnavailable);
+    updateEquipmentType(et);
+  }
+
+  public void increaseAvailability(String model, int quantityMadeAvailable) {
+    EquipmentType et = new EquipmentType();
+    et.setModel(model);
+    et.setNumUnitsTotal(getEquipmentType(model).getNumUnitsTotal());
+    et.setNumUnitsAvailable(getEquipmentType(model).getNumUnitsAvailable() + quantityMadeAvailable);
+    updateEquipmentType(et);
+  }
+
+  public void decreaseNumTotal(String model, int quantityRemoved) {
+    EquipmentType et = new EquipmentType();
+    et.setModel(model);
+    et.setNumUnitsTotal(getEquipmentType(model).getNumUnitsTotal() - quantityRemoved);
+    et.setNumUnitsAvailable(getEquipmentType(model).getNumUnitsAvailable());
+    updateEquipmentType(et);
+  }
+
+  public void increaseNumTotal(String model, int quantityAdded) {
+    EquipmentType et = new EquipmentType();
+    et.setModel(model);
+    et.setNumUnitsTotal(getEquipmentType(model).getNumUnitsTotal() + quantityAdded);
+    et.setNumUnitsAvailable(getEquipmentType(model).getNumUnitsAvailable());
+    updateEquipmentType(et);
+  }
+
   /** Creates a Equipment Types table */
   @Override
   public void createTable() {
@@ -232,7 +265,7 @@ public class EquipmentTypeDAOImpl implements EquipmentTypeDAO {
         } else {
           csvFile.write(equipmentTypes.get(i).getNumUnitsTotal() + ",");
         }
-        csvFile.write(equipmentTypes.get(i).getNumUnitsAvailable() + ",");
+        csvFile.write(Integer.toString(equipmentTypes.get(i).getNumUnitsAvailable()));
       }
       csvFile.flush();
       csvFile.close();

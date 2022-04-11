@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
+  private static final EquipmentTypeDAOImpl eqtDAOImpl = new EquipmentTypeDAOImpl();
+
   public EquipmentUnitDAOImpl() {}
 
   @Override
@@ -23,7 +25,7 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
         return e;
       }
     }
-    throw new NoSuchElementException("request does not exist");
+    throw new NoSuchElementException("unit does not exist");
   }
 
   @Override
@@ -53,10 +55,23 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       System.out.println("equipment unit does not exist");
       throw new NoSuchElementException("equipment unit does not exist");
     }
+    // Update total units and units available for equipment type
+    eqtDAOImpl.decreaseNumTotal(equipmentUnit.getType(), 1);
+    if (equipmentUnit.getIsAvailableChar() == 'Y') {
+      eqtDAOImpl.decreaseAvailability(equipmentUnit.getType(), 1);
+    }
   }
 
   @Override
   public void updateEquipmentUnit(EquipmentUnit equipmentUnit) {
+    if (equipmentUnit.getIsAvailableChar() == 'Y'
+        && getEquipmentUnit(equipmentUnit.getUnitID()).getIsAvailableChar() == 'N') {
+      eqtDAOImpl.increaseAvailability(equipmentUnit.getType(), 1);
+    }
+    if (equipmentUnit.getIsAvailableChar() == 'N'
+        && getEquipmentUnit(equipmentUnit.getUnitID()).getIsAvailableChar() == 'Y') {
+      eqtDAOImpl.decreaseAvailability(equipmentUnit.getType(), 1);
+    }
     // add item to list
     int index = 0; // create index for while loop
     int intitialSize = equipmentUnits.size(); // get size
@@ -115,6 +130,12 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
     } catch (SQLException e) {
       e.printStackTrace();
       System.out.println("Database could not be updated");
+    }
+
+    // update total units and units available for equipment type
+    eqtDAOImpl.increaseNumTotal(equipmentUnit.getType(), 1);
+    if (equipmentUnit.getIsAvailableChar() == 'Y') {
+      eqtDAOImpl.increaseAvailability(equipmentUnit.getType(), 1);
     }
   }
 
