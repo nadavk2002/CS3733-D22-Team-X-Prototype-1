@@ -76,8 +76,9 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       eqtDAOImpl.decreaseAvailability(equipmentUnit.getType(), 1);
     }
     // remove unit from old location and add to new one if location changes in the update
-    if(!equipmentUnit.getCurrLocation().equals(getEquipmentUnit(equipmentUnit.getUnitID()).getCurrLocation()))
-    {
+    if (!equipmentUnit
+        .getCurrLocation()
+        .equals(getEquipmentUnit(equipmentUnit.getUnitID()).getCurrLocation())) {
       getEquipmentUnit(equipmentUnit.getUnitID()).getCurrLocation().removeUnit(equipmentUnit);
       equipmentUnit.getCurrLocation().addUnit(equipmentUnit);
     }
@@ -146,7 +147,9 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
     if (equipmentUnit.getIsAvailableChar() == 'Y') {
       eqtDAOImpl.increaseAvailability(equipmentUnit.getType(), 1);
     }
-    equipmentUnit.getCurrLocation().addUnit(equipmentUnit); // add unit to currLocation's list of units
+    equipmentUnit
+        .getCurrLocation()
+        .addUnit(equipmentUnit); // add unit to currLocation's list of units
   }
 
   /** Creates a Equipment Units table */
@@ -208,7 +211,9 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
                   currLine[2].charAt(0),
                   locationDAO.getLocation(currLine[3]));
           equipmentUnits.add(equipmentUnitNode);
-          equipmentUnitNode.getCurrLocation().addUnit(equipmentUnitNode); // add unit to currLocation's list of units
+          equipmentUnitNode
+              .getCurrLocation()
+              .addUnit(equipmentUnitNode); // add unit to currLocation's list of units
         } else {
           System.out.println("MedicalEquipmentUnits CSV file formatted improperly");
           System.exit(1);
