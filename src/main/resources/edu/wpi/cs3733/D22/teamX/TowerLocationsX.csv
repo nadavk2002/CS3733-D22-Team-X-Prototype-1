@@ -33,7 +33,7 @@ HHALL00502,420,400,2,Tower,HALL,Hallway Connector 5 Floor 2,Hallway H00502
 HHALL00602,380,450,2,Tower,HALL,Hallway Connector 6 Floor 2,Hallway H00602
 HHALL00702,340,540,2,Tower,HALL,Hallway Connector 7 Floor 2,Hallway H00702
 HRETL00102,540,230,2,Tower,RETL,Garden Cafe,Garden Cafe
-HRETL00202,200,400,2,Tower,RETL,Vending Machine Floor 2?,Vending Machine
+HRETL00202,200,400,2,Tower,RETL,Vending Machine Floor 2,Vending Machine
 HRETL00302,430,460,2,Tower,RETL,Gift Shop Tower Floor 2,Gift Shop
 HSTAI00202,300,540,2,Tower,STAI,Stairwell 2 Tower Floor 2,Stairwell 0202
 HSTAI00302,390,600,2,Tower,STAI,Escalator 1 Floor 2,Escalator 1 Floor 2

@@ -10,9 +10,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class MedicalEquipmentDeliveryController {
+  @FXML private Label amountAvailable;
   @FXML private Button ToMainMenu;
   @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus;
   @FXML private TextField amountField;
@@ -32,6 +34,7 @@ public class MedicalEquipmentDeliveryController {
       selectEquipmentType.getItems().add(eqtDAO.getAllEquipmentTypes().get(i).getModel());
     }
     selectDestination.setItems(this.getLocationNames());
+    updateAvailability();
   }
 
   private ObservableList<String> equipDeliveryList() {
@@ -83,7 +86,6 @@ public class MedicalEquipmentDeliveryController {
   @FXML
   public void submitRequest() {
     MedicalEquipmentServiceRequest request = new MedicalEquipmentServiceRequest();
-
     request.setEquipmentType(selectEquipmentType.getValue());
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
@@ -93,5 +95,22 @@ public class MedicalEquipmentDeliveryController {
     MedicalEquipmentServiceRequestDAO submit = new MedicalEquipmentServiceRequestDAOImpl();
     submit.addMedicalEquipmentServiceRequest(request);
     this.resetFields();
+    updateAvailability();
+  }
+
+  public void updateAvailability() {
+    EquipmentTypeDAO eqtDAO = new EquipmentTypeDAOImpl();
+    StringBuilder availableStr = new StringBuilder("Equipment Available:");
+    String leftPadding = "                    ";
+    for (int i = 0; i < eqtDAO.getAllEquipmentTypes().size(); i++) {
+      String model = eqtDAO.getAllEquipmentTypes().get(i).getModel();
+      availableStr.append(
+          "\n"
+              + model
+              + leftPadding.substring(model.length())
+              + eqtDAO.getAllEquipmentTypes().get(i).getNumUnitsAvailable()
+              + " units");
+    }
+    amountAvailable.setText(availableStr.toString());
   }
 }

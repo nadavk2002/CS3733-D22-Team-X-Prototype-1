@@ -51,9 +51,9 @@ public class DatabaseCreator {
 
   /** Drops all database tables */
   private static void dropAllTables() {
-    equDAO.dropTable();
     labDAO.dropTable();
     mesrDAO.dropTable();
+    equDAO.dropTable();
     eqtDAO.dropTable();
     locDAO.dropTable();
   }
@@ -62,9 +62,9 @@ public class DatabaseCreator {
   private static void createAllTables() {
     locDAO.createTable();
     eqtDAO.createTable();
+    equDAO.createTable();
     mesrDAO.createTable();
     labDAO.createTable();
-    equDAO.createTable();
   }
 
   /**
@@ -74,9 +74,9 @@ public class DatabaseCreator {
   private static void loadAllCSV() {
     locDAO.loadCSV();
     eqtDAO.loadCSV();
+    equDAO.loadCSV();
     mesrDAO.loadCSV();
     labDAO.loadCSV();
-    equDAO.loadCSV();
   }
 
   /**
@@ -89,9 +89,9 @@ public class DatabaseCreator {
   public static boolean saveAllCSV(String dirPath) throws loadSaveFromCSVException {
     if (!locDAO.saveCSV(dirPath)
         || !eqtDAO.saveCSV(dirPath)
+        || !equDAO.saveCSV(dirPath)
         || !mesrDAO.saveCSV(dirPath)
-        || !labDAO.saveCSV(dirPath)
-        || !equDAO.saveCSV(dirPath)) {
+        || !labDAO.saveCSV(dirPath)) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;

@@ -143,6 +143,14 @@ public class MedicalEquipmentServiceRequestDAOImpl implements MedicalEquipmentSe
       System.out.println("Database could not be updated");
       return;
     }
+    //    // If service request completed, update the availability of the equipment type
+    //    // SHOULD BE BASED ON LOCATION ADDED TO
+    //    if (medicalEquipmentServiceRequest.getStatus().equals("DONE")) {
+    //      EquipmentTypeDAOImpl eqtDAOImpl = new EquipmentTypeDAOImpl();
+    //      eqtDAOImpl.decreaseAvailability(
+    //          medicalEquipmentServiceRequest.getEquipmentType(),
+    //          medicalEquipmentServiceRequest.getQuantity());
+    //    }
   }
 
   /** creates the medical equipment request service table in the database */
