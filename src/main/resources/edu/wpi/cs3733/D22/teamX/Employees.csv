@@ -1,0 +1,14 @@
+employeeID,firstName,lastName,clearanceType,jobTitle
+EMPL0001,Richard,Webber,admin,Chief of Surgery
+EMPL0002,Derek,Shepherd,admin,Chief of Neurosurgery
+EMPL0003,Owen,Hunt,admin,Chief of Trauma Surgery
+EMPL0004,Kenny,Fournette,staff,Registered Nurse
+EMPL0005,Olivia,Harper,staff,Registered Nurse
+EMPL0006,Daisy,Pepman,admin,Chief of Dermatology
+EMPL0007,Steve,White,admin,Head Custodian
+EMPL0008,John,Williams,staff,Custodian
+EMPL0009,Arizona,Robins,admin,Chief of Pediatrics
+EMPL0010,Jo,Willson,staff,OBGYN
+EMPL0011,Ben,Warren,staff,Anesthesiologist
+EMPL0012,Abby,Sciuto,staff,Lab Tech
+EMPL0013,Jennifer,Lawrence,staff,Language Interpreter
