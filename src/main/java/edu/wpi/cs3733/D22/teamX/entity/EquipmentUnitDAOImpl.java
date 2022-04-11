@@ -30,6 +30,8 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
 
   @Override
   public void deleteEquipmentUnit(EquipmentUnit equipmentUnit) {
+    // remove unit from currLocation's list of units
+    equipmentUnit.getCurrLocation().removeUnit(equipmentUnit);
     // iterate through the linked list of locations to find the object and update it on new list
     int index = 0;
     while (index < equipmentUnits.size()) {
@@ -55,8 +57,6 @@ public class EquipmentUnitDAOImpl implements EquipmentUnitDAO {
       System.out.println("equipment unit does not exist");
       throw new NoSuchElementException("equipment unit does not exist");
     }
-    equipmentUnit.getCurrLocation().removeUnit(equipmentUnit); // remove unit from currLocation's list of units
-
     // Update total units and units available for equipment type
     eqtDAOImpl.decreaseNumTotal(equipmentUnit.getType(), 1);
     if (equipmentUnit.getIsAvailableChar() == 'Y') {
