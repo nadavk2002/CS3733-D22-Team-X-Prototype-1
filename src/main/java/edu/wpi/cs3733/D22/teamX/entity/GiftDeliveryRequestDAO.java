@@ -271,7 +271,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
 
   @Override
   public String makeID() {
-    // TODO
-    return null;
+    int nextIDFinalNum = this.getAllRecords().size() + 1;
+    return String.format("GIFT%04d", nextIDFinalNum);
   }
 }
