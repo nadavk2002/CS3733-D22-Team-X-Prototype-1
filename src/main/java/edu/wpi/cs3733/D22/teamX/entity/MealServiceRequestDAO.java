@@ -70,7 +70,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
             Statement statement = connection.createStatement();
             // remove location from DB table
             statement.executeUpdate(
-                    "DELETE FROM MealSerivceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
+                    "DELETE FROM MealServiceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,7 +98,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
             Statement statement = connection.createStatement();
             // update item in DB
             statement.executeUpdate(
-                    "UPDATE MealSerivceRequest SET"
+                    "UPDATE MealServiceRequest SET"
                             + " destination = '"
                             + recordObject.getDestination().getNodeID()
                             + "', status = '"
@@ -130,7 +130,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
         try {
             Statement initialization = connection.createStatement();
             StringBuilder msr = new StringBuilder();
-            msr.append("INSERT INTO LabServiceRequest VALUES (");
+            msr.append("INSERT INTO MealServiceRequest VALUES (");
             msr.append("'" + recordObject.getRequestID() + "', ");
             msr.append("'" + recordObject.getDestination().getNodeID() + "', ");
             msr.append("'" + recordObject.getStatus() + "', ");
@@ -149,12 +149,36 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
     @Override
     public void createTable() {
-        
+        try {
+            Statement initialization = connection.createStatement();
+            initialization.execute(
+                    "CREATE TABLE MealServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+                            + "destination CHAR(10),"
+                            + "status CHAR(4),"
+                            + "assignee CHAR(8),"
+                            + "mainCourse VARCHAR(25),"
+                            + "side VARCHAR(25),"
+                            + "drink VARCHAR(25),"
+                            + "patientFor VARCHAR(15),"
+                            + "CONSTRAINT PMSR_dest_fk "
+                            + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
+                            + "ON DELETE SET NULL)");
+        } catch (SQLException e) {
+            System.out.println("MealServiceRequest table creation failed. Check output console.");
+            e.printStackTrace();
+            System.exit(1);
+        }
     }
 
     @Override
     public void dropTable() {
-
+        try {
+            Statement dropMealServiceRequest = connection.createStatement();
+            dropMealServiceRequest.execute("DROP TABLE MealServiceRequest");
+        } catch (SQLException e) {
+            System.out.println("MealServiceRequest not dropped");
+            e.printStackTrace();
+        }
     }
 
     @Override
