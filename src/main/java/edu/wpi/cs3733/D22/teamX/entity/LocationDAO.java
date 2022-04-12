@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -14,33 +13,7 @@ public class LocationDAO implements DAO<Location> {
   private static String csv = "TowerLocationsX.csv";
 
   /** Creates a new LocationDAO object. */
-  private LocationDAO() {
-    try {
-      // create the statement
-      Statement statement = connection.createStatement();
-      // execute query to see all locations and store it to a result set
-      ResultSet resultSet = statement.executeQuery("Select * FROM Location");
-      while (resultSet.next()) {
-        // create location variable to be appended to the list.
-        Location location = new Location();
-
-        // go through all the parameters of the location
-        location.setNodeID(resultSet.getString("nodeID"));
-        location.setxCoord(Integer.parseInt(resultSet.getString("xCoord")));
-        location.setyCoord(Integer.parseInt(resultSet.getString("yCoord")));
-        location.setFloor(resultSet.getString("floor"));
-        location.setBuilding(resultSet.getString("building"));
-        location.setNodeType(resultSet.getString("nodeType"));
-        location.setLongName(resultSet.getString("longName"));
-        location.setShortName(resultSet.getString("shortName"));
-
-        // append location on to the end of the locations list
-        locations.add(location);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+  private LocationDAO() {}
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {

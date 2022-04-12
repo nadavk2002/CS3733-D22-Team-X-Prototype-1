@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -15,29 +14,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   private static String csv = "MedEquipReq.csv";
 
   /** Creates a new LocationDAO object. */
-  private MedicalEquipmentServiceRequestDAO() {
-    try {
-      // create the statement
-      Statement statement = connection.createStatement();
-      // execute query to see all locations and store it to a result set
-      ResultSet resultSet = statement.executeQuery("Select * FROM MedicalEquipmentServiceRequest");
-      LocationDAO locationDAO = LocationDAO.getDAO();
-      while (resultSet.next()) {
-        MedicalEquipmentServiceRequest medicalEquipmentServiceRequest =
-            new MedicalEquipmentServiceRequest();
-        medicalEquipmentServiceRequest.setRequestID(resultSet.getString("requestID"));
-        medicalEquipmentServiceRequest.setDestination(
-            locationDAO.getRecord(resultSet.getString("destination")));
-        medicalEquipmentServiceRequest.setStatus(resultSet.getString("status"));
-        medicalEquipmentServiceRequest.setAssignee(resultSet.getString("assignee"));
-        medicalEquipmentServiceRequest.setEquipmentType(resultSet.getString("equipmentType"));
-        medicalEquipmentServiceRequest.setQuantity(resultSet.getInt("quantity"));
-        medicalEquipmentServiceRequests.add(medicalEquipmentServiceRequest);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+  private MedicalEquipmentServiceRequestDAO() {}
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {

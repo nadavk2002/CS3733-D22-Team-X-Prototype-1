@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -14,23 +13,7 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
   private static String csv = "EquipmentTypes.csv";
 
   /** Creates a new EquipmentTypeDAO object. */
-  private EquipmentTypeDAO() {
-    try {
-      // create the statement
-      Statement statement = connection.createStatement();
-      // execute query to see all locations and store it to a result set
-      ResultSet resultSet = statement.executeQuery("Select * FROM EquipmentType");
-      while (resultSet.next()) {
-        EquipmentType equipmentType = new EquipmentType();
-        equipmentType.setModel(resultSet.getString("model"));
-        equipmentType.setNumUnitsTotal(resultSet.getInt("numUnitsTotal"));
-        equipmentType.setNumUnitsAvailable(resultSet.getInt("numUnitsAvailable"));
-        equipmentTypes.add(equipmentType);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+  private EquipmentTypeDAO() {}
 
   /** Singleton helper class. */
   private static class SingletonHelper {

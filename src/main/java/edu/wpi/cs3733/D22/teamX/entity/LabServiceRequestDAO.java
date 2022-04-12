@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -14,27 +13,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
   private static String csv = "LabServiceRequests.csv";
 
   /** Creates a new LabServiceRequestDAO object. */
-  private LabServiceRequestDAO() {
-    try {
-      // create the statement
-      Statement statement = connection.createStatement();
-      // execute query to see all locations and store it to a result set
-      ResultSet resultSet = statement.executeQuery("Select * FROM LabServiceRequest");
-      LocationDAO locationDAO = LocationDAO.getDAO();
-      while (resultSet.next()) {
-        LabServiceRequest labServiceRequest = new LabServiceRequest();
-        labServiceRequest.setRequestID(resultSet.getString("requestID"));
-        labServiceRequest.setDestination(locationDAO.getRecord(resultSet.getString("destination")));
-        labServiceRequest.setStatus(resultSet.getString("status"));
-        labServiceRequest.setAssignee(resultSet.getString("assignee"));
-        labServiceRequest.setService(resultSet.getString("service"));
-        labServiceRequest.setPatientFor(resultSet.getString("patientFor"));
-        labServiceRequests.add(labServiceRequest);
-      }
-    } catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
+  private LabServiceRequestDAO() {}
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
