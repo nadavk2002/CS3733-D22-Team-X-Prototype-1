@@ -2,13 +2,18 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 /** Represents a meal service request */
 public class MealServiceRequest extends ServiceRequest {
-  String mealType;
-  String patientID;
+  String mainCourse;
+  String side;
+  String drink;
+  String patientFor;
+
 
   public MealServiceRequest() {
     super();
-    this.mealType = "";
-    this.patientID = "";
+    this.mainCourse = "";
+    this.side = "";
+    this.drink = "";
+    this.patientFor = "";
   }
 
   public MealServiceRequest(
@@ -16,30 +21,47 @@ public class MealServiceRequest extends ServiceRequest {
       Location destination,
       String status,
       String assignee,
-      String patientID,
-      String mealType) {
+      String mainCourse,
+      String side,
+      String drink,
+      String patientFor) {
     super(requestID, destination, status, assignee);
-    this.mealType = mealType;
-    this.patientID = patientID;
+    this.mainCourse = mainCourse;
+    this.side = side;
+    this.drink = drink;
+    this.patientFor = patientFor;
+
   }
 
-  public void setMealType(String mealType) {
-    this.mealType = mealType;
+  public String getMainCourse() {
+    return mainCourse;
   }
 
-  public void setPatientID(String patientID) {
-    this.patientID = patientID;
+  public void setMainCourse(String mainCourse) {
+    this.mainCourse = mainCourse;
   }
 
-  public String getMealType() {
-    return mealType;
+  public String getSide() {
+    return side;
   }
 
-  public String getPatientID() {
-    return patientID;
+  public void setSide(String side) {
+    this.side = side;
   }
 
-  public String makeRequestID() {
-    return "sample";
+  public String getDrink() {
+    return drink;
+  }
+
+  public void setDrink(String drink) {
+    this.drink = drink;
+  }
+
+  public String getPatientFor() {
+    return patientFor;
+  }
+
+  public void setPatientFor(String patientFor) {
+    this.patientFor = patientFor;
   }
 }
