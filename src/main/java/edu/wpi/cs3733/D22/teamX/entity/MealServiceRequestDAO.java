@@ -4,6 +4,7 @@ import java.security.PublicKey;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
     private static List<MealServiceRequest> mealServiceRequests = new ArrayList<MealServiceRequest>();
@@ -31,12 +32,18 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
     @Override
     public List<MealServiceRequest> getAllRecords() {
-        return null;
+        return mealServiceRequests;
     }
 
     @Override
     public MealServiceRequest getRecord(String recordID) {
-        return null;
+        // iterate through the list of requests
+        for(MealServiceRequest msr: mealServiceRequests){
+            if(msr.equals(recordID)){
+                return msr;
+            }
+        }
+        throw new NoSuchElementException("request does not exist");
     }
 
     @Override
