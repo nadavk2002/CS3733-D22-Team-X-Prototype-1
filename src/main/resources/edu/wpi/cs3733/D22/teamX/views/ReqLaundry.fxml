@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLaundryController">
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLaundryController">
    <children>
       <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
          <font>
@@ -26,7 +21,7 @@
                   <VBox fx:id="labelColumn" prefHeight="102.0" prefWidth="254.0">
                      <children>
                         <Label text="Type of Service:" />
-                        <Label text="Room Number:" />
+                        <Label text="Destination:" />
                         <Label text="Assignee:" />
                         <Label text="Service Status:" />
                      </children>
