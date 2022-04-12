@@ -2,13 +2,18 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 /** Represents a meal service request */
 public class MealServiceRequest extends ServiceRequest {
-  String mealType;
-  String patientID;
+  String mainCourse;
+  String side;
+  String drink;
+  String patientFor;
+
 
   public MealServiceRequest() {
     super();
-    this.mealType = "";
-    this.patientID = "";
+    this.mainCourse = "";
+    this.side = "";
+    this.drink = "";
+    this.patientFor = "";
   }
 
   public MealServiceRequest(
