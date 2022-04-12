@@ -27,14 +27,14 @@ public interface LocationDAO extends DatabaseEntity {
    *
    * @param location used to update the table entry
    */
-  void updateLocation(Location location); // updates induvidual location
+  void updateLocation(Location location); // updates individual location
 
   /**
    * removes the location in the database with the same nodeID as the passed Location
    *
    * @param location removed from the Location table
    */
-  void deleteLocation(Location location); // removes induvidual location
+  void deleteLocation(Location location); // removes individual location
 
   /**
    * adds location to the database

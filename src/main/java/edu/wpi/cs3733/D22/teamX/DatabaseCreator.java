@@ -12,6 +12,7 @@ public class DatabaseCreator {
       new MedicalEquipmentServiceRequestDAOImpl();
   private static final LabServiceRequestDAO labDAO = new LabServiceRequestDAOImpl();
   private static final EquipmentUnitDAO equDAO = new EquipmentUnitDAOImpl();
+  private static final EmployeeDAO emplDAO = new EmployeeDAOImpl();
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
@@ -55,12 +56,14 @@ public class DatabaseCreator {
     mesrDAO.dropTable();
     equDAO.dropTable();
     eqtDAO.dropTable();
+    emplDAO.dropTable();
     locDAO.dropTable();
   }
 
   /** Creates all database tables */
   public static void createAllTables() {
     locDAO.createTable();
+    emplDAO.createTable();
     eqtDAO.createTable();
     equDAO.createTable();
     mesrDAO.createTable();
@@ -91,6 +94,7 @@ public class DatabaseCreator {
    */
   public static boolean saveAllCSV(String dirPath) throws loadSaveFromCSVException {
     if (!locDAO.saveCSV(dirPath)
+        || !emplDAO.saveCSV(dirPath)
         || !eqtDAO.saveCSV(dirPath)
         || !equDAO.saveCSV(dirPath)
         || !mesrDAO.saveCSV(dirPath)

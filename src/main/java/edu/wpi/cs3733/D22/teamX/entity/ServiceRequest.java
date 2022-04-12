@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.Objects;
+
 /** Represents a general service request */
 public abstract class ServiceRequest {
 
@@ -58,6 +60,14 @@ public abstract class ServiceRequest {
 
   public String getLocationShortName() {
     return destination.getShortName();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ServiceRequest serviceRequest = (ServiceRequest) o;
+    return Objects.equals(requestID, serviceRequest.requestID);
   }
 
   //  public String getRequestingUser() {
