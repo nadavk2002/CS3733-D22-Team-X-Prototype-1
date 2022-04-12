@@ -161,9 +161,6 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
               + "CONSTRAINT LBSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
               + "ON DELETE SET NULL)");
-      //      + "CONSTRAINT LBSR_empl_fk "
-      //              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
-      //              + "ON DELETE SET NULL
     } catch (SQLException e) {
       System.out.println("LabServiceRequest table creation failed. Check output console.");
       e.printStackTrace();

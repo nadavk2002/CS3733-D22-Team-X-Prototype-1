@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.entity.LangServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -24,7 +21,7 @@ public class ReqLangController implements Initializable {
   // @FXML private TextField assignStaff;
   @FXML private TableView<LangServiceRequest> tbView;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
   private TableColumn<LangServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<LangServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
@@ -34,8 +31,7 @@ public class ReqLangController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});

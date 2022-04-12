@@ -6,13 +6,12 @@ import java.sql.*;
 
 public class DatabaseCreator {
   // Create impls in order to avoid FK errors
-  private static final LocationDAO locDAO = new LocationDAOImpl();
-  private static final EquipmentTypeDAO eqtDAO = new EquipmentTypeDAOImpl();
+  private static final LocationDAO locDAO = LocationDAO.getDAO();
+  private static final EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
   private static final MedicalEquipmentServiceRequestDAO mesrDAO =
-      new MedicalEquipmentServiceRequestDAOImpl();
-  private static final LabServiceRequestDAO labDAO = new LabServiceRequestDAOImpl();
-  private static final EquipmentUnitDAO equDAO = new EquipmentUnitDAOImpl();
-  private static final EmployeeDAO emplDAO = new EmployeeDAOImpl();
+      MedicalEquipmentServiceRequestDAO.getDAO();
+  private static final LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO();
+  private static final EquipmentUnitDAO equDAO = EquipmentUnitDAO.getDAO();
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()

@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -50,9 +47,8 @@ public class EquipReqTableController implements Initializable {
 
   private ObservableList<MedicalEquipmentServiceRequest> equipDeliveryList() {
     ObservableList<MedicalEquipmentServiceRequest> equipList = FXCollections.observableArrayList();
-    MedicalEquipmentServiceRequestDAO allEquip = new MedicalEquipmentServiceRequestDAOImpl();
-    List<MedicalEquipmentServiceRequest> inpEquipList =
-        allEquip.getAllMedicalEquipmentServiceRequests();
+    MedicalEquipmentServiceRequestDAO allEquip = MedicalEquipmentServiceRequestDAO.getDAO();
+    List<MedicalEquipmentServiceRequest> inpEquipList = allEquip.getAllRecords();
     equipList.addAll(inpEquipList);
     return equipList;
   }
