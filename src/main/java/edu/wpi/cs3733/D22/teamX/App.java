@@ -41,11 +41,11 @@ public class App extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
     App.LoginScreen = primaryStage;
-    Parent root = FXMLLoader.load(getClass().getResource("views/LoginScreen.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("views/BasicLayout.fxml"));
     Scene scene = new Scene(root);
     Pane insertPage = (Pane) scene.lookup("#appContent");
 
-    Pane mainMenu = FXMLLoader.load(getClass().getResource("views/app.fxml"));
+    Pane mainMenu = FXMLLoader.load(getClass().getResource("views/LoginScreen.fxml"));
     mainMenu.setLayoutY(98);
     List<Node> children = ((Pane) root).getChildren();
     indexOfSceneReplacement = children.indexOf(insertPage);

@@ -11,14 +11,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="LoginScreen" layoutY="98.0" prefHeight="928.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
+<AnchorPane fx:id="LoginScreen" layoutY="98.0" prefHeight="825.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
    <children>
-      <ImageView fitHeight="952.0" fitWidth="2041.0" layoutX="-89.0" layoutY="-77.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1000.0" fitWidth="2000.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/Brigham and Womens Logo.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdcc4" height="920.0" layoutX="980.0" layoutY="-76.0" stroke="#446fdc" strokeType="INSIDE" width="976.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdcc4" height="902.0" layoutX="980.0" stroke="#446fdc" strokeType="INSIDE" width="1018.0" />
       <VBox layoutX="1354.0" layoutY="464.0" prefHeight="200.0" prefWidth="286.0">
          <children>
             <PasswordField fx:id="Password" prefHeight="53.0" prefWidth="286.0" promptText="Password">
