@@ -495,13 +495,14 @@ public class GraphicalMapEditorController implements Initializable {
     List<EquipmentUnit> allEquipment = equipDAO.getAllEquipmentUnits();
     for (int i = 0; i < allEquipment.size(); i++) {
       if (allEquipment.get(i).getUnitID().equals(unitIdText.getText())) {
-        EquipmentUnit replaceEquip = allEquipment.get(i);
-        replaceEquip.setAvailable(availableCheck.isSelected());
-        replaceEquip.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
-        replaceEquip.setType(typeText.getText());
-        equipDAO.updateEquipmentUnit(replaceEquip);
-        loadLocation(replaceEquip.getCurrLocation().getFloor());
-        loadLocationInfo(replaceEquip.getCurrLocation().getNodeID());
+        EquipmentUnit newEquip = new EquipmentUnit();
+        newEquip.setUnitID(allEquipment.get(i).getUnitID());
+        newEquip.setAvailable(availableCheck.isSelected());
+        newEquip.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
+        newEquip.setType(typeText.getText());
+        equipDAO.updateEquipmentUnit(newEquip);
+        loadLocation(newEquip.getCurrLocation().getFloor());
+        loadLocationInfo(newEquip.getCurrLocation().getNodeID());
         return;
       }
     }
