@@ -1,8 +1,12 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
+    private static List<MealServiceRequest> mealServiceRequests = new ArrayList<MealServiceRequest>();
+    private static String csv = "MealRequests.csv";
     @Override
     public List<MealServiceRequest> getAllRecords() {
         return null;
