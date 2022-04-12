@@ -16,10 +16,10 @@ public class GiftDeliveryRequest extends ServiceRequest {
       Location destination,
       String status,
       String assignee,
-      String Notes,
+      String notes,
       String giftType) {
     super(requestID, destination, status, assignee);
-    this.Notes = Notes;
+    this.Notes = notes;
     this.giftType = giftType;
   }
 
