@@ -69,8 +69,8 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
     //      }
     //      return strID.toString();
     ////    }
-    MedicalEquipmentServiceRequestDAO esrDAO = new MedicalEquipmentServiceRequestDAOImpl();
-    int nextIDFinalNum = esrDAO.getAllMedicalEquipmentServiceRequests().size() + 1;
+    MedicalEquipmentServiceRequestDAO esrDAO = MedicalEquipmentServiceRequestDAO.getDAO();
+    int nextIDFinalNum = esrDAO.getAllRecords().size() + 1;
     return String.format("MESR%04d", nextIDFinalNum);
   }
 }

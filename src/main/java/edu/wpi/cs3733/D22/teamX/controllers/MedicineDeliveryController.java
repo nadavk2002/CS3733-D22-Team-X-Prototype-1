@@ -21,7 +21,7 @@ public class MedicineDeliveryController implements Initializable {
   @FXML private TextField rxNum;
   @FXML private TableView<MedicineServiceRequest> tbView;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
   private TableColumn<MedicineServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<MedicineServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
@@ -32,8 +32,7 @@ public class MedicineDeliveryController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     resetFields();
     submitRequest.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");

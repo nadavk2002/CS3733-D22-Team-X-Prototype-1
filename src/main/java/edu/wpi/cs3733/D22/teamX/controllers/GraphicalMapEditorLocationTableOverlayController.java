@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.entity.Location;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -26,14 +25,13 @@ public class GraphicalMapEditorLocationTableOverlayController implements Initial
   @FXML private TableColumn<Location, String> nodeType;
   @FXML private TableColumn<Location, String> longName;
   @FXML private TableColumn<Location, String> shortName;
-  private LocationDAO locDAO;
+  private LocationDAO locDAO = LocationDAO.getDAO();
   @FXML private TextField searchLocationsField;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     searchLocationsField.setPromptText("Search Here");
 
-    locDAO = new LocationDAOImpl();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     nodeID.setCellValueFactory(new PropertyValueFactory<>("nodeID"));
     xCoord.setCellValueFactory(new PropertyValueFactory<>("x"));
@@ -80,8 +78,7 @@ public class GraphicalMapEditorLocationTableOverlayController implements Initial
 
   private ObservableList<Location> locationListFill() {
     ObservableList<Location> tableList = FXCollections.observableArrayList();
-    locDAO = new LocationDAOImpl();
-    List<Location> locationList = locDAO.getAllLocations();
+    List<Location> locationList = locDAO.getAllRecords();
     tableList.addAll(locationList);
     return tableList;
   }

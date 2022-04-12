@@ -23,21 +23,21 @@ public class EquipmentUnitDAOTest {
 
   @Test
   public void testCreateList() {
-    EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
-    assertEquals(15, equipmentUnitDAO.getAllEquipmentUnits().size());
+    EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
+    assertEquals(15, equipmentUnitDAO.getAllRecords().size());
   }
 
   @Test
   public void testDeleteRecord() {
-    EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
+    EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
+    LocationDAO locationDAO = LocationDAO.getDAO();
     EquipmentUnit record =
-        new EquipmentUnit("MEUN9997", "Infusion Pump", 'Y', locationDAO.getLocation("CHALL009L2"));
-    equipmentUnitDAO.addEquipmentUnit(record);
-    equipmentUnitDAO.deleteEquipmentUnit(record);
+        new EquipmentUnit("MEUN9997", "Infusion Pump", 'Y', locationDAO.getRecord("CHALL009L2"));
+    equipmentUnitDAO.addRecord(record);
+    equipmentUnitDAO.deleteRecord(record);
     boolean notFound = false;
     try {
-      equipmentUnitDAO.deleteEquipmentUnit(record);
+      equipmentUnitDAO.deleteRecord(record);
     } catch (NoSuchElementException e) {
       notFound = true;
     }
@@ -46,20 +46,20 @@ public class EquipmentUnitDAOTest {
 
   @Test
   public void testUpdateRecord() {
-    LocationDAO locationDAO = new LocationDAOImpl();
-    EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
+    LocationDAO locationDAO = LocationDAO.getDAO();
+    EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
     // add record
     EquipmentUnit record =
-        new EquipmentUnit("MEUN9998", "Bed", 'Y', locationDAO.getLocation("xSTOR001L1"));
-    equipmentUnitDAO.addEquipmentUnit(record);
+        new EquipmentUnit("MEUN9998", "Bed", 'Y', locationDAO.getRecord("xSTOR001L1"));
+    equipmentUnitDAO.addRecord(record);
 
     // update record
     EquipmentUnit recordUpdate =
-        new EquipmentUnit("MEUN9998", "Bed", 'N', locationDAO.getLocation("xSTOR00303"));
-    equipmentUnitDAO.updateEquipmentUnit(recordUpdate);
+        new EquipmentUnit("MEUN9998", "Bed", 'N', locationDAO.getRecord("xSTOR00303"));
+    equipmentUnitDAO.updateRecord(recordUpdate);
 
     // check if update record is there
-    recordUpdate = equipmentUnitDAO.getEquipmentUnit("MEUN9998");
+    recordUpdate = equipmentUnitDAO.getRecord("MEUN9998");
     assertEquals("MEUN9998", recordUpdate.getUnitID());
     assertEquals("Bed", recordUpdate.getType());
     assertEquals('N', recordUpdate.getIsAvailableChar());
@@ -68,12 +68,12 @@ public class EquipmentUnitDAOTest {
 
   @Test
   public void testAddRecord() {
-    LocationDAO locationDAO = new LocationDAOImpl();
-    EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
+    LocationDAO locationDAO = LocationDAO.getDAO();
+    EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
     EquipmentUnit record =
-        new EquipmentUnit("MEUN9999", "Bed", 'Y', locationDAO.getLocation("xSTOR001L1"));
-    equipmentUnitDAO.addEquipmentUnit(record);
-    record = equipmentUnitDAO.getEquipmentUnit("MEUN9999");
+        new EquipmentUnit("MEUN9999", "Bed", 'Y', locationDAO.getRecord("xSTOR001L1"));
+    equipmentUnitDAO.addRecord(record);
+    record = equipmentUnitDAO.getRecord("MEUN9999");
     assertEquals("MEUN9999", record.getUnitID());
     assertEquals("Bed", record.getType());
     assertEquals('Y', record.getIsAvailableChar());
@@ -82,8 +82,8 @@ public class EquipmentUnitDAOTest {
 
   @Test
   public void testGetRecord() {
-    EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
-    EquipmentUnit record = equipmentUnitDAO.getEquipmentUnit("MEUN0001");
+    EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
+    EquipmentUnit record = equipmentUnitDAO.getRecord("MEUN0001");
     assertEquals("MEUN0001", record.getUnitID());
     assertEquals("X-Ray", record.getType());
     assertEquals('Y', record.getIsAvailableChar());

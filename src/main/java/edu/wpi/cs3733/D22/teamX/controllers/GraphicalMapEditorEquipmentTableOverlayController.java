@@ -22,13 +22,11 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
   @FXML private TableColumn<EquipmentUnit, String> availability;
   @FXML private TableColumn<EquipmentUnit, String> currLoc;
 
-  private EquipmentUnitDAO equipmentUnitDAO;
+  private EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
   @FXML private TextField searchEquipmentField;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    equipmentUnitDAO = new EquipmentUnitDAOImpl();
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     unitID.setCellValueFactory(new PropertyValueFactory<>("unitID"));
     type.setCellValueFactory(new PropertyValueFactory<>("type"));
@@ -71,8 +69,7 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
 
   private ObservableList<EquipmentUnit> equipmentListFill() {
     ObservableList<EquipmentUnit> tableList = FXCollections.observableArrayList();
-    equipmentUnitDAO = new EquipmentUnitDAOImpl();
-    List<EquipmentUnit> equipmentUnitList = equipmentUnitDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> equipmentUnitList = equipmentUnitDAO.getAllRecords();
     tableList.addAll(equipmentUnitList);
     return tableList;
   }

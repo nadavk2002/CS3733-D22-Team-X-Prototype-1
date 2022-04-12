@@ -87,8 +87,8 @@ public class GraphicalMapEditorController implements Initializable {
       unitIdText,
       typeText;
 
-  private LocationDAO locDAO;
-  private EquipmentUnitDAO equipDAO;
+  private LocationDAO locDAO = LocationDAO.getDAO();
+  private EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO();
   private GesturePane gesturePane;
 
   /**
@@ -178,8 +178,7 @@ public class GraphicalMapEditorController implements Initializable {
    */
   private ObservableList<Location> locationListFill() {
     ObservableList<Location> tableList = FXCollections.observableArrayList();
-    locDAO = new LocationDAOImpl();
-    List<Location> locationList = locDAO.getAllLocations();
+    List<Location> locationList = locDAO.getAllRecords();
     for (Location loc : locationList) {
       tableList.add(loc);
     }
@@ -194,7 +193,7 @@ public class GraphicalMapEditorController implements Initializable {
    */
   private ObservableList<EquipmentUnit> equipmentListFill() {
     ObservableList<EquipmentUnit> tableList = FXCollections.observableArrayList();
-    List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> equipment = equipDAO.getAllRecords();
     for (EquipmentUnit equip : equipment) {
       tableList.add(equip);
     }
@@ -228,7 +227,7 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void drawCirclesSetLocationList(String floor) {
-    List<Location> locationList = locDAO.getAllLocations();
+    List<Location> locationList = locDAO.getAllRecords();
     Image img = new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png");
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
@@ -287,8 +286,7 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void drawCirclesSetEquipmentList(String floor) {
-    equipDAO = new EquipmentUnitDAOImpl();
-    List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> equipment = equipDAO.getAllRecords();
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
         Circle circle = new Circle();
@@ -319,8 +317,8 @@ public class GraphicalMapEditorController implements Initializable {
   /** Deletes selected node id in the dropdown */
   public void deleteLocation() {
     String locationToDelete = locationChoice.getValue(); // Node ID
-    String floor = locDAO.getLocation(locationToDelete).getFloor();
-    locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
+    String floor = locDAO.getRecord(locationToDelete).getFloor();
+    locDAO.deleteRecord(locDAO.getRecord(locationToDelete));
     loadLocation(floor);
     loadTables();
   }
@@ -328,8 +326,8 @@ public class GraphicalMapEditorController implements Initializable {
   /** Deletes selected node id in the dropdown */
   public void deleteEquipment() {
     String equipmentToDelete = equipmentChoice.getValue();
-    String floor = equipDAO.getEquipmentUnit(equipmentToDelete).getCurrLocation().getFloor();
-    equipDAO.deleteEquipmentUnit(equipDAO.getEquipmentUnit(equipmentToDelete));
+    String floor = equipDAO.getRecord(equipmentToDelete).getCurrLocation().getFloor();
+    equipDAO.deleteRecord(equipDAO.getRecord(equipmentToDelete));
     loadTables();
     loadLocation(floor);
   }
@@ -338,7 +336,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML
   public void equipmentSelected() {
     try {
-      EquipmentUnit equipment = equipDAO.getEquipmentUnit(equipmentChoice.getValue());
+      EquipmentUnit equipment = equipDAO.getRecord(equipmentChoice.getValue());
       unitIdText.setText(equipment.getUnitID());
       typeText.setText(equipment.getType());
       availableCheck.setSelected(equipment.isAvailable());
@@ -355,7 +353,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML
   public void locationSelected() {
     try {
-      Location selected = locDAO.getLocation(locationChoice.getValue());
+      Location selected = locDAO.getRecord(locationChoice.getValue());
       nodeIdText.setText(selected.getNodeID());
       xCordText.setText(selected.getX());
       yCordText.setText(selected.getY());
@@ -398,14 +396,14 @@ public class GraphicalMapEditorController implements Initializable {
    */
   @FXML
   public void submitEquipment() {
-    List<EquipmentUnit> allEquipment = equipDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> allEquipment = equipDAO.getAllRecords();
     for (int i = 0; i < allEquipment.size(); i++) {
       if (allEquipment.get(i).getUnitID().equals(unitIdText.getText())) {
         EquipmentUnit replaceEquip = allEquipment.get(i);
         replaceEquip.setAvailable(availableCheck.isSelected());
-        replaceEquip.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
+        replaceEquip.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
         replaceEquip.setType(typeText.getText());
-        equipDAO.updateEquipmentUnit(replaceEquip);
+        equipDAO.updateRecord(replaceEquip);
         loadLocation(replaceEquip.getCurrLocation().getFloor());
         loadTables();
         return;
@@ -413,11 +411,11 @@ public class GraphicalMapEditorController implements Initializable {
     }
     EquipmentUnit newEquipment = new EquipmentUnit();
     newEquipment.setAvailable(availableCheck.isSelected());
-    newEquipment.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
+    newEquipment.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
     newEquipment.setType(typeText.getText());
     newEquipment.setUnitID(unitIdText.getText());
 
-    equipDAO.addEquipmentUnit(newEquipment);
+    equipDAO.addRecord(newEquipment);
     loadLocation(newEquipment.getCurrLocation().getFloor());
     equipTable.getItems().clear();
     equipTable.setItems(equipmentListFill());
@@ -426,7 +424,7 @@ public class GraphicalMapEditorController implements Initializable {
   /** Submits a new location with the given data or updates the location with the matching id. */
   @FXML
   public void submitLocation() {
-    List<Location> allLocations = locDAO.getAllLocations();
+    List<Location> allLocations = locDAO.getAllRecords();
     for (int i = 0; i < allLocations.size(); i++) {
       if (allLocations.get(i).getNodeID().equals(nodeIdText.getText())) {
         Location replaceLoc = allLocations.get(i);
@@ -437,7 +435,7 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setLongName(longNameText.getText());
         replaceLoc.setShortName(shortNameText.getText());
         replaceLoc.setNodeType(nodeTypeText.getText());
-        locDAO.updateLocation(replaceLoc);
+        locDAO.updateRecord(replaceLoc);
         loadTables();
         loadLocation(replaceLoc.getFloor());
         return;
@@ -453,7 +451,7 @@ public class GraphicalMapEditorController implements Initializable {
     newLocation.setNodeType(nodeTypeText.getText());
     newLocation.setLongName(longNameText.getText());
     newLocation.setShortName(shortNameText.getText());
-    locDAO.addLocation(newLocation);
+    locDAO.addRecord(newLocation);
     loadLocation(newLocation.getFloor());
     loadTables();
   }
@@ -481,7 +479,6 @@ public class GraphicalMapEditorController implements Initializable {
     showEquipCheck.setSelected(true);
     hBox1.setSpacing(90);
 
-    locDAO = new LocationDAOImpl();
     locationTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     nodeID.setCellValueFactory(new PropertyValueFactory<Location, String>("nodeID"));
     x.setCellValueFactory(new PropertyValueFactory<Location, String>("x"));
@@ -492,7 +489,6 @@ public class GraphicalMapEditorController implements Initializable {
     longName.setCellValueFactory(new PropertyValueFactory<Location, String>("longName"));
     shortName.setCellValueFactory(new PropertyValueFactory<Location, String>("shortName"));
 
-    equipDAO = new EquipmentUnitDAOImpl();
     equipTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     unitIdCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("unitID"));
     typeCol.setCellValueFactory(new PropertyValueFactory<EquipmentUnit, String>("type"));

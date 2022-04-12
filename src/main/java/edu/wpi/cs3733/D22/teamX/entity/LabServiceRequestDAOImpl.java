@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
+public class LabServiceRequestDAOImpl implements LabServiceRequestDAOOld {
   public LabServiceRequestDAOImpl() {}
 
   /**
@@ -16,21 +16,21 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
    * @return a list of all the Lab Exam Service Requests
    */
   @Override
-  public List<LabServiceRequest> getAllLabServiceRequests() {
+  public List<LabServiceRequest> getAllRecords() {
     return labServiceRequests;
   }
 
   /**
    * gets individual Lab Exam Service Request
    *
-   * @param requestID requestID of the individual Lab Exam Service Request
+   * @param recordID requestID of the individual Lab Exam Service Request
    * @return a Lab Exam Service Request with a matching requestID
    */
   @Override
-  public LabServiceRequest getLabServiceRequest(String requestID) {
+  public LabServiceRequest getRecord(String recordID) {
     // iterate through list to find object with matching ID
     for (LabServiceRequest lsr : labServiceRequests) {
-      if (lsr.getRequestID().equals(requestID)) {
+      if (lsr.getRequestID().equals(recordID)) {
         return lsr;
       }
     }
@@ -40,16 +40,16 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
   /**
    * deletes object from DAO and database.
    *
-   * @param labServiceRequest Lab Exam Service Request to be removed
+   * @param recordObject Lab Exam Service Request to be removed
    */
   @Override
-  public void deleteLabServiceRequest(LabServiceRequest labServiceRequest) {
+  public void deleteRecord(LabServiceRequest recordObject) {
     // remove from list
     int index = 0; // create index for while loop
     int intitialSize = labServiceRequests.size(); // get size
     // go thru list
     while (index < labServiceRequests.size()) {
-      if (labServiceRequests.get(index).equals(labServiceRequest)) {
+      if (labServiceRequests.get(index).equals(recordObject)) {
         labServiceRequests.remove(index); // remove item at index from list
         index--;
         break; // exit loop
@@ -65,9 +65,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-          "DELETE FROM LabServiceRequest WHERE requestID = '"
-              + labServiceRequest.getRequestID()
-              + "'");
+          "DELETE FROM LabServiceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -75,17 +73,17 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
   /**
    * updates object from DAO and database.
    *
-   * @param labServiceRequest Lab Exam Service Request to be updated
+   * @param recordObject Lab Exam Service Request to be updated
    */
   @Override
-  public void updateLabServiceRequest(LabServiceRequest labServiceRequest) {
+  public void updateRecord(LabServiceRequest recordObject) {
     // add item to list
     int index = 0; // create index for while loop
     int intitialSize = labServiceRequests.size(); // get size
     // go thru list
     while (index < labServiceRequests.size()) {
-      if (labServiceRequests.get(index).equals(labServiceRequest)) {
-        labServiceRequests.set(index, labServiceRequest); // update lsr at index position
+      if (labServiceRequests.get(index).equals(recordObject)) {
+        labServiceRequests.set(index, recordObject); // update lsr at index position
         break; // exit loop
       }
       index++;
@@ -101,17 +99,17 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
       statement.executeUpdate(
           "UPDATE LabServiceRequest SET"
               + " destination = '"
-              + labServiceRequest.getDestination().getNodeID()
+              + recordObject.getDestination().getNodeID()
               + "', status = '"
-              + labServiceRequest.getStatus()
+              + recordObject.getStatus()
               + "', assignee = '"
-              + labServiceRequest.getAssignee()
+              + recordObject.getAssignee()
               + "', service = '"
-              + labServiceRequest.getService()
+              + recordObject.getService()
               + "', patientFor = '"
-              + labServiceRequest.getPatientFor()
+              + recordObject.getPatientFor()
               + "' WHERE requestID = '"
-              + labServiceRequest.getRequestID()
+              + recordObject.getRequestID()
               + "'");
     } catch (SQLException e) {
       e.printStackTrace();
@@ -121,23 +119,23 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
   /**
    * adds object from DAO and database.
    *
-   * @param labServiceRequest Lab Exam Service Request to be added
+   * @param recordObject Lab Exam Service Request to be added
    */
   @Override
-  public void addLabServiceRequest(LabServiceRequest labServiceRequest) {
+  public void addRecord(LabServiceRequest recordObject) {
     // list
-    labServiceRequests.add(labServiceRequest);
+    labServiceRequests.add(recordObject);
     // db
     try {
       Statement initialization = connection.createStatement();
       StringBuilder lsr = new StringBuilder();
       lsr.append("INSERT INTO LabServiceRequest VALUES (");
-      lsr.append("'" + labServiceRequest.getRequestID() + "', ");
-      lsr.append("'" + labServiceRequest.getDestination().getNodeID() + "', ");
-      lsr.append("'" + labServiceRequest.getStatus() + "', ");
-      lsr.append("'" + labServiceRequest.getAssignee() + "', ");
-      lsr.append("'" + labServiceRequest.getService() + "', ");
-      lsr.append("'" + labServiceRequest.getPatientFor() + "'");
+      lsr.append("'" + recordObject.getRequestID() + "', ");
+      lsr.append("'" + recordObject.getDestination().getNodeID() + "', ");
+      lsr.append("'" + recordObject.getStatus() + "', ");
+      lsr.append("'" + recordObject.getAssignee() + "', ");
+      lsr.append("'" + recordObject.getService() + "', ");
+      lsr.append("'" + recordObject.getPatientFor() + "'");
       lsr.append(")");
       initialization.execute(lsr.toString());
     } catch (SQLException e) {
@@ -187,7 +185,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
   @Override
   public boolean loadCSV() {
     try {
-      LocationDAO locDestination = new LocationDAOImpl();
+      LocationDAO locDestination = LocationDAO.getDAO();
       InputStream labCSV = DatabaseCreator.class.getResourceAsStream(labServiceRequestsCSV);
       BufferedReader labCSVReader = new BufferedReader(new InputStreamReader(labCSV));
       labCSVReader.readLine();
@@ -198,7 +196,7 @@ public class LabServiceRequestDAOImpl implements LabServiceRequestDAO {
           LabServiceRequest labNode =
               new LabServiceRequest(
                   currLine[0],
-                  locDestination.getLocation(currLine[1]),
+                  locDestination.getRecord(currLine[1]),
                   currLine[2],
                   currLine[3],
                   currLine[4],
