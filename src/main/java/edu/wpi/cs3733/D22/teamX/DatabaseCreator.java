@@ -15,11 +15,14 @@ public class DatabaseCreator {
   private static final EmployeeDAO emplDAO = new EmployeeDAOImpl();
 
   /** Initializes the database with tables and establishes a connection */
-  public static void initializeDB() throws loadSaveFromCSVException {
+  public static void initializeDB()
+      throws loadSaveFromCSVException { // method must be called after app startup, so
+    // user can choose server type
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+      Class.forName("org.apache.derby.jdbc.ClientDriver");
     } catch (ClassNotFoundException e) {
       System.out.println("Apache Derby Driver not found.");
       e.printStackTrace();
@@ -28,12 +31,9 @@ public class DatabaseCreator {
     System.out.println("Apache Derby driver registered!");
 
     // tries to create the database and establish a connection
-    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    // currently, for client, the impls are not filled with table data
+    ConnectionSingleton.getConnectionSingleton().setEmbedded();
     System.out.println("Apache Derby connection established :D");
-
-    dropAllTables();
-    createAllTables();
-    loadAllCSV();
 
     System.out.println("Database created successfully");
   }
@@ -51,7 +51,7 @@ public class DatabaseCreator {
   }
 
   /** Drops all database tables */
-  private static void dropAllTables() {
+  public static void dropAllTables() {
     labDAO.dropTable();
     mesrDAO.dropTable();
     equDAO.dropTable();
@@ -61,7 +61,7 @@ public class DatabaseCreator {
   }
 
   /** Creates all database tables */
-  private static void createAllTables() {
+  public static void createAllTables() {
     locDAO.createTable();
     emplDAO.createTable();
     eqtDAO.createTable();
@@ -74,13 +74,15 @@ public class DatabaseCreator {
    * Reads data from all resource csv files and loads them into the database tables and DAO
    * Implementations
    */
-  private static void loadAllCSV() {
-    locDAO.loadCSV();
-    eqtDAO.loadCSV();
-    equDAO.loadCSV();
-    mesrDAO.loadCSV();
-    emplDAO.loadCSV();
-    labDAO.loadCSV();
+  public static boolean loadAllCSV() throws loadSaveFromCSVException {
+    if(!locDAO.loadCSV() ||
+    !eqtDAO.loadCSV() ||
+    !equDAO.loadCSV() ||
+    !mesrDAO.loadCSV() ||
+    !labDAO.loadCSV()) {
+      throw new loadSaveFromCSVException("Error when writing to CSV file.");
+    }
+    return true;
   }
 
   /**

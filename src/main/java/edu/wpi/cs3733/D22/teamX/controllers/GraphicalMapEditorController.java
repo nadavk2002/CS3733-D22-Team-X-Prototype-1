@@ -15,20 +15,20 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Cursor;
-import javafx.scene.Group;
-import javafx.scene.Node;
+import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import net.kurobako.gesturefx.GesturePane;
 
 /**
@@ -96,6 +96,38 @@ public class GraphicalMapEditorController implements Initializable {
    *
    * @throws IOException
    */
+  @FXML
+  private void ToLocationTable() throws IOException {
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass()
+                .getResource(
+                    "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorLocationTableOverlay.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("Location Table");
+    stage.setScene(new Scene(root1));
+    stage.show();
+  }
+
+  @FXML
+  private void ToEquipmentTable() throws IOException {
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass()
+                .getResource(
+                    "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorEquipmentTableOverlay.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("Equipment Table");
+    stage.setScene(new Scene(root1));
+    stage.show();
+  }
+
   @FXML
   private void ToMainMenu() throws IOException {
     App.switchScene(
@@ -436,6 +468,7 @@ public class GraphicalMapEditorController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     mapBox.getChildren().remove(imageGroup);
     pane = new GesturePane(imageGroup);
     mapBox.setMinWidth(610);
