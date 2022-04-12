@@ -20,7 +20,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -59,9 +63,36 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private Text llOneCleanText;
   @FXML private Text llTwoDirtyText;
   @FXML private Text llTwoCleanText;
+  private EquipmentUnitDAO equipmentUnitDAO;
+  @FXML private HBox dirtyTableBox;
+  @FXML private HBox cleanTableBox;
+
+  @FXML private TableView<EquipmentUnit> dirtyTable;
+  @FXML private TableView<EquipmentUnit> cleanTable;
+  @FXML private TableColumn<EquipmentUnit, String> unitID;
+  @FXML private TableColumn<EquipmentUnit, String> type;
+  @FXML private TableColumn<EquipmentUnit, String> availability;
+  @FXML private TableColumn<EquipmentUnit, String> currLoc;
+
+  // floor contants--------------------------------------
+  private final int dirtyXloc = 125;
+  private final int dirtyYloc = 1165;
+  private final int YF5 = 88;
+  private final int YF4 = 190;
+  private final int YF3 = 292;
+  private final int YF2 = 394;
+  private final int YF1 = 496;
+  private final int YLL2 = 598;
+  private final int YLL1 = 700;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    dirtyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    dirtyTableBox.setVisible(false);
+    unitID.setCellValueFactory(new PropertyValueFactory<>("unitID"));
+    type.setCellValueFactory(new PropertyValueFactory<>("type"));
+    availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
+    currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 
     dynamicSizeRectangles(levFiveDirty, levFiveClean, sortEquipmentByFloor("5"));
     dirtyCleanNumber(levFiveDirtyText, levFiveCleanText, sortEquipmentByFloor("5"));
@@ -83,6 +114,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
     dynamicSizeRectangles(llTwoDirty, llTwoClean, sortEquipmentByFloor("L2"));
     dirtyCleanNumber(llTwoDirtyText, llTwoCleanText, sortEquipmentByFloor("L2"));
+
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("3")), dirtyXloc, YF3, levThreeDirty);
   }
 
   @FXML
@@ -126,6 +159,46 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     clean.setText(Integer.toString(cleanAmount));
   }
 
+  private void fillDirtyTable(
+      ObservableList<EquipmentUnit> dirtyEquip, int XfloorVal, int YfloorVal, Rectangle floor) {
+    //    floor.setOnMouseClicked(
+    //        event -> {
+    //          dirtyTableBox.setVisible(true);
+    //          //          if (dirtyEquip.size() > 0) {
+    //          //            dirtyTableBox.setVisible(true);
+    //          //            dirtyTable.setItems(dirtyEquip);
+    //          //            dirtyTableBox.setLayoutX(XfloorVal);
+    //          //            dirtyTableBox.setLayoutY(YfloorVal);
+    //          //          } else {
+    //          //            dirtyTableBox.setVisible(false);
+    //          //          }
+    //        });
+  }
+
+  private void fillCleanTable(ObservableList<EquipmentUnit> cleanEquip, Rectangle cleanRectangle) {}
+
+  @FXML
+  private ObservableList<EquipmentUnit> sortByDirty(ObservableList<EquipmentUnit> equipOnFloor) {
+    ObservableList<EquipmentUnit> dirtyEquipment = FXCollections.observableArrayList();
+    for (EquipmentUnit equipmentUnit : equipOnFloor) {
+      if (!equipmentUnit.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+        dirtyEquipment.add(equipmentUnit);
+      }
+    }
+    return dirtyEquipment;
+  }
+
+  private ObservableList<EquipmentUnit> sortByClean(ObservableList<EquipmentUnit> equipOnFloor) {
+    ObservableList<EquipmentUnit> cleanEquipment = FXCollections.observableArrayList();
+    for (EquipmentUnit equipmentUnit : equipOnFloor) {
+      if (equipmentUnit.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+        cleanEquipment.add(equipmentUnit);
+      }
+    }
+    return cleanEquipment;
+  }
+
+  @FXML
   private void dynamicSizeRectangles(
       Rectangle dirty, Rectangle clean, ObservableList<EquipmentUnit> equipList) {
     int dirtyAmount = 0;
