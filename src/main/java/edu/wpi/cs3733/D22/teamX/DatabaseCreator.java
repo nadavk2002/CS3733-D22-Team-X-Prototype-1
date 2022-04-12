@@ -82,11 +82,12 @@ public class DatabaseCreator {
    */
   public static boolean loadAllCSV() throws loadSaveFromCSVException {
     if (!locDAO.loadCSV()
+        || !emplDAO.loadCSV()
         || !eqtDAO.loadCSV()
         || !equDAO.loadCSV()
         || !mesrDAO.loadCSV()
         || !labDAO.loadCSV()
-        || !langDAO.loadCSV()) {
+        || !langDAO.loadCSV()
         || !giftDAO.loadCSV()) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
