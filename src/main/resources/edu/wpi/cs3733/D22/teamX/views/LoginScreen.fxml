@@ -11,40 +11,46 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="LoginScreen" layoutY="98.0" prefHeight="825.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
+<AnchorPane fx:id="loginScreen" layoutY="98.0" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
    <children>
-      <ImageView fitHeight="1000.0" fitWidth="2000.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1436.0" fitWidth="2072.0" layoutX="-40.0" layoutY="-389.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/Brigham and Womens Logo.jpg" />
+            <Image url="@../assets/BWH Building.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdcc4" height="902.0" layoutX="980.0" stroke="#446fdc" strokeType="INSIDE" width="1018.0" />
-      <VBox layoutX="1354.0" layoutY="464.0" prefHeight="200.0" prefWidth="286.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdbf0" height="1146.0" layoutX="940.0" layoutY="-101.0" stroke="#446fdc" strokeType="INSIDE" width="1094.0" />
+      <VBox fx:id="loginFields" layoutX="1275.0" layoutY="418.0" prefHeight="200.0" prefWidth="286.0" spacing="28.0">
          <children>
-            <PasswordField fx:id="Password" prefHeight="53.0" prefWidth="286.0" promptText="Password">
+            <TextField fx:id="username" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Username">
                <font>
                   <Font size="24.0" />
-               </font></PasswordField>
-            <JFXButton fx:id="LoginButton" buttonType="RAISED" prefWidth="286.0" ripplerFill="WHITE" text="Login">
+               </font>
+            </TextField>
+            <PasswordField fx:id="password" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Password">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </PasswordField>
+            <JFXButton fx:id="loginButton" buttonType="RAISED" disable="true" onAction="#validLogin" prefWidth="286.0" ripplerFill="WHITE" text="Login">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </JFXButton>
-            <Label fx:id="message" prefHeight="53.0" prefWidth="286.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
          </children>
       </VBox>
-      <TextField fx:id="Username" layoutX="1355.0" layoutY="381.0" prefHeight="53.0" prefWidth="286.0" promptText="Username">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </TextField>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1422.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1341.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/Avatar User.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="message" layoutX="1094.0" layoutY="614.0" prefHeight="54.0" prefWidth="665.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="180.0" fitWidth="703.0" layoutX="106.0" layoutY="737.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/BWHlogo.png" />
          </image>
       </ImageView>
    </children>

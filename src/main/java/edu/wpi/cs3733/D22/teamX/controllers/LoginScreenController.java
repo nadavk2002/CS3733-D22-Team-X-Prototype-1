@@ -4,32 +4,25 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.LoginManager;
 import java.io.IOException;
-import java.util.HashMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class LoginScreenController {
-  @FXML private PasswordField Password;
-  @FXML private TextField Username;
-  @FXML private JFXButton LoginButton;
+  @FXML private VBox loginFields;
+  @FXML private PasswordField password;
+  @FXML private TextField username;
+  @FXML private JFXButton loginButton;
   @FXML private Label message;
 
-  private HashMap<String, String> page;
-
   @FXML
-  public void initialize() {
-    page = new HashMap<String, String>();
-    page.put("Login Screen", "LoginScreen.fxml");
-  }
-
-  @FXML
-  public void ValidLogin() throws IOException {
+  public void validLogin() throws IOException {
     if (LoginManager.getInstance()
-        .isValidLogin(Username.getText(), Password.getText().hashCode())) {
+        .isValidLogin(username.getText(), password.getText().hashCode())) {
       App.switchScene(
           FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
     } else {
@@ -38,7 +31,14 @@ public class LoginScreenController {
     }
   }
 
+  //  @FXML
+  //  public void Login() {
+  //    LoginScreen Login = new LoginScreen();
+  //    LoginManager.getInstance().isValidLogin(Login.getUsername(),
+  // Login.getPassword().hashCode());
+  //  }
+
   public void disableLoginButton() {
-    LoginButton.setDisable(Username.getText().equals("") || Password.getText().equals(""));
+    loginButton.setDisable(username.getText().isEmpty() || password.getText().isEmpty());
   }
 }
