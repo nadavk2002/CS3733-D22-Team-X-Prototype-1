@@ -138,6 +138,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       System.out.println("Database could not be updated");
       return;
     }
+    recordObject.getDestination().addRequest(recordObject);
   }
 
   @Override
