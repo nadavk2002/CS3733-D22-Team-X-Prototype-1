@@ -7,7 +7,6 @@ public class MealServiceRequest extends ServiceRequest {
   String drink;
   String patientFor;
 
-
   public MealServiceRequest() {
     super();
     this.mainCourse = "";
@@ -30,7 +29,6 @@ public class MealServiceRequest extends ServiceRequest {
     this.side = side;
     this.drink = drink;
     this.patientFor = patientFor;
-
   }
 
   public String getMainCourse() {
@@ -62,6 +60,19 @@ public class MealServiceRequest extends ServiceRequest {
   }
 
   public void setPatientFor(String patientFor) {
+    this.patientFor = patientFor;
+  }
+
+  // backwards compatability stuff please don't kill me
+  public String makeRequestID() {
+    return "sample";
+  }
+
+  public void setMealType(String mainCourse) {
+    this.mainCourse = mainCourse;
+  }
+
+  public void setPatientID(String patientFor) {
     this.patientFor = patientFor;
   }
 }
