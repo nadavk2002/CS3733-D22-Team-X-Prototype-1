@@ -14,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App extends Application {
 
-  private static Stage primaryStage;
+  private static Stage LoginScreen;
   private static int indexOfSceneReplacement;
 
   public static Stage getPrimaryStage() {
-    return primaryStage;
+    return LoginScreen;
   }
 
   /**
@@ -28,7 +28,7 @@ public class App extends Application {
    */
   public static void switchScene(Pane scene) {
     scene.setLayoutY(98);
-    Parent root = primaryStage.getScene().getRoot();
+    Parent root = LoginScreen.getScene().getRoot();
     List<Node> children = ((Pane) root).getChildren();
     children.set(indexOfSceneReplacement, scene);
   }
@@ -40,8 +40,8 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    App.primaryStage = primaryStage;
-    Parent root = FXMLLoader.load(getClass().getResource("views/BasicLayout.fxml"));
+    App.LoginScreen = primaryStage;
+    Parent root = FXMLLoader.load(getClass().getResource("views/LoginScreen.fxml"));
     Scene scene = new Scene(root);
     Pane insertPage = (Pane) scene.lookup("#appContent");
 

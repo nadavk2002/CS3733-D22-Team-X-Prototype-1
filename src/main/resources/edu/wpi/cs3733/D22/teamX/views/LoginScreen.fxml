@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="LoginScreen" layoutY="98.0" prefHeight="928.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.views.LoginScreen">
+<AnchorPane fx:id="LoginScreen" layoutY="98.0" prefHeight="928.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
    <children>
       <ImageView fitHeight="952.0" fitWidth="2041.0" layoutX="-89.0" layoutY="-77.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="D:\Organized School Folder\WPI\Sophomore\D term\Software Engineering\Brigham and Womens Logo.jpg" />
+            <Image url="@../assets/Brigham and Womens Logo.jpg" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdcc4" height="920.0" layoutX="980.0" layoutY="-76.0" stroke="#446fdc" strokeType="INSIDE" width="976.0" />
@@ -44,7 +44,7 @@
       </TextField>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1422.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="D:\Organized School Folder\WPI\Sophomore\D term\Software Engineering\Avatar User.png" />
+            <Image url="@../assets/Avatar User.png" />
          </image>
       </ImageView>
    </children>

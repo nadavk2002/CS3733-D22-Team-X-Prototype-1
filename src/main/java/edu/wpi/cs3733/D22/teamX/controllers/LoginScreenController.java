@@ -2,10 +2,9 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.App;
-import java.io.IOException;
-import java.util.Map;
-
 import edu.wpi.cs3733.D22.teamX.LoginManager;
+import java.io.IOException;
+import java.util.HashMap;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -13,24 +12,27 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
-public class LoginScreenController{
+public class LoginScreenController {
   @FXML private PasswordField Password;
   @FXML private TextField Username;
   @FXML private JFXButton LoginButton;
   @FXML private Label message;
 
-  /*@FXML
-  public void initialize(){
+  private HashMap<String, String> page;
 
-  }*/
+  @FXML
+  public void initialize() {
+    page = new HashMap<String, String>();
+    page.put("Login Screen", "LoginScreen.fxml");
+  }
+
   @FXML
   public void ValidLogin() throws IOException {
-    if (LoginManager.getInstance().isValidLogin("admin", "admin".hashCode())
-            || LoginManager.getInstance().isValidLogin("staff", "staff".hashCode())) {
+    if (LoginManager.getInstance()
+        .isValidLogin(Username.getText(), Password.getText().hashCode())) {
       App.switchScene(
-              FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
-    }
-    else{
+          FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+    } else {
       message.setText("Your username or password are incorrect");
       message.setTextFill(Color.rgb(210, 39, 30));
     }
