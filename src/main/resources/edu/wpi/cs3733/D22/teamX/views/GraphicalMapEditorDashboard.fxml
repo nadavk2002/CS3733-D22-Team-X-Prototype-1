@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,384 +11,399 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorDashboardController">
+
+<StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorDashboardController">
    <children>
-      <Text layoutX="898.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tower Levels">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
-      <HBox alignment="CENTER" layoutY="109.0" prefHeight="634.0" prefWidth="1920.0">
+      <AnchorPane fx:id="anchorRoot" prefHeight="982.0" prefWidth="1920.0" style="-fx-background-color: #FFFFFF;">
          <children>
-            <VBox fx:id="L5" prefHeight="720.0" prefWidth="406.0" style="-fx-border-color: #000000; -fx-border-width: 3;">
+            <Text layoutX="898.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tower Levels">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER" layoutY="109.0" prefHeight="634.0" prefWidth="1920.0">
                <children>
-                  <StackPane prefHeight="17.0" prefWidth="318.0">
+                  <VBox fx:id="L5" prefHeight="720.0" prefWidth="406.0" style="-fx-border-color: #000000; -fx-border-width: 3;">
                      <children>
-                        <Rectangle fx:id="cleanEquStor11" fill="DODGERBLUE" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 5">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="405.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane prefHeight="17.0" prefWidth="318.0">
                            <children>
-                              <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="34.0" fitWidth="34.0">
-                                       <image>
-                                          <Image url="@../assets/dirtyIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
+                              <Rectangle fx:id="cleanEquStor11" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 5">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="405.0">
                            <children>
-                              <Rectangle fx:id="levFiveClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="42.0">
-                                       <image>
-                                          <Image url="@../assets/cleanIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="34.0">
+                                             <image>
+                                                <Image url="@../assets/dirtyIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levFiveDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levFiveClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="42.0">
+                                             <image>
+                                                <Image url="@../assets/cleanIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levFiveCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="21.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="2.0" prefWidth="778.0">
+                           <children>
+                              <Rectangle fx:id="cleanEquStor12" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </StackPane>
-                     </children>
-                  </HBox>
-                  <StackPane prefHeight="2.0" prefWidth="778.0">
-                     <children>
-                        <Rectangle fx:id="cleanEquStor12" fill="DODGERBLUE" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="levFourDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="34.0">
-                                       <image>
-                                          <Image url="@../assets/dirtyIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="levFourDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="34.0">
+                                             <image>
+                                                <Image url="@../assets/dirtyIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levFourDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levFourClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="42.0">
+                                             <image>
+                                                <Image url="@../assets/cleanIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levFourCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="0.0" prefWidth="778.0">
+                           <children>
+                              <Rectangle fx:id="cleanEquStor13" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 3">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="levFourClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="42.0">
-                                       <image>
-                                          <Image url="@../assets/cleanIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="34.0">
+                                             <image>
+                                                <Image url="@../assets/dirtyIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levThreeDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levThreeClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="42.0">
+                                             <image>
+                                                <Image url="@../assets/cleanIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levThreeCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="25.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="0.0" prefWidth="778.0">
+                           <children>
+                              <Rectangle fx:id="cleanEquStor14" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </StackPane>
-                     </children>
-                  </HBox>
-                  <StackPane prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <Rectangle fx:id="cleanEquStor13" fill="DODGERBLUE" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 3">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="34.0">
-                                       <image>
-                                          <Image url="@../assets/dirtyIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="34.0">
+                                             <image>
+                                                <Image url="@../assets/dirtyIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="22.33331298828125">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="42.0">
+                                             <image>
+                                                <Image url="@../assets/cleanIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="21.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="0.0" prefWidth="778.0">
+                           <children>
+                              <Rectangle fx:id="cleanEquStor15" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 1">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="levThreeClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="42.0">
-                                       <image>
-                                          <Image url="@../assets/cleanIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="levOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="34.0">
+                                             <image>
+                                                <Image url="@../assets/dirtyIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="22.33331298828125">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="42.0">
+                                             <image>
+                                                <Image url="@../assets/cleanIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="levOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="0.0" prefWidth="778.0">
+                           <children>
+                              <Rectangle fx:id="cleanEquStor16" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 1">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </StackPane>
-                     </children>
-                  </HBox>
-                  <StackPane prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <Rectangle fx:id="cleanEquStor14" fill="DODGERBLUE" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="34.0">
-                                       <image>
-                                          <Image url="@../assets/dirtyIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="llOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="34.0">
+                                             <image>
+                                                <Image url="@../assets/dirtyIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="llOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="llOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="42.0">
+                                             <image>
+                                                <Image url="@../assets/cleanIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="llOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </HBox>
+                        <StackPane prefHeight="0.0" prefWidth="778.0">
+                           <children>
+                              <Rectangle fx:id="cleanEquStor17" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 2">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="levTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="42.0">
-                                       <image>
-                                          <Image url="@../assets/cleanIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="34.0">
+                                             <image>
+                                                <Image url="@../assets/dirtyIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="llTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="25.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <StackPane prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <Rectangle fx:id="cleanEquStor15" fill="DODGERBLUE" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 1">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="levOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                              </StackPane>
+                              <StackPane prefHeight="150.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fitHeight="34.0" fitWidth="34.0">
-                                       <image>
-                                          <Image url="@../assets/dirtyIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
+                                    <Rectangle fx:id="llTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="34.0" fitWidth="42.0">
+                                             <image>
+                                                <Image url="@../assets/cleanIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                          <Text fx:id="llTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="26.333251953125">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </StackPane>
                            </children>
-                        </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="levOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="34.0" fitWidth="42.0">
-                                       <image>
-                                          <Image url="@../assets/cleanIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </StackPane>
+                        </HBox>
                      </children>
-                  </HBox>
-                  <StackPane prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <Rectangle fx:id="cleanEquStor16" fill="DODGERBLUE" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 1">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="llOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="34.0" fitWidth="34.0">
-                                       <image>
-                                          <Image url="@../assets/dirtyIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="llOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="34.0" fitWidth="42.0">
-                                       <image>
-                                          <Image url="@../assets/cleanIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
-                  <StackPane prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <Rectangle fx:id="cleanEquStor17" fill="DODGERBLUE" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 2">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Text>
-                     </children>
-                  </StackPane>
-                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                     <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="34.0" fitWidth="34.0">
-                                       <image>
-                                          <Image url="@../assets/dirtyIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle fx:id="llTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                 <children>
-                                    <ImageView fitHeight="34.0" fitWidth="42.0">
-                                       <image>
-                                          <Image url="@../assets/cleanIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="1.0">
-                                       <font>
-                                          <Font size="18.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </StackPane>
-                     </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
+            <JFXButton fx:id="toMapEditor" layoutY="876.0" onAction="#ToMapEditor" prefHeight="106.0" prefWidth="1920.0" style="-fx-background-color: #446fdc;" text="Map Editor" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="36.0" fitWidth="30.0" layoutX="944.0" layoutY="875.0">
+               <image>
+                  <Image url="@../assets/upArrow.png" />
+               </image>
+            </ImageView>
          </children>
-      </HBox>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>
