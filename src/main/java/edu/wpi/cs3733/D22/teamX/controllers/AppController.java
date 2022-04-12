@@ -129,7 +129,8 @@ public class AppController implements Initializable {
   void graphicalMapEditorButton() throws IOException {
     App.switchScene(
         FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
+            getClass()
+                .getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorDashboard.fxml")));
   }
 
   @FXML
