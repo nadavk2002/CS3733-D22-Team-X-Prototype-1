@@ -17,37 +17,31 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EquipReqTableController implements Initializable {
-  @FXML private TableView<MedicalEquipmentServiceRequest> table;
+  @FXML private TableView<ServiceRequest> table;
   // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requester;
   @FXML
-  private TableColumn<MedicalEquipmentServiceRequest, String> equipType; // spike c, equipmentType
-
-  @FXML private TableColumn<MedicalEquipmentServiceRequest, Integer> amount; // spike c, Quantity
-
+  private TableColumn<ServiceRequest, String> assignee; // spike c, Quantity
   @FXML
-  private TableColumn<MedicalEquipmentServiceRequest, String> requestStatus; // spike c, Status
-  // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> prevLocation;
+  private TableColumn<ServiceRequest, String> requestStatus; // spike c, Status
   @FXML
-  private TableColumn<MedicalEquipmentServiceRequest, Location> destination; // spike c destination
-  // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requestTime;
-  // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> fulfillRequest;
-  @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requestID; // spike c RequestID
-  // @FXML private Button requestComplete;
+  private TableColumn<ServiceRequest, Location> destination; // spike c destination
+  @FXML
+  private TableColumn<ServiceRequest, String> requestID; // spike c RequestID
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    equipType.setCellValueFactory(new PropertyValueFactory<>("equipmentType"));
-    amount.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     requestStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-    destination.setCellValueFactory(new PropertyValueFactory<>("locationNodeID"));
+    destination.setCellValueFactory(new PropertyValueFactory<>("destination"));
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
+    assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
     table.setItems(equipDeliveryList());
   }
 
-  private ObservableList<MedicalEquipmentServiceRequest> equipDeliveryList() {
-    ObservableList<MedicalEquipmentServiceRequest> equipList = FXCollections.observableArrayList();
+  private ObservableList<ServiceRequest> equipDeliveryList() {
+    ObservableList<ServiceRequest> equipList = FXCollections.observableArrayList();
     MedicalEquipmentServiceRequestDAO allEquip = MedicalEquipmentServiceRequestDAO.getDAO();
+
     List<MedicalEquipmentServiceRequest> inpEquipList = allEquip.getAllRecords();
     equipList.addAll(inpEquipList);
     return equipList;
