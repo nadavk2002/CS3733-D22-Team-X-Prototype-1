@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import java.security.PublicKey;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,11 +49,76 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
     @Override
     public void deleteRecord(MealServiceRequest recordObject) {
-
+        // remove from list
+        int index = 0; // create index for while loop
+        int intitialSize = mealServiceRequests.size(); // get size
+        // go thru list
+        while (index < mealServiceRequests.size()) {
+            if (mealServiceRequests.get(index).equals(recordObject)) {
+                mealServiceRequests.remove(index); // remove item at index from list
+                index--;
+                break; // exit loop
+            }
+            index++;
+        }
+        if (index == intitialSize) {
+            throw new NoSuchElementException("request does not exist");
+        }
+        // remove from Database
+        try {
+            // create the statement
+            Statement statement = connection.createStatement();
+            // remove location from DB table
+            statement.executeUpdate(
+                    "DELETE FROM MealSerivceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void updateRecord(MealServiceRequest recordObject) {
+        // add item to list
+        int index = 0; // create index for while loop
+        int intitialSize = mealServiceRequests.size(); // get size
+        // go thru list
+        while (index < mealServiceRequests.size()) {
+            if (mealServiceRequests.get(index).equals(recordObject)) {
+                mealServiceRequests.set(index, recordObject); // update lsr at index position
+                break; // exit loop
+            }
+            index++;
+        }
+        if (index == intitialSize) {
+            throw new NoSuchElementException("request does not exist");
+        }
+        // update db table.
+        try {
+            // create the statement
+            Statement statement = connection.createStatement();
+            // update item in DB
+            statement.executeUpdate(
+                    "UPDATE MealSerivceRequest SET"
+                            + " destination = '"
+                            + recordObject.getDestination().getNodeID()
+                            + "', status = '"
+                            + recordObject.getStatus()
+                            + "', assignee = '"
+                            + recordObject.getAssignee()
+                            + "', mainCourse = '"
+                            + recordObject.getMainCourse()
+                            + "', side = '"
+                            + recordObject.getSide()
+                            + "', drink = '"
+                            + recordObject.getDrink()
+                            + "', patientFor = '"
+                            + recordObject.getPatientFor()
+                            + "' WHERE requestID = '"
+                            + recordObject.getRequestID()
+                            + "'");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
