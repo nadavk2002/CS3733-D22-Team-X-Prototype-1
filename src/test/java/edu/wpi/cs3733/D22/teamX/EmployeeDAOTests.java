@@ -21,46 +21,46 @@ public class EmployeeDAOTests {
 
   @Test
   public void TestDBListEmployees() {
-    EmployeeDAO emplDAOImpl = new EmployeeDAOImpl();
-    assertEquals(28, emplDAOImpl.getAllEmployees().size());
+    EmployeeDAO emplDAOImpl = EmployeeDAO.getDAO();
+    assertEquals(28, emplDAOImpl.getAllRecords().size());
   }
 
   @Test
   public void TestDBgetEmployee() {
-    EmployeeDAO emplDAOImpl = new EmployeeDAOImpl();
-    assertNotEquals(emplDAOImpl.getEmployee("EMPL0002"), emplDAOImpl.getEmployee("EMPL0001"));
+    EmployeeDAO emplDAOImpl = EmployeeDAO.getDAO();
+    assertNotEquals(emplDAOImpl.getRecord("EMPL0002"), emplDAOImpl.getRecord("EMPL0001"));
   }
 
   @Test
   public void TestDBgetEmployee2() {
-    EmployeeDAO emplDAOImpl = new EmployeeDAOImpl();
-    assertEquals(emplDAOImpl.getEmployee("EMPL0001").getEmployeeID(), "EMPL0001");
-    assertEquals(emplDAOImpl.getEmployee("EMPL0001").getFirstName(), "Richard");
-    assertEquals(emplDAOImpl.getEmployee("EMPL0001").getLastName(), "Webber");
-    assertEquals(emplDAOImpl.getEmployee("EMPL0001").getClearanceType(), "admin");
-    assertEquals(emplDAOImpl.getEmployee("EMPL0001").getJobTitle(), "Chief of Surgery");
+    EmployeeDAO emplDAOImpl = EmployeeDAO.getDAO();
+    assertEquals(emplDAOImpl.getRecord("EMPL0001").getEmployeeID(), "EMPL0001");
+    assertEquals(emplDAOImpl.getRecord("EMPL0001").getFirstName(), "Richard");
+    assertEquals(emplDAOImpl.getRecord("EMPL0001").getLastName(), "Webber");
+    assertEquals(emplDAOImpl.getRecord("EMPL0001").getClearanceType(), "admin");
+    assertEquals(emplDAOImpl.getRecord("EMPL0001").getJobTitle(), "Chief of Surgery");
   }
 
   @Test
   public void testEmployeeUpdate() {
-    EmployeeDAO emplDAOImpl = new EmployeeDAOImpl();
-    assertEquals(emplDAOImpl.getEmployee("EMPL0008").getJobTitle(), "Custodian");
-    Employee empl = emplDAOImpl.getEmployee("EMPL0008");
+    EmployeeDAO emplDAOImpl = EmployeeDAO.getDAO();
+    assertEquals(emplDAOImpl.getRecord("EMPL0008").getJobTitle(), "Custodian");
+    Employee empl = emplDAOImpl.getRecord("EMPL0008");
     empl.setJobTitle("BOSS");
-    emplDAOImpl.updateEmployee(empl);
-    assertEquals("BOSS", emplDAOImpl.getEmployee("EMPL0008").getJobTitle());
+    emplDAOImpl.updateRecord(empl);
+    assertEquals("BOSS", emplDAOImpl.getRecord("EMPL0008").getJobTitle());
   }
 
   @Test
   public void testEmployeeDelete() {
     boolean returnVarible = false;
-    EmployeeDAO emplDAOImpl = new EmployeeDAOImpl();
+    EmployeeDAO emplDAOImpl = EmployeeDAO.getDAO();
     //    assertEquals(emplDAOImpl.getEmployee("EMPL0003").getStatus(), "DONE");
     //    // delete
-    Employee empl = emplDAOImpl.getEmployee("EMPL0003");
-    emplDAOImpl.deleteEmployee(empl);
+    Employee empl = emplDAOImpl.getRecord("EMPL0003");
+    emplDAOImpl.deleteRecord(empl);
     try {
-      emplDAOImpl.getEmployee("EMPL0003");
+      emplDAOImpl.getRecord("EMPL0003");
     } catch (NoSuchElementException s) {
       returnVarible = true;
     }
@@ -70,9 +70,9 @@ public class EmployeeDAOTests {
   @Test
   public void testDBLSRequestAdd() {
     boolean returnVarible = false;
-    EmployeeDAO emplDAOImpl = new EmployeeDAOImpl();
+    EmployeeDAO emplDAOImpl = EmployeeDAO.getDAO();
     try {
-      emplDAOImpl.getEmployee("EMPL0029");
+      emplDAOImpl.getRecord("EMPL0029");
     } catch (NoSuchElementException s) {
       returnVarible = true;
     }
@@ -80,7 +80,7 @@ public class EmployeeDAOTests {
     // add the thing
     Employee empl = new Employee("EMPL0029", "Sam", "Smith", "staff", "Ultrasound");
     // add the thing
-    emplDAOImpl.addEmployee(empl);
-    assertEquals(empl, emplDAOImpl.getEmployee("EMPL0029"));
+    emplDAOImpl.addRecord(empl);
+    assertEquals(empl, emplDAOImpl.getRecord("EMPL0029"));
   }
 }

@@ -7,7 +7,7 @@ import java.sql.*;
 public class DatabaseCreator {
   // Create impls in order to avoid FK errors
   private static final LocationDAO locDAO = LocationDAO.getDAO();
-  private static final EmployeeDAO emplDAO = new EmployeeDAOImpl();
+  private static final EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private static final EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
   private static final MedicalEquipmentServiceRequestDAO mesrDAO =
       MedicalEquipmentServiceRequestDAO.getDAO();
