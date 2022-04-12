@@ -113,11 +113,11 @@ public class GraphicalMapEditorController implements Initializable {
                     .getResource(
                         "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorDashboard.fxml")));
     Scene scene = pane.getScene();
-    root.translateYProperty().set(-scene.getHeight());
+    root.translateXProperty().set(-scene.getHeight());
     parentPage.getChildren().add(root);
     Timeline timeline = new Timeline();
-    KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-    KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+    KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
+    KeyFrame kf = new KeyFrame(Duration.seconds(.75), kv);
 
     timeline.getKeyFrames().add(kf);
     timeline.setOnFinished(

@@ -19,7 +19,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
    <children>
       <AnchorPane fx:id="anchorRoot" prefHeight="982.0" prefWidth="1920.0" style="-fx-background-color: #FFFFFF;">
@@ -199,12 +198,12 @@
             <JFXCheckBox fx:id="showEquipCheck" layoutX="295.0" layoutY="77.0" text="Show Equipment" />
             <JFXButton fx:id="toLocationTable" layoutX="471.0" layoutY="74.0" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
             <JFXButton layoutX="604.0" layoutY="74.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
-            <JFXButton fx:id="toDashboard" layoutX="865.0" onAction="#ToDashboard" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #446fdc; -fx-background-radius: 0;" text="Map Editor Dashboard" textFill="WHITE">
+            <JFXButton fx:id="toDashboard" layoutX="-82.0" layoutY="417.0" onAction="#ToDashboard" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #446fdc; -fx-background-radius: 0; -fx-rotate: 270;" text="Map Editor Dashboard" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="967.0" layoutY="42.0" style="-fx-rotate: 180;">
+            <ImageView fitHeight="18.0" fitWidth="18.0" layoutX="41.0" layoutY="438.0" style="-fx-rotate: 90;">
                <image>
                   <Image url="@../assets/upArrow.png" />
                </image>

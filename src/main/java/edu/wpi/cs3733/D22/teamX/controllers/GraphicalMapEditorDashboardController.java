@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnit;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnitDAO;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnitDAOImpl;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -27,8 +26,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
-// import org.w3c.dom.Text;
 
 public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private AnchorPane anchorRoot;
@@ -95,11 +92,11 @@ public class GraphicalMapEditorDashboardController implements Initializable {
             Objects.requireNonNull(
                 getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
     Scene scene = toMapEditor.getScene();
-    root.translateYProperty().set(scene.getHeight());
+    root.translateXProperty().set(scene.getHeight());
     parentPage.getChildren().add(root);
     Timeline timeline = new Timeline();
-    KeyValue kv = new KeyValue(root.translateYProperty(), 0, Interpolator.EASE_IN);
-    KeyFrame kf = new KeyFrame(Duration.seconds(1), kv);
+    KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.LINEAR);
+    KeyFrame kf = new KeyFrame(Duration.seconds(.75), kv);
 
     timeline.getKeyFrames().add(kf);
     timeline.setOnFinished(
