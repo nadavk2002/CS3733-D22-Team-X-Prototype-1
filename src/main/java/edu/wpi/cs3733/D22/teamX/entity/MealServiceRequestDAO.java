@@ -38,7 +38,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
   public MealServiceRequest getRecord(String recordID) {
     // iterate through the list of requests
     for (MealServiceRequest msr : mealServiceRequests) {
-      if (msr.equals(recordID)) {
+      if (msr.getRequestID().equals(recordID)) {
         return msr;
       }
     }
