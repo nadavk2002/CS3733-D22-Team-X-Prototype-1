@@ -51,7 +51,6 @@ public class DatabaseCreator {
 
   /** Drops all database tables */
   public static void dropAllTables() {
-    equDAO.dropTable();
     labDAO.dropTable();
     mesrDAO.dropTable();
     equDAO.dropTable();
@@ -66,7 +65,6 @@ public class DatabaseCreator {
     equDAO.createTable();
     mesrDAO.createTable();
     labDAO.createTable();
-    equDAO.createTable();
   }
 
   /**
