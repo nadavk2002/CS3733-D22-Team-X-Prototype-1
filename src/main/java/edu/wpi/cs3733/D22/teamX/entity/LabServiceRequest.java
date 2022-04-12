@@ -45,7 +45,6 @@ public class LabServiceRequest extends ServiceRequest {
     this.patientFor = patientFor;
   }
 
-  @Override
   public String makeRequestID() {
     LabServiceRequestDAO lsrDAO = LabServiceRequestDAO.getDAO(); // gets list of all ids
     int nextIDFinalNum = lsrDAO.getAllRecords().size() + 1;

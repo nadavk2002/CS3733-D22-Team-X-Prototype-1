@@ -301,6 +301,8 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
 
   @Override
   public String makeID() {
-    return null;
+    MedicalEquipmentServiceRequestDAO esrDAO = MedicalEquipmentServiceRequestDAO.getDAO();
+    int nextIDFinalNum = esrDAO.getAllRecords().size() + 1;
+    return String.format("MESR%04d", nextIDFinalNum);
   }
 }

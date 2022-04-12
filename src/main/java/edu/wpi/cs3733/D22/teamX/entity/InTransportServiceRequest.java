@@ -13,7 +13,6 @@ public class InTransportServiceRequest extends ServiceRequest {
   //    this.addAccommodation = addAccommodation;
   //  }
 
-  @Override
   public String makeRequestID() {
     return "sample";
   }

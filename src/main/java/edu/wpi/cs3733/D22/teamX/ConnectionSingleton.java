@@ -16,7 +16,7 @@ public enum ConnectionSingleton {
   private static final String password = "admin";
 
   private Connection connection;
-  private String connectionType;
+  //  private String connectionType;
 
   /**
    * Establish a connection to an Apache Derby embedded database and load csv data into its tables
@@ -43,7 +43,7 @@ public enum ConnectionSingleton {
       e.printStackTrace();
       System.exit(1);
     }
-    connectionType = "embedded";
+    //    connectionType = "embedded";
   }
 
   /** Establish a connection to an Apache Derby client database and load csv data into its tables */
@@ -74,7 +74,7 @@ public enum ConnectionSingleton {
         System.out.println("CSV FILES NOT LOADED");
       }
     }
-    connectionType = "client";
+    //    connectionType = "client";
   }
 
   public static ConnectionSingleton getConnectionSingleton() {
@@ -85,7 +85,7 @@ public enum ConnectionSingleton {
     return connection;
   }
 
-  public String getConnectionType() {
-    return connectionType;
-  }
+  //  public String getConnectionType() {
+  //    return connectionType;
+  //  }
 }

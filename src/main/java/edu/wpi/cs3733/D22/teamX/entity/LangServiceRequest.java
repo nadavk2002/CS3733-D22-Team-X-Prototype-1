@@ -9,7 +9,6 @@ public class LangServiceRequest extends ServiceRequest {
    *
    * @return String representing the request id
    */
-  @Override
   public String makeRequestID() {
     return "sample";
   }

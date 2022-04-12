@@ -39,7 +39,6 @@ public class MealServiceRequest extends ServiceRequest {
     return patientID;
   }
 
-  @Override
   public String makeRequestID() {
     return "sample";
   }

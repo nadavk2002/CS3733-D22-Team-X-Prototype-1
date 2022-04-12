@@ -285,6 +285,9 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
 
   @Override
   public String makeID() {
-    return null;
+    EquipmentUnitDAO equDAO = EquipmentUnitDAO.getDAO(); // gets list of all ids
+    int nextIDFinalNum = equDAO.getAllRecords().size() + 1;
+
+    return String.format("MEUN%04d", nextIDFinalNum);
   }
 }

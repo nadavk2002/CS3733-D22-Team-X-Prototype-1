@@ -23,7 +23,6 @@ public class MedicineServiceRequest extends ServiceRequest {
     this.rxNum = rxNum;
   }
 
-  @Override
   public String makeRequestID() {
     return "sample";
   }

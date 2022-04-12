@@ -4,7 +4,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 public class LaundyServiceRequest extends ServiceRequest {
   String Laundry;
 
-  @Override
   public String makeRequestID() {
     return "sample";
   }

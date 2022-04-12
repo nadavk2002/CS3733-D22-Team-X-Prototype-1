@@ -67,9 +67,9 @@ public interface DAO<T> {
   boolean saveCSV(String dirPath);
 
   /**
-   * Returns the next ID number.
+   * Returns the next alphanumeric ID string.
    *
-   * @return the next ID number.
+   * @return the next alphanumeric ID string.
    */
   String makeID();
 }
