@@ -54,7 +54,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private ImageView imageView;
 
   @FXML private GesturePane pane;
-  @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck;
+  @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck, showRequestCheck;
   @FXML
   private TextField nodeIdText,
       xCordText,
@@ -200,12 +200,15 @@ public class GraphicalMapEditorController implements Initializable {
     equipmentChoice.getItems().clear();
     equipLocationChoice.setValue("");
     equipLocationChoice.getItems().clear();
+    submitEquipmentButton.setDisable(true);
+    submitLocationButton.setDisable(true);
+    deleteLocationButton.setDisable(true);
     List<Location> allLocations = locationListFill();
     for (int i = 0; i < allLocations.size(); i++) {
       equipLocationChoice.getItems().add(allLocations.get(i).getNodeID());
     }
-    drawCirclesSetLocationList(floor);
     drawCirclesSetEquipmentList(floor);
+    drawCirclesSetLocationList(floor);
   }
 
   /**
@@ -279,23 +282,29 @@ public class GraphicalMapEditorController implements Initializable {
     List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
-        Circle circle = new Circle();
-        circle.setRadius(7);
-        circle.setUserData(equipment.get(i));
-        circle.setCenterX(equipment.get(i).getCurrLocation().getxCoord());
-        circle.setCenterY(equipment.get(i).getCurrLocation().getyCoord());
-        circle.setFill(Paint.valueOf("GREEN"));
-        circle.setVisible(showEquipCheck.isSelected());
-        circle.setOnMouseReleased(
+        Rectangle rectangle = new Rectangle();
+        rectangle.setWidth(24);
+        rectangle.setHeight(24);
+        rectangle.setUserData(equipment.get(i));
+        rectangle.setX(equipment.get(i).getCurrLocation().getxCoord() - (rectangle.getWidth() / 2));
+        rectangle.setY(
+            equipment.get(i).getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
+        rectangle.setStroke(Paint.valueOf("GREEN"));
+        rectangle.setFill(
+            new ImagePattern(
+                new Image(
+                    "/edu/wpi/cs3733/D22/teamX/assets/" + equipment.get(i).getType() + ".png")));
+        ;
+        rectangle.setVisible(showEquipCheck.isSelected());
+        rectangle.setOnMouseReleased(
             new EventHandler<MouseEvent>() {
               @Override
               public void handle(MouseEvent event) {
-                EquipmentUnit e = (EquipmentUnit) circle.getUserData();
-                circle.setFill(Paint.valueOf("GREEN"));
+                EquipmentUnit e = (EquipmentUnit) rectangle.getUserData();
                 equipmentChoice.setValue(e.getUnitID());
               }
             });
-        imageGroup.getChildren().add(circle);
+        imageGroup.getChildren().add(rectangle);
         equipmentChoice.getItems().add(equipment.get(i).getUnitID());
       }
     }
@@ -304,9 +313,14 @@ public class GraphicalMapEditorController implements Initializable {
   private void drawRequests(List<ServiceRequest> requests) {
     for (ServiceRequest s : requests) {
       Rectangle rect = new Rectangle();
-      rect.setWidth(15);
-      rect.setHeight(15);
-      rect.setFill(Paint.valueOf("BLUE"));
+      rect.setUserData(s);
+      rect.setVisible(showRequestCheck.isSelected());
+      rect.setWidth(25);
+      rect.setHeight(25);
+      rect.setFill(
+          new ImagePattern(
+              new Image(
+                  "/edu/wpi/cs3733/D22/teamX/assets/" + s.getClass().getSimpleName() + ".png")));
       rect.setX(s.getDestination().getxCoord() - (rect.getWidth() / 2));
       rect.setY(s.getDestination().getyCoord() - (rect.getHeight() / 2));
       imageGroup.getChildren().add(rect);
@@ -321,6 +335,9 @@ public class GraphicalMapEditorController implements Initializable {
         if (node.getUserData() instanceof Location) node.setVisible(showLocCheck.isSelected());
         else if (node.getUserData() instanceof EquipmentUnit)
           node.setVisible(showEquipCheck.isSelected());
+        else if (node.getUserData() instanceof ServiceRequest) {
+          node.setVisible(showRequestCheck.isSelected());
+        }
       }
     }
   }
@@ -400,6 +417,7 @@ public class GraphicalMapEditorController implements Initializable {
       Location selected = locDAO.getLocation(locationChoice.getValue());
       submitLocationButton.setDisable(false);
       nodeIdText.setText(selected.getNodeID());
+      activateDeleteLocationButton();
       xCordText.setText(selected.getX());
       yCordText.setText(selected.getY());
       floorText.setText(selected.getFloor());
@@ -449,6 +467,16 @@ public class GraphicalMapEditorController implements Initializable {
             || nodeTypeText.getText().equals("")
             || longNameText.getText().equals("")
             || shortNameText.getText().equals(""));
+  }
+
+  private void activateDeleteLocationButton() {
+    try {
+      deleteLocationButton.setDisable(
+          locDAO.getLocation(nodeIdText.getText()).getUnitsAtLocation().size() != 0
+              || locDAO.getLocation(nodeIdText.getText()).getRequestsAtLocation().size() != 0);
+    } catch (Exception e) {
+      deleteLocationButton.setDisable(true);
+    }
   }
 
   private void activateSubmitEquipmentButton() {
@@ -537,6 +565,7 @@ public class GraphicalMapEditorController implements Initializable {
     pane.setScrollMode(GesturePane.ScrollMode.ZOOM);
     showLocCheck.setSelected(true);
     showEquipCheck.setSelected(true);
+    showRequestCheck.setSelected(true);
     hBox1.setSpacing(90);
 
     locDAO = new LocationDAOImpl();
@@ -556,9 +585,21 @@ public class GraphicalMapEditorController implements Initializable {
             showDots();
           }
         });
+    showRequestCheck.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            showDots();
+          }
+        });
     submitEquipmentButton.setDisable(true);
     submitLocationButton.setDisable(true);
-    nodeIdText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
+    deleteLocationButton.setDisable(true);
+    nodeIdText.setOnKeyTyped(
+        (KeyEvent e) -> {
+          activateSubmitLocationButton();
+          activateDeleteLocationButton();
+        });
     xCordText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
     yCordText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
     floorText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
