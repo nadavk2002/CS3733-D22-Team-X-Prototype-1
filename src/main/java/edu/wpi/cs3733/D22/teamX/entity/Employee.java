@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
-public abstract class Employee {
+import java.util.Objects;
+
+public class Employee {
     private String employeeID;
     private String firstName;
     private String lastName;
@@ -15,7 +17,7 @@ public abstract class Employee {
         this.jobTitle = jobTitle;
     }
 
-    private String getEmployeeID() {
+    public String getEmployeeID() {
         return employeeID;
     }
 
@@ -27,17 +29,21 @@ public abstract class Employee {
         return lastName;
     }
 
-    private String getClearanceType() {
+    public String getClearanceType() {
         return clearanceType;
     }
 
-    private String getJobTitle() {
+    public String getJobTitle() {
         return jobTitle;
     }
 
-    //In case of a change of clearance level
-    public void setClearanceType(String clearanceType) {
-        this.clearanceType = clearanceType;
+    public void setEmployeeID(String employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    //In case of a name change
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     //In case of a name change
@@ -45,8 +51,29 @@ public abstract class Employee {
         this.lastName = lastName;
     }
 
+    //In case of a change of clearance level
+    public void setClearanceType(String clearanceType) {
+        this.clearanceType = clearanceType;
+    }
+
     //In case of a job change
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee anEmployee = (Employee) o;
+        return Objects.equals(employeeID, anEmployee.employeeID);
+    }
+
+    public String makeEmployeeID(){
+        EmployeeDAOImpl emplDAO = new EmployeeDAOImpl(); // gets list of all ids
+        int nextIDFinalNum = emplDAO.getAllEmployees().size() + 1;
+
+        return String.format("EMPL%04d", nextIDFinalNum);
+    }
+
 }
