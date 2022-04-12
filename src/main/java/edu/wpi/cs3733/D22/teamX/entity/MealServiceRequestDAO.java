@@ -124,12 +124,32 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
     @Override
     public void addRecord(MealServiceRequest recordObject) {
-
+        // list
+        mealServiceRequests.add(recordObject);
+        // db
+        try {
+            Statement initialization = connection.createStatement();
+            StringBuilder msr = new StringBuilder();
+            msr.append("INSERT INTO LabServiceRequest VALUES (");
+            msr.append("'" + recordObject.getRequestID() + "', ");
+            msr.append("'" + recordObject.getDestination().getNodeID() + "', ");
+            msr.append("'" + recordObject.getStatus() + "', ");
+            msr.append("'" + recordObject.getAssignee() + "', ");
+            msr.append("'" + recordObject.getMainCourse() + "', ");
+            msr.append("'" + recordObject.getSide() + "', ");
+            msr.append("'" + recordObject.getDrink() + "', ");
+            msr.append("'" + recordObject.getPatientFor() + "'");
+            msr.append(")");
+            initialization.execute(msr.toString());
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Database could not be updated");
+        }
     }
 
     @Override
     public void createTable() {
-
+        
     }
 
     @Override
