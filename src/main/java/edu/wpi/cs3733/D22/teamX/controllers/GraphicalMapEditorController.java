@@ -289,7 +289,7 @@ public class GraphicalMapEditorController implements Initializable {
         rectangle.setX(equipment.get(i).getCurrLocation().getxCoord() - (rectangle.getWidth() / 2));
         rectangle.setY(
             equipment.get(i).getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
-        rectangle.setStroke(Paint.valueOf("GREEN"));
+        rectangle.setStroke(Paint.valueOf("BLACK"));
         rectangle.setFill(
             new ImagePattern(
                 new Image(
