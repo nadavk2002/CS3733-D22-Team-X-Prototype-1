@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+
+import java.io.*;
 import java.security.PublicKey;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -183,7 +186,62 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
     @Override
     public boolean loadCSV() {
-        return false;
+        try {
+            LocationDAO locDestination = LocationDAO.getDAO();
+            InputStream PMSRCSV = DatabaseCreator.class.getResourceAsStream(csv);
+            BufferedReader PMSRCSVReader = new BufferedReader(new InputStreamReader(PMSRCSV));
+            PMSRCSVReader.readLine();
+            String nextFileLine;
+            while ((nextFileLine = PMSRCSVReader.readLine()) != null) {
+                String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+                if (currLine.length == 8) {
+                    MealServiceRequest PMSRnode =
+                            new MealServiceRequest(
+                                    currLine[0],
+                                    locDestination.getRecord(currLine[1]),
+                                    currLine[2],
+                                    currLine[3],
+                                    currLine[4],
+                                    currLine[5],
+                                    currLine[6],
+                                    currLine[7],);
+                    mealServiceRequests.add(PMSRnode);
+                } else {
+                    System.out.println("MealServiceRequests CSV file formatted improperly");
+                    System.exit(1);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("MealServiceRequest.CSV not found!");
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        // Insert locations from MealServiceReqCSV into db table
+        for (int i = 0; i < mealServiceRequests.size(); i++) {
+            try {
+                Statement initialization = connection.createStatement();
+                StringBuilder MealServiceRequest = new StringBuilder();
+                MealServiceRequest.append("INSERT INTO MealServiceRequest VALUES(");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getRequestID() + "'" + ", ");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getStatus() + "'" + ", ");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getAssignee() + "'" + ", ");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getMainCourse() + "'" + ", ");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getSide() + "'" + ", ");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getDrink() + "'" + ", ");
+                MealServiceRequest.append("'" + mealServiceRequests.get(i).getPatientFor() + "'");
+                MealServiceRequest.append(")");
+                initialization.execute(MealServiceRequest.toString());
+            } catch (SQLException e) {
+                System.out.println("Input for MealServiceReq " + i + " failed");
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
