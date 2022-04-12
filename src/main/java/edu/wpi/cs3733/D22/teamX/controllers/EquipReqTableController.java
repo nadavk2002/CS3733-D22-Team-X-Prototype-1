@@ -4,11 +4,11 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,14 +19,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class EquipReqTableController implements Initializable {
   @FXML private TableView<ServiceRequest> table;
   // @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requester;
-  @FXML
-  private TableColumn<ServiceRequest, String> assignee; // spike c, Quantity
-  @FXML
-  private TableColumn<ServiceRequest, String> requestStatus; // spike c, Status
-  @FXML
-  private TableColumn<ServiceRequest, Location> destination; // spike c destination
-  @FXML
-  private TableColumn<ServiceRequest, String> requestID; // spike c RequestID
+  @FXML private TableColumn<ServiceRequest, String> assignee; // spike c, Quantity
+  @FXML private TableColumn<ServiceRequest, String> requestStatus; // spike c, Status
+  @FXML private TableColumn<ServiceRequest, Location> destination; // spike c destination
+  @FXML private TableColumn<ServiceRequest, String> requestID; // spike c RequestID
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -35,16 +31,15 @@ public class EquipReqTableController implements Initializable {
     destination.setCellValueFactory(new PropertyValueFactory<>("destination"));
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    table.setItems(equipDeliveryList());
+    table.setItems(FXCollections.observableList(listOfRequests()));
   }
 
-  private ObservableList<ServiceRequest> equipDeliveryList() {
-    ObservableList<ServiceRequest> equipList = FXCollections.observableArrayList();
-    MedicalEquipmentServiceRequestDAO allEquip = MedicalEquipmentServiceRequestDAO.getDAO();
-
-    List<MedicalEquipmentServiceRequest> inpEquipList = allEquip.getAllRecords();
-    equipList.addAll(inpEquipList);
-    return equipList;
+  private List<ServiceRequest> listOfRequests() {
+    List<? super ServiceRequest> requests = new ArrayList<>();
+    requests.addAll(MedicalEquipmentServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(LabServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
+    return (List<ServiceRequest>) requests;
   }
 
   @FXML
