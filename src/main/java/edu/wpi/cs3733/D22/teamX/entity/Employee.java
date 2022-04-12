@@ -70,10 +70,10 @@ public class Employee {
     return Objects.equals(employeeID, anEmployee.employeeID);
   }
 
-  public String makeEmployeeID() {
-    EmployeeDAOImpl emplDAO = new EmployeeDAOImpl(); // gets list of all ids
-    int nextIDFinalNum = emplDAO.getAllEmployees().size() + 1;
-
-    return String.format("EMPL%04d", nextIDFinalNum);
-  }
+  //  public String makeEmployeeID() {
+  //    EmployeeDAOImpl emplDAO = new EmployeeDAOImpl(); // gets list of all ids
+  //    int nextIDFinalNum = emplDAO.getAllRecords().size() + 1;
+  //
+  //    return String.format("EMPL%04d", nextIDFinalNum);
+  //  }
 }
