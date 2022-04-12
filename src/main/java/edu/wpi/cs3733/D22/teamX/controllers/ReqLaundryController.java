@@ -98,7 +98,7 @@ public class ReqLaundryController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(assignStaff.getValue());
-    request.setLaundry(selectLaundryType.getValue());
+    request.setService(selectLaundryType.getValue());
     this.resetFields();
     table.getItems().add(request);
   }
