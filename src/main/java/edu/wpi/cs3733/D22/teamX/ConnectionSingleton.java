@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX;
 
+import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,14 +9,19 @@ public enum ConnectionSingleton {
   INSTANCE;
 
   private static final String embeddedURL = "jdbc:derby:embed_db;create=true";
-  private static final String clientURL = "jdbc:derby://localhost:1527/client_db"; // ;create=true
+  private static final String clientURLAlreadyCreated = "jdbc:derby://localhost:1527/client_db";
+  private static final String clientURLCreatingDB =
+      "jdbc:derby://localhost:1527/client_db;create=true";
   private static final String username = "admin";
   private static final String password = "admin";
   private Connection connection;
 
+  /**
+   * Establish a connection to an Apache Derby embedded database and load csv data into its tables
+   */
   public void setEmbedded() {
-    if(connection != null)
-    {
+    // If connection already established, close it
+    if (connection != null) {
       try {
         connection.close();
         System.out.println("Embedded connection closed successfully");
@@ -24,18 +30,22 @@ public enum ConnectionSingleton {
         return;
       }
     }
+    // Establish connection to embedded database
     try {
-      connection = DriverManager.getConnection(embeddedURL, username, password);
-    } catch (SQLException e) {
+      connection = DriverManager.getConnection(embeddedURL); // , username, password);
+      DatabaseCreator.dropAllTables();
+      DatabaseCreator.createAllTables();
+      DatabaseCreator.loadAllCSV();
+    } catch (SQLException | loadSaveFromCSVException e) {
       System.out.println("Embedded connection failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
   }
 
+  /** Establish a connection to an Apache Derby client database and load csv data into its tables */
   public void setClient() {
-    if(connection != null)
-    {
+    if (connection != null) {
       try {
         connection.close();
         System.out.println("Client connection closed successfully");
@@ -44,12 +54,22 @@ public enum ConnectionSingleton {
         return;
       }
     }
+    // Try connecting to client database. If unable, create the database and connect to it.
     try {
-      connection = DriverManager.getConnection(clientURL, username, password);
-    } catch (SQLException e) {
-      System.out.println("Client connection failed. Check output console.");
-      e.printStackTrace();
-      System.exit(1);
+      connection = DriverManager.getConnection(clientURLAlreadyCreated); // , username, password);
+      System.out.println("Client database already created");
+    } catch (SQLException dbNotYetCreated) {
+      System.out.println("Creating client database");
+      try {
+        connection = DriverManager.getConnection(clientURLCreatingDB); // , username, password);
+        // DatabaseCreator.dropAllTables();
+        DatabaseCreator.createAllTables();
+        DatabaseCreator.loadAllCSV();
+      } catch (SQLException e) {
+        System.out.println("CONNECTION NOT ESTABLISHED");
+      } catch (loadSaveFromCSVException e) {
+        System.out.println("CSV FILES NOT LOADED");
+      }
     }
   }
 

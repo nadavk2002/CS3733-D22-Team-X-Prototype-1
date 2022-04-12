@@ -14,7 +14,9 @@ public class DatabaseCreator {
   private static final EquipmentUnitDAO equDAO = new EquipmentUnitDAOImpl();
 
   /** Initializes the database with tables and establishes a connection */
-  public static void initializeDB() throws loadSaveFromCSVException {
+  public static void initializeDB()
+      throws loadSaveFromCSVException { // method must be called after app startup, so
+    // user can choose server type
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
     try {
@@ -27,13 +29,8 @@ public class DatabaseCreator {
     }
     System.out.println("Apache Derby driver registered!");
     // tries to create the database and establish a connection
-    ConnectionSingleton.getConnectionSingleton().setEmbedded();
-    Connection connection = ConnectionSingleton.getConnectionSingleton().getConnection();
+    ConnectionSingleton.getConnectionSingleton().setClient();
     System.out.println("Apache Derby connection established :D");
-
-    dropAllTables();
-    createAllTables();
-    loadAllCSV();
 
     System.out.println("Database created successfully");
   }
@@ -51,7 +48,7 @@ public class DatabaseCreator {
   }
 
   /** Drops all database tables */
-  private static void dropAllTables() {
+  public static void dropAllTables() {
     equDAO.dropTable();
     labDAO.dropTable();
     mesrDAO.dropTable();
@@ -60,7 +57,7 @@ public class DatabaseCreator {
   }
 
   /** Creates all database tables */
-  private static void createAllTables() {
+  public static void createAllTables() {
     locDAO.createTable();
     eqtDAO.createTable();
     mesrDAO.createTable();
@@ -72,7 +69,7 @@ public class DatabaseCreator {
    * Reads data from all resource csv files and loads them into the database tables and DAO
    * Implementations
    */
-  private static boolean loadAllCSV() throws loadSaveFromCSVException {
+  public static boolean loadAllCSV() throws loadSaveFromCSVException {
     if (!locDAO.loadCSV()
         || !eqtDAO.loadCSV()
         || !mesrDAO.loadCSV()
