@@ -169,8 +169,8 @@ public class LocationDAO implements DAO<Location> {
   @Override
   public void dropTable() {
     try {
-      Statement dropLocation = connection.createStatement();
-      dropLocation.execute("DROP TABLE Location");
+      Statement statement = connection.createStatement();
+      statement.execute("DROP TABLE Location");
     } catch (SQLException e) {
       System.out.println("Location not dropped");
       e.printStackTrace();
