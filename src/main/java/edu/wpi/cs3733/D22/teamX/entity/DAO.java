@@ -71,5 +71,5 @@ public interface DAO<T> {
      *
      * @return the next ID number.
      */
-    // String makeID();
+     String makeID();
 }
