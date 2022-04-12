@@ -2,17 +2,22 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 /** Represents a Laundry Service Request */
 public class LaundyServiceRequest extends ServiceRequest {
-  String Laundry;
+  private String service;
+
+  public LaundyServiceRequest() {
+    super();
+    this.service = "";
+  }
 
   public String makeRequestID() {
     return "sample";
   }
 
-  public String getLaundry() {
-    return Laundry;
+  public String getService() {
+    return service;
   }
 
-  public void setLaundry(String Laundry) {
-    this.Laundry = Laundry;
+  public void setService(String service) {
+    this.service = service;
   }
 }

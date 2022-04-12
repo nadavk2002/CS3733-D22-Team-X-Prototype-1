@@ -15,6 +15,7 @@ public class DatabaseCreator {
   private static final GiftDeliveryRequestDAO giftDAO = GiftDeliveryRequestDAO.getDAO();
   private static final EquipmentUnitDAO equDAO = EquipmentUnitDAO.getDAO();
   private static final MealServiceRequestDAO pmsrDAO = MealServiceRequestDAO.getDAO();
+  private static final LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
@@ -55,11 +56,12 @@ public class DatabaseCreator {
   /** Drops all database tables */
   public static void dropAllTables() {
     pmsrDAO.dropTable();
+    giftDAO.dropTable();
+    langDAO.dropTable();
     labDAO.dropTable();
     mesrDAO.dropTable();
     equDAO.dropTable();
     eqtDAO.dropTable();
-    giftDAO.dropTable();
     emplDAO.dropTable();
     locDAO.dropTable();
   }
@@ -72,6 +74,7 @@ public class DatabaseCreator {
     equDAO.createTable();
     mesrDAO.createTable();
     labDAO.createTable();
+    langDAO.createTable();
     giftDAO.createTable();
     pmsrDAO.createTable();
   }
@@ -82,10 +85,12 @@ public class DatabaseCreator {
    */
   public static boolean loadAllCSV() throws loadSaveFromCSVException {
     if (!locDAO.loadCSV()
+        || !emplDAO.loadCSV()
         || !eqtDAO.loadCSV()
         || !equDAO.loadCSV()
         || !mesrDAO.loadCSV()
         || !labDAO.loadCSV()
+        || !langDAO.loadCSV()
         || !giftDAO.loadCSV()
         || !pmsrDAO.loadCSV()) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
@@ -107,6 +112,7 @@ public class DatabaseCreator {
         || !equDAO.saveCSV(dirPath)
         || !mesrDAO.saveCSV(dirPath)
         || !labDAO.saveCSV(dirPath)
+        || !langDAO.saveCSV(dirPath)
         || !giftDAO.saveCSV(dirPath)
         || !pmsrDAO.saveCSV(dirPath)) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
