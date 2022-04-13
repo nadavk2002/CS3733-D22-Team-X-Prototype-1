@@ -111,7 +111,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssignee()
+              + recordObject.getAssigneeID()
               + "', service = '"
               + recordObject.getService()
               + " WHERE requestID = '"
@@ -132,7 +132,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
-      sql.append("'" + recordObject.getAssignee() + "'" + ", ");
+      sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       sql.append("'" + recordObject.getService() + "'");
       sql.append(")");
       initialization.execute(sql.toString());
@@ -155,6 +155,9 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
               + "service VARCHAR(140),"
               + "CONSTRAINT LYSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT LYSR_employee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID)"
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("LaundryServiceRequest table creation failed. Check output console.");
@@ -178,6 +181,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       InputStream stream = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(stream));
       medCSVReader.readLine();
@@ -190,7 +194,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  currLine[3],
+                  emplDAO.getRecord(currLine[3]),
                   currLine[4]);
           laundyServiceRequests.add(node);
           node.getDestination().addRequest(node);
@@ -216,7 +220,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
         sql.append("'" + laundyServiceRequests.get(i).getRequestID() + "'" + ", ");
         sql.append("'" + laundyServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + laundyServiceRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + laundyServiceRequests.get(i).getAssignee() + "'" + ", ");
+        sql.append("'" + laundyServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append("'" + laundyServiceRequests.get(i).getService() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
@@ -249,7 +253,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
         if (laundyServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(laundyServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(laundyServiceRequests.get(i).getAssigneeID() + ",");
         }
         if (laundyServiceRequests.get(i).getService() == null) {
           csvFile.write(',');

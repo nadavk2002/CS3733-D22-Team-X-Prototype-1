@@ -107,7 +107,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssignee()
+              + recordObject.getAssigneeID()
               + "', rxNum = '"
               + recordObject.getRxNum()
               + "', patientFor = '"
@@ -132,7 +132,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
       medicineDeliveryServiceRequest.append(
           "'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getStatus() + "'" + ", ");
-      medicineDeliveryServiceRequest.append("'" + recordObject.getAssignee() + "'" + ", ");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getRxNum() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getPatientFor() + "'");
       medicineDeliveryServiceRequest.append(")");
@@ -159,6 +159,9 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
               + "patientFor CHAR(8),"
               + "CONSTRAINT MDSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT MDSR_employee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println(
@@ -183,6 +186,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
@@ -195,7 +199,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  currLine[3],
+                  emplDAO.getRecord(currLine[3]),
                   currLine[4],
                   currLine[5]);
           medicineServiceRequests.add(mesrNode);
@@ -226,7 +230,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
         medEquipReq.append(
             "'" + medicineServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getStatus() + "'" + ", ");
-        medEquipReq.append("'" + medicineServiceRequests.get(i).getAssignee() + "'" + ", ");
+        medEquipReq.append("'" + medicineServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getRxNum() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getPatientFor() + "'");
         medEquipReq.append(")");
@@ -260,7 +264,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
         if (medicineServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicineServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(medicineServiceRequests.get(i).getAssigneeID() + ",");
         }
         if (medicineServiceRequests.get(i).getRxNum() == null) {
           csvFile.write(',');
