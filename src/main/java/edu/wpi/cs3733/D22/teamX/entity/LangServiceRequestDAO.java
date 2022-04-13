@@ -269,6 +269,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   @Override
   public String makeID() {
     int nextIDFinalNum = this.getAllRecords().size() + 1;
-    return String.format("MESR%04d", nextIDFinalNum);
+    return String.format("LISR%04d", nextIDFinalNum);
   }
 }
