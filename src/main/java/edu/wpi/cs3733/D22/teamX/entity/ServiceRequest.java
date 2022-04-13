@@ -10,6 +10,8 @@ public abstract class ServiceRequest {
   private String status;
   private Employee assignee;
 
+  //did this do anything
+
   // private String requestingUser
 
   public ServiceRequest(String requestID, Location destination, String status, Employee assignee) {
