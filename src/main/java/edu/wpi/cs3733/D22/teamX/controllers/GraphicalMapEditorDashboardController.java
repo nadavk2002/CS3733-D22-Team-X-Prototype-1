@@ -3,7 +3,6 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnit;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnitDAO;
-import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnitDAOImpl;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -78,7 +77,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private Text llOneCleanText;
   @FXML private Text llTwoDirtyText;
   @FXML private Text llTwoCleanText;
-  private EquipmentUnitDAO equipmentUnitDAO;
+  private EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
   @FXML private HBox dirtyTableBox;
   @FXML private HBox cleanTableBox;
 
@@ -323,8 +322,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
   private ObservableList<EquipmentUnit> sortEquipmentByFloor(String floor) {
     ObservableList<EquipmentUnit> equipmentOnFloor = FXCollections.observableArrayList();
-    EquipmentUnitDAO equipmentUnitDAO = new EquipmentUnitDAOImpl();
-    List<EquipmentUnit> equipmentUnitList = equipmentUnitDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> equipmentUnitList = equipmentUnitDAO.getAllRecords();
     for (EquipmentUnit e : equipmentUnitList) {
       if (e.getCurrLocation().getFloor().equals(floor)) {
         equipmentOnFloor.add(e);
