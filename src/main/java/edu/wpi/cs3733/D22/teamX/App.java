@@ -80,6 +80,11 @@ public class App extends Application {
   public static void startScreen() throws IOException {
     Parent root = FXMLLoader.load(App.class.getResource("views/LoginScreen.fxml"));
     Scene scene = new Scene(root);
+    String css =
+        App.class
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/application.css")
+            .toExternalForm();
+    scene.getStylesheets().add(css);
     mainMenu.setScene(scene);
     mainMenu.setFullScreen(true);
     mainMenu.show();
