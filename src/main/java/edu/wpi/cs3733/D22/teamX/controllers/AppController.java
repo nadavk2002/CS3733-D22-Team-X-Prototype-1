@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.KeyCode;
 
 public class AppController implements Initializable {
   @FXML TextField searchBox;
@@ -69,37 +71,37 @@ public class AppController implements Initializable {
     }
   }
 
-  //  void searchButtons() {
-  //
-  //    FilteredList<Button> filteredButtons = new FilteredList<>(buttonList, b -> true);
-  //    searchBox
-  //        .textProperty()
-  //        .addListener(
-  //            (observable, oldValue, newValue) -> {
-  //              filteredButtons.setPredicate(
-  //                  button -> {
-  //                    if (newValue == null || newValue.isEmpty()) {
-  //                      button.setVisible(true);
-  //                      return true;
-  //                    }
-  //                    String lowerCaseFilter = newValue.toLowerCase();
-  //                    if (button.getText().toLowerCase().contains(lowerCaseFilter)) {
-  //                      button.setVisible(true);
-  //                      searchBox.setOnKeyPressed(
-  //                          event -> {
-  //                            if (event.getCode() == KeyCode.ENTER) {
-  //                              button.fire();
-  //                            }
-  //                          });
-  //                      return true;
-  //                    } else {
-  //                      button.setVisible(false);
-  //
-  //                      return false;
-  //                    }
-  //                  });
-  //            });
-  //  }
+  void searchButtons() {
+
+    FilteredList<Button> filteredButtons = new FilteredList<>(buttonList, b -> true);
+    searchBox
+        .textProperty()
+        .addListener(
+            (observable, oldValue, newValue) -> {
+              filteredButtons.setPredicate(
+                  button -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                      button.setVisible(true);
+                      return true;
+                    }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (button.getText().toLowerCase().contains(lowerCaseFilter)) {
+                      button.setVisible(true);
+                      searchBox.setOnKeyPressed(
+                          event -> {
+                            if (event.getCode() == KeyCode.ENTER) {
+                              button.fire();
+                            }
+                          });
+                      return true;
+                    } else {
+                      button.setVisible(false);
+
+                      return false;
+                    }
+                  });
+            });
+  }
 
   @FXML
   void ReqLangButton() throws IOException {
@@ -203,14 +205,14 @@ public class AppController implements Initializable {
         // EquipReqTable,
         // graphicalMapEditor,
         equipmentRequest);
-    searchBox.setVisible(false);
-    // searchBox.setPromptText("Search Here");
-    //    firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
-    //    secondRow.getChildren().addAll(ReqMedicineDelivery, LabRequest, ReqInTransport, ReqLang);
-    //    thirdRow.getChildren().addAll(ReqLaundry, ReqJanitor, GiftDelivery, mealReq);
-    //    mainBox.getChildren().addAll(mainTitle, firstRow, secondRow, thirdRow);
-    //    mainBox.setMargin(mainTitle, new Insets(40, 0, 40, 0));
-    // searchButtons();
+    searchBox.setPromptText("Search Here");
+    //        firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
+    //        secondRow.getChildren().addAll(ReqMedicineDelivery, LabRequest, ReqInTransport,
+    // ReqLang);
+    //        thirdRow.getChildren().addAll(ReqLaundry, ReqJanitor, GiftDelivery, mealReq);
+    //        mainBox.getChildren().addAll(mainTitle, firstRow, secondRow, thirdRow);
+    //        mainBox.setMargin(mainTitle, new Insets(40, 0, 40, 0));
+    searchButtons();
     nameToggle.setOnAction(this::nameToggleButton);
   }
 }

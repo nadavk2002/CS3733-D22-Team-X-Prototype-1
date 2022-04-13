@@ -6,35 +6,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLangController">
+<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLangController">
    <children>
-      <ChoiceBox fx:id="selectLang" layoutX="421.0" layoutY="323.0" prefWidth="150.0" />
-      <Label layoutX="320.0" layoutY="328.0" text="Select Language:" />
-      <Label layoutX="301.0" layoutY="368.0" text="Enter Room Number:" />
-      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
+      <ChoiceBox fx:id="selectLang" layoutX="733.0" layoutY="458.0" prefWidth="150.0" />
+      <Label layoutX="632.0" layoutY="463.0" text="Select Language:" />
+      <Label layoutX="613.0" layoutY="503.0" text="Enter Room Number:" />
+      <Label layoutX="673.0" layoutY="535.0" text="Assignee:" />
+      <Label layoutX="646.0" layoutY="567.0" text="Service Status:" />
+      <ChoiceBox fx:id="roomNum" layoutX="732.0" layoutY="498.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="serviceStatus" layoutX="732.0" layoutY="563.0" prefWidth="150.0" />
+      <JFXButton fx:id="submitButton" layoutX="736.0" layoutY="610.0" onAction="#submitRequest" text="Submit Request" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Label layoutX="361.0" layoutY="400.0" text="Assignee:" />
-      <Label layoutX="334.0" layoutY="432.0" text="Service Status:" />
-      <ChoiceBox fx:id="roomNum" layoutX="420.0" layoutY="363.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="serviceStatus" layoutX="420.0" layoutY="428.0" prefWidth="150.0" />
-      <JFXButton fx:id="submitButton" layoutX="424.0" layoutY="475.0" onAction="#submitRequest" text="Submit Request" textFill="#446fdc">
+      <JFXButton fx:id="resetFields" layoutX="747.0" layoutY="642.0" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="resetFields" layoutX="435.0" layoutY="507.0" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <Label layoutX="245.0" layoutY="227.0" text="Request Language Interpreter" textFill="#446fdc">
+      <Label layoutX="557.0" layoutY="362.0" text="Request Language Interpreter" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="assignStaff" layoutX="420.0" layoutY="396.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="assignStaff" layoutX="732.0" layoutY="531.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

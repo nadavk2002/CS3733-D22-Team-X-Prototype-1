@@ -4,14 +4,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqInTransportController">
+<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqInTransportController">
     <children>
       <VBox fx:id="pageVBox" alignment="CENTER" minHeight="900.0" prefHeight="900.0" prefWidth="1920.0" />
       <VBox fx:id="leftSideVBox" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="500.0" prefWidth="500.0" />
@@ -74,11 +72,6 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </JFXButton>
-        <JFXButton fx:id="ToMainMenu" layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
-            <font>
-                <Font name="System Bold" size="13.0" />
-            </font>
-        </JFXButton>
         <JFXButton fx:id="resetFields" layoutX="404.0" layoutY="536.0" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
             <font>
                 <Font name="System Bold" size="18.0" />
@@ -86,7 +79,6 @@
         </JFXButton>
         <ChoiceBox fx:id="assignStaff" layoutX="472.0" layoutY="418.0" minWidth="150.0" prefWidth="150.0" />
         <ChoiceBox fx:id="serviceStatus" layoutX="472.0" layoutY="460.0" prefWidth="150.0" />
-        <TableView fx:id="table" layoutX="938.0" layoutY="163.0" minHeight="700.0" prefHeight="700.0" prefWidth="1000.0" />
       <Label fx:id="title" alignment="CENTER" layoutX="927.0" layoutY="88.0" text="Internal Patient Transport" textAlignment="RIGHT" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
