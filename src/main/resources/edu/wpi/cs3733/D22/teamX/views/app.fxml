@@ -151,7 +151,7 @@
                </font>
             </Label>
             <TextField fx:id="searchBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-            <JFXToggleButton fx:id="nameToggle" onAction="#nameToggleButton" prefHeight="86.0" prefWidth="262.0" size="15.0" text="Hide Names" textFill="#446fdc" toggleColor="#446fdc" toggleLineColor="#aec2ef" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <JFXToggleButton fx:id="nameToggle" onAction="#nameToggleButton" prefHeight="86.0" prefWidth="262.0" size="15.0" text="Show Names" textFill="#446fdc" toggleColor="#446fdc" toggleLineColor="#aec2ef" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>

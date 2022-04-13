@@ -48,17 +48,7 @@ public class AppController implements Initializable {
 
   @FXML
   void nameToggleButton(ActionEvent event) {
-    if (nameTextOne.isVisible()) {
-      nameTextOne.setVisible(false);
-      nameTextTwo.setVisible(false);
-      nameTextThree.setVisible(false);
-      nameTextFour.setVisible(false);
-      nameTextFive.setVisible(false);
-      nameTextSix.setVisible(false);
-      nameTextSeven.setVisible(false);
-      nameTextEight.setVisible(false);
-      nameTextNine.setVisible(false);
-    } else {
+    if (!nameTextOne.isVisible()) {
       nameTextOne.setVisible(true);
       nameTextTwo.setVisible(true);
       nameTextThree.setVisible(true);
@@ -68,6 +58,16 @@ public class AppController implements Initializable {
       nameTextSeven.setVisible(true);
       nameTextEight.setVisible(true);
       nameTextNine.setVisible(true);
+    } else {
+      nameTextOne.setVisible(false);
+      nameTextTwo.setVisible(false);
+      nameTextThree.setVisible(false);
+      nameTextFour.setVisible(false);
+      nameTextFive.setVisible(false);
+      nameTextSix.setVisible(false);
+      nameTextSeven.setVisible(false);
+      nameTextEight.setVisible(false);
+      nameTextNine.setVisible(false);
     }
   }
 
@@ -214,5 +214,14 @@ public class AppController implements Initializable {
     //        mainBox.setMargin(mainTitle, new Insets(40, 0, 40, 0));
     searchButtons();
     nameToggle.setOnAction(this::nameToggleButton);
+    nameTextOne.setVisible(false);
+    nameTextTwo.setVisible(false);
+    nameTextThree.setVisible(false);
+    nameTextFour.setVisible(false);
+    nameTextFive.setVisible(false);
+    nameTextSix.setVisible(false);
+    nameTextSeven.setVisible(false);
+    nameTextEight.setVisible(false);
+    nameTextNine.setVisible(false);
   }
 }
