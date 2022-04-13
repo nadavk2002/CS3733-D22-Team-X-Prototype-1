@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
-
 import java.io.*;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -159,9 +158,8 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
               + "rxNum CHAR(8),"
               + "patientFor CHAR(8),"
               + "CONSTRAINT MDSR_dest_fk "
-              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
-              + "ON DELETE SET NULL, "
-              + "CONSTRAINT MESR_equipmentType_fk ");
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println(
           "MedicineDeliveryServiceRequest table creation failed. Check output console.");
@@ -174,7 +172,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
   public void dropTable() {
     try {
       Statement dropMedicalEquipmentServiceRequest = connection.createStatement();
-      dropMedicalEquipmentServiceRequest.execute("DROP TABLE MedicalEquipmentServiceRequest");
+      dropMedicalEquipmentServiceRequest.execute("DROP TABLE MedicineDeliveryServiceRequest");
     } catch (SQLException e) {
       System.out.println("MedicineDeliveryServiceRequest not dropped");
       e.printStackTrace();
@@ -193,17 +191,17 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 6) {
           MedicineServiceRequest mesrNode =
-                  new MedicineServiceRequest(
-                          currLine[0],
-                          locDestination.getRecord(currLine[1]),
-                          currLine[2],
-                          currLine[3],
-                          currLine[4],
-                          currLine[5]);
+              new MedicineServiceRequest(
+                  currLine[0],
+                  locDestination.getRecord(currLine[1]),
+                  currLine[2],
+                  currLine[3],
+                  currLine[4],
+                  currLine[5]);
           medicineServiceRequests.add(mesrNode);
           mesrNode
-                  .getDestination()
-                  .addRequest(mesrNode); // add mesr to destination's list of service requests
+              .getDestination()
+              .addRequest(mesrNode); // add mesr to destination's list of service requests
         } else {
           System.out.println("MedicineDeliveryRequests CSV file formatted improperly");
           System.exit(1);
@@ -223,11 +221,10 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
       try {
         Statement initialization = connection.createStatement();
         StringBuilder medEquipReq = new StringBuilder();
-        medEquipReq.append("INSERT INTO MedicalEquipmentServiceRequest VALUES(");
+        medEquipReq.append("INSERT INTO MedicineDeliveryServiceRequest VALUES(");
+        medEquipReq.append("'" + medicineServiceRequests.get(i).getRequestID() + "'" + ", ");
         medEquipReq.append(
-                "'" + medicineServiceRequests.get(i).getRequestID() + "'" + ", ");
-        medEquipReq.append(
-                "'" + medicineServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+            "'" + medicineServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getStatus() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getAssignee() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getRxNum() + "'" + ", ");

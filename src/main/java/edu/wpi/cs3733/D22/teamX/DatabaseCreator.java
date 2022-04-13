@@ -16,7 +16,8 @@ public class DatabaseCreator {
   private static final EquipmentUnitDAO equDAO = EquipmentUnitDAO.getDAO();
   private static final MealServiceRequestDAO pmsrDAO = MealServiceRequestDAO.getDAO();
   private static final LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
-  private static final MedicineDeliverServiceRequestDAO MDSDAO = MedicineDeliverServiceRequestDAO.getDAO();
+  private static final MedicineDeliverServiceRequestDAO MDSDAO =
+      MedicineDeliverServiceRequestDAO.getDAO();
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
