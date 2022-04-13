@@ -21,7 +21,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
 
   @Override
   public List<MedicineServiceRequest> getAllRecords() {
-    return null;
+    return medicineServiceRequests
   }
 
   @Override
