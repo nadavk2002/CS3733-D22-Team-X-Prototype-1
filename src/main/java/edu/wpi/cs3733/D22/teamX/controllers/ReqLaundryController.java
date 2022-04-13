@@ -64,7 +64,7 @@ public class ReqLaundryController implements Initializable {
     ID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    laundryService.setCellValueFactory(new PropertyValueFactory<>("laundry"));
+    laundryService.setCellValueFactory(new PropertyValueFactory<>("service"));
     assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 

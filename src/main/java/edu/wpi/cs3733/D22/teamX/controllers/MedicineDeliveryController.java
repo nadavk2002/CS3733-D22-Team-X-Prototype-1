@@ -49,7 +49,7 @@ public class MedicineDeliveryController implements Initializable {
     idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    rxColumn.setCellValueFactory(new PropertyValueFactory<>("rx"));
+    rxColumn.setCellValueFactory(new PropertyValueFactory<>("rxNum"));
     assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
@@ -71,6 +71,7 @@ public class MedicineDeliveryController implements Initializable {
     submitRequest.setDisable(
         roomNum.getValue().equals("")
             || rxNum.getText().equals("")
+            || rxNum.getText().length() > 8
             || serviceStatus.getValue().equals("")
             || assignStaff.getValue().equals(""));
   }
