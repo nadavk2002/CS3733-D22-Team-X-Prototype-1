@@ -140,7 +140,6 @@ public class ReqInTransportController implements Initializable {
         transportTo.getValue().equals("")
             || transportFrom.getValue().equals("")
             || addAccommodation.getValue().equals("")
-            || serviceStatus.getValue().equals("")
             || patientName.getValue().equals("")
             || assignStaff.getValue().equals(""));
   }
