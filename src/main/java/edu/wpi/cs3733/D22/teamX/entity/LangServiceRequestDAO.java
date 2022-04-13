@@ -69,7 +69,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-          "DELETE FROM LangServiceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
+              "DELETE FROM LangServiceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -77,6 +77,12 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
 
   @Override
   public void updateRecord(LangServiceRequest recordObject) {
+    if (!recordObject
+            .getDestination()
+            .equals(getRecord(recordObject.getRequestID()).getDestination())) {
+      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
+      recordObject.getDestination().addRequest(recordObject);
+    }
     int index = 0; // create indexer varible for while loop
     while (index < langServiceRequests.size()) {
       if (langServiceRequests.get(index).equals(recordObject)) {
@@ -96,18 +102,18 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE MedicalEquipmentServiceRequest SET"
-              + " destination = '"
-              + recordObject.getDestination().getNodeID()
-              + "', status = '"
-              + recordObject.getStatus()
-              + "', assignee = '"
-              + recordObject.getAssignee()
-              + "', language = '"
-              + recordObject.getLanguage()
-              + " WHERE requestID = '"
-              + recordObject.getRequestID()
-              + "'");
+              "UPDATE MedicalEquipmentServiceRequest SET"
+                      + " destination = '"
+                      + recordObject.getDestination().getNodeID()
+                      + "', status = '"
+                      + recordObject.getStatus()
+                      + "', assignee = '"
+                      + recordObject.getAssigneeID()
+                      + "', language = '"
+                      + recordObject.getLanguage()
+                      + " WHERE requestID = '"
+                      + recordObject.getRequestID()
+                      + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -124,7 +130,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
-      sql.append("'" + recordObject.getAssignee() + "'" + ", ");
+      sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       sql.append("'" + recordObject.getLanguage() + "'");
       sql.append(")");
       initialization.execute(sql.toString());
@@ -140,14 +146,17 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE LangServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
-              + "destination CHAR(10),"
-              + "status CHAR(4),"
-              + "assignee CHAR(8),"
-              + "language VARCHAR(20),"
-              + "CONSTRAINT LASR_dest_fk "
-              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
-              + "ON DELETE SET NULL)");
+              "CREATE TABLE LangServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+                      + "destination CHAR(10),"
+                      + "status CHAR(4),"
+                      + "assignee CHAR(8),"
+                      + "language VARCHAR(20),"
+                      + "CONSTRAINT LASR_dest_fk "
+                      + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+                      + "ON DELETE SET NULL, "
+                      + "CONSTRAINT LASR_assignee_fk "
+                      + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
+                      + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("LangServiceRequest table creation failed. Check output console.");
       e.printStackTrace();
@@ -170,6 +179,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplAssignee = EmployeeDAO.getDAO();
       InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
@@ -178,12 +188,12 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 5) {
           LangServiceRequest node =
-              new LangServiceRequest(
-                  currLine[0],
-                  locDestination.getRecord(currLine[1]),
-                  currLine[2],
-                  currLine[3],
-                  currLine[4]);
+                  new LangServiceRequest(
+                          currLine[0],
+                          locDestination.getRecord(currLine[1]),
+                          currLine[2],
+                          emplAssignee.getRecord(currLine[3]),
+                          currLine[4]);
           langServiceRequests.add(node);
           node.getDestination().addRequest(node);
         } else {
@@ -209,7 +219,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         sql.append("'" + langServiceRequests.get(i).getRequestID() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getAssignee() + "'" + ", ");
+        sql.append("'" + langServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getLanguage() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
@@ -239,10 +249,10 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         } else {
           csvFile.write(langServiceRequests.get(i).getStatus() + ",");
         }
-        if (langServiceRequests.get(i).getAssignee() == null) {
+        if (langServiceRequests.get(i).getAssigneeID() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(langServiceRequests.get(i).getAssigneeID() + ",");
         }
         if (langServiceRequests.get(i).getLanguage() == null) {
           csvFile.write(',');

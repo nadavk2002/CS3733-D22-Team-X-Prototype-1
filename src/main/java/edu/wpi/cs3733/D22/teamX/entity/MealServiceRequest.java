@@ -19,7 +19,7 @@ public class MealServiceRequest extends ServiceRequest {
       String requestID,
       Location destination,
       String status,
-      String assignee,
+      Employee assignee,
       String mainCourse,
       String side,
       String drink,

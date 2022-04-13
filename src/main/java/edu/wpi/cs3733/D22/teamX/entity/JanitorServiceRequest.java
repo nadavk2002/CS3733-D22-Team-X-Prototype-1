@@ -10,7 +10,7 @@ public class JanitorServiceRequest extends ServiceRequest {
   }
 
   public JanitorServiceRequest(
-      String requestID, Location destination, String status, String assignee, String serviceType) {
+      String requestID, Location destination, String status, Employee assignee, String serviceType) {
     super(requestID, destination, status, assignee);
     this.description = serviceType;
   }

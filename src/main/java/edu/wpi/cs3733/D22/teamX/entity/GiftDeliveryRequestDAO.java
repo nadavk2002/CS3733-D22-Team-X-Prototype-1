@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 
 public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
   private static List<GiftDeliveryRequest> giftDeliveryRequests =
-      new ArrayList<GiftDeliveryRequest>();
+          new ArrayList<GiftDeliveryRequest>();
   private static String csv = "GiftDeliveryRequests.csv";
 
   /** Creates a new GiftDeliveryRequestDAO object. */
@@ -19,7 +19,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
   /** Singleton helper class. */
   private static class SingletonHelper {
     private static final GiftDeliveryRequestDAO giftDeliveryRequestDAO =
-        new GiftDeliveryRequestDAO();
+            new GiftDeliveryRequestDAO();
   }
 
   /**
@@ -62,9 +62,9 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       try {
         Statement statement = connection.createStatement();
         statement.executeUpdate(
-            "DELETE FROM GiftDeliveryRequest WHERE requestID = '"
-                + recordObject.getRequestID()
-                + "'");
+                "DELETE FROM GiftDeliveryRequest WHERE requestID = '"
+                        + recordObject.getRequestID()
+                        + "'");
       } catch (SQLException e) {
         e.printStackTrace();
       }
@@ -93,22 +93,22 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         Statement statement = connection.createStatement();
         // update sql object
         statement.executeUpdate(
-            "UPDATE GiftDeliveryRequest SET requestID = "
-                + recordObject.getRequestID()
-                + ", destination = "
-                + recordObject.getDestination().getNodeID()
-                + ", status = '"
-                + recordObject.getStatus()
-                + "', assignee = '"
-                + recordObject.getAssignee()
-                + "', notes = '"
-                + recordObject.getNotes()
-                + "', giftType = '"
-                + recordObject.getGiftType()
-                + "' "
-                + "WHERE requestID = '"
-                + recordObject.getRequestID()
-                + "'");
+                "UPDATE GiftDeliveryRequest SET requestID = "
+                        + recordObject.getRequestID()
+                        + ", destination = "
+                        + recordObject.getDestination().getNodeID()
+                        + ", status = '"
+                        + recordObject.getStatus()
+                        + "', assignee = '"
+                        + recordObject.getAssigneeID()
+                        + "', notes = '"
+                        + recordObject.getNotes()
+                        + "', giftType = '"
+                        + recordObject.getGiftType()
+                        + "' "
+                        + "WHERE requestID = '"
+                        + recordObject.getRequestID()
+                        + "'");
 
       } catch (SQLException e) {
         e.printStackTrace();
@@ -129,7 +129,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append(recordObject.getDestination().getNodeID() + ", ");
       sql.append(recordObject.getStatus() + ", ");
-      sql.append("'" + recordObject.getAssignee() + "'" + ", ");
+      sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       sql.append("'" + recordObject.getNotes() + "'" + ", ");
       sql.append("'" + recordObject.getGiftType() + "'");
       sql.append(")");
@@ -146,12 +146,18 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
     try {
       Statement statement = connection.createStatement();
       statement.execute(
-          "CREATE TABLE GiftDeliveryRequest(requestID CHAR(10) PRIMARY KEY NOT NULL, "
-              + "destination CHAR(10),"
-              + "status CHAR(4),"
-              + "assignee CHAR(8),"
-              + "notes VARCHAR(140),"
-              + "giftType CHAR(10))");
+              "CREATE TABLE GiftDeliveryRequest(requestID CHAR(10) PRIMARY KEY NOT NULL, "
+                      + "destination CHAR(10),"
+                      + "status CHAR(4),"
+                      + "assignee CHAR(8),"
+                      + "notes VARCHAR(140),"
+                      + "giftType CHAR(10), "
+                      + "CONSTRAINT GDR_dest_fk "
+                      + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+                      + "ON DELETE SET NULL, "
+                      + "CONSTRAINT GDR_assignee_fk "
+                      + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
+                      + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("GiftDeliveryRequest table creation failed. Check output console.");
       e.printStackTrace();
@@ -178,17 +184,18 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       tlCSVReader.readLine();
       String nextFileLine;
       LocationDAO locationDAO = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       while ((nextFileLine = tlCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 6) {
           GiftDeliveryRequest node =
-              new GiftDeliveryRequest(
-                  currLine[0],
-                  locationDAO.getRecord(currLine[1]),
-                  currLine[2],
-                  currLine[3],
-                  currLine[4],
-                  currLine[5]);
+                  new GiftDeliveryRequest(
+                          currLine[0],
+                          locationDAO.getRecord(currLine[1]),
+                          currLine[2],
+                          emplDAO.getRecord(currLine[3]),
+                          currLine[4],
+                          currLine[5]);
           giftDeliveryRequests.add(node);
         } else {
           System.out.println("GiftDeliveryRequest CSV file formatted improperly");
@@ -215,7 +222,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         sql.append("'" + giftDeliveryRequests.get(i).getRequestID() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + giftDeliveryRequests.get(i).getAssignee() + "'" + ", ");
+        sql.append("'" + giftDeliveryRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getNotes() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getGiftType() + "'");
         sql.append(")");
@@ -246,10 +253,10 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         } else {
           csvFile.write(giftDeliveryRequests.get(i).getStatus() + ",");
         }
-        if (giftDeliveryRequests.get(i).getAssignee() == null) {
+        if (giftDeliveryRequests.get(i).getAssigneeID() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(giftDeliveryRequests.get(i).getAssignee() + ",");
+          csvFile.write(giftDeliveryRequests.get(i).getAssigneeID() + ",");
         }
         if (giftDeliveryRequests.get(i).getNotes() == null) {
           csvFile.write(',');

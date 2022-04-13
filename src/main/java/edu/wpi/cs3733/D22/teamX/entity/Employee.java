@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Employee {
@@ -8,14 +10,25 @@ public class Employee {
   private String lastName;
   private String clearanceType;
   private String jobTitle;
+  private List<ServiceRequest> requests;
+
+  public Employee() {
+    this.employeeID = EmployeeDAO.getDAO().makeID();
+    this.firstName = "";
+    this.lastName = "";
+    this.clearanceType = "staff";
+    this.jobTitle = "";
+    this.requests = new ArrayList<>();
+  }
 
   public Employee(
-      String employeeID, String firstName, String lastName, String clearanceType, String jobTitle) {
+          String employeeID, String firstName, String lastName, String clearanceType, String jobTitle) {
     this.employeeID = employeeID;
     this.firstName = firstName;
     this.lastName = lastName;
     this.clearanceType = clearanceType;
     this.jobTitle = jobTitle;
+    this.requests = new ArrayList<>();
   }
 
   public String getEmployeeID() {

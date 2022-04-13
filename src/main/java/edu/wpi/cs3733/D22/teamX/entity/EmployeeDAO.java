@@ -62,7 +62,7 @@ public class EmployeeDAO implements DAO<Employee> {
         Statement statement = connection.createStatement();
         // remove Employee from DB table
         statement.executeUpdate(
-            "DELETE FROM Employee WHERE employeeID = '" + recordObject.getEmployeeID() + "'");
+                "DELETE FROM Employee WHERE employeeID = '" + recordObject.getEmployeeID() + "'");
       } catch (SQLException e) {
         e.printStackTrace();
       }
@@ -89,18 +89,18 @@ public class EmployeeDAO implements DAO<Employee> {
         Statement statement = connection.createStatement();
         // update sql object
         statement.executeUpdate(
-            "UPDATE Employee SET firstName = "
-                + recordObject.getFirstName()
-                + ", lastName = "
-                + recordObject.getLastName()
-                + ", clearanceType = '"
-                + recordObject.getClearanceType()
-                + "', jobTitle = '"
-                + recordObject.getJobTitle()
-                + "' "
-                + "WHERE employeeID = '"
-                + recordObject.getEmployeeID()
-                + "'");
+                "UPDATE Employee SET firstName = "
+                        + recordObject.getFirstName()
+                        + ", lastName = "
+                        + recordObject.getLastName()
+                        + ", clearanceType = '"
+                        + recordObject.getClearanceType()
+                        + "', jobTitle = '"
+                        + recordObject.getJobTitle()
+                        + "' "
+                        + "WHERE employeeID = '"
+                        + recordObject.getEmployeeID()
+                        + "'");
 
       } catch (SQLException e) {
         e.printStackTrace();
@@ -135,11 +135,11 @@ public class EmployeeDAO implements DAO<Employee> {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE Employee(employeeID CHAR(8) PRIMARY KEY NOT NULL, "
-              + "firstName VARCHAR(20), "
-              + "lastName VARCHAR(20), "
-              + "clearanceType CHAR(5), "
-              + "jobTitle VARCHAR(50))");
+              "CREATE TABLE Employee(employeeID CHAR(8) PRIMARY KEY NOT NULL, "
+                      + "firstName VARCHAR(20), "
+                      + "lastName VARCHAR(20), "
+                      + "clearanceType CHAR(5), "
+                      + "jobTitle VARCHAR(50))");
     } catch (SQLException e) {
       System.out.println("Employee table creation failed. Check output console.");
       e.printStackTrace();
@@ -169,7 +169,7 @@ public class EmployeeDAO implements DAO<Employee> {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 5) {
           Employee emplNode =
-              new Employee(currLine[0], currLine[1], currLine[2], currLine[3], currLine[4]);
+                  new Employee(currLine[0], currLine[1], currLine[2], currLine[3], currLine[4]);
           employees.add(emplNode);
         } else {
           System.out.println("Employee CSV file formatted improperly");
