@@ -33,6 +33,7 @@ public class ReqLangController implements Initializable {
     roomNum.setItems(getLocationNames());
     selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
+    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
   }
 
   /**
@@ -81,7 +82,7 @@ public class ReqLangController implements Initializable {
   public void submitRequest() {
     LangServiceRequest request = new LangServiceRequest();
 
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(langDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
