@@ -39,7 +39,8 @@ public class JanitorialRequestController implements Initializable {
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     serviceType.getItems().addAll("Bodily Fluids", "Chemical Spills", "Disinfection");
-    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
+    assignStaff.setItems(this.getEmployeeIDs());
+//    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());

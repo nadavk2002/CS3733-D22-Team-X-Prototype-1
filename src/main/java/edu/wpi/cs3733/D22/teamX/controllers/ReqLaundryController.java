@@ -48,13 +48,14 @@ public class ReqLaundryController implements Initializable {
     submitColumn.setSpacing(20);
     buttonRow.setSpacing(20);
     roomNum.setItems(getLocationNames());
+    assignStaff.setItems(this.getEmployeeIDs());
     submitButton.setDisable(true);
 
     selectLaundryType
         .getItems()
         .addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
-    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
+//    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
 
     selectLaundryType.setOnAction((ActionEvent event) -> disableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> disableSubmitButton());

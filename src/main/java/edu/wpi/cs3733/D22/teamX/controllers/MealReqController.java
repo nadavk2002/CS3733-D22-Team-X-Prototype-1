@@ -51,6 +51,7 @@ public class MealReqController implements Initializable {
   private List<Location> locations;
 
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private List<Employee> employees;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
@@ -86,9 +87,10 @@ public class MealReqController implements Initializable {
     // main course choice box---------------------------------------
     mainSel.getItems().addAll("Chicken", "Fish", "Vegeterian");
     // assign staff choice box ---------------------------------------
-    assignStaff
-        .getItems()
-        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
+    assignStaff.setItems(this.getEmployeeIDs());
+//    assignStaff
+//        .getItems()
+//        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
     // status choice box----------------------------------------------------
     destinationDrop.setItems(getLocationNames());
     patientNames.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -124,6 +126,14 @@ public class MealReqController implements Initializable {
       locationNames.add(locations.get(i).getShortName());
     }
     return locationNames;
+  }
+
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
   }
 
   @FXML

@@ -36,9 +36,10 @@ public class ReqLangController implements Initializable {
     locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
+    assignStaff.setItems(this.getEmployeeIDs());
     selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
-    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
+//    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
     roomNum.setItems(getLocationNames());
     selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
