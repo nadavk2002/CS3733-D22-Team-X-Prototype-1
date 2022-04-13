@@ -8,18 +8,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MealReqController">
+<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MealReqController">
    <children>
-      <Label fx:id="choiceBoxLabel12" layoutX="754.0" layoutY="44.0" text="Request Patient Meal" textFill="#446fdc">
+      <Label fx:id="choiceBoxLabel12" layoutX="629.0" layoutY="309.0" text="Request Patient Meal" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
          </font></Label>
-      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#returnHomeButton" text="&lt;--  Main Menu" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <VBox fx:id="fullSelBox" alignment="TOP_RIGHT" layoutX="757.0" layoutY="149.0" prefHeight="341.0" prefWidth="353.0">
+      <VBox fx:id="fullSelBox" alignment="TOP_RIGHT" layoutX="632.0" layoutY="414.0" prefHeight="341.0" prefWidth="353.0">
          <children>
             <HBox fx:id="topRowNames" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
                <children>

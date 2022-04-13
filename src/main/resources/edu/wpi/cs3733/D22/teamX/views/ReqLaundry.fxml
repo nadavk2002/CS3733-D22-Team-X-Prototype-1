@@ -9,14 +9,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLaundryController">
+<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqLaundryController">
    <children>
-      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <VBox fx:id="submitColumn" layoutX="887.0" layoutY="277.0" prefHeight="200.0" prefWidth="250.0">
+      <VBox fx:id="submitColumn" layoutX="685.0" layoutY="463.0" prefHeight="200.0" prefWidth="250.0">
          <children>
             <HBox prefHeight="102.0" prefWidth="219.0">
                <children>
@@ -66,7 +61,7 @@
             </HBox>
          </children>
       </VBox>
-      <Label layoutX="805.0" layoutY="154.0" text="Request Laundry Service" textFill="#446fdc">
+      <Label layoutX="602.0" layoutY="359.0" text="Request Laundry Service" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

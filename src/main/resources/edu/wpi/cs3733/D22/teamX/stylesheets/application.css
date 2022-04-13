@@ -49,3 +49,26 @@
 #csvFileSaver {
     -fx-font-family: "Poppins";
 }
+
+/*LANDING PAGE*/
+
+#landingPage > .button {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-blue;
+}
+
+#landingPage > .button:hover {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-blue;
+}
+
+#landingPage > .label {
+    -fx-font-family: "Poppins";
+    -fx-wrap-text: true;
+    -fx-text-fill: -fx-dark-blue;
+}
+

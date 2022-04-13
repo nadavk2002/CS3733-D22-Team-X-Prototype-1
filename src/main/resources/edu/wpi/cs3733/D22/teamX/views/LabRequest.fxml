@@ -9,19 +9,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LabRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LabRequestController">
    <children>
-      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ReturnToMain" text="&lt;--  Main Menu" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <Label layoutX="825.0" layoutY="113.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc">
+      <Label layoutX="640.0" layoutY="334.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <VBox fx:id="submitCol" layoutX="849.0" layoutY="232.0" prefHeight="200.0" prefWidth="281.0">
+      <VBox fx:id="submitCol" layoutX="664.0" layoutY="453.0" prefHeight="200.0" prefWidth="281.0">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>

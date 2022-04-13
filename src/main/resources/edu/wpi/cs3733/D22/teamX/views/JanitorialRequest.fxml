@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.JanitorialRequestController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.JanitorialRequestController">
    <children>
-      <VBox layoutX="936.0" layoutY="159.0" prefHeight="163.0" prefWidth="147.0" spacing="11.0">
+      <VBox layoutX="732.0" layoutY="434.0" prefHeight="163.0" prefWidth="147.0" spacing="11.0">
          <children>
             <ChoiceBox fx:id="roomNum" prefWidth="150.0" />
             <ChoiceBox fx:id="serviceType" prefWidth="150.0" />
@@ -17,23 +17,18 @@
             <ChoiceBox fx:id="assignStaff" prefWidth="150.0" />
          </children>
       </VBox>
-      <JFXButton fx:id="submitButton" layoutX="960.0" layoutY="310.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+      <JFXButton fx:id="submitButton" layoutX="756.0" layoutY="585.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <VBox layoutX="935.0" layoutY="198.0" spacing="10.0" />
-      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#mainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
+      <VBox layoutX="731.0" layoutY="473.0" spacing="10.0" />
+      <JFXButton layoutX="768.0" layoutY="620.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="972.0" layoutY="345.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <VBox alignment="TOP_RIGHT" layoutX="835.0" layoutY="159.0" spacing="18.0">
+      <VBox alignment="TOP_RIGHT" layoutX="631.0" layoutY="434.0" spacing="18.0">
          <children>
             <Label text="Room Number:">
                <font>
@@ -57,7 +52,7 @@
             </Label>
          </children>
       </VBox>
-      <Label layoutX="798.0" layoutY="67.0" text="Request Janitorial Service" textFill="#446fdc">
+      <Label layoutX="594.0" layoutY="342.0" text="Request Janitorial Service" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

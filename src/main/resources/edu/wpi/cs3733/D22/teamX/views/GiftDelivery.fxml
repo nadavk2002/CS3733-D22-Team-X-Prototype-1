@@ -8,51 +8,46 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GiftDeliveryController">
+<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GiftDeliveryController">
 <children>
-    <ChoiceBox fx:id="selectAssignStaff" layoutX="928.0" layoutY="388.0" prefWidth="150.0">
+    <ChoiceBox fx:id="selectAssignStaff" layoutX="734.0" layoutY="530.0" prefWidth="150.0">
         <opaqueInsets>
             <Insets />
         </opaqueInsets>
     </ChoiceBox>
-    <TextField fx:id="giftNoteField" layoutX="929.0" layoutY="419.0" prefHeight="26.0" prefWidth="150.0" />
-    <Label layoutX="850.0" layoutY="389.0" text="Assign Staff:" />
-    <Label layoutX="866.0" layoutY="421.0" text="Gift Note:" />
-    <JFXButton fx:id="submitButton" layoutX="996.0" layoutY="491.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+    <TextField fx:id="giftNoteField" layoutX="735.0" layoutY="561.0" prefHeight="26.0" prefWidth="150.0" />
+    <Label layoutX="656.0" layoutY="531.0" text="Assign Staff:" />
+    <Label layoutX="672.0" layoutY="563.0" text="Gift Note:" />
+    <JFXButton fx:id="submitButton" layoutX="802.0" layoutY="633.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
         <font>
             <Font name="System Bold" size="13.0" />
         </font>
     </JFXButton>
-      <JFXButton layoutX="14.0" layoutY="14.0" onAction="#ReturnToMain" text="&lt;--  Main Menu" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="resetFields" layoutX="907.0" layoutY="491.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
+      <JFXButton fx:id="resetFields" layoutX="713.0" layoutY="633.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
           <font>
               <Font name="System Bold" size="13.0" />
           </font>
       </JFXButton>
-      <Label fx:id="requestStatus" layoutX="960.0" layoutY="554.0" />
-      <ChoiceBox fx:id="selectGiftDestination" layoutX="928.0" layoutY="356.0" prefWidth="150.0">
+      <Label fx:id="requestStatus" layoutX="766.0" layoutY="696.0" />
+      <ChoiceBox fx:id="selectGiftDestination" layoutX="734.0" layoutY="498.0" prefWidth="150.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ChoiceBox>
-      <Label layoutX="830.0" layoutY="357.0" text="Gift Destination: " />
-      <ChoiceBox fx:id="selectStatus" layoutX="928.0" layoutY="453.0" prefWidth="150.0">
+      <Label layoutX="636.0" layoutY="499.0" text="Gift Destination: " />
+      <ChoiceBox fx:id="selectStatus" layoutX="734.0" layoutY="595.0" prefWidth="150.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ChoiceBox>
-      <Label layoutX="879.0" layoutY="456.0" text="Status:" />
-      <Label layoutX="863.0" layoutY="326.0" text="Gift Type:" />
-      <ChoiceBox fx:id="selectGiftType" layoutX="929.0" layoutY="322.0" prefWidth="150.0">
+      <Label layoutX="685.0" layoutY="598.0" text="Status:" />
+      <Label layoutX="669.0" layoutY="468.0" text="Gift Type:" />
+      <ChoiceBox fx:id="selectGiftType" layoutX="735.0" layoutY="464.0" prefWidth="150.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ChoiceBox>
-      <Label layoutX="824.0" layoutY="193.0" text="Gift Delivery Request" textFill="#446fdc">
+      <Label layoutX="630.0" layoutY="335.0" text="Gift Delivery Request" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

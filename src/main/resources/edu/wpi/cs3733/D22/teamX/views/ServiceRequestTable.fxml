@@ -1,43 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ServiceRequestTableController">
+<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ServiceRequestTableController">
    <children>
-      <TableView fx:id="table" layoutX="141.0" layoutY="230.0" prefHeight="538.0" prefWidth="1246.0">
-        <columns>
-            <TableColumn fx:id="serviceType" prefWidth="167.199951171875" text="Service Type" />
-            <TableColumn fx:id="requestID" prefWidth="108.80007934570312" text="Request ID" />
-            <TableColumn fx:id="requestStatus" prefWidth="142.39996337890625" text="Request Status" />
-            <TableColumn fx:id="destination" prefWidth="130.93310546875" text="Destination" />
-            <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
-        </columns>
-      </TableView>
-      <JFXButton fx:id="ToMainMenu" layoutX="34.0" layoutY="34.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <Label alignment="CENTER" layoutX="739.0" layoutY="89.0" prefHeight="60.0" prefWidth="441.0" text="All Service Requests" textAlignment="CENTER" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <TextField fx:id="modifyID" layoutX="1514.0" layoutY="243.0" promptText="Enter Request ID..." />
-      <Text layoutX="1511.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Request Status">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <ChoiceBox fx:id="modifyStatus" layoutX="1514.0" layoutY="281.0" prefWidth="150.0" />
-      <JFXButton layoutX="1523.0" layoutY="319.0" onAction="#submitStatusUpdate" style="-fx-background-color: #446fdc;" text="Submit Status Update" textFill="WHITE" />
+      <VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1620.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="120.0" prefWidth="597.0" styleClass="scene-title" text="All Service Requests" textAlignment="CENTER" textFill="#446fdc">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+               <padding>
+                  <Insets bottom="50.0" />
+               </padding>
+            </Label>
+            <TableView fx:id="table" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="1246.0">
+              <columns>
+                  <TableColumn fx:id="serviceType" prefWidth="167.199951171875" text="Service Type" />
+                  <TableColumn fx:id="requestID" prefWidth="108.80007934570312" text="Request ID" />
+                  <TableColumn fx:id="requestStatus" prefWidth="142.39996337890625" text="Request Status" />
+                  <TableColumn fx:id="destination" prefWidth="130.93310546875" text="Destination" />
+                  <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
+              </columns>
+            </TableView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Request Status">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" top="50.0" />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="modifyID" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Enter Request ID...">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </TextField>
+            <ChoiceBox fx:id="modifyStatus" prefWidth="150.0">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </ChoiceBox>
+            <JFXButton onAction="#submitStatusUpdate" style="-fx-background-color: #446fdc;" text="Submit Status Update" textFill="WHITE" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
