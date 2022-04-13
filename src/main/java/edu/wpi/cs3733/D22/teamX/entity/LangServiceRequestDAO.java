@@ -77,12 +77,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
 
   @Override
   public void updateRecord(LangServiceRequest recordObject) {
-    if (!recordObject
-        .getDestination()
-        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
-      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
-      recordObject.getDestination().addRequest(recordObject);
-    }
     int index = 0; // create indexer varible for while loop
     while (index < langServiceRequests.size()) {
       if (langServiceRequests.get(index).equals(recordObject)) {
@@ -108,7 +102,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssigneeID()
+              + recordObject.getAssignee()
               + "', language = '"
               + recordObject.getLanguage()
               + " WHERE requestID = '"
@@ -130,7 +124,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
-      sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      sql.append("'" + recordObject.getAssignee() + "'" + ", ");
       sql.append("'" + recordObject.getLanguage() + "'");
       sql.append(")");
       initialization.execute(sql.toString());
@@ -153,9 +147,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
               + "language VARCHAR(20),"
               + "CONSTRAINT LASR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
-              + "ON DELETE SET NULL, "
-              + "CONSTRAINT LASR_assignee_fk "
-              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("LangServiceRequest table creation failed. Check output console.");
@@ -179,7 +170,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
-      EmployeeDAO emplAssignee = EmployeeDAO.getDAO();
       InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
@@ -192,7 +182,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  emplAssignee.getRecord(currLine[3]),
+                  currLine[3],
                   currLine[4]);
           langServiceRequests.add(node);
           node.getDestination().addRequest(node);
@@ -219,7 +209,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         sql.append("'" + langServiceRequests.get(i).getRequestID() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        sql.append("'" + langServiceRequests.get(i).getAssignee() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getLanguage() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
@@ -249,10 +239,10 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         } else {
           csvFile.write(langServiceRequests.get(i).getStatus() + ",");
         }
-        if (langServiceRequests.get(i).getAssigneeID() == null) {
+        if (langServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getAssigneeID() + ",");
+          csvFile.write(langServiceRequests.get(i).getAssignee() + ",");
         }
         if (langServiceRequests.get(i).getLanguage() == null) {
           csvFile.write(',');

@@ -42,7 +42,7 @@ public class LabServiceRequestsDAOTests {
     assertEquals(
         lsrDAOImpl.getRecord("LBSR0001").getDestination(), locationDAO.getRecord("HHALL01203"));
     assertEquals(lsrDAOImpl.getRecord("LBSR0001").getStatus(), "DONE");
-    assertEquals(lsrDAOImpl.getRecord("LBSR0001").getAssigneeID(), "EMPL0001");
+    assertEquals(lsrDAOImpl.getRecord("LBSR0001").getAssignee(), "EMPL0001");
     assertEquals(lsrDAOImpl.getRecord("LBSR0001").getService(), "Blood Sample");
     assertEquals(lsrDAOImpl.getRecord("LBSR0001").getPatientFor(), "PATT0001");
   }
@@ -77,7 +77,6 @@ public class LabServiceRequestsDAOTests {
   public void testDBLSRequestAdd() {
     boolean returnVarible = false;
     LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
-    EmployeeDAO emplDAO = EmployeeDAO.getDAO();
     LocationDAO locationDAO = LocationDAO.getDAO();
     try {
       lsrDAOImpl.getRecord("LBSR0016");
@@ -91,7 +90,7 @@ public class LabServiceRequestsDAOTests {
             "LBSR0016",
             locationDAO.getRecord("FHALL01101"),
             "DONE",
-            emplDAO.getRecord("EMPL0001"),
+            "EMPL0001",
             "Ultrasound",
             "PATT0125");
     // add the thing

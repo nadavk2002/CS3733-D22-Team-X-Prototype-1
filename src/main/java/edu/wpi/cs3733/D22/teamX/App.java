@@ -15,10 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 public class App extends Application {
 
   private static Stage mainMenu;
+  private static Stage loginScreen;
   private static int indexOfSceneReplacement;
 
   public static Stage getPrimaryStage() {
-    return mainMenu;
+    return loginScreen;
   }
 
   /**
@@ -33,6 +34,19 @@ public class App extends Application {
     children.set(indexOfSceneReplacement, scene);
   }
 
+  public static void switchRoot() throws IOException {
+    Parent root = FXMLLoader.load(App.class.getResource("views/BasicLayout.fxml"));
+    Scene scene = new Scene(root);
+    Pane insertPage = (Pane) scene.lookup("#appContent");
+
+    Pane MainMenu = FXMLLoader.load(App.class.getResource("views/app.fxml"));
+    MainMenu.setLayoutY(98);
+    List<Node> children = ((Pane) root).getChildren();
+    indexOfSceneReplacement = children.indexOf(insertPage);
+    children.set(indexOfSceneReplacement, MainMenu);
+    mainMenu.setScene(scene);
+  }
+
   @Override
   public void init() {
     log.info("Starting Up");
@@ -40,16 +54,16 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+    /*
     App.mainMenu = primaryStage;
     Parent root = FXMLLoader.load(getClass().getResource("views/BasicLayout.fxml"));
     Scene scene = new Scene(root);
     Pane insertPage = (Pane) scene.lookup("#appContent");
+     */
+    App.mainMenu = primaryStage;
 
-    Pane mainMenu = FXMLLoader.load(getClass().getResource("views/LoginScreen.fxml"));
-    mainMenu.setLayoutY(98);
-    List<Node> children = ((Pane) root).getChildren();
-    indexOfSceneReplacement = children.indexOf(insertPage);
-    children.set(indexOfSceneReplacement, mainMenu);
+    Parent root = FXMLLoader.load(getClass().getResource("views/LoginScreen.fxml"));
+    Scene scene = new Scene(root);
     primaryStage.setScene(scene);
     primaryStage.show();
     primaryStage.setFullScreen(true);

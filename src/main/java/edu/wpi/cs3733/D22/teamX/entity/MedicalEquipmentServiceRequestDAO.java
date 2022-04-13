@@ -82,13 +82,10 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
 
   @Override
   public void updateRecord(MedicalEquipmentServiceRequest recordObject) {
-    // remove mesr from old location and add to new one if location changes in the update
-    if (!recordObject
-        .getDestination()
-        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
-      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
-      recordObject.getDestination().addRequest(recordObject);
-    }
+//    // Assign equipment units if the status of a request changes to "DONE"
+//    if (recordObject.getStatus().equals("DONE") && !getRecord(recordObject.getRequestID()).getStatus().equals("DONE")) {
+//      // Assign available unit(s) to new location by copying them, and updating them in EquipmentUnitDAO
+//    }
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
       if (medicalEquipmentServiceRequests.get(index).equals(recordObject)) {
@@ -114,7 +111,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssigneeID()
+              + recordObject.getAssignee()
               + "', equipmentType = '"
               + recordObject.getEquipmentType()
               + "', quantity = "
@@ -138,7 +135,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
       medEquipReq.append("'" + recordObject.getRequestID() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getStatus() + "'" + ", ");
-      medEquipReq.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      medEquipReq.append("'" + recordObject.getAssignee() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getEquipmentType() + "'" + ", ");
       medEquipReq.append(recordObject.getQuantity());
       medEquipReq.append(")");
@@ -177,9 +174,6 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + "ON DELETE SET NULL, "
               + "CONSTRAINT MESR_equipmentType_fk "
               + "FOREIGN KEY (equipmentType) REFERENCES EquipmentType(model) "
-              + "ON DELETE SET NULL, "
-              + "CONSTRAINT MESR_assignee_fk "
-              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println(
@@ -204,7 +198,6 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
-      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
@@ -217,7 +210,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  emplDAO.getRecord(currLine[3]),
+                  currLine[3],
                   currLine[4],
                   Integer.parseInt(currLine[5]));
           medicalEquipmentServiceRequests.add(mesrNode);
@@ -249,8 +242,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         medEquipReq.append("'" + medicalEquipmentServiceRequests.get(i).getStatus() + "'" + ", ");
-        medEquipReq.append(
-            "'" + medicalEquipmentServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        medEquipReq.append("'" + medicalEquipmentServiceRequests.get(i).getAssignee() + "'" + ", ");
         medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getEquipmentType() + "'" + ", ");
         medEquipReq.append(medicalEquipmentServiceRequests.get(i).getQuantity());
@@ -282,10 +274,10 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         } else {
           csvFile.write(medicalEquipmentServiceRequests.get(i).getStatus() + ",");
         }
-        if (medicalEquipmentServiceRequests.get(i).getAssigneeID() == null) {
+        if (medicalEquipmentServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicalEquipmentServiceRequests.get(i).getAssigneeID() + ",");
+          csvFile.write(medicalEquipmentServiceRequests.get(i).getAssignee() + ",");
         }
         if (medicalEquipmentServiceRequests.get(i).getEquipmentType() == null) {
           csvFile.write(',');

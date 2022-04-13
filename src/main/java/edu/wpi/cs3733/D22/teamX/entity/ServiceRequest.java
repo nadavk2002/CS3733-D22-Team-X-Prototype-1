@@ -8,13 +8,13 @@ public abstract class ServiceRequest {
   private String requestID;
   private Location destination;
   private String status;
-  private Employee assignee;
+  private String assignee;
 
   //did this do anything
 
   // private String requestingUser
 
-  public ServiceRequest(String requestID, Location destination, String status, Employee assignee) {
+  public ServiceRequest(String requestID, Location destination, String status, String assignee) {
     this.requestID = requestID;
     this.destination = destination;
     this.status = status;
@@ -25,7 +25,7 @@ public abstract class ServiceRequest {
     this.requestID = "";
     this.destination = new Location();
     this.status = "";
-    this.assignee = new Employee();
+    this.assignee = "";
   }
 
   public String getRequestID() {
@@ -40,12 +40,8 @@ public abstract class ServiceRequest {
     return destination;
   }
 
-  public Employee getAssignee() {
+  public String getAssignee() {
     return assignee;
-  }
-
-  public String getAssigneeID() {
-    return getAssignee().getEmployeeID();
   }
 
   public void setRequestID(String requestID) {
@@ -60,7 +56,7 @@ public abstract class ServiceRequest {
     this.destination = destination;
   }
 
-  public void setAssignee(Employee assignee) {
+  public void setAssignee(String assignee) {
     this.assignee = assignee;
   }
 

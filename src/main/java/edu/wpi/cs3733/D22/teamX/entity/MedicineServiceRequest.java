@@ -11,7 +11,7 @@ public class MedicineServiceRequest extends ServiceRequest {
   }
 
   public MedicineServiceRequest(
-      String requestID, Location destination, String status, Employee assignee, String rxNum) {
+      String requestID, Location destination, String status, String assignee, String rxNum) {
     super(requestID, destination, status, assignee);
     this.rxNum = rxNum;
   }

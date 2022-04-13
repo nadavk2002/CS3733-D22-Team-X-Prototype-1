@@ -10,7 +10,7 @@ public class LangServiceRequest extends ServiceRequest {
   }
 
   public LangServiceRequest(
-      String requestID, Location destination, String status, Employee assignee, String language) {
+      String requestID, Location destination, String status, String assignee, String language) {
     super(requestID, destination, status, assignee);
     this.language = language;
   }
