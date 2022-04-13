@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
-  private static List<LangServiceRequest> langServiceRequests = new ArrayList<>();
-  private static String csv = "LanguageInterpreterRequests.csv";
+public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
+  private static List<LaundyServiceRequest> laundyServiceRequests = new ArrayList<>();
+  private static String csv = "LaundryServiceRequests.csv";
 
   /** Creates a new LocationDAO object. */
-  private LangServiceRequestDAO() {}
+  private LaundryServiceRequestDAO() {}
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
-    private static final LangServiceRequestDAO langServiceRequestDAO = new LangServiceRequestDAO();
+    private static final LaundryServiceRequestDAO laundryServiceRequestDAO =
+        new LaundryServiceRequestDAO();
   }
 
   /**
@@ -25,19 +26,19 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
    *
    * @return the DAO Singleton object.
    */
-  public static LangServiceRequestDAO getDAO() {
-    return SingletonHelper.langServiceRequestDAO;
+  public static LaundryServiceRequestDAO getDAO() {
+    return SingletonHelper.laundryServiceRequestDAO;
   }
 
   @Override
-  public List<LangServiceRequest> getAllRecords() {
-    return langServiceRequests;
+  public List<LaundyServiceRequest> getAllRecords() {
+    return laundyServiceRequests;
   }
 
   @Override
-  public LangServiceRequest getRecord(String recordID) {
+  public LaundyServiceRequest getRecord(String recordID) {
     // iterate through list to find element with matching requestID
-    for (LangServiceRequest lsr : langServiceRequests) {
+    for (LaundyServiceRequest lsr : laundyServiceRequests) {
       // if matching IDs
       if (lsr.getRequestID().equals(recordID)) {
         return lsr;
@@ -47,14 +48,14 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   }
 
   @Override
-  public void deleteRecord(LangServiceRequest recordObject) {
+  public void deleteRecord(LaundyServiceRequest recordObject) {
     recordObject.getDestination().removeRequest(recordObject);
     // remove from list
     int index = 0; // create index variable for while loop
-    int initialSize = langServiceRequests.size();
-    while (index < langServiceRequests.size()) {
-      if (langServiceRequests.get(index).equals(recordObject)) {
-        langServiceRequests.remove(index); // removes object from list
+    int initialSize = laundyServiceRequests.size();
+    while (index < laundyServiceRequests.size()) {
+      if (laundyServiceRequests.get(index).equals(recordObject)) {
+        laundyServiceRequests.remove(index); // removes object from list
         index--;
         break; // exit
       }
@@ -69,24 +70,32 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-          "DELETE FROM LangServiceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
+          "DELETE FROM LaundryServiceRequest WHERE requestID = '"
+              + recordObject.getRequestID()
+              + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
   @Override
-  public void updateRecord(LangServiceRequest recordObject) {
+  public void updateRecord(LaundyServiceRequest recordObject) {
+    if (!recordObject
+        .getDestination()
+        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
+      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
+      recordObject.getDestination().addRequest(recordObject);
+    }
     int index = 0; // create indexer varible for while loop
-    while (index < langServiceRequests.size()) {
-      if (langServiceRequests.get(index).equals(recordObject)) {
-        langServiceRequests.set(index, recordObject);
+    while (index < laundyServiceRequests.size()) {
+      if (laundyServiceRequests.get(index).equals(recordObject)) {
+        laundyServiceRequests.set(index, recordObject);
         break; // exit
       }
       index++; // increment if not found yet
     }
     // if medical equipment service request not found
-    if (index == langServiceRequests.size()) {
+    if (index == laundyServiceRequests.size()) {
       throw new NoSuchElementException("request does not exist");
     }
 
@@ -96,15 +105,15 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE MedicalEquipmentServiceRequest SET"
+          "UPDATE LaundryServiceRequest SET"
               + " destination = '"
               + recordObject.getDestination().getNodeID()
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssignee()
-              + "', language = '"
-              + recordObject.getLanguage()
+              + "', service = '"
+              + recordObject.getService()
               + " WHERE requestID = '"
               + recordObject.getRequestID()
               + "'");
@@ -114,18 +123,17 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   }
 
   @Override
-  public void addRecord(LangServiceRequest recordObject) {
-    langServiceRequests.add(recordObject);
-
+  public void addRecord(LaundyServiceRequest recordObject) {
+    laundyServiceRequests.add(recordObject);
     try {
       Statement initialization = connection.createStatement();
       StringBuilder sql = new StringBuilder();
-      sql.append("INSERT INTO LangServiceRequest VALUES(");
+      sql.append("INSERT INTO LaundyServiceRequest VALUES(");
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
       sql.append("'" + recordObject.getAssignee() + "'" + ", ");
-      sql.append("'" + recordObject.getLanguage() + "'");
+      sql.append("'" + recordObject.getService() + "'");
       sql.append(")");
       initialization.execute(sql.toString());
     } catch (SQLException e) {
@@ -140,16 +148,16 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-          "CREATE TABLE LangServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+          "CREATE TABLE LaundryServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-              + "language VARCHAR(20),"
-              + "CONSTRAINT LASR_dest_fk "
+              + "service VARCHAR(140),"
+              + "CONSTRAINT LYSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
-      System.out.println("LangServiceRequest table creation failed. Check output console.");
+      System.out.println("LaundryServiceRequest table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
@@ -159,9 +167,9 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public void dropTable() {
     try {
       Statement statement = connection.createStatement();
-      statement.execute("DROP TABLE LangServiceRequest");
+      statement.execute("DROP TABLE LaundryServiceRequest");
     } catch (SQLException e) {
-      System.out.println("LangServiceRequest not dropped");
+      System.out.println("LaundryServiceRequest not dropped");
       e.printStackTrace();
     }
   }
@@ -170,24 +178,24 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
-      InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
-      BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
+      InputStream stream = DatabaseCreator.class.getResourceAsStream(csv);
+      BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(stream));
       medCSVReader.readLine();
       String nextFileLine;
       while ((nextFileLine = medCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 5) {
-          LangServiceRequest node =
-              new LangServiceRequest(
+          LaundyServiceRequest node =
+              new LaundyServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   currLine[3],
                   currLine[4]);
-          langServiceRequests.add(node);
+          laundyServiceRequests.add(node);
           node.getDestination().addRequest(node);
         } else {
-          System.out.println("LangServiceRequest CSV file formatted improperly");
+          System.out.println("LaundryServiceRequest CSV file formatted improperly");
           System.exit(1);
         }
       }
@@ -200,21 +208,20 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       return false;
     }
 
-    // Insert medical equipment service requests from MedEquipReqFromCSV into db table
-    for (int i = 0; i < langServiceRequests.size(); i++) {
+    for (int i = 0; i < laundyServiceRequests.size(); i++) {
       try {
         Statement initialization = connection.createStatement();
         StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO LangServiceRequest VALUES(");
-        sql.append("'" + langServiceRequests.get(i).getRequestID() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getAssignee() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getLanguage() + "'");
+        sql.append("INSERT INTO LaundryServiceRequest VALUES(");
+        sql.append("'" + laundyServiceRequests.get(i).getRequestID() + "'" + ", ");
+        sql.append("'" + laundyServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+        sql.append("'" + laundyServiceRequests.get(i).getStatus() + "'" + ", ");
+        sql.append("'" + laundyServiceRequests.get(i).getAssignee() + "'" + ", ");
+        sql.append("'" + laundyServiceRequests.get(i).getService() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
       } catch (SQLException e) {
-        System.out.println("Input for LangServiceRequest " + i + " failed");
+        System.out.println("Input for LaundryServiceRequest " + i + " failed");
         e.printStackTrace();
         return false;
       }
@@ -226,28 +233,28 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,language");
-      for (int i = 0; i < langServiceRequests.size(); i++) {
-        csvFile.write("\n" + langServiceRequests.get(i).getRequestID() + ",");
-        if (langServiceRequests.get(i).getDestination() == null) {
+      csvFile.write("requestID,destination,status,assignee,service");
+      for (int i = 0; i < laundyServiceRequests.size(); i++) {
+        csvFile.write("\n" + laundyServiceRequests.get(i).getRequestID() + ",");
+        if (laundyServiceRequests.get(i).getDestination() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getDestination().getNodeID() + ",");
+          csvFile.write(laundyServiceRequests.get(i).getDestination().getNodeID() + ",");
         }
-        if (langServiceRequests.get(i).getStatus() == null) {
+        if (laundyServiceRequests.get(i).getStatus() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getStatus() + ",");
+          csvFile.write(laundyServiceRequests.get(i).getStatus() + ",");
         }
-        if (langServiceRequests.get(i).getAssignee() == null) {
+        if (laundyServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(laundyServiceRequests.get(i).getAssignee() + ",");
         }
-        if (langServiceRequests.get(i).getLanguage() == null) {
+        if (laundyServiceRequests.get(i).getService() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getLanguage());
+          csvFile.write(laundyServiceRequests.get(i).getService());
         }
       }
       csvFile.flush();
@@ -263,6 +270,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   @Override
   public String makeID() {
     int nextIDFinalNum = this.getAllRecords().size() + 1;
-    return String.format("LISR%04d", nextIDFinalNum);
+    return String.format("LYSR%04d", nextIDFinalNum);
   }
 }
