@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class GiftDeliveryController implements Initializable {
   @FXML private Button ReturnToMain;
@@ -21,9 +20,9 @@ public class GiftDeliveryController implements Initializable {
   @FXML
   private ChoiceBox<String> selectGiftDestination, selectAssignStaff, selectStatus, selectGiftType;
   @FXML private Button submitButton;
-  @FXML private TableView<GiftDeliveryRequest> tbView;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private GiftDeliveryRequestDAO giftDAO = GiftDeliveryRequestDAO.getDAO();
   private List<Location> locations;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<GiftDeliveryRequest, String> assigneeColumn = new TableColumn("Assignee");
@@ -49,18 +48,6 @@ public class GiftDeliveryController implements Initializable {
     selectAssignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
     giftNoteField.setOnAction((ActionEvent event) -> enableSubmitButton());
     selectStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
-
-    tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    tbView
-        .getColumns()
-        .addAll(
-            idColumn, assigneeColumn, locationColumn, statusColumn, giftTypeColumn, giftNoteColumn);
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
-    statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    giftTypeColumn.setCellValueFactory(new PropertyValueFactory<>("giftType"));
-    giftNoteColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
   }
 
   /**
@@ -104,15 +91,14 @@ public class GiftDeliveryController implements Initializable {
   @FXML
   public void submitButton() {
     GiftDeliveryRequest request = new GiftDeliveryRequest();
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(giftDAO.makeID());
     request.setDestination(
         locations.get(selectGiftDestination.getSelectionModel().getSelectedIndex()));
     request.setAssignee(selectAssignStaff.getValue());
     request.setStatus(selectStatus.getValue());
     request.setGiftType(selectGiftType.getValue());
     request.setNotes(giftNoteField.getText());
-
+    giftDAO.addRecord(request);
     this.resetFields();
-    tbView.getItems().add(request);
   }
 }

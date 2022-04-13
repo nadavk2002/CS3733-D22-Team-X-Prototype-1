@@ -15,9 +15,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -26,31 +23,17 @@ public class LabRequestController implements Initializable {
   @FXML private VBox labelCol;
   @FXML private VBox submitCol;
   @FXML private HBox buttonRow;
-  @FXML private TableColumn<LabServiceRequest, String> requestID;
-  @FXML private TableColumn<LabServiceRequest, String> patientID;
-  @FXML private TableColumn<LabServiceRequest, String> assigneeTable;
-  @FXML private TableColumn<LabServiceRequest, String> service;
-  @FXML private TableColumn<LabServiceRequest, String> status;
-  @FXML private TableColumn<LabServiceRequest, String> destination;
-  @FXML private TableView<LabServiceRequest> table;
   @FXML private Button ReturnToMain;
   @FXML private Button submitRequest;
   @FXML
   private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus, selectDestination;
   private List<Location> locations;
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO();
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
-
-    requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    patientID.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
-    assigneeTable.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    service.setCellValueFactory(new PropertyValueFactory<>("service"));
-    status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    destination.setCellValueFactory(new PropertyValueFactory<>("locationNodeID"));
-    table.setItems(labDeliveryList());
 
     selectDestination.setItems(this.getLocationNames());
     submitRequest.setDisable(true);
@@ -74,7 +57,6 @@ public class LabRequestController implements Initializable {
     selectLab
         .getItems()
         .addAll("Blood Work", "MRI", "Urine Sample", "Stool Sample", "Saliva Sample");
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     submitCol.setSpacing(20);
     buttonRow.setSpacing(20);
@@ -128,17 +110,16 @@ public class LabRequestController implements Initializable {
   public void submitRequest() {
     LabServiceRequest request = new LabServiceRequest();
 
-    request.setRequestID(request.makeRequestID()); //
+    request.setRequestID(labDAO.makeID()); //
     request.setPatientFor(patientName.getValue());
     request.setAssignee(assigneeDrop.getValue());
     request.setService(selectLab.getValue());
     request.setStatus(serviceStatus.getValue());
     request.setDestination(
         locations.get(selectDestination.getSelectionModel().getSelectedIndex())); //
-    LabServiceRequestDAO submit = LabServiceRequestDAO.getDAO();
-    submit.addRecord(request);
+
+    labDAO.addRecord(request);
     this.resetFields();
-    table.setItems(labDeliveryList());
   }
 
   @FXML

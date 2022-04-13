@@ -13,22 +13,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class JanitorialRequestController implements Initializable {
   @FXML private Button mainMenu, submitButton;
   @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
-  @FXML private TableView<JanitorServiceRequest> tbView;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private JanitorServiceRequestDAO janitorDAO = JanitorServiceRequestDAO.getDAO();
   private List<Location> locations;
-  private TableColumn<JanitorServiceRequest, String> idColumn = new TableColumn("Request ID");
-  private TableColumn<JanitorServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
-  private TableColumn<JanitorServiceRequest, String> locationColumn = new TableColumn("Location");
-  private TableColumn<JanitorServiceRequest, String> statusColumn =
-      new TableColumn("Request Status");
-  private TableColumn<JanitorServiceRequest, String> serviceTypeColumn =
-      new TableColumn("Service Type");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -43,16 +35,6 @@ public class JanitorialRequestController implements Initializable {
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());
     assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
-
-    tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    tbView
-        .getColumns()
-        .addAll(idColumn, assigneeColumn, locationColumn, statusColumn, serviceTypeColumn);
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
-    statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    // serviceTypeColumn.setCellValueFactory(new PropertyValueFactory<>("serviceType"));
-    assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
   /**
@@ -91,13 +73,13 @@ public class JanitorialRequestController implements Initializable {
   public void submitButton() {
     JanitorServiceRequest request = new JanitorServiceRequest();
 
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(janitorDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(assignStaff.getValue());
     request.setDescription(serviceType.getValue());
+    janitorDAO.addRecord(request);
     this.resetFields();
-    tbView.getItems().add(request);
   }
 
   /**

@@ -128,7 +128,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
     try {
       Statement initialization = connection.createStatement();
       StringBuilder sql = new StringBuilder();
-      sql.append("INSERT INTO LaundyServiceRequest VALUES(");
+      sql.append("INSERT INTO LaundryServiceRequest VALUES(");
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
