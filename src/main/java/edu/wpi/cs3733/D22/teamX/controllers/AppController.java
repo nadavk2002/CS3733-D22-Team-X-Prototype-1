@@ -168,7 +168,8 @@ public class AppController implements Initializable {
   //  void EquipReqTableButton() throws IOException {
   //    App.switchScene(
   //        FXMLLoader.load(
-  //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EquipReqTable.fxml")));
+  //
+  // getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   //  }
 
   @FXML

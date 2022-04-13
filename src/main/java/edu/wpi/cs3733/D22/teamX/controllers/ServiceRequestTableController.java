@@ -19,7 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
-public class EquipReqTableController implements Initializable {
+public class ServiceRequestTableController implements Initializable {
   @FXML private TableView<ServiceRequest> table;
   @FXML private TableColumn<ServiceRequest, String> assignee; // spike c, Quantity
   @FXML private TableColumn<ServiceRequest, String> requestStatus; // spike c, Status
