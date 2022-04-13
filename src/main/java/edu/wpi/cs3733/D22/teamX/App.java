@@ -45,6 +45,7 @@ public class App extends Application {
     indexOfSceneReplacement = children.indexOf(insertPage);
     children.set(indexOfSceneReplacement, MainMenu);
     mainMenu.setScene(scene);
+    mainMenu.setFullScreen(true);
   }
 
   @Override

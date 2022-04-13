@@ -14,8 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 
@@ -26,11 +28,66 @@ public class ServiceRequestTableController implements Initializable {
   @FXML private TableColumn<ServiceRequest, String> destination; // spike c destination
   @FXML private TableColumn<ServiceRequest, String> requestID; // spike c RequestID
   @FXML private TableColumn<ServiceRequest, String> serviceType;
+  @FXML private TableColumn<ServiceRequest, ChoiceBox<String>> modStatus;
+  @FXML private TextField modifyID;
+  @FXML private ChoiceBox<String> modifyStatus;
+
+  @FXML
+  private void submitStatusUpdate() throws IOException {
+    String id = modifyID.getText();
+    try {
+      GiftDeliveryRequestDAO giftDAO = GiftDeliveryRequestDAO.getDAO();
+      GiftDeliveryRequest req = giftDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      giftDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
+    try {
+      JanitorServiceRequestDAO janDAO = JanitorServiceRequestDAO.getDAO();
+      JanitorServiceRequest req = janDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      janDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
+    try {
+      LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO();
+      LabServiceRequest req = labDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      labDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
+    try {
+      LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
+      LangServiceRequest req = langDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      langDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
+    try {
+      MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
+      MealServiceRequest req = mealDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      mealDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
+    try {
+      MedicalEquipmentServiceRequestDAO medDAO = MedicalEquipmentServiceRequestDAO.getDAO();
+      MedicalEquipmentServiceRequest req = medDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      medDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
+  }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     requestStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+    modifyStatus.getItems().addAll("DONE", "PROC", "");
+
     destination.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<ServiceRequest, String>, ObservableValue<String>>() {
@@ -61,6 +118,9 @@ public class ServiceRequestTableController implements Initializable {
     requests.addAll(LabServiceRequestDAO.getDAO().getAllRecords());
     requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
     requests.addAll(LangServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
     return (List<ServiceRequest>) requests;
   }
 

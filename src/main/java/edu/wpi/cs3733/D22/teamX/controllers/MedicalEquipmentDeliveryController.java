@@ -21,6 +21,8 @@ public class MedicalEquipmentDeliveryController {
   @FXML private Button submitButton;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private MedicalEquipmentServiceRequestDAO equipmentDAO =
+      MedicalEquipmentServiceRequestDAO.getDAO();
   private List<Location> locations;
 
   @FXML
@@ -86,13 +88,12 @@ public class MedicalEquipmentDeliveryController {
   public void submitRequest() {
     MedicalEquipmentServiceRequest request = new MedicalEquipmentServiceRequest();
     request.setEquipmentType(selectEquipmentType.getValue());
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(equipmentDAO.makeID());
     request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
 
-    MedicalEquipmentServiceRequestDAO submit = MedicalEquipmentServiceRequestDAO.getDAO();
-    submit.addRecord(request);
+    equipmentDAO.addRecord(request);
     this.resetFields();
     updateAvailability();
   }

@@ -3,8 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -21,105 +19,89 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <HBox fx:id="masterBox" layoutX="452.0" layoutY="127.0" prefHeight="598.0" prefWidth="1172.0">
+      <VBox fx:id="fullSelBox" alignment="TOP_RIGHT" layoutX="757.0" layoutY="149.0" prefHeight="341.0" prefWidth="353.0">
          <children>
-            <VBox fx:id="fullSelBox" alignment="TOP_RIGHT" prefHeight="341.0" prefWidth="353.0">
+            <HBox fx:id="topRowNames" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
                <children>
-                  <HBox fx:id="topRowNames" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="choiceBoxLabel" text="Patient Names">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel1" text="Drink Selection">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="secondRowBoxes" alignment="TOP_CENTER" prefHeight="2.0" prefWidth="334.0">
-                     <children>
-                        <ChoiceBox fx:id="patientNames" prefWidth="150.0" />
-                        <ChoiceBox fx:id="drinkSel" prefWidth="150.0" />
-                     </children>
-                  </HBox>
-                  <HBox fx:id="thirdRowNames" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
-                     <children>
-                        <Label fx:id="choiceBoxLabel2" text="Assigned Staff">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel11" text="Side Selection">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="fourthRowBoxes" alignment="TOP_CENTER" prefHeight="26.0" prefWidth="352.0">
-                     <children>
-                        <ChoiceBox fx:id="assignStaff" prefWidth="150.0" />
-                        <ChoiceBox fx:id="sideSel" prefWidth="150.0" />
-                     </children>
-                  </HBox>
-                  <HBox fx:id="fifthRowNames" alignment="CENTER" prefHeight="17.0" prefWidth="37.0">
-                     <children>
-                        <Label fx:id="choiceBoxLabel3" text="Request Status">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel111" alignment="CENTER" text="Main Selection">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox fx:id="sixthRowBoxes" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="339.0">
-                     <children>
-                        <ChoiceBox fx:id="serviceStatus" prefWidth="150.0" />
-                        <ChoiceBox fx:id="mainSel" prefWidth="150.0" />
-                     </children>
-                  </HBox>
-                  <VBox fx:id="seventhRowButtons" alignment="TOP_CENTER" prefHeight="171.0" prefWidth="353.0">
-                     <children>
-                        <Label fx:id="choiceBoxLabel1111" alignment="CENTER" text="Destination">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                        <ChoiceBox fx:id="destinationDrop" prefWidth="150.0" />
-                        <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textAlignment="CENTER" textFill="#446fdc">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </VBox>
+                  <Label fx:id="choiceBoxLabel" text="Patient Names">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel1" text="Drink Selection">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="secondRowBoxes" alignment="TOP_CENTER" prefHeight="2.0" prefWidth="334.0">
+               <children>
+                  <ChoiceBox fx:id="patientNames" prefWidth="150.0" />
+                  <ChoiceBox fx:id="drinkSel" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="thirdRowNames" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
+               <children>
+                  <Label fx:id="choiceBoxLabel2" text="Assigned Staff">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel11" text="Side Selection">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="fourthRowBoxes" alignment="TOP_CENTER" prefHeight="26.0" prefWidth="352.0">
+               <children>
+                  <ChoiceBox fx:id="assignStaff" prefWidth="150.0" />
+                  <ChoiceBox fx:id="sideSel" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <HBox fx:id="fifthRowNames" alignment="CENTER" prefHeight="17.0" prefWidth="37.0">
+               <children>
+                  <Label fx:id="choiceBoxLabel3" text="Request Status">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel111" alignment="CENTER" text="Main Selection">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="sixthRowBoxes" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="339.0">
+               <children>
+                  <ChoiceBox fx:id="serviceStatus" prefWidth="150.0" />
+                  <ChoiceBox fx:id="mainSel" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <VBox fx:id="seventhRowButtons" alignment="TOP_CENTER" prefHeight="171.0" prefWidth="353.0">
+               <children>
+                  <Label fx:id="choiceBoxLabel1111" alignment="CENTER" text="Destination">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <ChoiceBox fx:id="destinationDrop" prefWidth="150.0" />
+                  <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textAlignment="CENTER" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </VBox>
-            <TableView fx:id="table" prefHeight="457.0" prefWidth="808.0">
-              <columns>
-                <TableColumn fx:id="reqID" prefWidth="75.0" text="Request ID" />
-                <TableColumn fx:id="patName" prefWidth="75.0" text="Patient Name" />
-                  <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
-                  <TableColumn fx:id="mainCourse" prefWidth="75.0" text="Main Course" />
-                  <TableColumn fx:id="side" prefWidth="75.0" text="Side" />
-                  <TableColumn fx:id="drink" prefWidth="75.0" text="Drink" />
-                  <TableColumn fx:id="status" prefWidth="75.0" text="Request Status" />
-                  <TableColumn fx:id="destination" prefWidth="75.0" text="Destination" />
-              </columns>
-            </TableView>
          </children>
-      </HBox>
+      </VBox>
    </children>
 </AnchorPane>
