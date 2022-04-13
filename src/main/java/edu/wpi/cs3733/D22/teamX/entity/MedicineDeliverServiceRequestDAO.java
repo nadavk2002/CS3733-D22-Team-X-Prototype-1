@@ -63,7 +63,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-          "DELETE FROM MedicineDeliveryServiceRequests WHERE requestID = '"
+          "DELETE FROM MedicineDeliveryServiceRequest WHERE requestID = '"
               + recordObject.getRequestID()
               + "'");
     } catch (SQLException e) {
@@ -73,7 +73,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
 
   @Override
   public void updateRecord(MedicineServiceRequest recordObject) {
-    // remove from old location and add to new one if location changes in the update
+    // remove mesr from old location and add to new one if location changes in the update
     if (!recordObject
         .getDestination()
         .equals(getRecord(recordObject.getRequestID()).getDestination())) {
@@ -99,7 +99,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE MedicineDeliveryServiceRequests SET"
+          "UPDATE MedicineDeliveryServiceRequest SET"
               + " destination = '"
               + recordObject.getDestination().getNodeID()
               + "', status = '"
@@ -125,12 +125,13 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
     try {
       Statement initialization = connection.createStatement();
       StringBuilder medicineDeliveryServiceRequest = new StringBuilder();
-      medicineDeliveryServiceRequest.append("INSERT INTO MedicineDeliveryServiceRequests VALUES(");
+      medicineDeliveryServiceRequest.append("INSERT INTO MedicineDeliveryServiceRequest VALUES(");
       medicineDeliveryServiceRequest.append("'" + recordObject.getRequestID() + "'" + ", ");
-      medicineDeliveryServiceRequest.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
+      medicineDeliveryServiceRequest.append(
+          "'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getStatus() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getAssignee() + "'" + ", ");
-      medicineDeliveryServiceRequest.append("'" + recordObject.getRxNum() + "'"+ ", ");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getRxNum() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getPatientFor() + "'");
       medicineDeliveryServiceRequest.append(")");
       initialization.execute(medicineDeliveryServiceRequest.toString());
@@ -139,9 +140,8 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
       return;
     }
     recordObject
-            .getDestination()
-            .addRequest(recordObject); // add mesr to destination's list of service requests
-
+        .getDestination()
+        .addRequest(recordObject); // add mesr to destination's list of service requests
   }
 
   @Override
@@ -149,28 +149,34 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
     try {
       Statement initialization = connection.createStatement();
       initialization.execute(
-              "CREATE TABLE MedicineDeliveryServiceRequests(requestID CHAR(8) PRIMARY KEY NOT NULL, "
-                      + "destination CHAR(10),"
-                      + "status CHAR(4),"
-                      + "assignee CHAR(8),"
-                      + "equipmentType VARCHAR(20),"
-                      + "quantity INT,"
-                      + "CONSTRAINT MESR_dest_fk "
-                      + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
-                      + "ON DELETE SET NULL, "
-                      + "CONSTRAINT MESR_equipmentType_fk "
-                      + "FOREIGN KEY (equipmentType) REFERENCES EquipmentType(model) "
-                      + "ON DELETE SET NULL)");
+          "CREATE TABLE MedicineDeliveryServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+              + "destination CHAR(10),"
+              + "status CHAR(4),"
+              + "assignee CHAR(8),"
+              + "rxNum CHAR(8),"
+              + "patientFor CHAR(8),"
+              + "CONSTRAINT MDSR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT MESR_equipmentType_fk ");
     } catch (SQLException e) {
       System.out.println(
-              "MedicalEquipmentServiceRequest table creation failed. Check output console.");
+          "MedicineDeliveryServiceRequest table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
   }
 
   @Override
-  public void dropTable() {}
+  public void dropTable() {
+    try {
+      Statement dropMedicalEquipmentServiceRequest = connection.createStatement();
+      dropMedicalEquipmentServiceRequest.execute("DROP TABLE MedicalEquipmentServiceRequest");
+    } catch (SQLException e) {
+      System.out.println("MedicineDeliveryServiceRequest not dropped");
+      e.printStackTrace();
+    }
+  }
 
   @Override
   public boolean loadCSV() {
