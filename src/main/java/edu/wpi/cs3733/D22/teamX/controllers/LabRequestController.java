@@ -16,8 +16,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -64,9 +62,9 @@ public class LabRequestController implements Initializable {
     serviceStatus.getItems().addAll(" ", "PROC", "DONE");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
     assigneeDrop.setItems(this.getEmployeeIDs());
-//    assigneeDrop
-//        .getItems()
-//        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
+    //    assigneeDrop
+    //        .getItems()
+    //        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
     selectLab
         .getItems()
         .addAll("Blood Work", "MRI", "Urine Sample", "Stool Sample", "Saliva Sample");
@@ -131,7 +129,7 @@ public class LabRequestController implements Initializable {
   public void submitRequest() {
     LabServiceRequest request = new LabServiceRequest();
 
-    request.setRequestID(request.makeRequestID()); //
+    request.setRequestID(labDAO.makeID()); //
     request.setPatientFor(patientName.getValue());
     request.setAssignee(emplDAO.getRecord(assigneeDrop.getValue()));
     request.setService(selectLab.getValue());

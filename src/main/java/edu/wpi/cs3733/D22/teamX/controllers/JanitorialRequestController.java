@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class JanitorialRequestController implements Initializable {
   @FXML private Button mainMenu, submitButton;
@@ -93,7 +92,7 @@ public class JanitorialRequestController implements Initializable {
   public void submitButton() {
     JanitorServiceRequest request = new JanitorServiceRequest();
 
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(janitorDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));

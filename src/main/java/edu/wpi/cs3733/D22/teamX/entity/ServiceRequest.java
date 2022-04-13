@@ -10,7 +10,7 @@ public abstract class ServiceRequest {
   private String status;
   private Employee assignee;
 
-  //did this do anything
+  // did this do anything
 
   // private String requestingUser
 
@@ -44,7 +44,7 @@ public abstract class ServiceRequest {
     return assignee;
   }
 
-  public String getAssigneeID(){
+  public String getAssigneeID() {
     return assignee.getEmployeeID();
   }
 

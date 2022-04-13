@@ -15,10 +15,6 @@ public class LaundyServiceRequest extends ServiceRequest {
     this.service = service;
   }
 
-  public String makeRequestID() {
-    return "sample";
-  }
-
   public String getService() {
     return service;
   }

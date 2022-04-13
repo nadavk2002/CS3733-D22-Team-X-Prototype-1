@@ -22,7 +22,7 @@ public class Employee {
   }
 
   public Employee(
-          String employeeID, String firstName, String lastName, String clearanceType, String jobTitle) {
+      String employeeID, String firstName, String lastName, String clearanceType, String jobTitle) {
     this.employeeID = employeeID;
     this.firstName = firstName;
     this.lastName = lastName;

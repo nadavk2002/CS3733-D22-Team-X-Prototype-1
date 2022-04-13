@@ -23,10 +23,6 @@ public class GiftDeliveryRequest extends ServiceRequest { // rename to GiftServi
     this.giftType = giftType;
   }
 
-  public String makeRequestID() {
-    return "sample";
-  }
-
   public String getNotes() {
     return notes;
   }

@@ -18,7 +18,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
   /** Singleton Helper Class. */
   private static class SingletonHelper {
     private static final JanitorServiceRequestDAO janitorServiceRequestDAO =
-            new JanitorServiceRequestDAO();
+        new JanitorServiceRequestDAO();
   }
 
   /**
@@ -70,9 +70,9 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-              "DELETE FROM JanitorServiceRequest WHERE requestID = '"
-                      + recordObject.getRequestID()
-                      + "'");
+          "DELETE FROM JanitorServiceRequest WHERE requestID = '"
+              + recordObject.getRequestID()
+              + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -81,8 +81,8 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
   @Override
   public void updateRecord(JanitorServiceRequest recordObject) {
     if (!recordObject
-            .getDestination()
-            .equals(getRecord(recordObject.getRequestID()).getDestination())) {
+        .getDestination()
+        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
       getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
       recordObject.getDestination().addRequest(recordObject);
     }
@@ -105,18 +105,18 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-              "UPDATE JanitorServiceRequest SET"
-                      + " destination = '"
-                      + recordObject.getDestination().getNodeID()
-                      + "', status = '"
-                      + recordObject.getStatus()
-                      + "', assignee = '"
-                      + recordObject.getAssigneeID()
-                      + "', description = '"
-                      + recordObject.getDescription()
-                      + " WHERE requestID = '"
-                      + recordObject.getRequestID()
-                      + "'");
+          "UPDATE JanitorServiceRequest SET"
+              + " destination = '"
+              + recordObject.getDestination().getNodeID()
+              + "', status = '"
+              + recordObject.getStatus()
+              + "', assignee = '"
+              + recordObject.getAssigneeID()
+              + "', description = '"
+              + recordObject.getDescription()
+              + " WHERE requestID = '"
+              + recordObject.getRequestID()
+              + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -149,17 +149,17 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
     try {
       Statement statement = connection.createStatement();
       statement.execute(
-              "CREATE TABLE JanitorServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
-                      + "destination CHAR(10),"
-                      + "status CHAR(4),"
-                      + "assignee CHAR(8),"
-                      + "description VARCHAR(140),"
-                      + "CONSTRAINT JSR_dest_fk "
-                      + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
-                      + "ON DELETE SET NULL, "
-                      + "CONSTRAINT JSR_assignee_fk "
-                      + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID)"
-                      + "ON DELETE SET NULL)");
+          "CREATE TABLE JanitorServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+              + "destination CHAR(10),"
+              + "status CHAR(4),"
+              + "assignee CHAR(8),"
+              + "description VARCHAR(140),"
+              + "CONSTRAINT JSR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT JSR_assignee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID)"
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("JanitorServiceRequest table creation failed. Check output console.");
       e.printStackTrace();
@@ -191,12 +191,12 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 5) {
           JanitorServiceRequest node =
-                  new JanitorServiceRequest(
-                          currLine[0],
-                          locDestination.getRecord(currLine[1]),
-                          currLine[2],
-                          emplDAO.getRecord(currLine[3]),
-                          currLine[4]);
+              new JanitorServiceRequest(
+                  currLine[0],
+                  locDestination.getRecord(currLine[1]),
+                  currLine[2],
+                  emplDAO.getRecord(currLine[3]),
+                  currLine[4]);
           janitorServiceRequests.add(node);
           node.getDestination().addRequest(node);
         } else {

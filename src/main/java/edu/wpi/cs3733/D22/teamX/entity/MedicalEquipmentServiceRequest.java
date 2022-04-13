@@ -43,15 +43,4 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
   public void setQuantity(int quantity) {
     this.quantity = quantity;
   }
-
-  /**
-   * Creates an eight character string constituting a requestID for a new MESR object
-   *
-   * @return a requestID that does not already exist in the MedicalEquipmentServiceRequest table
-   */
-  public String makeRequestID() {
-    MedicalEquipmentServiceRequestDAO esrDAO = MedicalEquipmentServiceRequestDAO.getDAO();
-    int nextIDFinalNum = esrDAO.getAllRecords().size() + 1;
-    return String.format("MESR%04d", nextIDFinalNum);
-  }
 }

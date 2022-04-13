@@ -63,11 +63,6 @@ public class MealServiceRequest extends ServiceRequest {
     this.patientFor = patientFor;
   }
 
-  // backwards compatability stuff please don't kill me
-  public String makeRequestID() {
-    return "sample";
-  }
-
   public void setMealType(String mainCourse) {
     this.mainCourse = mainCourse;
   }

@@ -15,15 +15,6 @@ public class LangServiceRequest extends ServiceRequest {
     this.language = language;
   }
 
-  /**
-   * Generates a request ID for the given request.
-   *
-   * @return String representing the request id
-   */
-  public String makeRequestID() {
-    return "sample";
-  }
-
   public String getLanguage() {
     return language;
   }

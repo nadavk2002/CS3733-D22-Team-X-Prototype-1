@@ -122,7 +122,15 @@ public class ServiceRequestTableController implements Initializable {
         });
 
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
+    assignee.setCellValueFactory(
+        new Callback<
+            TableColumn.CellDataFeatures<ServiceRequest, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TableColumn.CellDataFeatures<ServiceRequest, String> param) {
+            return new SimpleStringProperty(param.getValue().getAssigneeID());
+          }
+        });
     table.setItems(FXCollections.observableList(listOfRequests()));
   }
 

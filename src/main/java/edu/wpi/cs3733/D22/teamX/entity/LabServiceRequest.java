@@ -44,11 +44,4 @@ public class LabServiceRequest extends ServiceRequest {
   public void setPatientFor(String patientFor) {
     this.patientFor = patientFor;
   }
-
-  public String makeRequestID() {
-    LabServiceRequestDAO lsrDAO = LabServiceRequestDAO.getDAO(); // gets list of all ids
-    int nextIDFinalNum = lsrDAO.getAllRecords().size() + 1;
-
-    return String.format("LBSR%04d", nextIDFinalNum);
-  }
 }

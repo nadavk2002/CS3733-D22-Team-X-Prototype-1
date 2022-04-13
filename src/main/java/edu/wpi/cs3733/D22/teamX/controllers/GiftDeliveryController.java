@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class GiftDeliveryController implements Initializable {
   @FXML private Button ReturnToMain;
@@ -54,7 +53,6 @@ public class GiftDeliveryController implements Initializable {
     giftNoteField.setOnAction((ActionEvent event) -> enableSubmitButton());
     selectStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
   }
-
 
   /**
    * Creates a list of all locations with their short names.
@@ -105,7 +103,7 @@ public class GiftDeliveryController implements Initializable {
   @FXML
   public void submitButton() {
     GiftDeliveryRequest request = new GiftDeliveryRequest();
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(giftDAO.makeID());
     request.setDestination(
         locations.get(selectGiftDestination.getSelectionModel().getSelectedIndex()));
     request.setAssignee(emplDAO.getRecord(selectAssignStaff.getValue()));

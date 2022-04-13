@@ -39,8 +39,4 @@ public class MedicineServiceRequest extends ServiceRequest {
   public void setRxNum(String rxNum) {
     this.rxNum = rxNum;
   }
-
-  public String makeRequestID() {
-    return "sample";
-  }
 }

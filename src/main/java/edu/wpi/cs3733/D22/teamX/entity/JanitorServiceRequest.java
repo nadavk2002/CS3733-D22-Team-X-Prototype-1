@@ -10,7 +10,11 @@ public class JanitorServiceRequest extends ServiceRequest {
   }
 
   public JanitorServiceRequest(
-      String requestID, Location destination, String status, Employee assignee, String serviceType) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      String serviceType) {
     super(requestID, destination, status, assignee);
     this.description = serviceType;
   }
@@ -21,9 +25,5 @@ public class JanitorServiceRequest extends ServiceRequest {
 
   public void setDescription(String description) {
     this.description = description;
-  }
-
-  public String makeRequestID() {
-    return "sample";
   }
 }
