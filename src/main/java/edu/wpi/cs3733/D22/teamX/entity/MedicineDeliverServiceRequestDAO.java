@@ -1,5 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+
+import java.io.*;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -180,16 +183,112 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
 
   @Override
   public boolean loadCSV() {
-    return false;
+    try {
+      LocationDAO locDestination = LocationDAO.getDAO();
+      InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
+      BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
+      medCSVReader.readLine();
+      String nextFileLine;
+      while ((nextFileLine = medCSVReader.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 6) {
+          MedicineServiceRequest mesrNode =
+                  new MedicineServiceRequest(
+                          currLine[0],
+                          locDestination.getRecord(currLine[1]),
+                          currLine[2],
+                          currLine[3],
+                          currLine[4],
+                          currLine[5]);
+          medicineServiceRequests.add(mesrNode);
+          mesrNode
+                  .getDestination()
+                  .addRequest(mesrNode); // add mesr to destination's list of service requests
+        } else {
+          System.out.println("MedicineDeliveryRequests CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("File not found!");
+      return false;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+
+    // Insert medical equipment service requests from MedEquipReqFromCSV into db table
+    for (int i = 0; i < medicineServiceRequests.size(); i++) {
+      try {
+        Statement initialization = connection.createStatement();
+        StringBuilder medEquipReq = new StringBuilder();
+        medEquipReq.append("INSERT INTO MedicalEquipmentServiceRequest VALUES(");
+        medEquipReq.append(
+                "'" + medicineServiceRequests.get(i).getRequestID() + "'" + ", ");
+        medEquipReq.append(
+                "'" + medicineServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+        medEquipReq.append("'" + medicineServiceRequests.get(i).getStatus() + "'" + ", ");
+        medEquipReq.append("'" + medicineServiceRequests.get(i).getAssignee() + "'" + ", ");
+        medEquipReq.append("'" + medicineServiceRequests.get(i).getRxNum() + "'" + ", ");
+        medEquipReq.append("'" + medicineServiceRequests.get(i).getPatientFor() + "'");
+        medEquipReq.append(")");
+        initialization.execute(medEquipReq.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for MedicineDeliveryRequests " + i + " failed");
+        e.printStackTrace();
+        return false;
+      }
+    }
+    return true;
   }
 
   @Override
   public boolean saveCSV(String dirPath) {
-    return false;
+    try {
+      FileWriter csvFile = new FileWriter(dirPath + csv, false);
+      csvFile.write("requestID,destination,status,assignee,rxNumber,patientFor");
+      for (int i = 0; i < medicineServiceRequests.size(); i++) {
+        csvFile.write("\n" + medicineServiceRequests.get(i).getRequestID() + ",");
+        if (medicineServiceRequests.get(i).getDestination() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(medicineServiceRequests.get(i).getDestination().getNodeID() + ",");
+        }
+        if (medicineServiceRequests.get(i).getStatus() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(medicineServiceRequests.get(i).getStatus() + ",");
+        }
+        if (medicineServiceRequests.get(i).getAssignee() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(medicineServiceRequests.get(i).getAssignee() + ",");
+        }
+        if (medicineServiceRequests.get(i).getRxNum() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(medicineServiceRequests.get(i).getRxNum() + ",");
+        }
+        if (medicineServiceRequests.get(i).getPatientFor() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(medicineServiceRequests.get(i).getPatientFor() + ",");
+        }
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.print("An error occurred when trying to write to the CSV file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 
   @Override
   public String makeID() {
-    return null;
+    int nextIDFinalNum = getAllRecords().size() + 1;
+    return String.format("MDSR%04d", nextIDFinalNum);
   }
 }
