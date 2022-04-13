@@ -22,8 +22,6 @@ public class JanitorialRequestController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
-  private List<Employee> employees;
-  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private TableColumn<JanitorServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<JanitorServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
   private TableColumn<JanitorServiceRequest, String> locationColumn = new TableColumn("Location");
@@ -39,8 +37,7 @@ public class JanitorialRequestController implements Initializable {
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     serviceType.getItems().addAll("Bodily Fluids", "Chemical Spills", "Disinfection");
-    assignStaff.setItems(this.getEmployeeIDs());
-//    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
+    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -71,14 +68,6 @@ public class JanitorialRequestController implements Initializable {
     return locationNames;
   }
 
-  public ObservableList<String> getEmployeeIDs() {
-    ObservableList<String> employeeNames = FXCollections.observableArrayList();
-    for (int i = 0; i < employees.size(); i++) {
-      employeeNames.add(employees.get(i).getEmployeeID());
-    }
-    return employeeNames;
-  }
-
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitButton.setDisable(
@@ -105,7 +94,7 @@ public class JanitorialRequestController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
+    request.setAssignee(assignStaff.getValue());
     request.setDescription(serviceType.getValue());
     this.resetFields();
     tbView.getItems().add(request);
