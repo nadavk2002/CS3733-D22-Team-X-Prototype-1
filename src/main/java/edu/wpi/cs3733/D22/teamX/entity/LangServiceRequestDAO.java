@@ -77,12 +77,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
 
   @Override
   public void updateRecord(LangServiceRequest recordObject) {
-    if (!recordObject
-        .getDestination()
-        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
-      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
-      recordObject.getDestination().addRequest(recordObject);
-    }
     int index = 0; // create indexer varible for while loop
     while (index < langServiceRequests.size()) {
       if (langServiceRequests.get(index).equals(recordObject)) {

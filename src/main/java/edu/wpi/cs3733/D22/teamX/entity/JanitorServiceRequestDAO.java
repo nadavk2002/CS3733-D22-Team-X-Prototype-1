@@ -80,12 +80,6 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
 
   @Override
   public void updateRecord(JanitorServiceRequest recordObject) {
-    if (!recordObject
-        .getDestination()
-        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
-      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
-      recordObject.getDestination().addRequest(recordObject);
-    }
     int index = 0; // create indexer varible for while loop
     while (index < janitorServiceRequests.size()) {
       if (janitorServiceRequests.get(index).equals(recordObject)) {

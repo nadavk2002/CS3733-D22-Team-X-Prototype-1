@@ -11,15 +11,15 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginScreen" layoutY="98.0" prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
+<AnchorPane fx:id="loginScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
    <children>
-      <ImageView fitHeight="1436.0" fitWidth="2072.0" layoutX="-40.0" layoutY="-389.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1402.0" fitWidth="2001.0" layoutX="-35.0" layoutY="-292.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/BWH Building.jpg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdbf0" height="1146.0" layoutX="940.0" layoutY="-101.0" stroke="#446fdc" strokeType="INSIDE" width="1094.0" />
-      <VBox fx:id="loginFields" layoutX="1240.0" layoutY="420.0" prefHeight="280.0" prefWidth="392.0" spacing="28.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdbf0" height="1100.0" layoutX="958.0" layoutY="-8.0" stroke="#446fdc" strokeType="INSIDE" width="971.0" />
+      <VBox fx:id="loginFields" layoutX="1259.0" layoutY="552.0" prefHeight="280.0" prefWidth="392.0" spacing="28.0">
          <children>
             <TextField fx:id="username" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Username">
                <font>
@@ -43,7 +43,7 @@
             </Label>
          </children>
       </VBox>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1354.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1381.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/Avatar User.png" />
          </image>
@@ -53,5 +53,10 @@
             <Image url="@../assets/BWHlogo.png" />
          </image>
       </ImageView>
+      <JFXButton layoutX="1779.0" layoutY="63.0" onAction="#ExitApplication" prefHeight="41.0" prefWidth="83.0" text="Exit" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
