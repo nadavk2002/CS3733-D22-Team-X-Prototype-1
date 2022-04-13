@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
-  private static List<LangServiceRequest> langServiceRequests = new ArrayList<>();
-  private static String csv = "LanguageInterpreterRequests.csv";
+public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
+  private static List<JanitorServiceRequest> janitorServiceRequests = new ArrayList<>();
+  private static String csv = "JanitorServiceRequests.csv";
 
   /** Creates a new LocationDAO object. */
-  private LangServiceRequestDAO() {}
+  private JanitorServiceRequestDAO() {}
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
-    private static final LangServiceRequestDAO langServiceRequestDAO = new LangServiceRequestDAO();
+    private static final JanitorServiceRequestDAO janitorServiceRequestDAO =
+        new JanitorServiceRequestDAO();
   }
 
   /**
@@ -25,36 +26,36 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
    *
    * @return the DAO Singleton object.
    */
-  public static LangServiceRequestDAO getDAO() {
-    return SingletonHelper.langServiceRequestDAO;
+  public static JanitorServiceRequestDAO getDAO() {
+    return SingletonHelper.janitorServiceRequestDAO;
   }
 
   @Override
-  public List<LangServiceRequest> getAllRecords() {
-    return langServiceRequests;
+  public List<JanitorServiceRequest> getAllRecords() {
+    return janitorServiceRequests;
   }
 
   @Override
-  public LangServiceRequest getRecord(String recordID) {
+  public JanitorServiceRequest getRecord(String recordID) {
     // iterate through list to find element with matching requestID
-    for (LangServiceRequest lsr : langServiceRequests) {
+    for (JanitorServiceRequest jsr : janitorServiceRequests) {
       // if matching IDs
-      if (lsr.getRequestID().equals(recordID)) {
-        return lsr;
+      if (jsr.getRequestID().equals(recordID)) {
+        return jsr;
       }
     }
     throw new NoSuchElementException("request does not exist");
   }
 
   @Override
-  public void deleteRecord(LangServiceRequest recordObject) {
+  public void deleteRecord(JanitorServiceRequest recordObject) {
     recordObject.getDestination().removeRequest(recordObject);
     // remove from list
     int index = 0; // create index variable for while loop
-    int initialSize = langServiceRequests.size();
-    while (index < langServiceRequests.size()) {
-      if (langServiceRequests.get(index).equals(recordObject)) {
-        langServiceRequests.remove(index); // removes object from list
+    int initialSize = janitorServiceRequests.size();
+    while (index < janitorServiceRequests.size()) {
+      if (janitorServiceRequests.get(index).equals(recordObject)) {
+        janitorServiceRequests.remove(index); // removes object from list
         index--;
         break; // exit
       }
@@ -69,14 +70,16 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       Statement statement = connection.createStatement();
       // remove location from DB table
       statement.executeUpdate(
-          "DELETE FROM LangServiceRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
+          "DELETE FROM JanitorServiceRequest WHERE requestID = '"
+              + recordObject.getRequestID()
+              + "'");
     } catch (SQLException e) {
       e.printStackTrace();
     }
   }
 
   @Override
-  public void updateRecord(LangServiceRequest recordObject) {
+  public void updateRecord(JanitorServiceRequest recordObject) {
     if (!recordObject
         .getDestination()
         .equals(getRecord(recordObject.getRequestID()).getDestination())) {
@@ -84,15 +87,15 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       recordObject.getDestination().addRequest(recordObject);
     }
     int index = 0; // create indexer varible for while loop
-    while (index < langServiceRequests.size()) {
-      if (langServiceRequests.get(index).equals(recordObject)) {
-        langServiceRequests.set(index, recordObject);
+    while (index < janitorServiceRequests.size()) {
+      if (janitorServiceRequests.get(index).equals(recordObject)) {
+        janitorServiceRequests.set(index, recordObject);
         break; // exit
       }
       index++; // increment if not found yet
     }
     // if medical equipment service request not found
-    if (index == langServiceRequests.size()) {
+    if (index == janitorServiceRequests.size()) {
       throw new NoSuchElementException("request does not exist");
     }
 
@@ -102,15 +105,15 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE MedicalEquipmentServiceRequest SET"
+          "UPDATE JanitorServiceRequest SET"
               + " destination = '"
               + recordObject.getDestination().getNodeID()
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssignee()
-              + "', language = '"
-              + recordObject.getLanguage()
+              + "', description = '"
+              + recordObject.getDescription()
               + " WHERE requestID = '"
               + recordObject.getRequestID()
               + "'");
@@ -120,20 +123,20 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   }
 
   @Override
-  public void addRecord(LangServiceRequest recordObject) {
-    langServiceRequests.add(recordObject);
+  public void addRecord(JanitorServiceRequest recordObject) {
+    janitorServiceRequests.add(recordObject);
 
     try {
-      Statement initialization = connection.createStatement();
+      Statement statement = connection.createStatement();
       StringBuilder sql = new StringBuilder();
       sql.append("INSERT INTO LangServiceRequest VALUES(");
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
       sql.append("'" + recordObject.getAssignee() + "'" + ", ");
-      sql.append("'" + recordObject.getLanguage() + "'");
+      sql.append("'" + recordObject.getDescription() + "'");
       sql.append(")");
-      initialization.execute(sql.toString());
+      statement.execute(sql.toString());
     } catch (SQLException e) {
       System.out.println("Database could not be updated");
       return;
@@ -144,18 +147,18 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   @Override
   public void createTable() {
     try {
-      Statement initialization = connection.createStatement();
-      initialization.execute(
-          "CREATE TABLE LangServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+      Statement statement = connection.createStatement();
+      statement.execute(
+          "CREATE TABLE JanitorServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-              + "language VARCHAR(20),"
-              + "CONSTRAINT LASR_dest_fk "
+              + "description VARCHAR(140),"
+              + "CONSTRAINT JSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
-      System.out.println("LangServiceRequest table creation failed. Check output console.");
+      System.out.println("JanitorServiceRequest table creation failed. Check output console.");
       e.printStackTrace();
       System.exit(1);
     }
@@ -165,9 +168,9 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public void dropTable() {
     try {
       Statement statement = connection.createStatement();
-      statement.execute("DROP TABLE LangServiceRequest");
+      statement.execute("DROP TABLE JanitorServiceRequest");
     } catch (SQLException e) {
-      System.out.println("LangServiceRequest not dropped");
+      System.out.println("JanitorServiceRequest not dropped");
       e.printStackTrace();
     }
   }
@@ -176,24 +179,24 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
-      InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
-      BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
+      InputStream stream = DatabaseCreator.class.getResourceAsStream(csv);
+      BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(stream));
       medCSVReader.readLine();
       String nextFileLine;
       while ((nextFileLine = medCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 5) {
-          LangServiceRequest node =
-              new LangServiceRequest(
+          JanitorServiceRequest node =
+              new JanitorServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   currLine[3],
                   currLine[4]);
-          langServiceRequests.add(node);
+          janitorServiceRequests.add(node);
           node.getDestination().addRequest(node);
         } else {
-          System.out.println("LangServiceRequest CSV file formatted improperly");
+          System.out.println("JanitorServiceRequest CSV file formatted improperly");
           System.exit(1);
         }
       }
@@ -206,21 +209,20 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       return false;
     }
 
-    // Insert medical equipment service requests from MedEquipReqFromCSV into db table
-    for (int i = 0; i < langServiceRequests.size(); i++) {
+    for (int i = 0; i < janitorServiceRequests.size(); i++) {
       try {
         Statement initialization = connection.createStatement();
         StringBuilder sql = new StringBuilder();
-        sql.append("INSERT INTO LangServiceRequest VALUES(");
-        sql.append("'" + langServiceRequests.get(i).getRequestID() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getAssignee() + "'" + ", ");
-        sql.append("'" + langServiceRequests.get(i).getLanguage() + "'");
+        sql.append("INSERT INTO JanitorServiceRequest VALUES(");
+        sql.append("'" + janitorServiceRequests.get(i).getRequestID() + "'" + ", ");
+        sql.append("'" + janitorServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+        sql.append("'" + janitorServiceRequests.get(i).getStatus() + "'" + ", ");
+        sql.append("'" + janitorServiceRequests.get(i).getAssignee() + "'" + ", ");
+        sql.append("'" + janitorServiceRequests.get(i).getDescription() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
       } catch (SQLException e) {
-        System.out.println("Input for LangServiceRequest " + i + " failed");
+        System.out.println("Input for JanitorServiceRequest " + i + " failed");
         e.printStackTrace();
         return false;
       }
@@ -232,28 +234,28 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,language");
-      for (int i = 0; i < langServiceRequests.size(); i++) {
-        csvFile.write("\n" + langServiceRequests.get(i).getRequestID() + ",");
-        if (langServiceRequests.get(i).getDestination() == null) {
+      csvFile.write("requestID,destination,status,assignee,description");
+      for (int i = 0; i < janitorServiceRequests.size(); i++) {
+        csvFile.write("\n" + janitorServiceRequests.get(i).getRequestID() + ",");
+        if (janitorServiceRequests.get(i).getDestination() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getDestination().getNodeID() + ",");
+          csvFile.write(janitorServiceRequests.get(i).getDestination().getNodeID() + ",");
         }
-        if (langServiceRequests.get(i).getStatus() == null) {
+        if (janitorServiceRequests.get(i).getStatus() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getStatus() + ",");
+          csvFile.write(janitorServiceRequests.get(i).getStatus() + ",");
         }
-        if (langServiceRequests.get(i).getAssignee() == null) {
+        if (janitorServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(janitorServiceRequests.get(i).getAssignee() + ",");
         }
-        if (langServiceRequests.get(i).getLanguage() == null) {
+        if (janitorServiceRequests.get(i).getDescription() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(langServiceRequests.get(i).getLanguage());
+          csvFile.write(janitorServiceRequests.get(i).getDescription());
         }
       }
       csvFile.flush();
@@ -269,6 +271,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   @Override
   public String makeID() {
     int nextIDFinalNum = this.getAllRecords().size() + 1;
-    return String.format("LISR%04d", nextIDFinalNum);
+    return String.format("JASR%04d", nextIDFinalNum);
   }
 }
