@@ -17,11 +17,13 @@ public class LoginScreenController {
   @FXML private TextField username;
   @FXML private JFXButton loginButton, exitButton;
   @FXML private Label message;
+  public static String currentUsername;
 
   @FXML
   public void validLogin() throws IOException {
     if (LoginManager.getInstance()
         .isValidLogin(username.getText(), password.getText().hashCode())) {
+      currentUsername = username.getText();
       App.switchRoot();
     } else {
       message.setText("        Your username or password is incorrect");

@@ -72,8 +72,17 @@ public class App extends Application {
             .toExternalForm();
     scene.getStylesheets().add(css);
     primaryStage.setScene(scene);
-    primaryStage.show();
     primaryStage.setFullScreen(true);
+    primaryStage.show();
+    root.requestFocus();
+  }
+
+  public static void startScreen() throws IOException {
+    Parent root = FXMLLoader.load(App.class.getResource("views/LoginScreen.fxml"));
+    Scene scene = new Scene(root);
+    mainMenu.setScene(scene);
+    mainMenu.setFullScreen(true);
+    mainMenu.show();
     root.requestFocus();
   }
 

@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 
 /** This represents the blue bar at the top of the app */
 public class BasicLayoutController implements Initializable {
+  public Label userName;
   @FXML private JFXComboBox<String> ChoosePage;
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
@@ -38,6 +39,7 @@ public class BasicLayoutController implements Initializable {
     pages.put("Request Gift Delivery", "GiftDelivery.fxml");
     pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
     pages.put("Service Request Table", "ServiceRequestTable.fxml");
+    userName.setText("Hello, " + LoginScreenController.currentUsername);
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
     //            "Choose a Page",
@@ -73,6 +75,7 @@ public class BasicLayoutController implements Initializable {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
+    CSVFileSaverController.loaded = false;
   }
 
   @FXML
@@ -80,12 +83,14 @@ public class BasicLayoutController implements Initializable {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
+    CSVFileSaverController.loaded = false;
   }
 
   @FXML
   public void switchServiceRequestMenu() throws IOException {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+    CSVFileSaverController.loaded = false;
   }
 
   @FXML
@@ -94,6 +99,16 @@ public class BasicLayoutController implements Initializable {
         FXMLLoader.load(
             getClass()
                 .getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorDashboard.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  public void switchLoginScreen() throws IOException {
+    App.startScreen();
+    //    App.switchScene(
+    //        FXMLLoader.load(
+    //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/LoginScreen.fxml")));
+    CSVFileSaverController.loaded = false;
   }
 
   @FXML
