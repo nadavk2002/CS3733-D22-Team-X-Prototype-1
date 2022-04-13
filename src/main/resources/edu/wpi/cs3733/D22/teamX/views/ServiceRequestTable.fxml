@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="982.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ServiceRequestTableController">
+   <children>
+      <TableView fx:id="table" layoutX="330.0" layoutY="238.0" prefHeight="538.0" prefWidth="1246.0">
+        <columns>
+            <TableColumn fx:id="serviceType" prefWidth="167.199951171875" text="Service Type" />
+            <TableColumn fx:id="requestID" prefWidth="108.80007934570312" text="Request ID" />
+            <TableColumn fx:id="requestStatus" prefWidth="142.39996337890625" text="Request Status" />
+            <TableColumn fx:id="destination" prefWidth="130.93310546875" text="Destination" />
+            <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="ToMainMenu" layoutX="34.0" layoutY="34.0" onAction="#ToMainMenu" text="&lt;--  Main Menu" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <Label alignment="CENTER" layoutX="739.0" layoutY="89.0" prefHeight="60.0" prefWidth="441.0" text="All Service Requests" textAlignment="CENTER" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

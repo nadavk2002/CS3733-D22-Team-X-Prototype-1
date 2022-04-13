@@ -1,12 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
@@ -15,25 +10,30 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class MedicalEquipmentDeliveryController {
+  @FXML private Label amountAvailable;
   @FXML private Button ToMainMenu;
   @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus;
   @FXML private TextField amountField;
   @FXML private Button submitButton;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
 
   @FXML
   public void initialize() {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
-    selectEquipmentType.getItems().addAll("Bed", "X-Ray", "Pump", "Recliner");
+    EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
+    for (int i = 0; i < eqtDAO.getAllRecords().size(); i++) {
+      selectEquipmentType.getItems().add(eqtDAO.getAllRecords().get(i).getModel());
+    }
     selectDestination.setItems(this.getLocationNames());
+    updateAvailability();
   }
 
   private ObservableList<String> equipDeliveryList() {
@@ -85,15 +85,31 @@ public class MedicalEquipmentDeliveryController {
   @FXML
   public void submitRequest() {
     MedicalEquipmentServiceRequest request = new MedicalEquipmentServiceRequest();
-
     request.setEquipmentType(selectEquipmentType.getValue());
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
 
-    MedicalEquipmentServiceRequestDAO submit = new MedicalEquipmentServiceRequestDAOImpl();
-    submit.addMedicalEquipmentServiceRequest(request);
+    MedicalEquipmentServiceRequestDAO submit = MedicalEquipmentServiceRequestDAO.getDAO();
+    submit.addRecord(request);
     this.resetFields();
+    updateAvailability();
+  }
+
+  public void updateAvailability() {
+    EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
+    StringBuilder availableStr = new StringBuilder("Equipment Available:");
+    String leftPadding = "                    ";
+    for (int i = 0; i < eqtDAO.getAllRecords().size(); i++) {
+      String model = eqtDAO.getAllRecords().get(i).getModel();
+      availableStr.append(
+          "\n"
+              + model
+              + leftPadding.substring(model.length())
+              + eqtDAO.getAllRecords().get(i).getNumUnitsAvailable()
+              + " units");
+    }
+    amountAvailable.setText(availableStr.toString());
   }
 }

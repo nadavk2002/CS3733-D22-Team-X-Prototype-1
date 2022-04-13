@@ -2,7 +2,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.Xdb;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
 import java.net.URL;
@@ -39,6 +39,7 @@ public class BasicLayoutController implements Initializable {
     pages.put("Request Janitorial Services", "JanitorialRequest.fxml");
     pages.put("Request Gift Delivery", "GiftDelivery.fxml");
     pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
+    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     ChoosePage.setItems(
         FXCollections.observableArrayList(
             "Choose a Page",
@@ -52,7 +53,8 @@ public class BasicLayoutController implements Initializable {
             "Request Laundry Services",
             "Request Janitorial Services",
             "Request Gift Delivery",
-            "Graphical Map Editor"));
+            "Graphical Map Editor",
+            "Service Request Table"));
     ChoosePage.setValue("Choose a Page");
   }
 
@@ -93,11 +95,7 @@ public class BasicLayoutController implements Initializable {
     // stopTime(clockThread);
     if (CSVFileSaverController.loaded) {
       Platform.exit();
-      if (!Xdb.saveLocationDataToCSV("")
-          || !Xdb.saveMedEqDataToCSV("")
-          || !Xdb.saveLabServiceReqDataToCSV("")) {
-        throw new loadSaveFromCSVException("Error when writing to CSV file.");
-      }
+      DatabaseCreator.saveAllCSV("");
     } else {
       App.switchScene(
           FXMLLoader.load(

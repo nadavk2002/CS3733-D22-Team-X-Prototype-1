@@ -14,9 +14,9 @@ public class LabServiceRequestsDAOTests {
   // based on CSV file as of 4/4
   @Before
   public void setupDB() {
-    // initialize Xdb
+    // initialize DatabaseCreator
     try {
-      Xdb.initializeDB();
+      DatabaseCreator.initializeDB();
     } catch (loadSaveFromCSVException e) {
       e.printStackTrace();
     }
@@ -25,50 +25,48 @@ public class LabServiceRequestsDAOTests {
   // these test will fail if the csv file changes
   @Test
   public void TestDBListRequests() {
-    LabServiceRequestDAOImpl lsrDAOImpl = new LabServiceRequestDAOImpl();
-    assertEquals(15, lsrDAOImpl.getAllLabServiceRequests().size());
+    LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
+    assertEquals(15, lsrDAOImpl.getAllRecords().size());
   }
 
   @Test
   public void TestDBgetRequest() {
-    LabServiceRequestDAOImpl lsrDAOImpl = new LabServiceRequestDAOImpl();
-    assertEquals(
-        lsrDAOImpl.getLabServiceRequest("LBSR0001"), lsrDAOImpl.getLabServiceRequest("LBSR0001"));
+    LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
+    assertEquals(lsrDAOImpl.getRecord("LBSR0001"), lsrDAOImpl.getRecord("LBSR0001"));
   }
 
   @Test
   public void TestDBgetRequest2() {
-    LabServiceRequestDAOImpl lsrDAOImpl = new LabServiceRequestDAOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
+    LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
+    LocationDAO locationDAO = LocationDAO.getDAO();
     assertEquals(
-        lsrDAOImpl.getLabServiceRequest("LBSR0001").getDestination(),
-        locationDAO.getLocation("HHALL01203"));
-    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getStatus(), "DONE");
-    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getAssignee(), "EMPL0001");
-    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getService(), "Blood Sample");
-    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0001").getPatientFor(), "PATT0001");
+        lsrDAOImpl.getRecord("LBSR0001").getDestination(), locationDAO.getRecord("HHALL01203"));
+    assertEquals(lsrDAOImpl.getRecord("LBSR0001").getStatus(), "DONE");
+    assertEquals(lsrDAOImpl.getRecord("LBSR0001").getAssignee(), "EMPL0001");
+    assertEquals(lsrDAOImpl.getRecord("LBSR0001").getService(), "Blood Sample");
+    assertEquals(lsrDAOImpl.getRecord("LBSR0001").getPatientFor(), "PATT0001");
   }
 
   @Test
   public void testDBLSRequestUpdate() {
-    LabServiceRequestDAOImpl lsrDAOImpl = new LabServiceRequestDAOImpl();
-    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0002").getStatus(), "PROC");
-    LabServiceRequest lsr = lsrDAOImpl.getLabServiceRequest("LBSR0002");
+    LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
+    assertEquals(lsrDAOImpl.getRecord("LBSR0002").getStatus(), "PROC");
+    LabServiceRequest lsr = lsrDAOImpl.getRecord("LBSR0002");
     lsr.setStatus("DONE");
-    lsrDAOImpl.updateLabServiceRequest(lsr);
-    assertEquals("DONE", lsrDAOImpl.getLabServiceRequest("LBSR0002").getStatus());
+    lsrDAOImpl.updateRecord(lsr);
+    assertEquals("DONE", lsrDAOImpl.getRecord("LBSR0002").getStatus());
   }
 
   @Test
   public void testDBLSRequestDelete() {
     boolean returnVarible = false;
-    LabServiceRequestDAOImpl lsrDAOImpl = new LabServiceRequestDAOImpl();
-    assertEquals(lsrDAOImpl.getLabServiceRequest("LBSR0003").getStatus(), "DONE");
+    LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
+    assertEquals(lsrDAOImpl.getRecord("LBSR0003").getStatus(), "DONE");
     // delete
-    LabServiceRequest lsr = lsrDAOImpl.getLabServiceRequest("LBSR0003");
-    lsrDAOImpl.deleteLabServiceRequest(lsr);
+    LabServiceRequest lsr = lsrDAOImpl.getRecord("LBSR0003");
+    lsrDAOImpl.deleteRecord(lsr);
     try {
-      lsrDAOImpl.getLabServiceRequest("LBSR0003");
+      lsrDAOImpl.getRecord("LBSR0003");
     } catch (NoSuchElementException s) {
       returnVarible = true;
     }
@@ -78,10 +76,10 @@ public class LabServiceRequestsDAOTests {
   @Test
   public void testDBLSRequestAdd() {
     boolean returnVarible = false;
-    LabServiceRequestDAO lsrDAOImpl = new LabServiceRequestDAOImpl();
-    LocationDAO locationDAO = new LocationDAOImpl();
+    LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
+    LocationDAO locationDAO = LocationDAO.getDAO();
     try {
-      lsrDAOImpl.getLabServiceRequest("LBSR0016");
+      lsrDAOImpl.getRecord("LBSR0016");
     } catch (NoSuchElementException s) {
       returnVarible = true;
     }
@@ -90,13 +88,13 @@ public class LabServiceRequestsDAOTests {
     LabServiceRequest lsr =
         new LabServiceRequest(
             "LBSR0016",
-            locationDAO.getLocation("FHALL01101"),
+            locationDAO.getRecord("FHALL01101"),
             "DONE",
             "EMPL0001",
             "Ultrasound",
             "PATT0125");
     // add the thing
-    lsrDAOImpl.addLabServiceRequest(lsr);
-    assertEquals(lsr, lsrDAOImpl.getLabServiceRequest("LBSR0016"));
+    lsrDAOImpl.addRecord(lsr);
+    assertEquals(lsr, lsrDAOImpl.getRecord("LBSR0016"));
   }
 }

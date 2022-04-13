@@ -28,10 +28,10 @@ public class EquipmentUnit {
   }
 
   public EquipmentUnit() {
-    unitID = null;
-    type = null;
+    unitID = "";
+    type = "";
     isAvailable = false;
-    currLocation = null;
+    currLocation = new Location();
   }
 
   public String getUnitID() {
@@ -94,5 +94,12 @@ public class EquipmentUnit {
     if (o == null || getClass() != o.getClass()) return false;
     EquipmentUnit equipmentUnit = (EquipmentUnit) o;
     return Objects.equals(unitID, equipmentUnit.unitID);
+  }
+
+  public String makeEquipmentID() {
+    EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO(); // gets list of all ids
+    int nextIDFinalNum = equipDAO.getAllRecords().size() + 1;
+
+    return String.format("MEUN%04d", nextIDFinalNum);
   }
 }

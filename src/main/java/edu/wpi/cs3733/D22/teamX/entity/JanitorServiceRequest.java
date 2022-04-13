@@ -23,7 +23,6 @@ public class JanitorServiceRequest extends ServiceRequest {
     this.serviceType = serviceType;
   }
 
-  @Override
   public String makeRequestID() {
     return "sample";
   }

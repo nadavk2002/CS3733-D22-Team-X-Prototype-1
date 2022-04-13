@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.Objects;
+
 /** Represents a general service request */
 public abstract class ServiceRequest {
 
@@ -60,6 +62,14 @@ public abstract class ServiceRequest {
     return destination.getShortName();
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    ServiceRequest serviceRequest = (ServiceRequest) o;
+    return Objects.equals(requestID, serviceRequest.requestID);
+  }
+
   //  public String getRequestingUser() {
   //    return requestingUser;
   //  }
@@ -75,11 +85,4 @@ public abstract class ServiceRequest {
   //  public void setAssignee(String assignee) {
   //    this.assignee = assignee;
   //  }
-
-  /**
-   * Creates random requestID for new requests
-   *
-   * @return a String with a certain number of characters constituting an available requestID
-   */
-  public abstract String makeRequestID();
 }

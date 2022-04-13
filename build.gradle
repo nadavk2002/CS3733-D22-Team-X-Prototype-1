@@ -28,13 +28,15 @@ dependencies {
 
             // You may comment out the database dependency you do not use
             'org.xerial:sqlite-jdbc:3.36.0.3',
-            'org.apache.derby:derby:10.14.2.0',
-
+            'org.apache.derby:derby:10.15.2.0',
+            'org.apache.derby:derbyclient:10.15.2.0',
+            'org.apache.derby:derbytools:10.15.2.0',
             'org.slf4j:slf4j-api:1.7.36',
             'org.slf4j:slf4j-simple:1.7.36',
     )
     implementation 'junit:junit:4.13.2'
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
+    implementation 'net.kurobako:gesturefx:0.7.1'
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",

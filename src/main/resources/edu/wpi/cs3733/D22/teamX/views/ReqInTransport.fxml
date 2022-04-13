@@ -22,7 +22,7 @@
       <HBox fx:id="inputHBox1" alignment="CENTER" layoutX="200.0" layoutY="160.0" prefHeight="30.0" prefWidth="400.0" />
       <HBox fx:id="inputHBox2" alignment="CENTER" layoutX="200.0" layoutY="160.0" prefHeight="30.0" prefWidth="400.0" />
       <HBox fx:id="inputHBox3" alignment="CENTER" layoutX="190.0" layoutY="150.0" prefHeight="30.0" prefWidth="400.0" />
-        <TextField fx:id="patientName" minWidth="150.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="patientName" minWidth="150.0" prefWidth="150.0" />
         <ChoiceBox fx:id="transportTo" layoutX="471.0" layoutY="336.0" prefWidth="150.0" />
         <ChoiceBox fx:id="transportFrom" layoutX="472.0" layoutY="294.0" prefWidth="150.0" />
         <ChoiceBox fx:id="addAccommodation" layoutX="471.0" layoutY="378.0" prefWidth="150.0" />
@@ -84,7 +84,7 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </JFXButton>
-        <TextField fx:id="assignStaff" layoutX="472.0" layoutY="418.0" minWidth="150.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="assignStaff" layoutX="472.0" layoutY="418.0" minWidth="150.0" prefWidth="150.0" />
         <ChoiceBox fx:id="serviceStatus" layoutX="472.0" layoutY="460.0" prefWidth="150.0" />
         <TableView fx:id="table" layoutX="938.0" layoutY="163.0" minHeight="700.0" prefHeight="700.0" prefWidth="1000.0" />
       <Label fx:id="title" alignment="CENTER" layoutX="927.0" layoutY="88.0" text="Internal Patient Transport" textAlignment="RIGHT" textFill="#446fdc">
