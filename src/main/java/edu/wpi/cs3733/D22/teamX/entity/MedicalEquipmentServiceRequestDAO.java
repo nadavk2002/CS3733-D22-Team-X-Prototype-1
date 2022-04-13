@@ -82,13 +82,10 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
 
   @Override
   public void updateRecord(MedicalEquipmentServiceRequest recordObject) {
-    // remove mesr from old location and add to new one if location changes in the update
-    if (!recordObject
-        .getDestination()
-        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
-      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
-      recordObject.getDestination().addRequest(recordObject);
-    }
+//    // Assign equipment units if the status of a request changes to "DONE"
+//    if (recordObject.getStatus().equals("DONE") && !getRecord(recordObject.getRequestID()).getStatus().equals("DONE")) {
+//      // Assign available unit(s) to new location by copying them, and updating them in EquipmentUnitDAO
+//    }
     int index = 0; // create indexer varible for while loop
     while (index < medicalEquipmentServiceRequests.size()) {
       if (medicalEquipmentServiceRequests.get(index).equals(recordObject)) {
