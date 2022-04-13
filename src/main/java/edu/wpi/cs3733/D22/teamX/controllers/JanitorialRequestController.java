@@ -22,6 +22,8 @@ public class JanitorialRequestController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
+  private List<Employee> employees;
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private TableColumn<JanitorServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<JanitorServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
   private TableColumn<JanitorServiceRequest, String> locationColumn = new TableColumn("Location");
@@ -68,6 +70,14 @@ public class JanitorialRequestController implements Initializable {
     return locationNames;
   }
 
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
+  }
+
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitButton.setDisable(
@@ -94,7 +104,7 @@ public class JanitorialRequestController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(assignStaff.getValue());
+    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setServiceType(serviceType.getValue());
     this.resetFields();
     tbView.getItems().add(request);

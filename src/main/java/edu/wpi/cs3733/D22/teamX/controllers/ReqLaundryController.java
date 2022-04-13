@@ -37,6 +37,8 @@ public class ReqLaundryController implements Initializable {
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
 
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private List<Employee> employees;
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
@@ -81,6 +83,14 @@ public class ReqLaundryController implements Initializable {
     return locationNames;
   }
 
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
+  }
+
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void disableSubmitButton() {
     submitButton.setDisable(
@@ -97,7 +107,7 @@ public class ReqLaundryController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(assignStaff.getValue());
+    request.setAssignee(emplDAO.getRecord(assignStaff.getValue())); // FIX
     request.setService(selectLaundryType.getValue());
     this.resetFields();
     table.getItems().add(request);

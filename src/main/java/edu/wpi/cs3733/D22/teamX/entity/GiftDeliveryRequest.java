@@ -15,7 +15,7 @@ public class GiftDeliveryRequest extends ServiceRequest { // rename to GiftServi
       String requestID,
       Location destination,
       String status,
-      String assignee,
+      Employee assignee,
       String notes,
       String giftType) {
     super(requestID, destination, status, assignee);

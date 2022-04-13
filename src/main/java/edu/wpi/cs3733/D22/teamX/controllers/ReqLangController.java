@@ -23,6 +23,8 @@ public class ReqLangController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private List<Employee> employees;
   private TableColumn<LangServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<LangServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
   private TableColumn<LangServiceRequest, String> locationColumn = new TableColumn("Location");
@@ -65,6 +67,14 @@ public class ReqLangController implements Initializable {
     return locationNames;
   }
 
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
+  }
+
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitButton.setDisable(
@@ -102,7 +112,7 @@ public class ReqLangController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
-    request.setAssignee(assignStaff.getValue());
+    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     this.resetFields();
     tbView.getItems().add(request);
   }

@@ -35,6 +35,8 @@ public class ReqInTransportController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private List<Employee> employees;
   private TableColumn<InTransportServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<InTransportServiceRequest, String> assigneeColumn =
       new TableColumn("Assignee");
@@ -134,6 +136,14 @@ public class ReqInTransportController implements Initializable {
     return locationNames;
   }
 
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
+  }
+
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitButton.setDisable(
@@ -177,7 +187,7 @@ public class ReqInTransportController implements Initializable {
     request.setStatus(serviceStatus.getValue());
     request.setPatientName(patientName.getValue());
     request.setAddAccommodation(addAccommodation.getValue());
-    request.setAssignee(assignStaff.getValue());
+    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     this.resetFields();
     table.getItems().add(request);
   }

@@ -50,6 +50,8 @@ public class MealReqController implements Initializable {
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
 
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
@@ -148,7 +150,7 @@ public class MealReqController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(assignStaff.getValue());
+    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setMealType(
         mainSel.getValue() + "\n" + sideSel.getValue() + "\n" + drinkSel.getValue());
     request.setPatientID(patientNames.getValue());

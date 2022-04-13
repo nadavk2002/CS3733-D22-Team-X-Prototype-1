@@ -114,7 +114,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssignee()
+              + recordObject.getAssigneeID()
               + "', equipmentType = '"
               + recordObject.getEquipmentType()
               + "', quantity = "
@@ -138,7 +138,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
       medEquipReq.append("'" + recordObject.getRequestID() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getStatus() + "'" + ", ");
-      medEquipReq.append("'" + recordObject.getAssignee() + "'" + ", ");
+      medEquipReq.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getEquipmentType() + "'" + ", ");
       medEquipReq.append(recordObject.getQuantity());
       medEquipReq.append(")");
@@ -177,6 +177,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + "ON DELETE SET NULL, "
               + "CONSTRAINT MESR_equipmentType_fk "
               + "FOREIGN KEY (equipmentType) REFERENCES EquipmentType(model) "
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT MESR_assignee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println(
@@ -201,6 +204,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
@@ -213,7 +217,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  currLine[3],
+                  emplDAO.getRecord(currLine[3]),
                   currLine[4],
                   Integer.parseInt(currLine[5]));
           medicalEquipmentServiceRequests.add(mesrNode);
@@ -245,7 +249,8 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         medEquipReq.append("'" + medicalEquipmentServiceRequests.get(i).getStatus() + "'" + ", ");
-        medEquipReq.append("'" + medicalEquipmentServiceRequests.get(i).getAssignee() + "'" + ", ");
+        medEquipReq.append(
+            "'" + medicalEquipmentServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getEquipmentType() + "'" + ", ");
         medEquipReq.append(medicalEquipmentServiceRequests.get(i).getQuantity());
@@ -277,10 +282,10 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         } else {
           csvFile.write(medicalEquipmentServiceRequests.get(i).getStatus() + ",");
         }
-        if (medicalEquipmentServiceRequests.get(i).getAssignee() == null) {
+        if (medicalEquipmentServiceRequests.get(i).getAssigneeID() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicalEquipmentServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(medicalEquipmentServiceRequests.get(i).getAssigneeID() + ",");
         }
         if (medicalEquipmentServiceRequests.get(i).getEquipmentType() == null) {
           csvFile.write(',');

@@ -39,10 +39,14 @@ public class LabRequestController implements Initializable {
   private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus, selectDestination;
   private List<Location> locations;
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private List<Employee> employees;
+
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
+    employees = emplDAO.getAllRecords();
 
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     patientID.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
@@ -53,6 +57,7 @@ public class LabRequestController implements Initializable {
     table.setItems(labDeliveryList());
 
     selectDestination.setItems(this.getLocationNames());
+    assigneeDrop.setItems(this.getEmployeeIDs());
     submitRequest.setDisable(true);
     selectLab.getSelectionModel().select("");
     patientName.getSelectionModel().select("");
@@ -68,9 +73,9 @@ public class LabRequestController implements Initializable {
     // FORMATTING----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "PROC", "DONE");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
-    assigneeDrop
-        .getItems()
-        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
+    //    assigneeDrop
+    //        .getItems()
+    //        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
     selectLab
         .getItems()
         .addAll("Blood Work", "MRI", "Urine Sample", "Stool Sample", "Saliva Sample");
@@ -90,6 +95,14 @@ public class LabRequestController implements Initializable {
       locationNames.add(locations.get(i).getShortName());
     }
     return locationNames;
+  }
+
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
   }
 
   /** When Reset Fields button is pressed, the fields on the screen are reset to default. */
@@ -128,13 +141,12 @@ public class LabRequestController implements Initializable {
   public void submitRequest() {
     LabServiceRequest request = new LabServiceRequest();
 
-    request.setRequestID(request.makeRequestID()); //
+    request.setRequestID(request.makeRequestID());
     request.setPatientFor(patientName.getValue());
-    request.setAssignee(assigneeDrop.getValue());
+    request.setAssignee(employees.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setService(selectLab.getValue());
     request.setStatus(serviceStatus.getValue());
-    request.setDestination(
-        locations.get(selectDestination.getSelectionModel().getSelectedIndex())); //
+    request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     LabServiceRequestDAO submit = LabServiceRequestDAO.getDAO();
     submit.addRecord(request);
     this.resetFields();
