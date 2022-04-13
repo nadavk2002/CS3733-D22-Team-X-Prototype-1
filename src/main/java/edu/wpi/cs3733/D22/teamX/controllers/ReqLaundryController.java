@@ -13,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -26,15 +25,8 @@ public class ReqLaundryController implements Initializable {
   @FXML private ChoiceBox<String> selectLaundryType, roomNum, serviceStatus, assignStaff;
   // @FXML private TextField assignStaff;
 
-  @FXML private TableView table;
-  private TableColumn<LaundyServiceRequest, String> ID = new TableColumn("Request ID");
-  private TableColumn<LaundyServiceRequest, String> assignee = new TableColumn("Assignee");
-  private TableColumn<LaundyServiceRequest, String> status = new TableColumn("Status");
-  private TableColumn<LaundyServiceRequest, String> locationColumn = new TableColumn("Location");
-  private TableColumn<LaundyServiceRequest, String> laundryService =
-      new TableColumn("Laundry Service");
-
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
   private List<Location> locations;
 
   @Override
@@ -58,14 +50,6 @@ public class ReqLaundryController implements Initializable {
     roomNum.setOnAction((ActionEvent event) -> disableSubmitButton());
     assignStaff.setOnAction((ActionEvent event) -> disableSubmitButton());
     serviceStatus.setOnAction((ActionEvent event) -> disableSubmitButton());
-
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    table.getColumns().addAll(ID, assignee, locationColumn, status, laundryService);
-    ID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
-    status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    laundryService.setCellValueFactory(new PropertyValueFactory<>("laundry"));
-    assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
   /**
@@ -94,13 +78,13 @@ public class ReqLaundryController implements Initializable {
   public void submitRequest() {
     LaundyServiceRequest request = new LaundyServiceRequest();
 
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(laundryDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(assignStaff.getValue());
     request.setService(selectLaundryType.getValue());
+    laundryDAO.addRecord(request);
     this.resetFields();
-    table.getItems().add(request);
   }
 
   /**
