@@ -52,6 +52,9 @@ public class MealReqController implements Initializable {
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
 
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private List<Employee> employees;
+
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
@@ -88,9 +91,10 @@ public class MealReqController implements Initializable {
     // main course choice box---------------------------------------
     mainSel.getItems().addAll("Chicken", "Fish", "Vegeterian");
     // assign staff choice box ---------------------------------------
-    assignStaff
-        .getItems()
-        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
+    assignStaff.setItems(this.getEmployeeIDs());
+//    assignStaff
+//        .getItems()
+//        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
     // status choice box----------------------------------------------------
     destinationDrop.setItems(getLocationNames());
     patientNames.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -130,6 +134,14 @@ public class MealReqController implements Initializable {
     return locationNames;
   }
 
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
+  }
+
   @FXML
   void returnHomeButton() throws IOException {
     App.switchScene(
@@ -162,7 +174,7 @@ public class MealReqController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(assignStaff.getValue());
+    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setMainCourse(mainSel.getValue());
     request.setDrink(drinkSel.getValue());
     request.setSide(sideSel.getValue());

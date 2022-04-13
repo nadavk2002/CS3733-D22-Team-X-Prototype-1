@@ -102,7 +102,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssignee()
+              + recordObject.getAssigneeID()
               + "', service = '"
               + recordObject.getService()
               + "', patientFor = '"
@@ -127,7 +127,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       lsr.append("'" + recordObject.getRequestID() + "', ");
       lsr.append("'" + recordObject.getDestination().getNodeID() + "', ");
       lsr.append("'" + recordObject.getStatus() + "', ");
-      lsr.append("'" + recordObject.getAssignee() + "', ");
+      lsr.append("'" + recordObject.getAssigneeID() + "', ");
       lsr.append("'" + recordObject.getService() + "', ");
       lsr.append("'" + recordObject.getPatientFor() + "'");
       lsr.append(")");
@@ -151,6 +151,9 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
               + "patientFor VARCHAR(15),"
               + "CONSTRAINT LBSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT LBSR_assignee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("LabServiceRequest table creation failed. Check output console.");
@@ -174,6 +177,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplAssignee = EmployeeDAO.getDAO();
       InputStream labCSV = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader labCSVReader = new BufferedReader(new InputStreamReader(labCSV));
       labCSVReader.readLine();
@@ -186,7 +190,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  currLine[3],
+                  emplAssignee.getRecord(currLine[3]),
                   currLine[4],
                   currLine[5]);
           labServiceRequests.add(labNode);
@@ -213,7 +217,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
         labServiceReq.append(
             "'" + labServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         labServiceReq.append("'" + labServiceRequests.get(i).getStatus() + "'" + ", ");
-        labServiceReq.append("'" + labServiceRequests.get(i).getAssignee() + "'" + ", ");
+        labServiceReq.append("'" + labServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         labServiceReq.append("'" + labServiceRequests.get(i).getService() + "'" + ", ");
         labServiceReq.append("'" + labServiceRequests.get(i).getPatientFor() + "'");
         labServiceReq.append(")");
@@ -244,10 +248,10 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
         } else {
           csvFile.write(labServiceRequests.get(i).getStatus() + ",");
         }
-        if (labServiceRequests.get(i).getAssignee() == null) {
+        if (labServiceRequests.get(i).getAssigneeID() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(labServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(labServiceRequests.get(i).getAssigneeID() + ",");
         }
         if (labServiceRequests.get(i).getService() == null) {
           csvFile.write(',');

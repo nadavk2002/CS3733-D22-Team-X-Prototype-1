@@ -23,6 +23,8 @@ public class MedicineDeliveryController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private List<Employee> employees;
   private TableColumn<MedicineServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<MedicineServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
   private TableColumn<MedicineServiceRequest, String> locationColumn = new TableColumn("Location");
@@ -36,7 +38,8 @@ public class MedicineDeliveryController implements Initializable {
     resetFields();
     submitRequest.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
-    assignStaff.getItems().addAll("Staff 1", "Staff 2", "Staff 3", "Staff 4");
+    assignStaff.setItems(this.getEmployeeIDs());
+//    assignStaff.getItems().addAll("Staff 1", "Staff 2", "Staff 3", "Staff 4");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4");
     roomNum.setItems(getLocationNames());
     patientName.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -64,6 +67,14 @@ public class MedicineDeliveryController implements Initializable {
       locationNames.add(locations.get(i).getShortName());
     }
     return locationNames;
+  }
+
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeNames = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeNames.add(employees.get(i).getEmployeeID());
+    }
+    return employeeNames;
   }
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
@@ -104,7 +115,7 @@ public class MedicineDeliveryController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(assignStaff.getValue());
+    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setRxNum(rxNum.getText());
     this.resetFields();
     tbView.getItems().add(request);

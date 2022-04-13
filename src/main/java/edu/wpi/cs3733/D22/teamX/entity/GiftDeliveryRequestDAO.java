@@ -100,7 +100,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
                 + ", status = '"
                 + recordObject.getStatus()
                 + "', assignee = '"
-                + recordObject.getAssignee()
+                + recordObject.getAssigneeID()
                 + "', notes = '"
                 + recordObject.getNotes()
                 + "', giftType = '"
@@ -129,7 +129,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append(recordObject.getDestination().getNodeID() + ", ");
       sql.append(recordObject.getStatus() + ", ");
-      sql.append("'" + recordObject.getAssignee() + "'" + ", ");
+      sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       sql.append("'" + recordObject.getNotes() + "'" + ", ");
       sql.append("'" + recordObject.getGiftType() + "'");
       sql.append(")");
@@ -151,7 +151,13 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
               + "status CHAR(4),"
               + "assignee CHAR(8),"
               + "notes VARCHAR(140),"
-              + "giftType CHAR(10))");
+              + "giftType CHAR(10), "
+              + "CONSTRAINT GDR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT GDR_assignee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
+              + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("GiftDeliveryRequest table creation failed. Check output console.");
       e.printStackTrace();
@@ -178,6 +184,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       tlCSVReader.readLine();
       String nextFileLine;
       LocationDAO locationDAO = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       while ((nextFileLine = tlCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 6) {
@@ -186,7 +193,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
                   currLine[0],
                   locationDAO.getRecord(currLine[1]),
                   currLine[2],
-                  currLine[3],
+                  emplDAO.getRecord(currLine[3]),
                   currLine[4],
                   currLine[5]);
           giftDeliveryRequests.add(node);
@@ -215,7 +222,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         sql.append("'" + giftDeliveryRequests.get(i).getRequestID() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + giftDeliveryRequests.get(i).getAssignee() + "'" + ", ");
+        sql.append("'" + giftDeliveryRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getNotes() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getGiftType() + "'");
         sql.append(")");
@@ -246,10 +253,10 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         } else {
           csvFile.write(giftDeliveryRequests.get(i).getStatus() + ",");
         }
-        if (giftDeliveryRequests.get(i).getAssignee() == null) {
+        if (giftDeliveryRequests.get(i).getAssigneeID() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(giftDeliveryRequests.get(i).getAssignee() + ",");
+          csvFile.write(giftDeliveryRequests.get(i).getAssigneeID() + ",");
         }
         if (giftDeliveryRequests.get(i).getNotes() == null) {
           csvFile.write(',');
