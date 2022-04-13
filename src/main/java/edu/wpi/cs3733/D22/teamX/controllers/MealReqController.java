@@ -14,9 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -29,8 +26,7 @@ public class MealReqController implements Initializable {
       thirdRowNames,
       fourthRowBoxes,
       fifthRowNames,
-      sixthRowBoxes,
-      masterBox;
+      sixthRowBoxes;
   @FXML
   private ChoiceBox<String> patientNames,
       drinkSel,
@@ -39,17 +35,9 @@ public class MealReqController implements Initializable {
       assignStaff,
       serviceStatus,
       destinationDrop;
-  @FXML
-  private TableColumn<MealServiceRequest, String> reqID,
-      patName,
-      assignee,
-      mainCourse,
-      side,
-      drink,
-      status,
-      destination;
-  @FXML private TableView<MealServiceRequest> table;
+
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
   private List<Location> locations;
 
   @FXML
@@ -67,16 +55,7 @@ public class MealReqController implements Initializable {
     fifthRowNames.setSpacing(80);
     sixthRowBoxes.setSpacing(20);
     seventhRowButtons.setSpacing(20);
-    masterBox.setSpacing(40);
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    reqID.setStyle("-fx-alignment: TOP-CENTER;");
-    patName.setStyle("-fx-alignment: TOP-CENTER;");
-    assignee.setStyle("-fx-alignment: TOP-CENTER;");
-    mainCourse.setStyle("-fx-alignment: TOP-CENTER;");
-    side.setStyle("-fx-alignment: TOP-CENTER;");
-    drink.setStyle("-fx-alignment: TOP-CENTER;");
-    status.setStyle("-fx-alignment: TOP-CENTER;");
-    destination.setStyle("-fx-alignment: TOP-CENTER;");
+
     // status choice box ----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "DONE", "PROC");
     // patient names choice box---------------------------------------
@@ -100,15 +79,6 @@ public class MealReqController implements Initializable {
     assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
     destinationDrop.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
-
-    reqID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    patName.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
-    assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    mainCourse.setCellValueFactory(new PropertyValueFactory<>("mainCourse"));
-    side.setCellValueFactory(new PropertyValueFactory<>("side"));
-    drink.setCellValueFactory(new PropertyValueFactory<>("drink"));
-    status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    destination.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
   }
 
   public void enableSubmitButton() {
@@ -159,7 +129,7 @@ public class MealReqController implements Initializable {
   @FXML
   void submitButton() {
     MealServiceRequest request = new MealServiceRequest();
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(MealDAO.makeID());
     request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(assignStaff.getValue());
@@ -167,9 +137,8 @@ public class MealReqController implements Initializable {
     request.setDrink(drinkSel.getValue());
     request.setSide(sideSel.getValue());
     request.setPatientID(patientNames.getValue());
-    MealServiceRequestDAO submit = MealServiceRequestDAO.getDAO();
-    submit.addRecord(request);
+
+    MealDAO.addRecord(request);
     this.resetFields();
-    table.getItems().add(request);
   }
 }

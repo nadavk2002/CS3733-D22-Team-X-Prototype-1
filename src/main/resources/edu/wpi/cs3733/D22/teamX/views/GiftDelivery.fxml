@@ -2,10 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -49,7 +47,6 @@
       </ChoiceBox>
       <Label layoutX="879.0" layoutY="456.0" text="Status:" />
       <Label layoutX="863.0" layoutY="326.0" text="Gift Type:" />
-      <TableView fx:id="tbView" layoutX="776.0" layoutY="556.0" prefHeight="373.0" prefWidth="456.0" />
       <ChoiceBox fx:id="selectGiftType" layoutX="929.0" layoutY="322.0" prefWidth="150.0">
          <opaqueInsets>
             <Insets />
