@@ -95,7 +95,7 @@ public class JanitorialRequestController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(assignStaff.getValue());
-    request.setServiceType(serviceType.getValue());
+    request.setDescription(serviceType.getValue());
     this.resetFields();
     tbView.getItems().add(request);
   }
