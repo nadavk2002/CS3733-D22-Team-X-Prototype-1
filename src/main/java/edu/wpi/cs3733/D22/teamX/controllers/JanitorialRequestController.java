@@ -35,12 +35,13 @@ public class JanitorialRequestController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
+    employees = emplDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     serviceType.getItems().addAll("Bodily Fluids", "Chemical Spills", "Disinfection");
-    assignStaff.setItems(this.getEmployeeIDs());
-//    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
+    assignStaff.setItems(getEmployeeIDs());
+    //    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());

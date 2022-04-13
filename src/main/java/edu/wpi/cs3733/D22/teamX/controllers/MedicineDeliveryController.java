@@ -35,11 +35,12 @@ public class MedicineDeliveryController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
+    employees = emplDAO.getAllRecords();
     resetFields();
     submitRequest.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     assignStaff.setItems(this.getEmployeeIDs());
-//    assignStaff.getItems().addAll("Staff 1", "Staff 2", "Staff 3", "Staff 4");
+    //    assignStaff.getItems().addAll("Staff 1", "Staff 2", "Staff 3", "Staff 4");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4");
     roomNum.setItems(getLocationNames());
     patientName.setOnAction((ActionEvent event) -> enableSubmitButton());

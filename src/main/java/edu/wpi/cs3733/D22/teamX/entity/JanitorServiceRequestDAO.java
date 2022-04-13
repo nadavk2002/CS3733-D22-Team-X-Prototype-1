@@ -111,7 +111,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssignee()
+              + recordObject.getAssigneeID()
               + "', description = '"
               + recordObject.getDescription()
               + " WHERE requestID = '"
@@ -133,7 +133,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
-      sql.append("'" + recordObject.getAssignee() + "'" + ", ");
+      sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       sql.append("'" + recordObject.getDescription() + "'");
       sql.append(")");
       statement.execute(sql.toString());
@@ -156,6 +156,9 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
               + "description VARCHAR(140),"
               + "CONSTRAINT JSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT JSR_assignee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID)"
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("JanitorServiceRequest table creation failed. Check output console.");
@@ -179,6 +182,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       InputStream stream = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(stream));
       medCSVReader.readLine();
@@ -191,7 +195,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  currLine[3],
+                  emplDAO.getRecord(currLine[3]),
                   currLine[4]);
           janitorServiceRequests.add(node);
           node.getDestination().addRequest(node);
@@ -217,7 +221,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
         sql.append("'" + janitorServiceRequests.get(i).getRequestID() + "'" + ", ");
         sql.append("'" + janitorServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + janitorServiceRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + janitorServiceRequests.get(i).getAssignee() + "'" + ", ");
+        sql.append("'" + janitorServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append("'" + janitorServiceRequests.get(i).getDescription() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
@@ -250,7 +254,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
         if (janitorServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(janitorServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(janitorServiceRequests.get(i).getAssigneeID() + ",");
         }
         if (janitorServiceRequests.get(i).getDescription() == null) {
           csvFile.write(',');

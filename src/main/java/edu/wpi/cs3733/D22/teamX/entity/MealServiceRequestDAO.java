@@ -102,7 +102,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
               + "', status = '"
               + recordObject.getStatus()
               + "', assignee = '"
-              + recordObject.getAssignee()
+              + recordObject.getAssigneeID()
               + "', mainCourse = '"
               + recordObject.getMainCourse()
               + "', side = '"
@@ -131,7 +131,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
       msr.append("'" + recordObject.getRequestID() + "', ");
       msr.append("'" + recordObject.getDestination().getNodeID() + "', ");
       msr.append("'" + recordObject.getStatus() + "', ");
-      msr.append("'" + recordObject.getAssignee() + "', ");
+      msr.append("'" + recordObject.getAssigneeID() + "', ");
       msr.append("'" + recordObject.getMainCourse() + "', ");
       msr.append("'" + recordObject.getSide() + "', ");
       msr.append("'" + recordObject.getDrink() + "', ");
@@ -159,6 +159,9 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
               + "patientFor VARCHAR(15),"
               + "CONSTRAINT PMSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT PMSR_assignee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
       System.out.println("MealServiceRequest table creation failed. Check output console.");
@@ -182,6 +185,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
   public boolean loadCSV() {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       InputStream PMSRCSV = DatabaseCreator.class.getResourceAsStream(csv);
       BufferedReader PMSRCSVReader = new BufferedReader(new InputStreamReader(PMSRCSV));
       PMSRCSVReader.readLine();
@@ -194,7 +198,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
-                  currLine[3],
+                  emplDAO.getRecord(currLine[3]),
                   currLine[4],
                   currLine[5],
                   currLine[6],
@@ -223,7 +227,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
         MealServiceRequest.append(
             "'" + mealServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getStatus() + "'" + ", ");
-        MealServiceRequest.append("'" + mealServiceRequests.get(i).getAssignee() + "'" + ", ");
+        MealServiceRequest.append("'" + mealServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getMainCourse() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getSide() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getDrink() + "'" + ", ");
@@ -259,7 +263,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
         if (mealServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(mealServiceRequests.get(i).getAssignee() + ",");
+          csvFile.write(mealServiceRequests.get(i).getAssigneeID() + ",");
         }
         if (mealServiceRequests.get(i).getMainCourse() == null) {
           csvFile.write(',');

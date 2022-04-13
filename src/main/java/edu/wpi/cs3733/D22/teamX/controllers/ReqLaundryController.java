@@ -39,9 +39,11 @@ public class ReqLaundryController implements Initializable {
 
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
+    employees = emplDAO.getAllRecords();
     resetFields();
     selectionMenuColumn.setSpacing(20);
     labelColumn.setSpacing(28);
@@ -55,7 +57,7 @@ public class ReqLaundryController implements Initializable {
         .getItems()
         .addAll(new String[] {"Linens", "Gowns", "Bedding", "Scrubs", "Coats"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
-//    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
+    //    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
 
     selectLaundryType.setOnAction((ActionEvent event) -> disableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> disableSubmitButton());

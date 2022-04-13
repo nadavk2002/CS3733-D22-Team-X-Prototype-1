@@ -54,6 +54,7 @@ public class ReqInTransportController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
+    employees = emplDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     transportFrom.setItems(getLocationNames());
@@ -64,7 +65,7 @@ public class ReqInTransportController implements Initializable {
             new String[] {"Bed", "Recliner", "Intubator", "Extra Nurse", "Language Interpreter"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     assignStaff.setItems(this.getEmployeeIDs());
-//    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
+    //    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
     patientName.getItems().addAll("Patient1", "Patient2", "Patient3", "Patient4", "Patient5");
     transportFrom.setOnAction((ActionEvent event) -> enableSubmitButton());
     transportTo.setOnAction((ActionEvent event) -> enableSubmitButton());

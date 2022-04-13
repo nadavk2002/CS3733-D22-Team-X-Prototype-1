@@ -58,6 +58,7 @@ public class MealReqController implements Initializable {
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
+    employees = emplDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     // Formatting---------------------------------------------------
@@ -92,9 +93,9 @@ public class MealReqController implements Initializable {
     mainSel.getItems().addAll("Chicken", "Fish", "Vegeterian");
     // assign staff choice box ---------------------------------------
     assignStaff.setItems(this.getEmployeeIDs());
-//    assignStaff
-//        .getItems()
-//        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
+    //    assignStaff
+    //        .getItems()
+    //        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
     // status choice box----------------------------------------------------
     destinationDrop.setItems(getLocationNames());
     patientNames.setOnAction((ActionEvent event) -> enableSubmitButton());

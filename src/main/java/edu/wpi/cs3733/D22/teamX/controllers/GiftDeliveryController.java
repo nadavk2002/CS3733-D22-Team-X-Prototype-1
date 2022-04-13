@@ -37,12 +37,13 @@ public class GiftDeliveryController implements Initializable {
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
+    employees = emplDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
 
     selectStatus.getItems().addAll("", "PROC", "DONE");
     selectAssignStaff.setItems(this.getEmployeeIDs());
-//    selectAssignStaff.getItems().addAll("Staff1", "Staff2", "Staff3", "Staff4");
+    //    selectAssignStaff.getItems().addAll("Staff1", "Staff2", "Staff3", "Staff4");
     selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
     selectGiftType.getItems().addAll("Toy", "Flower", "Chocolate");
     selectGiftDestination.setItems(getLocationNames());
