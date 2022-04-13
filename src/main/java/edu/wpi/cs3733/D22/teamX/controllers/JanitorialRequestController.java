@@ -51,7 +51,7 @@ public class JanitorialRequestController implements Initializable {
     idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    serviceTypeColumn.setCellValueFactory(new PropertyValueFactory<>("serviceType"));
+    // serviceTypeColumn.setCellValueFactory(new PropertyValueFactory<>("serviceType"));
     assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
