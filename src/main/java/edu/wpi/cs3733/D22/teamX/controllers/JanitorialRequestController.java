@@ -18,9 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class JanitorialRequestController implements Initializable {
   @FXML private Button mainMenu, submitButton;
   @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
-  @FXML private TableView<JanitorServiceRequest> tbView;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private JanitorServiceRequestDAO janitorDAO = JanitorServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
@@ -47,16 +47,6 @@ public class JanitorialRequestController implements Initializable {
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());
     assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
-
-    tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    tbView
-        .getColumns()
-        .addAll(idColumn, assigneeColumn, locationColumn, statusColumn, serviceTypeColumn);
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
-    statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    // serviceTypeColumn.setCellValueFactory(new PropertyValueFactory<>("serviceType"));
-    assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
   /**
@@ -108,8 +98,8 @@ public class JanitorialRequestController implements Initializable {
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setDescription(serviceType.getValue());
+    janitorDAO.addRecord(request);
     this.resetFields();
-    tbView.getItems().add(request);
   }
 
   /**

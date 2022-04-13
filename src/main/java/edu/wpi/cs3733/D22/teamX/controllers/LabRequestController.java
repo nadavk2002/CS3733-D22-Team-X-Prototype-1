@@ -32,7 +32,6 @@ public class LabRequestController implements Initializable {
   @FXML private TableColumn<LabServiceRequest, String> service;
   @FXML private TableColumn<LabServiceRequest, String> status;
   @FXML private TableColumn<LabServiceRequest, String> destination;
-  @FXML private TableView<LabServiceRequest> table;
   @FXML private Button ReturnToMain;
   @FXML private Button submitRequest;
   @FXML
@@ -41,18 +40,12 @@ public class LabRequestController implements Initializable {
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
+  private LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO();
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
-    requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    patientID.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
-    assigneeTable.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    service.setCellValueFactory(new PropertyValueFactory<>("service"));
-    status.setCellValueFactory(new PropertyValueFactory<>("status"));
-    destination.setCellValueFactory(new PropertyValueFactory<>("locationNodeID"));
-    table.setItems(labDeliveryList());
 
     selectDestination.setItems(this.getLocationNames());
     submitRequest.setDisable(true);
@@ -77,7 +70,6 @@ public class LabRequestController implements Initializable {
     selectLab
         .getItems()
         .addAll("Blood Work", "MRI", "Urine Sample", "Stool Sample", "Saliva Sample");
-    table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     submitCol.setSpacing(20);
     buttonRow.setSpacing(20);
@@ -146,10 +138,8 @@ public class LabRequestController implements Initializable {
     request.setStatus(serviceStatus.getValue());
     request.setDestination(
         locations.get(selectDestination.getSelectionModel().getSelectedIndex())); //
-    LabServiceRequestDAO submit = LabServiceRequestDAO.getDAO();
-    submit.addRecord(request);
+    labDAO.addRecord(request);
     this.resetFields();
-    table.setItems(labDeliveryList());
   }
 
   @FXML

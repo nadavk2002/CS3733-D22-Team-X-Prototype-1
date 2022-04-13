@@ -21,10 +21,10 @@ public class GiftDeliveryController implements Initializable {
   @FXML
   private ChoiceBox<String> selectGiftDestination, selectAssignStaff, selectStatus, selectGiftType;
   @FXML private Button submitButton;
-  @FXML private TableView<GiftDeliveryRequest> tbView;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private GiftDeliveryRequestDAO giftDAO = GiftDeliveryRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");
@@ -53,19 +53,8 @@ public class GiftDeliveryController implements Initializable {
     selectAssignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
     giftNoteField.setOnAction((ActionEvent event) -> enableSubmitButton());
     selectStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
-
-    tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    tbView
-        .getColumns()
-        .addAll(
-            idColumn, assigneeColumn, locationColumn, statusColumn, giftTypeColumn, giftNoteColumn);
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
-    statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    giftTypeColumn.setCellValueFactory(new PropertyValueFactory<>("giftType"));
-    giftNoteColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
   }
+
 
   /**
    * Creates a list of all locations with their short names.
@@ -123,8 +112,7 @@ public class GiftDeliveryController implements Initializable {
     request.setStatus(selectStatus.getValue());
     request.setGiftType(selectGiftType.getValue());
     request.setNotes(giftNoteField.getText());
-
+    giftDAO.addRecord(request);
     this.resetFields();
-    tbView.getItems().add(request);
   }
 }
