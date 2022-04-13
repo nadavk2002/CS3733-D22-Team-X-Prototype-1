@@ -62,6 +62,7 @@ public class ServiceRequestTableController implements Initializable {
     requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
     requests.addAll(LangServiceRequestDAO.getDAO().getAllRecords());
     requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
     return (List<ServiceRequest>) requests;
   }
 
