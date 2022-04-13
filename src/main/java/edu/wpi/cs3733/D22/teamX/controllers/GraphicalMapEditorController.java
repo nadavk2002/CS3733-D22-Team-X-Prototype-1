@@ -373,7 +373,7 @@ public class GraphicalMapEditorController implements Initializable {
   }
 
   private void loadLocationInfo(String nodeID) {
-    Location location = locDAO.getLocation(nodeID);
+    Location location = locDAO.getRecord(nodeID);
     infoVBox.getChildren().clear();
     infoVBox.setSpacing(25);
     Label locationInfo = new Label();
@@ -465,8 +465,8 @@ public class GraphicalMapEditorController implements Initializable {
   private void activateDeleteLocationButton() {
     try {
       deleteLocationButton.setDisable(
-          locDAO.getLocation(nodeIdText.getText()).getUnitsAtLocation().size() != 0
-              || locDAO.getLocation(nodeIdText.getText()).getRequestsAtLocation().size() != 0);
+          locDAO.getRecord(nodeIdText.getText()).getUnitsAtLocation().size() != 0
+              || locDAO.getRecord(nodeIdText.getText()).getRequestsAtLocation().size() != 0);
     } catch (Exception e) {
       deleteLocationButton.setDisable(true);
     }
@@ -493,7 +493,7 @@ public class GraphicalMapEditorController implements Initializable {
         newEquip.setAvailable(availableCheck.isSelected());
         newEquip.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
         newEquip.setType(typeText.getText());
-        equipDAO.updateEquipmentUnit(newEquip);
+        equipDAO.updateRecord(newEquip);
         loadLocation(newEquip.getCurrLocation().getFloor());
         loadLocationInfo(newEquip.getCurrLocation().getNodeID());
         return;
