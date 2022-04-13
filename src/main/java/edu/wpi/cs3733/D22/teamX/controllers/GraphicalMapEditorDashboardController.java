@@ -93,15 +93,15 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private TableColumn<EquipmentUnit, String> currLocC;
 
   // floor contants--------------------------------------
-  private final int dirtyXloc = 130;
-  private final int cleanXloc = 1160;
-  private final int YF5 = 88;
-  private final int YF4 = 190;
-  private final int YF3 = 292;
-  private final int YF2 = 394;
-  private final int YF1 = 496;
-  private final int YLL2 = 700;
-  private final int YLL1 = 598;
+  private final int dirtyXloc = 70;
+  private final int cleanXloc = 1005;
+  private final int YF5 = 188;
+  private final int YF4 = 290;
+  private final int YF3 = 392;
+  private final int YF2 = 494;
+  private final int YF1 = 596;
+  private final int YLL2 = 800;
+  private final int YLL1 = 698;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {

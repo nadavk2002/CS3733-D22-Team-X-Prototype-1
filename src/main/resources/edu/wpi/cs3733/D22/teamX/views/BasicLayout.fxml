@@ -1,27 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdc" height="44.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" />
-
-      <ImageView fitHeight="61.0" fitWidth="219.0" layoutX="824.0" layoutY="3.0" preserveRatio="true">
-         <image>
-            <Image url="@../assets/brighamLogo.png" />
-         </image>
-      </ImageView>
-      <AnchorPane fx:id="appContent" accessibleRole="BUTTON" layoutY="98.0" prefHeight="982.0" prefWidth="1920.0" />
-      <JFXComboBox fx:id="ChoosePage" focusColor="#446fdc" layoutX="817.0" layoutY="55.0" onAction="#SwitchPage" prefHeight="41.0" prefWidth="227.0" promptText="Choose a Page " unFocusColor="#446fdc" />
-      <JFXButton cache="true" contentDisplay="TOP" layoutX="1854.0" layoutY="65.0" onAction="#ExitApplication" text="Exit" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></JFXButton>
+      <AnchorPane fx:id="appContent" layoutX="300.0" prefHeight="1080.0" prefWidth="1620.0" />
+      <Label fx:id="timeLabel" text="Time">
+      </Label>
+      <Pane prefHeight="1080.0" prefWidth="300.0">
+         <children>
+            <VBox fx:id="sideBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
+               <children>
+                  <Label fx:id="userName" text="Hello, User" />
+                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/portrait-free-icon-font (1).png" />
+                     </image>
+                     <VBox.margin>
+                        <Insets left="86.0" right="86.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Label text="Map" />
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#switchMapDashboard" prefWidth="300.0" text="Dashboard">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/settings-sliders-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="graphicalEditorButton" alignment="BASELINE_LEFT" onAction="#switchGraphicalEditor" prefWidth="300.0" text="Graphical Editor">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/map-marker-plus-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label text="Service Requests" />
+                  <JFXButton fx:id="requestMenuButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestMenu" prefWidth="300.0" text="Menu">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/home-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="tableButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestTable" prefWidth="300.0" text="Table">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/list-check-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label text="Settings" />
+                  <JFXButton alignment="BASELINE_LEFT" layoutX="10.0" layoutY="110.0" prefWidth="300.0" text="Preferences">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/heart-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="exitButton" alignment="BASELINE_LEFT" onAction="#ExitApplication" prefWidth="300.0" text="Exit">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/cross-circle-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

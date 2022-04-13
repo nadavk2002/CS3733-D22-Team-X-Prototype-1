@@ -13,15 +13,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class MedicineDeliveryController implements Initializable {
   @FXML private Button ReturnToMain, submitRequest;
   @FXML private ChoiceBox<String> patientName, roomNum, serviceStatus, assignStaff;
   @FXML private TextField rxNum;
-  @FXML private TableView<MedicineServiceRequest> tbView;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private MedicineDeliverServiceRequestDAO medicineDAO = MedicineDeliverServiceRequestDAO.getDAO();
   private List<Location> locations;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
@@ -47,14 +46,6 @@ public class MedicineDeliveryController implements Initializable {
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
     rxNum.setOnAction((ActionEvent event) -> enableSubmitButton());
-
-    tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    tbView.getColumns().addAll(idColumn, assigneeColumn, locationColumn, statusColumn, rxColumn);
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
-    statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    rxColumn.setCellValueFactory(new PropertyValueFactory<>("rxNum"));
-    assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
   }
 
   /**
@@ -114,12 +105,12 @@ public class MedicineDeliveryController implements Initializable {
   public void submitForm() {
     MedicineServiceRequest request = new MedicineServiceRequest();
 
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(medicineDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setRxNum(rxNum.getText());
+    medicineDAO.addRecord(request);
     this.resetFields();
-    tbView.getItems().add(request);
   }
 }

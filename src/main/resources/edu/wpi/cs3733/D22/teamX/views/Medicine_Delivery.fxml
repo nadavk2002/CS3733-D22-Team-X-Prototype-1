@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -65,7 +63,6 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="tbView" layoutX="616.0" layoutY="381.0" prefHeight="494.0" prefWidth="786.0" />
       <Label layoutX="860.0" layoutY="38.0" text="Request Medicine Delivery" textAlignment="CENTER" textFill="#446fdc">
          <font>
             <Font name="System Bold" size="24.0" />
