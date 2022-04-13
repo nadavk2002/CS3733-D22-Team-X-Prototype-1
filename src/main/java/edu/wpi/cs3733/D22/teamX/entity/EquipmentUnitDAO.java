@@ -151,7 +151,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
       initialization.execute(record.toString());
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("Database could not be updated");
+      System.out.println("EquipmentUnit database could not be updated");
     }
 
     // update total units and units available for equipment type

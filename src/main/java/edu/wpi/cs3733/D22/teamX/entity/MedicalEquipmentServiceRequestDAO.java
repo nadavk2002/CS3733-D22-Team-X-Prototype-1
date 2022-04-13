@@ -144,7 +144,8 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
       medEquipReq.append(")");
       initialization.execute(medEquipReq.toString());
     } catch (SQLException e) {
-      System.out.println("Database could not be updated");
+      e.printStackTrace();
+      System.out.println("MedicalEquipmentSR database could not be updated");
       return;
     }
     recordObject

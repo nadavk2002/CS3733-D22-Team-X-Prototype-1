@@ -126,7 +126,7 @@ public class EmployeeDAO implements DAO<Employee> {
       insertEmployee.append(")");
       initialization.execute(insertEmployee.toString());
     } catch (SQLException e) {
-      System.out.println("Database could not be updated");
+      System.out.println("Employee database could not be updated");
     }
   }
 

@@ -135,7 +135,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       sql.append(")");
       initialization.execute(sql.toString());
     } catch (SQLException e) {
-      System.out.println("Database could not be updated");
+      System.out.println("LangServiceRequest database could not be updated");
       return;
     }
     recordObject.getDestination().addRequest(recordObject);

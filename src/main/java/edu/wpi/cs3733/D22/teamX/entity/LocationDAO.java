@@ -143,7 +143,7 @@ public class LocationDAO implements DAO<Location> {
       insertLocation.append(")");
       initialization.execute(insertLocation.toString());
     } catch (SQLException e) {
-      System.out.println("Database could not be updated");
+      System.out.println("Location database could not be updated");
       return;
     }
   }

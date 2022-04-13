@@ -128,7 +128,7 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
       insertEquipmentType.append(")");
       initialization.execute(insertEquipmentType.toString());
     } catch (SQLException e) {
-      System.out.println("Database could not be updated");
+      System.out.println("EquipmentType database could not be updated");
       return;
     }
   }

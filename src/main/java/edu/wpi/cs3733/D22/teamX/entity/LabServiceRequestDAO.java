@@ -134,7 +134,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       initialization.execute(lsr.toString());
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("Database could not be updated");
+      System.out.println("LabSerivceRequest database could not be updated");
     }
   }
 

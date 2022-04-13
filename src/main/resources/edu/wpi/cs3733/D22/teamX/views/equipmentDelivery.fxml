@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MedicalEquipmentDeliveryController">
+<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MedicalEquipmentDeliveryController">
 <children>
     <ChoiceBox fx:id="selectEquipmentType" layoutX="717.0" layoutY="432.0" prefWidth="150.0">
         <opaqueInsets>
@@ -46,5 +44,6 @@
          </font>
       </Label>
       <Label fx:id="amountAvailable" alignment="TOP_CENTER" layoutX="557.0" layoutY="584.0" prefHeight="175.0" prefWidth="472.0" textFill="#446fdc" />
+      <Label fx:id="quanityGreaterThan" layoutX="899.0" layoutY="467.0" text="Quantity must be less than the amount available" textFill="#c90000" />
 </children>
 </AnchorPane>

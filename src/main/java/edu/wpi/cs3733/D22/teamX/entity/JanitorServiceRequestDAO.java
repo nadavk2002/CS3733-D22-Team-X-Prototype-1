@@ -138,7 +138,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
       sql.append(")");
       statement.execute(sql.toString());
     } catch (SQLException e) {
-      System.out.println("Database could not be updated");
+      System.out.println("JanitorServiceRequest database could not be updated");
       return;
     }
     recordObject.getDestination().addRequest(recordObject);

@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class MedicalEquipmentDeliveryController {
+  @FXML private Label quanityGreaterThan;
   @FXML private Label amountAvailable;
   @FXML private Button ToMainMenu;
   @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus;
@@ -23,6 +24,7 @@ public class MedicalEquipmentDeliveryController {
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private MedicalEquipmentServiceRequestDAO equipmentDAO =
       MedicalEquipmentServiceRequestDAO.getDAO();
+  private EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
   private List<Location> locations;
 
   @FXML
@@ -36,6 +38,7 @@ public class MedicalEquipmentDeliveryController {
     }
     selectDestination.setItems(this.getLocationNames());
     updateAvailability();
+    quanityGreaterThan.setVisible(false);
   }
 
   private ObservableList<String> equipDeliveryList() {
@@ -92,10 +95,16 @@ public class MedicalEquipmentDeliveryController {
     request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
-
+    request.setAssignee(EmployeeDAO.getDAO().getRecord("EMPL0001"));
+    if (request.getQuantity()
+        > eqtDAO.getRecord(request.getEquipmentType()).getNumUnitsAvailable()) {
+      quanityGreaterThan.setVisible(true);
+      return;
+    }
     equipmentDAO.addRecord(request);
     this.resetFields();
     updateAvailability();
+    quanityGreaterThan.setVisible(false);
   }
 
   public void updateAvailability() {

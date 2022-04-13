@@ -137,7 +137,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
       sql.append(")");
       initialization.execute(sql.toString());
     } catch (SQLException e) {
-      System.out.println("Database could not be updated");
+      System.out.println("Laundry database could not be updated");
       return;
     }
     recordObject.getDestination().addRequest(recordObject);
