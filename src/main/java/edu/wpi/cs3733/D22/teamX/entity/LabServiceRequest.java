@@ -10,7 +10,7 @@ public class LabServiceRequest extends ServiceRequest {
       String requestID,
       Location destination,
       String status,
-      Employee assignee,
+      String assignee,
       String service,
       String patientFor) {
     super(requestID, destination, status, assignee);

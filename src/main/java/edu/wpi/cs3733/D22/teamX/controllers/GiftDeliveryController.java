@@ -24,9 +24,7 @@ public class GiftDeliveryController implements Initializable {
   @FXML private TableView<GiftDeliveryRequest> tbView;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Location> locations;
-  private List<Employee> employees;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<GiftDeliveryRequest, String> assigneeColumn = new TableColumn("Assignee");
   private TableColumn<GiftDeliveryRequest, String> locationColumn = new TableColumn("Location");
@@ -41,8 +39,7 @@ public class GiftDeliveryController implements Initializable {
     submitButton.setDisable(true);
 
     selectStatus.getItems().addAll("", "PROC", "DONE");
-    selectAssignStaff.setItems(this.getEmployeeIDs());
-//    selectAssignStaff.getItems().addAll("Staff1", "Staff2", "Staff3", "Staff4");
+    selectAssignStaff.getItems().addAll("Staff1", "Staff2", "Staff3", "Staff4");
     selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
     selectGiftType.getItems().addAll("Toy", "Flower", "Chocolate");
     selectGiftDestination.setItems(getLocationNames());
@@ -79,14 +76,6 @@ public class GiftDeliveryController implements Initializable {
     return locationNames;
   }
 
-  public ObservableList<String> getEmployeeIDs() {
-    ObservableList<String> employeeNames = FXCollections.observableArrayList();
-    for (int i = 0; i < employees.size(); i++) {
-      employeeNames.add(employees.get(i).getEmployeeID());
-    }
-    return employeeNames;
-  }
-
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitButton.setDisable(
@@ -118,7 +107,7 @@ public class GiftDeliveryController implements Initializable {
     request.setRequestID(request.makeRequestID());
     request.setDestination(
         locations.get(selectGiftDestination.getSelectionModel().getSelectedIndex()));
-    request.setAssignee(emplDAO.getRecord(selectAssignStaff.getValue()));
+    request.setAssignee(selectAssignStaff.getValue());
     request.setStatus(selectStatus.getValue());
     request.setGiftType(selectGiftType.getValue());
     request.setNotes(giftNoteField.getText());

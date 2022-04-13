@@ -27,10 +27,9 @@ public class ReqLangController implements Initializable {
     locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
-    assignStaff.setItems(this.getEmployeeIDs());
     selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
-//    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
+    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
     roomNum.setItems(getLocationNames());
     selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -48,14 +47,6 @@ public class ReqLangController implements Initializable {
       locationNames.add(locations.get(i).getShortName());
     }
     return locationNames;
-  }
-
-  public ObservableList<String> getEmployeeIDs() {
-    ObservableList<String> employeeNames = FXCollections.observableArrayList();
-    for (int i = 0; i < employees.size(); i++) {
-      employeeNames.add(employees.get(i).getEmployeeID());
-    }
-    return employeeNames;
   }
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
@@ -95,7 +86,7 @@ public class ReqLangController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
-    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
+    request.setAssignee(assignStaff.getValue());
     langDAO.addRecord(request);
     this.resetFields();
   }

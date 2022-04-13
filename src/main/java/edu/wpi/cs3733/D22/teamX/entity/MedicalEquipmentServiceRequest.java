@@ -8,7 +8,7 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
       String requestID,
       Location destination,
       String status,
-      Employee assignee,
+      String assignee,
       //      String requestingUser,
       //      String assignee,
       String equipmentType,
