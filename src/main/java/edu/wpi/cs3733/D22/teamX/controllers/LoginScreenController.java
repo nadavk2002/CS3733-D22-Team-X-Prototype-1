@@ -9,11 +9,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 
 public class LoginScreenController {
-  @FXML private VBox loginFields;
   @FXML private PasswordField password;
   @FXML private TextField username;
   @FXML private JFXButton loginButton;
@@ -26,8 +25,9 @@ public class LoginScreenController {
       App.switchScene(
           FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
     } else {
-      message.setText("Your username or password are incorrect");
+      message.setText("        Your username or password is incorrect");
       message.setTextFill(Color.rgb(210, 39, 30));
+      message.setTextAlignment(TextAlignment.CENTER);
     }
   }
 

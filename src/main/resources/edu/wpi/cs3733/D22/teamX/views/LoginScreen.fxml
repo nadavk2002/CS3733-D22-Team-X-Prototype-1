@@ -19,7 +19,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdbf0" height="1146.0" layoutX="940.0" layoutY="-101.0" stroke="#446fdc" strokeType="INSIDE" width="1094.0" />
-      <VBox fx:id="loginFields" layoutX="1275.0" layoutY="418.0" prefHeight="200.0" prefWidth="286.0" spacing="28.0">
+      <VBox fx:id="loginFields" layoutX="1240.0" layoutY="420.0" prefHeight="280.0" prefWidth="392.0" spacing="28.0">
          <children>
             <TextField fx:id="username" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Username">
                <font>
@@ -31,23 +31,23 @@
                   <Font size="24.0" />
                </font>
             </PasswordField>
-            <JFXButton fx:id="loginButton" buttonType="RAISED" disable="true" onAction="#validLogin" prefWidth="286.0" ripplerFill="WHITE" text="Login">
+            <JFXButton fx:id="loginButton" buttonType="RAISED" disable="true" onAction="#validLogin" prefHeight="66.0" prefWidth="411.0" ripplerFill="WHITE" text="Login">
                <font>
                   <Font name="System Bold" size="30.0" />
                </font>
             </JFXButton>
+            <Label fx:id="message" prefHeight="54.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1341.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1354.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/Avatar User.png" />
          </image>
       </ImageView>
-      <Label fx:id="message" layoutX="1094.0" layoutY="614.0" prefHeight="54.0" prefWidth="665.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="180.0" fitWidth="703.0" layoutX="106.0" layoutY="737.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/BWHlogo.png" />
