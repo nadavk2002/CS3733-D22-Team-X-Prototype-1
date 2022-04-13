@@ -2,26 +2,61 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdc" height="44.0" layoutY="55.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1920.0" />
-
-      <ImageView fitHeight="61.0" fitWidth="219.0" layoutX="824.0" layoutY="3.0" preserveRatio="true">
-         <image>
-            <Image url="@../assets/brighamLogo.png" />
-         </image>
-      </ImageView>
-      <AnchorPane fx:id="appContent" accessibleRole="BUTTON" layoutY="98.0" prefHeight="982.0" prefWidth="1920.0" />
-      <JFXComboBox fx:id="ChoosePage" focusColor="#446fdc" layoutX="817.0" layoutY="55.0" onAction="#SwitchPage" prefHeight="41.0" prefWidth="227.0" promptText="Choose a Page " unFocusColor="#446fdc" />
-      <JFXButton cache="true" contentDisplay="TOP" layoutX="1854.0" layoutY="65.0" onAction="#ExitApplication" text="Exit" textFill="WHITE">
-         <font>
-            <Font size="14.0" />
-         </font></JFXButton>
+      <JFXComboBox fx:id="ChoosePage" focusColor="#446fdc" layoutY="55.0" onAction="#SwitchPage" prefHeight="41.0" prefWidth="227.0" promptText="Choose a Page " unFocusColor="#446fdc" />
+      <AnchorPane fx:id="appContent" layoutX="300.0" prefHeight="1080.0" prefWidth="1620.0" />
+      <Pane prefHeight="1080.0" prefWidth="300.0">
+         <children>
+            <VBox fx:id="sideBarVBox" prefHeight="800.0" prefWidth="300.0">
+               <children>
+                  <VBox fx:id="userSection" alignment="TOP_CENTER" layoutY="40.0" prefHeight="250.0" prefWidth="370.0">
+                     <children>
+                        <Label fx:id="userName" layoutY="40.0" text="Hello, User">
+                           <font>
+                              <Font name="Nirmala UI" size="36.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="navigationSection" prefHeight="417.0" prefWidth="300.0">
+                     <children>
+                        <Label text="Map" />
+                        <JFXButton text="Dashboard">
+                           <graphic>
+                              <SVGPath content="M20.469,1.146l-.031-.011L17.847.272a5.335,5.335,0,0,0-3.1-.081L9.44,1.734A2.312,2.312,0,0,1,7.859,1.6l-.5-.23A5.318,5.318,0,0,0,0,6.277V17.8a5.328,5.328,0,0,0,3.822,5.1l2.74.857A5.34,5.34,0,0,0,8.148,24a6.245,6.245,0,0,0,1.416-.192L15.1,22.28a2.3,2.3,0,0,1,1.249.01l2.259.651A4.363,4.363,0,0,0,24,18.7V6.154A5.328,5.328,0,0,0,20.469,1.146ZM14,3.534V19.47l-4,1.105V4.668ZM4.682,20.027A2.326,2.326,0,0,1,3,17.8V6.277A2.285,2.285,0,0,1,4.032,4.348a2.337,2.337,0,0,1,1.3-.4,2.145,2.145,0,0,1,.823.162L7,4.464V20.752ZM21,18.7a1.367,1.367,0,0,1-1.625,1.341L17,19.37V3.153l2.475.823A2.323,2.323,0,0,1,21,6.154Z" />
+                           </graphic></JFXButton>
+                        <JFXButton fx:id="graphicalEditorButton" onAction="#switchGraphicalEditor" text="Graphical Editor">
+                           <graphic>
+                              <SVGPath content="M21,11.5V15H18a3,3,0,0,0-3,3v3H4.5A1.5,1.5,0,0,1,3,19.5V4.5A1.5,1.5,0,0,1,4.5,3h9A1.5,1.5,0,0,0,15,1.5h0A1.5,1.5,0,0,0,13.5,0h-9A4.5,4.5,0,0,0,0,4.5v15A4.5,4.5,0,0,0,4.5,24H16.484a4.5,4.5,0,0,0,3.181-1.317l3.017-3.017A4.5,4.5,0,0,0,24,16.485V11.5A1.5,1.5,0,0,0,22.5,10h0A1.5,1.5,0,0,0,21,11.5ZM17.793,1.793l-12.5,12.5A1,1,0,0,0,5,15v3a1,1,0,0,0,1,1H9a1,1,0,0,0,.707-.293L22.038,6.376a3.379,3.379,0,0,0,.952-3.17A3.118,3.118,0,0,0,17.793,1.793Z" />
+                           </graphic>
+                        </JFXButton>
+                        <Label text="Service Request Systems" />
+                        <JFXButton fx:id="requestMenuButton" onAction="#switchServiceRequestMenu" text="Menu" />
+                        <JFXButton fx:id="tableButton" onAction="#switchServiceRequestTable" text="Table">
+                           <graphic>
+                              <SVGPath content="m18.5 0h-13a5.506 5.506 0 0 0 -5.5 5.5v13a5.506 5.506 0 0 0 5.5 5.5h13a5.506 5.506 0 0 0 5.5-5.5v-13a5.506 5.506 0 0 0 -5.5-5.5zm-8.5 14v-4h4v4zm4 3v4h-4v-4zm-11-7h4v4h-4zm7-3v-4h4v4zm7 3h4v4h-4zm4-4.5v1.5h-4v-4h1.5a2.5 2.5 0 0 1 2.5 2.5zm-15.5-2.5h1.5v4h-4v-1.5a2.5 2.5 0 0 1 2.5-2.5zm-2.5 15.5v-1.5h4v4h-1.5a2.5 2.5 0 0 1 -2.5-2.5zm15.5 2.5h-1.5v-4h4v1.5a2.5 2.5 0 0 1 -2.5 2.5z" />
+                           </graphic></JFXButton>
+                        <Label text="Settings" />
+                        <JFXButton layoutX="10.0" layoutY="110.0" text="Preferences" />
+                        <JFXButton fx:id="exitButton" onAction="#ExitApplication" text="Exit" />
+                        <Label fx:id="timeLabel" text="Time">
+                           <graphic>
+                              <SVGPath content="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,21a9,9,0,1,1,9-9A9.01,9.01,0,0,1,12,21ZM10.5,11.055l-2.4,1.5a1.5,1.5,0,0,0-.475,2.068h0a1.5,1.5,0,0,0,2.068.475l2.869-1.8a2,2,0,0,0,.938-1.7V7.772a1.5,1.5,0,0,0-1.5-1.5h0a1.5,1.5,0,0,0-1.5,1.5Z" disable="true" />
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -5,19 +5,28 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.Xdb;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 
 /** This represents the blue bar at the top of the app */
-public class BasicLayoutController {
+public class BasicLayoutController implements Initializable {
   @FXML private JFXComboBox<String> ChoosePage;
+  @FXML private Label timeLabel;
   private HashMap<String, String> pages;
+  private Thread clockThread;
 
-  @FXML
-  public void initialize() {
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    // startTime(clockThread);
     pages = new HashMap<String, String>();
     pages.put("Main Menu", "app.fxml");
     pages.put("Equipment Delivery", "equipmentDelivery.fxml");
@@ -60,7 +69,28 @@ public class BasicLayoutController {
   }
 
   @FXML
+  public void switchServiceRequestTable() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EquipReqTable.fxml")));
+  }
+
+  @FXML
+  public void switchGraphicalEditor() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
+  }
+
+  @FXML
+  public void switchServiceRequestMenu() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+  }
+
+  @FXML
   void ExitApplication() throws IOException, loadSaveFromCSVException {
+    // stopTime(clockThread);
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       if (!Xdb.saveLocationDataToCSV("")
@@ -74,5 +104,30 @@ public class BasicLayoutController {
               getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
       CSVFileSaverController.loaded = true;
     }
+  }
+
+  public void startTime(Thread timeThread) {
+    timeThread =
+        new Thread(
+            () -> {
+              SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+              while (true) {
+                try {
+                  Thread.sleep(1000);
+                } catch (Exception e) {
+                  System.out.println(e);
+                }
+                final String currentTime = sdf.format(new Date());
+                Platform.runLater(
+                    () -> {
+                      timeLabel.setText(currentTime);
+                    });
+              }
+            });
+    timeThread.start();
+  }
+
+  public void stopTime(Thread timeThread) {
+    timeThread.stop();
   }
 }

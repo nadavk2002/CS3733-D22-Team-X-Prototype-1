@@ -1,37 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+.root {
+    -fx-lightblue: #108DA3;
+    -fx-midblue: #0A5570;
+    -fx-darkteal: #124454;
+    -fx-blackish: #050505;
+    -fx-eggshell: #D6D9CE;
+}
+
+/*SIDEBAR FORMATTING*/
+
 #sideBarVBox {
-    -fx-background-color: "#576275";
+    -fx-background-color: -fx-darkteal;
 }
 
 #userName {
     -fx-font-family: "Poppins";
     -fx-font-size: 24;
-    -fx-font-weight: medium;
-    -fx-text-fill: "white";
+    -fx-font-weight: bold;
+    -fx-text-fill:  -fx-eggshell;
 }
 
 #navigationSection > .button {
     -fx-font-family: "Poppins";
-    -fx-font-size: 28;
-    -fx-font-weight: medium;
-    -fx-text-fill: "#E9EBEE";
+    -fx-font-size: 24;
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-eggshell;
 }
 
 #topBarHBox{
-    -fx-background-color: "#0B2C65";
+    -fx-background-color: -fx-blackish;
 }
 
 #exitButton {
     -fx-font-family: "Poppins";
     -fx-font-size: 20;
     -fx-font-weight: bold;
-    -fx-text-fill: "white";
+    -fx-text-fill:  -fx-eggshell;
 }
 
 #timeLabel {
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
     -fx-font-size: 24;
-    -fx-text-fill: "white";
+    -fx-text-fill:  -fx-eggshell;
 }

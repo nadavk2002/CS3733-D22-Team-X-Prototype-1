@@ -27,7 +27,7 @@ public class App extends Application {
    * @param scene Scene to place below menu bar
    */
   public static void switchScene(Pane scene) {
-    scene.setLayoutY(98);
+    scene.setLayoutY(0);
     Parent root = primaryStage.getScene().getRoot();
     List<Node> children = ((Pane) root).getChildren();
     children.set(indexOfSceneReplacement, scene);
@@ -44,9 +44,14 @@ public class App extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("views/BasicLayout.fxml"));
     Scene scene = new Scene(root);
     Pane insertPage = (Pane) scene.lookup("#appContent");
+    String css =
+        this.getClass()
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/application.css")
+            .toExternalForm();
+    scene.getStylesheets().add(css);
 
     Pane mainMenu = FXMLLoader.load(getClass().getResource("views/app.fxml"));
-    mainMenu.setLayoutY(98);
+    mainMenu.setLayoutY(0);
     List<Node> children = ((Pane) root).getChildren();
     indexOfSceneReplacement = children.indexOf(insertPage);
     children.set(indexOfSceneReplacement, mainMenu);
