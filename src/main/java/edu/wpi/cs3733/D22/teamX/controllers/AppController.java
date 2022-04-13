@@ -194,16 +194,16 @@ public class AppController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     buttonList.addAll(
-        mealReq,
-        GiftDelivery,
-        ReqJanitor,
-        ReqLaundry,
-        ReqLang,
-        ReqInTransport,
         LabRequest,
-        ReqMedicineDelivery,
+        ReqInTransport,
+        ReqLang,
         // EquipReqTable,
         // graphicalMapEditor,
+        GiftDelivery,
+        ReqLaundry,
+        ReqMedicineDelivery,
+        mealReq,
+        ReqJanitor,
         equipmentRequest);
     searchBox.setPromptText("Search Here");
     //        firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
