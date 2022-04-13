@@ -280,6 +280,6 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
   @Override
   public String makeID() {
     int nextIDFinalNum = this.getAllRecords().size() + 1;
-    return String.format("GIFT%04d", nextIDFinalNum);
+    return String.format("GDSR%04d", nextIDFinalNum);
   }
 }
