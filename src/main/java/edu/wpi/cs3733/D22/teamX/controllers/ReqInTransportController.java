@@ -33,7 +33,7 @@ public class ReqInTransportController implements Initializable {
   private HBox labelHBox1, labelHBox2, labelHBox3, inputHBox1, inputHBox2, inputHBox3, tableHBox;
   @FXML private VBox leftSideVBox, pageVBox;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
   private TableColumn<InTransportServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<InTransportServiceRequest, String> assigneeColumn =
@@ -51,8 +51,7 @@ public class ReqInTransportController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     transportFrom.setItems(getLocationNames());

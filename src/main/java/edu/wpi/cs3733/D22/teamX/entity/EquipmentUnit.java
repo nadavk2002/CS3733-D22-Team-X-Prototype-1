@@ -95,4 +95,11 @@ public class EquipmentUnit {
     EquipmentUnit equipmentUnit = (EquipmentUnit) o;
     return Objects.equals(unitID, equipmentUnit.unitID);
   }
+
+  public String makeEquipmentID() {
+    EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO(); // gets list of all ids
+    int nextIDFinalNum = equipDAO.getAllRecords().size() + 1;
+
+    return String.format("MEUN%04d", nextIDFinalNum);
+  }
 }

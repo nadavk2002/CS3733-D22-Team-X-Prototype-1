@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
-import edu.wpi.cs3733.D22.teamX.entity.MealServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -44,19 +41,20 @@ public class MealReqController implements Initializable {
       destinationDrop;
   @FXML
   private TableColumn<MealServiceRequest, String> reqID,
-      patID,
+      patName,
       assignee,
-      reqType,
+      mainCourse,
+      side,
+      drink,
       status,
       destination;
   @FXML private TableView<MealServiceRequest> table;
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     // Formatting---------------------------------------------------
@@ -72,9 +70,11 @@ public class MealReqController implements Initializable {
     masterBox.setSpacing(40);
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     reqID.setStyle("-fx-alignment: TOP-CENTER;");
-    patID.setStyle("-fx-alignment: TOP-CENTER;");
+    patName.setStyle("-fx-alignment: TOP-CENTER;");
     assignee.setStyle("-fx-alignment: TOP-CENTER;");
-    reqType.setStyle("-fx-alignment: TOP-CENTER;");
+    mainCourse.setStyle("-fx-alignment: TOP-CENTER;");
+    side.setStyle("-fx-alignment: TOP-CENTER;");
+    drink.setStyle("-fx-alignment: TOP-CENTER;");
     status.setStyle("-fx-alignment: TOP-CENTER;");
     destination.setStyle("-fx-alignment: TOP-CENTER;");
     // status choice box ----------------------------------------------------
@@ -102,9 +102,11 @@ public class MealReqController implements Initializable {
     serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
     reqID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    patID.setCellValueFactory(new PropertyValueFactory<>("patientID"));
+    patName.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
     assignee.setCellValueFactory(new PropertyValueFactory<>("assignee"));
-    reqType.setCellValueFactory(new PropertyValueFactory<>("mealType"));
+    mainCourse.setCellValueFactory(new PropertyValueFactory<>("mainCourse"));
+    side.setCellValueFactory(new PropertyValueFactory<>("side"));
+    drink.setCellValueFactory(new PropertyValueFactory<>("drink"));
     status.setCellValueFactory(new PropertyValueFactory<>("status"));
     destination.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
   }
@@ -146,6 +148,14 @@ public class MealReqController implements Initializable {
     destinationDrop.setValue("");
   }
 
+  private ObservableList<MealServiceRequest> mealRequests() {
+    ObservableList<MealServiceRequest> mealList = FXCollections.observableArrayList();
+    MealServiceRequestDAO allMeals = MealServiceRequestDAO.getDAO();
+    List<MealServiceRequest> inpMealsList = allMeals.getAllRecords();
+    mealList.addAll(inpMealsList);
+    return mealList;
+  }
+
   @FXML
   void submitButton() {
     MealServiceRequest request = new MealServiceRequest();
@@ -153,11 +163,13 @@ public class MealReqController implements Initializable {
     request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(assignStaff.getValue());
-    request.setMealType(
-        mainSel.getValue() + "\n" + sideSel.getValue() + "\n" + drinkSel.getValue());
+    request.setMainCourse(mainSel.getValue());
+    request.setDrink(drinkSel.getValue());
+    request.setSide(sideSel.getValue());
     request.setPatientID(patientNames.getValue());
+    MealServiceRequestDAO submit = MealServiceRequestDAO.getDAO();
+    submit.addRecord(request);
     this.resetFields();
-    //
     table.getItems().add(request);
   }
 }
