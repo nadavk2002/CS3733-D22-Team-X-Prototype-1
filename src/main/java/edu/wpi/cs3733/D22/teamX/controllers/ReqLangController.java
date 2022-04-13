@@ -13,23 +13,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ReqLangController implements Initializable {
   @FXML private Button mainMenu, submitButton;
   @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus, assignStaff;
-  // @FXML private TextField assignStaff;
-  @FXML private TableView<LangServiceRequest> tbView;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
   private List<Location> locations;
-  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private List<Employee> employees;
-  private TableColumn<LangServiceRequest, String> idColumn = new TableColumn("Request ID");
-  private TableColumn<LangServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
-  private TableColumn<LangServiceRequest, String> locationColumn = new TableColumn("Location");
-  private TableColumn<LangServiceRequest, String> statusColumn = new TableColumn("Request Status");
-  private TableColumn<LangServiceRequest, String> languageColumn = new TableColumn("Language");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -43,16 +34,7 @@ public class ReqLangController implements Initializable {
     roomNum.setItems(getLocationNames());
     selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
-
-    tbView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    tbView
-        .getColumns()
-        .addAll(idColumn, assigneeColumn, locationColumn, statusColumn, languageColumn);
-    idColumn.setCellValueFactory(new PropertyValueFactory<>("requestID"));
-    locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
-    statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
-    languageColumn.setCellValueFactory(new PropertyValueFactory<>("language"));
-    assigneeColumn.setCellValueFactory(new PropertyValueFactory<>("assignee"));
+    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
   }
 
   /**
@@ -109,12 +91,12 @@ public class ReqLangController implements Initializable {
   public void submitRequest() {
     LangServiceRequest request = new LangServiceRequest();
 
-    request.setRequestID(request.makeRequestID());
+    request.setRequestID(langDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
+    langDAO.addRecord(request);
     this.resetFields();
-    tbView.getItems().add(request);
   }
 }
