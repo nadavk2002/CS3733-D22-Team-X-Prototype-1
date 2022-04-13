@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequest> {
   private static List<MedicineServiceRequest> medicineServiceRequests =
@@ -26,7 +27,14 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
 
   @Override
   public MedicineServiceRequest getRecord(String recordID) {
-    return null;
+      // iterate through list to find element with matching requestID
+      for (MedicineServiceRequest esr : medicineServiceRequests) {
+          // if matching IDs
+          if (esr.getRequestID().equals(recordID)) {
+              return esr;
+          }
+      }
+      throw new NoSuchElementException("request does not exist");
   }
 
   @Override
