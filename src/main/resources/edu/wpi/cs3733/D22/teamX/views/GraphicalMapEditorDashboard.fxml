@@ -36,7 +36,7 @@
                   </StackPane>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="405.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l5Stack" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -55,7 +55,7 @@
                               </HBox>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l5StackC" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levFiveClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -88,7 +88,7 @@
                   </StackPane>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l4Stack" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levFourDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -107,7 +107,7 @@
                               </HBox>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l4StackC" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levFourClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -140,7 +140,7 @@
                   </StackPane>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l3Stack" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -159,7 +159,7 @@
                               </HBox>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l3StackC" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levThreeClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -192,7 +192,7 @@
                   </StackPane>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l2Stack" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -211,7 +211,7 @@
                               </HBox>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l2StackC" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -244,7 +244,7 @@
                   </StackPane>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l1Stack" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -263,7 +263,7 @@
                               </HBox>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="l1StackC" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="levOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -296,7 +296,7 @@
                   </StackPane>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="ll1Stack" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="llOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -315,7 +315,7 @@
                               </HBox>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="ll1StackC" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="llOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -348,7 +348,7 @@
                   </StackPane>
                   <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                      <children>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="ll2Stack" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -367,7 +367,7 @@
                               </HBox>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                        <StackPane fx:id="ll2StackC" prefHeight="150.0" prefWidth="200.0">
                            <children>
                               <Rectangle fx:id="llTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -426,10 +426,10 @@
                   </ImageView>
                   <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0">
                      <columns>
-                        <TableColumn prefWidth="75.0" text="Unit ID" />
-                        <TableColumn prefWidth="75.0" text="Type" />
-                        <TableColumn prefWidth="75.0" text="Availability" />
-                        <TableColumn prefWidth="75.0" text="Current Location" />
+                        <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
+                        <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
+                        <TableColumn fx:id="availabilityC" prefWidth="75.0" text="Availability" />
+                        <TableColumn fx:id="currLocC" prefWidth="75.0" text="Current Location" />
                      </columns>
                   </TableView>
                </children>

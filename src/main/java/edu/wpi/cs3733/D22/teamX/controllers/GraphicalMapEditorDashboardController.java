@@ -32,6 +32,21 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class GraphicalMapEditorDashboardController implements Initializable {
+  @FXML
+  private StackPane l5Stack,
+      l4Stack,
+      l3Stack,
+      l2Stack,
+      l1Stack,
+      ll1Stack,
+      ll2Stack,
+      l5StackC,
+      l4StackC,
+      l3StackC,
+      l2StackC,
+      l1StackC,
+      ll1StackC,
+      ll2StackC;
   @FXML private AnchorPane anchorRoot;
   @FXML private StackPane parentPage;
   @FXML private JFXButton toMapEditor;
@@ -73,26 +88,37 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private TableColumn<EquipmentUnit, String> type;
   @FXML private TableColumn<EquipmentUnit, String> availability;
   @FXML private TableColumn<EquipmentUnit, String> currLoc;
+  @FXML private TableColumn<EquipmentUnit, String> unitIDC;
+  @FXML private TableColumn<EquipmentUnit, String> typeC;
+  @FXML private TableColumn<EquipmentUnit, String> availabilityC;
+  @FXML private TableColumn<EquipmentUnit, String> currLocC;
 
   // floor contants--------------------------------------
-  private final int dirtyXloc = 125;
-  private final int dirtyYloc = 1165;
+  private final int dirtyXloc = 130;
+  private final int cleanXloc = 1160;
   private final int YF5 = 88;
   private final int YF4 = 190;
   private final int YF3 = 292;
   private final int YF2 = 394;
   private final int YF1 = 496;
-  private final int YLL2 = 598;
-  private final int YLL1 = 700;
+  private final int YLL2 = 700;
+  private final int YLL1 = 598;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     dirtyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
     dirtyTableBox.setVisible(false);
+    cleanTableBox.setVisible(false);
     unitID.setCellValueFactory(new PropertyValueFactory<>("unitID"));
     type.setCellValueFactory(new PropertyValueFactory<>("type"));
     availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
+    unitIDC.setCellValueFactory(new PropertyValueFactory<>("unitID"));
+    typeC.setCellValueFactory(new PropertyValueFactory<>("type"));
+    availabilityC.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
+    currLocC.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 
     dynamicSizeRectangles(levFiveDirty, levFiveClean, sortEquipmentByFloor("5"));
     dirtyCleanNumber(levFiveDirtyText, levFiveCleanText, sortEquipmentByFloor("5"));
@@ -114,8 +140,21 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
     dynamicSizeRectangles(llTwoDirty, llTwoClean, sortEquipmentByFloor("L2"));
     dirtyCleanNumber(llTwoDirtyText, llTwoCleanText, sortEquipmentByFloor("L2"));
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("5")), dirtyXloc, YF5, l5Stack);
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("4")), dirtyXloc, YF4, l4Stack);
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("3")), dirtyXloc, YF3, l3Stack);
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("2")), dirtyXloc, YF2, l2Stack);
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("1")), dirtyXloc, YF1, l1Stack);
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("L1")), dirtyXloc, YLL1, ll1Stack);
+    fillDirtyTable(sortByDirty(sortEquipmentByFloor("L2")), dirtyXloc, YLL2, ll2Stack);
 
-    fillDirtyTable(sortByDirty(sortEquipmentByFloor("3")), dirtyXloc, YF3, levThreeDirty);
+    fillCleanTable(sortByClean(sortEquipmentByFloor("5")), cleanXloc, YF5, l5StackC);
+    fillCleanTable(sortByClean(sortEquipmentByFloor("4")), cleanXloc, YF4, l4StackC);
+    fillCleanTable(sortByClean(sortEquipmentByFloor("3")), cleanXloc, YF3, l3StackC);
+    fillCleanTable(sortByClean(sortEquipmentByFloor("2")), cleanXloc, YF2, l2StackC);
+    fillCleanTable(sortByClean(sortEquipmentByFloor("1")), cleanXloc, YF1, l1StackC);
+    fillCleanTable(sortByClean(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1StackC);
+    fillCleanTable(sortByClean(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2StackC);
   }
 
   @FXML
@@ -160,22 +199,72 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   }
 
   private void fillDirtyTable(
-      ObservableList<EquipmentUnit> dirtyEquip, int XfloorVal, int YfloorVal, Rectangle floor) {
-    //    floor.setOnMouseClicked(
-    //        event -> {
-    //          dirtyTableBox.setVisible(true);
-    //          //          if (dirtyEquip.size() > 0) {
-    //          //            dirtyTableBox.setVisible(true);
-    //          //            dirtyTable.setItems(dirtyEquip);
-    //          //            dirtyTableBox.setLayoutX(XfloorVal);
-    //          //            dirtyTableBox.setLayoutY(YfloorVal);
-    //          //          } else {
-    //          //            dirtyTableBox.setVisible(false);
-    //          //          }
-    //        });
+      ObservableList<EquipmentUnit> dirtyEquip, int XfloorVal, int YfloorVal, StackPane floor) {
+    floor.setOnMouseEntered(
+        event -> {
+          if (dirtyEquip.size() > 0) {
+            dirtyTableBox.setVisible(true);
+            dirtyTable.setItems(dirtyEquip);
+            dirtyTableBox.setLayoutX(XfloorVal);
+            dirtyTableBox.setLayoutY(YfloorVal);
+          } else {
+            dirtyTableBox.setVisible(false);
+          }
+          dirtyTableBox.setOnMouseEntered(
+              event2 -> {
+                if (dirtyEquip.size() > 0) {
+                  dirtyTableBox.setVisible(true);
+                  dirtyTable.setItems(dirtyEquip);
+                  dirtyTableBox.setLayoutX(XfloorVal);
+                  dirtyTableBox.setLayoutY(YfloorVal);
+                } else {
+                  dirtyTableBox.setVisible(false);
+                }
+              });
+        });
+    floor.setOnMouseExited(
+        event -> {
+          dirtyTableBox.setVisible(false);
+          dirtyTableBox.setOnMouseExited(
+              event2 -> {
+                dirtyTableBox.setVisible(false);
+              });
+        });
   }
 
-  private void fillCleanTable(ObservableList<EquipmentUnit> cleanEquip, Rectangle cleanRectangle) {}
+  private void fillCleanTable(
+      ObservableList<EquipmentUnit> cleanEquip, int XfloorVal, int YfloorVal, StackPane floor) {
+    floor.setOnMouseEntered(
+        event -> {
+          if (cleanEquip.size() > 0) {
+            cleanTableBox.setVisible(true);
+            cleanTable.setItems(cleanEquip);
+            cleanTableBox.setLayoutX(XfloorVal);
+            cleanTableBox.setLayoutY(YfloorVal);
+          } else {
+            cleanTableBox.setVisible(false);
+          }
+          cleanTableBox.setOnMouseEntered(
+              event2 -> {
+                if (cleanEquip.size() > 0) {
+                  cleanTableBox.setVisible(true);
+                  cleanTable.setItems(cleanEquip);
+                  cleanTableBox.setLayoutX(XfloorVal);
+                  cleanTableBox.setLayoutY(YfloorVal);
+                } else {
+                  cleanTableBox.setVisible(false);
+                }
+              });
+        });
+    floor.setOnMouseExited(
+        event -> {
+          cleanTableBox.setVisible(false);
+          cleanTableBox.setOnMouseExited(
+              event2 -> {
+                cleanTableBox.setVisible(false);
+              });
+        });
+  }
 
   @FXML
   private ObservableList<EquipmentUnit> sortByDirty(ObservableList<EquipmentUnit> equipOnFloor) {
