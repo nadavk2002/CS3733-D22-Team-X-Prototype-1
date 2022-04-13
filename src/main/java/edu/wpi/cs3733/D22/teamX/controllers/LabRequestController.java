@@ -39,11 +39,13 @@ public class LabRequestController implements Initializable {
   private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus, selectDestination;
   private List<Location> locations;
   private LocationDAO locationDAO = LocationDAO.getDAO();
+  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private List<Employee> employees;
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
-
+    employees = emplDAO.getAllRecords();
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     patientID.setCellValueFactory(new PropertyValueFactory<>("patientFor"));
     assigneeTable.setCellValueFactory(new PropertyValueFactory<>("assignee"));
@@ -68,9 +70,10 @@ public class LabRequestController implements Initializable {
     // FORMATTING----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "PROC", "DONE");
     patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
-    assigneeDrop
-        .getItems()
-        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
+    assigneeDrop.setItems(this.getEmployeeIDs());
+//    assigneeDrop
+//        .getItems()
+//        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
     selectLab
         .getItems()
         .addAll("Blood Work", "MRI", "Urine Sample", "Stool Sample", "Saliva Sample");
@@ -90,6 +93,14 @@ public class LabRequestController implements Initializable {
       locationNames.add(locations.get(i).getShortName());
     }
     return locationNames;
+  }
+
+  public ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeIDs = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeIDs.add(employees.get(i).getEmployeeID());
+    }
+    return employeeIDs;
   }
 
   /** When Reset Fields button is pressed, the fields on the screen are reset to default. */
@@ -130,7 +141,7 @@ public class LabRequestController implements Initializable {
 
     request.setRequestID(request.makeRequestID()); //
     request.setPatientFor(patientName.getValue());
-    request.setAssignee(assigneeDrop.getValue());
+    request.setAssignee(emplDAO.getRecord(assigneeDrop.getValue()));
     request.setService(selectLab.getValue());
     request.setStatus(serviceStatus.getValue());
     request.setDestination(
