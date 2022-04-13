@@ -9,6 +9,12 @@ public class LaundyServiceRequest extends ServiceRequest {
     this.service = "";
   }
 
+  public LaundyServiceRequest(
+      String requestID, Location destination, String status, String assignee, String service) {
+    super(requestID, destination, status, assignee);
+    this.service = service;
+  }
+
   public String makeRequestID() {
     return "sample";
   }
