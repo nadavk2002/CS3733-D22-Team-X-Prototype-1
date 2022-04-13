@@ -99,7 +99,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE MedicalEquipmentServiceRequest SET"
+          "UPDATE MedicineDeliveryServiceRequests SET"
               + " destination = '"
               + recordObject.getDestination().getNodeID()
               + "', status = '"
@@ -119,10 +119,55 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
   }
 
   @Override
-  public void addRecord(MedicineServiceRequest recordObject) {}
+  public void addRecord(MedicineServiceRequest recordObject) {
+    medicineServiceRequests.add(recordObject);
+
+    try {
+      Statement initialization = connection.createStatement();
+      StringBuilder medicineDeliveryServiceRequest = new StringBuilder();
+      medicineDeliveryServiceRequest.append("INSERT INTO MedicineDeliveryServiceRequests VALUES(");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getRequestID() + "'" + ", ");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getStatus() + "'" + ", ");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getAssignee() + "'" + ", ");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getRxNum() + "'"+ ", ");
+      medicineDeliveryServiceRequest.append("'" + recordObject.getPatientFor() + "'");
+      medicineDeliveryServiceRequest.append(")");
+      initialization.execute(medicineDeliveryServiceRequest.toString());
+    } catch (SQLException e) {
+      System.out.println("Database could not be updated");
+      return;
+    }
+    recordObject
+            .getDestination()
+            .addRequest(recordObject); // add mesr to destination's list of service requests
+
+  }
 
   @Override
-  public void createTable() {}
+  public void createTable() {
+    try {
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+              "CREATE TABLE MedicineDeliveryServiceRequests(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+                      + "destination CHAR(10),"
+                      + "status CHAR(4),"
+                      + "assignee CHAR(8),"
+                      + "equipmentType VARCHAR(20),"
+                      + "quantity INT,"
+                      + "CONSTRAINT MESR_dest_fk "
+                      + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
+                      + "ON DELETE SET NULL, "
+                      + "CONSTRAINT MESR_equipmentType_fk "
+                      + "FOREIGN KEY (equipmentType) REFERENCES EquipmentType(model) "
+                      + "ON DELETE SET NULL)");
+    } catch (SQLException e) {
+      System.out.println(
+              "MedicalEquipmentServiceRequest table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
 
   @Override
   public void dropTable() {}
