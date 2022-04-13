@@ -67,8 +67,8 @@ public class GraphicalMapEditorController implements Initializable {
       unitIdText,
       typeText;
 
-  private LocationDAO locDAO;
-  private EquipmentUnitDAO equipDAO;
+  private LocationDAO locDAO = LocationDAO.getDAO();
+  private EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO();
   private GesturePane gesturePane;
 
   /**
@@ -164,8 +164,7 @@ public class GraphicalMapEditorController implements Initializable {
    */
   private ObservableList<Location> locationListFill() {
     ObservableList<Location> tableList = FXCollections.observableArrayList();
-    locDAO = new LocationDAOImpl();
-    List<Location> locationList = locDAO.getAllLocations();
+    List<Location> locationList = locDAO.getAllRecords();
     for (Location loc : locationList) {
       tableList.add(loc);
     }
@@ -180,7 +179,7 @@ public class GraphicalMapEditorController implements Initializable {
    */
   private ObservableList<EquipmentUnit> equipmentListFill() {
     ObservableList<EquipmentUnit> tableList = FXCollections.observableArrayList();
-    List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> equipment = equipDAO.getAllRecords();
     for (EquipmentUnit equip : equipment) {
       tableList.add(equip);
     }
@@ -217,8 +216,7 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void drawCirclesSetLocationList(String floor) {
-    locDAO = new LocationDAOImpl();
-    List<Location> locationList = locDAO.getAllLocations();
+    List<Location> locationList = locDAO.getAllRecords();
     Image img = new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png");
     for (int i = 0; i < locationList.size(); i++) {
       if (locationList.get(i).getFloor().equals(floor)) {
@@ -278,8 +276,7 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void drawCirclesSetEquipmentList(String floor) {
-    equipDAO = new EquipmentUnitDAOImpl();
-    List<EquipmentUnit> equipment = equipDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> equipment = equipDAO.getAllRecords();
     for (int i = 0; i < equipment.size(); i++) {
       if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
         Rectangle rectangle = new Rectangle();
@@ -345,17 +342,16 @@ public class GraphicalMapEditorController implements Initializable {
   /** Deletes selected node id in the dropdown */
   public void deleteLocation() {
     String locationToDelete = locationChoice.getValue(); // Node ID
-    String floor = locDAO.getLocation(locationToDelete).getFloor();
-    locDAO.deleteLocation(locDAO.getLocation(locationToDelete));
+    String floor = locDAO.getRecord(locationToDelete).getFloor();
+    locDAO.deleteRecord(locDAO.getRecord(locationToDelete));
     loadLocation(floor);
   }
 
   /** Deletes selected node id in the dropdown */
   public void deleteEquipment() {
     String equipmentToDelete = equipmentChoice.getValue();
-    String floor = equipDAO.getEquipmentUnit(equipmentToDelete).getCurrLocation().getFloor();
-    equipDAO.deleteEquipmentUnit(equipDAO.getEquipmentUnit(equipmentToDelete));
-
+    String floor = equipDAO.getRecord(equipmentToDelete).getCurrLocation().getFloor();
+    equipDAO.deleteRecord(equipDAO.getRecord(equipmentToDelete));
     loadLocation(floor);
   }
 
@@ -363,7 +359,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML
   public void equipmentSelected() {
     try {
-      EquipmentUnit equipment = equipDAO.getEquipmentUnit(equipmentChoice.getValue());
+      EquipmentUnit equipment = equipDAO.getRecord(equipmentChoice.getValue());
       unitIdText.setText(equipment.getUnitID());
       typeText.setText(equipment.getType());
       availableCheck.setSelected(equipment.isAvailable());
@@ -377,8 +373,6 @@ public class GraphicalMapEditorController implements Initializable {
   }
 
   private void loadLocationInfo(String nodeID) {
-    locDAO = new LocationDAOImpl();
-    equipDAO = new EquipmentUnitDAOImpl();
     Location location = locDAO.getLocation(nodeID);
     infoVBox.getChildren().clear();
     infoVBox.setSpacing(25);
@@ -414,7 +408,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML
   public void locationSelected() {
     try {
-      Location selected = locDAO.getLocation(locationChoice.getValue());
+      Location selected = locDAO.getRecord(locationChoice.getValue());
       submitLocationButton.setDisable(false);
       nodeIdText.setText(selected.getNodeID());
       activateDeleteLocationButton();
@@ -444,7 +438,6 @@ public class GraphicalMapEditorController implements Initializable {
    * @param location Floor level
    */
   public void loadLocation(String location) {
-    locDAO = new LocationDAOImpl();
     imageGroup.getChildren().clear();
     Image img =
         new Image(
@@ -492,13 +485,13 @@ public class GraphicalMapEditorController implements Initializable {
    */
   @FXML
   public void submitEquipment() {
-    List<EquipmentUnit> allEquipment = equipDAO.getAllEquipmentUnits();
+    List<EquipmentUnit> allEquipment = equipDAO.getAllRecords();
     for (int i = 0; i < allEquipment.size(); i++) {
       if (allEquipment.get(i).getUnitID().equals(unitIdText.getText())) {
         EquipmentUnit newEquip = new EquipmentUnit();
         newEquip.setUnitID(allEquipment.get(i).getUnitID());
         newEquip.setAvailable(availableCheck.isSelected());
-        newEquip.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
+        newEquip.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
         newEquip.setType(typeText.getText());
         equipDAO.updateEquipmentUnit(newEquip);
         loadLocation(newEquip.getCurrLocation().getFloor());
@@ -508,11 +501,11 @@ public class GraphicalMapEditorController implements Initializable {
     }
     EquipmentUnit newEquipment = new EquipmentUnit();
     newEquipment.setAvailable(availableCheck.isSelected());
-    newEquipment.setCurrLocation(locDAO.getLocation(equipLocationChoice.getValue()));
+    newEquipment.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
     newEquipment.setType(typeText.getText());
     newEquipment.setUnitID(unitIdText.getText());
 
-    equipDAO.addEquipmentUnit(newEquipment);
+    equipDAO.addRecord(newEquipment);
     loadLocation(newEquipment.getCurrLocation().getFloor());
     loadLocationInfo(newEquipment.getCurrLocation().getNodeID());
   }
@@ -520,7 +513,7 @@ public class GraphicalMapEditorController implements Initializable {
   /** Submits a new location with the given data or updates the location with the matching id. */
   @FXML
   public void submitLocation() {
-    List<Location> allLocations = locDAO.getAllLocations();
+    List<Location> allLocations = locDAO.getAllRecords();
     for (int i = 0; i < allLocations.size(); i++) {
       if (allLocations.get(i).getNodeID().equals(nodeIdText.getText())) {
         Location replaceLoc = allLocations.get(i);
@@ -531,8 +524,7 @@ public class GraphicalMapEditorController implements Initializable {
         replaceLoc.setLongName(longNameText.getText());
         replaceLoc.setShortName(shortNameText.getText());
         replaceLoc.setNodeType(nodeTypeText.getText());
-        locDAO.updateLocation(replaceLoc);
-
+        locDAO.updateRecord(replaceLoc);
         loadLocation(replaceLoc.getFloor());
         loadLocationInfo(replaceLoc.getNodeID());
         return;
@@ -548,7 +540,7 @@ public class GraphicalMapEditorController implements Initializable {
     newLocation.setNodeType(nodeTypeText.getText());
     newLocation.setLongName(longNameText.getText());
     newLocation.setShortName(shortNameText.getText());
-    locDAO.addLocation(newLocation);
+    locDAO.addRecord(newLocation);
     loadLocation(newLocation.getFloor());
     loadLocationInfo(newLocation.getNodeID());
   }
@@ -568,9 +560,6 @@ public class GraphicalMapEditorController implements Initializable {
     showEquipCheck.setSelected(true);
     showRequestCheck.setSelected(true);
     hBox1.setSpacing(90);
-
-    locDAO = new LocationDAOImpl();
-    equipDAO = new EquipmentUnitDAOImpl();
 
     showEquipCheck.setOnAction(
         new EventHandler<ActionEvent>() {

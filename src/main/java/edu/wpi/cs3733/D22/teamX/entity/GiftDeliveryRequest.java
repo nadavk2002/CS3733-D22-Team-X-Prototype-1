@@ -1,13 +1,13 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 /** Represents a gift delivery service request */
-public class GiftDeliveryRequest extends ServiceRequest {
-  String Notes;
+public class GiftDeliveryRequest extends ServiceRequest { // rename to GiftServiceRequest
+  String notes;
   String giftType;
 
   public GiftDeliveryRequest() {
     super();
-    this.Notes = "";
+    this.notes = "";
     this.giftType = "";
   }
 
@@ -16,10 +16,10 @@ public class GiftDeliveryRequest extends ServiceRequest {
       Location destination,
       String status,
       String assignee,
-      String Notes,
+      String notes,
       String giftType) {
     super(requestID, destination, status, assignee);
-    this.Notes = Notes;
+    this.notes = notes;
     this.giftType = giftType;
   }
 
@@ -28,11 +28,11 @@ public class GiftDeliveryRequest extends ServiceRequest {
   }
 
   public String getNotes() {
-    return Notes;
+    return notes;
   }
 
   public void setNotes(String Notes) {
-    this.Notes = Notes;
+    this.notes = Notes;
   }
 
   public String getGiftType() {

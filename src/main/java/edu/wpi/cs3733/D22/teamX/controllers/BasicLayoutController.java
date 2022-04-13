@@ -30,6 +30,7 @@ public class BasicLayoutController {
     pages.put("Request Janitorial Services", "JanitorialRequest.fxml");
     pages.put("Request Gift Delivery", "GiftDelivery.fxml");
     pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
+    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     ChoosePage.setItems(
         FXCollections.observableArrayList(
             "Choose a Page",
@@ -43,7 +44,8 @@ public class BasicLayoutController {
             "Request Laundry Services",
             "Request Janitorial Services",
             "Request Gift Delivery",
-            "Graphical Map Editor"));
+            "Graphical Map Editor",
+            "Service Request Table"));
     ChoosePage.setValue("Choose a Page");
   }
 

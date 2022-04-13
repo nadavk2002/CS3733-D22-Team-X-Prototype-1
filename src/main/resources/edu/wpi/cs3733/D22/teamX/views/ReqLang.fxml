@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -19,7 +18,6 @@
          </font>
       </JFXButton>
       <Label layoutX="361.0" layoutY="400.0" text="Assignee:" />
-      <TextField fx:id="assignStaff" layoutX="421.0" layoutY="396.0" />
       <Label layoutX="334.0" layoutY="432.0" text="Service Status:" />
       <TableView fx:id="tbView" layoutX="960.0" layoutY="216.0" prefHeight="534.0" prefWidth="950.0" />
       <ChoiceBox fx:id="roomNum" layoutX="420.0" layoutY="363.0" prefWidth="150.0" />
@@ -39,5 +37,6 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="assignStaff" layoutX="420.0" layoutY="396.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

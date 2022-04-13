@@ -20,7 +20,7 @@ public class JanitorialRequestController implements Initializable {
   @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
   @FXML private TableView<JanitorServiceRequest> tbView;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
   private TableColumn<JanitorServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<JanitorServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
@@ -32,8 +32,7 @@ public class JanitorialRequestController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");

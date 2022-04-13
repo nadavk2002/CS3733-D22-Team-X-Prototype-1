@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
-import edu.wpi.cs3733.D22.teamX.entity.LangServiceRequest;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAOImpl;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -20,11 +17,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class ReqLangController implements Initializable {
   @FXML private Button mainMenu, submitButton;
-  @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus;
-  @FXML private TextField assignStaff;
+  @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus, assignStaff;
+  // @FXML private TextField assignStaff;
   @FXML private TableView<LangServiceRequest> tbView;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
   private TableColumn<LangServiceRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<LangServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
@@ -34,12 +31,12 @@ public class ReqLangController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");
+    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
     roomNum.setItems(getLocationNames());
     selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -70,7 +67,10 @@ public class ReqLangController implements Initializable {
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
-    submitButton.setDisable(roomNum.getValue().equals("") || selectLang.getValue().equals(""));
+    submitButton.setDisable(
+        roomNum.getValue().equals("")
+            || selectLang.getValue().equals("")
+            || assignStaff.getValue().equals(""));
   }
 
   /**
@@ -90,7 +90,7 @@ public class ReqLangController implements Initializable {
     selectLang.setValue("");
     roomNum.setValue("");
     serviceStatus.setValue("");
-    assignStaff.setText("");
+    assignStaff.setValue("");
   }
 
   /** Creates a service request from the fields on the javafx page */
@@ -102,7 +102,7 @@ public class ReqLangController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
-    request.setAssignee(assignStaff.getText());
+    request.setAssignee(assignStaff.getValue());
     this.resetFields();
     tbView.getItems().add(request);
   }

@@ -23,7 +23,7 @@ public class GiftDeliveryController implements Initializable {
   @FXML private Button submitButton;
   @FXML private TableView<GiftDeliveryRequest> tbView;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");
   private TableColumn<GiftDeliveryRequest, String> assigneeColumn = new TableColumn("Assignee");
@@ -34,8 +34,7 @@ public class GiftDeliveryController implements Initializable {
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
 
@@ -61,7 +60,7 @@ public class GiftDeliveryController implements Initializable {
     locationColumn.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
     giftTypeColumn.setCellValueFactory(new PropertyValueFactory<>("giftType"));
-    giftNoteColumn.setCellValueFactory(new PropertyValueFactory<>("Notes"));
+    giftNoteColumn.setCellValueFactory(new PropertyValueFactory<>("notes"));
   }
 
   /**

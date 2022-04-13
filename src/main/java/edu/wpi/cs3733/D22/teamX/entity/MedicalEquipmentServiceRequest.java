@@ -49,28 +49,9 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
    *
    * @return a requestID that does not already exist in the MedicalEquipmentServiceRequest table
    */
-  @Override
   public String makeRequestID() {
-    //    Random rand = new Random();
-    //    StringBuilder strID = new StringBuilder();
-    //    List<Character> alphanumerics = new ArrayList<Character>(Arrays.asList('a', 'b', 'c', 'd',
-    // 'e', 'f', 'g', 'h', 'i',
-    //            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y',
-    // 'z', 'A', 'B', 'C', 'D',
-    //            'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-    // 'U', 'V', 'W', 'X', 'Y',
-    //            'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'));
-    ////    while(true)
-    ////    {
-    //      for(int i = 0; i < 8; i++)
-    //      {
-    //        int range = rand.nextInt(alphanumerics.size());
-    //        strID.append(alphanumerics.get(range));
-    //      }
-    //      return strID.toString();
-    ////    }
-    MedicalEquipmentServiceRequestDAO esrDAO = new MedicalEquipmentServiceRequestDAOImpl();
-    int nextIDFinalNum = esrDAO.getAllMedicalEquipmentServiceRequests().size() + 1;
+    MedicalEquipmentServiceRequestDAO esrDAO = MedicalEquipmentServiceRequestDAO.getDAO();
+    int nextIDFinalNum = esrDAO.getAllRecords().size() + 1;
     return String.format("MESR%04d", nextIDFinalNum);
   }
 }

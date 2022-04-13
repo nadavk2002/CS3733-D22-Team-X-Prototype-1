@@ -20,18 +20,17 @@ public class MedicalEquipmentDeliveryController {
   @FXML private TextField amountField;
   @FXML private Button submitButton;
 
-  private LocationDAO locationDAO;
+  private LocationDAO locationDAO = LocationDAO.getDAO();
   private List<Location> locations;
 
   @FXML
   public void initialize() {
-    locationDAO = new LocationDAOImpl();
-    locations = locationDAO.getAllLocations();
+    locations = locationDAO.getAllRecords();
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
-    EquipmentTypeDAO eqtDAO = new EquipmentTypeDAOImpl();
-    for (int i = 0; i < eqtDAO.getAllEquipmentTypes().size(); i++) {
-      selectEquipmentType.getItems().add(eqtDAO.getAllEquipmentTypes().get(i).getModel());
+    EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
+    for (int i = 0; i < eqtDAO.getAllRecords().size(); i++) {
+      selectEquipmentType.getItems().add(eqtDAO.getAllRecords().get(i).getModel());
     }
     selectDestination.setItems(this.getLocationNames());
     updateAvailability();
@@ -92,23 +91,23 @@ public class MedicalEquipmentDeliveryController {
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
 
-    MedicalEquipmentServiceRequestDAO submit = new MedicalEquipmentServiceRequestDAOImpl();
-    submit.addMedicalEquipmentServiceRequest(request);
+    MedicalEquipmentServiceRequestDAO submit = MedicalEquipmentServiceRequestDAO.getDAO();
+    submit.addRecord(request);
     this.resetFields();
     updateAvailability();
   }
 
   public void updateAvailability() {
-    EquipmentTypeDAO eqtDAO = new EquipmentTypeDAOImpl();
+    EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
     StringBuilder availableStr = new StringBuilder("Equipment Available:");
     String leftPadding = "                    ";
-    for (int i = 0; i < eqtDAO.getAllEquipmentTypes().size(); i++) {
-      String model = eqtDAO.getAllEquipmentTypes().get(i).getModel();
+    for (int i = 0; i < eqtDAO.getAllRecords().size(); i++) {
+      String model = eqtDAO.getAllRecords().get(i).getModel();
       availableStr.append(
           "\n"
               + model
               + leftPadding.substring(model.length())
-              + eqtDAO.getAllEquipmentTypes().get(i).getNumUnitsAvailable()
+              + eqtDAO.getAllRecords().get(i).getNumUnitsAvailable()
               + " units");
     }
     amountAvailable.setText(availableStr.toString());
