@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,11 +21,10 @@ public class BasicLayoutController implements Initializable {
   @FXML private JFXComboBox<String> ChoosePage;
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
-  private Thread clockThread;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // startTime(clockThread);
+    // startTime();
     pages = new HashMap<String, String>();
     pages.put("Main Menu", "app.fxml");
     pages.put("Equipment Delivery", "equipmentDelivery.fxml");
@@ -40,41 +38,41 @@ public class BasicLayoutController implements Initializable {
     pages.put("Request Gift Delivery", "GiftDelivery.fxml");
     pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
     pages.put("Service Request Table", "ServiceRequestTable.fxml");
-    ChoosePage.setItems(
-        FXCollections.observableArrayList(
-            "Choose a Page",
-            "Main Menu",
-            "Equipment Delivery",
-            "Lab Request",
-            "Meal Request",
-            "Medicine Delivery",
-            "Request Transport",
-            "Request Language Interpreter",
-            "Request Laundry Services",
-            "Request Janitorial Services",
-            "Request Gift Delivery",
-            "Graphical Map Editor",
-            "Service Request Table"));
-    ChoosePage.setValue("Choose a Page");
+    //    ChoosePage.setItems(
+    //        FXCollections.observableArrayList(
+    //            "Choose a Page",
+    //            "Main Menu",
+    //            "Equipment Delivery",
+    //            "Lab Request",
+    //            "Meal Request",
+    //            "Medicine Delivery",
+    //            "Request Transport",
+    //            "Request Language Interpreter",
+    //            "Request Laundry Services",
+    //            "Request Janitorial Services",
+    //            "Request Gift Delivery",
+    //            "Graphical Map Editor",
+    //            "Service Request Table"));
+    //    ChoosePage.setValue("Choose a Page");
   }
 
-  @FXML
-  public void SwitchPage() throws IOException {
-    String newPage = ChoosePage.getValue();
-    if (!newPage.equals("Choose a Page")) {
-      App.switchScene(
-          FXMLLoader.load(
-              App.class.getResource("/edu/wpi/cs3733/D22/teamX/views/" + pages.get(newPage))));
-      ChoosePage.setValue("Choose a Page");
-      CSVFileSaverController.loaded = false;
-    }
-  }
+  //  @FXML
+  //  public void SwitchPage() throws IOException {
+  //    String newPage = ChoosePage.getValue();
+  //    if (!newPage.equals("Choose a Page")) {
+  //      App.switchScene(
+  //          FXMLLoader.load(
+  //              App.class.getResource("/edu/wpi/cs3733/D22/teamX/views/" + pages.get(newPage))));
+  //      ChoosePage.setValue("Choose a Page");
+  //      CSVFileSaverController.loaded = false;
+  //    }
+  //  }
 
   @FXML
   public void switchServiceRequestTable() throws IOException {
     App.switchScene(
         FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EquipReqTable.fxml")));
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   }
 
   @FXML
@@ -91,8 +89,15 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchMapDashboard() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass()
+                .getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorDashboard.fxml")));
+  }
+
+  @FXML
   void ExitApplication() throws IOException, loadSaveFromCSVException {
-    // stopTime(clockThread);
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
@@ -104,8 +109,8 @@ public class BasicLayoutController implements Initializable {
     }
   }
 
-  public void startTime(Thread timeThread) {
-    timeThread =
+  public void startTime() {
+    Thread timeThread =
         new Thread(
             () -> {
               SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
@@ -123,9 +128,5 @@ public class BasicLayoutController implements Initializable {
               }
             });
     timeThread.start();
-  }
-
-  public void stopTime(Thread timeThread) {
-    timeThread.stop();
   }
 }

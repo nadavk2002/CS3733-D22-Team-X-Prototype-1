@@ -50,7 +50,7 @@ public class App extends Application {
             .toExternalForm();
     scene.getStylesheets().add(css);
 
-    Pane mainMenu = FXMLLoader.load(getClass().getResource("views/app.fxml"));
+    Pane mainMenu = FXMLLoader.load(getClass().getResource("views/loginScreen.fxml"));
     mainMenu.setLayoutX(300);
     List<Node> children = ((Pane) root).getChildren();
     indexOfSceneReplacement = children.indexOf(insertPage);
