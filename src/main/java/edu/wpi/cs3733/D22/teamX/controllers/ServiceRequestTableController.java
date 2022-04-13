@@ -77,6 +77,20 @@ public class ServiceRequestTableController implements Initializable {
       medDAO.updateRecord(req);
     } catch (Exception e) {
     }
+    try {
+      MedicineDeliverServiceRequestDAO medDAO = MedicineDeliverServiceRequestDAO.getDAO();
+      MedicineServiceRequest req = medDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      medDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
+    try {
+      LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
+      LaundyServiceRequest req = laundryDAO.getRecord(id);
+      req.setStatus(modifyStatus.getValue());
+      laundryDAO.updateRecord(req);
+    } catch (Exception e) {
+    }
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
@@ -121,6 +135,7 @@ public class ServiceRequestTableController implements Initializable {
     requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
     requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
     requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
     return (List<ServiceRequest>) requests;
   }
 
