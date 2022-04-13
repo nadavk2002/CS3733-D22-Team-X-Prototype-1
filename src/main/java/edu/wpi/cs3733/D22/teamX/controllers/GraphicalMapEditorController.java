@@ -7,7 +7,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.ResourceBundle;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +35,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 /**
@@ -70,12 +76,37 @@ public class GraphicalMapEditorController implements Initializable {
   private LocationDAO locDAO = LocationDAO.getDAO();
   private EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO();
   private GesturePane gesturePane;
+  @FXML private StackPane parentPage;
+  @FXML private AnchorPane anchorRoot;
 
   /**
    * Returns to the main menu of the JavaFX App
    *
    * @throws IOException
    */
+  @FXML
+  private void ToDashboard() throws IOException {
+    Parent root =
+        FXMLLoader.load(
+            Objects.requireNonNull(
+                getClass()
+                    .getResource(
+                        "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorDashboard.fxml")));
+    Scene scene = pane.getScene();
+    root.translateXProperty().set(-scene.getHeight());
+    parentPage.getChildren().add(root);
+    Timeline timeline = new Timeline();
+    KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_IN);
+    KeyFrame kf = new KeyFrame(Duration.seconds(.75), kv);
+
+    timeline.getKeyFrames().add(kf);
+    timeline.setOnFinished(
+        event -> {
+          parentPage.getChildren().remove(anchorRoot);
+        });
+    timeline.play();
+  }
+
   @FXML
   private void ToLocationTable() throws IOException {
     FXMLLoader fxmlLoader =
