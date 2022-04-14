@@ -89,7 +89,7 @@ public class ReqLaundryController implements Initializable {
 
   @FXML
   public void submitRequest() {
-    LaundyServiceRequest request = new LaundyServiceRequest();
+    LaundryServiceRequest request = new LaundryServiceRequest();
 
     request.setRequestID(laundryDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));

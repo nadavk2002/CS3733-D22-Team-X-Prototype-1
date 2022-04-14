@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
-  private static List<LaundyServiceRequest> laundyServiceRequests = new ArrayList<>();
+public class LaundryServiceRequestDAO implements DAO<LaundryServiceRequest> {
+  private static List<LaundryServiceRequest> laundryServiceRequests = new ArrayList<>();
   private static String csv = "LaundryServiceRequests.csv";
 
   /** Creates a new LocationDAO object. */
@@ -31,14 +31,14 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
   }
 
   @Override
-  public List<LaundyServiceRequest> getAllRecords() {
-    return laundyServiceRequests;
+  public List<LaundryServiceRequest> getAllRecords() {
+    return laundryServiceRequests;
   }
 
   @Override
-  public LaundyServiceRequest getRecord(String recordID) {
+  public LaundryServiceRequest getRecord(String recordID) {
     // iterate through list to find element with matching requestID
-    for (LaundyServiceRequest lsr : laundyServiceRequests) {
+    for (LaundryServiceRequest lsr : laundryServiceRequests) {
       // if matching IDs
       if (lsr.getRequestID().equals(recordID)) {
         return lsr;
@@ -48,14 +48,14 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
   }
 
   @Override
-  public void deleteRecord(LaundyServiceRequest recordObject) {
+  public void deleteRecord(LaundryServiceRequest recordObject) {
     recordObject.getDestination().removeRequest(recordObject);
     // remove from list
     int index = 0; // create index variable for while loop
-    int initialSize = laundyServiceRequests.size();
-    while (index < laundyServiceRequests.size()) {
-      if (laundyServiceRequests.get(index).equals(recordObject)) {
-        laundyServiceRequests.remove(index); // removes object from list
+    int initialSize = laundryServiceRequests.size();
+    while (index < laundryServiceRequests.size()) {
+      if (laundryServiceRequests.get(index).equals(recordObject)) {
+        laundryServiceRequests.remove(index); // removes object from list
         index--;
         break; // exit
       }
@@ -79,7 +79,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
   }
 
   @Override
-  public void updateRecord(LaundyServiceRequest recordObject) {
+  public void updateRecord(LaundryServiceRequest recordObject) {
     if (!recordObject
         .getDestination()
         .equals(getRecord(recordObject.getRequestID()).getDestination())) {
@@ -87,15 +87,15 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
       recordObject.getDestination().addRequest(recordObject);
     }
     int index = 0; // create indexer varible for while loop
-    while (index < laundyServiceRequests.size()) {
-      if (laundyServiceRequests.get(index).equals(recordObject)) {
-        laundyServiceRequests.set(index, recordObject);
+    while (index < laundryServiceRequests.size()) {
+      if (laundryServiceRequests.get(index).equals(recordObject)) {
+        laundryServiceRequests.set(index, recordObject);
         break; // exit
       }
       index++; // increment if not found yet
     }
     // if medical equipment service request not found
-    if (index == laundyServiceRequests.size()) {
+    if (index == laundryServiceRequests.size()) {
       throw new NoSuchElementException("request does not exist");
     }
 
@@ -123,8 +123,8 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
   }
 
   @Override
-  public void addRecord(LaundyServiceRequest recordObject) {
-    laundyServiceRequests.add(recordObject);
+  public void addRecord(LaundryServiceRequest recordObject) {
+    laundryServiceRequests.add(recordObject);
     try {
       Statement initialization = connection.createStatement();
       StringBuilder sql = new StringBuilder();
@@ -189,14 +189,14 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
       while ((nextFileLine = medCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 5) {
-          LaundyServiceRequest node =
-              new LaundyServiceRequest(
+          LaundryServiceRequest node =
+              new LaundryServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
                   currLine[4]);
-          laundyServiceRequests.add(node);
+          laundryServiceRequests.add(node);
           node.getDestination().addRequest(node);
         } else {
           System.out.println("LaundryServiceRequest CSV file formatted improperly");
@@ -212,16 +212,16 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
       return false;
     }
 
-    for (int i = 0; i < laundyServiceRequests.size(); i++) {
+    for (int i = 0; i < laundryServiceRequests.size(); i++) {
       try {
         Statement initialization = connection.createStatement();
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO LaundryServiceRequest VALUES(");
-        sql.append("'" + laundyServiceRequests.get(i).getRequestID() + "'" + ", ");
-        sql.append("'" + laundyServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
-        sql.append("'" + laundyServiceRequests.get(i).getStatus() + "'" + ", ");
-        sql.append("'" + laundyServiceRequests.get(i).getAssigneeID() + "'" + ", ");
-        sql.append("'" + laundyServiceRequests.get(i).getService() + "'");
+        sql.append("'" + laundryServiceRequests.get(i).getRequestID() + "'" + ", ");
+        sql.append("'" + laundryServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+        sql.append("'" + laundryServiceRequests.get(i).getStatus() + "'" + ", ");
+        sql.append("'" + laundryServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        sql.append("'" + laundryServiceRequests.get(i).getService() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
       } catch (SQLException e) {
@@ -238,27 +238,27 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
       csvFile.write("requestID,destination,status,assignee,service");
-      for (int i = 0; i < laundyServiceRequests.size(); i++) {
-        csvFile.write("\n" + laundyServiceRequests.get(i).getRequestID() + ",");
-        if (laundyServiceRequests.get(i).getDestination() == null) {
+      for (int i = 0; i < laundryServiceRequests.size(); i++) {
+        csvFile.write("\n" + laundryServiceRequests.get(i).getRequestID() + ",");
+        if (laundryServiceRequests.get(i).getDestination() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(laundyServiceRequests.get(i).getDestination().getNodeID() + ",");
+          csvFile.write(laundryServiceRequests.get(i).getDestination().getNodeID() + ",");
         }
-        if (laundyServiceRequests.get(i).getStatus() == null) {
+        if (laundryServiceRequests.get(i).getStatus() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(laundyServiceRequests.get(i).getStatus() + ",");
+          csvFile.write(laundryServiceRequests.get(i).getStatus() + ",");
         }
-        if (laundyServiceRequests.get(i).getAssignee() == null) {
+        if (laundryServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(laundyServiceRequests.get(i).getAssigneeID() + ",");
+          csvFile.write(laundryServiceRequests.get(i).getAssigneeID() + ",");
         }
-        if (laundyServiceRequests.get(i).getService() == null) {
+        if (laundryServiceRequests.get(i).getService() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(laundyServiceRequests.get(i).getService());
+          csvFile.write(laundryServiceRequests.get(i).getService());
         }
       }
       csvFile.flush();

@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequest> {
+public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceRequest> {
   private static List<MedicineServiceRequest> medicineServiceRequests =
       new ArrayList<MedicineServiceRequest>();
   private static String csv = "MedicineDeliveryRequests.csv";
 
-  private MedicineDeliverServiceRequestDAO() {}
+  private MedicineDeliveryServiceRequestDAO() {}
 
   private static class SingletonHelper {
-    private static final MedicineDeliverServiceRequestDAO medicineDeliveryServiceRequestDAO =
-        new MedicineDeliverServiceRequestDAO();
+    private static final MedicineDeliveryServiceRequestDAO medicineDeliveryServiceRequestDAO =
+        new MedicineDeliveryServiceRequestDAO();
   }
 
-  public static MedicineDeliverServiceRequestDAO getDAO() {
+  public static MedicineDeliveryServiceRequestDAO getDAO() {
     return SingletonHelper.medicineDeliveryServiceRequestDAO;
   }
 

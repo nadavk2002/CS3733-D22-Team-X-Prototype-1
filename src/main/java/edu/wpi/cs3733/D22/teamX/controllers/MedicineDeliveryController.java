@@ -20,7 +20,8 @@ public class MedicineDeliveryController implements Initializable {
   @FXML private TextField rxNum;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private MedicineDeliverServiceRequestDAO medicineDAO = MedicineDeliverServiceRequestDAO.getDAO();
+  private MedicineDeliveryServiceRequestDAO medicineDAO =
+      MedicineDeliveryServiceRequestDAO.getDAO();
   private List<Location> locations;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;

@@ -16,8 +16,8 @@ public class DatabaseCreator {
   private static final EquipmentUnitDAO equDAO = EquipmentUnitDAO.getDAO();
   private static final MealServiceRequestDAO pmsrDAO = MealServiceRequestDAO.getDAO();
   private static final LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
-  private static final MedicineDeliverServiceRequestDAO MDSDAO =
-      MedicineDeliverServiceRequestDAO.getDAO();
+  private static final MedicineDeliveryServiceRequestDAO MDSDAO =
+      MedicineDeliveryServiceRequestDAO.getDAO();
   private static final JanitorServiceRequestDAO janitorDAO = JanitorServiceRequestDAO.getDAO();
   private static final LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
 

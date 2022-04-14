@@ -78,7 +78,7 @@ public class ServiceRequestTableController implements Initializable {
     } catch (Exception e) {
     }
     try {
-      MedicineDeliverServiceRequestDAO medDAO = MedicineDeliverServiceRequestDAO.getDAO();
+      MedicineDeliveryServiceRequestDAO medDAO = MedicineDeliveryServiceRequestDAO.getDAO();
       MedicineServiceRequest req = medDAO.getRecord(id);
       req.setStatus(modifyStatus.getValue());
       medDAO.updateRecord(req);
@@ -86,7 +86,7 @@ public class ServiceRequestTableController implements Initializable {
     }
     try {
       LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
-      LaundyServiceRequest req = laundryDAO.getRecord(id);
+      LaundryServiceRequest req = laundryDAO.getRecord(id);
       req.setStatus(modifyStatus.getValue());
       laundryDAO.updateRecord(req);
     } catch (Exception e) {
@@ -143,7 +143,7 @@ public class ServiceRequestTableController implements Initializable {
     requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
     requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
     requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
+    requests.addAll(MedicineDeliveryServiceRequestDAO.getDAO().getAllRecords());
     return (List<ServiceRequest>) requests;
   }
 
