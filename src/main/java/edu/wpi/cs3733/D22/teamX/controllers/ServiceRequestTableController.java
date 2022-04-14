@@ -79,7 +79,7 @@ public class ServiceRequestTableController implements Initializable {
     }
     try {
       MedicineDeliveryServiceRequestDAO medDAO = MedicineDeliveryServiceRequestDAO.getDAO();
-      MedicineServiceRequest req = medDAO.getRecord(id);
+      MedicineDeliveryServiceRequest req = medDAO.getRecord(id);
       req.setStatus(modifyStatus.getValue());
       medDAO.updateRecord(req);
     } catch (Exception e) {

@@ -345,10 +345,10 @@ public class GraphicalMapEditorController implements Initializable {
       rect.setVisible(showRequestCheck.isSelected());
       rect.setWidth(25);
       rect.setHeight(25);
+      String simp = s.getClass().getSimpleName();
       rect.setFill(
-          new ImagePattern(
-              new Image(
-                  "/edu/wpi/cs3733/D22/teamX/assets/" + s.getClass().getSimpleName() + ".png")));
+          new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/" + simp + ".png")));
+      // System.out.println("/edu/wpi/cs3733/D22/teamX/assets/" + simp + ".png");
       rect.setX(s.getDestination().getxCoord() - (rect.getWidth() / 2));
       rect.setY(s.getDestination().getyCoord() - (rect.getHeight() / 2));
       imageGroup.getChildren().add(rect);
@@ -634,5 +634,9 @@ public class GraphicalMapEditorController implements Initializable {
     equipLocationChoice.setOnAction((ActionEvent a) -> activateSubmitEquipmentButton());
 
     loadLocation("1");
+  }
+
+  public void getNextNodeID() {
+    unitIdText.setText(equipDAO.makeID());
   }
 }

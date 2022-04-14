@@ -2,8 +2,8 @@ package edu.wpi.cs3733.D22.teamX;
 
 import static org.junit.Assert.*;
 
+import edu.wpi.cs3733.D22.teamX.entity.MedicineDeliveryServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.MedicineDeliveryServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.entity.MedicineServiceRequest;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.util.NoSuchElementException;
 import org.junit.Before;
@@ -43,7 +43,7 @@ public class MedicineDeliveryServiceRequestDAOTests {
 
   @Test
   public void TestUpdateServiceRecord() {
-    MedicineServiceRequest newMDSR = new MedicineServiceRequest();
+    MedicineDeliveryServiceRequest newMDSR = new MedicineDeliveryServiceRequest();
     // test Meal Service Request
     assertTrue(DAO.getRecord("MDSR0009").getStatus().equals("PROC"));
     // set MealRequest
@@ -59,7 +59,7 @@ public class MedicineDeliveryServiceRequestDAOTests {
 
   @Test
   public void TestAddRecord() {
-    MedicineServiceRequest newMDSR = new MedicineServiceRequest();
+    MedicineDeliveryServiceRequest newMDSR = new MedicineDeliveryServiceRequest();
     // test Meal Service Request
     assertTrue(DAO.getRecord("MDSR0011").getStatus().equals("PROC"));
     // set MealRequest

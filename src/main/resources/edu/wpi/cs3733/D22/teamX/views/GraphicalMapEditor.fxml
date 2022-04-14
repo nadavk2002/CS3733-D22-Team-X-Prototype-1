@@ -1,23 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+<StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
    <children>
       <AnchorPane fx:id="anchorRoot" prefHeight="1080.0" prefWidth="1620.0" style="-fx-background-color: #FFFFFF;">
          <children>
@@ -78,10 +68,11 @@
                               <Label prefHeight="18.0" prefWidth="130.0" text="Choose Equipment:" />
                            </children>
                         </GridPane>
-                        <GridPane prefHeight="137.0" prefWidth="371.0" vgap="5.0">
+                        <GridPane prefHeight="85.0" prefWidth="309.0" vgap="5.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.20001220703125" minWidth="10.0" prefWidth="99.5999755859375" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.4000244140625" minWidth="10.0" prefWidth="272.4000244140625" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.20001220703125" minWidth="10.0" prefWidth="103.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="167.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.4000244140625" minWidth="10.0" prefWidth="47.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -90,14 +81,15 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <TextField fx:id="unitIdText" prefHeight="24.0" prefWidth="226.0" GridPane.columnIndex="1" />
+                              <TextField fx:id="unitIdText" prefHeight="25.0" prefWidth="226.0" GridPane.columnIndex="1" />
                               <TextField fx:id="typeText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="Unit ID:" />
+                              <Label prefWidth="66.0" text="Unit ID:" />
                               <Label text="Type: " GridPane.rowIndex="1" />
                               <Label text="Available: " GridPane.rowIndex="2" />
                               <Label text="Current location:" GridPane.rowIndex="3" />
                               <JFXCheckBox fx:id="availableCheck" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <ChoiceBox fx:id="equipLocationChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <JFXButton mnemonicParsing="false" onAction="#getNextNodeID" text="Auto" GridPane.columnIndex="2" />
                            </children>
                         </GridPane>
                      </children>
@@ -134,8 +126,9 @@
             </GridPane>
             <GridPane layoutX="470.0" layoutY="766.0" prefHeight="189.0" prefWidth="371.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.20001220703125" minWidth="10.0" prefWidth="99.5999755859375" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.4000244140625" minWidth="10.0" prefWidth="272.4000244140625" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.20001220703125" minWidth="10.0" prefWidth="109.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.4000244140625" minWidth="10.0" prefWidth="210.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.4000244140625" minWidth="10.0" prefWidth="83.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceRequest> {
-  private static List<MedicineServiceRequest> medicineServiceRequests =
-      new ArrayList<MedicineServiceRequest>();
+public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineDeliveryServiceRequest> {
+  private static List<MedicineDeliveryServiceRequest> medicineDeliveryServiceRequests =
+      new ArrayList<MedicineDeliveryServiceRequest>();
   private static String csv = "MedicineDeliveryRequests.csv";
 
   private MedicineDeliveryServiceRequestDAO() {}
@@ -25,14 +25,14 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
   }
 
   @Override
-  public List<MedicineServiceRequest> getAllRecords() {
-    return medicineServiceRequests;
+  public List<MedicineDeliveryServiceRequest> getAllRecords() {
+    return medicineDeliveryServiceRequests;
   }
 
   @Override
-  public MedicineServiceRequest getRecord(String recordID) {
+  public MedicineDeliveryServiceRequest getRecord(String recordID) {
     // iterate through list to find element with matching requestID
-    for (MedicineServiceRequest esr : medicineServiceRequests) {
+    for (MedicineDeliveryServiceRequest esr : medicineDeliveryServiceRequests) {
       // if matching IDs
       if (esr.getRequestID().equals(recordID)) {
         return esr;
@@ -42,15 +42,15 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
   }
 
   @Override
-  public void deleteRecord(MedicineServiceRequest recordObject) {
+  public void deleteRecord(MedicineDeliveryServiceRequest recordObject) {
     // add to destination's list of service requests
     recordObject.getDestination().removeRequest(recordObject);
     // remove from list
     int index = 0; // create index variable for while loop
-    int initialSize = medicineServiceRequests.size();
-    while (index < medicineServiceRequests.size()) {
-      if (medicineServiceRequests.get(index).equals(recordObject)) {
-        medicineServiceRequests.remove(index); // removes object from list
+    int initialSize = medicineDeliveryServiceRequests.size();
+    while (index < medicineDeliveryServiceRequests.size()) {
+      if (medicineDeliveryServiceRequests.get(index).equals(recordObject)) {
+        medicineDeliveryServiceRequests.remove(index); // removes object from list
         index--;
         break; // exit
       }
@@ -74,7 +74,7 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
   }
 
   @Override
-  public void updateRecord(MedicineServiceRequest recordObject) {
+  public void updateRecord(MedicineDeliveryServiceRequest recordObject) {
     // remove mesr from old location and add to new one if location changes in the update
     if (!recordObject
         .getDestination()
@@ -83,15 +83,15 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
       recordObject.getDestination().addRequest(recordObject);
     }
     int index = 0; // create indexer varible for while loop
-    while (index < medicineServiceRequests.size()) {
-      if (medicineServiceRequests.get(index).equals(recordObject)) {
-        medicineServiceRequests.set(index, recordObject);
+    while (index < medicineDeliveryServiceRequests.size()) {
+      if (medicineDeliveryServiceRequests.get(index).equals(recordObject)) {
+        medicineDeliveryServiceRequests.set(index, recordObject);
         break; // exit
       }
       index++; // increment if not found yet
     }
     // if medical equipment service request not found
-    if (index == medicineServiceRequests.size()) {
+    if (index == medicineDeliveryServiceRequests.size()) {
       throw new NoSuchElementException("request does not exist");
     }
 
@@ -121,8 +121,8 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
   }
 
   @Override
-  public void addRecord(MedicineServiceRequest recordObject) {
-    medicineServiceRequests.add(recordObject);
+  public void addRecord(MedicineDeliveryServiceRequest recordObject) {
+    medicineDeliveryServiceRequests.add(recordObject);
 
     try {
       Statement initialization = connection.createStatement();
@@ -194,15 +194,15 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
       while ((nextFileLine = medCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
         if (currLine.length == 6) {
-          MedicineServiceRequest mesrNode =
-              new MedicineServiceRequest(
+          MedicineDeliveryServiceRequest mesrNode =
+              new MedicineDeliveryServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
                   currLine[4],
                   currLine[5]);
-          medicineServiceRequests.add(mesrNode);
+          medicineDeliveryServiceRequests.add(mesrNode);
           mesrNode
               .getDestination()
               .addRequest(mesrNode); // add mesr to destination's list of service requests
@@ -221,18 +221,20 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
     }
 
     // Insert medical equipment service requests from MedEquipReqFromCSV into db table
-    for (int i = 0; i < medicineServiceRequests.size(); i++) {
+    for (int i = 0; i < medicineDeliveryServiceRequests.size(); i++) {
       try {
         Statement initialization = connection.createStatement();
         StringBuilder medEquipReq = new StringBuilder();
         medEquipReq.append("INSERT INTO MedicineDeliveryServiceRequest VALUES(");
-        medEquipReq.append("'" + medicineServiceRequests.get(i).getRequestID() + "'" + ", ");
         medEquipReq.append(
-            "'" + medicineServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
-        medEquipReq.append("'" + medicineServiceRequests.get(i).getStatus() + "'" + ", ");
-        medEquipReq.append("'" + medicineServiceRequests.get(i).getAssigneeID() + "'" + ", ");
-        medEquipReq.append("'" + medicineServiceRequests.get(i).getRxNum() + "'" + ", ");
-        medEquipReq.append("'" + medicineServiceRequests.get(i).getPatientFor() + "'");
+            "'" + medicineDeliveryServiceRequests.get(i).getRequestID() + "'" + ", ");
+        medEquipReq.append(
+            "'" + medicineDeliveryServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+        medEquipReq.append("'" + medicineDeliveryServiceRequests.get(i).getStatus() + "'" + ", ");
+        medEquipReq.append(
+            "'" + medicineDeliveryServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        medEquipReq.append("'" + medicineDeliveryServiceRequests.get(i).getRxNum() + "'" + ", ");
+        medEquipReq.append("'" + medicineDeliveryServiceRequests.get(i).getPatientFor() + "'");
         medEquipReq.append(")");
         initialization.execute(medEquipReq.toString());
       } catch (SQLException e) {
@@ -249,32 +251,32 @@ public class MedicineDeliveryServiceRequestDAO implements DAO<MedicineServiceReq
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
       csvFile.write("requestID,destination,status,assignee,rxNumber,patientFor");
-      for (int i = 0; i < medicineServiceRequests.size(); i++) {
-        csvFile.write("\n" + medicineServiceRequests.get(i).getRequestID() + ",");
-        if (medicineServiceRequests.get(i).getDestination() == null) {
+      for (int i = 0; i < medicineDeliveryServiceRequests.size(); i++) {
+        csvFile.write("\n" + medicineDeliveryServiceRequests.get(i).getRequestID() + ",");
+        if (medicineDeliveryServiceRequests.get(i).getDestination() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicineServiceRequests.get(i).getDestination().getNodeID() + ",");
+          csvFile.write(medicineDeliveryServiceRequests.get(i).getDestination().getNodeID() + ",");
         }
-        if (medicineServiceRequests.get(i).getStatus() == null) {
+        if (medicineDeliveryServiceRequests.get(i).getStatus() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicineServiceRequests.get(i).getStatus() + ",");
+          csvFile.write(medicineDeliveryServiceRequests.get(i).getStatus() + ",");
         }
-        if (medicineServiceRequests.get(i).getAssignee() == null) {
+        if (medicineDeliveryServiceRequests.get(i).getAssignee() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicineServiceRequests.get(i).getAssigneeID() + ",");
+          csvFile.write(medicineDeliveryServiceRequests.get(i).getAssigneeID() + ",");
         }
-        if (medicineServiceRequests.get(i).getRxNum() == null) {
+        if (medicineDeliveryServiceRequests.get(i).getRxNum() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicineServiceRequests.get(i).getRxNum() + ",");
+          csvFile.write(medicineDeliveryServiceRequests.get(i).getRxNum() + ",");
         }
-        if (medicineServiceRequests.get(i).getPatientFor() == null) {
+        if (medicineDeliveryServiceRequests.get(i).getPatientFor() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(medicineServiceRequests.get(i).getPatientFor() + ",");
+          csvFile.write(medicineDeliveryServiceRequests.get(i).getPatientFor() + ",");
         }
       }
       csvFile.flush();

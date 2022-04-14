@@ -25,11 +25,15 @@ public class MedicineDeliveryController implements Initializable {
   private List<Location> locations;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
-  private TableColumn<MedicineServiceRequest, String> idColumn = new TableColumn("Request ID");
-  private TableColumn<MedicineServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
-  private TableColumn<MedicineServiceRequest, String> locationColumn = new TableColumn("Location");
-  private TableColumn<MedicineServiceRequest, String> rxColumn = new TableColumn("Rx Number");
-  private TableColumn<MedicineServiceRequest, String> statusColumn =
+  private TableColumn<MedicineDeliveryServiceRequest, String> idColumn =
+      new TableColumn("Request ID");
+  private TableColumn<MedicineDeliveryServiceRequest, String> assigneeColumn =
+      new TableColumn("Assignee");
+  private TableColumn<MedicineDeliveryServiceRequest, String> locationColumn =
+      new TableColumn("Location");
+  private TableColumn<MedicineDeliveryServiceRequest, String> rxColumn =
+      new TableColumn("Rx Number");
+  private TableColumn<MedicineDeliveryServiceRequest, String> statusColumn =
       new TableColumn("Request Status");
 
   @Override
@@ -104,7 +108,7 @@ public class MedicineDeliveryController implements Initializable {
   /** Creates a service request from the fields on the javafx page */
   @FXML
   public void submitForm() {
-    MedicineServiceRequest request = new MedicineServiceRequest();
+    MedicineDeliveryServiceRequest request = new MedicineDeliveryServiceRequest();
 
     request.setRequestID(medicineDAO.makeID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));

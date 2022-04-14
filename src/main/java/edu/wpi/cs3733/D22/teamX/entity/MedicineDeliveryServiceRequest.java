@@ -1,18 +1,18 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 /** Represents a medicine delivery service request */
-public class MedicineServiceRequest extends ServiceRequest {
+public class MedicineDeliveryServiceRequest extends ServiceRequest {
   // needs patientFor
   private String rxNum;
   private String patientFor;
 
-  public MedicineServiceRequest() {
+  public MedicineDeliveryServiceRequest() {
     super();
     this.rxNum = "";
     this.patientFor = "";
   }
 
-  public MedicineServiceRequest(
+  public MedicineDeliveryServiceRequest(
       String requestID,
       Location destination,
       String status,
