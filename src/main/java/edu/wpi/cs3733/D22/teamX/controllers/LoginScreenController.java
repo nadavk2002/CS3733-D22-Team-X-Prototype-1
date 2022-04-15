@@ -1,7 +1,9 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
 import edu.wpi.cs3733.D22.teamX.App;
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.LoginManager;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
@@ -15,6 +17,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 public class LoginScreenController {
+  @FXML private JFXRadioButton optionEmbedded;
+  @FXML private JFXRadioButton optionClient;
   @FXML private PasswordField password;
   @FXML private TextField username;
   @FXML private JFXButton loginButton, exitButton;
@@ -26,11 +30,25 @@ public class LoginScreenController {
     if (LoginManager.getInstance()
         .isValidLogin(username.getText(), password.getText().hashCode())) {
       currentUsername = username.getText();
-      try {
-        DatabaseCreator.initializeDB();
-      } catch (loadSaveFromCSVException e) {
-        e.printStackTrace();
-        System.exit(1);
+      if (optionEmbedded.isSelected()) {
+        try {
+          DatabaseCreator.initializeDB();
+          ConnectionSingleton.getConnectionSingleton().setEmbedded();
+          System.out.println("Apache Derby connection established :D");
+        } catch (loadSaveFromCSVException e) {
+          e.printStackTrace();
+          System.exit(1);
+        }
+      }
+      if (optionClient.isSelected()) {
+        try {
+          DatabaseCreator.initializeDB();
+          ConnectionSingleton.getConnectionSingleton().setClient();
+          System.out.println("Apache Derby connection established :D");
+        } catch (loadSaveFromCSVException e) {
+          e.printStackTrace();
+          System.exit(1);
+        }
       }
       App.switchRoot();
     } else {

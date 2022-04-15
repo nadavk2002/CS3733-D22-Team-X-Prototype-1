@@ -21,8 +21,9 @@ public class DatabaseCreator {
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
-      throws loadSaveFromCSVException { // method must be called after app startup, so
-    // user can choose server type
+      throws
+          loadSaveFromCSVException { // method must be called after app startup, so user can choose
+    // server type
     System.out.println("-----Testing Apache Derby Embedded Connection-----");
     // checks whether the driver is working
     try {
@@ -34,13 +35,6 @@ public class DatabaseCreator {
       System.exit(1);
     }
     System.out.println("Apache Derby driver registered!");
-
-    // tries to create the database and establish a connection
-    // currently, for client, the impls are not filled with table data
-    ConnectionSingleton.getConnectionSingleton().setEmbedded();
-    System.out.println("Apache Derby connection established :D");
-
-    System.out.println("Database created successfully");
   }
 
   /** Saves the data from the database to the appropriate CSV files and closes the database. */
