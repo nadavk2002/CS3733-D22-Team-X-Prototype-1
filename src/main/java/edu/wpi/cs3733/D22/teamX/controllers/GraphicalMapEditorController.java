@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamX.*;
 import edu.wpi.cs3733.D22.teamX.entity.*;
@@ -44,6 +45,8 @@ import net.kurobako.gesturefx.GesturePane;
  */
 public class GraphicalMapEditorController implements Initializable {
 
+  @FXML
+  private JFXButton autofiller;
   @FXML
   private Button ToMainMenu,
       deleteLocationButton,
@@ -634,5 +637,10 @@ public class GraphicalMapEditorController implements Initializable {
     equipLocationChoice.setOnAction((ActionEvent a) -> activateSubmitEquipmentButton());
 
     loadLocation("1");
+  }
+
+  public void autofillUnitIDBox()
+  {
+    unitIdText.setText(EmployeeDAO.getDAO().makeID());
   }
 }
