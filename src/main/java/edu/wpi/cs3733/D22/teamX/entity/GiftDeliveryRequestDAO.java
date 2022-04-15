@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -16,7 +17,12 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
 
   /** Creates a new GiftDeliveryRequestDAO object. */
   private GiftDeliveryRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      giftDeliveryRequests.clear();
+    }
   }
 
   /** Singleton helper class. */
@@ -49,6 +55,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
 
   @Override
   public void deleteRecord(GiftDeliveryRequest recordObject) {
+    recordObject.getDestination().removeRequest(recordObject);
     int index = 0;
     // find index
     while (index < giftDeliveryRequests.size()) {
@@ -78,6 +85,12 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
 
   @Override
   public void updateRecord(GiftDeliveryRequest recordObject) {
+    if (!recordObject
+        .getDestination()
+        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
+      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
+      recordObject.getDestination().addRequest(recordObject);
+    }
     // iterate through the list of locations to find the location passed in and update it in
     // locations
     int index = 0;
@@ -200,6 +213,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
                   currLine[4],
                   currLine[5]);
           giftDeliveryRequests.add(node);
+          node.getDestination().addRequest(node);
         } else {
           System.out.println("GiftDeliveryRequest CSV file formatted improperly");
           System.exit(1);
@@ -300,6 +314,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         toAdd.setNotes(results.getString("notes"));
         toAdd.setGiftType(results.getString("giftType"));
         giftDeliveryRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println("GiftDeliveryRequestDAO could not be filled from the sql table");

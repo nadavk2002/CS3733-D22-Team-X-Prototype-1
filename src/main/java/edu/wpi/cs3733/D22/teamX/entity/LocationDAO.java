@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class LocationDAO implements DAO<Location> {
 
   /** Creates a new LocationDAO object. */
   private LocationDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      locations.clear();
+    }
   }
 
   /** Singleton Helper Class. */

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
 
   /** Creates a new LocationDAO object. */
   private LangServiceRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      langServiceRequests.clear();
+    }
   }
 
   /** Singleton Helper Class. */
@@ -292,6 +298,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
         toAdd.setLanguage(results.getString("language"));
         langServiceRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println("LangServiceRequestDAO could not be filled from the sql table");

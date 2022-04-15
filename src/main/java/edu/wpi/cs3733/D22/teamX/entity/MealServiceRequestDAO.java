@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
   /** creates new MealServiceRequestDAO */
   private MealServiceRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      mealServiceRequests.clear();
+    }
   }
 
   /** Singleton helper Class */
@@ -50,6 +56,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
   @Override
   public void deleteRecord(MealServiceRequest recordObject) {
+    recordObject.getDestination().removeRequest(recordObject);
     // remove from list
     int index = 0; // create index for while loop
     int intitialSize = mealServiceRequests.size(); // get size
@@ -79,6 +86,12 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
 
   @Override
   public void updateRecord(MealServiceRequest recordObject) {
+    if (!recordObject
+        .getDestination()
+        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
+      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
+      recordObject.getDestination().addRequest(recordObject);
+    }
     // add item to list
     int index = 0; // create index for while loop
     int intitialSize = mealServiceRequests.size(); // get size
@@ -145,6 +158,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
       e.printStackTrace();
       System.out.println("MealSR atabase could not be updated");
     }
+    recordObject.getDestination().addRequest(recordObject);
   }
 
   @Override
@@ -207,6 +221,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
                   currLine[6],
                   currLine[7]);
           mealServiceRequests.add(PMSRnode);
+          PMSRnode.getDestination().addRequest(PMSRnode);
         } else {
           System.out.println("MealServiceRequests CSV file formatted improperly");
           System.exit(1);
@@ -322,6 +337,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
         toAdd.setDrink(results.getString("drink"));
         toAdd.setPatientFor(results.getString("patientFor"));
         mealServiceRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println("MealServiceRequestDAO could not be filled from the sql table");

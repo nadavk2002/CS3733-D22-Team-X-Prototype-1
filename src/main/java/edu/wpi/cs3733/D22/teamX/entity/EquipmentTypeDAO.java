@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
 
   /** Creates a new EquipmentTypeDAO object. */
   private EquipmentTypeDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      equipmentTypes.clear();
+    }
   }
 
   /** Singleton helper class. */

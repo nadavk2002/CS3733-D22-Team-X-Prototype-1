@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -16,7 +17,12 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
 
   /** Creates a new LocationDAO object. */
   private MedicalEquipmentServiceRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      medicalEquipmentServiceRequests.clear();
+    }
   }
 
   /** Singleton Helper Class. */
@@ -328,6 +334,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         toAdd.setEquipmentType(results.getString("equipmentType"));
         toAdd.setQuantity(results.getInt("quantity"));
         medicalEquipmentServiceRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println(

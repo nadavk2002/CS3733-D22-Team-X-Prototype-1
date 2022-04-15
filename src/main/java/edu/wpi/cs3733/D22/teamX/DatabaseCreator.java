@@ -37,7 +37,7 @@ public class DatabaseCreator {
 
     // tries to create the database and establish a connection
     // currently, for client, the impls are not filled with table data
-    ConnectionSingleton.getConnectionSingleton().setEmbedded();
+    ConnectionSingleton.getConnectionSingleton().setClient();
     System.out.println("Apache Derby connection established :D");
 
     System.out.println("Database created successfully");
@@ -148,21 +148,5 @@ public class DatabaseCreator {
     MDSDAO = MedicineDeliverServiceRequestDAO.getDAO();
     janitorDAO = JanitorServiceRequestDAO.getDAO();
     laundryDAO = LaundryServiceRequestDAO.getDAO();
-  }
-
-  /** clear the data from all DAO lists */
-  public static void clearAllDAO() {
-    locDAO.getAllRecords().clear();
-    emplDAO.getAllRecords().clear();
-    eqtDAO.getAllRecords().clear();
-    mesrDAO.getAllRecords().clear();
-    labDAO.getAllRecords().clear();
-    giftDAO.getAllRecords().clear();
-    equDAO.getAllRecords().clear();
-    pmsrDAO.getAllRecords().clear();
-    langDAO.getAllRecords().clear();
-    MDSDAO.getAllRecords().clear();
-    janitorDAO.getAllRecords().clear();
-    laundryDAO.getAllRecords().clear();
   }
 }

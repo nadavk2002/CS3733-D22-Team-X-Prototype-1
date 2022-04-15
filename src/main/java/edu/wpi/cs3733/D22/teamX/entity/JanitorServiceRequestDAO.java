@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
 
   /** Creates a new LocationDAO object. */
   private JanitorServiceRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      janitorServiceRequests.clear();
+    }
   }
 
   /** Singleton Helper Class. */
@@ -294,6 +300,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
         toAdd.setDescription(results.getString("description"));
         janitorServiceRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println("JanitorServiceRequestDAO could not be filled from the sql table");

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
 
   /** Creates a new LabServiceRequestDAO object. */
   private LabServiceRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      labServiceRequests.clear();
+    }
   }
 
   /** Singleton Helper Class. */
@@ -50,6 +56,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
 
   @Override
   public void deleteRecord(LabServiceRequest recordObject) {
+    recordObject.getDestination().removeRequest(recordObject);
     // remove from list
     int index = 0; // create index for while loop
     int intitialSize = labServiceRequests.size(); // get size
@@ -79,6 +86,12 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
 
   @Override
   public void updateRecord(LabServiceRequest recordObject) {
+    if (!recordObject
+        .getDestination()
+        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
+      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
+      recordObject.getDestination().addRequest(recordObject);
+    }
     // add item to list
     int index = 0; // create index for while loop
     int intitialSize = labServiceRequests.size(); // get size
@@ -139,6 +152,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       e.printStackTrace();
       System.out.println("LabSerivceRequest database could not be updated");
     }
+    recordObject.getDestination().addRequest(recordObject);
   }
 
   @Override
@@ -197,6 +211,8 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
                   currLine[4],
                   currLine[5]);
           labServiceRequests.add(labNode);
+          labNode.getDestination().addRequest(labNode);
+
         } else {
           System.out.println("LabServiceRequests CSV file formatted improperly");
           System.exit(1);
@@ -298,6 +314,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
         toAdd.setService(results.getString("service"));
         toAdd.setPatientFor(results.getString("patientFor"));
         labServiceRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println("LabServiceRequestDAO could not be filled from the sql table");

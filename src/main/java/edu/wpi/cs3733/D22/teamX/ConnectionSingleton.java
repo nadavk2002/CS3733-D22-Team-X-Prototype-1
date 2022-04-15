@@ -16,12 +16,13 @@ public enum ConnectionSingleton {
   private static final String password = "admin";
 
   private Connection connection;
-  //  private String connectionType;
+  private String connectionType;
 
   /**
    * Establish a connection to an Apache Derby embedded database and load csv data into its tables
    */
   public void setEmbedded() {
+    connectionType = "embedded";
     // If connection already established, close it
     if (connection != null) {
       try {
@@ -36,7 +37,7 @@ public enum ConnectionSingleton {
     try {
       connection = DriverManager.getConnection(embeddedURL);
       DatabaseCreator.setAllDAOVars();
-      DatabaseCreator.clearAllDAO();
+      // DatabaseCreator.clearAllDAO();
       DatabaseCreator.dropAllTables();
       DatabaseCreator.createAllTables();
       DatabaseCreator.loadAllCSV();
@@ -45,11 +46,11 @@ public enum ConnectionSingleton {
       e.printStackTrace();
       System.exit(1);
     }
-    //    connectionType = "embedded";
   }
 
   /** Establish a connection to an Apache Derby client database and load csv data into its tables */
   public void setClient() {
+    connectionType = "client";
     if (connection != null) {
       try {
         connection.close();
@@ -63,7 +64,6 @@ public enum ConnectionSingleton {
     try {
       connection = DriverManager.getConnection(clientURLAlreadyCreated);
       DatabaseCreator.setAllDAOVars();
-      // DatabaseCreator.fillAllDAO();
       System.out.println("Client database already created");
     } catch (SQLException dbNotYetCreated) {
       System.out.println("Creating client database");
@@ -78,7 +78,6 @@ public enum ConnectionSingleton {
         System.out.println("CSV FILES NOT LOADED");
       }
     }
-    //    connectionType = "client";
   }
 
   public static ConnectionSingleton getConnectionSingleton() {
@@ -89,7 +88,7 @@ public enum ConnectionSingleton {
     return connection;
   }
 
-  //  public String getConnectionType() {
-  //    return connectionType;
-  //  }
+  public String getConnectionType() {
+    return connectionType;
+  }
 }

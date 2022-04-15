@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
   private static EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
 
   private EquipmentUnitDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      equipmentUnits.clear();
+    }
   }
 
   /** Singleton Helper Class. */
@@ -304,6 +310,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
         toAdd.setAvailable(results.getString("isAvailable").charAt(0));
         toAdd.setCurrLocation(LocationDAO.getDAO().getRecord(results.getString("currLocation")));
         equipmentUnits.add(toAdd);
+        toAdd.getCurrLocation().addUnit(toAdd); // add unit to currLocation's list of units
       }
     } catch (SQLException e) {
       System.out.println("EquipmentUnitDAO could not be filled from the sql table");

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
   private static String csv = "MedicineDeliveryRequests.csv";
 
   private MedicineDeliverServiceRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      medicineServiceRequests.clear();
+    }
   }
 
   private static class SingletonHelper {
@@ -310,6 +316,7 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
         toAdd.setRxNum(results.getString("rxNum"));
         toAdd.setPatientFor(results.getString("patientFor"));
         medicineServiceRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println("MedicineDeliverServiceRequestDAO could not be filled from the sql table");

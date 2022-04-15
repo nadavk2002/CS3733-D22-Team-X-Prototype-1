@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
 import java.sql.ResultSet;
@@ -15,7 +16,12 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
 
   /** Creates a new LocationDAO object. */
   private LaundryServiceRequestDAO() {
-    fillFromTable();
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
+      fillFromTable();
+    }
+    if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("embedded")) {
+      laundyServiceRequests.clear();
+    }
   }
 
   /** Singleton Helper Class. */
@@ -293,6 +299,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
         toAdd.setService(results.getString("service"));
         laundyServiceRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
       }
     } catch (SQLException e) {
       System.out.println("LaundryServiceRequestDAO could not be filled from the sql table");
