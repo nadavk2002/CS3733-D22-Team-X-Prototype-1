@@ -45,8 +45,7 @@ import net.kurobako.gesturefx.GesturePane;
  */
 public class GraphicalMapEditorController implements Initializable {
 
-  @FXML
-  private JFXButton autofiller;
+  @FXML private JFXButton autofiller;
   @FXML
   private Button ToMainMenu,
       deleteLocationButton,
@@ -639,8 +638,7 @@ public class GraphicalMapEditorController implements Initializable {
     loadLocation("1");
   }
 
-  public void autofillUnitIDBox()
-  {
-    unitIdText.setText(EmployeeDAO.getDAO().makeID());
+  public void autofillUnitIDBox() {
+    unitIdText.setText(EquipmentUnitDAO.getDAO().makeID());
   }
 }
