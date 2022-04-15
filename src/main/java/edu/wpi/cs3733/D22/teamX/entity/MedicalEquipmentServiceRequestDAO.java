@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   private static String csv = "MedEquipReq.csv";
 
   /** Creates a new LocationDAO object. */
-  private MedicalEquipmentServiceRequestDAO() {}
+  private MedicalEquipmentServiceRequestDAO() {
+    fillFromTable();
+  }
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
@@ -300,6 +303,35 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
     } catch (IOException e) {
       System.out.print("An error occurred when trying to write to the CSV file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills medicalEquipmentServiceRequests with data from the sql table
+   *
+   * @return true if medicalEquipmentServiceRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      medicalEquipmentServiceRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM MedicalEquipmentServiceRequest");
+      while (results.next()) {
+        MedicalEquipmentServiceRequest toAdd = new MedicalEquipmentServiceRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setEquipmentType(results.getString("equipmentType"));
+        toAdd.setQuantity(results.getInt("quantity"));
+        medicalEquipmentServiceRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println(
+          "MedicalEquipmentServiceRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

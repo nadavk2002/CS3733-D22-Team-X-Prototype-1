@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
   private static String csv = "LaundryServiceRequests.csv";
 
   /** Creates a new LocationDAO object. */
-  private LaundryServiceRequestDAO() {}
+  private LaundryServiceRequestDAO() {
+    fillFromTable();
+  }
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
@@ -266,6 +269,33 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
     } catch (IOException e) {
       System.out.print("An error occurred when trying to write to the CSV file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills laundyServiceRequests with data from the sql table
+   *
+   * @return true if laundyServiceRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      laundyServiceRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM LaundryServiceRequest");
+      while (results.next()) {
+        LaundyServiceRequest toAdd = new LaundyServiceRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setService(results.getString("service"));
+        laundyServiceRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("LaundryServiceRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

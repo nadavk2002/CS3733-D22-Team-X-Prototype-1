@@ -66,8 +66,4 @@ public class MealServiceRequest extends ServiceRequest {
   public void setMealType(String mainCourse) {
     this.mainCourse = mainCourse;
   }
-
-  public void setPatientID(String patientFor) {
-    this.patientFor = patientFor;
-  }
 }

@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -9,11 +10,13 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class LocationDAO implements DAO<Location> {
-  private static List<Location> locations = new ArrayList<Location>();
-  private static String csv = "TowerLocationsX.csv";
+  private static final List<Location> locations = new ArrayList<Location>();
+  private static final String csv = "TowerLocationsX.csv";
 
   /** Creates a new LocationDAO object. */
-  private LocationDAO() {}
+  private LocationDAO() {
+    fillFromTable();
+  }
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
@@ -277,6 +280,36 @@ public class LocationDAO implements DAO<Location> {
     } catch (IOException e) {
       System.out.println("Error occurred when updating locations csv file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills locations with data from the sql table
+   *
+   * @return true if locations is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      locations.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM Location");
+      while (results.next()) {
+        Location toAdd = new Location();
+        toAdd.setNodeID(results.getString("nodeID"));
+        toAdd.setxCoord(results.getInt("xCoord"));
+        toAdd.setyCoord(results.getInt("yCoord"));
+        toAdd.setFloor(results.getString("floor"));
+        toAdd.setBuilding(results.getString("building"));
+        toAdd.setNodeType(results.getString("nodeType"));
+        toAdd.setLongName(results.getString("longName"));
+        toAdd.setShortName(results.getString("shortName"));
+        locations.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("LocationDAO could not be filled from the sql table");
       return false;
     }
     return true;

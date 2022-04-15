@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
       new ArrayList<MedicineServiceRequest>();
   private static String csv = "MedicineDeliveryRequests.csv";
 
-  private MedicineDeliverServiceRequestDAO() {}
+  private MedicineDeliverServiceRequestDAO() {
+    fillFromTable();
+  }
 
   private static class SingletonHelper {
     private static final MedicineDeliverServiceRequestDAO medicineDeliveryServiceRequestDAO =
@@ -282,6 +285,34 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
     } catch (IOException e) {
       System.out.print("An error occurred when trying to write to the CSV file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills medicineServiceRequests with data from the sql table
+   *
+   * @return true if medicineServiceRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      medicineServiceRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM MedicineDeliveryServiceRequest");
+      while (results.next()) {
+        MedicineServiceRequest toAdd = new MedicineServiceRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setRxNum(results.getString("rxNum"));
+        toAdd.setPatientFor(results.getString("patientFor"));
+        medicineServiceRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("MedicineDeliverServiceRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

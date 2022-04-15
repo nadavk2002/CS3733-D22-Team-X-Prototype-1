@@ -34,7 +34,9 @@ public enum ConnectionSingleton {
     }
     // Establish connection to embedded database
     try {
-      connection = DriverManager.getConnection(embeddedURL); // , username, password);
+      connection = DriverManager.getConnection(embeddedURL);
+      DatabaseCreator.setAllDAOVars();
+      DatabaseCreator.clearAllDAO();
       DatabaseCreator.dropAllTables();
       DatabaseCreator.createAllTables();
       DatabaseCreator.loadAllCSV();
@@ -59,13 +61,15 @@ public enum ConnectionSingleton {
     }
     // Try connecting to client database. If unable, create the database and connect to it.
     try {
-      connection = DriverManager.getConnection(clientURLAlreadyCreated); // , username, password);
+      connection = DriverManager.getConnection(clientURLAlreadyCreated);
+      DatabaseCreator.setAllDAOVars();
+      // DatabaseCreator.fillAllDAO();
       System.out.println("Client database already created");
     } catch (SQLException dbNotYetCreated) {
       System.out.println("Creating client database");
       try {
-        connection = DriverManager.getConnection(clientURLCreatingDB); // , username, password);
-        // DatabaseCreator.dropAllTables();
+        connection = DriverManager.getConnection(clientURLCreatingDB);
+        DatabaseCreator.setAllDAOVars();
         DatabaseCreator.createAllTables();
         DatabaseCreator.loadAllCSV();
       } catch (SQLException e) {

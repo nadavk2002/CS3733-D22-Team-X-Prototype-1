@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
   private static String csv = "JanitorServiceRequests.csv";
 
   /** Creates a new LocationDAO object. */
-  private JanitorServiceRequestDAO() {}
+  private JanitorServiceRequestDAO() {
+    fillFromTable();
+  }
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
@@ -267,6 +270,33 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
     } catch (IOException e) {
       System.out.print("An error occurred when trying to write to the CSV file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills janitorServiceRequests with data from the sql table
+   *
+   * @return true if janitorServiceRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      janitorServiceRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM JanitorServiceRequest");
+      while (results.next()) {
+        JanitorServiceRequest toAdd = new JanitorServiceRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setDescription(results.getString("description"));
+        janitorServiceRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("JanitorServiceRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

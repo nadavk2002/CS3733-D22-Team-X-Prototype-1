@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
   private static String csv = "LabServiceRequests.csv";
 
   /** Creates a new LabServiceRequestDAO object. */
-  private LabServiceRequestDAO() {}
+  private LabServiceRequestDAO() {
+    fillFromTable();
+  }
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
@@ -270,6 +273,34 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       System.out.print(
           "An error occurred when trying to write to the Lab Service Request CSV file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills labServiceRequests with data from the sql table
+   *
+   * @return true if labServiceRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      labServiceRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM LabServiceRequest");
+      while (results.next()) {
+        LabServiceRequest toAdd = new LabServiceRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setService(results.getString("service"));
+        toAdd.setPatientFor(results.getString("patientFor"));
+        labServiceRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("LabServiceRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

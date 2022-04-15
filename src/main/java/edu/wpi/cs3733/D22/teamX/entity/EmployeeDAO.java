@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class EmployeeDAO implements DAO<Employee> {
   private static String csv = "Employees.csv";
 
   /** Creates a new EmployeeDAO object. */
-  private EmployeeDAO() {}
+  private EmployeeDAO() {
+    fillFromTable();
+  }
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
@@ -42,7 +45,7 @@ public class EmployeeDAO implements DAO<Employee> {
         return element;
       }
     }
-    throw new NoSuchElementException("Employee does not exist");
+    throw new NoSuchElementException("Employee" + recordID + "does not exist");
   }
 
   @Override
@@ -226,6 +229,33 @@ public class EmployeeDAO implements DAO<Employee> {
     } catch (IOException e) {
       System.out.println("Error occurred when updating Employee csv file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills employees with data from the sql table
+   *
+   * @return true if employees is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      employees.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM Employee");
+      while (results.next()) {
+        Employee toAdd = new Employee();
+        toAdd.setEmployeeID(results.getString("employeeID"));
+        toAdd.setFirstName(results.getString("firstName"));
+        toAdd.setLastName(results.getString("lastName"));
+        toAdd.setClearanceType(results.getString("clearanceType"));
+        toAdd.setJobTitle(results.getString("jobTitle"));
+        employees.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("EmployeeDAO could not be filled from the sql table");
       return false;
     }
     return true;

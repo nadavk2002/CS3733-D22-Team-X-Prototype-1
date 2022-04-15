@@ -67,6 +67,13 @@ public interface DAO<T> {
   boolean saveCSV(String dirPath);
 
   /**
+   * Clears, then fills the DAO list with data from the sql table
+   *
+   * @return true if the DAO is successfully filled
+   */
+  boolean fillFromTable();
+
+  /**
    * Returns the next alphanumeric ID string.
    *
    * @return the next alphanumeric ID string.

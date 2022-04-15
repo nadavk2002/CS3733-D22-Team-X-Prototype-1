@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
   private static String csv = "LanguageInterpreterRequests.csv";
 
   /** Creates a new LocationDAO object. */
-  private LangServiceRequestDAO() {}
+  private LangServiceRequestDAO() {
+    fillFromTable();
+  }
 
   /** Singleton Helper Class. */
   private static class SingletonHelper {
@@ -265,6 +268,33 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
     } catch (IOException e) {
       System.out.print("An error occurred when trying to write to the CSV file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills langServiceRequests with data from the sql table
+   *
+   * @return true if langServiceRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      langServiceRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM LangServiceRequest");
+      while (results.next()) {
+        LangServiceRequest toAdd = new LangServiceRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setLanguage(results.getString("language"));
+        langServiceRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("LangServiceRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

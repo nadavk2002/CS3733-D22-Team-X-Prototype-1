@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
   private static String csv = "MealRequests.csv";
 
   /** creates new MealServiceRequestDAO */
-  private MealServiceRequestDAO() {}
+  private MealServiceRequestDAO() {
+    fillFromTable();
+  }
 
   /** Singleton helper Class */
   private static class SingletonHelper {
@@ -292,6 +295,36 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
       System.out.print(
           "An error occurred when trying to write to the Meal Service Request CSV file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills mealServiceRequests with data from the sql table
+   *
+   * @return true if mealServiceRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      mealServiceRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM MealServiceRequest");
+      while (results.next()) {
+        MealServiceRequest toAdd = new MealServiceRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setMainCourse(results.getString("mainCourse"));
+        toAdd.setSide(results.getString("side"));
+        toAdd.setDrink(results.getString("drink"));
+        toAdd.setPatientFor(results.getString("patientFor"));
+        mealServiceRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("MealServiceRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

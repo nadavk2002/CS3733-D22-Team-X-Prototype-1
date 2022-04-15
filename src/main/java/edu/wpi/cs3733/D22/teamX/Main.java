@@ -8,12 +8,12 @@ public class Main {
     System.setProperty(
         "prism.allowhidpi",
         "false"); // Disables windows DPI scaling so the application fits all 1920x1080 screens.
-    try {
-      DatabaseCreator.initializeDB();
-    } catch (loadSaveFromCSVException e) {
-      e.printStackTrace();
-      System.exit(1);
-    }
+    //    try {
+    //      DatabaseCreator.initializeDB();
+    //    } catch (loadSaveFromCSVException e) {
+    //      e.printStackTrace();
+    //      System.exit(1);
+    //    }
 
     App.launch(App.class, args);
 

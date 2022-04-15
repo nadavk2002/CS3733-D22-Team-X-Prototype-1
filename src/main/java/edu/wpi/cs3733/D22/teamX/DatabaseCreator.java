@@ -6,20 +6,18 @@ import java.sql.*;
 
 public class DatabaseCreator {
   // Create impls in order to avoid FK errors
-  private static final LocationDAO locDAO = LocationDAO.getDAO();
-  private static final EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private static final EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
-  private static final MedicalEquipmentServiceRequestDAO mesrDAO =
-      MedicalEquipmentServiceRequestDAO.getDAO();
-  private static final LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO();
-  private static final GiftDeliveryRequestDAO giftDAO = GiftDeliveryRequestDAO.getDAO();
-  private static final EquipmentUnitDAO equDAO = EquipmentUnitDAO.getDAO();
-  private static final MealServiceRequestDAO pmsrDAO = MealServiceRequestDAO.getDAO();
-  private static final LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
-  private static final MedicineDeliverServiceRequestDAO MDSDAO =
-      MedicineDeliverServiceRequestDAO.getDAO();
-  private static final JanitorServiceRequestDAO janitorDAO = JanitorServiceRequestDAO.getDAO();
-  private static final LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
+  private static LocationDAO locDAO;
+  private static EmployeeDAO emplDAO;
+  private static EquipmentTypeDAO eqtDAO;
+  private static MedicalEquipmentServiceRequestDAO mesrDAO;
+  private static LabServiceRequestDAO labDAO;
+  private static GiftDeliveryRequestDAO giftDAO;
+  private static EquipmentUnitDAO equDAO;
+  private static MealServiceRequestDAO pmsrDAO;
+  private static LangServiceRequestDAO langDAO;
+  private static MedicineDeliverServiceRequestDAO MDSDAO;
+  private static JanitorServiceRequestDAO janitorDAO;
+  private static LaundryServiceRequestDAO laundryDAO;
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
@@ -134,5 +132,37 @@ public class DatabaseCreator {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;
+  }
+
+  /** Set all DAO variables declared in DatabaseCreator */
+  public static void setAllDAOVars() {
+    locDAO = LocationDAO.getDAO();
+    emplDAO = EmployeeDAO.getDAO();
+    eqtDAO = EquipmentTypeDAO.getDAO();
+    mesrDAO = MedicalEquipmentServiceRequestDAO.getDAO();
+    labDAO = LabServiceRequestDAO.getDAO();
+    giftDAO = GiftDeliveryRequestDAO.getDAO();
+    equDAO = EquipmentUnitDAO.getDAO();
+    pmsrDAO = MealServiceRequestDAO.getDAO();
+    langDAO = LangServiceRequestDAO.getDAO();
+    MDSDAO = MedicineDeliverServiceRequestDAO.getDAO();
+    janitorDAO = JanitorServiceRequestDAO.getDAO();
+    laundryDAO = LaundryServiceRequestDAO.getDAO();
+  }
+
+  /** clear the data from all DAO lists */
+  public static void clearAllDAO() {
+    locDAO.getAllRecords().clear();
+    emplDAO.getAllRecords().clear();
+    eqtDAO.getAllRecords().clear();
+    mesrDAO.getAllRecords().clear();
+    labDAO.getAllRecords().clear();
+    giftDAO.getAllRecords().clear();
+    equDAO.getAllRecords().clear();
+    pmsrDAO.getAllRecords().clear();
+    langDAO.getAllRecords().clear();
+    MDSDAO.getAllRecords().clear();
+    janitorDAO.getAllRecords().clear();
+    laundryDAO.getAllRecords().clear();
   }
 }

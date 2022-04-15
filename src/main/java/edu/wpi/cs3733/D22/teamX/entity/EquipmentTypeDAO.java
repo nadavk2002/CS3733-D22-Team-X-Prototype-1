@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +14,9 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
   private static String csv = "EquipmentTypes.csv";
 
   /** Creates a new EquipmentTypeDAO object. */
-  private EquipmentTypeDAO() {}
+  private EquipmentTypeDAO() {
+    fillFromTable();
+  }
 
   /** Singleton helper class. */
   private static class SingletonHelper {
@@ -226,6 +229,31 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
     } catch (IOException e) {
       System.out.println("Error occured when updating equipment types csv file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills equipmentTypes with data from the sql table
+   *
+   * @return true if equipmentTypes is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      equipmentTypes.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM EquipmentType");
+      while (results.next()) {
+        EquipmentType toAdd = new EquipmentType();
+        toAdd.setModel(results.getString("model"));
+        toAdd.setNumUnitsTotal(results.getInt("numUnitsTotal"));
+        toAdd.setNumUnitsAvailable(results.getInt("numUnitsAvailable"));
+        equipmentTypes.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("EquipmentTypeDAO could not be filled from the sql table");
       return false;
     }
     return true;

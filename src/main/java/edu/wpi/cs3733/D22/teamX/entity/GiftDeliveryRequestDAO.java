@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -14,7 +15,9 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
   private static String csv = "GiftDeliveryRequests.csv";
 
   /** Creates a new GiftDeliveryRequestDAO object. */
-  private GiftDeliveryRequestDAO() {}
+  private GiftDeliveryRequestDAO() {
+    fillFromTable();
+  }
 
   /** Singleton helper class. */
   private static class SingletonHelper {
@@ -272,6 +275,34 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
     } catch (IOException e) {
       System.out.println("Error occurred when updating GiftDeliveryRequests csv file.");
       e.printStackTrace();
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Fills giftDeliveryRequests with data from the sql table
+   *
+   * @return true if giftDeliveryRequests is successfully filled
+   */
+  @Override
+  public boolean fillFromTable() {
+    try {
+      giftDeliveryRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM GiftDeliveryRequest");
+      while (results.next()) {
+        GiftDeliveryRequest toAdd = new GiftDeliveryRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setNotes(results.getString("notes"));
+        toAdd.setGiftType(results.getString("giftType"));
+        giftDeliveryRequests.add(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("GiftDeliveryRequestDAO could not be filled from the sql table");
       return false;
     }
     return true;

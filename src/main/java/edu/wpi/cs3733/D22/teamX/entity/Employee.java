@@ -13,7 +13,7 @@ public class Employee {
   private List<ServiceRequest> requests;
 
   public Employee() {
-    this.employeeID = EmployeeDAO.getDAO().makeID();
+    this.employeeID = "";
     this.firstName = "";
     this.lastName = "";
     this.clearanceType = "staff";

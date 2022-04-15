@@ -149,7 +149,7 @@ public class MealReqController implements Initializable {
     request.setMainCourse(mainSel.getValue());
     request.setDrink(drinkSel.getValue());
     request.setSide(sideSel.getValue());
-    request.setPatientID(patientNames.getValue());
+    request.setPatientFor(patientNames.getValue());
 
     MealDAO.addRecord(request);
     this.resetFields();

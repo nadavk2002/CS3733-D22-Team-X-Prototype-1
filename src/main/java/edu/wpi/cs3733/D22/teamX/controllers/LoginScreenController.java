@@ -2,7 +2,9 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.App;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.LoginManager;
+import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -24,6 +26,12 @@ public class LoginScreenController {
     if (LoginManager.getInstance()
         .isValidLogin(username.getText(), password.getText().hashCode())) {
       currentUsername = username.getText();
+      try {
+        DatabaseCreator.initializeDB();
+      } catch (loadSaveFromCSVException e) {
+        e.printStackTrace();
+        System.exit(1);
+      }
       App.switchRoot();
     } else {
       message.setText("        Your username or password is incorrect");
