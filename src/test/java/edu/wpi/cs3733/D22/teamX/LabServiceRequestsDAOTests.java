@@ -78,6 +78,7 @@ public class LabServiceRequestsDAOTests {
     boolean returnVarible = false;
     LabServiceRequestDAO lsrDAOImpl = LabServiceRequestDAO.getDAO();
     LocationDAO locationDAO = LocationDAO.getDAO();
+    EmployeeDAO empDAO = EmployeeDAO.getDAO();
     try {
       lsrDAOImpl.getRecord("LBSR0016");
     } catch (NoSuchElementException s) {
@@ -90,7 +91,7 @@ public class LabServiceRequestsDAOTests {
             "LBSR0016",
             locationDAO.getRecord("FHALL01101"),
             "DONE",
-            "EMPL0001",
+            empDAO.getRecord("EMPL0001"),
             "Ultrasound",
             "PATT0125");
     // add the thing
