@@ -170,7 +170,7 @@ public class EmployeeDAO implements DAO<Employee> {
   @Override
   public boolean loadCSV() {
     try {
-      InputStream emplCSV = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream emplCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader emplCSVReader = new BufferedReader(new InputStreamReader(emplCSV));
       emplCSVReader.readLine();
       String nextFileLine;

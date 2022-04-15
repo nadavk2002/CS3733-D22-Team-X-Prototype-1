@@ -189,7 +189,7 @@ public class LocationDAO implements DAO<Location> {
   @Override
   public boolean loadCSV() {
     try {
-      InputStream tlCSV = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream tlCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader tlCSVReader = new BufferedReader(new InputStreamReader(tlCSV));
       tlCSVReader.readLine();
       String nextFileLine;

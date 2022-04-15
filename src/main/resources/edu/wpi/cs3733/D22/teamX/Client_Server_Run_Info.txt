@@ -1,0 +1,19 @@
+Follow these instructions to start up a client server on your local machine.
+For the purposes of running this project ONLY USE STEP 1!
+The other steps are for creating servers in general, but our code handles server creation already
+
+- NOTE: IGNORE DOUBLE QUOTES
+
+1) Start the server
+"java -jar %DERBY_HOME%\lib\derbyrun.jar server start"
+
+2) IN A NEW CMD WINDOW, type
+"ij"
+
+3) In the new window, connect to the server
+"connect 'jdbc:derby://localhost:1527/DB_NAME_HERE;create=true';"
+
+4) You're in! Use as you please
+
+5) When done type this to exit
+"quit;"

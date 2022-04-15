@@ -210,7 +210,8 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
   public boolean loadCSV() {
     LocationDAO locationDAO = LocationDAO.getDAO();
     try {
-      InputStream equipmentUnitStream = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream equipmentUnitStream =
+          DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader equipmentUnitBuffer =
           new BufferedReader(new InputStreamReader(equipmentUnitStream));
       equipmentUnitBuffer.readLine();

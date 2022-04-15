@@ -171,7 +171,8 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
   @Override
   public boolean loadCSV() {
     try {
-      InputStream equipmentTypeStream = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream equipmentTypeStream =
+          DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader equipmentTypeBuffer =
           new BufferedReader(new InputStreamReader(equipmentTypeStream));
       equipmentTypeBuffer.readLine();

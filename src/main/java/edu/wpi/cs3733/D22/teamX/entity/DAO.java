@@ -9,6 +9,8 @@ public interface DAO<T> {
   Connection connection =
       ConnectionSingleton.getConnectionSingleton().getConnection(); // store connection info
 
+  String csvFolderPath = "csv/";
+
   /**
    * Returns a list of type T of all the records.
    *

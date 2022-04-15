@@ -203,7 +203,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
       EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-      InputStream PMSRCSV = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream PMSRCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader PMSRCSVReader = new BufferedReader(new InputStreamReader(PMSRCSV));
       PMSRCSVReader.readLine();
       String nextFileLine;

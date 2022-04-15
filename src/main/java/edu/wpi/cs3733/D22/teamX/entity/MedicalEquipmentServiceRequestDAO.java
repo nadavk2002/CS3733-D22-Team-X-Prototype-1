@@ -215,7 +215,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
       EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-      InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream medCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(medCSV));
       medCSVReader.readLine();
       String nextFileLine;

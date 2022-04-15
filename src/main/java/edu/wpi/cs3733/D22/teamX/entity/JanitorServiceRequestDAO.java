@@ -192,7 +192,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
       EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-      InputStream stream = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream stream = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader medCSVReader = new BufferedReader(new InputStreamReader(stream));
       medCSVReader.readLine();
       String nextFileLine;

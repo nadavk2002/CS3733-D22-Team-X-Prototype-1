@@ -195,7 +195,7 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
       EmployeeDAO emplAssignee = EmployeeDAO.getDAO();
-      InputStream labCSV = DatabaseCreator.class.getResourceAsStream(csv);
+      InputStream labCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader labCSVReader = new BufferedReader(new InputStreamReader(labCSV));
       labCSVReader.readLine();
       String nextFileLine;
