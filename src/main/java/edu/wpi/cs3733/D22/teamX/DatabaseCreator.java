@@ -37,7 +37,7 @@ public class DatabaseCreator {
 
     // tries to create the database and establish a connection
     // currently, for client, the impls are not filled with table data
-    ConnectionSingleton.getConnectionSingleton().setClient();
+    ConnectionSingleton.getConnectionSingleton().setEmbedded();
     System.out.println("Apache Derby connection established :D");
 
     System.out.println("Database created successfully");
