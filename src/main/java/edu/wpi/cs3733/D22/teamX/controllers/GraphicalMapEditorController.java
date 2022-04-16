@@ -246,6 +246,30 @@ public class GraphicalMapEditorController implements Initializable {
           locDAO.deleteRecord((Location) rect.getUserData());
         });
     menu.getItems().add(deleteButton);
+    MenuItem editButton = new MenuItem("Edit Location");
+    editButton.setOnAction(
+        event -> {
+          FXMLLoader fxmlLoader =
+              new FXMLLoader(
+                  getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/editLocationMenu.fxml"));
+          Stage popup = new Stage();
+          popup.setTitle(((Location) rect.getUserData()).getNodeID());
+          popup.setOnHidden(
+              close -> {
+                loadLocation(((Location) rect.getUserData()).getFloor());
+              });
+          EditLocationMenuController controller = new EditLocationMenuController(rect, popup);
+          fxmlLoader.setController(controller);
+          AnchorPane pane = null;
+          try {
+            pane = fxmlLoader.load();
+          } catch (IOException e) {
+          }
+          Scene scene = new Scene(pane);
+          popup.setScene(scene);
+          popup.show();
+        });
+    menu.getItems().add(editButton);
     return menu;
   }
 
