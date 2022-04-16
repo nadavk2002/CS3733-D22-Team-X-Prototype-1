@@ -6,10 +6,7 @@ import edu.wpi.cs3733.D22.teamX.*;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -26,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
@@ -45,13 +43,10 @@ import net.kurobako.gesturefx.GesturePane;
  */
 public class GraphicalMapEditorController implements Initializable {
 
+  private HashMap<String, Image> mapImages;
+
   @FXML private JFXButton autofiller;
-  @FXML
-  private Button ToMainMenu,
-      deleteLocationButton,
-      submitLocationButton,
-      deleteEquipment,
-      submitEquipmentButton;
+  @FXML private Button ToMainMenu, submitLocationButton, submitEquipmentButton;
   @FXML private ChoiceBox<String> locationChoice, equipmentChoice, equipLocationChoice;
 
   @FXML private HBox hBox1;
@@ -234,13 +229,37 @@ public class GraphicalMapEditorController implements Initializable {
     equipLocationChoice.getItems().clear();
     submitEquipmentButton.setDisable(true);
     submitLocationButton.setDisable(true);
-    deleteLocationButton.setDisable(true);
-    List<Location> allLocations = locationListFill();
-    for (int i = 0; i < allLocations.size(); i++) {
-      equipLocationChoice.getItems().add(allLocations.get(i).getNodeID());
-    }
-    drawCirclesSetEquipmentList(floor);
     drawCirclesSetLocationList(floor);
+  }
+
+  private ContextMenu locRightClickMenu(Rectangle rect) {
+    ContextMenu menu = new ContextMenu();
+    MenuItem deleteButton = new MenuItem("Delete Location");
+    deleteButton.setDisable(
+        ((Location) rect.getUserData()).getUnitsAtLocation().size() != 0
+            || ((Location) rect.getUserData()).getRequestsAtLocation().size() != 0);
+    deleteButton.setOnAction(
+        delEvent -> {
+          locationChoice.getItems().remove(((Location) rect.getUserData()).getNodeID());
+          equipLocationChoice.getItems().remove(((Location) rect.getUserData()).getNodeID());
+          imageGroup.getChildren().remove(menu.getOwnerNode());
+          locDAO.deleteRecord((Location) rect.getUserData());
+        });
+    menu.getItems().add(deleteButton);
+    return menu;
+  }
+
+  private ContextMenu equipRightClickMenu(Rectangle rect) {
+    ContextMenu menu = new ContextMenu();
+    MenuItem deleteButton = new MenuItem("Delete Equipment");
+    deleteButton.setOnAction(
+        event -> {
+          equipmentChoice.getItems().remove(((EquipmentUnit) rect.getUserData()).getUnitID());
+          imageGroup.getChildren().remove(rect);
+          equipDAO.deleteRecord((EquipmentUnit) rect.getUserData());
+        });
+    menu.getItems().add(deleteButton);
+    return menu;
   }
 
   /**
@@ -250,21 +269,27 @@ public class GraphicalMapEditorController implements Initializable {
    */
   private void drawCirclesSetLocationList(String floor) {
     List<Location> locationList = locDAO.getAllRecords();
-    Image img = new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png");
+    ImagePattern img =
+        new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png"));
     for (int i = 0; i < locationList.size(); i++) {
+      equipLocationChoice.getItems().add(locationList.get(i).getNodeID());
       if (locationList.get(i).getFloor().equals(floor)) {
-        Rectangle rect = new Rectangle();
+        Rectangle rect = new Rectangle(24, 24);
         rect.setCursor(Cursor.HAND);
         rect.setUserData(locationList.get(i));
-        rect.setHeight(24);
-        rect.setWidth(24);
         rect.setX(locationList.get(i).getxCoord() - (rect.getWidth() / 2));
         rect.setY(locationList.get(i).getyCoord() - rect.getHeight());
-        rect.setFill(new ImagePattern(img));
+        rect.setFill(img);
+        rect.setOnContextMenuRequested(
+            event -> {
+              ContextMenu menu = locRightClickMenu(rect);
+              menu.show(rect, event.getScreenX(), event.getScreenY());
+            });
         rect.setOnMouseDragged(
             new EventHandler<MouseEvent>() {
               @Override
               public void handle(MouseEvent event) {
+                if (event.getButton() != MouseButton.PRIMARY) return;
                 pane.setGestureEnabled(false);
                 rect.setCursor(Cursor.CLOSED_HAND);
                 rect.setFill(Paint.valueOf("LIGHTBLUE"));
@@ -280,10 +305,11 @@ public class GraphicalMapEditorController implements Initializable {
             new EventHandler<MouseEvent>() {
               @Override
               public void handle(MouseEvent event) {
+                if (event.getButton() != MouseButton.PRIMARY) return;
                 pane.setGestureEnabled(true);
                 Location l = (Location) rect.getUserData();
                 rect.setCursor(Cursor.HAND);
-                rect.setFill(new ImagePattern(img));
+                rect.setFill(img);
                 locationChoice.setValue(l.getNodeID());
                 int x = (int) (rect.getX() + (rect.getWidth() / 2));
                 int y = (int) (rect.getY() + rect.getHeight());
@@ -297,6 +323,7 @@ public class GraphicalMapEditorController implements Initializable {
             });
         rect.setVisible(showLocCheck.isSelected());
         this.drawRequests(locationList.get(i).getRequestsAtLocation());
+        this.drawEquipment(locationList.get(i).getUnitsAtLocation());
         imageGroup.getChildren().add(rect);
         locationChoice.getItems().add(locationList.get(i).getNodeID());
       }
@@ -306,37 +333,32 @@ public class GraphicalMapEditorController implements Initializable {
   /**
    * Draws green dots for all equipment that are on the provided floor
    *
-   * @param floor String of the floor number (L1, G, 1, etc.)
+   * @param equipmentList Equipment to place on the map
    */
-  private void drawCirclesSetEquipmentList(String floor) {
-    List<EquipmentUnit> equipment = equipDAO.getAllRecords();
-    for (int i = 0; i < equipment.size(); i++) {
-      if (equipment.get(i).getCurrLocation().getFloor().equals(floor)) {
-        Rectangle rectangle = new Rectangle();
-        rectangle.setWidth(24);
-        rectangle.setHeight(24);
-        rectangle.setUserData(equipment.get(i));
-        rectangle.setX(equipment.get(i).getCurrLocation().getxCoord() - (rectangle.getWidth() / 2));
-        rectangle.setY(
-            equipment.get(i).getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
-        rectangle.setStroke(Paint.valueOf("BLACK"));
-        rectangle.setFill(
-            new ImagePattern(
-                new Image(
-                    "/edu/wpi/cs3733/D22/teamX/assets/" + equipment.get(i).getType() + ".png")));
-        ;
-        rectangle.setVisible(showEquipCheck.isSelected());
-        rectangle.setOnMouseReleased(
-            new EventHandler<MouseEvent>() {
-              @Override
-              public void handle(MouseEvent event) {
-                EquipmentUnit e = (EquipmentUnit) rectangle.getUserData();
-                equipmentChoice.setValue(e.getUnitID());
-              }
-            });
-        imageGroup.getChildren().add(rectangle);
-        equipmentChoice.getItems().add(equipment.get(i).getUnitID());
-      }
+  private void drawEquipment(List<EquipmentUnit> equipmentList) {
+    for (EquipmentUnit e : equipmentList) {
+      Rectangle rectangle = new Rectangle(24, 24);
+      rectangle.setUserData(e);
+      rectangle.setX(e.getCurrLocation().getxCoord() - (rectangle.getWidth() / 2));
+      rectangle.setY(e.getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
+      rectangle.setStroke(Paint.valueOf("BLACK"));
+      rectangle.setOnContextMenuRequested(
+          event -> {
+            ContextMenu menu = equipRightClickMenu(rectangle);
+            menu.show(rectangle, event.getScreenX(), event.getScreenY());
+          });
+      rectangle.setFill(
+          new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
+      rectangle.setVisible(showEquipCheck.isSelected());
+      rectangle.setOnMouseReleased(
+          new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+              equipmentChoice.setValue(((EquipmentUnit) rectangle.getUserData()).getUnitID());
+            }
+          });
+      imageGroup.getChildren().add(rectangle);
+      equipmentChoice.getItems().add(e.getUnitID());
     }
   }
 
@@ -370,22 +392,6 @@ public class GraphicalMapEditorController implements Initializable {
         }
       }
     }
-  }
-
-  /** Deletes selected node id in the dropdown */
-  public void deleteLocation() {
-    String locationToDelete = locationChoice.getValue(); // Node ID
-    String floor = locDAO.getRecord(locationToDelete).getFloor();
-    locDAO.deleteRecord(locDAO.getRecord(locationToDelete));
-    loadLocation(floor);
-  }
-
-  /** Deletes selected node id in the dropdown */
-  public void deleteEquipment() {
-    String equipmentToDelete = equipmentChoice.getValue();
-    String floor = equipDAO.getRecord(equipmentToDelete).getCurrLocation().getFloor();
-    equipDAO.deleteRecord(equipDAO.getRecord(equipmentToDelete));
-    loadLocation(floor);
   }
 
   /** Fills text boxes with equipment data when a piece of equipment is chosen in the dropdown. */
@@ -444,7 +450,6 @@ public class GraphicalMapEditorController implements Initializable {
       Location selected = locDAO.getRecord(locationChoice.getValue());
       submitLocationButton.setDisable(false);
       nodeIdText.setText(selected.getNodeID());
-      activateDeleteLocationButton();
       xCordText.setText(selected.getX());
       yCordText.setText(selected.getY());
       floorText.setText(selected.getFloor());
@@ -472,11 +477,7 @@ public class GraphicalMapEditorController implements Initializable {
    */
   public void loadLocation(String location) {
     imageGroup.getChildren().clear();
-    Image img =
-        new Image(
-            getClass()
-                .getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/" + location + ".png"));
-    ImageView newImage = new ImageView(img);
+    ImageView newImage = new ImageView(mapImages.get(location));
     newImage.setFitHeight(610);
     newImage.setFitWidth(610);
     imageGroup.getChildren().add(newImage);
@@ -493,16 +494,6 @@ public class GraphicalMapEditorController implements Initializable {
             || nodeTypeText.getText().equals("")
             || longNameText.getText().equals("")
             || shortNameText.getText().equals(""));
-  }
-
-  private void activateDeleteLocationButton() {
-    try {
-      deleteLocationButton.setDisable(
-          locDAO.getRecord(nodeIdText.getText()).getUnitsAtLocation().size() != 0
-              || locDAO.getRecord(nodeIdText.getText()).getRequestsAtLocation().size() != 0);
-    } catch (Exception e) {
-      deleteLocationButton.setDisable(true);
-    }
   }
 
   private void activateSubmitEquipmentButton() {
@@ -580,6 +571,21 @@ public class GraphicalMapEditorController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    mapImages = new HashMap<>();
+    mapImages.put(
+        "L1", new Image(getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/L1.png")));
+    mapImages.put(
+        "L2", new Image(getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/L2.png")));
+    mapImages.put(
+        "1", new Image(getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/1.png")));
+    mapImages.put(
+        "2", new Image(getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/2.png")));
+    mapImages.put(
+        "3", new Image(getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/3.png")));
+    mapImages.put(
+        "4", new Image(getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/4.png")));
+    mapImages.put(
+        "5", new Image(getClass().getResourceAsStream("/edu/wpi/cs3733/D22/teamX/assets/5.png")));
 
     mapBox.getChildren().remove(imageGroup);
     pane = new GesturePane(imageGroup);
@@ -617,11 +623,9 @@ public class GraphicalMapEditorController implements Initializable {
         });
     submitEquipmentButton.setDisable(true);
     submitLocationButton.setDisable(true);
-    deleteLocationButton.setDisable(true);
     nodeIdText.setOnKeyTyped(
         (KeyEvent e) -> {
           activateSubmitLocationButton();
-          activateDeleteLocationButton();
         });
     xCordText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
     yCordText.setOnKeyTyped((KeyEvent e) -> activateSubmitLocationButton());
