@@ -44,6 +44,7 @@ import net.kurobako.gesturefx.GesturePane;
 public class GraphicalMapEditorController implements Initializable {
 
   private HashMap<String, Image> mapImages;
+  private String floor;
 
   @FXML private JFXButton autofiller;
   @FXML private Button ToMainMenu, submitLocationButton, submitEquipmentButton;
@@ -258,7 +259,8 @@ public class GraphicalMapEditorController implements Initializable {
               close -> {
                 loadLocation(((Location) rect.getUserData()).getFloor());
               });
-          EditLocationMenuController controller = new EditLocationMenuController(rect, popup);
+          EditLocationMenuController controller =
+              new EditLocationMenuController((Location) rect.getUserData(), popup);
           fxmlLoader.setController(controller);
           AnchorPane pane = null;
           try {
@@ -317,6 +319,7 @@ public class GraphicalMapEditorController implements Initializable {
               public void handle(MouseEvent event) {
                 if (event.getButton() != MouseButton.PRIMARY) return;
                 pane.setGestureEnabled(false);
+                imageGroup.setDisable(true);
                 rect.setCursor(Cursor.CLOSED_HAND);
                 rect.setFill(Paint.valueOf("LIGHTBLUE"));
                 if (event.getX() - (rect.getWidth() / 2) > imageView.getX()
@@ -333,6 +336,7 @@ public class GraphicalMapEditorController implements Initializable {
               public void handle(MouseEvent event) {
                 if (event.getButton() != MouseButton.PRIMARY) return;
                 pane.setGestureEnabled(true);
+                imageGroup.setDisable(false);
                 Location l = (Location) rect.getUserData();
                 rect.setCursor(Cursor.HAND);
                 rect.setFill(img);
@@ -502,6 +506,35 @@ public class GraphicalMapEditorController implements Initializable {
    * @param location Floor level
    */
   public void loadLocation(String location) {
+    this.floor = location;
+    imageGroup.setOnMouseClicked(
+        event -> {
+          if (event.getButton() != MouseButton.PRIMARY) return;
+          Location loc = new Location();
+          loc.setxCoord((int) event.getX());
+          loc.setyCoord((int) event.getY());
+          loc.setFloor(this.floor);
+          loc.setNodeID(locDAO.makeID());
+          FXMLLoader fxmlLoader =
+              new FXMLLoader(
+                  getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/editLocationMenu.fxml"));
+          Stage popup = new Stage();
+          popup.setTitle(loc.getNodeID());
+          popup.setOnHidden(
+              close -> {
+                loadLocation(loc.getFloor());
+              });
+          EditLocationMenuController controller = new EditLocationMenuController(loc, popup);
+          fxmlLoader.setController(controller);
+          AnchorPane pane = null;
+          try {
+            pane = fxmlLoader.load();
+          } catch (IOException e) {
+          }
+          Scene scene = new Scene(pane);
+          popup.setScene(scene);
+          popup.show();
+        });
     imageGroup.getChildren().clear();
     ImageView newImage = new ImageView(mapImages.get(location));
     newImage.setFitHeight(610);

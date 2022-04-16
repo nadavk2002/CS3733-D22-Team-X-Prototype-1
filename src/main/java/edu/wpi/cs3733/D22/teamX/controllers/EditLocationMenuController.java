@@ -8,15 +8,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 public class EditLocationMenuController implements Initializable {
-  private Rectangle rect;
+  private Location loc;
   private Stage stage;
 
-  public EditLocationMenuController(Rectangle rect, Stage stage) {
-    this.rect = rect;
+  public EditLocationMenuController(Location loc, Stage stage) {
+    this.loc = loc;
     this.stage = stage;
   }
 
@@ -36,7 +35,6 @@ public class EditLocationMenuController implements Initializable {
 
   @FXML
   void updateLocation(ActionEvent event) {
-    Location loc = (Location) rect.getUserData();
     loc.setBuilding(buildingText.getText());
     loc.setFloor(floorText.getText());
     loc.setLongName(longNameText.getText());
@@ -44,13 +42,17 @@ public class EditLocationMenuController implements Initializable {
     loc.setShortName(shortNameText.getText());
     loc.setxCoord(Integer.parseInt(xCordText.getText()));
     loc.setyCoord(Integer.parseInt(yCordText.getText()));
-    LocationDAO.getDAO().updateRecord(loc);
+    try {
+      LocationDAO.getDAO().updateRecord(loc);
+    } catch (Exception e) {
+      LocationDAO.getDAO().addRecord(loc);
+    }
+
     this.stage.close();
   }
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    Location loc = (Location) rect.getUserData();
     buildingText.setText(loc.getBuilding());
     floorText.setText(loc.getFloor());
     longNameText.setText(loc.getLongName());
