@@ -256,7 +256,9 @@ public class GraphicalMapEditorController implements Initializable {
         event -> {
           equipmentChoice.getItems().remove(((EquipmentUnit) rect.getUserData()).getUnitID());
           imageGroup.getChildren().remove(rect);
+          String locNode = ((EquipmentUnit) rect.getUserData()).getCurrLocation().getNodeID();
           equipDAO.deleteRecord((EquipmentUnit) rect.getUserData());
+          loadLocationInfo(locNode);
         });
     menu.getItems().add(deleteButton);
     return menu;
