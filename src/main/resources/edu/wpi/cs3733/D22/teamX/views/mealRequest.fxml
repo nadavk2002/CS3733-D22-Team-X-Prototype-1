@@ -1,102 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MealReqController">
-   <children>
-      <Label fx:id="choiceBoxLabel12" layoutX="629.0" layoutY="309.0" text="Request Patient Meal" textFill="#446fdc">
+
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MealReqController">
+   <top>
+      <Label fx:id="choiceBoxLabel12" text="Request Patient Meal" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
          <font>
-            <Font name="System Bold" size="36.0" />
-         </font></Label>
-      <VBox fx:id="fullSelBox" alignment="TOP_RIGHT" layoutX="632.0" layoutY="414.0" prefHeight="341.0" prefWidth="353.0">
+            <Font name="System Bold" size="48.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="100.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <GridPane alignment="CENTER" hgap="50.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="750.0" prefWidth="700.0" translateY="-50.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <HBox fx:id="topRowNames" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="choiceBoxLabel" text="Patient Names">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="choiceBoxLabel1" text="Drink Selection">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox fx:id="secondRowBoxes" alignment="TOP_CENTER" prefHeight="2.0" prefWidth="334.0">
-               <children>
-                  <ChoiceBox fx:id="patientNames" prefWidth="150.0" />
-                  <ChoiceBox fx:id="drinkSel" prefWidth="150.0" />
-               </children>
-            </HBox>
-            <HBox fx:id="thirdRowNames" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="choiceBoxLabel2" text="Assigned Staff">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="choiceBoxLabel11" text="Side Selection">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox fx:id="fourthRowBoxes" alignment="TOP_CENTER" prefHeight="26.0" prefWidth="352.0">
-               <children>
-                  <ChoiceBox fx:id="assignStaff" prefWidth="150.0" />
-                  <ChoiceBox fx:id="sideSel" prefWidth="150.0" />
-               </children>
-            </HBox>
-            <HBox fx:id="fifthRowNames" alignment="CENTER" prefHeight="17.0" prefWidth="37.0">
-               <children>
-                  <Label fx:id="choiceBoxLabel3" text="Request Status">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="choiceBoxLabel111" alignment="CENTER" text="Main Selection">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <HBox fx:id="sixthRowBoxes" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="339.0">
-               <children>
-                  <ChoiceBox fx:id="serviceStatus" prefWidth="150.0" />
-                  <ChoiceBox fx:id="mainSel" prefWidth="150.0" />
-               </children>
-            </HBox>
-            <VBox fx:id="seventhRowButtons" alignment="TOP_CENTER" prefHeight="171.0" prefWidth="353.0">
-               <children>
-                  <Label fx:id="choiceBoxLabel1111" alignment="CENTER" text="Destination">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <ChoiceBox fx:id="destinationDrop" prefWidth="150.0" />
-                  <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textAlignment="CENTER" textFill="#446fdc">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </VBox>
+            <Label fx:id="choiceBoxLabel" text="Patient Names">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="choiceBoxLabel1" text="Drink Selection" GridPane.rowIndex="1">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="choiceBoxLabel2" text="Assigned Staff" GridPane.rowIndex="2">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="choiceBoxLabel11" text="Side Selection" GridPane.rowIndex="3">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="choiceBoxLabel3" text="Request Status" GridPane.rowIndex="4">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="choiceBoxLabel111" alignment="CENTER" text="Main Selection" GridPane.rowIndex="5">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="choiceBoxLabel1111" alignment="CENTER" text="Destination" GridPane.rowIndex="6">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="choiceBoxLabel11111" alignment="CENTER" layoutX="10.0" layoutY="436.0" text="Exemptions" GridPane.rowIndex="7">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <ChoiceBox fx:id="destinationDrop" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <ChoiceBox fx:id="mainSel" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <ChoiceBox fx:id="serviceStatus" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ChoiceBox fx:id="sideSel" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="assignStaff" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="drinkSel" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="patientNames" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" />
+            <ChoiceBox fx:id="exemptionSel" layoutX="360.0" layoutY="432.0" prefHeight="60.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textAlignment="CENTER" textFill="#446fdc" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </JFXButton>
          </children>
-      </VBox>
-   </children>
-</AnchorPane>
+      </GridPane>
+   </center>
+</BorderPane>

@@ -50,15 +50,15 @@ public class MealReqController implements Initializable {
     resetFields();
     submitButton.setDisable(true);
     // Formatting---------------------------------------------------
-    fullSelBox.setSpacing(20);
-    seventhRowButtons.setSpacing(20);
-    topRowNames.setSpacing(80);
-    secondRowBoxes.setSpacing(20);
-    thirdRowNames.setSpacing(80);
-    fourthRowBoxes.setSpacing(20);
-    fifthRowNames.setSpacing(80);
-    sixthRowBoxes.setSpacing(20);
-    seventhRowButtons.setSpacing(20);
+    //    fullSelBox.setSpacing(20);
+    //    seventhRowButtons.setSpacing(20);
+    //    topRowNames.setSpacing(80);
+    //    secondRowBoxes.setSpacing(20);
+    //    thirdRowNames.setSpacing(80);
+    //    fourthRowBoxes.setSpacing(20);
+    //    fifthRowNames.setSpacing(80);
+    //    sixthRowBoxes.setSpacing(20);
+    //    seventhRowButtons.setSpacing(20);
 
     // status choice box ----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "DONE", "PROC");
