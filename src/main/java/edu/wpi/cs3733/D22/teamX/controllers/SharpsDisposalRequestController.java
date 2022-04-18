@@ -78,6 +78,7 @@ public class SharpsDisposalRequestController implements Initializable {
     statusChoiceBox.setValue("");
     assigneeDropDown.setValue("");
     typeDropDown.setValue("");
+    errorText.setText("");
   }
 
   @FXML
