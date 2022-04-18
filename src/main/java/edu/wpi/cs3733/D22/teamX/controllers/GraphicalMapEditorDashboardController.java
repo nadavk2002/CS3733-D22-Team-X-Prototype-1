@@ -28,6 +28,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class GraphicalMapEditorDashboardController implements Initializable {
@@ -46,8 +49,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       l1StackC,
       ll1StackC,
       ll2StackC;
-  @FXML private AnchorPane anchorRoot;
-  @FXML private StackPane parentPage;
+  @FXML public AnchorPane anchorRoot;
+  @FXML public StackPane parentPage;
   @FXML private JFXButton toMapEditor;
   @FXML private Rectangle levFiveDirty;
   @FXML private Rectangle levFiveClean;
@@ -91,6 +94,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private TableColumn<EquipmentUnit, String> typeC;
   @FXML private TableColumn<EquipmentUnit, String> availabilityC;
   @FXML private TableColumn<EquipmentUnit, String> currLocC;
+  @FXML private JFXButton showAlerts;
 
   // floor contants--------------------------------------
   private final int dirtyXloc = 70;
@@ -157,17 +161,31 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   }
 
   @FXML
+  private void ShowAlerts() throws IOException {
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/DashboardAlerts.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("Alerts");
+    stage.setScene(new Scene(root1));
+    stage.show();
+  }
+
+  @FXML
   private void ToMapEditor() throws IOException {
     Parent root =
         FXMLLoader.load(
             Objects.requireNonNull(
                 getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
     Scene scene = toMapEditor.getScene();
-    root.translateXProperty().set(scene.getHeight());
+    root.translateXProperty().set(scene.getWidth());
     parentPage.getChildren().add(root);
     Timeline timeline = new Timeline();
-    KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.LINEAR);
-    KeyFrame kf = new KeyFrame(Duration.seconds(.75), kv);
+    KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_BOTH);
+    KeyFrame kf = new KeyFrame(Duration.seconds(.5), kv);
 
     timeline.getKeyFrames().add(kf);
     timeline.setOnFinished(
@@ -266,7 +284,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   }
 
   @FXML
-  private ObservableList<EquipmentUnit> sortByDirty(ObservableList<EquipmentUnit> equipOnFloor) {
+  public ObservableList<EquipmentUnit> sortByDirty(ObservableList<EquipmentUnit> equipOnFloor) {
     ObservableList<EquipmentUnit> dirtyEquipment = FXCollections.observableArrayList();
     for (EquipmentUnit equipmentUnit : equipOnFloor) {
       if (!equipmentUnit.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
@@ -275,7 +293,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     }
     return dirtyEquipment;
   }
-
+  @FXML
   private ObservableList<EquipmentUnit> sortByClean(ObservableList<EquipmentUnit> equipOnFloor) {
     ObservableList<EquipmentUnit> cleanEquipment = FXCollections.observableArrayList();
     for (EquipmentUnit equipmentUnit : equipOnFloor) {
@@ -320,7 +338,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     }
   }
 
-  private ObservableList<EquipmentUnit> sortEquipmentByFloor(String floor) {
+  public ObservableList<EquipmentUnit> sortEquipmentByFloor(String floor) {
     ObservableList<EquipmentUnit> equipmentOnFloor = FXCollections.observableArrayList();
     List<EquipmentUnit> equipmentUnitList = equipmentUnitDAO.getAllRecords();
     for (EquipmentUnit e : equipmentUnitList) {
