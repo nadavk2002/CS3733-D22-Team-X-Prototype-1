@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.SharpsDisposalRequestController">
+<AnchorPane fx:id="roomChoiceBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.SharpsDisposalRequestController">
    <children>
       <Label contentDisplay="BOTTOM" layoutX="604.0" layoutY="342.0" text="Request Sharps Disposal" textFill="#446fdc">
          <font>
@@ -22,7 +21,7 @@
                <children>
                   <VBox alignment="TOP_RIGHT" spacing="18.0">
                      <children>
-                        <Label prefHeight="25.0" text="Room Number: ">
+                        <Label prefHeight="25.0" text="Room: ">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -37,7 +36,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="25.0" text="Need Type: ">
+                        <Label prefHeight="25.0" text="Needle Type: ">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -46,22 +45,22 @@
                   </VBox>
                   <VBox spacing="18.0">
                      <children>
-                        <ChoiceBox prefHeight="25.0" prefWidth="150.0" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="150.0" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="150.0" />
-                        <ChoiceBox prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="roomDropDown" prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="statusChoiceBox" prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="assigneeDropDown" prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="typeDropDown" prefHeight="25.0" prefWidth="150.0" />
                      </children>
                   </VBox>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
-                  <JFXButton text="Submit Request" textFill="#446fdc">
+                  <JFXButton fx:id="submitButton" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton text="Reset Forms" textFill="#446fdc">
+                  <JFXButton fx:id="resetButton" onAction="#resetFields" text="Reset Forms" textFill="#446fdc">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
