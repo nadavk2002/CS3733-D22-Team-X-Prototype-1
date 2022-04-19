@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
-
 import java.io.*;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -201,13 +200,13 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
   /** Drops the table from the database */
   @Override
   public void dropTable() {
-      try {
-          Statement dropMealServiceRequest = connection.createStatement();
-          dropMealServiceRequest.execute("DROP TABLE SharpsDisposalRequest");
-      } catch (SQLException e) {
-          System.out.println("SharpsDisposalRequest not dropped");
-          e.printStackTrace();
-      }
+    try {
+      Statement dropMealServiceRequest = connection.createStatement();
+      dropMealServiceRequest.execute("DROP TABLE SharpsDisposalRequest");
+    } catch (SQLException e) {
+      System.out.println("SharpsDisposalRequest not dropped");
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -217,59 +216,59 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    */
   @Override
   public boolean loadCSV() {
+    try {
+      LocationDAO locDestination = LocationDAO.getDAO();
+      EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+      InputStream SDSRCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
+      BufferedReader SDSRCSVReader = new BufferedReader(new InputStreamReader(SDSRCSV));
+      SDSRCSVReader.readLine();
+      String nextFileLine;
+      while ((nextFileLine = SDSRCSVReader.readLine()) != null) {
+        String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+        if (currLine.length == 5) {
+          SharpsDisposalRequest SDSRnode =
+              new SharpsDisposalRequest(
+                  currLine[0],
+                  locDestination.getRecord(currLine[1]),
+                  currLine[2],
+                  emplDAO.getRecord(currLine[3]),
+                  currLine[4]);
+          sharpsDisposalRequests.add(SDSRnode);
+          SDSRnode.getDestination().addRequest(SDSRnode);
+        } else {
+          System.out.println("SharpsDisposalRequest CSV file formatted improperly");
+          System.exit(1);
+        }
+      }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+      System.out.println("SharpsDisposalRequests.CSV not found!");
+      return false;
+    } catch (IOException e) {
+      e.printStackTrace();
+      return false;
+    }
+    // Insert locations from MealServiceReqCSV into db table
+    for (int i = 0; i < sharpsDisposalRequests.size(); i++) {
       try {
-          LocationDAO locDestination = LocationDAO.getDAO();
-          EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-          InputStream SDSRCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
-          BufferedReader SDSRCSVReader = new BufferedReader(new InputStreamReader(SDSRCSV));
-          SDSRCSVReader.readLine();
-          String nextFileLine;
-          while ((nextFileLine = SDSRCSVReader.readLine()) != null) {
-              String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-              if (currLine.length == 5){
-                  SharpsDisposalRequest SDSRnode =
-                          new SharpsDisposalRequest(
-                                  currLine[0],
-                                  locDestination.getRecord(currLine[1]),
-                                  currLine[2],
-                                  emplDAO.getRecord(currLine[3]),
-                                  currLine[4]);
-                  sharpsDisposalRequests.add(SDSRnode);
-                  SDSRnode.getDestination().addRequest(SDSRnode);
-              } else {
-                  System.out.println("SharpsDisposalRequest CSV file formatted improperly");
-                  System.exit(1);
-              }
-          }
-      } catch (FileNotFoundException e) {
-          e.printStackTrace();
-          System.out.println("SharpsDisposalRequests.CSV not found!");
-          return false;
-      } catch (IOException e) {
-          e.printStackTrace();
-          return false;
+        Statement initialization = connection.createStatement();
+        StringBuilder MealServiceRequest = new StringBuilder();
+        MealServiceRequest.append("INSERT INTO SharpsDisposalRequest VALUES(");
+        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getRequestID() + "'" + ", ");
+        MealServiceRequest.append(
+            "'" + sharpsDisposalRequests.get(i).getDestination().getNodeID() + "'" + ", ");
+        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getStatus() + "'" + ", ");
+        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getAssigneeID() + "'" + ", ");
+        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getType() + "'");
+        MealServiceRequest.append(")");
+        initialization.execute(MealServiceRequest.toString());
+      } catch (SQLException e) {
+        System.out.println("Input for SharpsDisposalRequest " + i + " failed");
+        e.printStackTrace();
+        return false;
       }
-      // Insert locations from MealServiceReqCSV into db table
-      for (int i = 0; i < sharpsDisposalRequests.size(); i++) {
-          try {
-              Statement initialization = connection.createStatement();
-              StringBuilder MealServiceRequest = new StringBuilder();
-              MealServiceRequest.append("INSERT INTO SharpsDisposalRequest VALUES(");
-              MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getRequestID() + "'" + ", ");
-              MealServiceRequest.append(
-                      "'" + sharpsDisposalRequests.get(i).getDestination().getNodeID() + "'" + ", ");
-              MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getStatus() + "'" + ", ");
-              MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getAssigneeID() + "'" + ", ");
-              MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getType() + "'");
-              MealServiceRequest.append(")");
-              initialization.execute(MealServiceRequest.toString());
-          } catch (SQLException e) {
-              System.out.println("Input for SharpsDisposalRequest " + i + " failed");
-              e.printStackTrace();
-              return false;
-          }
-      }
-      return true;
+    }
+    return true;
   }
 
   /**
@@ -280,7 +279,41 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    */
   @Override
   public boolean saveCSV(String dirPath) {
-    return false;
+    try {
+      FileWriter csvFile = new FileWriter(dirPath + csv, false);
+      csvFile.write("requestID,destination,status,assignee,service,patientFor");
+      for (int i = 0; i < sharpsDisposalRequests.size(); i++) {
+        csvFile.write("\n" + sharpsDisposalRequests.get(i).getRequestID() + ",");
+        if (sharpsDisposalRequests.get(i).getDestination() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(sharpsDisposalRequests.get(i).getDestination().getNodeID() + ",");
+        }
+        if (sharpsDisposalRequests.get(i).getStatus() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(sharpsDisposalRequests.get(i).getStatus() + ",");
+        }
+        if (sharpsDisposalRequests.get(i).getAssignee() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(sharpsDisposalRequests.get(i).getAssigneeID() + ",");
+        }
+        if (sharpsDisposalRequests.get(i).getType() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(sharpsDisposalRequests.get(i).getType());
+        }
+      }
+      csvFile.flush();
+      csvFile.close();
+    } catch (IOException e) {
+      System.out.print(
+          "An error occurred when trying to write to the SharpsDisposalRequest CSV file.");
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 
   /**
