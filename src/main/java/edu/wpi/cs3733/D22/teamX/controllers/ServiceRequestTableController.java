@@ -36,6 +36,14 @@ public class ServiceRequestTableController implements Initializable {
   @FXML private TableColumn<ServiceRequest, ChoiceBox<String>> modStatus;
   @FXML TextField modifyID;
 
+  public String previousID;
+  public void getID() {
+    if (modifyID.getText() != "") {
+      previousID = modifyID.getText();
+    }
+  }
+
+
   @FXML
   private void goToUpdatePage() throws IOException {
     String id = modifyID.getText();

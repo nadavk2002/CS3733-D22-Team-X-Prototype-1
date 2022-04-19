@@ -25,7 +25,7 @@ public class UpdateEquipmentRequestController {
 
   @FXML
   public void initialize() {
-    loadPreviousSelection();
+    // loadPreviousSelection();
     locations = locationDAO.getAllRecords();
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
@@ -38,12 +38,12 @@ public class UpdateEquipmentRequestController {
     quanityGreaterThan.setVisible(false);
   }
 
-  public void loadPreviousSelection() {
-    ServiceRequestTableController request = new ServiceRequestTableController();
-    String id = request.modifyID.getText();
-    Location previousLoc = locationDAO.getRecord(id);
-    selectDestination.getSelectionModel().select(previousLoc.getShortName());
-  }
+      public void loadPreviousSelection() {
+          ServiceRequestTableController request = new ServiceRequestTableController();
+          String id = request.getID();
+          Location previousLoc = locationDAO.getRecord(id);
+          selectDestination.getSelectionModel().select(previousLoc.getShortName());
+      }
 
   private ObservableList<String> equipDeliveryList() {
     ObservableList<String> nodeID = FXCollections.observableArrayList();
