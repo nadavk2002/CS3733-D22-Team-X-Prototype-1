@@ -4,10 +4,11 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import java.util.Set;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,18 +39,20 @@ public class MealReqController implements Initializable {
       serviceStatus,
       destinationDrop;
 
-  private LocationDAO locationDAO = LocationDAO.getDAO();
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private final LocationDAO locationDAO = LocationDAO.getDAO();
+  private final ServiceRequestDAO requestDAO = new ServiceRequestDAO();
 //  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
   private List<Location> locations;
+//  private final LocationDAO locationDAO = LocationDAO.getDAO();
+//  private final MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
+  private final EmployeeDAO emplDAO = EmployeeDAO.getDAO();
 
-  private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private List<Employee> employees;
+  private final ObservableList<MealServiceRequest> mealList = FXCollections.observableArrayList();
+  private final ObservableList<String> employeeIDs = FXCollections.observableArrayList();
+  private final ObservableList<String> locationNames = FXCollections.observableArrayList();
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
-    locations = locationDAO.getAllRecords();
-    employees = emplDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
     // Formatting---------------------------------------------------
@@ -66,15 +69,39 @@ public class MealReqController implements Initializable {
     // status choice box ----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "DONE", "PROC");
     // patient names choice box---------------------------------------
-    patientNames.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
+    // patientNames.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient
+    // 5");
+    List<MealServiceRequest> meals = getMealRequests();
+    for (MealServiceRequest meal : meals) {
+      patientNames.getItems().add(meal.getPatientFor());
+    }
+
     // drinks choice box---------------------------------------
-    drinkSel.getItems().addAll("Water", "Orange Juice", "Apple Juice", "Gatorade");
+    // drinkSel.getItems().addAll("Water", "Orange Juice", "Apple Juice", "Gatorade");
+    List<String> mealDrinks = new ArrayList<String>();
+    for (MealServiceRequest meal : meals) {
+      mealDrinks.add(meal.getDrink());
+    }
+    drinkSel.getItems().addAll(mealDrinks.stream().distinct().collect(Collectors.toList()));
+
     // sides choice box---------------------------------------
-    sideSel.getItems().addAll("Fruit Cup", "Mashed Potatoes", "Mixed Vegetables");
+    // sideSel.getItems().addAll("Fruit Cup", "Mashed Potatoes", "Mixed Vegetables");
+    List<String> mealSides = new ArrayList<String>();
+    for (MealServiceRequest meal : meals) {
+      mealSides.add(meal.getSide());
+    }
+    sideSel.getItems().addAll(mealSides.stream().distinct().collect(Collectors.toList()));
+
     // main course choice box---------------------------------------
-    mainSel.getItems().addAll("Chicken", "Fish", "Vegeterian");
+    // mainSel.getItems().addAll("Chicken", "Fish", "Vegeterian");
+    List<String> mealMains = new ArrayList<String>();
+    for (MealServiceRequest meal : meals) {
+      mealMains.add(meal.getMainCourse());
+    }
+    mainSel.getItems().addAll(mealMains.stream().distinct().collect(Collectors.toList()));
+
     // assign staff choice box ---------------------------------------
-    assignStaff.setItems(this.getEmployeeIDs());
+    assignStaff.setItems(getEmployeeIDs());
     //    assignStaff
     //        .getItems()
     //        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
@@ -101,19 +128,21 @@ public class MealReqController implements Initializable {
   }
 
   public ObservableList<String> getLocationNames() {
-    ObservableList<String> locationNames = FXCollections.observableArrayList();
-    for (int i = 0; i < locations.size(); i++) {
-      locationNames.add(locations.get(i).getShortName());
+    List<Location> locations = locationDAO.getAllRecords();
+    List<String> locationShortNames = new ArrayList<String>();
+    for (Location location : locations) {
+      locationShortNames.add(location.getShortName());
     }
+    locationNames.addAll(locationShortNames.stream().distinct().collect(Collectors.toList()));
     return locationNames;
   }
 
   public ObservableList<String> getEmployeeIDs() {
-    ObservableList<String> employeeNames = FXCollections.observableArrayList();
-    for (int i = 0; i < employees.size(); i++) {
-      employeeNames.add(employees.get(i).getEmployeeID());
+    List<Employee> employees = emplDAO.getAllRecords();
+    for (Employee employee : employees) {
+      employeeIDs.add(employee.getFirstName() + " " + employee.getLastName());
     }
-    return employeeNames;
+    return employeeIDs;
   }
 
   @FXML
@@ -134,11 +163,8 @@ public class MealReqController implements Initializable {
     destinationDrop.setValue("");
   }
 
-  private ObservableList<MealServiceRequest> mealRequests() {
-    ObservableList<MealServiceRequest> mealList = FXCollections.observableArrayList();
-    MealServiceRequestDAO allMeals = MealServiceRequestDAO.getDAO();
-    List<MealServiceRequest> inpMealsList = allMeals.getAllRecords();
-    mealList.addAll(inpMealsList);
+  private ObservableList<MealServiceRequest> getMealRequests() {
+    mealList.addAll(requestDAO.getAllRecords());
     return mealList;
   }
 
@@ -146,9 +172,11 @@ public class MealReqController implements Initializable {
   void submitButton() {
     MealServiceRequest request = new MealServiceRequest();
     request.setRequestID(requestDAO.makeMealServiceRequestID());
-    request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));
+    request.setDestination(
+        locationDAO.getAllRecords().get(destinationDrop.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
+    request.setAssignee(
+        emplDAO.getAllRecords().get(assignStaff.getSelectionModel().getSelectedIndex()));
     request.setMainCourse(mainSel.getValue());
     request.setDrink(drinkSel.getValue());
     request.setSide(sideSel.getValue());
