@@ -52,7 +52,7 @@ public class EmployeeViewerController implements Initializable {
 
   private void updateFields() {
     // get Employeee
-    //System.out.println(EmployeeID.getValue());
+    // System.out.println(EmployeeID.getValue());
     Employee employee = new Employee();
     employee = employeeDAO.getRecord(EmployeeID.getValue());
     // populate textfields

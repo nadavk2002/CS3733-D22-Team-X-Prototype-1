@@ -9,6 +9,9 @@ plugins {
 mainClassName = 'edu.wpi.cs3733.D22.teamX.Main'
 
 repositories {
+    flatDir {
+        dirs 'libs'
+    }
     mavenCentral()
     jcenter()
     maven {
@@ -43,6 +46,9 @@ dependencies {
             "junit:junit:4.13.2",
             "org.testfx:testfx-junit:4.0.16-alpha"
     )
+
+    implementation name: 'CS3733-D22-Team-X-MealServiceRequestAPI'
+    implementation name: 'InternalTranspoAPI'
 }
 
 

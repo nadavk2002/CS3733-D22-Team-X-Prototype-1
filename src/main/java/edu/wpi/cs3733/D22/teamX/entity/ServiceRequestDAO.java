@@ -272,5 +272,4 @@ public class ServiceRequestDAO {
   public String makeSharpsDisposalServieRequestID() {
     return sharpsDisposalRequestDAO.makeID();
   }
-
 }
