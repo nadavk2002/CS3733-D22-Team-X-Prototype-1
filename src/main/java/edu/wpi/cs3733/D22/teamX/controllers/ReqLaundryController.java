@@ -26,7 +26,7 @@ public class ReqLaundryController implements Initializable {
   // @FXML private TextField assignStaff;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-//  private LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
+  //  private LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
   private List<Location> locations;
 
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
