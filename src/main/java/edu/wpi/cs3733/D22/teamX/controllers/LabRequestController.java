@@ -120,8 +120,8 @@ public class LabRequestController implements Initializable {
 
   private ObservableList<LabServiceRequest> labDeliveryList() {
     ObservableList<LabServiceRequest> labList = FXCollections.observableArrayList();
-    LabServiceRequestDAO allLabs = LabServiceRequestDAO.getDAO();
-    List<LabServiceRequest> inpLabsList = allLabs.getAllRecords();
+//    LabServiceRequestDAO allLabs = LabServiceRequestDAO.getDAO();
+    List<LabServiceRequest> inpLabsList = requestDAO.getAllLabServiceRequests();
     labList.addAll(inpLabsList);
     return labList;
   }
