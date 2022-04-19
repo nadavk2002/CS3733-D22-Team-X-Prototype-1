@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class EmployeeViewerController implements Initializable {
   // DAOS
   private final EmployeeDAO employeeDAO = EmployeeDAO.getDAO();
+  private ServiceRequestDAO serviceRequestDAO = new ServiceRequestDAO();
   // service request DAO
 
   // lists
@@ -51,7 +52,7 @@ public class EmployeeViewerController implements Initializable {
 
   private void updateFields() {
     // get Employeee
-    System.out.println(EmployeeID.getValue());
+    //System.out.println(EmployeeID.getValue());
     Employee employee = new Employee();
     employee = employeeDAO.getRecord(EmployeeID.getValue());
     // populate textfields
@@ -70,17 +71,8 @@ public class EmployeeViewerController implements Initializable {
   }
 
   private List<ServiceRequest> SRDAOToOL() {
-    // replace with service request Facade
-    ArrayList<ServiceRequest> requests = new ArrayList<ServiceRequest>();
-    requests.addAll(MedicalEquipmentServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LabServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LangServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
-
+    // load all requests into a list
+    ArrayList<ServiceRequest> requests = serviceRequestDAO.getServiceRequests();
     // filter out requests with other users
     ArrayList<ServiceRequest> returnRequests = new ArrayList<ServiceRequest>();
     for (ServiceRequest SR : requests) {
