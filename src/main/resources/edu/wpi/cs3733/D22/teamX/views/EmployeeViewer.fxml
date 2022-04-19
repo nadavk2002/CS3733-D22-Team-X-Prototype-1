@@ -64,6 +64,9 @@
                                  </font>
                               </Label>
                            </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </VBox>
                         <VBox alignment="TOP_RIGHT" prefHeight="200.0" spacing="10.0">
                            <children>
@@ -132,7 +135,6 @@
                   </TableView>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" />
          </children>
       </HBox>
    </center>

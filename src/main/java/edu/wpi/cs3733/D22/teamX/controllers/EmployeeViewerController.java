@@ -74,10 +74,19 @@ public class EmployeeViewerController implements Initializable {
               || clearanceType.getText().equals("")
               || jobTitle.getText().equals("");
     } catch (NoSuchElementException e) {
+      isDisabled =
+          firstName.getText().equals("")
+              || lastName.getText().equals("")
+              || clearanceType.getText().equals("")
+              || jobTitle.getText().equals("");
     }
 
     addNew.setDisable(isDisabled);
-    update.setDisable(isDisabled);
+    if (EmployeeID.getValue().equals("")) {
+      update.setDisable(false);
+    } else {
+      update.setDisable(isDisabled);
+    }
   }
 
   private ObservableList<String> getEmployeeIDs() {
@@ -110,6 +119,9 @@ public class EmployeeViewerController implements Initializable {
 
       // reset the buttons
       enableAddUpdate();
+
+      // clear error text
+      errorText.setText("");
     }
   }
 
@@ -157,7 +169,46 @@ public class EmployeeViewerController implements Initializable {
     allowUpdateFields = true;
   }
 
-  public void addEmployee(ActionEvent actionEvent) {}
+  public void addEmployee(ActionEvent actionEvent) {
+    String error = "employee added sucessfully";
+    Employee employee = new Employee();
+    // setValues
+    employee.setEmployeeID(employeeDAO.makeID());
+    employee.setFirstName(firstName.getText());
+    employee.setLastName(lastName.getText());
+    employee.setClearanceType(clearanceType.getText());
+    employee.setJobTitle(jobTitle.getText());
+    // submit to DAO
+    try {
+      employeeDAO.addRecord(employee);
+    } catch (Exception e) {
+      error = "employee not added error: " + e.toString() + " has occured";
+    }
 
-  public void updateEmployee(ActionEvent actionEvent) {}
+    // reset fields
+    resetFields();
+    // set Choice box to created employee
+    EmployeeID.setValue(employee.getEmployeeID());
+    // update choice box with new value
+    EmployeeID.setItems(getEmployeeIDs());
+    // update the fields
+    updateFields();
+
+    // errorText.setText(error);
+  }
+
+  public void updateEmployee(ActionEvent actionEvent) {
+    // make new employee
+    Employee employee = new Employee();
+    // setValues
+    employee.setEmployeeID(EmployeeID.getValue());
+    employee.setFirstName(firstName.getText());
+    employee.setLastName(lastName.getText());
+    employee.setClearanceType(clearanceType.getText());
+    employee.setJobTitle(jobTitle.getText());
+    employeeDAO.updateRecord(employee);
+
+    // disable buttons
+    enableAddUpdate();
+  }
 }
