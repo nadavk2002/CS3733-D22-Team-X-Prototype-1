@@ -1,6 +1,9 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
+
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -60,7 +63,34 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    * @param recordObject the recordObject to be deleted.
    */
   @Override
-  public void deleteRecord(SharpsDisposalRequest recordObject) {}
+  public void deleteRecord(SharpsDisposalRequest recordObject) {
+      recordObject.getDestination().removeRequest(recordObject);
+      // remove from list
+      int index = 0; // create index for while loop
+      int intitialSize = sharpsDisposalRequests.size(); // get size
+      // go thru list
+      while (index < sharpsDisposalRequests.size()) {
+          if (sharpsDisposalRequests.get(index).equals(recordObject)) {
+              sharpsDisposalRequests.remove(index); // remove item at index from list
+              index--;
+              break; // exit loop
+          }
+          index++;
+      }
+      if (index == intitialSize) {
+          throw new NoSuchElementException("request does not exist");
+      }
+      // remove from Database
+      try {
+          // create the statement
+          Statement statement = connection.createStatement();
+          // remove location from DB table
+          statement.executeUpdate(
+                  "DELETE FROM SharpsDisposalRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+  }
 
   /**
    * Updates a specified record object. If the record doesn't exist, it is added.
