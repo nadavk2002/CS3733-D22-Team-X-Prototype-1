@@ -17,7 +17,8 @@ public class MedicalEquipmentDeliveryController {
   @FXML private Label quanityGreaterThan;
   @FXML private Label amountAvailable;
   @FXML private Button ToMainMenu;
-  @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus, selectAssignee;
+  @FXML
+  private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus, selectAssignee;
   @FXML private TextField amountField;
   @FXML private Button submitButton;
 
@@ -54,7 +55,7 @@ public class MedicalEquipmentDeliveryController {
     return nodeID;
   }
 
-  private ObservableList<String> getEmployeeIDs(){
+  private ObservableList<String> getEmployeeIDs() {
     ObservableList<String> employeeID = FXCollections.observableArrayList();
     for (int i = 0; i < employees.size(); i++) {
       employeeID.add(employees.get(i).getEmployeeID());
@@ -79,6 +80,7 @@ public class MedicalEquipmentDeliveryController {
     selectEquipmentType.setValue("");
     selectDestination.setValue("");
     selectStatus.setValue("");
+    selectAssignee.setValue("");
   }
 
   @FXML

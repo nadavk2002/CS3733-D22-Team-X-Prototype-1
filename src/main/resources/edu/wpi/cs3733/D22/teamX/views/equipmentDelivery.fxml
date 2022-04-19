@@ -43,9 +43,13 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Label>
-      <Label fx:id="amountAvailable" alignment="TOP_CENTER" layoutX="550.0" layoutY="671.0" prefHeight="80.0" prefWidth="472.0" textFill="#446fdc" />
+      <Label fx:id="amountAvailable" alignment="TOP_CENTER" layoutX="550.0" layoutY="671.0" prefHeight="100.0" prefWidth="472.0" textFill="#446fdc" />
       <Label fx:id="quanityGreaterThan" layoutX="899.0" layoutY="501.0" text="Quantity must be less than the amount available" textFill="#c90000" />
-      <ChoiceBox layoutX="718.0" layoutY="464.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="selectAssignee" layoutX="718.0" layoutY="464.0" prefWidth="150.0">
+          <opaqueInsets>
+              <Insets />
+          </opaqueInsets>
+      </ChoiceBox>
       <Label layoutX="646.0" layoutY="468.0" text="Assignee:" />
 </children>
 </AnchorPane>
