@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="548.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.UpdateEquipmentRequestController">
+   <children>
+      <ChoiceBox fx:id="selectEquipmentType" layoutX="304.0" layoutY="204.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <TextField fx:id="amountField" layoutX="304.0" layoutY="235.0" onKeyReleased="#checkForInt" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="179.0" layoutY="208.0" text="Equipment Selection:" />
+      <Label layoutX="245.0" layoutY="239.0" text="Amount:" />
+      <JFXButton fx:id="submitButton" layoutX="373.0" layoutY="307.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="resetFields" layoutX="281.0" layoutY="307.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <ChoiceBox fx:id="selectDestination" layoutX="304.0" layoutY="173.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <Label layoutX="227.0" layoutY="177.0" text="Destination: " />
+      <ChoiceBox fx:id="selectStatus" layoutX="304.0" layoutY="270.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <Label layoutX="255.0" layoutY="274.0" text="Status:" />
+      <Label layoutX="101.0" layoutY="50.0" text="Edit Request Equipment Delivery" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="amountAvailable" alignment="TOP_CENTER" layoutX="143.0" layoutY="355.0" prefHeight="175.0" prefWidth="472.0" textFill="#446fdc" />
+      <Label fx:id="quanityGreaterThan" layoutX="481.0" layoutY="239.0" text="Quantity must be less than the amount available" textFill="#c90000" />
+   </children>
+</AnchorPane>

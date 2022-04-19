@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -33,7 +32,7 @@
                   <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
               </columns>
             </TableView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Request Status">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Request">
                <font>
                   <Font size="18.0" />
                </font>
@@ -46,12 +45,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </TextField>
-            <ChoiceBox fx:id="modifyStatus" prefWidth="150.0">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </ChoiceBox>
-            <JFXButton onAction="#submitStatusUpdate" style="-fx-background-color: #446fdc;" text="Submit Status Update" textFill="WHITE" />
+            <JFXButton onAction="#goToUpdatePage" style="-fx-background-color: #446fdc;" text="Edit Request" textFill="WHITE" />
          </children>
       </VBox>
    </children>

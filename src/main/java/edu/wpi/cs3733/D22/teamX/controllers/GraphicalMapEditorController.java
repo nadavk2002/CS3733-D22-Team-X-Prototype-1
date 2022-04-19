@@ -41,7 +41,7 @@ import net.kurobako.gesturefx.GesturePane;
 
 /**
  * Controller for the map editor page. This graphically displays equipment and location data on a
- * map of the tower at the hostpital.
+ * map of the tower at the hospital.
  */
 public class GraphicalMapEditorController implements Initializable {
 
