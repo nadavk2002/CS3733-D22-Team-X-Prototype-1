@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
-
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -48,13 +47,13 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    */
   @Override
   public SharpsDisposalRequest getRecord(String recordID) {
-    //iterate through list to find object with matching ID
-      for(SharpsDisposalRequest SDSR : sharpsDisposalRequests){
-          if(SDSR.getRequestID().equals(recordID)){
-              return SDSR;
-          }
+    // iterate through list to find object with matching ID
+    for (SharpsDisposalRequest SDSR : sharpsDisposalRequests) {
+      if (SDSR.getRequestID().equals(recordID)) {
+        return SDSR;
       }
-      throw new NoSuchElementException("Request with " + recordID + " requestID does not exist");
+    }
+    throw new NoSuchElementException("Request with " + recordID + " requestID does not exist");
   }
 
   /**
@@ -64,32 +63,34 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    */
   @Override
   public void deleteRecord(SharpsDisposalRequest recordObject) {
-      recordObject.getDestination().removeRequest(recordObject);
-      // remove from list
-      int index = 0; // create index for while loop
-      int intitialSize = sharpsDisposalRequests.size(); // get size
-      // go thru list
-      while (index < sharpsDisposalRequests.size()) {
-          if (sharpsDisposalRequests.get(index).equals(recordObject)) {
-              sharpsDisposalRequests.remove(index); // remove item at index from list
-              index--;
-              break; // exit loop
-          }
-          index++;
+    recordObject.getDestination().removeRequest(recordObject);
+    // remove from list
+    int index = 0; // create index for while loop
+    int intitialSize = sharpsDisposalRequests.size(); // get size
+    // go thru list
+    while (index < sharpsDisposalRequests.size()) {
+      if (sharpsDisposalRequests.get(index).equals(recordObject)) {
+        sharpsDisposalRequests.remove(index); // remove item at index from list
+        index--;
+        break; // exit loop
       }
-      if (index == intitialSize) {
-          throw new NoSuchElementException("request does not exist");
-      }
-      // remove from Database
-      try {
-          // create the statement
-          Statement statement = connection.createStatement();
-          // remove location from DB table
-          statement.executeUpdate(
-                  "DELETE FROM SharpsDisposalRequest WHERE requestID = '" + recordObject.getRequestID() + "'");
-      } catch (SQLException e) {
-          e.printStackTrace();
-      }
+      index++;
+    }
+    if (index == intitialSize) {
+      throw new NoSuchElementException("request does not exist");
+    }
+    // remove from Database
+    try {
+      // create the statement
+      Statement statement = connection.createStatement();
+      // remove location from DB table
+      statement.executeUpdate(
+          "DELETE FROM SharpsDisposalRequest WHERE requestID = '"
+              + recordObject.getRequestID()
+              + "'");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   /**
@@ -98,7 +99,49 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    * @param recordObject the recordObject to be updated or added.
    */
   @Override
-  public void updateRecord(SharpsDisposalRequest recordObject) {}
+  public void updateRecord(SharpsDisposalRequest recordObject) {
+    if (!recordObject
+        .getDestination()
+        .equals(getRecord(recordObject.getRequestID()).getDestination())) {
+      getRecord(recordObject.getRequestID()).getDestination().removeRequest(recordObject);
+      recordObject.getDestination().addRequest(recordObject);
+    }
+    // add item to list
+    int index = 0; // create index for while loop
+    int intitialSize = sharpsDisposalRequests.size(); // get size
+    // go thru list
+    while (index < sharpsDisposalRequests.size()) {
+      if (sharpsDisposalRequests.get(index).equals(recordObject)) {
+        sharpsDisposalRequests.set(index, recordObject); // update lsr at index position
+        break; // exit loop
+      }
+      index++;
+    }
+    if (index == intitialSize) {
+      throw new NoSuchElementException("request does not exist");
+    }
+    // update db table.
+    try {
+      // create the statement
+      Statement statement = connection.createStatement();
+      // update item in DB
+      statement.executeUpdate(
+          "UPDATE SharpsDisposalRequest SET"
+              + " destination = '"
+              + recordObject.getDestination().getNodeID()
+              + "', status = '"
+              + recordObject.getStatus()
+              + "', assignee = '"
+              + recordObject.getAssigneeID()
+              + "', type = '"
+              + recordObject.getType()
+              + "' WHERE requestID = '"
+              + recordObject.getRequestID()
+              + "'");
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
 
   /**
    * Adds a record object to the database.
