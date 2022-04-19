@@ -12,7 +12,7 @@ import java.util.NoSuchElementException;
 
 public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
   private static List<SharpsDisposalRequest> sharpsDisposalRequests = new ArrayList<>();
-  private static String csv = "SharpsDisposalRequest.csv";
+  private static String csv = "SharpsDisposalRequests.csv";
 
   private SharpsDisposalRequestDAO() {
     if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
@@ -185,10 +185,10 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
               + "status CHAR(4),"
               + "assignee CHAR(8),"
               + "type VARCHAR(25),"
-              + "CONSTRAINT PMSR_dest_fk "
+              + "CONSTRAINT SDSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
               + "ON DELETE SET NULL, "
-              + "CONSTRAINT PMSR_assignee_fk "
+              + "CONSTRAINT SDSR_assignee_fk "
               + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
               + "ON DELETE SET NULL)");
     } catch (SQLException e) {
@@ -253,16 +253,18 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
     for (int i = 0; i < sharpsDisposalRequests.size(); i++) {
       try {
         Statement initialization = connection.createStatement();
-        StringBuilder MealServiceRequest = new StringBuilder();
-        MealServiceRequest.append("INSERT INTO SharpsDisposalRequest VALUES(");
-        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getRequestID() + "'" + ", ");
-        MealServiceRequest.append(
+        StringBuilder sharpsDisposalRequest = new StringBuilder();
+        sharpsDisposalRequest.append("INSERT INTO SharpsDisposalRequest VALUES(");
+        sharpsDisposalRequest.append(
+            "'" + sharpsDisposalRequests.get(i).getRequestID() + "'" + ", ");
+        sharpsDisposalRequest.append(
             "'" + sharpsDisposalRequests.get(i).getDestination().getNodeID() + "'" + ", ");
-        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getStatus() + "'" + ", ");
-        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getAssigneeID() + "'" + ", ");
-        MealServiceRequest.append("'" + sharpsDisposalRequests.get(i).getType() + "'");
-        MealServiceRequest.append(")");
-        initialization.execute(MealServiceRequest.toString());
+        sharpsDisposalRequest.append("'" + sharpsDisposalRequests.get(i).getStatus() + "'" + ", ");
+        sharpsDisposalRequest.append(
+            "'" + sharpsDisposalRequests.get(i).getAssigneeID() + "'" + ", ");
+        sharpsDisposalRequest.append("'" + sharpsDisposalRequests.get(i).getType() + "'");
+        sharpsDisposalRequest.append(")");
+        initialization.execute(sharpsDisposalRequest.toString());
       } catch (SQLException e) {
         System.out.println("Input for SharpsDisposalRequest " + i + " failed");
         e.printStackTrace();

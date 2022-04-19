@@ -81,7 +81,7 @@ public class DatabaseCreator {
     janitorDAO.createTable();
     MDSDAO.createTable();
     laundryDAO.createTable();
-    sharpDAO.dropTable();
+    sharpDAO.createTable();
   }
 
   /**
