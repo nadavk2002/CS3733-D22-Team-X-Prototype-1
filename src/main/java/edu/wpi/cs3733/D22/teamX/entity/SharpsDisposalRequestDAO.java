@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -281,7 +282,7 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,service,patientFor");
+      csvFile.write("requestID,destination,status,assignee,type");
       for (int i = 0; i < sharpsDisposalRequests.size(); i++) {
         csvFile.write("\n" + sharpsDisposalRequests.get(i).getRequestID() + ",");
         if (sharpsDisposalRequests.get(i).getDestination() == null) {
@@ -323,7 +324,25 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    */
   @Override
   public boolean fillFromTable() {
-    return false;
+    try {
+      sharpsDisposalRequests.clear();
+      Statement fromTable = connection.createStatement();
+      ResultSet results = fromTable.executeQuery("SELECT * FROM SharpsDisposalRequest");
+      while (results.next()) {
+        SharpsDisposalRequest toAdd = new SharpsDisposalRequest();
+        toAdd.setRequestID(results.getString("requestID"));
+        toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
+        toAdd.setStatus(results.getString("status"));
+        toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setType(results.getString("type"));
+        sharpsDisposalRequests.add(toAdd);
+        toAdd.getDestination().addRequest(toAdd);
+      }
+    } catch (SQLException e) {
+      System.out.println("SharpsDisposalRequest could not be filled from the sql table");
+      return false;
+    }
+    return true;
   }
 
   /**
