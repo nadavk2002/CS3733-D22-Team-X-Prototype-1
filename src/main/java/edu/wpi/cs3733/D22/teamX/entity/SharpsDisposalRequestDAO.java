@@ -149,7 +149,28 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    * @param recordObject the recordObject to be added.
    */
   @Override
-  public void addRecord(SharpsDisposalRequest recordObject) {}
+  public void addRecord(SharpsDisposalRequest recordObject) {
+      // list
+      sharpsDisposalRequests.add(recordObject);
+      // db
+      try {
+          Statement initialization = connection.createStatement();
+          StringBuilder SDSR = new StringBuilder();
+          SDSR.append("INSERT INTO SharpsDisposalRequest VALUES (");
+          SDSR.append("'" + recordObject.getRequestID() + "', ");
+          SDSR.append("'" + recordObject.getDestination().getNodeID() + "', ");
+          SDSR.append("'" + recordObject.getStatus() + "', ");
+          SDSR.append("'" + recordObject.getAssigneeID() + "', ");
+          SDSR.append("'" + recordObject.getType() + "'");
+          SDSR.append(")");
+          initialization.execute(SDSR.toString());
+      } catch (SQLException e) {
+          System.out.println("SDSR could not be added");
+          e.printStackTrace();
+
+      }
+      recordObject.getDestination().addRequest(recordObject);
+  }
 
   /** Creates the table for the entity with fields defined by csv file/entity class */
   @Override
