@@ -352,6 +352,7 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    */
   @Override
   public String makeID() {
-    return null;
+    int nextIDNum = sharpsDisposalRequests.size() + 1;
+    return String.format("SDSR%04d", nextIDNum);
   }
 }
