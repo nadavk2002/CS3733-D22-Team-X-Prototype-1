@@ -150,31 +150,50 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
    */
   @Override
   public void addRecord(SharpsDisposalRequest recordObject) {
-      // list
-      sharpsDisposalRequests.add(recordObject);
-      // db
-      try {
-          Statement initialization = connection.createStatement();
-          StringBuilder SDSR = new StringBuilder();
-          SDSR.append("INSERT INTO SharpsDisposalRequest VALUES (");
-          SDSR.append("'" + recordObject.getRequestID() + "', ");
-          SDSR.append("'" + recordObject.getDestination().getNodeID() + "', ");
-          SDSR.append("'" + recordObject.getStatus() + "', ");
-          SDSR.append("'" + recordObject.getAssigneeID() + "', ");
-          SDSR.append("'" + recordObject.getType() + "'");
-          SDSR.append(")");
-          initialization.execute(SDSR.toString());
-      } catch (SQLException e) {
-          System.out.println("SDSR could not be added");
-          e.printStackTrace();
-
-      }
-      recordObject.getDestination().addRequest(recordObject);
+    // list
+    sharpsDisposalRequests.add(recordObject);
+    // db
+    try {
+      Statement initialization = connection.createStatement();
+      StringBuilder SDSR = new StringBuilder();
+      SDSR.append("INSERT INTO SharpsDisposalRequest VALUES (");
+      SDSR.append("'" + recordObject.getRequestID() + "', ");
+      SDSR.append("'" + recordObject.getDestination().getNodeID() + "', ");
+      SDSR.append("'" + recordObject.getStatus() + "', ");
+      SDSR.append("'" + recordObject.getAssigneeID() + "', ");
+      SDSR.append("'" + recordObject.getType() + "'");
+      SDSR.append(")");
+      initialization.execute(SDSR.toString());
+    } catch (SQLException e) {
+      System.out.println("SDSR could not be added");
+      e.printStackTrace();
+    }
+    recordObject.getDestination().addRequest(recordObject);
   }
 
   /** Creates the table for the entity with fields defined by csv file/entity class */
   @Override
-  public void createTable() {}
+  public void createTable() {
+    try {
+      Statement initialization = connection.createStatement();
+      initialization.execute(
+          "CREATE TABLE SharpsDisposalRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
+              + "destination CHAR(10),"
+              + "status CHAR(4),"
+              + "assignee CHAR(8),"
+              + "type VARCHAR(25),"
+              + "CONSTRAINT PMSR_dest_fk "
+              + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT PMSR_assignee_fk "
+              + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
+              + "ON DELETE SET NULL)");
+    } catch (SQLException e) {
+      System.out.println("SharpsDisposalRequest table creation failed. Check output console.");
+      e.printStackTrace();
+      System.exit(1);
+    }
+  }
 
   /** Drops the table from the database */
   @Override
