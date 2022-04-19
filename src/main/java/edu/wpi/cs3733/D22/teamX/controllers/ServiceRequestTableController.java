@@ -32,63 +32,65 @@ public class ServiceRequestTableController implements Initializable {
   @FXML private TextField modifyID;
   @FXML private ChoiceBox<String> modifyStatus;
 
+  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+
   @FXML
   private void submitStatusUpdate() throws IOException {
     String id = modifyID.getText();
     try {
-      ServiceRequestDAO giftDAO = new ServiceRequestDAO();
-      GiftDeliveryRequest req = giftDAO.getGiftDeliveryRequest(id);
+//      ServiceRequestDAO giftDAO = new ServiceRequestDAO();
+      GiftDeliveryRequest req = requestDAO.getGiftDeliveryRequest(id);
       req.setStatus(modifyStatus.getValue());
-      giftDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     try {
-      JanitorServiceRequestDAO janDAO = JanitorServiceRequestDAO.getDAO();
-      JanitorServiceRequest req = janDAO.getRecord(id);
+//      ServiceRequestDAO janDAO = new ServiceRequestDAO();
+      JanitorServiceRequest req = requestDAO.getJanitorServiceRequest(id);
       req.setStatus(modifyStatus.getValue());
-      janDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     try {
-      LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO();
-      LabServiceRequest req = labDAO.getRecord(id);
+//      ServiceRequestDAO labDAO = new();
+      LabServiceRequest req = requestDAO.getLabServiceRequest(id);
       req.setStatus(modifyStatus.getValue());
-      labDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     try {
-      LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
-      LangServiceRequest req = langDAO.getRecord(id);
+//      LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
+      LangServiceRequest req = requestDAO.getLangServiceRequest(id);
       req.setStatus(modifyStatus.getValue());
-      langDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     try {
-      MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
-      MealServiceRequest req = mealDAO.getRecord(id);
+//      MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
+      MealServiceRequest req = requestDAO.getMealServiceRequest(id);
       req.setStatus(modifyStatus.getValue());
-      mealDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     try {
-      MedicalEquipmentServiceRequestDAO medDAO = MedicalEquipmentServiceRequestDAO.getDAO();
-      MedicalEquipmentServiceRequest req = medDAO.getRecord(id);
+//      MedicalEquipmentServiceRequestDAO medDAO = MedicalEquipmentServiceRequestDAO.getDAO();
+      MedicalEquipmentServiceRequest req = requestDAO.getMedicalEquipmentServiceRequest(id);
       req.setStatus(modifyStatus.getValue());
-      medDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     try {
-      MedicineDeliverServiceRequestDAO medDAO = MedicineDeliverServiceRequestDAO.getDAO();
-      MedicineServiceRequest req = medDAO.getRecord(id);
+//      MedicineDeliverServiceRequestDAO medDAO = MedicineDeliverServiceRequestDAO.getDAO();
+      MedicineServiceRequest req = requestDAO.getMedicineServiceRequest(id);
       req.setStatus(modifyStatus.getValue());
-      medDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     try {
-      LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
-      LaundyServiceRequest req = laundryDAO.getRecord(id);
+//      LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
+      LaundyServiceRequest req = requestDAO.getLaundryServiceRequest(id);
       req.setStatus(modifyStatus.getValue());
-      laundryDAO.updateRecord(req);
+      requestDAO.updateRecord(req);
     } catch (Exception e) {
     }
     App.switchScene(
@@ -135,16 +137,16 @@ public class ServiceRequestTableController implements Initializable {
   }
 
   private List<ServiceRequest> listOfRequests() {
-    List<? super ServiceRequest> requests = new ArrayList<>();
-    requests.addAll(MedicalEquipmentServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LabServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LangServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
-    return (List<ServiceRequest>) requests;
+//    List<? super ServiceRequest> requests = new ArrayList<>();
+//    requests.addAll(MedicalEquipmentServiceRequestDAO.getDAO().getAllRecords());
+//    requests.addAll(LabServiceRequestDAO.getDAO().getAllRecords());
+//    requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
+//    requests.addAll(LangServiceRequestDAO.getDAO().getAllRecords());
+//    requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
+//    requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
+//    requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
+//    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
+    return requestDAO.getServiceRequests();
   }
 
   @FXML

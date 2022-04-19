@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +39,8 @@ public class MealReqController implements Initializable {
       destinationDrop;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
+  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+//  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
   private List<Location> locations;
 
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
@@ -142,7 +145,7 @@ public class MealReqController implements Initializable {
   @FXML
   void submitButton() {
     MealServiceRequest request = new MealServiceRequest();
-    request.setRequestID(MealDAO.makeID());
+    request.setRequestID(requestDAO.makeMealServiceRequestID());
     request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
@@ -151,7 +154,7 @@ public class MealReqController implements Initializable {
     request.setSide(sideSel.getValue());
     request.setPatientFor(patientNames.getValue());
 
-    MealDAO.addRecord(request);
+    requestDAO.addRecord(request);
     this.resetFields();
   }
 }
