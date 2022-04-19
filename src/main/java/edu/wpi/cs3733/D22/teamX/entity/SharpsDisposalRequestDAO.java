@@ -28,7 +28,7 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
         new SharpsDisposalRequestDAO();
   }
 
-  public SharpsDisposalRequestDAO getDAO() {
+  public static SharpsDisposalRequestDAO getDAO() {
     return SingletonHelper.sharpsDisposalRequestDAO;
   }
 

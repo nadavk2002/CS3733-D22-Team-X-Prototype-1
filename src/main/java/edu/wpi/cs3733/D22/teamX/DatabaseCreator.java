@@ -18,6 +18,7 @@ public class DatabaseCreator {
   private static MedicineDeliverServiceRequestDAO MDSDAO;
   private static JanitorServiceRequestDAO janitorDAO;
   private static LaundryServiceRequestDAO laundryDAO;
+  private static SharpsDisposalRequestDAO sharpDAO;
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
@@ -51,6 +52,7 @@ public class DatabaseCreator {
 
   /** Drops all database tables */
   public static void dropAllTables() {
+    sharpDAO.dropTable();
     laundryDAO.dropTable();
     MDSDAO.dropTable();
     janitorDAO.dropTable();
@@ -79,6 +81,7 @@ public class DatabaseCreator {
     janitorDAO.createTable();
     MDSDAO.createTable();
     laundryDAO.createTable();
+    sharpDAO.dropTable();
   }
 
   /**
@@ -97,7 +100,8 @@ public class DatabaseCreator {
         || !pmsrDAO.loadCSV()
         || !janitorDAO.loadCSV()
         || !MDSDAO.loadCSV()
-        || !laundryDAO.loadCSV()) {
+        || !laundryDAO.loadCSV()
+        || !sharpDAO.loadCSV()) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;
@@ -122,7 +126,8 @@ public class DatabaseCreator {
         || !pmsrDAO.saveCSV(dirPath)
         || !janitorDAO.saveCSV(dirPath)
         || !MDSDAO.saveCSV(dirPath)
-        || !laundryDAO.saveCSV(dirPath)) {
+        || !laundryDAO.saveCSV(dirPath)
+        || !sharpDAO.saveCSV(dirPath)) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;
@@ -142,5 +147,6 @@ public class DatabaseCreator {
     MDSDAO = MedicineDeliverServiceRequestDAO.getDAO();
     janitorDAO = JanitorServiceRequestDAO.getDAO();
     laundryDAO = LaundryServiceRequestDAO.getDAO();
+    sharpDAO = SharpsDisposalRequestDAO.getDAO();
   }
 }
