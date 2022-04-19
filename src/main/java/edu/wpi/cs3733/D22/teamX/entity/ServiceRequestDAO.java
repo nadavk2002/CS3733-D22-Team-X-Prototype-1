@@ -16,7 +16,8 @@ public class ServiceRequestDAO {
   private MedicineDeliverServiceRequestDAO medicineDeliverServiceRequestDAO =
       MedicineDeliverServiceRequestDAO.getDAO();
   private SharpsDisposalRequestDAO sharpsDisposalRequestDAO = SharpsDisposalRequestDAO.getDAO();
-  private MaintenanceServiceRequestDAO maintenanceServiceRequestDAO = MaintenanceServiceRequestDAO.getDAO();
+  private MaintenanceServiceRequestDAO maintenanceServiceRequestDAO =
+      MaintenanceServiceRequestDAO.getDAO();
 
   public ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
 
