@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,15 +11,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class EmployeeViewerController implements Initializable {
   // DAOS
   private final EmployeeDAO employeeDAO = EmployeeDAO.getDAO();
+  public JFXButton addNew, update, resetFields;
+  public Label errorText;
   private ServiceRequestDAO serviceRequestDAO = new ServiceRequestDAO();
   // service request DAO
 
@@ -30,6 +30,9 @@ public class EmployeeViewerController implements Initializable {
   @FXML private TextField firstName, lastName, clearanceType, jobTitle;
   @FXML private TableView<ServiceRequest> table;
   @FXML private TableColumn<ServiceRequest, String> tableRequestID, tableDestination, tableStatus;
+
+  // flag to make sure that the page does not update itself during certain operations
+  private boolean allowUpdateFields = true;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -51,23 +54,25 @@ public class EmployeeViewerController implements Initializable {
   }
 
   private void updateFields() {
-    // get Employeee
-    //System.out.println(EmployeeID.getValue());
-    Employee employee = new Employee();
-    employee = employeeDAO.getRecord(EmployeeID.getValue());
-    // populate textfields
-    firstName.setText(employee.getFirstName());
-    lastName.setText(employee.getLastName());
-    clearanceType.setText(employee.getClearanceType());
-    jobTitle.setText(employee.getJobTitle());
+    if (allowUpdateFields) {
+      // get Employeee
+      // System.out.println(EmployeeID.getValue());
+      Employee employee = new Employee();
+      employee = employeeDAO.getRecord(EmployeeID.getValue());
+      // populate textfields
+      firstName.setText(employee.getFirstName());
+      lastName.setText(employee.getLastName());
+      clearanceType.setText(employee.getClearanceType());
+      jobTitle.setText(employee.getJobTitle());
 
-    // populate table of service requests
-    tableRequestID.setCellValueFactory(
-        new PropertyValueFactory<ServiceRequest, String>("RequestID"));
-    tableDestination.setCellValueFactory(
-        new PropertyValueFactory<ServiceRequest, String>("LocationShortName"));
-    tableStatus.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Status"));
-    table.setItems(FXCollections.observableList(SRDAOToOL()));
+      // populate table of service requests
+      tableRequestID.setCellValueFactory(
+          new PropertyValueFactory<ServiceRequest, String>("RequestID"));
+      tableDestination.setCellValueFactory(
+          new PropertyValueFactory<ServiceRequest, String>("LocationShortName"));
+      tableStatus.setCellValueFactory(new PropertyValueFactory<ServiceRequest, String>("Status"));
+      table.setItems(FXCollections.observableList(SRDAOToOL()));
+    }
   }
 
   private List<ServiceRequest> SRDAOToOL() {
@@ -84,7 +89,10 @@ public class EmployeeViewerController implements Initializable {
     return returnRequests;
   }
 
+  @FXML
   private void resetFields() {
+    // disable choicebox
+    allowUpdateFields = false;
     // clear table
     tableRequestID.setCellValueFactory(
         new PropertyValueFactory<ServiceRequest, String>("RequestID"));
@@ -101,5 +109,12 @@ public class EmployeeViewerController implements Initializable {
 
     // clearChoiceBox
     EmployeeID.setValue("");
+
+    // enable choicebox updates
+    allowUpdateFields = true;
   }
+
+  public void addEmployee(ActionEvent actionEvent) {}
+
+  public void updateEmployee(ActionEvent actionEvent) {}
 }
