@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.EmployeeViewerController">
    <top>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
@@ -36,7 +35,7 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="EmployeeID" onDragDetected="#updateFields" prefWidth="200.0" />
+                        <ChoiceBox fx:id="EmployeeID" prefWidth="200.0" />
                      </children>
                   </HBox>
                   <HBox prefHeight="100.0" spacing="5.0">
@@ -98,7 +97,7 @@
             </VBox>
             <VBox alignment="TOP_CENTER" spacing="10.0">
                <children>
-                  <Label text="OutstandingServiceRequests">
+                  <Label text="Outstanding Service Requests">
                      <font>
                         <Font size="18.0" />
                      </font>
