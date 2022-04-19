@@ -174,6 +174,7 @@ public class ServiceRequestDAO {
   public void updateRecord(SharpsDisposalRequest request) {
     sharpsDisposalRequestDAO.updateRecord(request);
   }
+
   // Delete
   public void deleteRecord(GiftDeliveryRequest request) {
     giftDeliveryRequestDAO.deleteRecord(request);
@@ -271,4 +272,5 @@ public class ServiceRequestDAO {
   public String makeSharpsDisposalServieRequestID() {
     return sharpsDisposalRequestDAO.makeID();
   }
+
 }

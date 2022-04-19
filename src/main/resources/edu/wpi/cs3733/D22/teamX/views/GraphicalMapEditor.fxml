@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+<StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
    <children>
       <AnchorPane fx:id="anchorRoot" prefHeight="1080.0" prefWidth="1620.0" style="-fx-background-color: #FFFFFF;">
          <children>
@@ -101,11 +111,6 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="deleteEquipmentButton" onAction="#deleteEquipment" text="Delete Equipment" textFill="#446fdc">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
                      </children>
                   </HBox>
                </children>
@@ -160,11 +165,6 @@
                </children>
             </GridPane>
             <JFXButton fx:id="submitLocationButton" layoutX="295.0" layoutY="933.0" onAction="#submitLocation" text="Add/Update Location" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
-            <JFXButton fx:id="deleteLocationButton" layoutX="181.0" layoutY="933.0" onAction="#deleteLocation" text="Delete Location" textFill="#446fdc">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
