@@ -17,7 +17,7 @@ public class SharpsDisposalRequestController implements Initializable {
   // get all the DAOs
   private LocationDAO locationDAO = LocationDAO.getDAO(); // location DAO
   private EmployeeDAO employeeDAO = EmployeeDAO.getDAO(); // employee DAO
-  private SharpsDisposalRequestDAO sharpDAO = SharpsDisposalRequestDAO.getDAO(); // sharpDAO
+  private ServiceRequestDAO sharpDAO = ServiceRequestDAO.getDAO(); // sharpDAO
   // put Sharps Disposal Request DAO here
 
   // lists for drop downs
@@ -100,7 +100,7 @@ public class SharpsDisposalRequestController implements Initializable {
       SDSR.setStatus(statusChoiceBox.getValue());
       SDSR.setType(typeDropDown.getValue());
       // TODO use acctual makeID system in SharpsDisposal
-      SDSR.setRequestID(sharpDAO.makeID());
+      SDSR.setRequestID(sharpDAO.makeSharpsDisposalServieRequestID());
       // submit the thing
       sharpDAO.addRecord(SDSR);
       // notify user of submittion

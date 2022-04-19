@@ -19,7 +19,7 @@ public class ReqLangController implements Initializable {
   @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus, assignStaff;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
   //  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;

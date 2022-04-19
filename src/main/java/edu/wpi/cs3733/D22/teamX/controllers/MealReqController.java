@@ -39,7 +39,7 @@ public class MealReqController implements Initializable {
       destinationDrop;
 
   private final LocationDAO locationDAO = LocationDAO.getDAO();
-  private final ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private final ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
   //  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
   private List<Location> locations;
   //  private final LocationDAO locationDAO = LocationDAO.getDAO();

@@ -17,20 +17,24 @@ public class MedicalEquipmentDeliveryController {
   @FXML private Label quanityGreaterThan;
   @FXML private Label amountAvailable;
   @FXML private Button ToMainMenu;
-  @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus;
+  @FXML
+  private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus, selectAssignee;
   @FXML private TextField amountField;
   @FXML private Button submitButton;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private EmployeeDAO employeeDAO = EmployeeDAO.getDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
   //  private MedicalEquipmentServiceRequestDAO equipmentDAO =
   //      MedicalEquipmentServiceRequestDAO.getDAO();
   private EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
   private List<Location> locations;
+  private List<Employee> employees;
 
   @FXML
   public void initialize() {
     locations = locationDAO.getAllRecords();
+    employees = employeeDAO.getAllRecords();
     submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
     EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
@@ -38,6 +42,7 @@ public class MedicalEquipmentDeliveryController {
       selectEquipmentType.getItems().add(eqtDAO.getAllRecords().get(i).getModel());
     }
     selectDestination.setItems(this.getLocationNames());
+    selectAssignee.setItems(this.getEmployeeIDs());
     updateAvailability();
     quanityGreaterThan.setVisible(false);
   }
@@ -48,6 +53,14 @@ public class MedicalEquipmentDeliveryController {
       nodeID.add(locations.get(i).getNodeID());
     }
     return nodeID;
+  }
+
+  private ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeID = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeID.add(employees.get(i).getEmployeeID());
+    }
+    return employeeID;
   }
   /**
    * When "Main Menu" button is pressed, the app.fxml scene is loaded on the window.
@@ -67,6 +80,7 @@ public class MedicalEquipmentDeliveryController {
     selectEquipmentType.setValue("");
     selectDestination.setValue("");
     selectStatus.setValue("");
+    selectAssignee.setValue("");
   }
 
   @FXML
@@ -96,7 +110,7 @@ public class MedicalEquipmentDeliveryController {
     request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
-    request.setAssignee(EmployeeDAO.getDAO().getRecord("EMPL0001"));
+    request.setAssignee(employees.get(selectAssignee.getSelectionModel().getSelectedIndex()));
     if (request.getQuantity()
         > eqtDAO.getRecord(request.getEquipmentType()).getNumUnitsAvailable()) {
       quanityGreaterThan.setVisible(true);

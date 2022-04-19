@@ -21,8 +21,17 @@ public class ServiceRequestDAO {
 
   public ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
 
-  public ServiceRequestDAO() {
+  private ServiceRequestDAO() {
     setServiceRequests();
+  }
+
+  private static class SingletonHelper {
+    private static final ServiceRequestDAO serviceRequestDAO =
+            new ServiceRequestDAO();
+  }
+
+  public static ServiceRequestDAO getDAO(){
+    return SingletonHelper.serviceRequestDAO;
   }
 
   // Get all requests
@@ -299,4 +308,5 @@ public class ServiceRequestDAO {
   public String makeMaintenanceServiceRequestID() {
     return maintenanceServiceRequestDAO.makeID();
   }
+
 }
