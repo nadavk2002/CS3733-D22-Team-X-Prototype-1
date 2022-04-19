@@ -106,9 +106,27 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   private final int YF1 = 596;
   private final int YLL2 = 800;
   private final int YLL1 = 698;
+  //  private ObservableList<String> hallsOutsideOfPatientRooms;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    //    hallsOutsideOfPatientRooms.addAll(
+    //        "HHALL01203",
+    //        "HHALL01103",
+    //        "HHALL00903",
+    //        "HHALL01003",
+    //        "HHALL01303",
+    //        "HHALL01403",
+    //        "HHALL01204",
+    //        "HHALL01104",
+    //        "HHALL00904",
+    //        "HHALL01304",
+    //        "HHALL01404",
+    //        "HHALL01205",
+    //        "HHALL01105",
+    //        "HHALL00905",
+    //        "HHALL01305",
+    //        "HHALL01405");
     dirtyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
@@ -199,9 +217,15 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     int dirtyAmount = 0;
     int cleanAmount = 0;
     for (EquipmentUnit equipmentUnit : equipList) {
-      if (equipmentUnit.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+      if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("stor")
+              && equipmentUnit.getIsAvailableChar() == 'Y')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'Y')) {
         cleanAmount++;
-      } else {
+      } else if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("dirt")
+              && equipmentUnit.getIsAvailableChar() == 'N')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'N')) {
         dirtyAmount++;
       }
     }
@@ -284,20 +308,27 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   }
 
   @FXML
-  public ObservableList<EquipmentUnit> sortByDirty(ObservableList<EquipmentUnit> equipOnFloor) {
+  private ObservableList<EquipmentUnit> sortByDirty(ObservableList<EquipmentUnit> equipOnFloor) {
     ObservableList<EquipmentUnit> dirtyEquipment = FXCollections.observableArrayList();
     for (EquipmentUnit equipmentUnit : equipOnFloor) {
-      if (!equipmentUnit.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+      if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("dirt")
+              && equipmentUnit.getIsAvailableChar() == 'N')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'N')) {
         dirtyEquipment.add(equipmentUnit);
       }
     }
     return dirtyEquipment;
   }
+
   @FXML
   private ObservableList<EquipmentUnit> sortByClean(ObservableList<EquipmentUnit> equipOnFloor) {
     ObservableList<EquipmentUnit> cleanEquipment = FXCollections.observableArrayList();
     for (EquipmentUnit equipmentUnit : equipOnFloor) {
-      if (equipmentUnit.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+      if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("stor")
+              && equipmentUnit.getIsAvailableChar() == 'Y')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'Y')) {
         cleanEquipment.add(equipmentUnit);
       }
     }
@@ -309,11 +340,20 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       Rectangle dirty, Rectangle clean, ObservableList<EquipmentUnit> equipList) {
     int dirtyAmount = 0;
     int cleanAmount = 0;
+    int inUseAmount = 0;
     for (EquipmentUnit equipmentUnit : equipList) {
-      if (equipmentUnit.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+      if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("stor")
+              && equipmentUnit.getIsAvailableChar() == 'Y')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'Y')) {
         cleanAmount++;
-      } else {
+      } else if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("dirt")
+              && equipmentUnit.getIsAvailableChar() == 'N')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'N')) {
         dirtyAmount++;
+      } else {
+        inUseAmount++;
       }
     }
     if (cleanAmount == 0 && dirtyAmount == 0) {
@@ -333,8 +373,18 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         dirty.setFill(Color.LIGHTGRAY);
       }
     } else {
-      dirty.setWidth((int) ((double) (dirtyAmount) / (double) (equipList.size()) * 400.0));
-      clean.setWidth((int) ((double) (cleanAmount) / (double) (equipList.size()) * 400.0));
+      dirty.setWidth(
+          (int) ((double) (dirtyAmount) / (double) (equipList.size() - inUseAmount) * 400.0));
+      clean.setWidth(
+          (int) ((double) (cleanAmount) / (double) (equipList.size() - inUseAmount) * 400.0));
+      if (dirty.getWidth() < 70) {
+        clean.setWidth(330);
+        dirty.setWidth(70);
+      }
+      if (clean.getWidth() < 70) {
+        clean.setWidth(70);
+        dirty.setWidth(330);
+      }
     }
   }
 
