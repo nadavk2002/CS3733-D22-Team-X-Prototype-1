@@ -21,7 +21,8 @@ public class MedicineDeliveryController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
-//  private MedicineDeliverServiceRequestDAO medicineDAO = MedicineDeliverServiceRequestDAO.getDAO();
+  //  private MedicineDeliverServiceRequestDAO medicineDAO =
+  // MedicineDeliverServiceRequestDAO.getDAO();
   private List<Location> locations;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;

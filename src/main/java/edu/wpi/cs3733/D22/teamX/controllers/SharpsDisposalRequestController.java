@@ -1,10 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import edu.wpi.cs3733.D22.teamX.entity.Employee;
-import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
-import edu.wpi.cs3733.D22.teamX.entity.Location;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -56,8 +53,7 @@ public class SharpsDisposalRequestController implements Initializable {
   public ObservableList<String> getLocationNames() {
     ObservableList<String> locationNames = FXCollections.observableArrayList();
     for (Location location : locations) {
-      locationNames.add(
-          location.getShortName()); // this should probably be something that is unique.
+      locationNames.add(location.getNodeID()); // this should probably be something that is unique.
     }
     return locationNames;
   }
@@ -87,23 +83,36 @@ public class SharpsDisposalRequestController implements Initializable {
     submitButton.setDisable(
         roomDropDown.getValue().equals("")
             || assigneeDropDown.getValue().equals("")
-            || statusChoiceBox.getValue().equals("")
+            // || statusChoiceBox.getValue().equals("")
             || typeDropDown.getValue().equals(""));
   }
 
   public void submitButton() {
     boolean Success = true;
-    // make service Request
+    String error = "";
+    try {
+      // make service Request
+      SharpsDisposalRequest SDSR = new SharpsDisposalRequest();
+      // populate fields
+      SDSR.setAssignee(employeeDAO.getRecord(assigneeDropDown.getValue()));
+      SDSR.setDestination(locationDAO.getRecord(roomDropDown.getValue()));
+      SDSR.setStatus(statusChoiceBox.getValue());
+      SDSR.setType(typeDropDown.getValue());
+      // TODO use acctual makeID system in SharpsDisposal
+      SDSR.setRequestID("Sample");
 
-    // populate fields
+      // submit the thing
 
-    // submit the thing
+      // notify user of submittion
+    } catch (Exception e) {
+      Success = false;
+      error = e.toString();
+    }
 
-    // notify user of submittion
     if (Success) {
       errorText.setText("Request Submitted!");
     } else {
-      errorText.setText("a error has occured. request Not Submitted");
+      errorText.setText("a error has occured: " + error + ". request Not Submitted");
     }
     // reset Fields
   }

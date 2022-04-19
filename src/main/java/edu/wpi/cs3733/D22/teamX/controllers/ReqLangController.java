@@ -20,7 +20,7 @@ public class ReqLangController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
-//  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
+  //  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
