@@ -197,7 +197,15 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
 
   /** Drops the table from the database */
   @Override
-  public void dropTable() {}
+  public void dropTable() {
+      try {
+          Statement dropMealServiceRequest = connection.createStatement();
+          dropMealServiceRequest.execute("DROP TABLE SharpsDisposalRequest");
+      } catch (SQLException e) {
+          System.out.println("SharpsDisposalRequest not dropped");
+          e.printStackTrace();
+      }
+  }
 
   /**
    * Loads the data from the csv file into the table
