@@ -17,12 +17,14 @@ public enum ConnectionSingleton {
 
   private Connection connection;
   private String connectionType;
+  private boolean isConnectionEstablished = false;
 
   /**
    * Establish a connection to an Apache Derby embedded database and load csv data into its tables
    */
   public void setEmbedded() {
     connectionType = "embedded";
+    isConnectionEstablished = true;
     // If connection already established, close it
     if (connection != null) {
       try {
@@ -50,6 +52,7 @@ public enum ConnectionSingleton {
 
   /** Establish a connection to an Apache Derby client database and load csv data into its tables */
   public void setClient() {
+    isConnectionEstablished = true;
     connectionType = "client";
     if (connection != null) {
       try {
@@ -90,5 +93,9 @@ public enum ConnectionSingleton {
 
   public String getConnectionType() {
     return connectionType;
+  }
+
+  public boolean isConnectionEstablished() {
+    return isConnectionEstablished;
   }
 }

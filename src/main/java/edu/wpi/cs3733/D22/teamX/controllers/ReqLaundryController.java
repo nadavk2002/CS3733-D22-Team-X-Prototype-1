@@ -26,11 +26,13 @@ public class ReqLaundryController implements Initializable {
   // @FXML private TextField assignStaff;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
+//  private LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
   private List<Location> locations;
 
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
+
+  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -91,12 +93,12 @@ public class ReqLaundryController implements Initializable {
   public void submitRequest() {
     LaundyServiceRequest request = new LaundyServiceRequest();
 
-    request.setRequestID(laundryDAO.makeID());
+    request.setRequestID(requestDAO.makeLaundryServiceRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue())); // FIX
     request.setService(selectLaundryType.getValue());
-    laundryDAO.addRecord(request);
+    requestDAO.addRecord(request);
     this.resetFields();
   }
 
