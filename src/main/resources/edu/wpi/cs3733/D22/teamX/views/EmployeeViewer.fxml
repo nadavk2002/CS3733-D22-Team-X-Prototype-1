@@ -67,22 +67,22 @@
                         </VBox>
                         <VBox alignment="TOP_RIGHT" prefHeight="200.0" spacing="10.0">
                            <children>
-                              <TextField fx:id="firstName" prefHeight="19.0" prefWidth="300.0">
+                              <TextField fx:id="firstName" onKeyTyped="#enableAddUpdate" prefHeight="19.0" prefWidth="300.0">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="lastName" prefHeight="19.0" prefWidth="300.0">
+                              <TextField fx:id="lastName" onKeyTyped="#enableAddUpdate" prefHeight="19.0" prefWidth="300.0">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="clearanceType" prefHeight="19.0" prefWidth="300.0">
+                              <TextField fx:id="clearanceType" onKeyTyped="#enableAddUpdate" prefHeight="19.0" prefWidth="300.0">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
                               </TextField>
-                              <TextField fx:id="jobTitle" prefHeight="19.0" prefWidth="300.0">
+                              <TextField fx:id="jobTitle" onKeyTyped="#enableAddUpdate" prefHeight="19.0" prefWidth="300.0">
                                  <font>
                                     <Font size="13.0" />
                                  </font>
