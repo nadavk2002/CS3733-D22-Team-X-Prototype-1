@@ -42,6 +42,16 @@ public class EditLocationMenuController implements Initializable {
     loc.setShortName(shortNameText.getText());
     loc.setxCoord(Integer.parseInt(xCordText.getText()));
     loc.setyCoord(Integer.parseInt(yCordText.getText()));
+    if (loc.getNodeID() == null) {
+      if (loc.getShortName().length() >= 5)
+        loc.setNodeID(
+            loc.getShortName().substring(0, 5) + LocationDAO.getDAO().getAllRecords().size() + 1);
+      else
+        loc.setNodeID(
+            loc.getShortName().substring(0, loc.getShortName().length())
+                + LocationDAO.getDAO().getAllRecords().size()
+                + 1);
+    }
     try {
       LocationDAO.getDAO().updateRecord(loc);
     } catch (Exception e) {

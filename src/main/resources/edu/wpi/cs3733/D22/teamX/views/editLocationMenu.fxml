@@ -42,6 +42,6 @@
             <TextField fx:id="shortNameText" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
-      <JFXButton layoutX="244.0" layoutY="336.0" onAction="#updateLocation" prefHeight="26.0" prefWidth="111.0" text="Update Location" textAlignment="CENTER" />
+      <JFXButton fx:id="submitButton" layoutX="244.0" layoutY="336.0" onAction="#updateLocation" prefHeight="26.0" prefWidth="111.0" text="Submit Location" textAlignment="CENTER" />
    </children>
 </AnchorPane>

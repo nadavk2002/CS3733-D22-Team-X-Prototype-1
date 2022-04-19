@@ -509,17 +509,17 @@ public class GraphicalMapEditorController implements Initializable {
     this.floor = location;
     imageGroup.setOnMouseClicked(
         event -> {
-          if (event.getButton() != MouseButton.PRIMARY) return;
+          if (event.getButton() != MouseButton.MIDDLE) return;
           Location loc = new Location();
           loc.setxCoord((int) event.getX());
           loc.setyCoord((int) event.getY());
           loc.setFloor(this.floor);
-          loc.setNodeID(locDAO.makeID());
+          loc.setNodeID(null);
           FXMLLoader fxmlLoader =
               new FXMLLoader(
                   getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/editLocationMenu.fxml"));
           Stage popup = new Stage();
-          popup.setTitle(loc.getNodeID());
+          popup.setTitle("New Location");
           popup.setOnHidden(
               close -> {
                 loadLocation(loc.getFloor());
