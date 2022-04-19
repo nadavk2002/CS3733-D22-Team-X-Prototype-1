@@ -17,7 +17,7 @@ public class SharpsDisposalRequestController implements Initializable {
   // get all the DAOs
   private LocationDAO locationDAO = LocationDAO.getDAO(); // location DAO
   private EmployeeDAO employeeDAO = EmployeeDAO.getDAO(); // employee DAO
-  private ServiceRequestDAO sharpDAO = new ServiceRequestDAO(); // sharpDAO
+  private ServiceRequestDAO sharpDAO = ServiceRequestDAO.getDAO(); // sharpDAO
   // put Sharps Disposal Request DAO here
 
   // lists for drop downs

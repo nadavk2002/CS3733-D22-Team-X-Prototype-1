@@ -22,7 +22,7 @@ public class MedicalEquipmentDeliveryController {
   @FXML private Button submitButton;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
   //  private MedicalEquipmentServiceRequestDAO equipmentDAO =
   //      MedicalEquipmentServiceRequestDAO.getDAO();
   private EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();

@@ -31,7 +31,7 @@ public class ServiceRequestTableController implements Initializable {
   @FXML private TextField modifyID;
   @FXML private ChoiceBox<String> modifyStatus;
 
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
   @FXML
   private void submitStatusUpdate() throws IOException {

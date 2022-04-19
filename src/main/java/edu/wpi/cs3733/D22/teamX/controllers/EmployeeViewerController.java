@@ -20,7 +20,7 @@ public class EmployeeViewerController implements Initializable {
   private final EmployeeDAO employeeDAO = EmployeeDAO.getDAO();
   public JFXButton addNew, update, resetFields;
   public Label errorText;
-  private ServiceRequestDAO serviceRequestDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO serviceRequestDAO = ServiceRequestDAO.getDAO();
   // service request DAO
 
   // lists
