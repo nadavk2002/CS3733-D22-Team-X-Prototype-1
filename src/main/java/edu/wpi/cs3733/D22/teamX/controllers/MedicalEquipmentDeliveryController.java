@@ -23,8 +23,8 @@ public class MedicalEquipmentDeliveryController {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
-//  private MedicalEquipmentServiceRequestDAO equipmentDAO =
-//      MedicalEquipmentServiceRequestDAO.getDAO();
+  //  private MedicalEquipmentServiceRequestDAO equipmentDAO =
+  //      MedicalEquipmentServiceRequestDAO.getDAO();
   private EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
   private List<Location> locations;
 
