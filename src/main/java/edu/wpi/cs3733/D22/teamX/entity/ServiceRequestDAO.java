@@ -1,37 +1,23 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.util.ArrayList;
+
 public class ServiceRequestDAO {
-  LocationDAO locationDAO = LocationDAO.getDAO();
-  EmployeeDAO employeeDAO = EmployeeDAO.getDAO();
-  EquipmentTypeDAO equipmentTypeDAO = EquipmentTypeDAO.getDAO();
-  EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
-  GiftDeliveryRequestDAO giftDeliveryRequestDAO = GiftDeliveryRequestDAO.getDAO();
-  JanitorServiceRequestDAO janitorServiceRequestDAO = JanitorServiceRequestDAO.getDAO();
-  LabServiceRequestDAO labServiceRequestDAO = LabServiceRequestDAO.getDAO();
-  LangServiceRequestDAO langServiceRequestDAO = LangServiceRequestDAO.getDAO();
-  LaundryServiceRequestDAO laundryServiceRequestDAO = LaundryServiceRequestDAO.getDAO();
-  MealServiceRequestDAO mealServiceRequestDAO = MealServiceRequestDAO.getDAO();
-  MedicalEquipmentServiceRequestDAO medicalEquipmentServiceRequestDAO =
+  private GiftDeliveryRequestDAO giftDeliveryRequestDAO = GiftDeliveryRequestDAO.getDAO();
+  private JanitorServiceRequestDAO janitorServiceRequestDAO = JanitorServiceRequestDAO.getDAO();
+  private LabServiceRequestDAO labServiceRequestDAO = LabServiceRequestDAO.getDAO();
+  private LangServiceRequestDAO langServiceRequestDAO = LangServiceRequestDAO.getDAO();
+  private LaundryServiceRequestDAO laundryServiceRequestDAO = LaundryServiceRequestDAO.getDAO();
+  private MealServiceRequestDAO mealServiceRequestDAO = MealServiceRequestDAO.getDAO();
+  private MedicalEquipmentServiceRequestDAO medicalEquipmentServiceRequestDAO =
       MedicalEquipmentServiceRequestDAO.getDAO();
-  MedicineDeliverServiceRequestDAO medicineDeliverServiceRequestDAO =
+  private MedicineDeliverServiceRequestDAO medicineDeliverServiceRequestDAO =
       MedicineDeliverServiceRequestDAO.getDAO();
 
-  public ServiceRequestDAO() {}
+  public ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
 
-  public LocationDAO getLocationDAO() {
-    return locationDAO;
-  }
-
-  public EmployeeDAO getEmployeeDAO() {
-    return employeeDAO;
-  }
-
-  public EquipmentTypeDAO getEquipmentTypeDAO() {
-    return equipmentTypeDAO;
-  }
-
-  public EquipmentUnitDAO getEquipmentUnitDAO() {
-    return equipmentUnitDAO;
+  public ServiceRequestDAO() {
+    setServiceRequests();
   }
 
   public GiftDeliveryRequestDAO getGiftDeliveryRequestDAO() {
@@ -64,5 +50,34 @@ public class ServiceRequestDAO {
 
   public MedicineDeliverServiceRequestDAO getMedicineDeliverServiceRequestDAO() {
     return medicineDeliverServiceRequestDAO;
+  }
+
+  public void setServiceRequests() {
+    ArrayList<ServiceRequest> allRequests = new ArrayList<>();
+    for(ServiceRequest request:giftDeliveryRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    for(ServiceRequest request:janitorServiceRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    for(ServiceRequest request:labServiceRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    for(ServiceRequest request:langServiceRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    for(ServiceRequest request:laundryServiceRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    for(ServiceRequest request:mealServiceRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    for(ServiceRequest request:medicalEquipmentServiceRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    for(ServiceRequest request:medicineDeliverServiceRequestDAO.getAllRecords()) {
+      allRequests.add(request);
+    }
+    this.serviceRequests=allRequests;
   }
 }
