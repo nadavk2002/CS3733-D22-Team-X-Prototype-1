@@ -23,7 +23,7 @@ public class GiftDeliveryController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private ServiceRequestDAO giftDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO giftDAO = ServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");

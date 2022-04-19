@@ -39,7 +39,7 @@ public class LabRequestController implements Initializable {
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
   //  private LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO()
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
