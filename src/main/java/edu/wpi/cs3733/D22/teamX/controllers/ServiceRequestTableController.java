@@ -36,8 +36,8 @@ public class ServiceRequestTableController implements Initializable {
   private void submitStatusUpdate() throws IOException {
     String id = modifyID.getText();
     try {
-      GiftDeliveryRequestDAO giftDAO = GiftDeliveryRequestDAO.getDAO();
-      GiftDeliveryRequest req = giftDAO.getRecord(id);
+      ServiceRequestDAO giftDAO = new ServiceRequestDAO();
+      GiftDeliveryRequest req = giftDAO.getGiftDeliveryRequest(id);
       req.setStatus(modifyStatus.getValue());
       giftDAO.updateRecord(req);
     } catch (Exception e) {
