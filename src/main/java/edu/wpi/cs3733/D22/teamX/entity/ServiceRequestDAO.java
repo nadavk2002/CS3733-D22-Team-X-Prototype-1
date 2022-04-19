@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ServiceRequestDAO {
@@ -22,10 +23,36 @@ public class ServiceRequestDAO {
   }
 
 
-  //Get requests
+  //Get all requests
   public ArrayList<ServiceRequest> getServiceRequests() {
     return serviceRequests;
   }
+  public List<GiftDeliveryRequest> getAllGiftDeliveryRequests(){
+    return giftDeliveryRequestDAO.getAllRecords();
+  }
+  public List<JanitorServiceRequest> getAllJanitorServiceRequests(){
+    return janitorServiceRequestDAO.getAllRecords();
+  }
+  public List<LabServiceRequest> getAllLabServiceRequests(){
+    return labServiceRequestDAO.getAllRecords();
+  }
+  public List<LangServiceRequest> getAllLangServiceRequests(){
+    return langServiceRequestDAO.getAllRecords();
+  }
+  public List<LaundyServiceRequest> getAllLaundryServiceRequests(){
+    return laundryServiceRequestDAO.getAllRecords();
+  }
+  public List<MealServiceRequest> getAllMealServiceRequests(){
+    return mealServiceRequestDAO.getAllRecords();
+  }
+  public List<MedicalEquipmentServiceRequest> getAllMedicalEquipmentServiceRequests(){
+    return medicalEquipmentServiceRequestDAO.getAllRecords();
+  }
+  public List<MedicineServiceRequest> getAllMedicineServiceRequests(){
+    return medicineDeliverServiceRequestDAO.getAllRecords();
+  }
+
+  //Get a specific request
   public GiftDeliveryRequest getGiftDeliveryRequest(String requestID){
     return giftDeliveryRequestDAO.getRecord(requestID);
   }
@@ -105,25 +132,25 @@ public class ServiceRequestDAO {
   }
 
   //Delete
-  public void deleteRequest(GiftDeliveryRequest request){
+  public void deleteRecord(GiftDeliveryRequest request){
     giftDeliveryRequestDAO.deleteRecord(request);
   }
-  public void deleteRequest(JanitorServiceRequest request){
+  public void deleteRecord(JanitorServiceRequest request){
     janitorServiceRequestDAO.deleteRecord(request);
   }
-  public void deleteRequest(LabServiceRequest request){
+  public void deleteRecord(LabServiceRequest request){
     labServiceRequestDAO.deleteRecord(request);
   }
-  public void deleteRequest(LangServiceRequest request){
+  public void deleteRecord(LangServiceRequest request){
     langServiceRequestDAO.deleteRecord(request);
   }
-  public void deleteRequest(LaundyServiceRequest request){
+  public void deleteRecord(LaundyServiceRequest request){
     laundryServiceRequestDAO.deleteRecord(request);
   }
-  public void deleteRequest(MealServiceRequest request){
+  public void deleteRecord(MealServiceRequest request){
     mealServiceRequestDAO.deleteRecord(request);
   }
-  public void deleteRequest(MedicalEquipmentServiceRequest request){
+  public void deleteRecord(MedicalEquipmentServiceRequest request){
     medicalEquipmentServiceRequestDAO.deleteRecord(request);
   }
   public void deleteRequest(MedicineServiceRequest request){

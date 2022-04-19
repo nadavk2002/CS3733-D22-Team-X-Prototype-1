@@ -164,7 +164,7 @@ public class MealReqController implements Initializable {
   }
 
   private ObservableList<MealServiceRequest> getMealRequests() {
-    mealList.addAll(requestDAO.getAllRecords());
+    mealList.addAll(requestDAO.getAllMealServiceRequests());
     return mealList;
   }
 
