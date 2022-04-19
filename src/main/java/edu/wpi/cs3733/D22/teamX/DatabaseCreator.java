@@ -42,8 +42,8 @@ public class DatabaseCreator {
     try {
       ConnectionSingleton.getConnectionSingleton().getConnection().close();
       System.out.println("Connection closed successfully");
-    } catch (SQLException e) {
-      e.printStackTrace();
+    } catch (Exception e) {
+      System.out.println("No connection to close");
       return false;
     }
     return true;

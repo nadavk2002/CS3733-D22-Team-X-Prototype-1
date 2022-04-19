@@ -19,7 +19,7 @@ public class JanitorialRequestController implements Initializable {
   @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private JanitorServiceRequestDAO janitorDAO = JanitorServiceRequestDAO.getDAO();
+  private ServiceRequestDAO janitorDAO = new ServiceRequestDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
@@ -92,7 +92,7 @@ public class JanitorialRequestController implements Initializable {
   public void submitButton() {
     JanitorServiceRequest request = new JanitorServiceRequest();
 
-    request.setRequestID(janitorDAO.makeID());
+    request.setRequestID(janitorDAO.makeJanitorServiceRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
