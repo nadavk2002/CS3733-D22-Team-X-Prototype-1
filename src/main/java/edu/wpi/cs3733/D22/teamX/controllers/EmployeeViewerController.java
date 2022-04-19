@@ -119,7 +119,8 @@ public class EmployeeViewerController implements Initializable {
     // filter out requests with other users
     ArrayList<ServiceRequest> returnRequests = new ArrayList<ServiceRequest>();
     for (ServiceRequest SR : requests) {
-      if (SR.getAssignee().getEmployeeID().equals(EmployeeID.getValue())) {
+      if (SR.getAssignee().getEmployeeID().equals(EmployeeID.getValue())
+          && !SR.getStatus().equals("DONE")) {
         returnRequests.add(SR);
       }
     }
