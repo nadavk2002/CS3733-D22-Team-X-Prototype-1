@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -28,7 +30,7 @@
                   <Image url="@../assets/upArrow.png" />
                </image>
             </ImageView>
-            <VBox fx:id="L51" alignment="CENTER" layoutX="600.0" layoutY="140.0" prefHeight="595.0" prefWidth="406.0">
+            <VBox fx:id="masterBox" alignment="CENTER" layoutX="106.0" layoutY="103.0" prefHeight="595.0" prefWidth="406.0">
                <children>
                   <Label text="Tower Levels">
                      <font>
@@ -39,7 +41,7 @@
                      <children>
                         <StackPane prefHeight="17.0" prefWidth="318.0">
                            <children>
-                              <Rectangle fx:id="cleanEquStor11" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Rectangle fx:id="cleanEquStor11" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 5">
                                  <font>
                                     <Font size="24.0" />
@@ -60,6 +62,20 @@
                                              </image>
                                           </ImageView>
                                           <Text fx:id="levFiveDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="l5StackIU" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levFiveIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="levFiveIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -91,7 +107,7 @@
                         </HBox>
                         <StackPane prefHeight="2.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="cleanEquStor12" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Rectangle fx:id="cleanEquStor12" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4">
                                  <font>
                                     <Font size="24.0" />
@@ -112,6 +128,20 @@
                                              </image>
                                           </ImageView>
                                           <Text fx:id="levFourDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="l4StackIU" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levFourIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="levFourIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -143,7 +173,7 @@
                         </HBox>
                         <StackPane prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="cleanEquStor13" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Rectangle fx:id="cleanEquStor13" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 3">
                                  <font>
                                     <Font size="24.0" />
@@ -164,6 +194,20 @@
                                              </image>
                                           </ImageView>
                                           <Text fx:id="levThreeDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="l3StackIU" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levThreeIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="levThreeIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -195,7 +239,7 @@
                         </HBox>
                         <StackPane prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="cleanEquStor14" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Rectangle fx:id="cleanEquStor14" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2">
                                  <font>
                                     <Font size="24.0" />
@@ -216,6 +260,20 @@
                                              </image>
                                           </ImageView>
                                           <Text fx:id="levTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="22.33331298828125">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="l2StackIU" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levTwoIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="levTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -247,7 +305,7 @@
                         </HBox>
                         <StackPane prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="cleanEquStor15" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Rectangle fx:id="cleanEquStor15" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 1">
                                  <font>
                                     <Font size="24.0" />
@@ -268,6 +326,20 @@
                                              </image>
                                           </ImageView>
                                           <Text fx:id="levOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="22.33331298828125">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="l1StackIU" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="levOneIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="levOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -299,7 +371,7 @@
                         </HBox>
                         <StackPane prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="cleanEquStor16" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Rectangle fx:id="cleanEquStor16" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 1">
                                  <font>
                                     <Font size="24.0" />
@@ -320,6 +392,20 @@
                                              </image>
                                           </ImageView>
                                           <Text fx:id="llOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="ll1StackIU" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="llOneIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="llOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -351,7 +437,7 @@
                         </HBox>
                         <StackPane prefHeight="0.0" prefWidth="778.0">
                            <children>
-                              <Rectangle fx:id="cleanEquStor17" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="400.0" />
+                              <Rectangle fx:id="cleanEquStor17" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
                               <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 2">
                                  <font>
                                     <Font size="24.0" />
@@ -372,6 +458,20 @@
                                              </image>
                                           </ImageView>
                                           <Text fx:id="llTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="25.0">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
+                              <StackPane fx:id="ll2StackIU" prefHeight="150.0" prefWidth="200.0">
+                                 <children>
+                                    <Rectangle fx:id="llTwoIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="llTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -403,52 +503,58 @@
                         </HBox>
                      </children>
                   </VBox>
+                  <JFXButton fx:id="showAlerts" minHeight="-Infinity" minWidth="-Infinity" onAction="#ShowAlerts" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc; -fx-background-radius: 0;" text="Alerts" textFill="WHITE" />
                </children>
             </VBox>
-            <HBox fx:id="dirtyTableBox" alignment="CENTER" layoutX="70.0" layoutY="190.0" prefHeight="203.0" prefWidth="301.0">
-               <children>
-                  <TableView fx:id="dirtyTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
-                    <columns>
-                      <TableColumn fx:id="unitID" prefWidth="75.0" text="Unit ID" />
-                      <TableColumn fx:id="type" prefWidth="75.0" text="Type" />
-                        <TableColumn fx:id="availability" prefWidth="75.0" text="Availability" />
-                        <TableColumn fx:id="currLoc" prefWidth="75.0" text="Current Location" />
-                    </columns>
-                  </TableView>
-                  <ImageView fitHeight="34.0" fitWidth="32.0" style="-fx-rotate: 270;">
-                     <image>
-                        <Image url="@../assets/blackArrow.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <HBox fx:id="cleanTableBox" alignment="CENTER" layoutX="1005.0" layoutY="88.0" prefHeight="203.0" prefWidth="301.0">
+            <HBox fx:id="cleanTableBox" alignment="CENTER" layoutX="895.0" layoutY="281.0" prefHeight="203.0" prefWidth="538.0">
                <children>
                   <ImageView fitHeight="34.0" fitWidth="32.0" style="-fx-rotate: 90;">
                      <image>
                         <Image url="@../assets/blackArrow.png" />
                      </image>
                   </ImageView>
-                  <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
-                     <columns>
-                        <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
-                        <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
-                        <TableColumn fx:id="availabilityC" prefWidth="75.0" text="Availability" />
-                        <TableColumn fx:id="currLocC" prefWidth="75.0" text="Current Location" />
-                     </columns>
-                  </TableView>
+                  <TabPane minHeight="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #ffffff;">
+                     <tabs>
+                        <Tab text="All Clean Equipment">
+                           <content>
+                              <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                                 <columns>
+                                    <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
+                                    <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
+                                    <TableColumn fx:id="availabilityC" prefWidth="75.0" text="Availability" />
+                                    <TableColumn fx:id="currLocC" prefWidth="75.0" text="Current Location" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab text="Clean Equipment in Pod B">
+                           <content>
+                              <TableView fx:id="cleanPodB" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                                 <columns>
+                                    <TableColumn fx:id="unitIDCPodA" prefWidth="75.0" text="Unit ID" />
+                                    <TableColumn fx:id="typeCPodA" prefWidth="75.0" text="Type" />
+                                    <TableColumn fx:id="availabilityCPodA" prefWidth="75.0" text="Availability" />
+                                    <TableColumn fx:id="currLocCPodA" prefWidth="75.0" text="Current Location" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                        <Tab text="Clean Equipment in Pod C">
+                           <content>
+                              <TableView fx:id="cleanPodC" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                                 <columns>
+                                    <TableColumn fx:id="unitIDCPodB" prefWidth="75.0" text="Unit ID" />
+                                    <TableColumn fx:id="typeCPodB" prefWidth="75.0" text="Type" />
+                                    <TableColumn fx:id="availabilityCPodB" prefWidth="75.0" text="Availability" />
+                                    <TableColumn fx:id="currLocCPodB" prefWidth="75.0" text="Current Location" />
+                                 </columns>
+                              </TableView>
+                           </content>
+                        </Tab>
+                     </tabs>
+                  </TabPane>
                </children>
             </HBox>
-            <JFXButton fx:id="showAlerts" layoutX="1093.0" layoutY="-2.0" onAction="#ShowAlerts" prefHeight="60.0" prefWidth="527.0" style="-fx-background-color: #446fdc; -fx-background-radius: 0;" text="Alerts" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="1350.0" layoutY="38.0" style="-fx-rotate: 180;">
-               <image>
-                  <Image url="@../assets/upArrow.png" />
-               </image>
-            </ImageView>
          </children>
       </AnchorPane>
    </children>
