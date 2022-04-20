@@ -15,7 +15,7 @@
     /*-fx-light-blue: #81BAD6;*/
     -fx-light-blue: #4E8FF8;
     /*-fx-dark-blue: #102B4A;*/
-    /*-fx-dark-blue: #1D4E86;*/
+    -fx-navy-blue: #1D4E86;
     -fx-dark-blue: #2562A7;
     -fx-font-family: "Poppins";
 }
@@ -197,23 +197,60 @@
 
 /*LANDING PAGE*/
 
-#landingPage > .button {
-    -fx-font-family: "Corbel";
-    -fx-font-size: 24;
-    -fx-text-fill: -fx-dark-blue;
-}
-
-#landingPage > .button:hover {
-    -fx-font-family: "Corbel";
-    -fx-font-size: 24;
-    -fx-text-fill: -fx-dark-blue;
-}
-
-#landingPage > .label {
-    -fx-font-family: "Corbel";
+#mainTitle {
+    -fx-font-family: "Poppins";
     -fx-font-weight: bold;
     -fx-font-size: 48;
-    -fx-text-fill: -fx-dark-blue;
+    -fx-text-fill: -fx-off-white;
+}
+
+#landingPagePane {
+    -fx-background-color: -fx-navy-blue;
+}
+
+#landingPageScrollPane {
+    -fx-background-color: -fx-navy-blue;
+}
+
+#landingPageStackPane {
+    -fx-background-color: -fx-navy-blue;
+}
+
+/*#landingPageContent{*/
+/*    -fx-background-color: -fx-navy-blue;*/
+/*}*/
+
+#landingPageBackground {
+    -fx-background-color: -fx-off-white;
+}
+
+#landingPageContent > .label {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 18;
+    -fx-font-style: italic;
+    -fx-text-fill: -fx-light-blue;
+}
+
+#searchBarText {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-off-white;
+}
+
+#landingPageContent > .button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-light-blue;
+}
+
+#landingPageContent > .button:hover {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-light-blue;
+}
+
+#nameToggle {
+    -fx-text-fill: -fx-off-white;
 }
 
 /*{*/
