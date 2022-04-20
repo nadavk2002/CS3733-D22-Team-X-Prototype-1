@@ -23,10 +23,6 @@ public class LoginManager {
     return LoginManagerHelper.loginMan;
   }
 
-  public Map<String, Integer> getLogins() {
-    return logins;
-  }
-
   /**
    * Adds a new account to the manager
    *
