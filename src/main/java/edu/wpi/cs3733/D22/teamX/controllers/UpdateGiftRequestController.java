@@ -1,7 +1,9 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.entity.GiftDeliveryRequest;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -9,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -21,7 +24,7 @@ public class UpdateGiftRequestController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private ServiceRequestDAO giftDAO = ServiceRequestDAO.getDAO();
+  // private ServiceRequestDAO giftDAO = ServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");
@@ -106,7 +109,7 @@ public class UpdateGiftRequestController implements Initializable {
   }
 
   @FXML
-  public void submitButton() {
+  public void submitButton() throws IOException {
     GiftDeliveryRequest request = new GiftDeliveryRequest();
     request.setRequestID(this.request.getRequestID());
     request.setDestination(
@@ -119,5 +122,8 @@ public class UpdateGiftRequestController implements Initializable {
     Stage stage = (Stage) submitButton.getScene().getWindow();
     stage.close();
     this.resetFields();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   }
 }

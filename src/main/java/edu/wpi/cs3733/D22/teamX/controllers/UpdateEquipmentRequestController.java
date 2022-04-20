@@ -1,10 +1,13 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
+import java.io.IOException;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -86,7 +89,7 @@ public class UpdateEquipmentRequestController {
   }
 
   @FXML
-  public void submitRequest() {
+  public void submitRequest() throws IOException {
     MedicalEquipmentServiceRequest request = new MedicalEquipmentServiceRequest();
     request.setEquipmentType(selectEquipmentType.getValue());
     request.setRequestID(this.request.getRequestID());
@@ -105,6 +108,10 @@ public class UpdateEquipmentRequestController {
     this.resetFields();
     updateAvailability();
     quanityGreaterThan.setVisible(false);
+
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   }
 
   public void updateAvailability() {

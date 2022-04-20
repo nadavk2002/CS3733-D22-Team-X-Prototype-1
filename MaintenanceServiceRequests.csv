@@ -1,5 +1,5 @@
 requestID,destination,status,assignee,description
-MASR0001,FHALL01501,DONE,EMPL0018,Couch is missing two legs
+MASR0001,FHALL00601,PROC,EMPL0001,Couch is missing a leg
 MASR0002,HRETL00202,PROC,EMPL0002,Vending machine does not turn on
 MASR0003,WELEV00L01,DONE,EMPL0003,Elevator is stuck at floor 1
 MASR0004,CREST001L1,DONE,EMPL0004,Dead light bulb

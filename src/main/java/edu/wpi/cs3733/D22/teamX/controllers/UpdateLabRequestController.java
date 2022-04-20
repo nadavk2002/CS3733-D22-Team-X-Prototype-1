@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -8,6 +10,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -134,7 +137,7 @@ public class UpdateLabRequestController implements Initializable {
   }
 
   @FXML
-  public void submitRequest() {
+  public void submitRequest() throws IOException {
     LabServiceRequest request = new LabServiceRequest();
 
     request.setRequestID(this.request.getRequestID());
@@ -149,5 +152,8 @@ public class UpdateLabRequestController implements Initializable {
     Stage stage = (Stage) submitRequest.getScene().getWindow();
     stage.close();
     this.resetFields();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   }
 }

@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -141,7 +144,7 @@ public class UpdateMealRequestController implements Initializable {
   }
 
   @FXML
-  void submitRequest() {
+  void submitRequest() throws IOException {
     MealServiceRequest request = new MealServiceRequest();
     request.setRequestID(this.request.getRequestID());
     request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));
@@ -157,5 +160,8 @@ public class UpdateMealRequestController implements Initializable {
     Stage stage = (Stage) submitButton.getScene().getWindow();
     stage.close();
     this.resetFields();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   }
 }

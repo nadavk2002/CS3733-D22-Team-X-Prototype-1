@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -8,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
@@ -100,7 +103,7 @@ public class UpdateJanitorRequestController implements Initializable {
 
   /** Creates a service request from the fields on the javafx page */
   @FXML
-  public void submitButton() {
+  public void submitButton() throws IOException {
     JanitorServiceRequest request = new JanitorServiceRequest();
 
     request.setRequestID(this.request.getRequestID());
@@ -113,5 +116,8 @@ public class UpdateJanitorRequestController implements Initializable {
     Stage stage = (Stage) submitButton.getScene().getWindow();
     stage.close();
     this.resetFields();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   }
 }

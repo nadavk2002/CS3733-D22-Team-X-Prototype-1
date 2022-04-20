@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label contentDisplay="BOTTOM" layoutX="56.0" layoutY="53.0" text="Edit Sharps Disposal Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <VBox alignment="TOP_CENTER" layoutX="180.0" layoutY="138.0" spacing="10.0">
+         <children>
+            <HBox alignment="TOP_CENTER" spacing="2.0">
+               <children>
+                  <VBox alignment="TOP_RIGHT" spacing="18.0">
+                     <children>
+                        <Label prefHeight="25.0" text="Room: ">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="25.0" text="Service Status: ">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="25.0" text="Assignee: ">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Label prefHeight="25.0" text="Needle Type: ">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox spacing="18.0">
+                     <children>
+                        <ChoiceBox fx:id="roomDropDown" prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="statusChoiceBox" prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="assigneeDropDown" prefHeight="25.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="typeDropDown" prefHeight="25.0" prefWidth="150.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="submitButton" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="resetButton" onAction="#resetFields" text="Reset Forms" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <Label fx:id="errorText" alignment="TOP_CENTER" contentDisplay="CENTER" textAlignment="CENTER">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

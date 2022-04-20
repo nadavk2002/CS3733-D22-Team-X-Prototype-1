@@ -15,19 +15,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-public class UpdateLangRequestController implements Initializable {
-  @FXML private Button submitButton;
-  @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus, assignStaff;
+public class UpdateInTransportRequestController implements Initializable {
+  @FXML private Button resetFields, submitButton;
+  @FXML
+  private ChoiceBox<String> selectPatient,
+      selectStartLocation,
+      serviceStatus,
+      assignStaff,
+      destination;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
-  //  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private LangServiceRequest request;
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
-  UpdateLangRequestController(LangServiceRequest request) {
+  private InTransportServiceRequest request;
+
+  public UpdateInTransportRequestController(InTransportServiceRequest request) {
     this.request = request;
   }
 
@@ -36,19 +41,39 @@ public class UpdateLangRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    selectPatient
+        .getItems()
+        .addAll(
+            new String[] {
+              "PATT0001",
+              "PATT0002",
+              "PATT0003",
+              "PATT0004",
+              "PATT0005",
+              "PATT0006",
+              "PATT0007",
+              "PATT0008",
+              "PATT0009",
+              "PATT0010"
+            });
     assignStaff.setItems(this.getEmployeeIDs());
-    selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
-    serviceStatus.getItems().addAll("", "PROC", "DONE");
+    //    selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
+    serviceStatus.getItems().addAll(" ", "PROC", "DONE");
     //    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
-    roomNum.setItems(getLocationNames());
-    selectLang.setOnAction((ActionEvent event) -> enableSubmitButton());
-    roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
+    selectStartLocation.setItems(getLocationNames());
+    destination.setItems(getLocationNames());
+    selectPatient.setOnAction((ActionEvent event) -> enableSubmitButton());
+    selectStartLocation.setOnAction((ActionEvent event) -> enableSubmitButton());
     assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
+    // serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
+    destination.setOnAction((ActionEvent event) -> enableSubmitButton());
 
-    selectLang.setValue(this.request.getLanguage());
-    roomNum.setItems(this.getLocationNames());
+    selectPatient.setValue(this.request.getPatientName());
+    selectStartLocation.setItems(this.getLocationNames());
+    destination.setItems(this.getLocationNames());
     assignStaff.setValue(this.request.getAssigneeID());
-    roomNum.setValue(request.getLocationShortName());
+    selectStartLocation.setValue(request.getLocationShortName());
+    destination.setValue(request.getLocationShortName());
     serviceStatus.setValue(this.request.getStatus());
   }
 
@@ -76,31 +101,33 @@ public class UpdateLangRequestController implements Initializable {
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitButton.setDisable(
-        roomNum.getValue().equals("")
-            || selectLang.getValue().equals("")
-            || assignStaff.getValue().equals(""));
+        selectPatient.getValue().equals("")
+            || selectStartLocation.getValue().equals("")
+            || assignStaff.getValue().equals("")
+            || destination.getValue().equals(""));
   }
 
   /** Resets all fields on the page. */
   @FXML
   public void resetFields() {
-    selectLang.setValue("");
-    roomNum.setValue("");
-    serviceStatus.setValue("");
+    selectPatient.setValue("");
+    selectStartLocation.setValue("");
+    serviceStatus.setValue(" ");
     assignStaff.setValue("");
+    destination.setValue("");
   }
 
   /** Creates a service request from the fields on the javafx page */
   @FXML
   public void submitRequest() throws IOException {
-    LangServiceRequest request = new LangServiceRequest();
+    InTransportServiceRequest request = new InTransportServiceRequest();
 
     request.setRequestID(this.request.getRequestID());
-    request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
-    request.setStatus(serviceStatus.getValue());
-    request.setLanguage(selectLang.getValue());
+    request.setPatientName(selectPatient.getValue());
+    request.setTransportFrom(selectStartLocation.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
-    // requestDAO.addRecord(request);
+    request.setStatus(serviceStatus.getValue());
+    request.setDestination(locations.get(destination.getSelectionModel().getSelectedIndex()));
     ServiceRequestDAO.getDAO().updateRecord(request);
     Stage stage = (Stage) submitButton.getScene().getWindow();
     stage.close();

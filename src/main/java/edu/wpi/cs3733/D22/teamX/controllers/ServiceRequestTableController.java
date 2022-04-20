@@ -234,6 +234,41 @@ public class ServiceRequestTableController implements Initializable {
       stage.show();
     } catch (Exception e) {
     }
+    try {
+      SharpsDisposalRequest req = requestDAO.getSharpsDisposalServiceRequest(id);
+      UpdateSharpsDisposalRequestController controller =
+          new UpdateSharpsDisposalRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass()
+                  .getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateSharpsDisposalRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Sharps Disposal Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      InTransportServiceRequest req = requestDAO.getInTransportServiceRequest(id);
+      UpdateInTransportRequestController controller = new UpdateInTransportRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass()
+                  .getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateInTransportRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Internal Patient Transport Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
