@@ -65,18 +65,6 @@ public class OutstandingServiceController implements Initializable {
     table.setItems(FXCollections.observableList(listOfRequests()));
   }
 
-  public void checkStatus(List<ServiceRequest> requests) {
-    for (int i = 0; i < requests.size(); i++) {
-
-      // if (requestStatus.getTableView().getItems().get(i).getStatus().equals("DONE"))
-      if (requestStatus.getTableView().getItems().get(i).equals("DONE")) {
-        requests.remove(i);
-        requestStatus.setStyle("-fx-background-color: tomato;");
-      }
-      // System.out.println(requestStatus.getTableView().getItems().get(i).getStatus().equals("DONE"));
-    }
-  }
-
   public List<ServiceRequest> listOfRequests() {
     List<? super ServiceRequest> requests = new ArrayList<>();
     requests.addAll(MedicalEquipmentServiceRequestDAO.getDAO().getAllRecords());
@@ -91,7 +79,6 @@ public class OutstandingServiceController implements Initializable {
     List<ServiceRequest> newRequests = (List<ServiceRequest>) requests;
     for (int i = 0; i < newRequests.size(); i++) {
 
-      // if (requestStatus.getTableView().getItems().get(i).getStatus().equals("DONE"))
       if (newRequests.get(i).getStatus().equals("DONE")) {
         newRequests.remove(i);
         i--;
