@@ -5,7 +5,6 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.api.*;
 import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
-import edu.wpi.cs3733.D22.teamX.api.exceptions.ServiceException;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
@@ -150,18 +149,6 @@ public class BasicLayoutController implements Initializable {
           FXMLLoader.load(
               getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
       CSVFileSaverController.loaded = true;
-      try {
-        MealRequestAPI.run(
-            470,
-            180,
-            600,
-            600,
-            "/edu/wpi/cs3733/D22/teamX/api/stylesheets/default.css",
-            "FDEPT00101",
-            "Hello");
-      } catch (ServiceException e) {
-        throw new RuntimeException(e);
-      }
     }
   }
 
