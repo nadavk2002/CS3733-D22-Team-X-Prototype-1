@@ -20,7 +20,9 @@ public class MedicineDeliveryController implements Initializable {
   @FXML private TextField rxNum;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private MedicineDeliverServiceRequestDAO medicineDAO = MedicineDeliverServiceRequestDAO.getDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
+  //  private MedicineDeliverServiceRequestDAO medicineDAO =
+  // MedicineDeliverServiceRequestDAO.getDAO();
   private List<Location> locations;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
@@ -105,12 +107,12 @@ public class MedicineDeliveryController implements Initializable {
   public void submitForm() {
     MedicineServiceRequest request = new MedicineServiceRequest();
 
-    request.setRequestID(medicineDAO.makeID());
+    request.setRequestID(requestDAO.makeMedicineDeliverServiceRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setRxNum(rxNum.getText());
-    medicineDAO.addRecord(request);
+    requestDAO.addRecord(request);
     this.resetFields();
   }
 }

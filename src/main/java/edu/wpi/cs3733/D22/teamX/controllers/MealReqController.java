@@ -39,7 +39,11 @@ public class MealReqController implements Initializable {
       destinationDrop;
 
   private final LocationDAO locationDAO = LocationDAO.getDAO();
-  private final MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
+  private final ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
+  //  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
+  private List<Location> locations;
+  //  private final LocationDAO locationDAO = LocationDAO.getDAO();
+  //  private final MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
   private final EmployeeDAO emplDAO = EmployeeDAO.getDAO();
 
   private final ObservableList<MealServiceRequest> mealList = FXCollections.observableArrayList();
@@ -159,14 +163,14 @@ public class MealReqController implements Initializable {
   }
 
   private ObservableList<MealServiceRequest> getMealRequests() {
-    mealList.addAll(mealDAO.getAllRecords());
+    mealList.addAll(requestDAO.getAllMealServiceRequests());
     return mealList;
   }
 
   @FXML
   void submitButton() {
     MealServiceRequest request = new MealServiceRequest();
-    request.setRequestID(mealDAO.makeID());
+    request.setRequestID(requestDAO.makeMealServiceRequestID());
     request.setDestination(
         locationDAO.getAllRecords().get(destinationDrop.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
@@ -177,7 +181,7 @@ public class MealReqController implements Initializable {
     request.setSide(sideSel.getValue());
     request.setPatientFor(patientNames.getValue());
 
-    mealDAO.addRecord(request);
+    requestDAO.addRecord(request);
     this.resetFields();
   }
 }

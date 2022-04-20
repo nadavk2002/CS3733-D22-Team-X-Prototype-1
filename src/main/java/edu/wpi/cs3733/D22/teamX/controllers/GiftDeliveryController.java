@@ -23,7 +23,7 @@ public class GiftDeliveryController implements Initializable {
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private GiftDeliveryRequestDAO giftDAO = GiftDeliveryRequestDAO.getDAO();
+  private ServiceRequestDAO giftDAO = ServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");
@@ -103,7 +103,7 @@ public class GiftDeliveryController implements Initializable {
   @FXML
   public void submitButton() {
     GiftDeliveryRequest request = new GiftDeliveryRequest();
-    request.setRequestID(giftDAO.makeID());
+    request.setRequestID(giftDAO.makeGiftDeliveryRequestID());
     request.setDestination(
         locations.get(selectGiftDestination.getSelectionModel().getSelectedIndex()));
     request.setAssignee(emplDAO.getRecord(selectAssignStaff.getValue()));

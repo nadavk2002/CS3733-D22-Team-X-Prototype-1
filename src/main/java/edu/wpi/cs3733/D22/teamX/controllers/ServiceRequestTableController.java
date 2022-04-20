@@ -4,7 +4,6 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -43,6 +42,8 @@ public class ServiceRequestTableController implements Initializable {
     }
   }
 
+
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
   @FXML
   private void goToUpdatePage() throws IOException {
@@ -181,6 +182,7 @@ public class ServiceRequestTableController implements Initializable {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     requestStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+
     destination.setCellValueFactory(
         new Callback<
             TableColumn.CellDataFeatures<ServiceRequest, String>, ObservableValue<String>>() {
@@ -214,16 +216,16 @@ public class ServiceRequestTableController implements Initializable {
   }
 
   private List<ServiceRequest> listOfRequests() {
-    List<? super ServiceRequest> requests = new ArrayList<>();
-    requests.addAll(MedicalEquipmentServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LabServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LangServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
-    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
-    return (List<ServiceRequest>) requests;
+    //    List<? super ServiceRequest> requests = new ArrayList<>();
+    //    requests.addAll(MedicalEquipmentServiceRequestDAO.getDAO().getAllRecords());
+    //    requests.addAll(LabServiceRequestDAO.getDAO().getAllRecords());
+    //    requests.addAll(GiftDeliveryRequestDAO.getDAO().getAllRecords());
+    //    requests.addAll(LangServiceRequestDAO.getDAO().getAllRecords());
+    //    requests.addAll(MealServiceRequestDAO.getDAO().getAllRecords());
+    //    requests.addAll(JanitorServiceRequestDAO.getDAO().getAllRecords());
+    //    requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
+    //    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
+    return requestDAO.getServiceRequests();
   }
 
   @FXML
