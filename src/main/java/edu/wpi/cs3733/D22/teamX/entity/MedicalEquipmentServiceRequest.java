@@ -18,6 +18,11 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
     this.quantity = quantity;
   }
 
+  @Override
+  public String getLocationShortName() {
+    return super.getLocationShortName();
+  }
+
   public MedicalEquipmentServiceRequest() {
     super();
     this.equipmentType = "";

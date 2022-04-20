@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnit;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnitDAO;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
+import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -11,12 +13,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -123,7 +127,9 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private TableColumn<EquipmentUnit, String> availabilityCPodB;
   @FXML private TableColumn<EquipmentUnit, String> currLocCPodB;
   @FXML private JFXButton showAlerts;
-
+  @FXML private Label alertLabel;
+  @FXML private VBox alertBox;
+  MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
   // floor constants--------------------------------------
   private final int cleanXloc = 705;
   private final int YF5 = 188 - 5;
@@ -136,7 +142,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
+    alertBox.setVisible(false);
     masterBox.setSpacing(30);
 
     cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -204,6 +210,36 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     //      System.out.println(e.getCurrLocation().getLongName());
     //    }
     //    System.out.println(addToPod1(sortEquipmentByFloor("3")).size());
+    displayAlert();
+  }
+
+  private void displayAlert() {
+    ObservableList<MedicalEquipmentServiceRequest> alertList = MESRDAO.getAlerts();
+    alertList.addListener(
+        new ListChangeListener<MedicalEquipmentServiceRequest>() {
+          @Override
+          public void onChanged(
+              javafx.collections.ListChangeListener.Change<? extends MedicalEquipmentServiceRequest>
+                  c) {
+            if (MESRDAO
+                .getAllRecords()
+                .get(MESRDAO.getAllRecords().size() - 1)
+                .getEquipmentType()
+                .equals("Bed")) {
+              alertBox.setVisible(true);
+              alertLabel.setText("Service Request for Beds have been sent to the OR Bed Park");
+            }
+            if (MESRDAO
+                .getAllRecords()
+                .get(MESRDAO.getAllRecords().size() - 1)
+                .getEquipmentType()
+                .equals("Infusion Pump")) {
+              alertLabel.setVisible(true);
+              alertLabel.setText(
+                  "Service Request for Infusion Pumps have been sent to the West Plaza");
+            }
+          }
+        });
   }
 
   @FXML

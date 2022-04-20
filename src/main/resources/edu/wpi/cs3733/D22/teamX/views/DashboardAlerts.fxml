@@ -4,15 +4,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox prefHeight="400.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.DashboardAlertsController">
    <children>
       <TableView fx:id="alertTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="527.0">
         <columns>
-          <TableColumn fx:id="unitID" prefWidth="75.0" text="Unit ID" />
-          <TableColumn fx:id="alert" prefWidth="75.0" text="Alert" />
-            <TableColumn fx:id="timeOfAlert" prefWidth="75.0" text="Time of Alert" />
-            <TableColumn fx:id="sendAlert" prefWidth="75.0" text="Send Alert" />
+          <TableColumn fx:id="requestID" prefWidth="75.0" text="Request ID" />
+          <TableColumn fx:id="type" prefWidth="75.0" text="Type" />
+            <TableColumn fx:id="quantity" prefWidth="75.0" text="Quantity" />
+            <TableColumn fx:id="destination" prefWidth="75.0" text="Destination" />
         </columns>
       </TableView>
    </children>

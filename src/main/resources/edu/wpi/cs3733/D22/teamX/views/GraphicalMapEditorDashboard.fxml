@@ -555,6 +555,20 @@
                   </TabPane>
                </children>
             </HBox>
+            <VBox fx:id="alertBox" alignment="CENTER" layoutX="354.0" layoutY="21.0" prefHeight="70.0" prefWidth="907.0" style="-fx-background-color: #446fdc;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="35.0" prefWidth="158.0" text="ALERT!" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="alertLabel" alignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>

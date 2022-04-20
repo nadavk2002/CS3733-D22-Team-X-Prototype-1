@@ -9,12 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentServiceRequest> {
   private static List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests =
       new ArrayList<MedicalEquipmentServiceRequest>();
   private static String csv = "MedEquipReq.csv";
-
+  private static ObservableList<MedicalEquipmentServiceRequest> alerts =
+      FXCollections.observableArrayList();
   /** Creates a new LocationDAO object. */
   private MedicalEquipmentServiceRequestDAO() {
     if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
@@ -25,6 +28,13 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
     }
   }
 
+  public ObservableList<MedicalEquipmentServiceRequest> getAlerts() {
+    return alerts;
+  }
+
+  public void addAlert(MedicalEquipmentServiceRequest MESR) {
+    alerts.add(MESR);
+  }
   /** Singleton Helper Class. */
   private static class SingletonHelper {
     private static final MedicalEquipmentServiceRequestDAO medicalEquipmentServiceRequestDAO =
