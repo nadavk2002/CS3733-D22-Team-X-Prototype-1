@@ -17,8 +17,8 @@ public class APILandingPageController implements Initializable {
       MealRequestAPI.run(
           470,
           180,
-          0,
-          0,
+          700,
+          700,
           "/edu/wpi/cs3733/D22/teamX/stylesheets/application.css",
           "FDEPT00101",
           "Hello");
