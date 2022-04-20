@@ -74,6 +74,15 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="apiButton" alignment="BASELINE_LEFT" onAction="#switchAPILandingPage" prefWidth="300.0" text="API">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/list-check-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <Label text="Settings" />
                   <JFXButton alignment="BASELINE_LEFT" layoutX="10.0" layoutY="110.0" prefWidth="300.0" text="Preferences">
                      <graphic>

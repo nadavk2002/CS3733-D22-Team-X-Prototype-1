@@ -13,12 +13,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 
 public class CSVFileSaverController implements Initializable {
   public JFXButton browser;
-  public AnchorPane anchorCSVSaver;
+  @FXML public BorderPane csvSaverPane;
   public static boolean loaded = false;
 
   @Override
@@ -28,7 +28,7 @@ public class CSVFileSaverController implements Initializable {
 
   public void getDirectoryForSaving(ActionEvent actionEvent) throws loadSaveFromCSVException {
     DirectoryChooser csvSaverDC = new DirectoryChooser();
-    File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
+    File csvSaverDir = csvSaverDC.showDialog(csvSaverPane.getScene().getWindow());
     if (csvSaverDir == null) {
       return;
     }
