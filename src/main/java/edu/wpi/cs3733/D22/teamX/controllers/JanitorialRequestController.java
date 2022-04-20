@@ -19,7 +19,7 @@ public class JanitorialRequestController implements Initializable {
   @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private ServiceRequestDAO janitorDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO janitorDAO = ServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();

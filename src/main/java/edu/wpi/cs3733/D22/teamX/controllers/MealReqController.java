@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
-import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,11 +39,11 @@ public class MealReqController implements Initializable {
       destinationDrop;
 
   private final LocationDAO locationDAO = LocationDAO.getDAO();
-  private final ServiceRequestDAO requestDAO = new ServiceRequestDAO();
-//  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
+  private final ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
+  //  private MealServiceRequestDAO MealDAO = MealServiceRequestDAO.getDAO();
   private List<Location> locations;
-//  private final LocationDAO locationDAO = LocationDAO.getDAO();
-//  private final MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
+  //  private final LocationDAO locationDAO = LocationDAO.getDAO();
+  //  private final MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
   private final EmployeeDAO emplDAO = EmployeeDAO.getDAO();
 
   private final ObservableList<MealServiceRequest> mealList = FXCollections.observableArrayList();

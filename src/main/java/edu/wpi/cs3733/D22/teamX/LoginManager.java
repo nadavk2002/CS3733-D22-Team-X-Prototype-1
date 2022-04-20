@@ -34,8 +34,14 @@ public class LoginManager {
    * @param hashedPassword the hashcode of the password being registered for that account
    */
   public void addLogin(String username, Integer hashedPassword) {
-    logins.put(username, hashedPassword);
+    if (logins.containsKey(username)) {
+      System.out.println("username already taken");
+    } else {
+      logins.put(username, hashedPassword);
+    }
   }
+
+  // make method to update a login
 
   /**
    * Checks if the username and password are stored in logins

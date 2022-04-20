@@ -38,8 +38,8 @@ public class LabRequestController implements Initializable {
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
-//  private LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO()
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  //  private LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO()
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
@@ -120,7 +120,7 @@ public class LabRequestController implements Initializable {
 
   private ObservableList<LabServiceRequest> labDeliveryList() {
     ObservableList<LabServiceRequest> labList = FXCollections.observableArrayList();
-//    LabServiceRequestDAO allLabs = LabServiceRequestDAO.getDAO();
+    //    LabServiceRequestDAO allLabs = LabServiceRequestDAO.getDAO();
     List<LabServiceRequest> inpLabsList = requestDAO.getAllLabServiceRequests();
     labList.addAll(inpLabsList);
     return labList;

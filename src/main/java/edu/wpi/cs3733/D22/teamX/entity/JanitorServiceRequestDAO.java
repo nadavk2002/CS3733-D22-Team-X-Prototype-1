@@ -14,7 +14,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
   private static List<JanitorServiceRequest> janitorServiceRequests = new ArrayList<>();
   private static String csv = "JanitorServiceRequests.csv";
 
-  /** Creates a new LocationDAO object. */
+  /** Creates a new JanitorServiceRequestDAO object. */
   private JanitorServiceRequestDAO() {
     if (ConnectionSingleton.getConnectionSingleton().getConnectionType().equals("client")) {
       fillFromTable();
