@@ -26,19 +26,19 @@ public class BasicLayoutController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // startTime();
-    pages = new HashMap<String, String>();
-    pages.put("Main Menu", "app.fxml");
-    pages.put("Equipment Delivery", "equipmentDelivery.fxml");
-    pages.put("Lab Request", "LabRequest.fxml");
-    pages.put("Meal Request", "mealRequest.fxml");
-    pages.put("Medicine Delivery", "Medicine_Delivery.fxml");
-    pages.put("Request Transport", "ReqInTransport.fxml");
-    pages.put("Request Language Interpreter", "ReqLang.fxml");
-    pages.put("Request Laundry Services", "ReqLaundry.fxml");
-    pages.put("Request Janitorial Services", "JanitorialRequest.fxml");
-    pages.put("Request Gift Delivery", "GiftDelivery.fxml");
-    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
-    pages.put("Service Request Table", "ServiceRequestTable.fxml");
+    //    pages = new HashMap<String, String>();
+    //    pages.put("Main Menu", "app.fxml");
+    //    pages.put("Equipment Delivery", "equipmentDelivery.fxml");
+    //    pages.put("Lab Request", "LabRequest.fxml");
+    //    pages.put("Meal Request", "mealRequest.fxml");
+    //    pages.put("Medicine Delivery", "Medicine_Delivery.fxml");
+    //    pages.put("Request Transport", "ReqInTransport.fxml");
+    //    pages.put("Request Language Interpreter", "ReqLang.fxml");
+    //    pages.put("Request Laundry Services", "ReqLaundry.fxml");
+    //    pages.put("Request Janitorial Services", "JanitorialRequest.fxml");
+    //    pages.put("Request Gift Delivery", "GiftDelivery.fxml");
+    //    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
+    //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     userName.setText("Hello, " + LoginScreenController.currentUsername);
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
@@ -108,6 +108,14 @@ public class BasicLayoutController implements Initializable {
     //    App.switchScene(
     //        FXMLLoader.load(
     //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/LoginScreen.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  public void switchAPILandingPage() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/APILandingPage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
