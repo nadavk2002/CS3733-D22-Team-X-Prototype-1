@@ -71,6 +71,7 @@ public class GraphicalMapEditorController implements Initializable {
 
   private LocationDAO locDAO = LocationDAO.getDAO();
   private EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO();
+  private EquipmentTypeDAO equipmentTypeDAO = EquipmentTypeDAO.getDAO();
   private GesturePane gesturePane;
   @FXML private StackPane parentPage;
   @FXML private AnchorPane anchorRoot;
@@ -412,29 +413,10 @@ public class GraphicalMapEditorController implements Initializable {
             menu.show(rectangle, event.getScreenX(), event.getScreenY());
             // event.consume();
           });
-
-      /*
-      rectangle.setOnMouseDragged(
-          new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-              event.setDragDetect(true);
-              if (event.getButton() != MouseButton.PRIMARY) return;
-              pane.setGestureEnabled(false);
-              imageGroup.setDisable(true);
-              rectangle.setCursor(Cursor.CLOSED_HAND);
-              rectangle.setFill(Paint.valueOf("LIGHTBLUE"));
-              if (event.getX() - (rectangle.getWidth() / 2) > imageView.getX()
-                  && event.getX() <= imageView.getX() + imageView.getBoundsInLocal().getWidth())
-                rectangle.setX(event.getX() - (rectangle.getWidth() / 2));
-              if (event.getY() - (rectangle.getHeight() / 2) > imageView.getY()
-                  && event.getY() <= imageView.getY() + imageView.getBoundsInLocal().getHeight())
-                rectangle.setY(event.getY() - (rectangle.getHeight() / 2));
-            }
-          });
-
-       */
-
+      rectangle.setFill(
+          new ImagePattern(
+              new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType().getModel() + ".png")));
+      rectangle.setVisible(showEquipCheck.isSelected());
       rectangle.setOnMouseReleased(
           new EventHandler<MouseEvent>() {
             @Override
@@ -494,7 +476,7 @@ public class GraphicalMapEditorController implements Initializable {
     try {
       EquipmentUnit equipment = equipDAO.getRecord(equipmentChoice.getValue());
       unitIdText.setText(equipment.getUnitID());
-      typeText.setText(equipment.getType());
+      typeText.setText(equipment.getType().getModel());
       availableCheck.setSelected(equipment.isAvailable());
       equipLocationChoice.setValue(equipment.getCurrLocation().getNodeID());
     } catch (NoSuchElementException e) {
@@ -515,7 +497,7 @@ public class GraphicalMapEditorController implements Initializable {
     for (int i = 0; i < location.getUnitsAtLocation().size(); i++) {
       info +=
           "- "
-              + location.getUnitsAtLocation().get(i).getType()
+              + location.getUnitsAtLocation().get(i).getType().getModel()
               + ": "
               + location.getUnitsAtLocation().get(i).getUnitID()
               + "\n";
@@ -652,7 +634,7 @@ public class GraphicalMapEditorController implements Initializable {
         newEquip.setUnitID(allEquipment.get(i).getUnitID());
         newEquip.setAvailable(availableCheck.isSelected());
         newEquip.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
-        newEquip.setType(typeText.getText());
+        newEquip.setType(equipmentTypeDAO.getRecord(typeText.getText()));
         equipDAO.updateRecord(newEquip);
         loadLocation(newEquip.getCurrLocation().getFloor());
         loadLocationInfo(newEquip.getCurrLocation().getNodeID());
@@ -662,7 +644,7 @@ public class GraphicalMapEditorController implements Initializable {
     EquipmentUnit newEquipment = new EquipmentUnit();
     newEquipment.setAvailable(availableCheck.isSelected());
     newEquipment.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
-    newEquipment.setType(typeText.getText());
+    newEquipment.setType(equipmentTypeDAO.getRecord(typeText.getText()));
     newEquipment.setUnitID(unitIdText.getText());
 
     equipDAO.addRecord(newEquipment);

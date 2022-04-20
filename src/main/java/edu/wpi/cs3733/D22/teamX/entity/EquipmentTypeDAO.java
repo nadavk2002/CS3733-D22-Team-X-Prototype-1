@@ -271,35 +271,45 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
     return null;
   }
 
-  public void decreaseAvailability(String model, int quantityMadeUnavailable) {
-    EquipmentType et = new EquipmentType();
-    et.setModel(model);
-    et.setNumUnitsTotal(getRecord(model).getNumUnitsTotal());
-    et.setNumUnitsAvailable(getRecord(model).getNumUnitsAvailable() - quantityMadeUnavailable);
-    updateRecord(et);
+  public void decreaseAvailability(EquipmentType model, int quantityMadeUnavailable) {
+    //    EquipmentType et = new EquipmentType();
+    //    et.setModel(model.getModel());
+    //    et.setNumUnitsTotal(getRecord(model.getModel()).getNumUnitsTotal());
+    //    et.setNumUnitsAvailable(
+    //        getRecord(model.getModel()).getNumUnitsAvailable() - quantityMadeUnavailable);
+    //    updateRecord(et);
+    model.setNumUnitsAvailable(model.getNumUnitsAvailable() - quantityMadeUnavailable);
+    updateRecord(model);
   }
 
-  public void increaseAvailability(String model, int quantityMadeAvailable) {
-    EquipmentType et = new EquipmentType();
-    et.setModel(model);
-    et.setNumUnitsTotal(getRecord(model).getNumUnitsTotal());
-    et.setNumUnitsAvailable(getRecord(model).getNumUnitsAvailable() + quantityMadeAvailable);
-    updateRecord(et);
+  public void increaseAvailability(EquipmentType model, int quantityMadeAvailable) {
+    //    EquipmentType et = new EquipmentType();
+    //    et.setModel(model.getModel());
+    //    et.setNumUnitsTotal(getRecord(model.getModel()).getNumUnitsTotal());
+    //    et.setNumUnitsAvailable(
+    //        getRecord(model.getModel()).getNumUnitsAvailable() + quantityMadeAvailable);
+    //    updateRecord(et);
+    model.setNumUnitsAvailable(model.getNumUnitsAvailable() + quantityMadeAvailable);
+    updateRecord(model);
   }
 
-  public void decreaseNumTotal(String model, int quantityRemoved) {
-    EquipmentType et = new EquipmentType();
-    et.setModel(model);
-    et.setNumUnitsTotal(getRecord(model).getNumUnitsTotal() - quantityRemoved);
-    et.setNumUnitsAvailable(getRecord(model).getNumUnitsAvailable());
-    updateRecord(et);
+  public void decreaseNumTotal(EquipmentType model, int quantityRemoved) {
+    //    EquipmentType et = new EquipmentType();
+    //    et.setModel(model.getModel());
+    //    et.setNumUnitsTotal(getRecord(model.getModel()).getNumUnitsTotal() - quantityRemoved);
+    //    et.setNumUnitsAvailable(getRecord(model.getModel()).getNumUnitsAvailable());
+    //    updateRecord(et);
+    model.setNumUnitsTotal(model.getNumUnitsTotal() - quantityRemoved);
+    updateRecord(model);
   }
 
-  public void increaseNumTotal(String model, int quantityAdded) {
-    EquipmentType et = new EquipmentType();
-    et.setModel(model);
-    et.setNumUnitsTotal(getRecord(model).getNumUnitsTotal() + quantityAdded);
-    et.setNumUnitsAvailable(getRecord(model).getNumUnitsAvailable());
-    updateRecord(et);
+  public void increaseNumTotal(EquipmentType model, int quantityAdded) {
+    //    EquipmentType et = new EquipmentType();
+    //    et.setModel(model.getModel());
+    //    et.setNumUnitsTotal(getRecord(model.getModel()).getNumUnitsTotal() + quantityAdded);
+    //    et.setNumUnitsAvailable(getRecord(model.getModel()).getNumUnitsAvailable());
+    //    updateRecord(et);
+    model.setNumUnitsTotal(model.getNumUnitsTotal() + quantityAdded);
+    updateRecord(model);
   }
 }
