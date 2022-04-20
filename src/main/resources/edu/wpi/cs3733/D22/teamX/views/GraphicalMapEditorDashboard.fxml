@@ -49,7 +49,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="405.0">
+                        <HBox fx:id="l5Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="405.0">
                            <children>
                               <StackPane fx:id="l5Stack" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -115,7 +115,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
+                        <HBox fx:id="l4Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
                               <StackPane fx:id="l4Stack" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -181,7 +181,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
+                        <HBox fx:id="l3Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
                               <StackPane fx:id="l3Stack" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -247,7 +247,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
+                        <HBox fx:id="l2Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
                               <StackPane fx:id="l2Stack" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -313,7 +313,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
+                        <HBox fx:id="l1Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
                               <StackPane fx:id="l1Stack" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -379,7 +379,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
+                        <HBox fx:id="ll1Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
                               <StackPane fx:id="ll1Stack" prefHeight="150.0" prefWidth="200.0">
                                  <children>
@@ -445,7 +445,7 @@
                               </Text>
                            </children>
                         </StackPane>
-                        <HBox alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
+                        <HBox fx:id="ll2Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
                            <children>
                               <StackPane fx:id="ll2Stack" prefHeight="150.0" prefWidth="200.0">
                                  <children>

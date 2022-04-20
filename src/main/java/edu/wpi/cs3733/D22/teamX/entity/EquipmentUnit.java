@@ -35,6 +35,10 @@ public class EquipmentUnit {
     currLocation = new Location();
   }
 
+  public String getTypeName() {
+    return type.getModel();
+  }
+
   public String getUnitID() {
     return unitID;
   }

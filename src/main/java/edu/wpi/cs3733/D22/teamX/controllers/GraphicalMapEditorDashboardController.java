@@ -105,6 +105,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private Text llOneIUText;
   @FXML private Text llTwoIUText;
   @FXML private VBox masterBox;
+  @FXML private HBox l5Hbox, l4Hbox, l3Hbox, l2Hbox, l1Hbox, ll1Hbox, ll2Hbox;
   private EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
   @FXML private HBox cleanTableBox;
 
@@ -153,7 +154,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     cleanTableBox.setVisible(false);
 
     unitIDC.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    typeC.setCellValueFactory(new PropertyValueFactory<>("type"));
+    typeC.setCellValueFactory(new PropertyValueFactory<>("typeName"));
     availabilityC.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLocC.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 
@@ -187,21 +188,29 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
     dynamicSizeRectangles(llTwoDirty, llTwoClean, llTwoIU, sortEquipmentByFloor("L2"));
     rectangleNumber(llTwoDirtyText, llTwoCleanText, llTwoIUText, sortEquipmentByFloor("L2"));
-    fillTable(sortByDirty(sortEquipmentByFloor("5")), cleanXloc, YF5, l5Stack);
-    fillTable(sortByDirty(sortEquipmentByFloor("4")), cleanXloc, YF4, l4Stack);
-    fillTable(sortByDirty(sortEquipmentByFloor("3")), cleanXloc, YF3, l3Stack);
-    fillTable(sortByDirty(sortEquipmentByFloor("2")), cleanXloc, YF2, l2Stack);
-    fillTable(sortByDirty(sortEquipmentByFloor("1")), cleanXloc, YF1, l1Stack);
-    fillTable(sortByDirty(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1Stack);
-    fillTable(sortByDirty(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2Stack);
+    fillTable(sortByDirty(sortEquipmentByFloor("5")), cleanXloc, YF5, l5Stack, l5Hbox);
+    fillTable(sortByDirty(sortEquipmentByFloor("4")), cleanXloc, YF4, l4Stack, l4Hbox);
+    fillTable(sortByDirty(sortEquipmentByFloor("3")), cleanXloc, YF3, l3Stack, l3Hbox);
+    fillTable(sortByDirty(sortEquipmentByFloor("2")), cleanXloc, YF2, l2Stack, l2Hbox);
+    fillTable(sortByDirty(sortEquipmentByFloor("1")), cleanXloc, YF1, l1Stack, l1Hbox);
+    fillTable(sortByDirty(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1Stack, ll1Hbox);
+    fillTable(sortByDirty(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2Stack, ll2Hbox);
 
-    fillTable(sortByClean(sortEquipmentByFloor("5")), cleanXloc, YF5, l5StackC);
-    fillTable(sortByClean(sortEquipmentByFloor("4")), cleanXloc, YF4, l4StackC);
-    fillTable(sortByClean(sortEquipmentByFloor("3")), cleanXloc, YF3, l3StackC);
-    fillTable(sortByClean(sortEquipmentByFloor("2")), cleanXloc, YF2, l2StackC);
-    fillTable(sortByClean(sortEquipmentByFloor("1")), cleanXloc, YF1, l1StackC);
-    fillTable(sortByClean(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1StackC);
-    fillTable(sortByClean(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2StackC);
+    fillTable(sortByClean(sortEquipmentByFloor("5")), cleanXloc, YF5, l5StackC, l5Hbox);
+    fillTable(sortByClean(sortEquipmentByFloor("4")), cleanXloc, YF4, l4StackC, l4Hbox);
+    fillTable(sortByClean(sortEquipmentByFloor("3")), cleanXloc, YF3, l3StackC, l3Hbox);
+    fillTable(sortByClean(sortEquipmentByFloor("2")), cleanXloc, YF2, l2StackC, l2Hbox);
+    fillTable(sortByClean(sortEquipmentByFloor("1")), cleanXloc, YF1, l1StackC, l1Hbox);
+    fillTable(sortByClean(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1StackC, ll1Hbox);
+    fillTable(sortByClean(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2StackC, ll2Hbox);
+
+    fillTable(sortByInUse(sortEquipmentByFloor("5")), cleanXloc, YF5, l5StackIU, l5Hbox);
+    fillTable(sortByInUse(sortEquipmentByFloor("4")), cleanXloc, YF4, l4StackIU, l4Hbox);
+    fillTable(sortByInUse(sortEquipmentByFloor("3")), cleanXloc, YF3, l3StackIU, l3Hbox);
+    fillTable(sortByInUse(sortEquipmentByFloor("2")), cleanXloc, YF2, l2StackIU, l2Hbox);
+    fillTable(sortByInUse(sortEquipmentByFloor("1")), cleanXloc, YF1, l1StackIU, l1Hbox);
+    fillTable(sortByInUse(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1StackIU, ll1Hbox);
+    fillTable(sortByInUse(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2StackIU, ll2Hbox);
     // dirtyPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("3")));
     // dirtyPodB.getItems().addAll(addToPod1(sortEquipmentByFloor("4")));
     // cleanPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("5")));
@@ -303,9 +312,17 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   }
 
   private void fillTable(
-      ObservableList<EquipmentUnit> equipment, int XfloorVal, int YfloorVal, StackPane floor) {
-    floor.setOnMouseEntered(
+      ObservableList<EquipmentUnit> equipment,
+      int XfloorVal,
+      int YfloorVal,
+      StackPane floor,
+      HBox floorBox) {
+    floor.setOnMouseClicked(
         event -> {
+          floor.toFront();
+        });
+    floor.setOnMouseEntered(
+        event6 -> {
           if (equipment.size() > 0) {
             cleanTableBox.setVisible(true);
             cleanTable.setItems(equipment);
@@ -316,6 +333,17 @@ public class GraphicalMapEditorDashboardController implements Initializable {
           }
           cleanTableBox.setOnMouseEntered(
               event2 -> {
+                if (equipment.size() > 0) {
+                  cleanTableBox.setVisible(true);
+                  cleanTable.setItems(equipment);
+                  cleanTableBox.setLayoutX(XfloorVal);
+                  cleanTableBox.setLayoutY(YfloorVal);
+                } else {
+                  cleanTableBox.setVisible(false);
+                }
+              });
+          floorBox.setOnMouseEntered(
+              event3 -> {
                 if (equipment.size() > 0) {
                   cleanTableBox.setVisible(true);
                   cleanTable.setItems(equipment);
@@ -362,6 +390,24 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       }
     }
     return cleanEquipment;
+  }
+
+  @FXML
+  private ObservableList<EquipmentUnit> sortByInUse(ObservableList<EquipmentUnit> equipOnFloor) {
+    ObservableList<EquipmentUnit> inUseEquipment = FXCollections.observableArrayList();
+    for (EquipmentUnit equipmentUnit : equipOnFloor) {
+      if (!((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("stor")
+                  && equipmentUnit.getIsAvailableChar() == 'Y')
+              || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+                  && equipmentUnit.getIsAvailableChar() == 'Y'))
+          && !((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("dirt")
+                  && equipmentUnit.getIsAvailableChar() == 'N')
+              || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+                  && equipmentUnit.getIsAvailableChar() == 'N'))) {
+        inUseEquipment.add(equipmentUnit);
+      }
+    }
+    return inUseEquipment;
   }
 
   @FXML
