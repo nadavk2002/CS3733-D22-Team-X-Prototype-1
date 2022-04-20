@@ -3,227 +3,231 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
-<?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AppController">
-   <children>
-      <ImageView fitHeight="1080.0" opacity="0.2" pickOnBounds="true" preserveRatio="true" translateX="-30.0">
-         <image>
-            <Image url="@../assets/ezgif.com-gif-maker.jpg" />
-         </image>
-         <viewport>
-            <Rectangle2D />
-         </viewport>
-      </ImageView>
-      <GridPane fx:id="landingPage" prefHeight="1080.0" prefWidth="1620.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="200.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="5.0" prefHeight="46.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AppController">
+   <center>
+      <ScrollPane prefHeight="1080.0" prefWidth="1620.0" BorderPane.alignment="CENTER">
+        <content>
+            <GridPane fx:id="landingPage" prefHeight="1380.0" prefWidth="1620.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="200.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="200.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="5.0" prefHeight="50.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="ReqMedicineDelivery" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqMedicineDeliveryButton" prefHeight="235.0" prefWidth="300.0" text="Request Medicine Delivery" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true" translateX="3.0">
+                           <Image url="@../assets/prescription.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="ReqLang" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqLangButton" prefHeight="235.0" prefWidth="300.0" text="Request Language Interpreter" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true" translateX="-12.0">
+                           <Image url="@../assets/translation.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="ReqLaundry" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqLaundryButton" prefHeight="235.0" prefWidth="300.0" text="Request Laundry Service" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true">
+                           <Image url="@../assets/laundry.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="ReqInTransport" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqInTransportButton" prefHeight="235.0" prefWidth="446.0" text="Request Internal Patient Transportation" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true">
+                           <Image url="@../assets/patientTransport.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="ReqJanitor" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqJanitorButton" prefHeight="235.0" prefWidth="300.0" text="Request Janitorial Services" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true">
+                           <Image url="@../assets/broomstick.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="mealReq" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#mealReqButton" prefHeight="235.0" prefWidth="300.0" text="Request Patient Meal" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true">
+                           <Image url="@../assets/food.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="GiftDelivery" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#GiftDeliveryButton" prefHeight="235.0" prefWidth="300.0" text="Gift Delivery" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/bouquet.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="LabRequest" cache="true" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#LabRequestButton" prefHeight="235.0" prefWidth="300.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true">
+                           <Image url="@../assets/beaker.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="equipmentRequest" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#equipmentRequestButton" prefHeight="235.0" prefWidth="300.0" text="Request Equipment Delivery" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="125.0" preserveRatio="true" translateX="4.0">
+                           <Image url="@../assets/stethoscope.png" />
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label fx:id="nameTextOne" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Dylan Nguyen" textAlignment="CENTER" textFill="#657fbc" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="nameTextTwo" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Sharon Wu" textAlignment="CENTER" textFill="#657fbc" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="nameTextThree" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Nicholas Markou" textAlignment="CENTER" textFill="#657fbc" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
+                  <Label fx:id="nameTextFour" text="Sharon Wu" textFill="#657fbc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameTextSeven" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Dylan Nguyen" textAlignment="CENTER" textFill="#657fbc" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameTextNine" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Zhuofan Lu &amp; Dylan Nguyen" textAlignment="CENTER" textFill="#657fbc" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameTextEight" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Zhuofan Lu" textAlignment="CENTER" textFill="#657fbc" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameTextFive" text="Nadav Konstantine" textFill="#657fbc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="nameTextSix" text="Jordan Wecler" textFill="#657fbc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font name="System Italic" size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+        </content>
+      </ScrollPane>
+   </center>
+   <top>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="ReqMedicineDelivery" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqMedicineDeliveryButton" prefHeight="235.0" prefWidth="300.0" text="Request Medicine Delivery" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true" translateX="3.0">
-                     <Image url="@../assets/prescription.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="ReqLang" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqLangButton" prefHeight="235.0" prefWidth="300.0" text="Request Language Interpreter" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true" translateX="-12.0">
-                     <Image url="@../assets/translation.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="ReqLaundry" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqLaundryButton" prefHeight="235.0" prefWidth="300.0" text="Request Laundry Service" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true">
-                     <Image url="@../assets/laundry.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="ReqInTransport" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqInTransportButton" prefHeight="235.0" prefWidth="446.0" text="Request Internal Patient Transportation" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true">
-                     <Image url="@../assets/patientTransport.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="ReqJanitor" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqJanitorButton" prefHeight="235.0" prefWidth="300.0" text="Request Janitorial Services" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true">
-                     <Image url="@../assets/broomstick.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="mealReq" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#mealReqButton" prefHeight="235.0" prefWidth="300.0" text="Request Patient Meal" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true">
-                     <Image url="@../assets/food.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="GiftDelivery" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#GiftDeliveryButton" prefHeight="235.0" prefWidth="300.0" text="Gift Delivery" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/bouquet.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <JFXButton fx:id="LabRequest" cache="true" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#LabRequestButton" prefHeight="235.0" prefWidth="300.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true">
-                     <Image url="@../assets/beaker.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <Label fx:id="mainTitle" prefHeight="150.0" prefWidth="470.0" styleClass="scene-title" text="Service Request Systems" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-               <font>
-                  <Font name="System Bold" size="46.0" />
-               </font>
-            </Label>
-            <TextField fx:id="searchBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-            <JFXToggleButton fx:id="nameToggle" onAction="#nameToggleButton" prefHeight="86.0" prefWidth="262.0" size="15.0" text="Show Names" textFill="#446fdc" toggleColor="#446fdc" toggleLineColor="#aec2ef" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+            <JFXToggleButton fx:id="nameToggle" onAction="#nameToggleButton" prefHeight="86.0" prefWidth="262.0" size="15.0" text="Show Names" textFill="#446fdc" toggleColor="#446fdc" toggleLineColor="#aec2ef">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXToggleButton>
-            <JFXButton fx:id="equipmentRequest" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#equipmentRequestButton" prefHeight="235.0" prefWidth="300.0" text="Request Equipment Delivery" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label fx:id="mainTitle" prefHeight="150.0" prefWidth="470.0" styleClass="scene-title" text="Service Request Systems" textAlignment="CENTER" textFill="#446fdc" wrapText="true">
                <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="125.0" preserveRatio="true" translateX="4.0">
-                     <Image url="@../assets/stethoscope.png" />
-                  </ImageView>
-               </graphic>
-            </JFXButton>
-            <Label fx:id="nameTextOne" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Dylan Nguyen" textAlignment="CENTER" textFill="#657fbc" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Label>
-            <Label fx:id="nameTextTwo" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Sharon Wu" textAlignment="CENTER" textFill="#657fbc" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Label>
-            <Label fx:id="nameTextThree" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Nicholas Markou" textAlignment="CENTER" textFill="#657fbc" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </Label>
-            <Label fx:id="nameTextFour" text="Sharon Wu" textFill="#657fbc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
+                  <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <Label fx:id="nameTextSeven" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Dylan Nguyen" textAlignment="CENTER" textFill="#657fbc" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-            </Label>
-            <Label fx:id="nameTextNine" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Zhuofan Lu &amp; Dylan Nguyen" textAlignment="CENTER" textFill="#657fbc" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-            </Label>
-            <Label fx:id="nameTextEight" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Zhuofan Lu" textAlignment="CENTER" textFill="#657fbc" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-            </Label>
-            <Label fx:id="nameTextFive" text="Nadav Konstantine" textFill="#657fbc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-            </Label>
-            <Label fx:id="nameTextSix" text="Jordan Wecler" textFill="#657fbc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
-               <font>
-                  <Font name="System Italic" size="19.0" />
-               </font>
-            </Label>
+            <TextField fx:id="searchBox" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" />
          </children>
-      </GridPane>
-   </children>
-</AnchorPane>
+      </HBox>
+   </top>
+</BorderPane>
