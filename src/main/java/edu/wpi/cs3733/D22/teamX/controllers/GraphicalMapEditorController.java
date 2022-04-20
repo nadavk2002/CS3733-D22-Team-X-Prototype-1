@@ -468,9 +468,13 @@ public class GraphicalMapEditorController implements Initializable {
       rect.setWidth(25);
       rect.setHeight(25);
       String string = s.getSimpleName();
-      rect.setFill(
-          new ImagePattern(
-              new Image("/edu/wpi/cs3733/D22/teamX/assets/" + s.getSimpleName() + ".png")));
+      try {
+        rect.setFill(
+            new ImagePattern(
+                new Image("/edu/wpi/cs3733/D22/teamX/assets/" + s.getSimpleName() + ".png")));
+      } catch (Exception e) {
+        rect.setFill(Paint.valueOf("GREY"));
+      }
       rect.setX(s.getDestination().getxCoord() - (rect.getWidth() / 2));
       rect.setY(s.getDestination().getyCoord() - (rect.getHeight() / 2));
       imageGroup.getChildren().add(rect);

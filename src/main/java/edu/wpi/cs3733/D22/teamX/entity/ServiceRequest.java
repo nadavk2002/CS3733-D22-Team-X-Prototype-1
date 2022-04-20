@@ -79,18 +79,21 @@ public abstract class ServiceRequest {
   public String getSimpleName() {
     // there's definitely a way to simplify this, maybe a list of all possible requests?
     // whatever tho
-    if (this instanceof GiftDeliveryRequest) return "GiftDeliveryRequest";
-    if (this instanceof JanitorServiceRequest) return "JanitorServiceRequest";
-    if (this instanceof LabServiceRequest) return "LabServiceRequest";
-    if (this instanceof LangServiceRequest) return "LangServiceRequest";
-    if (this instanceof LaundyServiceRequest) return "LaundyServiceRequest";
-    if (this instanceof MealServiceRequest) return "MealServiceRequest";
-    if (this instanceof MedicalEquipmentServiceRequest) return "MedicalEquipmentServiceRequest";
-    if (this instanceof MedicineServiceRequest) return "MedicineServiceRequest";
-    if (this instanceof SharpsDisposalRequest) return "SharpsDisposalRequest";
-    if (this instanceof MaintenanceServiceRequest) return "MaintenanceServiceRequest";
-    System.out.println("ADD NEW SERVICE REQUEST HERE OTHERWISE MAP EDITOR WONT WORK :[");
-    return null;
+    return this.getClass().getSimpleName();
+    //    if (this instanceof GiftDeliveryRequest) return "GiftDeliveryRequest";
+    //    if (this instanceof JanitorServiceRequest) return "JanitorServiceRequest";
+    //    if (this instanceof LabServiceRequest) return "LabServiceRequest";
+    //    if (this instanceof LangServiceRequest) return "LangServiceRequest";
+    //    if (this instanceof LaundyServiceRequest) return "LaundyServiceRequest";
+    //    if (this instanceof MealServiceRequest) return "MealServiceRequest";
+    //    if (this instanceof MedicalEquipmentServiceRequest) return
+    // "MedicalEquipmentServiceRequest";
+    //    if (this instanceof MedicineServiceRequest) return "MedicineServiceRequest";
+    //    if (this instanceof SharpsDisposalRequest) return "SharpsDisposalRequest";
+    //    if (this instanceof InTransportServiceRequest) return "InTransportServiceRequest";
+
+    //    System.out.println("ADD NEW SERVICE REQUEST HERE OTHERWISE MAP EDITOR WONT WORK :[");
+    //    return null;
   }
 
   //  public String getRequestingUser() {
