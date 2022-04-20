@@ -389,7 +389,8 @@ public class GraphicalMapEditorController implements Initializable {
       rectangle.setY(e.getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
       rectangle.setStroke(Paint.valueOf("BLACK"));
       rectangle.setFill(
-          new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
+          new ImagePattern(
+              new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType().getModel() + ".png")));
       rectangle.setVisible(showEquipCheck.isSelected());
       rectangle.setOnDragExited(
           event -> {
@@ -429,7 +430,8 @@ public class GraphicalMapEditorController implements Initializable {
               rectangle.setCursor(Cursor.HAND);
               rectangle.setFill(
                   new ImagePattern(
-                      new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
+                      new Image(
+                          "/edu/wpi/cs3733/D22/teamX/assets/" + e.getType().getModel() + ".png")));
             }
           });
 
