@@ -232,10 +232,13 @@
                         <Font name="System Italic" size="19.0" />
                      </font>
                   </Label>
-                  <Label fx:id="nameTextTen" text="Nicholas Moy" textFill="#657fbc" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
+                  <Label fx:id="nameTextTen" alignment="CENTER" contentDisplay="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Nicholas Moy" textAlignment="CENTER" textFill="#657fbc" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="System Italic" size="19.0" />
                      </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                   </Label>
                   <Label fx:id="nameTextEleven" text="Darren Kwee" textFill="#657fbc" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BOTTOM">
                      <font>
