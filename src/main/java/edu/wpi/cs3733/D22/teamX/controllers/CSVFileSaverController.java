@@ -13,12 +13,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 
 public class CSVFileSaverController implements Initializable {
   public JFXButton browser;
-  public AnchorPane anchorCSVSaver;
+  @FXML public BorderPane csvSaverPane;
   public static boolean loaded = false;
 
   @Override
@@ -26,19 +26,25 @@ public class CSVFileSaverController implements Initializable {
     // System.out.println("Hello");
   }
 
-  public void getDirectoryForSaving(ActionEvent actionEvent) throws loadSaveFromCSVException {
+  public void getDirectoryForSaving(ActionEvent actionEvent)
+      throws loadSaveFromCSVException,
+          edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     DirectoryChooser csvSaverDC = new DirectoryChooser();
-    File csvSaverDir = csvSaverDC.showDialog(anchorCSVSaver.getScene().getWindow());
+    File csvSaverDir = csvSaverDC.showDialog(csvSaverPane.getScene().getWindow());
     if (csvSaverDir == null) {
       return;
     }
     String csvSaverDirStr = csvSaverDir.getPath() + "\\";
     DatabaseCreator.saveAllCSV(csvSaverDirStr);
+    edu.wpi.cs3733.D22.teamX.api.DatabaseCreator.saveAllCSV(csvSaverDirStr);
     Platform.exit();
   }
 
-  public void saveToDefault(ActionEvent actionEvent) throws loadSaveFromCSVException {
+  public void saveToDefault(ActionEvent actionEvent)
+      throws loadSaveFromCSVException,
+          edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     DatabaseCreator.saveAllCSV("");
+    edu.wpi.cs3733.D22.teamX.api.DatabaseCreator.saveAllCSV("");
     Platform.exit();
   }
 

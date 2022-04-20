@@ -3,7 +3,10 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.api.*;
+import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
+import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -30,20 +33,20 @@ public class BasicLayoutController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // startTime();
+    //    pages = new HashMap<String, String>();
+    //    pages.put("Main Menu", "app.fxml");
+    //    pages.put("Equipment Delivery", "equipmentDelivery.fxml");
+    //    pages.put("Lab Request", "LabRequest.fxml");
+    //    pages.put("Meal Request", "mealRequest.fxml");
+    //    pages.put("Medicine Delivery", "Medicine_Delivery.fxml");
+    //    pages.put("Request Transport", "ReqInTransport.fxml");
+    //    pages.put("Request Language Interpreter", "ReqLang.fxml");
+    //    pages.put("Request Laundry Services", "ReqLaundry.fxml");
+    //    pages.put("Request Janitorial Services", "JanitorialRequest.fxml");
+    //    pages.put("Request Gift Delivery", "GiftDelivery.fxml");
+    //    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
+    //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     initClock();
-    pages = new HashMap<String, String>();
-    pages.put("Main Menu", "app.fxml");
-    pages.put("Equipment Delivery", "equipmentDelivery.fxml");
-    pages.put("Lab Request", "LabRequest.fxml");
-    pages.put("Meal Request", "mealRequest.fxml");
-    pages.put("Medicine Delivery", "Medicine_Delivery.fxml");
-    pages.put("Request Transport", "ReqInTransport.fxml");
-    pages.put("Request Language Interpreter", "ReqLang.fxml");
-    pages.put("Request Laundry Services", "ReqLaundry.fxml");
-    pages.put("Request Janitorial Services", "JanitorialRequest.fxml");
-    pages.put("Request Gift Delivery", "GiftDelivery.fxml");
-    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
-    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     userName.setText("Hello, " + LoginScreenController.currentUsername);
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
@@ -126,10 +129,21 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication() throws IOException, loadSaveFromCSVException {
+  public void switchAPILandingPage() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/APILandingPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  void ExitApplication()
+      throws IOException, loadSaveFromCSVException, loadSaveFromCSVException,
+          edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
+      edu.wpi.cs3733.D22.teamX.api.DatabaseCreator.saveAllCSV("");
     } else {
       App.switchScene(
           FXMLLoader.load(
@@ -144,7 +158,7 @@ public class BasicLayoutController implements Initializable {
             new KeyFrame(
                 Duration.ZERO,
                 e -> {
-                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy  h:mm a");
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
                   timeLabel.setText(LocalDateTime.now().format(formatter));
                 }),
             new KeyFrame(Duration.seconds(1)));
