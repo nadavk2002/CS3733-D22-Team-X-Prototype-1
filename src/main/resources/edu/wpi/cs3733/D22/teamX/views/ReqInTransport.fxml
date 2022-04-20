@@ -7,21 +7,21 @@
 
 <AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqInTransportController">
     <children>
-        <ChoiceBox fx:id="selectPatient" layoutX="733.0" layoutY="458.0" prefWidth="150.0" />
-        <Label layoutX="646.0" layoutY="463.0" text="Select Patient:" />
-        <Label layoutX="645.0" layoutY="494.0" text="Start Location:" />
-        <Label layoutX="670.0" layoutY="528.0" text="Assignee:" />
-        <Label layoutX="646.0" layoutY="562.0" text="Service Status:" />
-        <ChoiceBox fx:id="selectStartLocation" layoutX="733.0" layoutY="490.0" prefWidth="150.0" />
-        <ChoiceBox fx:id="serviceStatus" layoutX="733.0" layoutY="557.0" prefWidth="150.0" />
         <Label layoutX="561.0" layoutY="362.0" text="Request Inpatient Delivery" textFill="#446fdc">
             <font>
                 <Font name="System Bold" size="36.0" />
             </font>
         </Label>
+        <ChoiceBox fx:id="selectPatient" layoutX="733.0" layoutY="458.0" prefWidth="150.0" />
+        <Label layoutX="640.0" layoutY="463.0" text="Select Patient:" />
+        <Label layoutX="638.0" layoutY="494.0" text="Start Location:" />
+        <Label layoutX="664.0" layoutY="528.0" text="Assignee:" />
+        <Label layoutX="639.0" layoutY="562.0" text="Service Status:" />
+        <ChoiceBox fx:id="selectStartLocation" layoutX="733.0" layoutY="490.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="serviceStatus" layoutX="733.0" layoutY="557.0" prefWidth="150.0" />
         <ChoiceBox fx:id="assignStaff" layoutX="733.0" layoutY="523.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="Destination" layoutX="733.0" layoutY="592.0" prefWidth="150.0" />
-      <Label layoutX="658.0" layoutY="596.0" prefHeight="18.0" prefWidth="66.0" text="Destination:" textAlignment="RIGHT" />
+        <ChoiceBox fx:id="destination" layoutX="733.0" layoutY="592.0" prefWidth="150.0" />
+        <Label layoutX="651.0" layoutY="596.0" text="Destination:" />
         <JFXButton fx:id="submitButton" layoutX="736.0" layoutY="633.0" onAction="#submitRequest" text="Submit Request" textFill="#446fdc">
             <font>
                 <Font name="System Bold" size="13.0" />

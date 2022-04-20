@@ -13,12 +13,11 @@ public class InTransportServiceRequest extends ServiceRequest {
 
   public InTransportServiceRequest(
       String requestID,
-      Location destination,
-      String status,
-      Employee assignee,
       String patientName,
       String transportFrom,
-      String addAccommodation) {
+      Employee assignee,
+      String status,
+      Location destination) {
     super(requestID, destination, status, assignee);
     this.patientName = patientName;
     this.transportFrom = transportFrom;

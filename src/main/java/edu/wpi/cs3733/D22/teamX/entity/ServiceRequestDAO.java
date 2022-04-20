@@ -81,6 +81,10 @@ public class ServiceRequestDAO {
     return maintenanceServiceRequestDAO.getAllRecords();
   }
 
+  public List<InTransportServiceRequest> getAllInTransportServiceRequests() {
+    return inTransportServiceRequestDAO.getAllRecords();
+  }
+
   // Get a specific request
   public GiftDeliveryRequest getGiftDeliveryRequest(String requestID) {
     return giftDeliveryRequestDAO.getRecord(requestID);
@@ -120,6 +124,10 @@ public class ServiceRequestDAO {
 
   public MaintenanceServiceRequest getMaintenanceServiceRequest(String requestID) {
     return maintenanceServiceRequestDAO.getRecord(requestID);
+  }
+
+  public InTransportServiceRequest getInTransportServiceRequest(String requestID) {
+    return inTransportServiceRequestDAO.getRecord(requestID);
   }
 
   // Add
@@ -208,6 +216,10 @@ public class ServiceRequestDAO {
     maintenanceServiceRequestDAO.updateRecord(request);
   }
 
+  public void updateRecord(InTransportServiceRequest request) {
+    inTransportServiceRequestDAO.updateRecord(request);
+  }
+
   // Delete
   public void deleteRecord(GiftDeliveryRequest request) {
     giftDeliveryRequestDAO.deleteRecord(request);
@@ -249,6 +261,10 @@ public class ServiceRequestDAO {
     maintenanceServiceRequestDAO.deleteRecord(request);
   }
 
+  public void deleteRecord(InTransportServiceRequest request) {
+    inTransportServiceRequestDAO.deleteRecord(request);
+  }
+
   // getService requests
   public ServiceRequest getServiceRequest(String requestID) {
     for (ServiceRequest request : serviceRequests) {
@@ -271,6 +287,7 @@ public class ServiceRequestDAO {
     allRequests.addAll(medicineDeliverServiceRequestDAO.getAllRecords());
     allRequests.addAll(sharpsDisposalRequestDAO.getAllRecords());
     allRequests.addAll(maintenanceServiceRequestDAO.getAllRecords());
+    allRequests.addAll(inTransportServiceRequestDAO.getAllRecords());
     this.serviceRequests = allRequests;
   }
 

@@ -37,7 +37,21 @@ public class ReqInTransportController implements Initializable {
     employees = emplDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(true);
-    selectPatient.getItems().addAll(new String[] {"Patient 1", "Patient 2", "Patient 3"});
+    selectPatient
+        .getItems()
+        .addAll(
+            new String[] {
+              "PATT0001",
+              "PATT0002",
+              "PATT0003",
+              "PATT0004",
+              "PATT0005",
+              "PATT0006",
+              "PATT0007",
+              "PATT0008",
+              "PATT0009",
+              "PATT0010"
+            });
     assignStaff.setItems(this.getEmployeeIDs());
     //    selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
     serviceStatus.getItems().addAll(" ", "PROC", "DONE");
@@ -46,8 +60,9 @@ public class ReqInTransportController implements Initializable {
     destination.setItems(getLocationNames());
     selectPatient.setOnAction((ActionEvent event) -> enableSubmitButton());
     selectStartLocation.setOnAction((ActionEvent event) -> enableSubmitButton());
-//    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
+    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
+    destination.setOnAction((ActionEvent event) -> enableSubmitButton());
   }
 
   /**
