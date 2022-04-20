@@ -192,7 +192,6 @@ public class AppController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
     buttonList.addAll(
         LabRequest,
         ReqInTransport,

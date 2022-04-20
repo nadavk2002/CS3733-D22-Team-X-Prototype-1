@@ -1,68 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="loginScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
-   <children>
-      <ImageView fitHeight="1402.0" fitWidth="2001.0" layoutX="-35.0" layoutY="-292.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/BWH Building.jpg" />
-         </image>
-      </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#446fdbf0" height="1100.0" layoutX="958.0" layoutY="-8.0" stroke="#446fdc" strokeType="INSIDE" width="971.0" />
-      <VBox fx:id="loginFields" layoutX="1259.0" layoutY="552.0" prefHeight="280.0" prefWidth="392.0" spacing="28.0">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
+   <center>
+      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField fx:id="username" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Username">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </TextField>
-            <PasswordField fx:id="password" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Password">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </PasswordField>
-            <JFXButton fx:id="loginButton" buttonType="RAISED" disable="true" onAction="#validLogin" prefHeight="66.0" prefWidth="411.0" ripplerFill="WHITE" text="Login">
-               <font>
-                  <Font name="System Bold" size="30.0" />
-               </font>
-            </JFXButton>
-            <Label fx:id="message" prefHeight="54.0" prefWidth="438.0">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
+            <ImageView fitHeight="1080.0" fitWidth="1920.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/Brigham-Womens-TO-USE-crop.jpg" />
+               </image>
+               <effect>
+                  <Blend>
+                     <topInput>
+                        <GaussianBlur radius="30.0" />
+                     </topInput>
+                  </Blend>
+               </effect>
+            </ImageView>
+            <Rectangle arcHeight="150.0" arcWidth="150.0" fill="#4572d9" height="800.0" smooth="false" strokeType="INSIDE" styleClass="content-background" width="1000.0">
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </Rectangle>
+            <VBox fx:id="loginFields" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" spacing="30.0">
+               <children>
+                  <ImageView fitHeight="180.0" fitWidth="703.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/BWHlogo.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="loginTitle" styleClass="title-label" text="Login:">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="200.0" prefWidth="800.0">
+                     <children>
+                        <VBox fillWidth="false" prefHeight="200.0" prefWidth="400.0" spacing="20.0">
+                           <children>
+                              <TextField fx:id="username" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Username">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <PasswordField fx:id="password" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Password">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </PasswordField>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="500.0" spacing="10.0">
+                           <children>
+                              <Label fx:id="dbText" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="450.0" text="Select a server option:" wrapText="true">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXRadioButton fx:id="optionEmbedded" mnemonicParsing="false" prefHeight="35.0" prefWidth="181.0" selected="true" text="Embedded" textFill="#f6f9ff">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="serverOptions" />
+                                 </toggleGroup>
+                                 <unSelectedColor>
+                                    <Color red="0.9647058844566345" green="0.9764705896377563" blue="1.0" />
+                                 </unSelectedColor>
+                                 <selectedColor>
+                                    <Color red="0.30588236451148987" green="0.5607843399047852" blue="0.9725490212440491" />
+                                 </selectedColor>
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </JFXRadioButton>
+                              <JFXRadioButton fx:id="optionClient" mnemonicParsing="false" prefHeight="35.0" prefWidth="121.0" text="Client" textFill="#f6f9ff" toggleGroup="$serverOptions">
+                                 <selectedColor>
+                                    <Color red="0.30588236451148987" green="0.5607843399047852" blue="0.9725490212440491" />
+                                 </selectedColor>
+                                 <unSelectedColor>
+                                    <Color red="0.9647058844566345" green="0.9764705896377563" blue="1.0" />
+                                 </unSelectedColor>
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </JFXRadioButton>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="80.0" prefWidth="500.0" spacing="40.0">
+                     <children>
+                        <JFXButton fx:id="loginButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#validLogin" prefHeight="40.0" prefWidth="120.0" text="Login" textFill="WHITE">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="loginExitButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#ExitApplication" prefHeight="40.0" prefWidth="90.0" text="Exit" textFill="WHITE">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <Label fx:id="message" prefHeight="57.0" prefWidth="438.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
-      </VBox>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1381.0" layoutY="356.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/Avatar User.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="180.0" fitWidth="703.0" layoutX="106.0" layoutY="737.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../assets/BWHlogo.png" />
-         </image>
-      </ImageView>
-      <JFXButton layoutX="1779.0" layoutY="63.0" onAction="#ExitApplication" prefHeight="41.0" prefWidth="83.0" text="Exit" textFill="WHITE">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </JFXButton>
-      <VBox fx:id="serverVBox" layoutX="1052.0" layoutY="769.0" prefHeight="200.0" prefWidth="257.0">
-         <children>
-            <Label alignment="TOP_LEFT" prefHeight="44.0" prefWidth="142.0" text="Select a server option (Only available on startup):" wrapText="true" />
-            <JFXRadioButton fx:id="optionEmbedded" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="33.0" prefWidth="93.0" selected="true" text="Embedded">
-               <toggleGroup>
-                  <ToggleGroup fx:id="serverOptions" />
-               </toggleGroup>
-            </JFXRadioButton>
-            <JFXRadioButton fx:id="optionClient" alignment="TOP_LEFT" mnemonicParsing="false" prefHeight="30.0" prefWidth="93.0" text="Client" toggleGroup="$serverOptions" />
-         </children></VBox>
-   </children>
-</AnchorPane>
+      </StackPane>
+   </center>
+</BorderPane>
