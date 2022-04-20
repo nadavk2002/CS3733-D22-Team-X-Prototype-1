@@ -22,9 +22,7 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
@@ -309,10 +307,25 @@ public class GraphicalMapEditorController implements Initializable {
         rect.setX(locationList.get(i).getxCoord() - (rect.getWidth() / 2));
         rect.setY(locationList.get(i).getyCoord() - rect.getHeight());
         rect.setFill(img);
+        rect.setOnDragOver(
+            event -> {
+              event.acceptTransferModes(TransferMode.ANY);
+            });
+        rect.setOnDragDropped(
+            event -> {
+              pane.setGestureEnabled(true);
+              EquipmentUnit equip = equipDAO.getRecord(event.getDragboard().getString());
+              equip.getCurrLocation().removeUnit(equip);
+              ((Location) rect.getUserData()).addUnit(equip);
+              equip.setCurrLocation((Location) rect.getUserData());
+              loadLocation(equip.getCurrLocation().getFloor());
+            });
+
         rect.setOnContextMenuRequested(
             event -> {
               ContextMenu menu = locRightClickMenu(rect);
               menu.show(rect, event.getScreenX(), event.getScreenY());
+              // event.consume();
             });
         rect.setOnMouseDragged(
             new EventHandler<MouseEvent>() {
@@ -329,6 +342,7 @@ public class GraphicalMapEditorController implements Initializable {
                 if (event.getY() - (rect.getHeight() / 2) > imageView.getY()
                     && event.getY() <= imageView.getY() + imageView.getBoundsInLocal().getHeight())
                   rect.setY(event.getY() - rect.getHeight());
+                // event.consume();
               }
             });
         rect.setOnMouseReleased(
@@ -350,6 +364,7 @@ public class GraphicalMapEditorController implements Initializable {
                 if (y > 610) y = 610;
                 xCordText.setText(String.valueOf(x));
                 yCordText.setText(String.valueOf(y));
+                // event.consume();
               }
             });
         rect.setVisible(showLocCheck.isSelected());
@@ -373,10 +388,30 @@ public class GraphicalMapEditorController implements Initializable {
       rectangle.setX(e.getCurrLocation().getxCoord() - (rectangle.getWidth() / 2));
       rectangle.setY(e.getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
       rectangle.setStroke(Paint.valueOf("BLACK"));
+      rectangle.setFill(
+          new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
+      rectangle.setVisible(showEquipCheck.isSelected());
+      rectangle.setOnDragExited(
+          event -> {
+            pane.setGestureEnabled(true);
+          });
+
+      rectangle.setOnDragDetected(
+          event -> {
+            Dragboard db = rectangle.startDragAndDrop(TransferMode.ANY);
+            pane.setGestureEnabled(false);
+            System.out.println("DRAG DETECTED");
+            ClipboardContent cb = new ClipboardContent();
+            cb.putString(((EquipmentUnit) rectangle.getUserData()).getUnitID());
+            db.setContent(cb);
+            event.consume();
+          });
+
       rectangle.setOnContextMenuRequested(
           event -> {
             ContextMenu menu = equipRightClickMenu(rectangle);
             menu.show(rectangle, event.getScreenX(), event.getScreenY());
+            // event.consume();
           });
       rectangle.setFill(
           new ImagePattern(
@@ -386,9 +421,18 @@ public class GraphicalMapEditorController implements Initializable {
           new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
+              if (event.getButton() != MouseButton.PRIMARY) return;
+              pane.setGestureEnabled(true);
+              imageGroup.setDisable(false);
               equipmentChoice.setValue(((EquipmentUnit) rectangle.getUserData()).getUnitID());
+              EquipmentUnit l = (EquipmentUnit) rectangle.getUserData();
+              rectangle.setCursor(Cursor.HAND);
+              rectangle.setFill(
+                  new ImagePattern(
+                      new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
             }
           });
+
       imageGroup.getChildren().add(rectangle);
       equipmentChoice.getItems().add(e.getUnitID());
     }
@@ -542,6 +586,19 @@ public class GraphicalMapEditorController implements Initializable {
     newImage.setFitHeight(610);
     newImage.setFitWidth(610);
     imageGroup.getChildren().add(newImage);
+    newImage.setOnDragDropped(
+        event -> {
+          System.out.println("ondragdropped");
+          Dragboard db = event.getDragboard();
+          boolean completed = false;
+          if (db.hasString()) {
+            EquipmentUnit movedUnit = equipDAO.getRecord(db.getString());
+            movedUnit.setCurrLocation((Location) newImage.getUserData());
+            completed = true;
+          }
+          event.setDropCompleted(completed);
+          // event.consume();
+        });
     loadMap(location);
   }
 
