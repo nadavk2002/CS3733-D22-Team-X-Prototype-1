@@ -19,7 +19,8 @@ public class ReqLangController implements Initializable {
   @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus, assignStaff;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
+  //  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
@@ -94,12 +95,12 @@ public class ReqLangController implements Initializable {
   public void submitRequest() {
     LangServiceRequest request = new LangServiceRequest();
 
-    request.setRequestID(langDAO.makeID());
+    request.setRequestID(requestDAO.makeLangServiceRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setLanguage(selectLang.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
-    langDAO.addRecord(request);
+    requestDAO.addRecord(request);
     this.resetFields();
   }
 }

@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
@@ -58,8 +59,18 @@ public class LoginScreenController implements Initializable {
         }
       }
       App.switchRoot();
+      password.setOnKeyPressed(
+          event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+              try {
+                App.switchRoot();
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+            }
+          });
     } else {
-      message.setText("        Your username or password is incorrect");
+      message.setText("    Your username or password is incorrect");
       message.setTextFill(Color.rgb(210, 39, 30));
       message.setTextAlignment(TextAlignment.CENTER);
     }

@@ -4,18 +4,19 @@ import java.util.Objects;
 
 public class EquipmentUnit {
   private String unitID;
-  private String type;
+  private EquipmentType type;
   private boolean isAvailable;
   private Location currLocation;
 
-  public EquipmentUnit(String unitID, String type, boolean isAvailable, Location currLocation) {
+  public EquipmentUnit(
+      String unitID, EquipmentType type, boolean isAvailable, Location currLocation) {
     this.unitID = unitID;
     this.type = type;
     this.isAvailable = isAvailable;
     this.currLocation = currLocation;
   }
 
-  public EquipmentUnit(String unitID, String type, char isAvailable, Location currLocation) {
+  public EquipmentUnit(String unitID, EquipmentType type, char isAvailable, Location currLocation) {
     this.unitID = unitID;
     this.type = type;
     // Converts CHAR(1) to boolean
@@ -29,7 +30,7 @@ public class EquipmentUnit {
 
   public EquipmentUnit() {
     unitID = "";
-    type = "";
+    type = null;
     isAvailable = false;
     currLocation = new Location();
   }
@@ -42,11 +43,11 @@ public class EquipmentUnit {
     this.unitID = unitID;
   }
 
-  public String getType() {
+  public EquipmentType getType() {
     return type;
   }
 
-  public void setType(String type) {
+  public void setType(EquipmentType type) {
     this.type = type;
   }
 

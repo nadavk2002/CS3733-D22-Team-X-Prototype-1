@@ -98,11 +98,11 @@ public class EmployeeDAO implements DAO<Employee> {
         Statement statement = connection.createStatement();
         // update sql object
         statement.executeUpdate(
-            "UPDATE Employee SET firstName = "
+            "UPDATE Employee SET firstName = '"
                 + recordObject.getFirstName()
-                + ", lastName = "
+                + "', lastName = '"
                 + recordObject.getLastName()
-                + ", clearanceType = '"
+                + "', clearanceType = '"
                 + recordObject.getClearanceType()
                 + "', jobTitle = '"
                 + recordObject.getJobTitle()

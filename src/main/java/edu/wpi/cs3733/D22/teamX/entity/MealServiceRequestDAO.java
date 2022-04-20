@@ -156,7 +156,7 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
       initialization.execute(msr.toString());
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("MealSR atabase could not be updated");
+      System.out.println("MealSR database could not be updated");
     }
     recordObject.getDestination().addRequest(recordObject);
   }

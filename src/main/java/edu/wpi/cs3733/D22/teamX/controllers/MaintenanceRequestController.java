@@ -14,22 +14,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-public class JanitorialRequestController implements Initializable {
+public class MaintenanceRequestController implements Initializable {
   @FXML private Button mainMenu, submitButton;
-  @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
+  @FXML private ChoiceBox<String> roomNum, serviceStatus, assignee;
+  @FXML private TextArea description;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private ServiceRequestDAO janitorDAO = ServiceRequestDAO.getDAO();
+  private ServiceRequestDAO maintenanceDAO = ServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  private TableColumn<JanitorServiceRequest, String> idColumn = new TableColumn("Request ID");
-  private TableColumn<JanitorServiceRequest, String> assigneeColumn = new TableColumn("Assignee");
-  private TableColumn<JanitorServiceRequest, String> locationColumn = new TableColumn("Location");
-  private TableColumn<JanitorServiceRequest, String> statusColumn =
+  private TableColumn<MaintenanceServiceRequest, String> idColumn = new TableColumn("Request ID");
+  private TableColumn<MaintenanceServiceRequest, String> assigneeColumn =
+      new TableColumn("Assignee");
+  private TableColumn<MaintenanceServiceRequest, String> locationColumn =
+      new TableColumn("Location");
+  private TableColumn<MaintenanceServiceRequest, String> statusColumn =
       new TableColumn("Request Status");
-  private TableColumn<JanitorServiceRequest, String> serviceTypeColumn =
-      new TableColumn("Service Type");
+  private TableColumn<MaintenanceServiceRequest, String> descriptionColumn =
+      new TableColumn("Description");
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -38,13 +41,11 @@ public class JanitorialRequestController implements Initializable {
     resetFields();
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
-    serviceType.getItems().addAll("Bodily Fluids", "Chemical Spills", "Disinfection");
-    assignStaff.setItems(getEmployeeIDs());
-    //    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
+    assignee.setItems(getEmployeeIDs());
     roomNum.setItems(getLocationNames());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
-    serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());
-    assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
+    // description.setOnAction((ActionEvent event) -> enableSubmitButton());
+    assignee.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
   }
 
@@ -73,31 +74,31 @@ public class JanitorialRequestController implements Initializable {
   public void enableSubmitButton() {
     submitButton.setDisable(
         roomNum.getValue().equals("")
-            || serviceType.getValue().equals("")
             || serviceStatus.getValue().equals("")
-            || assignStaff.getValue().equals(""));
+            || assignee.getValue().equals("")
+            || description.getLength() <= 0
+            || description.getLength() > 140);
   }
 
   /** Resets all fields on the page. */
   @FXML
   public void resetFields() {
-    serviceType.setValue("");
+    assignee.setValue("");
     roomNum.setValue("");
     serviceStatus.setValue("");
-    assignStaff.setValue("");
+    description.clear();
   }
 
   /** Creates a service request from the fields on the javafx page */
   @FXML
   public void submitButton() {
-    JanitorServiceRequest request = new JanitorServiceRequest();
-
-    request.setRequestID(janitorDAO.makeJanitorServiceRequestID());
+    MaintenanceServiceRequest request = new MaintenanceServiceRequest();
+    request.setRequestID(maintenanceDAO.makeJanitorServiceRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
-    request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
-    request.setDescription(serviceType.getValue());
-    janitorDAO.addRecord(request);
+    request.setAssignee(emplDAO.getRecord(assignee.getValue()));
+    request.setDescription(description.getText());
+    maintenanceDAO.addRecord(request);
     this.resetFields();
   }
 
