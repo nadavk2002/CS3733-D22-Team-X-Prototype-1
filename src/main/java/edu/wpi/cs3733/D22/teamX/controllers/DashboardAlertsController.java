@@ -31,6 +31,14 @@ public class DashboardAlertsController implements Initializable {
   @FXML
   private void fillTable(ObservableList<EquipmentUnit> dirty) {}
 
+
+  private ObservableList<EquipmentUnit> sortByBeds(ObservableList<EquipmentUnit> dirtyEquipment){
+    ObservableList<EquipmentUnit> dirtyBeds = FXCollections.observableArrayList();
+    for(EquipmentUnit e : dirtyEquipment){
+      //if(e.)
+    }
+    return dirtyBeds;
+  }
   @FXML
   private ObservableList<EquipmentUnit> sortByDirty(ObservableList<EquipmentUnit> equipOnFloor) {
     ObservableList<EquipmentUnit> dirtyEquipment = FXCollections.observableArrayList();
