@@ -17,13 +17,13 @@ public class APILandingPageController implements Initializable {
       MealRequestAPI.run(
           470,
           180,
-          600,
-          600,
+          0,
+          0,
           "/edu/wpi/cs3733/D22/teamX/stylesheets/application.css",
           "FDEPT00101",
           "Hello");
     } catch (ServiceException e) {
-      throw new RuntimeException(e);
+      System.out.println("Service Exception Occured");
     }
   }
 }
