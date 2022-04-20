@@ -48,7 +48,9 @@ public class AppController implements Initializable {
       nameTextSix,
       nameTextSeven,
       nameTextEight,
-      nameTextNine;
+      nameTextNine,
+      nameTextTen,
+      nameTextEleven;
   ObservableList<Button> buttonList = FXCollections.observableArrayList();
 
   @FXML
@@ -63,6 +65,8 @@ public class AppController implements Initializable {
       nameTextSeven.setVisible(true);
       nameTextEight.setVisible(true);
       nameTextNine.setVisible(true);
+      nameTextTen.setVisible(true);
+      nameTextEleven.setVisible(true);
     } else {
       nameTextOne.setVisible(false);
       nameTextTwo.setVisible(false);
@@ -73,6 +77,8 @@ public class AppController implements Initializable {
       nameTextSeven.setVisible(false);
       nameTextEight.setVisible(false);
       nameTextNine.setVisible(false);
+      nameTextTen.setVisible(false);
+      nameTextEleven.setVisible(false);
     }
   }
 
@@ -229,6 +235,8 @@ public class AppController implements Initializable {
     nameTextSeven.setVisible(false);
     nameTextEight.setVisible(false);
     nameTextNine.setVisible(false);
+    nameTextTen.setVisible(false);
+    nameTextEleven.setVisible(false);
   }
 
   public void ReqSharpsButton() throws IOException {
