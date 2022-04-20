@@ -1,19 +1,144 @@
 @import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 
+
+/*@font-face{*/
+/*    !*-fx-font-family: Manrope;*!*/
+/*    !*src: url('WebFont.eot');*!*/
+/*    !*src: url('WebFont.eot?#iefix') format('embedded-opentype'),*!*/
+/*    !*src: url(manrope-variablefont_wght-webfont.woff) format("woff"),*!*/
+/*    !*url(Manrope-VariableFont_wght.ttf) format('truetype');*!*/
+/*    !*url('WebFont.svg#webfont') format('svg');*!*/
+/*}*/
+
 .root {
     -fx-off-white: #F6F9FF;
-    -fx-light-blue: #81BAD6;
-    -fx-blue: #4E8FF8;
-    -fx-dark-blue: #22457D;
-    -fx-navy-blue: #102B4A;
-}
-
-.label {
+    /*-fx-light-blue: #81BAD6;*/
+    -fx-light-blue: #4E8FF8;
+    /*-fx-dark-blue: #102B4A;*/
+    /*-fx-dark-blue: #1D4E86;*/
+    -fx-dark-blue: #2562A7;
     -fx-font-family: "Poppins";
 }
 
+.content-container > .label {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-off-white;
+}
+
+.content-container > .button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-off-white;
+    -fx-background-radius: 20px;
+}
+
+.content-container > .button:hover {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-off-white;
+    -fx-text-fill: -fx-light-blue;
+}
+
+.content-container > .text-field {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-off-white;
+    -fx-text-fill: -fx-dark-blue;
+}
+
+.content-background {
+    -fx-fill: -fx-dark-blue;
+}
+
+.title-label {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-dark-blue;
+}
+
+/* LOGIN SCREEN */
+#loginTitle {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+    -fx-text-fill: -fx-off-white;
+    -fx-wrap-text: true;
+}
+
+#loginExitButton {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-off-white;
+    -fx-background-radius: 20px;
+}
+
+#loginExitButton:hover {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-off-white;
+    -fx-text-fill: -fx-light-blue;
+}
+
+#loginButton {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-off-white;
+    -fx-background-radius: 20px;
+}
+
+#loginButton:hover {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-off-white;
+    -fx-text-fill: -fx-light-blue;
+}
+
+#dbText {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: bold;
+    -fx-font-size: 30;
+    -fx-text-fill: -fx-off-white;
+    -fx-wrap-text: true;
+}
+
+#optionEmbedded {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-off-white;
+}
+
+#optionEmbedded .radio {
+    -fx-background-color: -fx-off-white;
+}
+
+#optionEmbedded .radio:selected {
+    -fx-background-color: -fx-light-blue;
+}
+
+#optionClient {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-off-white;
+}
+
+#optionClient.radio {
+    -fx-background-color: -fx-off-white;
+}
+
+#optionClient .radio:selected {
+    -fx-background-color: -fx-light-blue;
+}
+
+/*.label {*/
+/*    -fx-font-family: "Corbel";*/
+/*}*/
+
 /*.button {*/
-/*    -fx-font-family: "Poppins";*/
+/*    -fx-font-family: "Franklin Gothic Book";*/
 /*}*/
 
 /*SIDEBAR FORMATTING*/
@@ -23,52 +148,71 @@
 }
 
 #sideBar > .button {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Oxygen";
     -fx-font-size: 24;
-    -fx-font-weight: bold;
     -fx-text-fill: -fx-off-white;
     -fx-graphic-text-gap: 8px;
     -fx-padding: 10px;
 }
 
 #sideBar > .button:hover {
-    -fx-background-color: -fx-blue;
+    -fx-background-color: -fx-light-blue;
     -fx-underline: true;
 }
 
 #sideBar > .label {
     -fx-font-family: "Poppins";
-    -fx-font-size: 24;
     -fx-font-weight: bold;
+    -fx-font-size: 24;
     -fx-text-fill: -fx-off-white;
     -fx-padding: 10px;
 }
 
 /*CSVFileSaver*/
 
-#csvFileSaver {
-    -fx-font-family: "Poppins";
-}
+/*#csvSaverPane {*/
+/*    -fx-background-color: -fx-off-white;*/
+/*}*/
+
+/*#csvFileSaver > .label {*/
+/*    -fx-font-family: "Corbel";*/
+/*    -fx-font-size: 96;*/
+/*    -fx-text-fill: -fx-off-white;*/
+/*    !*-fx-font-smoothing-type: gray;*!*/
+/*}*/
+
+/*#csvFileSaver > .button {*/
+/*    -fx-font-family: "Corbel";*/
+/*    -fx-font-size: 24;*/
+/*    -fx-text-fill: -fx-off-white;*/
+/*    -fx-background-color: -fx-light-blue;*/
+/*}*/
+
+/*#csvFileSaver > .button:hover {*/
+/*    -fx-font-family: "Corbel";*/
+/*    -fx-font-size: 24;*/
+/*    -fx-text-fill: -fx-off-white;*/
+/*    -fx-background-color: -fx-light-blue;*/
+/*}*/
 
 /*LANDING PAGE*/
 
 #landingPage > .button {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Corbel";
     -fx-font-size: 24;
-    -fx-font-weight: bold;
     -fx-text-fill: -fx-dark-blue;
 }
 
 #landingPage > .button:hover {
-    -fx-font-family: "Poppins";
+    -fx-font-family: "Corbel";
     -fx-font-size: 24;
-    -fx-font-weight: bold;
     -fx-text-fill: -fx-dark-blue;
 }
 
 #landingPage > .label {
-    -fx-font-family: "Poppins";
-    -fx-wrap-text: true;
+    -fx-font-family: "Corbel";
+    -fx-font-weight: bold;
+    -fx-font-size: 48;
     -fx-text-fill: -fx-dark-blue;
 }
 
