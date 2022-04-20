@@ -74,7 +74,7 @@
                               </PasswordField>
                            </children>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="500.0" spacing="10.0">
+                        <VBox fx:id="serverVBox" prefHeight="200.0" prefWidth="500.0" spacing="10.0">
                            <children>
                               <Label fx:id="dbText" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="450.0" text="Select a server option:" wrapText="true">
                                  <font>
