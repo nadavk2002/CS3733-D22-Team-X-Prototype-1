@@ -143,13 +143,21 @@ public class BasicLayoutController implements Initializable {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
-      edu.wpi.cs3733.D22.teamX.api.DatabaseCreator.saveAllCSV("");
+      edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO.getDAO().saveCSV("");
     } else {
       App.switchScene(
           FXMLLoader.load(
               getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
       CSVFileSaverController.loaded = true;
     }
+  }
+
+  @FXML
+  public void goToEmployeeViewer() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+    CSVFileSaverController.loaded = false;
   }
 
   private void initClock() {
