@@ -16,15 +16,26 @@ public class ServiceRequestDAO {
   private MedicineDeliverServiceRequestDAO medicineDeliverServiceRequestDAO =
       MedicineDeliverServiceRequestDAO.getDAO();
   private SharpsDisposalRequestDAO sharpsDisposalRequestDAO = SharpsDisposalRequestDAO.getDAO();
+  private MaintenanceServiceRequestDAO maintenanceServiceRequestDAO =
+      MaintenanceServiceRequestDAO.getDAO();
 
   public ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
 
-  public ServiceRequestDAO() {
+  private ServiceRequestDAO() {
     setServiceRequests();
+  }
+
+  private static class SingletonHelper {
+    private static final ServiceRequestDAO serviceRequestDAO = new ServiceRequestDAO();
+  }
+
+  public static ServiceRequestDAO getDAO() {
+    return SingletonHelper.serviceRequestDAO;
   }
 
   // Get all requests
   public ArrayList<ServiceRequest> getServiceRequests() {
+    setServiceRequests();
     return serviceRequests;
   }
 
@@ -64,6 +75,10 @@ public class ServiceRequestDAO {
     return sharpsDisposalRequestDAO.getAllRecords();
   }
 
+  public List<MaintenanceServiceRequest> getAllMaintenanceServiceRequests() {
+    return maintenanceServiceRequestDAO.getAllRecords();
+  }
+
   // Get a specific request
   public GiftDeliveryRequest getGiftDeliveryRequest(String requestID) {
     return giftDeliveryRequestDAO.getRecord(requestID);
@@ -99,6 +114,10 @@ public class ServiceRequestDAO {
 
   public SharpsDisposalRequest getSharpsDisposalServiceRequest(String requestID) {
     return sharpsDisposalRequestDAO.getRecord(requestID);
+  }
+
+  public MaintenanceServiceRequest getMaintenanceServiceRequest(String requestID) {
+    return maintenanceServiceRequestDAO.getRecord(requestID);
   }
 
   // Add
@@ -138,6 +157,10 @@ public class ServiceRequestDAO {
     sharpsDisposalRequestDAO.addRecord(request);
   }
 
+  public void addRecord(MaintenanceServiceRequest request) {
+    maintenanceServiceRequestDAO.addRecord(request);
+  }
+
   // Upgrades people upgrades
   public void updateRecord(GiftDeliveryRequest request) {
     giftDeliveryRequestDAO.updateRecord(request);
@@ -173,6 +196,10 @@ public class ServiceRequestDAO {
 
   public void updateRecord(SharpsDisposalRequest request) {
     sharpsDisposalRequestDAO.updateRecord(request);
+  }
+
+  public void updateRecord(MaintenanceServiceRequest request) {
+    maintenanceServiceRequestDAO.updateRecord(request);
   }
 
   // Delete
@@ -212,6 +239,10 @@ public class ServiceRequestDAO {
     sharpsDisposalRequestDAO.deleteRecord(request);
   }
 
+  public void deleteRequest(MaintenanceServiceRequest request) {
+    maintenanceServiceRequestDAO.deleteRecord(request);
+  }
+
   // getService requests
   public ServiceRequest getServiceRequest(String requestID) {
     for (ServiceRequest request : serviceRequests) {
@@ -233,6 +264,7 @@ public class ServiceRequestDAO {
     allRequests.addAll(medicalEquipmentServiceRequestDAO.getAllRecords());
     allRequests.addAll(medicineDeliverServiceRequestDAO.getAllRecords());
     allRequests.addAll(sharpsDisposalRequestDAO.getAllRecords());
+    allRequests.addAll(maintenanceServiceRequestDAO.getAllRecords());
     this.serviceRequests = allRequests;
   }
 
@@ -269,7 +301,11 @@ public class ServiceRequestDAO {
     return medicineDeliverServiceRequestDAO.makeID();
   }
 
-  public String makeSharpsDisposalServieRequestID() {
+  public String makeSharpsDisposalServiceRequestID() {
     return sharpsDisposalRequestDAO.makeID();
+  }
+
+  public String makeMaintenanceServiceRequestID() {
+    return maintenanceServiceRequestDAO.makeID();
   }
 }
