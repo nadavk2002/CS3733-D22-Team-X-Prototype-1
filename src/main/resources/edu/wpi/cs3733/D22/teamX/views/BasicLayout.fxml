@@ -12,7 +12,6 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
    <children>
-      <AnchorPane fx:id="appContent" layoutX="300.0" prefHeight="1080.0" prefWidth="1620.0" />
       <Pane prefHeight="1080.0" prefWidth="300.0">
          <children>
             <VBox fx:id="sideBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
@@ -56,7 +55,25 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="outstandingButton" alignment="BASELINE_LEFT" onAction="#switchOutstandingService" prefWidth="300.0" text="Outstanding Tasks">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/list-check-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="tableButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestTable" prefWidth="300.0" text="Table">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/list-check-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="apiButton" alignment="BASELINE_LEFT" onAction="#switchAPILandingPage" prefWidth="300.0" text="API">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -93,5 +110,6 @@
             </VBox>
          </children>
       </Pane>
+      <AnchorPane fx:id="appContent" layoutX="300.0" prefHeight="1080.0" prefWidth="1620.0" />
    </children>
 </AnchorPane>

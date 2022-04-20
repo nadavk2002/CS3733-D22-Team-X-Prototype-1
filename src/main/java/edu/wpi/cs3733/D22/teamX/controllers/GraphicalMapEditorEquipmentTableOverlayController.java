@@ -50,7 +50,11 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
                     String lowerCaseFilter = newValue.toLowerCase();
                     if (equipmentUnit.getUnitID().toLowerCase().contains(lowerCaseFilter)) {
                       return true;
-                    } else if (equipmentUnit.getType().toLowerCase().contains(lowerCaseFilter)) {
+                    } else if (equipmentUnit
+                        .getType()
+                        .getModel()
+                        .toLowerCase()
+                        .contains(lowerCaseFilter)) {
                       return true;
                     } else if (equipmentUnit
                         .getCurrLocationShortName()

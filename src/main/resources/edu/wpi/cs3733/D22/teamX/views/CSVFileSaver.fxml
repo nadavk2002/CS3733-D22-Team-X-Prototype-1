@@ -1,72 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchorCSVSaver" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CSVFileSaverController">
-   <children>
-      <BorderPane prefHeight="1080.0" prefWidth="1620.0">
-         <center>
-            <VBox fx:id="csvFileSaver" alignment="CENTER" fillWidth="false" prefHeight="700.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+
+<BorderPane fx:id="csvSaverPane" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CSVFileSaverController">
+   <center>
+      <VBox fx:id="csvFileSaver" alignment="CENTER" fillWidth="false" prefHeight="700.0" prefWidth="1200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="BOTTOM_CENTER" text="CSV File Saver" textFill="#446fdc">
+               <font>
+                  <Font name="System Bold" size="96.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <StackPane prefHeight="107.0" prefWidth="419.0" scaleX="1.5" scaleY="1.5">
                <children>
-                  <Label alignment="BOTTOM_CENTER" text="CSV File Saver" textFill="#446fdc">
-                     <font>
-                        <Font name="System Bold" size="96.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <StackPane prefHeight="107.0" prefWidth="419.0" scaleX="1.5" scaleY="1.5">
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1d1d1" height="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
+                  <HBox prefHeight="100.0" prefWidth="468.0" translateX="10.0" translateY="10.0">
                      <children>
-                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d1d1d1" height="90.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="463.0" />
-                        <HBox prefHeight="100.0" prefWidth="468.0" translateX="10.0" translateY="10.0">
+                        <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="368.0" translateY="10.0">
                            <children>
-                              <VBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="368.0" translateY="10.0">
+                              <Label text="Choose directory to save CSV files">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="TOP_CENTER" prefHeight="10.0" prefWidth="266.0">
                                  <children>
-                                    <Label text="Choose directory to save CSV files">
+                                    <JFXButton fx:id="browser" onAction="#getDirectoryForSaving" text="Browse" textFill="#446fdc" underline="true">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font size="16.0" />
                                        </font>
-                                    </Label>
-                                    <HBox alignment="TOP_CENTER" prefHeight="10.0" prefWidth="266.0">
-                                       <children>
-                                          <JFXButton fx:id="browser" onAction="#getDirectoryForSaving" text="Browse" textFill="#446fdc" underline="true">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </JFXButton>
-                                          <JFXButton mnemonicParsing="false" onAction="#saveToDefault" text="Default Directory" textFill="#446fdc" underline="true">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </JFXButton>
-                                       </children>
-                                    </HBox>
+                                    </JFXButton>
+                                    <JFXButton mnemonicParsing="false" onAction="#saveToDefault" text="Default Directory" textFill="#446fdc" underline="true">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </JFXButton>
                                  </children>
-                              </VBox>
-                              <ImageView fitHeight="77.0" fitWidth="78.0" translateY="5.0">
-                                 <image>
-                                    <Image url="@../assets/saveIcon.png" />
-                                 </image>
-                              </ImageView>
+                              </HBox>
                            </children>
-                        </HBox>
+                        </VBox>
+                        <ImageView fitHeight="77.0" fitWidth="78.0" translateY="5.0">
+                           <image>
+                              <Image url="@../assets/saveIcon.png" />
+                           </image>
+                        </ImageView>
                      </children>
-                  </StackPane>
+                  </HBox>
                </children>
-            </VBox>
-         </center>
-      </BorderPane>
-   </children>
-</AnchorPane>
+            </StackPane>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

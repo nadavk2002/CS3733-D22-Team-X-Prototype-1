@@ -130,7 +130,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
       statement.executeUpdate(
           "UPDATE EquipmentUnit SET"
               + " type = '"
-              + recordObject.getType()
+              + recordObject.getType().getModel()
               + "', ISAVAILABLE = '"
               + recordObject.getIsAvailableChar()
               + "', CURRLOCATION = '"
@@ -153,7 +153,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
       StringBuilder record = new StringBuilder();
       record.append("INSERT INTO EquipmentUnit VALUES (");
       record.append("'" + recordObject.getUnitID() + "', ");
-      record.append("'" + recordObject.getType() + "', ");
+      record.append("'" + recordObject.getType().getModel() + "', ");
       record.append("'" + recordObject.getIsAvailableChar() + "',");
       record.append("'" + recordObject.getCurrLocation().getNodeID() + "'");
       record.append(")");
@@ -209,6 +209,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
   @Override
   public boolean loadCSV() {
     LocationDAO locationDAO = LocationDAO.getDAO();
+    EquipmentTypeDAO equipmentTypeDAO = EquipmentTypeDAO.getDAO();
     try {
       InputStream equipmentUnitStream =
           DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
@@ -222,7 +223,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
           EquipmentUnit equipmentUnitNode =
               new EquipmentUnit(
                   currLine[0],
-                  currLine[1],
+                  equipmentTypeDAO.getRecord(currLine[1]),
                   currLine[2].charAt(0),
                   locationDAO.getRecord(currLine[3]));
           equipmentUnits.add(equipmentUnitNode);
@@ -250,7 +251,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
         StringBuilder equipmentUnit = new StringBuilder();
         equipmentUnit.append("INSERT INTO EquipmentUnit VALUES(");
         equipmentUnit.append("'" + equipmentUnits.get(i).getUnitID() + "'" + ", ");
-        equipmentUnit.append("'" + equipmentUnits.get(i).getType() + "'" + ", ");
+        equipmentUnit.append("'" + equipmentUnits.get(i).getType().getModel() + "'" + ", ");
         equipmentUnit.append("'" + equipmentUnits.get(i).getIsAvailableChar() + "'" + ", ");
         equipmentUnit.append("'" + equipmentUnits.get(i).getCurrLocation().getNodeID() + "'");
         equipmentUnit.append(")");
@@ -271,10 +272,10 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
       csvFile.write("unitID,type,isAvailable,currLocation");
       for (int i = 0; i < equipmentUnits.size(); i++) {
         csvFile.write("\n" + equipmentUnits.get(i).getUnitID() + ",");
-        if (equipmentUnits.get(i).getType() == null) {
+        if (equipmentUnits.get(i).getType().getModel() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(equipmentUnits.get(i).getType() + ",");
+          csvFile.write(equipmentUnits.get(i).getType().getModel() + ",");
         }
         csvFile.write(equipmentUnits.get(i).getIsAvailableChar() + ",");
         if (equipmentUnits.get(i).getCurrLocation() == null) {
@@ -307,7 +308,9 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
       while (results.next()) {
         EquipmentUnit toAdd = new EquipmentUnit();
         toAdd.setUnitID(results.getString("UnitID"));
-        toAdd.setType(results.getString("type")); // must be an EquipmentType object!
+        toAdd.setType(
+            EquipmentTypeDAO.getDAO()
+                .getRecord(results.getString("type"))); // must be an EquipmentType object!
         toAdd.setAvailable(results.getString("isAvailable").charAt(0));
         toAdd.setCurrLocation(LocationDAO.getDAO().getRecord(results.getString("currLocation")));
         equipmentUnits.add(toAdd);
@@ -324,7 +327,6 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
   public String makeID() {
     EquipmentUnitDAO equDAO = EquipmentUnitDAO.getDAO(); // gets list of all ids
     int nextIDFinalNum = equDAO.getAllRecords().size() + 1;
-
     return String.format("MEUN%04d", nextIDFinalNum);
   }
 }

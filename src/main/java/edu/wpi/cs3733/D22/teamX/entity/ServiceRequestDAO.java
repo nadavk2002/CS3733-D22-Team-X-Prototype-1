@@ -35,6 +35,7 @@ public class ServiceRequestDAO {
 
   // Get all requests
   public ArrayList<ServiceRequest> getServiceRequests() {
+    setServiceRequests();
     return serviceRequests;
   }
 
