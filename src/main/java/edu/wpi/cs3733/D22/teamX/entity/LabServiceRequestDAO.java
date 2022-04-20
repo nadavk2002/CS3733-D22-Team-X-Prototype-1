@@ -140,17 +140,17 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       Statement initialization = connection.createStatement();
       StringBuilder lsr = new StringBuilder();
       lsr.append("INSERT INTO LabServiceRequest VALUES (");
-      lsr.append("'" + recordObject.getRequestID() + "', ");
-      lsr.append("'" + recordObject.getDestination().getNodeID() + "', ");
-      lsr.append("'" + recordObject.getStatus() + "', ");
-      lsr.append("'" + recordObject.getAssigneeID() + "', ");
-      lsr.append("'" + recordObject.getService() + "', ");
+      lsr.append("'" + recordObject.getRequestID() + "'" + ", ");
+      lsr.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
+      lsr.append("'" + recordObject.getStatus() + "'" + ", ");
+      lsr.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      lsr.append("'" + recordObject.getService() + "'" + ", ");
       lsr.append("'" + recordObject.getPatientFor() + "'");
       lsr.append(")");
       initialization.execute(lsr.toString());
     } catch (SQLException e) {
       e.printStackTrace();
-      System.out.println("LabSerivceRequest database could not be updated");
+      System.out.println("LabServiceRequest database could not be updated");
     }
     recordObject.getDestination().addRequest(recordObject);
   }

@@ -123,7 +123,7 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
               + recordObject.getAssigneeID()
               + "', description = '"
               + recordObject.getDescription()
-              + " WHERE requestID = '"
+              + "' WHERE requestID = '"
               + recordObject.getRequestID()
               + "'");
     } catch (SQLException e) {

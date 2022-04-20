@@ -123,7 +123,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
               + recordObject.getAssigneeID()
               + "', description = '"
               + recordObject.getDescription()
-              + " WHERE requestID = '"
+              + "' WHERE requestID = '"
               + recordObject.getRequestID()
               + "'");
     } catch (SQLException e) {

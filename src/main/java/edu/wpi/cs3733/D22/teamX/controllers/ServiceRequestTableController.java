@@ -13,11 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 public class ServiceRequestTableController implements Initializable {
@@ -28,80 +33,15 @@ public class ServiceRequestTableController implements Initializable {
   @FXML private TableColumn<ServiceRequest, String> requestID; // spike c RequestID
   @FXML private TableColumn<ServiceRequest, String> serviceType;
   @FXML private TableColumn<ServiceRequest, ChoiceBox<String>> modStatus;
-  @FXML private TextField modifyID;
-  @FXML private ChoiceBox<String> modifyStatus;
-
+  @FXML TextField modifyID;
   private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
-  @FXML
-  private void submitStatusUpdate() throws IOException {
-    String id = modifyID.getText();
-    try {
-      //      ServiceRequestDAO giftDAO = new ServiceRequestDAO();
-      GiftDeliveryRequest req = requestDAO.getGiftDeliveryRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    try {
-      //      ServiceRequestDAO janDAO = new ServiceRequestDAO();
-      JanitorServiceRequest req = requestDAO.getJanitorServiceRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    try {
-      //      ServiceRequestDAO labDAO = new();
-      LabServiceRequest req = requestDAO.getLabServiceRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    try {
-      //      LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
-      LangServiceRequest req = requestDAO.getLangServiceRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    try {
-      //      MealServiceRequestDAO mealDAO = MealServiceRequestDAO.getDAO();
-      MealServiceRequest req = requestDAO.getMealServiceRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    try {
-      //      MedicalEquipmentServiceRequestDAO medDAO = MedicalEquipmentServiceRequestDAO.getDAO();
-      MedicalEquipmentServiceRequest req = requestDAO.getMedicalEquipmentServiceRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    try {
-      //      MedicineDeliverServiceRequestDAO medDAO = MedicineDeliverServiceRequestDAO.getDAO();
-      MedicineServiceRequest req = requestDAO.getMedicineServiceRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    try {
-      //      LaundryServiceRequestDAO laundryDAO = LaundryServiceRequestDAO.getDAO();
-      LaundyServiceRequest req = requestDAO.getLaundryServiceRequest(id);
-      req.setStatus(modifyStatus.getValue());
-      requestDAO.updateRecord(req);
-    } catch (Exception e) {
-    }
-    App.switchScene(
-        FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
-  }
+  public String previousID;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     requestStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
-    modifyStatus.getItems().addAll("DONE", "PROC", "");
 
     destination.setCellValueFactory(
         new Callback<
@@ -133,6 +73,205 @@ public class ServiceRequestTableController implements Initializable {
           }
         });
     table.setItems(FXCollections.observableList(listOfRequests()));
+  }
+
+  public String getID() {
+    if (modifyID.getText() != "") {
+      previousID = modifyID.getText();
+    }
+    return previousID;
+  }
+
+  @FXML
+  private void goToUpdatePage() throws IOException {
+    String id = modifyID.getText();
+    try {
+      GiftDeliveryRequest req = requestDAO.getGiftDeliveryRequest(id);
+      UpdateGiftRequestController controller = new UpdateGiftRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateGiftRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Gift Delivery Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      JanitorServiceRequest req = requestDAO.getJanitorServiceRequest(id);
+      UpdateJanitorRequestController controller = new UpdateJanitorRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateJanitorRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Janitor Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      LabServiceRequest req = requestDAO.getLabServiceRequest(id);
+      UpdateLabRequestController controller = new UpdateLabRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateLabRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Lab Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      LangServiceRequest req = requestDAO.getLangServiceRequest(id);
+      UpdateLangRequestController controller = new UpdateLangRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateLangRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Language Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      MealServiceRequest req = requestDAO.getMealServiceRequest(id);
+      UpdateMealRequestController controller = new UpdateMealRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateMealRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Meal Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      MedicalEquipmentServiceRequest req = requestDAO.getMedicalEquipmentServiceRequest(id);
+      UpdateEquipmentRequestController controller = new UpdateEquipmentRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass()
+                  .getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateEquipmentRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Medical Equipment Delivery Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      MedicineServiceRequest req = requestDAO.getMedicineServiceRequest(id);
+      UpdateMedicineDeliveryRequestController controller =
+          new UpdateMedicineDeliveryRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass()
+                  .getResource(
+                      "/edu/wpi/cs3733/D22/teamX/views/UpdateMedicineDeliveryRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Medicine Delivery Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      LaundyServiceRequest req = requestDAO.getLaundryServiceRequest(id);
+      UpdateLaundryRequestController controller = new UpdateLaundryRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateLaundryRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Laundry Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      MaintenanceServiceRequest req = requestDAO.getMaintenanceServiceRequest(id);
+      UpdateMaintenanceRequestController controller = new UpdateMaintenanceRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass()
+                  .getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateMaintenanceRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Maintenance Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      SharpsDisposalRequest req = requestDAO.getSharpsDisposalServiceRequest(id);
+      UpdateSharpsDisposalRequestController controller =
+          new UpdateSharpsDisposalRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass()
+                  .getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateSharpsDisposalRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Sharps Disposal Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    try {
+      InTransportServiceRequest req = requestDAO.getInTransportServiceRequest(id);
+      UpdateInTransportRequestController controller = new UpdateInTransportRequestController(req);
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass()
+                  .getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateInTransportRequest.fxml"));
+      fxmlLoader.setController(controller);
+      Parent root1 = (Parent) fxmlLoader.load();
+      Stage stage = new Stage();
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.initStyle(StageStyle.DECORATED);
+      stage.setTitle("Edit Internal Patient Transport Service Request");
+      stage.setScene(new Scene(root1));
+      stage.show();
+    } catch (Exception e) {
+    }
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
   }
 
   private List<ServiceRequest> listOfRequests() {

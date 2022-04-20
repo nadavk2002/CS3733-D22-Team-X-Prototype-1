@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ChoiceBox fx:id="selectAssignStaff" layoutX="228.0" layoutY="223.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <TextField fx:id="giftNoteField" layoutX="228.0" layoutY="256.0" prefHeight="26.0" prefWidth="150.0" />
+      <Label layoutX="150.0" layoutY="227.0" text="Assign Staff:" />
+      <Label layoutX="164.0" layoutY="259.0" text="Gift Note:" />
+      <JFXButton fx:id="submitButton" layoutX="298.0" layoutY="329.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="resetFields" layoutX="206.0" layoutY="329.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <ChoiceBox fx:id="selectGiftDestination" layoutX="228.0" layoutY="191.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <Label layoutX="129.0" layoutY="195.0" text="Gift Destination: " />
+      <ChoiceBox fx:id="selectStatus" layoutX="228.0" layoutY="290.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <Label layoutX="180.0" layoutY="294.0" text="Status:" />
+      <Label layoutX="164.0" layoutY="164.0" text="Gift Type:" />
+      <ChoiceBox fx:id="selectGiftType" layoutX="228.0" layoutY="160.0" prefWidth="150.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ChoiceBox>
+      <Label layoutX="86.0" layoutY="62.0" text="Edit Gift Delivery Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

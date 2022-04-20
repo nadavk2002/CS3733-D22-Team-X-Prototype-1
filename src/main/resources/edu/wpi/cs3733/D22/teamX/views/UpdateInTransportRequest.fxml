@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="37.0" layoutY="35.0" text="Edit Inpatient Delivery Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="selectPatient" layoutX="247.0" layoutY="131.0" prefWidth="150.0" />
+      <Label layoutX="154.0" layoutY="136.0" text="Select Patient:" />
+      <Label layoutX="152.0" layoutY="167.0" text="Start Location:" />
+      <Label layoutX="178.0" layoutY="201.0" text="Assignee:" />
+      <Label layoutX="153.0" layoutY="235.0" text="Service Status:" />
+      <ChoiceBox fx:id="selectStartLocation" layoutX="247.0" layoutY="163.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="serviceStatus" layoutX="247.0" layoutY="230.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="assignStaff" layoutX="247.0" layoutY="196.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="destination" layoutX="247.0" layoutY="265.0" prefWidth="150.0" />
+      <Label layoutX="165.0" layoutY="269.0" text="Destination:" />
+      <JFXButton fx:id="submitButton" layoutX="250.0" layoutY="306.0" onAction="#submitRequest" text="Submit Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="resetFields" layoutX="261.0" layoutY="338.0" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

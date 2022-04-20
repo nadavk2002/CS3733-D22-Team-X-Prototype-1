@@ -111,7 +111,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       Statement statement = connection.createStatement();
       // update item in DB
       statement.executeUpdate(
-          "UPDATE MedicalEquipmentServiceRequest SET"
+          "UPDATE LangServiceRequest SET"
               + " destination = '"
               + recordObject.getDestination().getNodeID()
               + "', status = '"
@@ -120,7 +120,7 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
               + recordObject.getAssigneeID()
               + "', language = '"
               + recordObject.getLanguage()
-              + " WHERE requestID = '"
+              + "' WHERE requestID = '"
               + recordObject.getRequestID()
               + "'");
     } catch (SQLException e) {

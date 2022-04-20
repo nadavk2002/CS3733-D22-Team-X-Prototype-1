@@ -109,11 +109,11 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         Statement statement = connection.createStatement();
         // update sql object
         statement.executeUpdate(
-            "UPDATE GiftDeliveryRequest SET requestID = "
+            "UPDATE GiftDeliveryRequest SET requestID = '"
                 + recordObject.getRequestID()
-                + ", destination = "
+                + "', destination = '"
                 + recordObject.getDestination().getNodeID()
-                + ", status = '"
+                + "', status = '"
                 + recordObject.getStatus()
                 + "', assignee = '"
                 + recordObject.getAssigneeID()
