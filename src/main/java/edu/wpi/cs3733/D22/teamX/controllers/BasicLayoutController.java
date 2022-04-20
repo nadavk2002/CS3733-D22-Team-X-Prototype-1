@@ -1,11 +1,13 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.cs3733.D22.api.*;
-import edu.wpi.cs3733.D22.api.exceptions.ServiceException;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.api.*;
+import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
+import edu.wpi.cs3733.D22.teamX.api.exceptions.ServiceException;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
+import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -114,17 +116,27 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication() throws IOException, loadSaveFromCSVException {
+  void ExitApplication()
+      throws IOException, loadSaveFromCSVException, loadSaveFromCSVException,
+          edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
+      edu.wpi.cs3733.D22.teamX.api.DatabaseCreator.saveAllCSV("");
     } else {
       App.switchScene(
           FXMLLoader.load(
               getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
       CSVFileSaverController.loaded = true;
       try {
-        MealRequestAPI.run(0, 0, 0, 0, "", "", "");
+        MealRequestAPI.run(
+            470,
+            180,
+            600,
+            600,
+            "/edu/wpi/cs3733/D22/teamX/api/stylesheets/default.css",
+            "FDEPT00101",
+            "Hello");
       } catch (ServiceException e) {
         throw new RuntimeException(e);
       }
