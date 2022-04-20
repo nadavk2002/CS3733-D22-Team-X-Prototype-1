@@ -307,19 +307,6 @@ public class GraphicalMapEditorController implements Initializable {
         rect.setX(locationList.get(i).getxCoord() - (rect.getWidth() / 2));
         rect.setY(locationList.get(i).getyCoord() - rect.getHeight());
         rect.setFill(img);
-        rect.setOnDragOver(
-            event -> {
-              event.acceptTransferModes(TransferMode.ANY);
-            });
-        rect.setOnDragDropped(
-            event -> {
-              pane.setGestureEnabled(true);
-              EquipmentUnit equip = equipDAO.getRecord(event.getDragboard().getString());
-              equip.getCurrLocation().removeUnit(equip);
-              ((Location) rect.getUserData()).addUnit(equip);
-              equip.setCurrLocation((Location) rect.getUserData());
-              loadLocation(equip.getCurrLocation().getFloor());
-            });
 
         rect.setOnContextMenuRequested(
             event -> {
@@ -389,22 +376,27 @@ public class GraphicalMapEditorController implements Initializable {
       rectangle.setY(e.getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
       rectangle.setStroke(Paint.valueOf("BLACK"));
       rectangle.setFill(
-          new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
+          new ImagePattern(
+              new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType().getModel() + ".png")));
       rectangle.setVisible(showEquipCheck.isSelected());
-      rectangle.setOnDragExited(
-          event -> {
-            pane.setGestureEnabled(true);
-          });
 
-      rectangle.setOnDragDetected(
-          event -> {
-            Dragboard db = rectangle.startDragAndDrop(TransferMode.ANY);
-            pane.setGestureEnabled(false);
-            System.out.println("DRAG DETECTED");
-            ClipboardContent cb = new ClipboardContent();
-            cb.putString(((EquipmentUnit) rectangle.getUserData()).getUnitID());
-            db.setContent(cb);
-            event.consume();
+      rectangle.setOnMouseDragged(
+          new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+              if (event.getButton() != MouseButton.PRIMARY) return;
+              pane.setGestureEnabled(false);
+              imageGroup.setDisable(true);
+              rectangle.setCursor(Cursor.CLOSED_HAND);
+              rectangle.setFill(Paint.valueOf("LIGHTBLUE"));
+              if (event.getX() - (rectangle.getWidth() / 2) > imageView.getX()
+                  && event.getX() <= imageView.getX() + imageView.getBoundsInLocal().getWidth())
+                rectangle.setX(event.getX() - (rectangle.getWidth() / 2));
+              if (event.getY() - (rectangle.getHeight() / 2) > imageView.getY()
+                  && event.getY() <= imageView.getY() + imageView.getBoundsInLocal().getHeight())
+                rectangle.setY(event.getY() - (rectangle.getHeight() / 2));
+              // event.consume();
+            }
           });
 
       rectangle.setOnContextMenuRequested(
@@ -429,13 +421,43 @@ public class GraphicalMapEditorController implements Initializable {
               rectangle.setCursor(Cursor.HAND);
               rectangle.setFill(
                   new ImagePattern(
-                      new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
+                      new Image(
+                          "/edu/wpi/cs3733/D22/teamX/assets/" + e.getType().getModel() + ".png")));
+              Rectangle newLocRect =
+                  findClosestLocation((int) rectangle.getX(), (int) rectangle.getY());
+              if (newLocRect != null) {
+                Location newLoc = (Location) newLocRect.getUserData();
+                ((EquipmentUnit) rectangle.getUserData())
+                    .getCurrLocation()
+                    .removeUnit((EquipmentUnit) rectangle.getUserData());
+                newLoc.addUnit((EquipmentUnit) rectangle.getUserData());
+                ((EquipmentUnit) rectangle.getUserData()).setCurrLocation(newLoc);
+              }
+              loadLocation(l.getCurrLocation().getFloor());
             }
           });
 
       imageGroup.getChildren().add(rectangle);
       equipmentChoice.getItems().add(e.getUnitID());
     }
+  }
+
+  private Rectangle findClosestLocation(int x, int y) {
+    Rectangle closest = null;
+    double distance = Integer.MAX_VALUE;
+    for (Node n : imageGroup.getChildren()) {
+      if (n instanceof Rectangle && n.getUserData() instanceof Location) {
+        Location curLocation = (Location) n.getUserData();
+        double curDistance =
+            Math.pow((x - curLocation.getxCoord()), 2) + Math.pow((y - curLocation.getyCoord()), 2);
+        curDistance = Math.abs(Math.sqrt(curDistance));
+        if (curDistance < distance && curDistance < 50) {
+          distance = curDistance;
+          closest = (Rectangle) n;
+        }
+      }
+    }
+    return closest;
   }
 
   private void drawRequests(List<ServiceRequest> requests) {

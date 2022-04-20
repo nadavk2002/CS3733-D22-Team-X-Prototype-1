@@ -3,7 +3,10 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.api.*;
+import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
+import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -134,10 +137,13 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication() throws IOException, loadSaveFromCSVException {
+  void ExitApplication()
+      throws IOException, loadSaveFromCSVException, loadSaveFromCSVException,
+          edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
+      edu.wpi.cs3733.D22.teamX.api.DatabaseCreator.saveAllCSV("");
     } else {
       App.switchScene(
           FXMLLoader.load(
@@ -152,7 +158,7 @@ public class BasicLayoutController implements Initializable {
             new KeyFrame(
                 Duration.ZERO,
                 e -> {
-                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy  h:mm a");
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
                   timeLabel.setText(LocalDateTime.now().format(formatter));
                 }),
             new KeyFrame(Duration.seconds(1)));
