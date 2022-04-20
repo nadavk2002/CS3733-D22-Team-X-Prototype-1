@@ -102,14 +102,14 @@ public class UpdateMealRequestController implements Initializable {
   }
 
   public void enableSubmitButton() {
-    submitButton.setDisable(
-        patientNames.getValue().equals("")
-            || drinkSel.getValue().equals("")
-            || mainSel.getValue().equals("")
-            || sideSel.getValue().equals("")
-            || assignStaff.getValue().equals("")
-            || serviceStatus.getValue().equals("")
-            || destinationDrop.getValue().equals(""));
+    //    submitButton.setDisable(
+    //        patientNames.getValue().equals("")
+    //            || drinkSel.getValue().equals("")
+    //            || mainSel.getValue().equals("")
+    //            || sideSel.getValue().equals("")
+    //            || assignStaff.getValue().equals("")
+    //            || serviceStatus.getValue().equals("")
+    //            || destinationDrop.getValue().equals(""));
   }
 
   public ObservableList<String> getLocationNames() {

@@ -101,11 +101,11 @@ public class UpdateInTransportRequestController implements Initializable {
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
-    submitButton.setDisable(
-        selectPatient.getValue().equals("")
-            || selectStartLocation.getValue().equals("")
-            || assignStaff.getValue().equals("")
-            || destination.getValue().equals(""));
+    //    submitButton.setDisable(
+    //        selectPatient.getValue().equals("")
+    //            || selectStartLocation.getValue().equals("")
+    //            || assignStaff.getValue().equals("")
+    //            || destination.getValue().equals(""));
   }
 
   /** Resets all fields on the page. */

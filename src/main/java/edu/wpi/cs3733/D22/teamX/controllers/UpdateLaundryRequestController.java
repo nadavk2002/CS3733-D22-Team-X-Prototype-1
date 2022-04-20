@@ -93,10 +93,10 @@ public class UpdateLaundryRequestController implements Initializable {
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
-    submitButton.setDisable(
-        assignStaff.getValue().equals("")
-            || roomNum.getValue().equals("")
-            || selectLaundryType.getValue().equals(""));
+    //    submitButton.setDisable(
+    //        assignStaff.getValue().equals("")
+    //            || roomNum.getValue().equals("")
+    //            || selectLaundryType.getValue().equals(""));
   }
 
   @FXML

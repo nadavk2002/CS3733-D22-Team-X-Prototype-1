@@ -95,12 +95,12 @@ public class UpdateSharpsDisposalRequestController implements Initializable {
 
   @FXML
   public void enableSubmitButton() {
-    // make sure everything is populated
-    submitButton.setDisable(
-        roomDropDown.getValue().equals("")
-            || assigneeDropDown.getValue().equals("")
-            // || statusChoiceBox.getValue().equals("")
-            || typeDropDown.getValue().equals(""));
+    //    // make sure everything is populated
+    //    submitButton.setDisable(
+    //        roomDropDown.getValue().equals("")
+    //            || assigneeDropDown.getValue().equals("")
+    //            // || statusChoiceBox.getValue().equals("")
+    //            || typeDropDown.getValue().equals(""));
   }
 
   public void submitButton() throws IOException {

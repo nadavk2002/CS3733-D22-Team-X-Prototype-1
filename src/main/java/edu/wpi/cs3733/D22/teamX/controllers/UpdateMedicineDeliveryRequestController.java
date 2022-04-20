@@ -88,12 +88,12 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitRequest.setDisable(
-        roomNum.getValue().equals("")
-            || rxNum.getText().equals("")
-            || rxNum.getText().length() > 8
-            || serviceStatus.getValue().equals("")
-            || patientName.getValue().equals("")
-            || assignStaff.getValue().equals(""));
+        //        roomNum.getValue().equals("")
+        //            || rxNum.getText().equals("")
+        rxNum.getText().length() > 8);
+    //            || serviceStatus.getValue().equals("")
+    //            || patientName.getValue().equals("")
+    //            || assignStaff.getValue().equals(""));
   }
 
   /** resets all fields on the page. */

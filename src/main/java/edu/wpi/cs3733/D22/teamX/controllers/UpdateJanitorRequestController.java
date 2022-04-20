@@ -86,10 +86,10 @@ public class UpdateJanitorRequestController implements Initializable {
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
-    submitButton.setDisable(
-        roomNum.getValue().equals("")
-            || serviceType.getText().equals("")
-            || assignStaff.getValue().equals(""));
+    //    submitButton.setDisable(
+    //        roomNum.getValue().equals("")
+    //            || serviceType.getText().equals("")
+    //            || assignStaff.getValue().equals(""));
   }
 
   /** Resets all fields on the page. */

@@ -86,10 +86,9 @@ public class UpdateMaintenanceRequestController implements Initializable {
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
     submitButton.setDisable(
-        roomNum.getValue().equals("")
-            || assignee.getValue().equals("")
-            || description.getLength() <= 0
-            || description.getLength() > 140);
+        //        roomNum.getValue().equals("")
+        //            || assignee.getValue().equals("")
+        description.getLength() <= 0 || description.getLength() > 140);
   }
 
   /** Resets all fields on the page. */
