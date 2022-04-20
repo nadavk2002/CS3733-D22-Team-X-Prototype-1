@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="423.0" prefWidth="657.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="206.0" layoutY="115.0" prefHeight="163.0" prefWidth="147.0" spacing="11.0">
+         <children>
+            <ChoiceBox fx:id="roomNum" prefWidth="150.0" />
+            <ChoiceBox fx:id="assignee" prefWidth="150.0" />
+            <ChoiceBox fx:id="status" prefWidth="150.0" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="submitButton" layoutX="230.0" layoutY="266.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <VBox layoutX="205.0" layoutY="154.0" spacing="10.0" />
+      <JFXButton layoutX="242.0" layoutY="301.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <VBox alignment="TOP_RIGHT" layoutX="105.0" layoutY="115.0" spacing="18.0">
+         <children>
+            <Label text="Room Number:">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label text="Assignee:">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label text="Status:">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <Label layoutX="43.0" layoutY="35.0" text="Edit Maintenance Service Request" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="description" layoutX="403.0" layoutY="112.0" prefHeight="200.0" prefWidth="200.0" />
+      <Label layoutX="473.0" layoutY="92.0" text="Description" />
+   </children>
+</AnchorPane>
