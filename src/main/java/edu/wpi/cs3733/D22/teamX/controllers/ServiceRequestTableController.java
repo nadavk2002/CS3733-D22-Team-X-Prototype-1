@@ -221,8 +221,9 @@ public class ServiceRequestTableController implements Initializable {
       MaintenanceServiceRequest req = requestDAO.getMaintenanceServiceRequest(id);
       UpdateMaintenanceRequestController controller = new UpdateMaintenanceRequestController(req);
       FXMLLoader fxmlLoader =
-              new FXMLLoader(
-                      getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateMaintenanceRequest.fxml"));
+          new FXMLLoader(
+              getClass()
+                  .getResource("/edu/wpi/cs3733/D22/teamX/views/UpdateMaintenanceRequest.fxml"));
       fxmlLoader.setController(controller);
       Parent root1 = (Parent) fxmlLoader.load();
       Stage stage = new Stage();
