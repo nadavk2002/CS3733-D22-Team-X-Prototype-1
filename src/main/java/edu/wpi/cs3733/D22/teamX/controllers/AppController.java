@@ -34,7 +34,9 @@ public class AppController implements Initializable {
       graphicalMapEditor,
       EquipReqTable,
       ReqJanitor,
-      GiftDelivery;
+      GiftDelivery,
+      ReqSharps,
+      ReqMaintenance;
   @FXML private ToggleButton nameToggle;
   @FXML
   private Label mainTitle,
@@ -206,7 +208,9 @@ public class AppController implements Initializable {
         ReqMedicineDelivery,
         mealReq,
         ReqJanitor,
-        equipmentRequest);
+        equipmentRequest,
+        ReqSharps,
+        ReqMaintenance);
     searchBox.setPromptText("Search Here");
     //        firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
     //        secondRow.getChildren().addAll(ReqMedicineDelivery, LabRequest, ReqInTransport,
@@ -225,5 +229,17 @@ public class AppController implements Initializable {
     nameTextSeven.setVisible(false);
     nameTextEight.setVisible(false);
     nameTextNine.setVisible(false);
+  }
+
+  public void ReqSharpsButton() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/SharpsDisposalRequest.fxml")));
+  }
+
+  public void ReqMaintenanceButton() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/MaintenanceRequest.fxml")));
   }
 }

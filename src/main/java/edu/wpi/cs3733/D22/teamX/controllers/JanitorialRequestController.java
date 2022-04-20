@@ -35,7 +35,7 @@ public class JanitorialRequestController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
-    resetFields();
+    // resetFields();
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     serviceType.getItems().addAll("Bodily Fluids", "Chemical Spills", "Disinfection");

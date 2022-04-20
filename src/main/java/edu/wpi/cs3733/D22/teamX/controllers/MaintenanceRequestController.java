@@ -93,7 +93,7 @@ public class MaintenanceRequestController implements Initializable {
   @FXML
   public void submitButton() {
     MaintenanceServiceRequest request = new MaintenanceServiceRequest();
-    request.setRequestID(maintenanceDAO.makeJanitorServiceRequestID());
+    request.setRequestID(maintenanceDAO.makeMaintenanceServiceRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignee.getValue()));

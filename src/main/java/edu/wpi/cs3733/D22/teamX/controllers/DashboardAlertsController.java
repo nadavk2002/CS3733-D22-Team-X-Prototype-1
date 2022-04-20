@@ -111,7 +111,7 @@ public class DashboardAlertsController implements Initializable {
               && equipmentUnit.getIsAvailableChar() == 'N')
           || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
               && equipmentUnit.getIsAvailableChar() == 'N')) {
-        System.out.println("dirtyShit");
+        // System.out.println("dirtyShit");
 
         dirtyEquipment.add(equipmentUnit);
       }

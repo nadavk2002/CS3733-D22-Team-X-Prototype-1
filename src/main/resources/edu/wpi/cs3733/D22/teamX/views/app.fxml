@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="landingPage" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AppController">
+<BorderPane fx:id="landingPage" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AppController">
    <center>
       <Pane prefHeight="1080.0" prefWidth="1620.0" BorderPane.alignment="CENTER">
          <children>
@@ -21,10 +30,10 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="373.4000244140625" minHeight="10.0" prefHeight="349.3999938964844" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="416.6000061035156" minHeight="10.0" prefHeight="311.60002441406243" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="432.39990234375" minHeight="10.0" prefHeight="340.79986572265614" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="361.60013427734384" minHeight="5.0" prefHeight="361.60013427734384" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="373.4000244140625" minHeight="10.0" prefHeight="274.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="416.6000061035156" minHeight="10.0" prefHeight="328.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="432.39990234375" minHeight="10.0" prefHeight="361.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="423.0" minHeight="5.0" prefHeight="415.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
                         <JFXButton fx:id="ReqMedicineDelivery" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqMedicineDeliveryButton" prefHeight="235.0" prefWidth="300.0" text="Request Medicine Delivery" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
@@ -66,6 +75,19 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
+                        <JFXButton fx:id="ReqSharps" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqSharpsButton" prefHeight="235.0" prefWidth="300.0" text="Request Sharps Disposal" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="3" >
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="125.0" preserveRatio="true" translateX="-12.0">
+                                 <Image url="@../assets/SharpsDisposalRequest.png" />
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
                         <JFXButton fx:id="ReqInTransport" contentDisplay="TOP" minHeight="235.0" minWidth="300.0" onAction="#ReqInTransportButton" prefHeight="235.0" prefWidth="446.0" text="Request Internal Patient Transportation" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                            <font>
                               <Font name="System Bold" size="24.0" />
@@ -76,6 +98,19 @@
                            <graphic>
                               <ImageView fitHeight="125.0" preserveRatio="true">
                                  <Image url="@../assets/patientTransport.png" />
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="ReqMaintenance" contentDisplay="TOP" minHeight="201.0" minWidth="300.0" onAction="#ReqMaintenanceButton" prefHeight="201.0" prefWidth="446.0" text="Request Maintenance" textAlignment="CENTER" textFill="#446fdc" wrapText="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" >
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <graphic>
+                              <ImageView fitHeight="125.0" preserveRatio="true">
+                                 <Image url="@../assets/MaintenanceServiceRequest.png" />
                               </ImageView>
                            </graphic>
                         </JFXButton>

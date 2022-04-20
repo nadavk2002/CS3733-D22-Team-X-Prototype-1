@@ -103,7 +103,7 @@ public class SharpsDisposalRequestController implements Initializable {
       SDSR.setRequestID(sharpDAO.makeSharpsDisposalServiceRequestID());
       // submit the thing
       sharpDAO.addRecord(SDSR);
-      // notify user of submittion
+      // notify user of submission
     } catch (Exception e) {
       Success = false;
       error = e.toString();
@@ -111,8 +111,9 @@ public class SharpsDisposalRequestController implements Initializable {
 
     if (Success) {
       errorText.setText("Request Submitted!");
+      resetFields();
     } else {
-      errorText.setText("a error has occured: " + error + ". request Not Submitted");
+      errorText.setText("an error has occured: " + error + ". request Not Submitted");
     }
     // reset Fields
   }
