@@ -6,15 +6,19 @@ import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
 
 /** This represents the blue bar at the top of the app */
 public class BasicLayoutController implements Initializable {
@@ -26,6 +30,7 @@ public class BasicLayoutController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // startTime();
+    initClock();
     pages = new HashMap<String, String>();
     pages.put("Main Menu", "app.fxml");
     pages.put("Equipment Delivery", "equipmentDelivery.fxml");
@@ -94,6 +99,15 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchOutstandingService() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass()
+                .getResource("/edu/wpi/cs3733/D22/teamX/views/OutstandingServiceRequest.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   public void switchMapDashboard() throws IOException {
     App.switchScene(
         FXMLLoader.load(
@@ -124,24 +138,17 @@ public class BasicLayoutController implements Initializable {
     }
   }
 
-  public void startTime() {
-    Thread timeThread =
-        new Thread(
-            () -> {
-              SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
-              while (true) {
-                try {
-                  Thread.sleep(1000);
-                } catch (Exception e) {
-                  System.out.println(e);
-                }
-                final String currentTime = sdf.format(new Date());
-                Platform.runLater(
-                    () -> {
-                      timeLabel.setText(currentTime);
-                    });
-              }
-            });
-    timeThread.start();
+  private void initClock() {
+    Timeline clock =
+        new Timeline(
+            new KeyFrame(
+                Duration.ZERO,
+                e -> {
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy  h:mm a");
+                  timeLabel.setText(LocalDateTime.now().format(formatter));
+                }),
+            new KeyFrame(Duration.seconds(1)));
+    clock.setCycleCount(Animation.INDEFINITE);
+    clock.play();
   }
 }

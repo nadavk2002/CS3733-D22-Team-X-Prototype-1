@@ -32,7 +32,7 @@ public class ReqLaundryController implements Initializable {
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private List<Employee> employees;
 
-  private ServiceRequestDAO requestDAO = new ServiceRequestDAO();
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {

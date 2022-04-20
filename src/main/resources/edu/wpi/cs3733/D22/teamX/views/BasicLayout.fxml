@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
    <children>
       <AnchorPane fx:id="appContent" layoutX="300.0" prefHeight="1080.0" prefWidth="1620.0" />
-      <Label fx:id="timeLabel" text="Time">
-         <graphic>
-            <SVGPath content="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,21a9,9,0,1,1,9-9A9.01,9.01,0,0,1,12,21ZM10.5,11.055l-2.4,1.5a1.5,1.5,0,0,0-.475,2.068h0a1.5,1.5,0,0,0,2.068.475l2.869-1.8a2,2,0,0,0,.938-1.7V7.772a1.5,1.5,0,0,0-1.5-1.5h0a1.5,1.5,0,0,0-1.5,1.5Z" disable="true" />
-         </graphic>
-      </Label>
       <Pane prefHeight="1080.0" prefWidth="300.0">
          <children>
             <VBox fx:id="sideBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
@@ -58,6 +56,15 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="outstandingButton" alignment="BASELINE_LEFT" onAction="#switchOutstandingService" prefWidth="300.0" text="Outstanding Tasks">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/list-check-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="tableButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestTable" prefWidth="300.0" text="Table">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -86,6 +93,11 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <Label fx:id="timeLabel" prefHeight="37.0" prefWidth="300.0" text="Time">
+                     <graphic>
+                        <SVGPath content="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,21a9,9,0,1,1,9-9A9.01,9.01,0,0,1,12,21ZM10.5,11.055l-2.4,1.5a1.5,1.5,0,0,0-.475,2.068h0a1.5,1.5,0,0,0,2.068.475l2.869-1.8a2,2,0,0,0,.938-1.7V7.772a1.5,1.5,0,0,0-1.5-1.5h0a1.5,1.5,0,0,0-1.5,1.5Z" disable="true" fill="WHITE" />
+                     </graphic>
+                  </Label>
                </children>
             </VBox>
          </children>
