@@ -308,17 +308,16 @@ public class GraphicalMapEditorController implements Initializable {
         rect.setFill(img);
         rect.setOnDragOver(
             event -> {
-              System.out.println("DRAGOVER");
-              if (event.getDragboard().hasString()) {
-                event.acceptTransferModes(TransferMode.ANY);
-              }
+              event.acceptTransferModes(TransferMode.ANY);
             });
         rect.setOnDragDropped(
             event -> {
-              System.out.println("DRAGGED DROP");
               pane.setGestureEnabled(true);
               EquipmentUnit equip = equipDAO.getRecord(event.getDragboard().getString());
+              equip.getCurrLocation().removeUnit(equip);
+              ((Location) rect.getUserData()).addUnit(equip);
               equip.setCurrLocation((Location) rect.getUserData());
+              loadLocation(equip.getCurrLocation().getFloor());
             });
 
         rect.setOnContextMenuRequested(
@@ -391,40 +390,21 @@ public class GraphicalMapEditorController implements Initializable {
       rectangle.setFill(
           new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
       rectangle.setVisible(showEquipCheck.isSelected());
+      rectangle.setOnDragExited(
+          event -> {
+            pane.setGestureEnabled(true);
+          });
 
       rectangle.setOnDragDetected(
           event -> {
+            Dragboard db = rectangle.startDragAndDrop(TransferMode.ANY);
             pane.setGestureEnabled(false);
             System.out.println("DRAG DETECTED");
-            Dragboard db = rectangle.startDragAndDrop(TransferMode.ANY);
             ClipboardContent cb = new ClipboardContent();
+            cb.putString(((EquipmentUnit) rectangle.getUserData()).getUnitID());
             db.setContent(cb);
             event.consume();
           });
-      /*
-      rectangle.setOnDragDetected(
-          event -> {
-            System.out.println("Drag detected");
-            pane.setGestureEnabled(false);
-            imageGroup.setDisable(true);
-
-            Dragboard db = rectangle.startDragAndDrop(TransferMode.ANY);
-            ClipboardContent content = new ClipboardContent();
-            content.putString(((EquipmentUnit) rectangle.getUserData()).getUnitID());
-            db.setContent(content);
-            System.out.println(db.getString());
-            // event.consume();
-          });
-      rectangle.setOnDragDone(
-          event -> {
-            System.out.println("dragdone");
-            pane.setGestureEnabled(true);
-            imageGroup.setDisable(false);
-            rectangle.setFill(Paint.valueOf("GREEN"));
-            // event.consume();
-          });
-
-       */
 
       rectangle.setOnContextMenuRequested(
           event -> {
@@ -432,6 +412,7 @@ public class GraphicalMapEditorController implements Initializable {
             menu.show(rectangle, event.getScreenX(), event.getScreenY());
             // event.consume();
           });
+
       /*
       rectangle.setOnMouseDragged(
           new EventHandler<MouseEvent>() {
@@ -452,6 +433,8 @@ public class GraphicalMapEditorController implements Initializable {
             }
           });
 
+       */
+
       rectangle.setOnMouseReleased(
           new EventHandler<MouseEvent>() {
             @Override
@@ -467,8 +450,6 @@ public class GraphicalMapEditorController implements Initializable {
                       new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType() + ".png")));
             }
           });
-
-       */
 
       imageGroup.getChildren().add(rectangle);
       equipmentChoice.getItems().add(e.getUnitID());
