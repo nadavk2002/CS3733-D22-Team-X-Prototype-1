@@ -503,7 +503,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <JFXButton fx:id="showAlerts" minHeight="-Infinity" minWidth="-Infinity" onAction="#ShowAlerts" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc; -fx-background-radius: 0;" text="Alerts" textFill="WHITE" />
+                  <JFXButton fx:id="showAlerts" minHeight="-Infinity" minWidth="-Infinity" onAction="#ShowAlerts" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #446fdc;" text="Alerts" textFill="WHITE" />
                </children>
             </VBox>
             <HBox fx:id="cleanTableBox" alignment="CENTER" layoutX="895.0" layoutY="281.0" prefHeight="203.0" prefWidth="538.0">

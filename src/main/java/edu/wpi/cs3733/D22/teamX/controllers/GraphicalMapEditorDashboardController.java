@@ -102,34 +102,22 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private Text llTwoIUText;
   @FXML private VBox masterBox;
   private EquipmentUnitDAO equipmentUnitDAO = EquipmentUnitDAO.getDAO();
-  //  @FXML private HBox dirtyTableBox;
   @FXML private HBox cleanTableBox;
 
-  // @FXML private TableView<EquipmentUnit> dirtyTable;
   @FXML private TableView<EquipmentUnit> cleanTable;
-  // @FXML private TableView<EquipmentUnit> dirtyPodB;
-  // @FXML private TableView<EquipmentUnit> dirtyPodC;
+
   @FXML private TableView<EquipmentUnit> cleanPodB;
   @FXML private TableView<EquipmentUnit> cleanPodC;
-  // @FXML private TableColumn<EquipmentUnit, String> unitID;
-  // @FXML private TableColumn<EquipmentUnit, String> type;
-  // @FXML private TableColumn<EquipmentUnit, String> availability;
-  //  @FXML private TableColumn<EquipmentUnit, String> unitIDC;
+
+  @FXML private TableColumn<EquipmentUnit, String> unitIDC;
   @FXML private TableColumn<EquipmentUnit, String> typeC;
   @FXML private TableColumn<EquipmentUnit, String> availabilityC;
   @FXML private TableColumn<EquipmentUnit, String> currLocC;
-  // @FXML private TableColumn<EquipmentUnit, String> unitIDPodA;
-  // @FXML private TableColumn<EquipmentUnit, String> typePodA;
-  // @FXML private TableColumn<EquipmentUnit, String> availabilityPodA;
-  // FXML private TableColumn<EquipmentUnit, String> currLocPodA;
+
   @FXML private TableColumn<EquipmentUnit, String> unitIDCPodA;
   @FXML private TableColumn<EquipmentUnit, String> typeCPodA;
   @FXML private TableColumn<EquipmentUnit, String> availabilityCPodA;
   @FXML private TableColumn<EquipmentUnit, String> currLocCPodA;
-  // @FXML private TableColumn<EquipmentUnit, String> unitIDPodB;
-  // @FXML private TableColumn<EquipmentUnit, String> typePodB;
-  // @FXML private TableColumn<EquipmentUnit, String> availabilityPodB;
-  // @FXML private TableColumn<EquipmentUnit, String> currLocPodB;
   @FXML private TableColumn<EquipmentUnit, String> unitIDCPodB;
   @FXML private TableColumn<EquipmentUnit, String> typeCPodB;
   @FXML private TableColumn<EquipmentUnit, String> availabilityCPodB;
@@ -137,7 +125,6 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private JFXButton showAlerts;
 
   // floor constants--------------------------------------
-  // private final int dirtyXloc = 40;
   private final int cleanXloc = 705;
   private final int YF5 = 188 - 5;
   private final int YF4 = 290 - 6;
@@ -146,81 +133,54 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   private final int YF1 = 596 - 15;
   private final int YLL2 = 800 - 18;
   private final int YLL1 = 698 - 19;
-  //  private ObservableList<String> hallsOutsideOfPatientRooms;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    hallsOutsideOfPatientRooms.addAll(
-    //        "HHALL01203",
-    //        "HHALL01103",
-    //        "HHALL00903",
-    //        "HHALL01003",
-    //        "HHALL01303",
-    //        "HHALL01403",
-    //        "HHALL01204",
-    //        "HHALL01104",
-    //        "HHALL00904",
-    //        "HHALL01304",
-    //        "HHALL01404",
-    //        "HHALL01205",
-    //        "HHALL01105",
-    //        "HHALL00905",
-    //        "HHALL01305",
-    //        "HHALL01405");
+
     masterBox.setSpacing(30);
-    // dirtyTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
     cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    // dirtyPodB.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    // dirtyPodC.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
     cleanPodB.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     cleanPodC.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-    //
-    // dirtyTableBox.setVisible(false);
+
     cleanTableBox.setVisible(false);
-    // unitID.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    //  type.setCellValueFactory(new PropertyValueFactory<>("type"));
-    //    availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
-    //    currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
-    //    unitIDC.setCellValueFactory(new PropertyValueFactory<>("unitID"));
+
+    unitIDC.setCellValueFactory(new PropertyValueFactory<>("unitID"));
     typeC.setCellValueFactory(new PropertyValueFactory<>("type"));
     availabilityC.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLocC.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
-    //    unitIDPodA.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    //    typePodA.setCellValueFactory(new PropertyValueFactory<>("type"));
-    //    availabilityPodA.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
-    //    currLocPodA.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
+
     unitIDCPodA.setCellValueFactory(new PropertyValueFactory<>("unitID"));
     typeCPodA.setCellValueFactory(new PropertyValueFactory<>("type"));
     availabilityCPodA.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLocCPodA.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
-    //    unitIDPodB.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    //    typePodB.setCellValueFactory(new PropertyValueFactory<>("type"));
-    //    availabilityPodB.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
-    //    currLocPodB.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
+
     unitIDCPodB.setCellValueFactory(new PropertyValueFactory<>("unitID"));
     typeCPodB.setCellValueFactory(new PropertyValueFactory<>("type"));
     availabilityCPodB.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLocCPodB.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
-        dynamicSizeRectangles(levFiveDirty, levFiveClean,levFiveIU, sortEquipmentByFloor("5"));
-        dirtyCleanNumber(levFiveDirtyText, levFiveCleanText, sortEquipmentByFloor("5"));
+    dynamicSizeRectangles(levFiveDirty, levFiveClean, levFiveIU, sortEquipmentByFloor("5"));
+    rectangleNumber(levFiveDirtyText, levFiveCleanText, levFiveIUText, sortEquipmentByFloor("5"));
 
-        dynamicSizeRectangles(levFourDirty, levFourClean,levFiveIU, sortEquipmentByFloor("4"));
-        dirtyCleanNumber(levFourDirtyText, levFourCleanText, sortEquipmentByFloor("4"));
+    dynamicSizeRectangles(levFourDirty, levFourClean, levFourIU, sortEquipmentByFloor("4"));
+    rectangleNumber(levFourDirtyText, levFourCleanText, levFourIUText, sortEquipmentByFloor("4"));
 
-        dynamicSizeRectangles(levThreeDirty, levThreeClean, levFiveIU,sortEquipmentByFloor("3"));
-        dirtyCleanNumber(levThreeDirtyText, levThreeCleanText,sortEquipmentByFloor("3"));
+    dynamicSizeRectangles(levThreeDirty, levThreeClean, levThreeIU, sortEquipmentByFloor("3"));
+    rectangleNumber(
+        levThreeDirtyText, levThreeCleanText, levThreeIUText, sortEquipmentByFloor("3"));
 
-        dynamicSizeRectangles(levTwoDirty, levTwoClean, levFiveIU,sortEquipmentByFloor("2"));
-        dirtyCleanNumber(levTwoDirtyText, levTwoCleanText,sortEquipmentByFloor("2"));
+    dynamicSizeRectangles(levTwoDirty, levTwoClean, levTwoIU, sortEquipmentByFloor("2"));
+    rectangleNumber(levTwoDirtyText, levTwoCleanText, levTwoIUText, sortEquipmentByFloor("2"));
 
-        dynamicSizeRectangles(levOneDirty, levOneClean, levFiveIU,sortEquipmentByFloor("1"));
-        dirtyCleanNumber(levOneDirtyText, levOneCleanText,sortEquipmentByFloor("1"));
+    dynamicSizeRectangles(levOneDirty, levOneClean, levOneIU, sortEquipmentByFloor("1"));
+    rectangleNumber(levOneDirtyText, levOneCleanText, levOneIUText, sortEquipmentByFloor("1"));
 
-        dynamicSizeRectangles(llOneDirty, llOneClean, levFiveIU,sortEquipmentByFloor("L1"));
-        dirtyCleanNumber(llOneDirtyText, llOneCleanText,sortEquipmentByFloor("L1"));
+    dynamicSizeRectangles(llOneDirty, llOneClean, llOneIU, sortEquipmentByFloor("L1"));
+    rectangleNumber(llOneDirtyText, llOneCleanText, llOneIUText, sortEquipmentByFloor("L1"));
 
-        dynamicSizeRectangles(llTwoDirty, llTwoClean, levFiveIU,sortEquipmentByFloor("L2"));
-        dirtyCleanNumber(llTwoDirtyText, llTwoCleanText, sortEquipmentByFloor("L2"));
+    dynamicSizeRectangles(llTwoDirty, llTwoClean, llTwoIU, sortEquipmentByFloor("L2"));
+    rectangleNumber(llTwoDirtyText, llTwoCleanText, llTwoIUText, sortEquipmentByFloor("L2"));
     fillTable(sortByDirty(sortEquipmentByFloor("5")), cleanXloc, YF5, l5Stack);
     fillTable(sortByDirty(sortEquipmentByFloor("4")), cleanXloc, YF4, l4Stack);
     fillTable(sortByDirty(sortEquipmentByFloor("3")), cleanXloc, YF3, l3Stack);
@@ -281,9 +241,11 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     timeline.play();
   }
 
-  private void dirtyCleanNumber(Text dirty, Text clean, ObservableList<EquipmentUnit> equipList) {
+  private void rectangleNumber(
+      Text dirty, Text clean, Text inUse, ObservableList<EquipmentUnit> equipList) {
     int dirtyAmount = 0;
     int cleanAmount = 0;
+    int inUseAmount = 0;
     for (EquipmentUnit equipmentUnit : equipList) {
       if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("stor")
               && equipmentUnit.getIsAvailableChar() == 'Y')
@@ -295,52 +257,14 @@ public class GraphicalMapEditorDashboardController implements Initializable {
           || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
               && equipmentUnit.getIsAvailableChar() == 'N')) {
         dirtyAmount++;
+      } else {
+        inUseAmount++;
       }
     }
-    //    if (cleanAmount == 0) {
-    //      clean.setText("0");
-    //    }
-    //    if (dirtyAmount == 0) {
-    //      dirty.setText("0");
-    //    }
     dirty.setText(Integer.toString(dirtyAmount));
     clean.setText(Integer.toString(cleanAmount));
+    inUse.setText(Integer.toString(inUseAmount));
   }
-
-  //  private void fillDirtyTable(
-  //      ObservableList<EquipmentUnit> dirtyEquip, int XfloorVal, int YfloorVal, StackPane floor) {
-  //    floor.setOnMouseEntered(
-  //        event -> {
-  //          if (dirtyEquip.size() > 0) {
-  //            dirtyTableBox.setVisible(true);
-  //            // dirtyTable.setItems(dirtyEquip);
-  //            dirtyTableBox.setLayoutX(XfloorVal);
-  //            dirtyTableBox.setLayoutY(YfloorVal);
-  //          } else {
-  //            dirtyTableBox.setVisible(false);
-  //          }
-  //          dirtyTableBox.setOnMouseEntered(
-  //              event2 -> {
-  //                if (dirtyEquip.size() > 0) {
-  //                  dirtyTableBox.setVisible(true);
-  //                  // dirtyTable.setItems(dirtyEquip);
-  //                  dirtyTableBox.setLayoutX(XfloorVal);
-  //                  dirtyTableBox.setLayoutY(YfloorVal);
-  //                } else {
-  //                  dirtyTableBox.setVisible(false);
-  //                }
-  //              });
-  //        });
-  //    floor.setOnMouseExited(
-  //        event -> {
-  //          dirtyTableBox.setVisible(false);
-  //          dirtyTableBox.setOnMouseExited(
-  //              event2 -> {
-  //                dirtyTableBox.setVisible(false);
-  //              });
-  //        });
-  //    // dirtyPodB.getItems().addAll(addToPod1(dirtyEquip));
-  //  }
 
   private void fillTable(
       ObservableList<EquipmentUnit> equipment, int XfloorVal, int YfloorVal, StackPane floor) {
@@ -425,41 +349,100 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         inUseAmount++;
       }
     }
-    if (cleanAmount == 0 && dirtyAmount == 0) {
+    int dirtyWidth = (int) ((double) (dirtyAmount) / (double) (equipList.size()) * 600.0);
+    int cleanWidth = (int) ((double) (cleanAmount) / (double) (equipList.size()) * 600.0);
+    int inUseWidth = (int) ((double) (inUseAmount) / (double) (equipList.size()) * 600.0);
+    if (cleanAmount == 0 && dirtyAmount == 0 && inUseAmount == 0) {
       clean.setWidth(200);
       dirty.setWidth(200);
+      inUse.setWidth(200);
       clean.setFill(Color.LIGHTGRAY);
       dirty.setFill(Color.LIGHTGRAY);
-    } else if (cleanAmount == 0 || dirtyAmount == 0) {
-      if (cleanAmount == 0) {
-        clean.setWidth(70);
-        dirty.setWidth(330);
-        clean.setFill(Color.LIGHTGRAY);
-      }
-      if (dirtyAmount == 0) {
-        clean.setWidth(330);
-        dirty.setWidth(70);
-        dirty.setFill(Color.LIGHTGRAY);
-      }
-      if(inUseAmount == 0){
-        clean.setWidth(330);
-        inUse.setWidth(70);
-        inUse.setFill(Color.LIGHTGRAY);
-      }
-    } else {
+      inUse.setFill(Color.LIGHTGRAY);
+    } else if (dirtyAmount == 0 && cleanAmount == 0) {
+      clean.setWidth(70);
+      dirty.setWidth(70);
+      inUse.setWidth(460.0);
+      clean.setFill(Color.LIGHTGRAY);
+      dirty.setFill(Color.LIGHTGRAY);
+
+    } else if (cleanAmount == 0 && inUseAmount == 0) {
+      clean.setWidth(70);
+      inUse.setWidth(70);
+      dirty.setWidth(460.0);
+      clean.setFill(Color.LIGHTGRAY);
+      inUse.setFill(Color.LIGHTGRAY);
+
+    } else if (dirtyAmount == 0 && inUseAmount == 0) {
+      inUse.setWidth(70);
+      dirty.setWidth(70);
+      clean.setWidth(460);
+      inUse.setFill(Color.LIGHTGRAY);
+      dirty.setFill(Color.LIGHTGRAY);
+
+    } else if (cleanAmount == 0) {
+      clean.setWidth(70);
       dirty.setWidth(
-          (int) ((double) (dirtyAmount) / (double) (equipList.size() - inUseAmount) * 600.0));
+          (int) ((double) (cleanAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
+      inUse.setWidth(
+          (int) ((double) (inUseAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
+      clean.setFill(Color.LIGHTGRAY);
+    } else if (dirtyAmount == 0) {
+      dirty.setWidth(70);
       clean.setWidth(
-          (int) ((double) (cleanAmount) / (double) (equipList.size() - inUseAmount) * 600.0));
-      inUse.setWidth((int)((double) (inUseAmount) / (double) (equipList.size() - inUseAmount) * 600.0));
-      if (dirty.getWidth() < 70) {
-        clean.setWidth(330);
-        dirty.setWidth(70);
-      }
-      if (clean.getWidth() < 70) {
-        clean.setWidth(70);
-        dirty.setWidth(330);
-      }
+          (int) ((double) (cleanAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
+      inUse.setWidth(
+          (int) ((double) (inUseAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
+      dirty.setFill(Color.LIGHTGRAY);
+    } else if (inUseAmount == 0) {
+      inUse.setWidth(70);
+      dirty.setWidth(
+          (int) ((double) (dirtyAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
+      clean.setWidth(
+          (int) ((double) (cleanAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
+      inUse.setFill(Color.LIGHTGRAY);
+    } else if (dirtyWidth <= 70 && cleanWidth <= 70) {
+      clean.setWidth(70);
+      dirty.setWidth(70);
+      inUse.setWidth(
+          (int)
+              ((double) (inUseAmount)
+                  / (double) (equipList.size() - cleanAmount - dirtyAmount)
+                  * 460.0));
+    } else if (cleanWidth <= 70 && inUseWidth <= 70) {
+      clean.setWidth(70);
+      inUse.setWidth(70);
+      dirty.setWidth((int) ((double) (inUseAmount) / (double) (equipList.size()) * 460.0));
+    } else if (dirtyWidth <= 70 && inUseWidth <= 70) {
+      inUse.setWidth(70);
+      dirty.setWidth(70);
+      clean.setWidth(
+          (int)
+              ((double) (inUseAmount)
+                  / (double) (equipList.size() - inUseAmount - dirtyAmount)
+                  * 460.0));
+    } else if (dirtyWidth <= 70) {
+      dirty.setWidth(70);
+      clean.setWidth(
+          (int) ((double) (cleanAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
+      inUse.setWidth(
+          (int) ((double) (inUseAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
+    } else if (cleanWidth <= 70) {
+      clean.setWidth(70);
+      dirty.setWidth(
+          (int) ((double) (cleanAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
+      inUse.setWidth(
+          (int) ((double) (inUseAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
+    } else if (inUseWidth <= 70) {
+      dirty.setWidth(
+          (int) ((double) (dirtyAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
+      clean.setWidth(
+          (int) ((double) (cleanAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
+      inUse.setWidth(70);
+    } else {
+      dirty.setWidth((int) ((double) (dirtyAmount) / (double) (equipList.size()) * 600.0));
+      clean.setWidth((int) ((double) (cleanAmount) / (double) (equipList.size()) * 600.0));
+      inUse.setWidth((int) ((double) (inUseAmount) / (double) (equipList.size()) * 600.0));
     }
   }
 
