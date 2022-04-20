@@ -158,7 +158,7 @@ public class BasicLayoutController implements Initializable {
             new KeyFrame(
                 Duration.ZERO,
                 e -> {
-                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy  h:mm a");
+                  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a");
                   timeLabel.setText(LocalDateTime.now().format(formatter));
                 }),
             new KeyFrame(Duration.seconds(1)));
