@@ -215,7 +215,7 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </JFXToggleButton>
-            <Label fx:id="mainTitle" prefHeight="148.0" prefWidth="686.0" styleClass="scene-title" text="Service Request Systems" textAlignment="CENTER" textFill="#446fdc" wrapText="true">
+            <Label fx:id="mainTitle" prefHeight="150.0" prefWidth="470.0" styleClass="title-label" text="Service Request Systems" textAlignment="CENTER" textFill="#446fdc" wrapText="true">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
