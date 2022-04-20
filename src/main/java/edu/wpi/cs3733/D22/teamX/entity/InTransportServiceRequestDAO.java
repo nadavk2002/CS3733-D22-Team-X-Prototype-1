@@ -204,7 +204,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
       String nextFileLine;
       while ((nextFileLine = insrCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 5) {
+        if (currLine.length == 6) {
           InTransportServiceRequest node =
               new InTransportServiceRequest(
                   currLine[0],
