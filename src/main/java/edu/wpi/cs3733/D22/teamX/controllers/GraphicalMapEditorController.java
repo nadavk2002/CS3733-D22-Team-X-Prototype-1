@@ -307,19 +307,6 @@ public class GraphicalMapEditorController implements Initializable {
         rect.setX(locationList.get(i).getxCoord() - (rect.getWidth() / 2));
         rect.setY(locationList.get(i).getyCoord() - rect.getHeight());
         rect.setFill(img);
-        rect.setOnDragOver(
-            event -> {
-              event.acceptTransferModes(TransferMode.ANY);
-            });
-        rect.setOnDragDropped(
-            event -> {
-              pane.setGestureEnabled(true);
-              EquipmentUnit equip = equipDAO.getRecord(event.getDragboard().getString());
-              equip.getCurrLocation().removeUnit(equip);
-              ((Location) rect.getUserData()).addUnit(equip);
-              equip.setCurrLocation((Location) rect.getUserData());
-              loadLocation(equip.getCurrLocation().getFloor());
-            });
 
         rect.setOnContextMenuRequested(
             event -> {
@@ -392,20 +379,24 @@ public class GraphicalMapEditorController implements Initializable {
           new ImagePattern(
               new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType().getModel() + ".png")));
       rectangle.setVisible(showEquipCheck.isSelected());
-      rectangle.setOnDragExited(
-          event -> {
-            pane.setGestureEnabled(true);
-          });
 
-      rectangle.setOnDragDetected(
-          event -> {
-            Dragboard db = rectangle.startDragAndDrop(TransferMode.ANY);
-            pane.setGestureEnabled(false);
-            System.out.println("DRAG DETECTED");
-            ClipboardContent cb = new ClipboardContent();
-            cb.putString(((EquipmentUnit) rectangle.getUserData()).getUnitID());
-            db.setContent(cb);
-            event.consume();
+      rectangle.setOnMouseDragged(
+          new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+              if (event.getButton() != MouseButton.PRIMARY) return;
+              pane.setGestureEnabled(false);
+              imageGroup.setDisable(true);
+              rectangle.setCursor(Cursor.CLOSED_HAND);
+              rectangle.setFill(Paint.valueOf("LIGHTBLUE"));
+              if (event.getX() - (rectangle.getWidth() / 2) > imageView.getX()
+                  && event.getX() <= imageView.getX() + imageView.getBoundsInLocal().getWidth())
+                rectangle.setX(event.getX() - (rectangle.getWidth() / 2));
+              if (event.getY() - (rectangle.getHeight() / 2) > imageView.getY()
+                  && event.getY() <= imageView.getY() + imageView.getBoundsInLocal().getHeight())
+                rectangle.setY(event.getY() - (rectangle.getHeight() / 2));
+              // event.consume();
+            }
           });
 
       rectangle.setOnContextMenuRequested(
