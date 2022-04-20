@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class UpdateEquipmentRequestController {
   @FXML private Label quanityGreaterThan;
@@ -22,28 +23,31 @@ public class UpdateEquipmentRequestController {
       MedicalEquipmentServiceRequestDAO.getDAO();
   private EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
   private List<Location> locations;
+  private MedicalEquipmentServiceRequest request;
+
+  private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
+
+  public UpdateEquipmentRequestController(MedicalEquipmentServiceRequest request) {
+    this.request = request;
+  }
 
   @FXML
   public void initialize() {
-    // loadPreviousSelection();
+    selectDestination.setValue(request.getLocationShortName());
     locations = locationDAO.getAllRecords();
-    submitButton.setDisable(true);
     selectStatus.getItems().addAll("", "PROC", "DONE");
     EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
     for (int i = 0; i < eqtDAO.getAllRecords().size(); i++) {
       selectEquipmentType.getItems().add(eqtDAO.getAllRecords().get(i).getModel());
     }
     selectDestination.setItems(this.getLocationNames());
+    selectEquipmentType.setValue(this.request.getEquipmentType());
+    selectStatus.setValue(this.request.getStatus());
+    String updateAmount = String.valueOf(this.request.getQuantity());
+    amountField.setText(updateAmount);
     updateAvailability();
     quanityGreaterThan.setVisible(false);
   }
-
-      public void loadPreviousSelection() {
-          ServiceRequestTableController request = new ServiceRequestTableController();
-          String id = request.getID();
-          Location previousLoc = locationDAO.getRecord(id);
-          selectDestination.getSelectionModel().select(previousLoc.getShortName());
-      }
 
   private ObservableList<String> equipDeliveryList() {
     ObservableList<String> nodeID = FXCollections.observableArrayList();
@@ -85,7 +89,7 @@ public class UpdateEquipmentRequestController {
   public void submitRequest() {
     MedicalEquipmentServiceRequest request = new MedicalEquipmentServiceRequest();
     request.setEquipmentType(selectEquipmentType.getValue());
-    request.setRequestID(equipmentDAO.makeID());
+    request.setRequestID(this.request.getRequestID());
     request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
@@ -95,7 +99,9 @@ public class UpdateEquipmentRequestController {
       quanityGreaterThan.setVisible(true);
       return;
     }
-    equipmentDAO.addRecord(request);
+    ServiceRequestDAO.getDAO().updateRecord(request);
+    Stage stage = (Stage) submitButton.getScene().getWindow();
+    stage.close();
     this.resetFields();
     updateAvailability();
     quanityGreaterThan.setVisible(false);

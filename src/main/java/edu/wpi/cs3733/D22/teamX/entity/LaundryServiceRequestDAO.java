@@ -123,7 +123,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
               + recordObject.getAssigneeID()
               + "', service = '"
               + recordObject.getService()
-              + " WHERE requestID = '"
+              + "' WHERE requestID = '"
               + recordObject.getRequestID()
               + "'");
     } catch (SQLException e) {

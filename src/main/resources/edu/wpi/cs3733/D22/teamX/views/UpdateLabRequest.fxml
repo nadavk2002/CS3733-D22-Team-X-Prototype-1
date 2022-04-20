@@ -1,14 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.cs3733.D22.teamX.controllers.UpdateLabRequestController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="444.0" prefWidth="646.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="94.0" layoutY="59.0" text="Edit Lab Service Request" textAlignment="CENTER" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+      <VBox fx:id="submitCol" layoutX="159.0" layoutY="140.0" prefHeight="200.0" prefWidth="281.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox fx:id="labelCol" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Staff " />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service Status" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" />
+                     </children>
+                  </VBox>
+                  <VBox fx:id="dropdownCol" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ChoiceBox fx:id="patientName" prefHeight="30.0" prefWidth="159.0" />
+                        <ChoiceBox fx:id="selectLab" prefHeight="30.0" prefWidth="159.0" />
+                        <ChoiceBox fx:id="assigneeDrop" prefHeight="30.0" prefWidth="159.0" />
+                        <ChoiceBox fx:id="serviceStatus" prefHeight="30.0" prefWidth="159.0" />
+                        <ChoiceBox fx:id="selectDestination" prefHeight="30.0" prefWidth="159.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox fx:id="buttonRow" alignment="CENTER" prefHeight="62.0" prefWidth="346.0">
+               <children>
+                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" prefHeight="30.0" prefWidth="114.0" text="Reset Form" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="submitRequest" mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="127.0" text="Submit Request" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

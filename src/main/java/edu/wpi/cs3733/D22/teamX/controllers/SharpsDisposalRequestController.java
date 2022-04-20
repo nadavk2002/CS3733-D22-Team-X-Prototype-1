@@ -100,7 +100,7 @@ public class SharpsDisposalRequestController implements Initializable {
       SDSR.setStatus(statusChoiceBox.getValue());
       SDSR.setType(typeDropDown.getValue());
       // TODO use acctual makeID system in SharpsDisposal
-      SDSR.setRequestID(sharpDAO.makeSharpsDisposalServieRequestID());
+      SDSR.setRequestID(sharpDAO.makeSharpsDisposalServiceRequestID());
       // submit the thing
       sharpDAO.addRecord(SDSR);
       // notify user of submittion

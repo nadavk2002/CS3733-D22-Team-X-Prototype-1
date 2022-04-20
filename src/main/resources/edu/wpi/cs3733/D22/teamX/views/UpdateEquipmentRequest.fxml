@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="548.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.UpdateEquipmentRequestController">
+<AnchorPane prefHeight="548.0" prefWidth="746.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ChoiceBox fx:id="selectEquipmentType" layoutX="304.0" layoutY="204.0" prefWidth="150.0">
          <opaqueInsets>

@@ -26,11 +26,10 @@ public class ServiceRequestDAO {
   }
 
   private static class SingletonHelper {
-    private static final ServiceRequestDAO serviceRequestDAO =
-            new ServiceRequestDAO();
+    private static final ServiceRequestDAO serviceRequestDAO = new ServiceRequestDAO();
   }
 
-  public static ServiceRequestDAO getDAO(){
+  public static ServiceRequestDAO getDAO() {
     return SingletonHelper.serviceRequestDAO;
   }
 
@@ -308,5 +307,4 @@ public class ServiceRequestDAO {
   public String makeMaintenanceServiceRequestID() {
     return maintenanceServiceRequestDAO.makeID();
   }
-
 }
