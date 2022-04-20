@@ -49,6 +49,7 @@ public class UpdateMealRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    submitButton.setDisable(false);
     // status choice box ----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "DONE", "PROC");
     // patient names choice box---------------------------------------

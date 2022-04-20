@@ -47,6 +47,7 @@ public class UpdateSharpsDisposalRequestController implements Initializable {
     employees = employeeDAO.getAllRecords();
     // reset fields
     resetFields();
+    submitButton.setDisable(false);
     // populate ChoiceBoxes
     roomDropDown.setItems(getLocationNames());
     assigneeDropDown.setItems(getEmployeeNames());

@@ -46,6 +46,7 @@ public class UpdateMaintenanceRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    submitButton.setDisable(false);
     status.getItems().addAll("", "PROC", "DONE");
     assignee.setItems(getEmployeeIDs());
     roomNum.setItems(getLocationNames());

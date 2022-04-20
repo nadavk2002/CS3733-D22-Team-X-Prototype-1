@@ -41,6 +41,7 @@ public class UpdateInTransportRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    submitButton.setDisable(false);
     selectPatient
         .getItems()
         .addAll(

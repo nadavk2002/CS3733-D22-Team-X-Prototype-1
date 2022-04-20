@@ -49,7 +49,8 @@ public class UpdateLabRequestController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
-
+    resetFields();
+    submitRequest.setDisable(false);
     selectDestination.setItems(this.getLocationNames());
     //    submitRequest.setDisable(true);
     selectLab.getSelectionModel().select("");

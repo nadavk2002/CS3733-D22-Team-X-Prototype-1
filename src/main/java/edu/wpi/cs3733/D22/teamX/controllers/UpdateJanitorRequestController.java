@@ -45,6 +45,7 @@ public class UpdateJanitorRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    submitButton.setDisable(false);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     serviceType.setText("");
     assignStaff.setItems(getEmployeeIDs());
@@ -88,7 +89,6 @@ public class UpdateJanitorRequestController implements Initializable {
     submitButton.setDisable(
         roomNum.getValue().equals("")
             || serviceType.getText().equals("")
-            || serviceStatus.getValue().equals("")
             || assignStaff.getValue().equals(""));
   }
 

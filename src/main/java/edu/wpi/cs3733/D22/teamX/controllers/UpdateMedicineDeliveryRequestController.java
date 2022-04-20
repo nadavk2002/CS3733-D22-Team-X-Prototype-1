@@ -44,6 +44,7 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    submitRequest.setDisable(false);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     assignStaff.setItems(this.getEmployeeIDs());
     //    assignStaff.getItems().addAll("Staff 1", "Staff 2", "Staff 3", "Staff 4");

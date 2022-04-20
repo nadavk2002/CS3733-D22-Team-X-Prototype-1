@@ -36,6 +36,7 @@ public class UpdateLangRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    submitButton.setDisable(false);
     assignStaff.setItems(this.getEmployeeIDs());
     selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
     serviceStatus.getItems().addAll("", "PROC", "DONE");

@@ -46,8 +46,9 @@ public class UpdateGiftRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
-
+    submitButton.setDisable(false);
     selectStatus.getItems().addAll("", "PROC", "DONE");
+    giftNoteField.setText("");
     selectAssignStaff.setItems(this.getEmployeeIDs());
     //    selectAssignStaff.getItems().addAll("Staff1", "Staff2", "Staff3", "Staff4");
     selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
@@ -57,7 +58,7 @@ public class UpdateGiftRequestController implements Initializable {
     selectGiftType.setOnAction((ActionEvent event) -> enableSubmitButton());
     selectGiftDestination.setOnAction((ActionEvent event) -> enableSubmitButton());
     selectAssignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
-    giftNoteField.setOnAction((ActionEvent event) -> enableSubmitButton());
+    // giftNoteField.setOnAction((ActionEvent event) -> enableSubmitButton());
     //    selectStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
     selectGiftType.setValue(this.request.getGiftType());
@@ -95,8 +96,7 @@ public class UpdateGiftRequestController implements Initializable {
         selectGiftType.getValue().equals("")
             || selectGiftDestination.getValue().equals("")
             || selectAssignStaff.getValue().equals("")
-            || giftNoteField.getText().equals("")
-            || selectStatus.getValue().equals(""));
+            || giftNoteField.getText().equals(""));
   }
 
   @FXML

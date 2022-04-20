@@ -38,6 +38,8 @@ public class UpdateEquipmentRequestController {
   public void initialize() {
     selectDestination.setValue(request.getLocationShortName());
     locations = locationDAO.getAllRecords();
+    resetFields();
+    submitButton.setDisable(false);
     selectStatus.getItems().addAll("", "PROC", "DONE");
     EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
     for (int i = 0; i < eqtDAO.getAllRecords().size(); i++) {

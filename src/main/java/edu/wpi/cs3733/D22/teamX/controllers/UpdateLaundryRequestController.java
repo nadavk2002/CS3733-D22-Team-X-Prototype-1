@@ -45,6 +45,7 @@ public class UpdateLaundryRequestController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
+    submitButton.setDisable(false);
     selectionMenuColumn.setSpacing(20);
     labelColumn.setSpacing(28);
     submitColumn.setSpacing(20);
