@@ -3,10 +3,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
-import edu.wpi.cs3733.D22.teamX.api.*;
-import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -20,7 +17,9 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /** This represents the blue bar at the top of the app */
@@ -48,6 +47,11 @@ public class BasicLayoutController implements Initializable {
     //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
+    try {
+      playMusic();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
     //            "Choose a Page",
@@ -77,6 +81,17 @@ public class BasicLayoutController implements Initializable {
   //      CSVFileSaverController.loaded = false;
   //    }
   //  }
+
+  private void playMusic() throws IOException {
+    Stage stage = new Stage();
+    stage.setOpacity(0);
+    Scene scene =
+        new Scene(
+            FXMLLoader.load(
+                getClass()
+                    .getResource("/edu/wpi/cs3733/D22/teamX/views/InvisibleMusicPlayer.fxml")));
+    stage.setScene(scene);
+  }
 
   @FXML
   public void switchServiceRequestTable() throws IOException {
