@@ -64,7 +64,7 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </TextField>
-                              <PasswordField fx:id="password" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Password">
+                              <PasswordField fx:id="password" onAction="#validLogin" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Password">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
