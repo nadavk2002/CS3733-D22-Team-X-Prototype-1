@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /** Represents a general service request */
@@ -9,6 +10,9 @@ public abstract class ServiceRequest {
   private Location destination;
   private String status;
   private Employee assignee;
+  private LocalDateTime CreationTime;
+  private LocalDateTime PROCTime;
+  private LocalDateTime DONETime;
 
   // did this do anything
 
@@ -19,6 +23,19 @@ public abstract class ServiceRequest {
     this.destination = destination;
     this.status = status;
     this.assignee = assignee;
+    this.CreationTime = LocalDateTime.now();
+    this.PROCTime = null;
+    this.DONETime = null;
+  }
+
+  public ServiceRequest(String requestID, Location destination, String status, Employee assignee, LocalDateTime creationTime, LocalDateTime PROCTime, LocalDateTime DONETime) {
+    this.requestID = requestID;
+    this.destination = destination;
+    this.status = status;
+    this.assignee = assignee;
+    this.CreationTime = creationTime;
+    this.PROCTime = PROCTime;
+    this.DONETime = DONETime;
   }
 
   public ServiceRequest() {
@@ -26,6 +43,9 @@ public abstract class ServiceRequest {
     this.destination = new Location();
     this.status = "";
     this.assignee = new Employee();
+    this.CreationTime = LocalDateTime.now();
+    this.PROCTime = null;
+    this.DONETime = null;
   }
 
   public String getRequestID() {
@@ -66,6 +86,30 @@ public abstract class ServiceRequest {
 
   public String getLocationShortName() {
     return destination.getShortName();
+  }
+
+  public LocalDateTime getCreationTime() {
+    return CreationTime;
+  }
+
+  public void setCreationTime(LocalDateTime creationTime) {
+    CreationTime = creationTime;
+  }
+
+  public LocalDateTime getPROCTime() {
+    return PROCTime;
+  }
+
+  public void setPROCTime(LocalDateTime PROCTime) {
+    this.PROCTime = PROCTime;
+  }
+
+  public LocalDateTime getDONETime() {
+    return DONETime;
+  }
+
+  public void setDONETime(LocalDateTime DONETime) {
+    this.DONETime = DONETime;
   }
 
   @Override
