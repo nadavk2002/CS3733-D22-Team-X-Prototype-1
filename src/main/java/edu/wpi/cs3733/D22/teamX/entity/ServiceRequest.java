@@ -28,7 +28,14 @@ public abstract class ServiceRequest {
     this.DONETime = null;
   }
 
-  public ServiceRequest(String requestID, Location destination, String status, Employee assignee, LocalDateTime creationTime, LocalDateTime PROCTime, LocalDateTime DONETime) {
+  public ServiceRequest(
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime) {
     this.requestID = requestID;
     this.destination = destination;
     this.status = status;
