@@ -183,7 +183,6 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
       statement.execute("DROP TABLE JanitorServiceRequest");
     } catch (SQLException e) {
       System.out.println("JanitorServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 

@@ -163,7 +163,6 @@ public class EmployeeDAO implements DAO<Employee> {
       dropEmployee.execute("DROP TABLE Employee");
     } catch (SQLException e) {
       System.out.println("Employee not dropped");
-      e.printStackTrace();
     }
   }
 

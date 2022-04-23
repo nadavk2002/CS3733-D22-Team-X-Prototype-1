@@ -189,7 +189,6 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
       dropLabServiceRequest.execute("DROP TABLE InTransportServiceRequest");
     } catch (SQLException e) {
       System.out.println("InTransportServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 
