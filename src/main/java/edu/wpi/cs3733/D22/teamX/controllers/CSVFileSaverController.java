@@ -36,7 +36,6 @@ public class CSVFileSaverController implements Initializable {
     }
     String csvSaverDirStr = csvSaverDir.getPath() + "\\";
     DatabaseCreator.saveAllCSV(csvSaverDirStr);
-    edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO.getDAO().saveCSV(csvSaverDirStr);
     Platform.exit();
   }
 
@@ -44,7 +43,6 @@ public class CSVFileSaverController implements Initializable {
       throws loadSaveFromCSVException,
           edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     DatabaseCreator.saveAllCSV("");
-    edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO.getDAO().saveCSV("");
     Platform.exit();
   }
 
