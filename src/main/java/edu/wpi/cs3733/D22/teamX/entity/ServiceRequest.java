@@ -5,6 +5,8 @@ import java.util.Objects;
 
 /** Represents a general service request */
 public abstract class ServiceRequest {
+  //this could be LocalDateTime.MIN but i am not sure how the DB would handle the minimum year
+  private LocalDateTime nullTime = LocalDateTime.of(0,1,1,0,0);
 
   private String requestID;
   private Location destination;
@@ -24,8 +26,15 @@ public abstract class ServiceRequest {
     this.status = status;
     this.assignee = assignee;
     this.CreationTime = LocalDateTime.now();
-    this.PROCTime = null;
-    this.DONETime = null;
+    if(status == "PROC"){
+      this.PROCTime = CreationTime;
+      this.DONETime = nullTime;
+    }
+    else if(status == "DONE"){
+      this.PROCTime = CreationTime;
+      this.DONETime = CreationTime;
+    }
+
   }
 
   public ServiceRequest(
@@ -51,8 +60,8 @@ public abstract class ServiceRequest {
     this.status = "";
     this.assignee = new Employee();
     this.CreationTime = LocalDateTime.now();
-    this.PROCTime = null;
-    this.DONETime = null;
+    this.PROCTime = nullTime;
+    this.DONETime = nullTime;
   }
 
   public String getRequestID() {
@@ -80,7 +89,20 @@ public abstract class ServiceRequest {
   }
 
   public void setStatus(String status) {
+    //this may violate ECB but allows for this to be applied to all SRs without having to update controllers but DAOs still have to be updated.
+    if(this.status != status){
+      if(status == "PROC"){
+        this.PROCTime = LocalDateTime.now();
+        this.DONETime = nullTime;
+      }else if(status == "DONE"){
+        DONETime = LocalDateTime.now();
+        if(PROCTime.equals(nullTime)){
+          PROCTime =  DONETime;
+        }
+      }
+    }
     this.status = status;
+
   }
 
   public void setDestination(Location destination) {
