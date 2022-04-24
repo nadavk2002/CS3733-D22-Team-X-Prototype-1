@@ -33,6 +33,9 @@ public abstract class ServiceRequest {
     } else if (status == "DONE") {
       this.PROCTime = CreationTime;
       this.DONETime = CreationTime;
+    } else {
+      this.PROCTime = nullTime;
+      this.DONETime = nullTime;
     }
   }
 
