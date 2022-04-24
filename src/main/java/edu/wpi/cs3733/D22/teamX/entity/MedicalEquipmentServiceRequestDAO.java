@@ -6,6 +6,7 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
@@ -251,8 +252,11 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                  currLine[4],
-                  Integer.parseInt(currLine[5]));
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]),0,ZoneOffset.UTC),
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]),0,ZoneOffset.UTC),
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]),0,ZoneOffset.UTC),
+                  currLine[7],
+                  Integer.parseInt(currLine[8]));
           medicalEquipmentServiceRequests.add(mesrNode);
           mesrNode
               .getDestination()
@@ -284,6 +288,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         medEquipReq.append("'" + medicalEquipmentServiceRequests.get(i).getStatus() + "'" + ", ");
         medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        medEquipReq.append(medicalEquipmentServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC));
+        medEquipReq.append(medicalEquipmentServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC));
+        medEquipReq.append(medicalEquipmentServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC));
         medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getEquipmentType() + "'" + ", ");
         medEquipReq.append(medicalEquipmentServiceRequests.get(i).getQuantity());
@@ -319,6 +326,21 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
           csvFile.write(',');
         } else {
           csvFile.write(medicalEquipmentServiceRequests.get(i).getAssigneeID() + ",");
+        }
+        if (medicalEquipmentServiceRequests.get(i).getCreationTime() == null){
+          csvFile.write(',');
+        }else{
+          csvFile.write(medicalEquipmentServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (medicalEquipmentServiceRequests.get(i).getPROCTime() == null){
+          csvFile.write(',');
+        }else{
+          csvFile.write(medicalEquipmentServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (medicalEquipmentServiceRequests.get(i).getDONETime() == null){
+          csvFile.write(',');
+        }else{
+          csvFile.write(medicalEquipmentServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (medicalEquipmentServiceRequests.get(i).getEquipmentType() == null) {
           csvFile.write(',');
