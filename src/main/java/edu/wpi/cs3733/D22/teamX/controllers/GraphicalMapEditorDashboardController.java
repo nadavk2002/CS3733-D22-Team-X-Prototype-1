@@ -15,6 +15,7 @@ import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -130,22 +131,25 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private JFXButton showAlerts;
   @FXML private Label alertLabel;
   @FXML private VBox alertBox;
+  @FXML private VBox towerBox;
+  @FXML private HBox buttonBox;
   MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
   // floor constants--------------------------------------
   private final int cleanXloc = 705;
-  private final int YF5 = 188 - 5;
-  private final int YF4 = 290 - 6;
-  private final int YF3 = 392 - 8;
-  private final int YF2 = 494 - 12;
-  private final int YF1 = 596 - 15;
-  private final int YLL2 = 800 - 18;
-  private final int YLL1 = 698 - 19;
+  private final int YF5 = 156 + 5 + 25;
+  private final int YF4 = 259 + 10 + 25;
+  private final int YF3 = 365 + 15 + 25;
+  private final int YF2 = 472 + 20 + 25;
+  private final int YF1 = 578 + 25 + 25;
+  private final int YLL2 = 789 + 30 + 25;
+  private final int YLL1 = 684 + 35 + 25;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     alertBox.setVisible(false);
     masterBox.setSpacing(30);
-
+    towerBox.setSpacing(5);
+    buttonBox.setSpacing(6);
     cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     cleanPodB.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -159,12 +163,12 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     currLocC.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 
     unitIDCPodA.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    typeCPodA.setCellValueFactory(new PropertyValueFactory<>("type"));
+    typeCPodA.setCellValueFactory(new PropertyValueFactory<>("typeName"));
     availabilityCPodA.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLocCPodA.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 
     unitIDCPodB.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    typeCPodB.setCellValueFactory(new PropertyValueFactory<>("type"));
+    typeCPodB.setCellValueFactory(new PropertyValueFactory<>("typeName"));
     availabilityCPodB.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLocCPodB.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
     dynamicSizeRectangles(levFiveDirty, levFiveClean, levFiveIU, sortEquipmentByFloor("5"));
@@ -188,29 +192,176 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
     dynamicSizeRectangles(llTwoDirty, llTwoClean, llTwoIU, sortEquipmentByFloor("L2"));
     rectangleNumber(llTwoDirtyText, llTwoCleanText, llTwoIUText, sortEquipmentByFloor("L2"));
-    fillTable(sortByDirty(sortEquipmentByFloor("5")), cleanXloc, YF5, l5Stack, l5Hbox);
-    fillTable(sortByDirty(sortEquipmentByFloor("4")), cleanXloc, YF4, l4Stack, l4Hbox);
-    fillTable(sortByDirty(sortEquipmentByFloor("3")), cleanXloc, YF3, l3Stack, l3Hbox);
-    fillTable(sortByDirty(sortEquipmentByFloor("2")), cleanXloc, YF2, l2Stack, l2Hbox);
-    fillTable(sortByDirty(sortEquipmentByFloor("1")), cleanXloc, YF1, l1Stack, l1Hbox);
-    fillTable(sortByDirty(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1Stack, ll1Hbox);
-    fillTable(sortByDirty(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2Stack, ll2Hbox);
+    fillTable(
+        sortByDirty(sortEquipmentByFloor("5")),
+        addToPodB(sortEquipmentByFloor("5")),
+        addToPodC(sortEquipmentByFloor("5")),
+        cleanXloc,
+        YF5,
+        l5Stack,
+        l5Hbox);
+    fillTable(
+        sortByDirty(sortEquipmentByFloor("4")),
+        addToPodB(sortEquipmentByFloor("4")),
+        addToPodC(sortEquipmentByFloor("4")),
+        cleanXloc,
+        YF4,
+        l4Stack,
+        l4Hbox);
+    fillTable(
+        sortByDirty(sortEquipmentByFloor("3")),
+        addToPodB(sortEquipmentByFloor("3")),
+        addToPodC(sortEquipmentByFloor("3")),
+        cleanXloc,
+        YF3,
+        l3Stack,
+        l3Hbox);
+    fillTable(
+        sortByDirty(sortEquipmentByFloor("2")),
+        addToPodB(sortEquipmentByFloor("2")),
+        addToPodC(sortEquipmentByFloor("2")),
+        cleanXloc,
+        YF2,
+        l2Stack,
+        l2Hbox);
+    fillTable(
+        sortByDirty(sortEquipmentByFloor("1")),
+        addToPodB(sortEquipmentByFloor("1")),
+        addToPodC(sortEquipmentByFloor("1")),
+        cleanXloc,
+        YF1,
+        l1Stack,
+        l1Hbox);
+    fillTable(
+        sortByDirty(sortEquipmentByFloor("L1")),
+        addToPodB(sortEquipmentByFloor("L1")),
+        addToPodC(sortEquipmentByFloor("L1")),
+        cleanXloc,
+        YLL1,
+        ll1Stack,
+        ll1Hbox);
+    fillTable(
+        sortByDirty(sortEquipmentByFloor("L2")),
+        addToPodB(sortEquipmentByFloor("L2")),
+        addToPodC(sortEquipmentByFloor("L2")),
+        cleanXloc,
+        YLL2,
+        ll2Stack,
+        ll2Hbox);
 
-    fillTable(sortByClean(sortEquipmentByFloor("5")), cleanXloc, YF5, l5StackC, l5Hbox);
-    fillTable(sortByClean(sortEquipmentByFloor("4")), cleanXloc, YF4, l4StackC, l4Hbox);
-    fillTable(sortByClean(sortEquipmentByFloor("3")), cleanXloc, YF3, l3StackC, l3Hbox);
-    fillTable(sortByClean(sortEquipmentByFloor("2")), cleanXloc, YF2, l2StackC, l2Hbox);
-    fillTable(sortByClean(sortEquipmentByFloor("1")), cleanXloc, YF1, l1StackC, l1Hbox);
-    fillTable(sortByClean(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1StackC, ll1Hbox);
-    fillTable(sortByClean(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2StackC, ll2Hbox);
+    fillTable(
+        sortByClean(sortEquipmentByFloor("5")),
+        addToPodB(sortEquipmentByFloor("5")),
+        addToPodC(sortEquipmentByFloor("5")),
+        cleanXloc,
+        YF5,
+        l5StackC,
+        l5Hbox);
+    fillTable(
+        sortByClean(sortEquipmentByFloor("4")),
+        addToPodB(sortEquipmentByFloor("4")),
+        addToPodC(sortEquipmentByFloor("4")),
+        cleanXloc,
+        YF4,
+        l4StackC,
+        l4Hbox);
+    fillTable(
+        sortByClean(sortEquipmentByFloor("3")),
+        addToPodB(sortEquipmentByFloor("3")),
+        addToPodC(sortEquipmentByFloor("3")),
+        cleanXloc,
+        YF3,
+        l3StackC,
+        l3Hbox);
+    fillTable(
+        sortByClean(sortEquipmentByFloor("2")),
+        addToPodB(sortEquipmentByFloor("2")),
+        addToPodC(sortEquipmentByFloor("2")),
+        cleanXloc,
+        YF2,
+        l2StackC,
+        l2Hbox);
+    fillTable(
+        sortByClean(sortEquipmentByFloor("1")),
+        addToPodB(sortEquipmentByFloor("1")),
+        addToPodC(sortEquipmentByFloor("1")),
+        cleanXloc,
+        YF1,
+        l1StackC,
+        l1Hbox);
+    fillTable(
+        sortByClean(sortEquipmentByFloor("L1")),
+        addToPodB(sortEquipmentByFloor("L1")),
+        addToPodC(sortEquipmentByFloor("L1")),
+        cleanXloc,
+        YLL1,
+        ll1StackC,
+        ll1Hbox);
+    fillTable(
+        sortByClean(sortEquipmentByFloor("L2")),
+        addToPodB(sortEquipmentByFloor("L2")),
+        addToPodC(sortEquipmentByFloor("L2")),
+        cleanXloc,
+        YLL2,
+        ll2StackC,
+        ll2Hbox);
 
-    fillTable(sortByInUse(sortEquipmentByFloor("5")), cleanXloc, YF5, l5StackIU, l5Hbox);
-    fillTable(sortByInUse(sortEquipmentByFloor("4")), cleanXloc, YF4, l4StackIU, l4Hbox);
-    fillTable(sortByInUse(sortEquipmentByFloor("3")), cleanXloc, YF3, l3StackIU, l3Hbox);
-    fillTable(sortByInUse(sortEquipmentByFloor("2")), cleanXloc, YF2, l2StackIU, l2Hbox);
-    fillTable(sortByInUse(sortEquipmentByFloor("1")), cleanXloc, YF1, l1StackIU, l1Hbox);
-    fillTable(sortByInUse(sortEquipmentByFloor("L1")), cleanXloc, YLL1, ll1StackIU, ll1Hbox);
-    fillTable(sortByInUse(sortEquipmentByFloor("L2")), cleanXloc, YLL2, ll2StackIU, ll2Hbox);
+    fillTable(
+        sortByInUse(sortEquipmentByFloor("5")),
+        addToPodB(sortEquipmentByFloor("5")),
+        addToPodC(sortEquipmentByFloor("5")),
+        cleanXloc,
+        YF5,
+        l5StackIU,
+        l5Hbox);
+    fillTable(
+        sortByInUse(sortEquipmentByFloor("4")),
+        addToPodB(sortEquipmentByFloor("4")),
+        addToPodC(sortEquipmentByFloor("4")),
+        cleanXloc,
+        YF4,
+        l4StackIU,
+        l4Hbox);
+    fillTable(
+        sortByInUse(sortEquipmentByFloor("3")),
+        addToPodB(sortEquipmentByFloor("3")),
+        addToPodC(sortEquipmentByFloor("3")),
+        cleanXloc,
+        YF3,
+        l3StackIU,
+        l3Hbox);
+    fillTable(
+        sortByInUse(sortEquipmentByFloor("2")),
+        addToPodB(sortEquipmentByFloor("2")),
+        addToPodC(sortEquipmentByFloor("2")),
+        cleanXloc,
+        YF2,
+        l2StackIU,
+        l2Hbox);
+    fillTable(
+        sortByInUse(sortEquipmentByFloor("1")),
+        addToPodB(sortEquipmentByFloor("1")),
+        addToPodC(sortEquipmentByFloor("1")),
+        cleanXloc,
+        YF1,
+        l1StackIU,
+        l1Hbox);
+    fillTable(
+        sortByInUse(sortEquipmentByFloor("L1")),
+        addToPodB(sortEquipmentByFloor("L1")),
+        addToPodC(sortEquipmentByFloor("L1")),
+        cleanXloc,
+        YLL1,
+        ll1StackIU,
+        ll1Hbox);
+    fillTable(
+        sortByInUse(sortEquipmentByFloor("L2")),
+        addToPodB(sortEquipmentByFloor("L2")),
+        addToPodC(sortEquipmentByFloor("L2")),
+        cleanXloc,
+        YLL2,
+        ll2StackIU,
+        ll2Hbox);
     // dirtyPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("3")));
     // dirtyPodB.getItems().addAll(addToPod1(sortEquipmentByFloor("4")));
     // cleanPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("5")));
@@ -313,6 +464,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
   private void fillTable(
       ObservableList<EquipmentUnit> equipment,
+      ObservableList<EquipmentUnit> podB,
+      ObservableList<EquipmentUnit> podC,
       int XfloorVal,
       int YfloorVal,
       StackPane floor,
@@ -326,6 +479,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
           if (equipment.size() > 0) {
             cleanTableBox.setVisible(true);
             cleanTable.setItems(equipment);
+            cleanPodB.setItems(podB);
+            cleanPodC.setItems(podC);
             cleanTableBox.setLayoutX(XfloorVal);
             cleanTableBox.setLayoutY(YfloorVal);
           } else {
@@ -336,6 +491,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
                 if (equipment.size() > 0) {
                   cleanTableBox.setVisible(true);
                   cleanTable.setItems(equipment);
+                  cleanPodB.setItems(podB);
+                  cleanPodC.setItems(podC);
                   cleanTableBox.setLayoutX(XfloorVal);
                   cleanTableBox.setLayoutY(YfloorVal);
                 } else {
@@ -347,6 +504,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
                 if (equipment.size() > 0) {
                   cleanTableBox.setVisible(true);
                   cleanTable.setItems(equipment);
+                  cleanPodB.setItems(podB);
+                  cleanPodC.setItems(podC);
                   cleanTableBox.setLayoutX(XfloorVal);
                   cleanTableBox.setLayoutY(YfloorVal);
                 } else {
@@ -539,7 +698,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     return equipmentOnFloor;
   }
 
-  private ObservableList<EquipmentUnit> addToPod2(ObservableList<EquipmentUnit> equipOnFloor) {
+  private ObservableList<EquipmentUnit> addToPodC(ObservableList<EquipmentUnit> equipOnFloor) {
     ObservableList<EquipmentUnit> allEquipInPod1 = FXCollections.observableArrayList();
     ObservableList<EquipmentUnit> allLocAllPods = FXCollections.observableArrayList();
     for (EquipmentUnit allPods : equipOnFloor) {
@@ -561,7 +720,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     return allEquipInPod1;
   }
 
-  private ObservableList<EquipmentUnit> addToPod1(ObservableList<EquipmentUnit> equipOnFloor) {
+  private ObservableList<EquipmentUnit> addToPodB(ObservableList<EquipmentUnit> equipOnFloor) {
     ObservableList<EquipmentUnit> allEquipInPod1 = FXCollections.observableArrayList();
     ObservableList<EquipmentUnit> allLocAllPods = FXCollections.observableArrayList();
     for (EquipmentUnit allPods : equipOnFloor) {
@@ -581,5 +740,35 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       }
     }
     return allEquipInPod1;
+  }
+
+  public void ToEquipmentTable(ActionEvent actionEvent) throws IOException {
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass()
+                .getResource(
+                    "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorEquipmentTableOverlay.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("Equipment Table");
+    stage.setScene(new Scene(root1));
+    stage.show();
+  }
+
+  public void ToLocationTable(ActionEvent actionEvent) throws IOException {
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass()
+                .getResource(
+                    "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorLocationTableOverlay.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("Location Table");
+    stage.setScene(new Scene(root1));
+    stage.show();
   }
 }
