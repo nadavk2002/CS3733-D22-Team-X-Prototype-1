@@ -1,17 +1,16 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.D22.teamD.API.SanitationReqAPI;
+import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.api.*;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequest;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
-import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -36,6 +35,7 @@ public class BasicLayoutController implements Initializable {
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
   private static int mealApiIDIndex = 15;
+  private static int sanitationAPIIndex = 0;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -205,6 +205,26 @@ public class BasicLayoutController implements Initializable {
               apiMeal.getPatientFor());
       ServiceRequestDAO.getDAO().addRecord(meal);
       mealApiIDIndex++;
+    }
+
+    List<SanitationIRequest> apiSanReqs = new SanitationReqAPI().getAllRequests();
+    while (sanitationAPIIndex < apiSanReqs.size()) {
+      SanitationIRequest sanReq = apiSanReqs.get(sanitationAPIIndex);
+      JanitorServiceRequest jsr =
+          new JanitorServiceRequest(
+              ServiceRequestDAO.getDAO().makeJanitorServiceRequestID(),
+              LocationDAO.getDAO().getRecord("FDEPT00101"),
+              "",
+              EmployeeDAO.getDAO().getRecord(sanReq.getAssigneeID().substring(0, 8)),
+              sanReq.getSanitationType());
+      if (sanReq.getCleanStatus().name().equals("IN_PROGRESS")) {
+        jsr.setStatus("PROC");
+      }
+      if (sanReq.getCleanStatus().name().equals("COMPLETED")) {
+        jsr.setStatus("DONE");
+      }
+      ServiceRequestDAO.getDAO().addRecord(jsr);
+      sanitationAPIIndex++;
     }
   }
 }
