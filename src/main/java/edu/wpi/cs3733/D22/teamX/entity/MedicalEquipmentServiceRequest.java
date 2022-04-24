@@ -21,15 +21,15 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
   }
 
   public MedicalEquipmentServiceRequest(
-          String requestID,
-          Location destination,
-          String status,
-          Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,
-          String equipmentType,
-          int quantity) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String equipmentType,
+      int quantity) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.equipmentType = equipmentType;
     this.quantity = quantity;
