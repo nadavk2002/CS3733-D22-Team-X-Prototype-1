@@ -135,12 +135,12 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-                  + "', CreationTime = "
-                  + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", PROCTime = "
-                  + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", DONETime = "
-                  + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
               + ", equipmentType = '"
               + recordObject.getEquipmentType()
               + "', quantity = "
@@ -200,9 +200,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-                  + "CreationTime BIGINT,"
-                  + "PROCTime BIGINT,"
-                  + "DONETime BIGINT,"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "equipmentType VARCHAR(20),"
               + "quantity INT,"
               + "CONSTRAINT MESR_dest_fk "

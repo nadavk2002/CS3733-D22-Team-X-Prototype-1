@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
+
 public class MedicalEquipmentServiceRequest extends ServiceRequest {
   private String equipmentType;
   private int quantity;
@@ -14,6 +16,21 @@ public class MedicalEquipmentServiceRequest extends ServiceRequest {
       String equipmentType,
       int quantity) {
     super(requestID, destination, status, assignee);
+    this.equipmentType = equipmentType;
+    this.quantity = quantity;
+  }
+
+  public MedicalEquipmentServiceRequest(
+          String requestID,
+          Location destination,
+          String status,
+          Employee assignee,
+          LocalDateTime creationTime,
+          LocalDateTime PROCTime,
+          LocalDateTime DONETime,
+          String equipmentType,
+          int quantity) {
+    super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.equipmentType = equipmentType;
     this.quantity = quantity;
   }
