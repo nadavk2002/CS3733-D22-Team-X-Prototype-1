@@ -1,12 +1,12 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 /** Represents a general service request */
 public abstract class ServiceRequest {
-  //this could be LocalDateTime.MIN but i am not sure how the DB would handle the minimum year
-  private LocalDateTime nullTime = LocalDateTime.of(0,1,1,0,0);
+  private LocalDateTime nullTime = LocalDateTime.ofEpochSecond(0,0, ZoneOffset.UTC); //1 - 1 - 1970
 
   private String requestID;
   private Location destination;
