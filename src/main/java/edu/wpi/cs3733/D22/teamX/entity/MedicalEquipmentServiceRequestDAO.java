@@ -6,6 +6,7 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -134,7 +135,13 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-              + "', equipmentType = '"
+                  + "', CreationTime = "
+                  + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                  + ", PROCTime = "
+                  + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                  + ", DONETime = "
+                  + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + ", equipmentType = '"
               + recordObject.getEquipmentType()
               + "', quantity = "
               + recordObject.getQuantity()
@@ -158,6 +165,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
       medEquipReq.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getStatus() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      medEquipReq.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      medEquipReq.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      medEquipReq.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       medEquipReq.append("'" + recordObject.getEquipmentType() + "'" + ", ");
       medEquipReq.append(recordObject.getQuantity());
       medEquipReq.append(")");
