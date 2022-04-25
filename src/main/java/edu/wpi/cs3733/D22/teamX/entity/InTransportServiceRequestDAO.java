@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -118,7 +120,13 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
                 + recordObject.getTransportFrom()
                 + "', assignee = '"
                 + recordObject.getAssigneeID()
-                + "', status = '"
+                    + "', CreationTime = "
+                    + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                    + ", PROCTime = "
+                    + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                    + ", DONETime = "
+                    + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+                + ", status = '"
                 + recordObject.getStatus()
                 + "', destination = '"
                 + recordObject.getDestination().getNodeID()
@@ -147,6 +155,9 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
       sql.append("'" + recordObject.getPatientName() + "'" + ", ");
       sql.append("'" + recordObject.getTransportFrom() + "'" + ", ");
       sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      sql.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      sql.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      sql.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'");
       sql.append(")");
@@ -167,6 +178,9 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
               + "patientName VARCHAR(15),"
               + "transportFrom VARCHAR(30),"
               + "assignee CHAR(8),"
+                  + "CreationTime BIGINT,"
+                  + "PROCTime BIGINT,"
+                  + "DONETime BIGINT,"
               + "status CHAR(4),"
               + "destination CHAR(10),"
               + "CONSTRAINT INSR_dest_fk "
@@ -203,15 +217,18 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
       String nextFileLine;
       while ((nextFileLine = insrCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 6) {
+        if (currLine.length == 9) {
           InTransportServiceRequest node =
               new InTransportServiceRequest(
                   currLine[0],
                   currLine[1],
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                  currLine[4],
-                  locDestination.getRecord(currLine[5]));
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  currLine[7],
+                  locDestination.getRecord(currLine[8]));
           inTransportServiceRequests.add(node);
           node.getDestination().addRequest(node);
         } else {
@@ -237,6 +254,15 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
         sql.append("'" + inTransportServiceRequests.get(i).getPatientName() + "'" + ", ");
         sql.append("'" + inTransportServiceRequests.get(i).getTransportFrom() + "'" + ", ");
         sql.append("'" + inTransportServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        sql.append(
+                inTransportServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                        + ",");
+        sql.append(
+                inTransportServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                        + ",");
+        sql.append(
+                inTransportServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
+                        + ",");
         sql.append("'" + inTransportServiceRequests.get(i).getStatus() + "'" + ", ");
         sql.append("'" + inTransportServiceRequests.get(i).getDestination().getNodeID() + "'");
         sql.append(")");
@@ -254,7 +280,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID, patientName, transportFrom, assignee, status, destination");
+      csvFile.write("requestID, patientName, transportFrom, assignee,CreationTime,PROCTime,DONETime, status, destination");
       for (int i = 0; i < inTransportServiceRequests.size(); i++) {
         csvFile.write("\n" + inTransportServiceRequests.get(i).getRequestID() + ",");
         if (inTransportServiceRequests.get(i).getPatientName() == null) {
@@ -271,6 +297,27 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
           csvFile.write(',');
         } else {
           csvFile.write(inTransportServiceRequests.get(i).getAssigneeID() + ",");
+        }
+        if (inTransportServiceRequests.get(i).getCreationTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+                  inTransportServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                          + ",");
+        }
+        if (inTransportServiceRequests.get(i).getPROCTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+                  inTransportServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                          + ",");
+        }
+        if (inTransportServiceRequests.get(i).getDONETime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+                  inTransportServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
+                          + ",");
         }
         if (inTransportServiceRequests.get(i).getStatus() == null) {
           csvFile.write(',');
@@ -305,6 +352,15 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(
+                LocalDateTime.ofEpochSecond(
+                        Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+                LocalDateTime.ofEpochSecond(
+                        Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+                LocalDateTime.ofEpochSecond(
+                        Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setTransportFrom(results.getString("transportFrom"));
         toAdd.setPatientName(results.getString("patientName"));
         inTransportServiceRequests.add(toAdd);
