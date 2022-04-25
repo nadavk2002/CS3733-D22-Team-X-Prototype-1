@@ -152,8 +152,7 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication()
-      throws IOException, loadSaveFromCSVException {
+  void ExitApplication() throws IOException, loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
