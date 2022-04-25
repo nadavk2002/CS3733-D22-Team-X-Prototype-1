@@ -24,7 +24,6 @@ public class InvisibleMusicPlayerController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    mediaPlayer.setVolume(.60);
     mediaPlayer.setAutoPlay(true);
     mediaPlayer.setOnStopped(() -> mediaPlayer.play());
   }
