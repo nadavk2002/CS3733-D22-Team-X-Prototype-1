@@ -230,7 +230,6 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
       dropMedicalEquipmentServiceRequest.execute("DROP TABLE MedicalEquipmentServiceRequest");
     } catch (SQLException e) {
       System.out.println("MedicalEquipmentServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 

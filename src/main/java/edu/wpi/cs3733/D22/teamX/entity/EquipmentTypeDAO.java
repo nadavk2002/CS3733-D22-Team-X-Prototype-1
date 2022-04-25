@@ -164,7 +164,6 @@ public class EquipmentTypeDAO implements DAO<EquipmentType> {
       dropEquipmentType.execute("DROP TABLE EquipmentType");
     } catch (SQLException e) {
       System.out.println("EquipmentType not dropped");
-      e.printStackTrace();
     }
   }
 

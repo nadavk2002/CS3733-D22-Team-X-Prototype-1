@@ -186,7 +186,6 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       dropLabServiceRequest.execute("DROP TABLE LabServiceRequest");
     } catch (SQLException e) {
       System.out.println("LabServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 
