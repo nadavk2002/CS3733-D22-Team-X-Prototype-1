@@ -2,10 +2,10 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -34,12 +34,9 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <children>
-                        <JFXToggleButton />
-                        <Slider>
-                           <padding>
-                              <Insets bottom="22.0" />
-                           </padding>
-                        </Slider>
+                        <JFXToggleButton fx:id="muteToggle" contentDisplay="RIGHT" onAction="#muteBackgroundMusic" text="Mute Music" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="76.0" text="Volume  " />
+                        <JFXSlider fx:id="volumeSlider" prefHeight="55.0" prefWidth="140.0" />
                      </children>
                   </HBox>
                   <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">

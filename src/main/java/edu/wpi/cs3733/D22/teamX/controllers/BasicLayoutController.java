@@ -63,14 +63,14 @@ public class BasicLayoutController implements Initializable {
     //    pages.put("Request Gift Delivery", "GiftDelivery.fxml");
     //    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
     //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
-    initClock();
-    userName.setText("Hello, " + LoginScreenController.currentUsername);
-    checkAPIData();
     try {
       playMusic();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    initClock();
+    userName.setText("Hello, " + LoginScreenController.currentUsername);
+    checkAPIData();
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
     //            "Choose a Page",

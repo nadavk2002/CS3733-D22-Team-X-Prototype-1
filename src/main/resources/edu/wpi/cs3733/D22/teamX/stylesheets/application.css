@@ -86,14 +86,14 @@
 #username {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-navy-blue;
     -fx-prompt-text-fill: -fx-navy-blue;
 }
 
 #password {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-navy-blue;
     -fx-prompt-text-fill: -fx-navy-blue;
 }
 

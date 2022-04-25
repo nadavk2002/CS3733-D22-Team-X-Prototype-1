@@ -13,7 +13,7 @@ public class InvisibleMusicPlayerController implements Initializable {
           App.class
               .getResource("/edu/wpi/cs3733/D22/teamX/sounds/Wii_Menu_Music.mp3")
               .toExternalForm());
-  private static final MediaPlayer mediaPlayer = new MediaPlayer(sound);
+  public static final MediaPlayer mediaPlayer = new MediaPlayer(sound);
   /**
    * Called to initialize a controller after its root element has been completely processed.
    *
@@ -24,6 +24,7 @@ public class InvisibleMusicPlayerController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    mediaPlayer.setVolume(.50);
     mediaPlayer.setAutoPlay(true);
     mediaPlayer.setOnStopped(() -> mediaPlayer.play());
   }
