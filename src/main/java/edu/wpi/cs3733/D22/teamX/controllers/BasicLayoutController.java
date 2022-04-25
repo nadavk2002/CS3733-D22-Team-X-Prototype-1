@@ -11,7 +11,6 @@ import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -23,6 +22,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -143,6 +143,15 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchEmployeeViewer() throws IOException {
+    App.switchScene(
+            FXMLLoader.load(
+                    getClass()
+                            .getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   public void switchAPILandingPage() throws IOException {
     checkAPIData();
     App.switchScene(
@@ -188,6 +197,7 @@ public class BasicLayoutController implements Initializable {
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
   }
+
 
   private static void checkAPIData() {
     // Add new meal service request data
