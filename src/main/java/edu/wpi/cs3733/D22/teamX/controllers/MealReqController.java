@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -15,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -30,7 +30,7 @@ public class MealReqController implements Initializable {
       fifthRowNames,
       sixthRowBoxes;
   @FXML
-  private ChoiceBox<String> patientNames,
+  private JFXComboBox<String> patientNames,
       drinkSel,
       mainSel,
       sideSel,
