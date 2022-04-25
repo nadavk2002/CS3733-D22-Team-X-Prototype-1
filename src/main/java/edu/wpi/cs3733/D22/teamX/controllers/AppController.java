@@ -285,7 +285,7 @@ public class AppController implements Initializable {
         case "request medicine delivery":
           ReqMedicineDeliveryButton();
           break;
-        case "request laundry delivery":
+        case "request laundry service":
           ReqLaundryButton();
           break;
         case "gift delivery":
