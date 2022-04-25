@@ -10,9 +10,9 @@ FHALL00801,360,230,1,Tower,HALL,Tower Hallway 1,Hallway F00801
 FHALL00901,230,220,1,Tower,HALL,Tower Hallway 2,Hallway F00901
 FHALL01001,230,180,1,Tower,HALL,Tower Hallway 3,Hallway F01001
 FHALL01101,220,300,1,Tower,HALL,Tower Hallway 4,Hallway F01101
-FHALL01201,140,300,1,Tower,HALL,Tower Staff Entrance,Hallway F01201
+FHALL01201,173,330,1,Tower,HALL,Tower Staff Entrance,Hallway F01201
 FHALL01301,220,200,1,Tower,HALL,Tower Hallway 5,Hallway F01301
-FHALL01401,220,400,1,Tower,HALL,Tower Hallway 6,Hallway F01401
+FHALL01401,247,376,1,Tower,HALL,Tower Hallway 6,Hallway F01401
 FHALL01501,220,430,1,Tower,HALL,Tower Hallway 7,Hallway F01501
 FHALL01601,360,430,1,Tower,HALL,Tower Hallway 8,Hallway F01601
 FHALL01701,320,330,1,Tower,HALL,Tower Hallway 9,Hallway F01701
@@ -67,7 +67,7 @@ CHALL008L2,350,300,L2,Tower,HALL,Hallway 8 Floor L2,Hallway C008L2
 CHALL009L2,350,230,L2,Tower,HALL,Hallway 9 Floor L2,Hallway C009L2
 WELEV00LL2,410,300,L2,Tower,ELEV,Elevator L Floor L2,Elevator LL2
 xSTOR001L1,300,270,L1,Tower,STOR,OR Bed Park Floor L1,OR Bed Park Floor L1
-xSTOR00201,140,300,1,Tower,STOR,West Plaza,West Plaza
+xSTOR00201,134,244,1,Tower,STOR,West Plaza,West Plaza
 xSTOR00303,180,160,3,Tower,STOR,Clean Equipment Storage 1 Floor 3,Clean ES 0103
 xSTOR00403,180,470,3,Tower,STOR,Clean Equipment Storage 2 Floor 3,Clean ES 0203
 xDIRT00103,210,310,3,Tower,DIRT,Dirty Equipment Storage Floor 3,Dirty ES 3
@@ -75,9 +75,9 @@ xPATI00103,180,90,3,Tower,PATI,Patient Room 1 Floor 3,Patient Room 0103
 xPATI00203,120,80,3,Tower,PATI,Patient Room 2 Floor 3,Patient Room 0203
 xPATI00303,80,120,3,Tower,PATI,Patient Room 3 Floor 3,Patient Room 0303
 xPATI00403,90,180,3,Tower,PATI,Patient Room 4 Floor 3,Patient Room 0403
-xPATI00503,91,404,3,Tower,PATI,Patient Room 5 Floor 3,Patient Room 0503
-xPATI00603,107,488,3,Tower,PATI,Patient Room 6 Floor 3,Patient Room 0603
-xPATI00703,178,509,3,Tower,PATI,Patient Room 7 Floor 3,Patient Room 0703
+xPATI00503,90,410,3,Tower,PATI,Patient Room 5 Floor 3,Patient Room 0503
+xPATI00603,80,480,3,Tower,PATI,Patient Room 6 Floor 3,Patient Room 0603
+xPATI00703,120,520,3,Tower,PATI,Patient Room 7 Floor 3,Patient Room 0703
 xPATI00803,180,510,3,Tower,PATI,Patient Room 8 Floor 3,Patient Room 0803
 xSTOR00503,265,210,3,Tower,STOR,Bed and Recliner Parking 1 Floor 3,BRP 0103
 xSTOR00603,265,390,3,Tower,STOR,Bed and Recliner Parking 2 Floor 3,BRP 0203
@@ -137,5 +137,5 @@ xPATI00505,90,410,5,Tower,PATI,Patient Room 5 Floor 5,Patient Room 0505
 xPATI00605,80,480,5,Tower,PATI,Patient Room 6 Floor 5,Patient Room 0605
 xPATI00705,120,520,5,Tower,PATI,Patient Room 7 Floor 5,Patient Room 0705
 xPATI00805,180,510,5,Tower,PATI,Patient Room 8 Floor 5,Patient Room 0805
-xSTOR00505,265,210,L1,Tower,STOR,Bed and Recliner Parking 1 Floor 5,BRP 0105
+xSTOR00505,265,210,5,Tower,STOR,Bed and Recliner Parking 1 Floor 5,BRP 0105
 xSTOR00605,265,390,5,Tower,STOR,Bed and Recliner Parking 2 Floor 5,BRP 0205
