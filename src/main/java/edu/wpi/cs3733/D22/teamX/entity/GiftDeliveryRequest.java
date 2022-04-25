@@ -26,15 +26,15 @@ public class GiftDeliveryRequest extends ServiceRequest { // rename to GiftServi
   }
 
   public GiftDeliveryRequest(
-          String requestID,
-          Location destination,
-          String status,
-          Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,
-          String notes,
-          String giftType) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String notes,
+      String giftType) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.notes = notes;
     this.giftType = giftType;
