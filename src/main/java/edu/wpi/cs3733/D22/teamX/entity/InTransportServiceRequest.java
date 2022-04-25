@@ -26,15 +26,15 @@ public class InTransportServiceRequest extends ServiceRequest {
   }
 
   public InTransportServiceRequest(
-          String requestID,
-          String patientName,
-          String transportFrom,
-          Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,
-          String status,
-          Location destination) {
+      String requestID,
+      String patientName,
+      String transportFrom,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String status,
+      Location destination) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.patientName = patientName;
     this.transportFrom = transportFrom;
