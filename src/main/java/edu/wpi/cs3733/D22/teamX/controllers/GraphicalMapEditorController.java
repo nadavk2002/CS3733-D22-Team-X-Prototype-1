@@ -1,6 +1,5 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamX.*;
 import edu.wpi.cs3733.D22.teamX.entity.*;
@@ -44,9 +43,7 @@ public class GraphicalMapEditorController implements Initializable {
   private HashMap<String, Image> mapImages;
   private String floor;
 
-  @FXML private JFXButton autofiller;
-  @FXML private Button ToMainMenu, submitEquipmentButton;
-  @FXML private ChoiceBox<String> equipmentChoice, equipLocationChoice;
+  @FXML private Button ToMainMenu;
 
   @FXML private HBox hBox1;
   @FXML private VBox mapBox, infoVBox;
@@ -56,8 +53,7 @@ public class GraphicalMapEditorController implements Initializable {
   @FXML private ImageView imageView;
 
   @FXML private GesturePane pane;
-  @FXML private JFXCheckBox availableCheck, showLocCheck, showEquipCheck, showRequestCheck;
-  @FXML private TextField unitIdText, typeText;
+  @FXML private JFXCheckBox showLocCheck, showEquipCheck, showRequestCheck;
 
   private LocationDAO locDAO = LocationDAO.getDAO();
   private EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO();
@@ -211,12 +207,6 @@ public class GraphicalMapEditorController implements Initializable {
    * @param floor String of the floor number (L1, G, 1, etc.)
    */
   private void loadMap(String floor) {
-    equipmentChoice.setValue("");
-    equipmentChoice.getItems().clear();
-    equipLocationChoice.setValue("");
-    equipLocationChoice.getItems().clear();
-    submitEquipmentButton.setDisable(true);
-
     drawCirclesSetLocationList(floor);
   }
 
@@ -228,7 +218,6 @@ public class GraphicalMapEditorController implements Initializable {
             || ((Location) rect.getUserData()).getRequestsAtLocation().size() != 0);
     deleteButton.setOnAction(
         delEvent -> {
-          equipLocationChoice.getItems().remove(((Location) rect.getUserData()).getNodeID());
           imageGroup.getChildren().remove(menu.getOwnerNode());
           locDAO.deleteRecord((Location) rect.getUserData());
         });
@@ -297,7 +286,6 @@ public class GraphicalMapEditorController implements Initializable {
     MenuItem deleteButton = new MenuItem("Delete Equipment");
     deleteButton.setOnAction(
         event -> {
-          equipmentChoice.getItems().remove(((EquipmentUnit) rect.getUserData()).getUnitID());
           imageGroup.getChildren().remove(rect);
           String locNode = ((EquipmentUnit) rect.getUserData()).getCurrLocation().getNodeID();
           equipDAO.deleteRecord((EquipmentUnit) rect.getUserData());
@@ -317,8 +305,10 @@ public class GraphicalMapEditorController implements Initializable {
           popup.setTitle(newEquipment.getUnitID());
           popup.setOnHidden(
               close -> {
-                loadLocation(newEquipment.getCurrLocation().getFloor());
-                loadLocationInfo(newEquipment.getCurrLocation().getNodeID());
+                loadLocation(
+                    equipDAO.getRecord(newEquipment.getUnitID()).getCurrLocation().getFloor());
+                loadLocationInfo(
+                    equipDAO.getRecord(newEquipment.getUnitID()).getCurrLocation().getNodeID());
               });
           EquipmentUnitEditorController eq = new EquipmentUnitEditorController(newEquipment);
           fxmlLoader.setController(eq);
@@ -346,7 +336,6 @@ public class GraphicalMapEditorController implements Initializable {
     ImagePattern img =
         new ImagePattern(new Image("/edu/wpi/cs3733/D22/teamX/assets/mapLocationMarker.png"));
     for (int i = 0; i < locationList.size(); i++) {
-      equipLocationChoice.getItems().add(locationList.get(i).getNodeID());
       if (locationList.get(i).getFloor().equals(floor)) {
         Rectangle rect = new Rectangle(24, 24);
         rect.setCursor(Cursor.HAND);
@@ -439,7 +428,8 @@ public class GraphicalMapEditorController implements Initializable {
       rectangle.setUserData(e);
       rectangle.setX(e.getCurrLocation().getxCoord() - (rectangle.getWidth() / 2));
       rectangle.setY(e.getCurrLocation().getyCoord() - (rectangle.getHeight() / 2));
-      rectangle.setStroke(Paint.valueOf("BLACK"));
+      if (e.isAvailable()) rectangle.setStroke(Paint.valueOf("#2dad40"));
+      else rectangle.setStroke(Paint.valueOf("BLACK"));
       rectangle.setFill(
           new ImagePattern(
               new Image("/edu/wpi/cs3733/D22/teamX/assets/" + e.getType().getModel() + ".png")));
@@ -481,7 +471,6 @@ public class GraphicalMapEditorController implements Initializable {
               if (event.getButton() != MouseButton.PRIMARY) return;
               pane.setGestureEnabled(true);
               imageGroup.setDisable(false);
-              equipmentChoice.setValue(((EquipmentUnit) rectangle.getUserData()).getUnitID());
               EquipmentUnit l = (EquipmentUnit) rectangle.getUserData();
               rectangle.setCursor(Cursor.HAND);
               rectangle.setFill(
@@ -510,7 +499,6 @@ public class GraphicalMapEditorController implements Initializable {
           });
 
       imageGroup.getChildren().add(rectangle);
-      equipmentChoice.getItems().add(e.getUnitID());
     }
   }
 
@@ -565,23 +553,6 @@ public class GraphicalMapEditorController implements Initializable {
           node.setVisible(showRequestCheck.isSelected());
         }
       }
-    }
-  }
-
-  /** Fills text boxes with equipment data when a piece of equipment is chosen in the dropdown. */
-  @FXML
-  public void equipmentSelected() {
-    try {
-      EquipmentUnit equipment = equipDAO.getRecord(equipmentChoice.getValue());
-      unitIdText.setText(equipment.getUnitID());
-      typeText.setText(equipment.getType().getModel());
-      availableCheck.setSelected(equipment.isAvailable());
-      equipLocationChoice.setValue(equipment.getCurrLocation().getNodeID());
-    } catch (NoSuchElementException e) {
-      unitIdText.setText("");
-      typeText.setText("");
-      availableCheck.setSelected(false);
-      equipLocationChoice.setValue("");
     }
   }
 
@@ -657,72 +628,7 @@ public class GraphicalMapEditorController implements Initializable {
     newImage.setFitHeight(610);
     newImage.setFitWidth(610);
     imageGroup.getChildren().add(newImage);
-    newImage.setOnDragDropped(
-        event -> {
-          System.out.println("ondragdropped");
-          Dragboard db = event.getDragboard();
-          boolean completed = false;
-          if (db.hasString()) {
-            EquipmentUnit movedUnit = equipDAO.getRecord(db.getString());
-            movedUnit.setCurrLocation((Location) newImage.getUserData());
-            completed = true;
-          }
-          event.setDropCompleted(completed);
-          // event.consume();
-        });
     loadMap(location);
-  }
-  /*
-  private void activateSubmitLocationButton() {
-    submitLocationButton.setDisable(
-        nodeIdText.getText().equals("")
-            || (xCordText.getText().equals("") || !xCordText.getText().matches("[0-9]+"))
-            || (yCordText.getText().equals("") || !yCordText.getText().matches("[0-9]+"))
-            || floorText.getText().equals("")
-            || buildingText.getText().equals("")
-            || nodeTypeText.getText().equals("")
-            || longNameText.getText().equals("")
-            || shortNameText.getText().equals(""));
-  }
-
-   */
-
-  private void activateSubmitEquipmentButton() {
-    submitEquipmentButton.setDisable(
-        unitIdText.getText().equals("")
-            || typeText.getText().equals("")
-            || equipLocationChoice.getValue().equals(""));
-  }
-
-  /**
-   * Submit new equipment to the database based on the filled in text data or updates equipment with
-   * a matching ID.
-   */
-  @FXML
-  public void submitEquipment() {
-    List<EquipmentUnit> allEquipment = equipDAO.getAllRecords();
-    for (int i = 0; i < allEquipment.size(); i++) {
-      if (allEquipment.get(i).getUnitID().equals(unitIdText.getText())) {
-        EquipmentUnit newEquip = new EquipmentUnit();
-        newEquip.setUnitID(allEquipment.get(i).getUnitID());
-        newEquip.setAvailable(availableCheck.isSelected());
-        newEquip.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
-        newEquip.setType(equipmentTypeDAO.getRecord(typeText.getText()));
-        equipDAO.updateRecord(newEquip);
-        loadLocation(newEquip.getCurrLocation().getFloor());
-        loadLocationInfo(newEquip.getCurrLocation().getNodeID());
-        return;
-      }
-    }
-    EquipmentUnit newEquipment = new EquipmentUnit();
-    newEquipment.setAvailable(availableCheck.isSelected());
-    newEquipment.setCurrLocation(locDAO.getRecord(equipLocationChoice.getValue()));
-    newEquipment.setType(equipmentTypeDAO.getRecord(typeText.getText()));
-    newEquipment.setUnitID(unitIdText.getText());
-
-    equipDAO.addRecord(newEquipment);
-    loadLocation(newEquipment.getCurrLocation().getFloor());
-    loadLocationInfo(newEquipment.getCurrLocation().getNodeID());
   }
 
   @Override
@@ -777,16 +683,7 @@ public class GraphicalMapEditorController implements Initializable {
             showDots();
           }
         });
-    submitEquipmentButton.setDisable(true);
-
-    unitIdText.setOnKeyTyped((KeyEvent e) -> activateSubmitEquipmentButton());
-    typeText.setOnKeyTyped((KeyEvent e) -> activateSubmitEquipmentButton());
-    equipLocationChoice.setOnAction((ActionEvent a) -> activateSubmitEquipmentButton());
 
     loadLocation("1");
-  }
-
-  public void autofillUnitIDBox() {
-    unitIdText.setText(EquipmentUnitDAO.getDAO().makeID());
   }
 }

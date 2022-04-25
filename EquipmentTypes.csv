@@ -1,5 +1,5 @@
 model,numUnitsTotal,numUnitsAvailable
-X-Ray,3,3
-Bed,40,11
-Recliner,17,12
-Infusion Pump,59,36
+X-Ray,4,4
+Bed,39,11
+Recliner,15,11
+Infusion Pump,58,37

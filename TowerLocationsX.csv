@@ -12,7 +12,7 @@ FHALL01001,230,180,1,Tower,HALL,Tower Hallway 3,Hallway F01001
 FHALL01101,220,300,1,Tower,HALL,Tower Hallway 4,Hallway F01101
 FHALL01201,140,300,1,Tower,HALL,Tower Staff Entrance,Hallway F01201
 FHALL01301,220,200,1,Tower,HALL,Tower Hallway 5,Hallway F01301
-FHALL01401,254,392,1,Tower,HALL,Tower Hallway 6,Hallway F01401
+FHALL01401,220,400,1,Tower,HALL,Tower Hallway 6,Hallway F01401
 FHALL01501,220,430,1,Tower,HALL,Tower Hallway 7,Hallway F01501
 FHALL01601,360,430,1,Tower,HALL,Tower Hallway 8,Hallway F01601
 FHALL01701,320,330,1,Tower,HALL,Tower Hallway 9,Hallway F01701
@@ -75,9 +75,9 @@ xPATI00103,180,90,3,Tower,PATI,Patient Room 1 Floor 3,Patient Room 0103
 xPATI00203,120,80,3,Tower,PATI,Patient Room 2 Floor 3,Patient Room 0203
 xPATI00303,80,120,3,Tower,PATI,Patient Room 3 Floor 3,Patient Room 0303
 xPATI00403,90,180,3,Tower,PATI,Patient Room 4 Floor 3,Patient Room 0403
-xPATI00503,90,410,3,Tower,PATI,Patient Room 5 Floor 3,Patient Room 0503
-xPATI00603,80,480,3,Tower,PATI,Patient Room 6 Floor 3,Patient Room 0603
-xPATI00703,120,520,3,Tower,PATI,Patient Room 7 Floor 3,Patient Room 0703
+xPATI00503,91,404,3,Tower,PATI,Patient Room 5 Floor 3,Patient Room 0503
+xPATI00603,107,488,3,Tower,PATI,Patient Room 6 Floor 3,Patient Room 0603
+xPATI00703,178,509,3,Tower,PATI,Patient Room 7 Floor 3,Patient Room 0703
 xPATI00803,180,510,3,Tower,PATI,Patient Room 8 Floor 3,Patient Room 0803
 xSTOR00503,265,210,3,Tower,STOR,Bed and Recliner Parking 1 Floor 3,BRP 0103
 xSTOR00603,265,390,3,Tower,STOR,Bed and Recliner Parking 2 Floor 3,BRP 0203
@@ -137,5 +137,5 @@ xPATI00505,90,410,5,Tower,PATI,Patient Room 5 Floor 5,Patient Room 0505
 xPATI00605,80,480,5,Tower,PATI,Patient Room 6 Floor 5,Patient Room 0605
 xPATI00705,120,520,5,Tower,PATI,Patient Room 7 Floor 5,Patient Room 0705
 xPATI00805,180,510,5,Tower,PATI,Patient Room 8 Floor 5,Patient Room 0805
-xSTOR00505,265,210,5,Tower,STOR,Bed and Recliner Parking 1 Floor 5,BRP 0105
+xSTOR00505,265,210,L1,Tower,STOR,Bed and Recliner Parking 1 Floor 5,BRP 0105
 xSTOR00605,265,390,5,Tower,STOR,Bed and Recliner Parking 2 Floor 5,BRP 0205
