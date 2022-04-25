@@ -71,15 +71,6 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="employeeViewerButton" alignment="BASELINE_LEFT" onAction="#goToEmployeeViewer" prefWidth="300.0" text="Employee Viewer">
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/list-check-free-icon-font.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                   <JFXButton fx:id="tableButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestTable" prefWidth="300.0" text="Table">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
@@ -99,7 +90,7 @@
                      </graphic>
                   </JFXButton>
                   <Label text="Employees" />
-                  <JFXButton fx:id="employeeViewerButton" onAction="#switchEmployeeViewer" alignment="BASELINE_LEFT" prefWidth="300.0" text="Viewer">
+                  <JFXButton fx:id="employeeViewerButton" alignment="BASELINE_LEFT" onAction="#switchEmployeeViewer" prefWidth="300.0" text="Viewer">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -109,7 +100,7 @@
                      </graphic>
                   </JFXButton>
                   <Label text="Settings" />
-                  <JFXButton alignment="BASELINE_LEFT" layoutX="10.0" layoutY="110.0" prefWidth="300.0" text="Preferences">
+                  <JFXButton alignment="BASELINE_LEFT" layoutX="10.0" layoutY="110.0" onAction="#switchPreferencePage" prefWidth="300.0" text="Preferences">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>

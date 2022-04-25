@@ -22,7 +22,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -145,9 +144,8 @@ public class BasicLayoutController implements Initializable {
   @FXML
   public void switchEmployeeViewer() throws IOException {
     App.switchScene(
-            FXMLLoader.load(
-                    getClass()
-                            .getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
@@ -161,8 +159,7 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication()
-      throws IOException, loadSaveFromCSVException {
+  void ExitApplication() throws IOException, loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
@@ -176,11 +173,11 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void goToEmployeeViewer() throws IOException {
+  public void switchPreferencePage() throws IOException {
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/PreferencePage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
@@ -197,7 +194,6 @@ public class BasicLayoutController implements Initializable {
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
   }
-
 
   private static void checkAPIData() {
     // Add new meal service request data

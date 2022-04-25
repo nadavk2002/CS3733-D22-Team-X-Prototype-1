@@ -58,6 +58,22 @@
     -fx-text-fill: -fx-dark-blue;
 }
 
+.reset-button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-off-white;
+    -fx-background-radius: 20px;
+}
+
+.submit-button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-off-white;
+    -fx-background-radius: 20px;
+}
+
 /* LOGIN SCREEN */
 #loginTitle {
     -fx-font-family: "Poppins";
