@@ -23,6 +23,7 @@ public class CSVFileSaverController implements Initializable {
   @FXML public BorderPane csvSaverPane;
   public static boolean loaded = false;
   @FXML private Label saveSuccessful;
+  public static boolean isSaved = false;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -40,6 +41,7 @@ public class CSVFileSaverController implements Initializable {
     String csvSaverDirStr = csvSaverDir.getPath() + "\\";
     DatabaseCreator.saveAllCSV(csvSaverDirStr);
     showSuccess();
+    isSaved = true;
   }
 
   public void saveToDefault(ActionEvent actionEvent)
@@ -47,6 +49,7 @@ public class CSVFileSaverController implements Initializable {
           edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     DatabaseCreator.saveAllCSV("");
     showSuccess();
+    isSaved = true;
   }
 
   @FXML

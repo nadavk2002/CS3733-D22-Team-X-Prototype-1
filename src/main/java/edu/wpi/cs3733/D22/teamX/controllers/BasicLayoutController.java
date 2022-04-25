@@ -3,15 +3,13 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
-import edu.wpi.cs3733.D22.teamX.api.*;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequest;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
 import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import edu.wpi.cs3733.c22.teamD.*;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -155,7 +153,10 @@ public class BasicLayoutController implements Initializable {
   void ExitApplication() throws IOException, loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
-      DatabaseCreator.saveAllCSV("");
+      if(!CSVFileSaverController.isSaved)
+      {
+        DatabaseCreator.saveAllCSV("");
+      }
     } else {
       checkAPIData();
       App.switchScene(
