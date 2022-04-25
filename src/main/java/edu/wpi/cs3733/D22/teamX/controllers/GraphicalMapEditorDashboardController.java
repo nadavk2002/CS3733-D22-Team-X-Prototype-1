@@ -133,6 +133,21 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML private VBox alertBox;
   @FXML private VBox towerBox;
   @FXML private HBox buttonBox;
+  @FXML
+  private VBox l5Vbox,
+      l4Vbox,
+      l3Vbox,
+      l2Vbox,
+      l1Vbox,
+      ll1Vbox,
+      ll2Vbox,
+      l5Master,
+      l4Master,
+      l3Master,
+      l2Master,
+      l1Master,
+      ll1Master,
+      ll2Master;
   MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
   // floor constants--------------------------------------
   private final int cleanXloc = 705;
@@ -147,9 +162,24 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     alertBox.setVisible(false);
-    masterBox.setSpacing(30);
-    towerBox.setSpacing(5);
+    masterBox.setSpacing(5);
+    towerBox.setSpacing(3);
     buttonBox.setSpacing(6);
+    l5Vbox.setSpacing(3);
+    l4Vbox.setSpacing(3);
+    l3Vbox.setSpacing(3);
+    l2Vbox.setSpacing(3);
+    l1Vbox.setSpacing(3);
+    ll1Vbox.setSpacing(3);
+    ll2Vbox.setSpacing(3);
+    l5Master.setSpacing(3);
+    l4Master.setSpacing(3);
+    l3Master.setSpacing(3);
+    l2Master.setSpacing(3);
+    l1Master.setSpacing(3);
+    ll1Master.setSpacing(3);
+    ll2Master.setSpacing(3);
+
     cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     cleanPodB.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
