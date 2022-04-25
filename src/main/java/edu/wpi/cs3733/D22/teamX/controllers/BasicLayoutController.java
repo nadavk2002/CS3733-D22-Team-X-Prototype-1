@@ -11,7 +11,6 @@ import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -143,6 +142,14 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchEmployeeViewer() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   public void switchAPILandingPage() throws IOException {
     checkAPIData();
     App.switchScene(
@@ -166,11 +173,11 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void goToEmployeeViewer() throws IOException {
+  public void switchPreferencePage() throws IOException {
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/PreferencePage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
