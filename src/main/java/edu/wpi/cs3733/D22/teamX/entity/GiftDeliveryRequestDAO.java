@@ -119,12 +119,12 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
                 + recordObject.getStatus()
                 + "', assignee = '"
                 + recordObject.getAssigneeID()
-                    + "', CreationTime = "
-                    + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                    + ", PROCTime = "
-                    + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                    + ", DONETime = "
-                    + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+                + "', CreationTime = "
+                + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                + ", PROCTime = "
+                + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                + ", DONETime = "
+                + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
                 + ", notes = '"
                 + recordObject.getNotes()
                 + "', giftType = '"
@@ -177,9 +177,9 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-                  + "CreationTime BIGINT,"
-                  + "PROCTime BIGINT,"
-                  + "DONETime BIGINT,"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "notes VARCHAR(140),"
               + "giftType CHAR(10), "
               + "CONSTRAINT GDR_dest_fk "
@@ -223,9 +223,9 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
                   locationDAO.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
                   currLine[7],
                   currLine[8]);
           giftDeliveryRequests.add(node);
@@ -257,14 +257,9 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         sql.append("'" + giftDeliveryRequests.get(i).getStatus() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append(
-                giftDeliveryRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                        + ",");
-        sql.append(
-                giftDeliveryRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                        + ",");
-        sql.append(
-                giftDeliveryRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
-                        + ",");
+            giftDeliveryRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(giftDeliveryRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(giftDeliveryRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append("'" + giftDeliveryRequests.get(i).getNotes() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getGiftType() + "'");
         sql.append(")");
@@ -282,7 +277,7 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID, destination, status, assignee, notes, giftType");
+      csvFile.write("requestID, destination, status, assignee,CreationTime,PROCTime,DONETime, notes, giftType");
       for (int i = 0; i < giftDeliveryRequests.size(); i++) {
         csvFile.write("\n" + giftDeliveryRequests.get(i).getRequestID() + ",");
         if (giftDeliveryRequests.get(i).getDestination() == null) {
@@ -304,22 +299,19 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  giftDeliveryRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                          + ",");
+              giftDeliveryRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (giftDeliveryRequests.get(i).getPROCTime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  giftDeliveryRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                          + ",");
+              giftDeliveryRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (giftDeliveryRequests.get(i).getDONETime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  giftDeliveryRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
-                          + ",");
+              giftDeliveryRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (giftDeliveryRequests.get(i).getNotes() == null) {
           csvFile.write(',');
@@ -357,9 +349,15 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
-        toAdd.setCreationTime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
-        toAdd.setPROCTime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
-        toAdd.setDONETime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
+        toAdd.setCreationTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setNotes(results.getString("notes"));
         toAdd.setGiftType(results.getString("giftType"));
         giftDeliveryRequests.add(toAdd);
