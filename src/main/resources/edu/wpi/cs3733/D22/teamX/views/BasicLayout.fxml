@@ -5,14 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
    <children>
-      <Pane prefHeight="1080.0" prefWidth="300.0">
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="280.0" prefHeight="1080.0" prefWidth="300.0">
          <children>
             <VBox fx:id="sideBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
                <children>
@@ -25,7 +24,15 @@
                         <Insets left="86.0" right="86.0" />
                      </VBox.margin>
                   </ImageView>
-                  <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" text="Log out" />
+                  <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" text="Log out">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/sign-out-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <Label text="Map" />
                   <JFXButton alignment="BASELINE_LEFT" onAction="#switchMapDashboard" prefWidth="300.0" text="Dashboard">
                      <graphic>
@@ -55,7 +62,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="outstandingButton" alignment="BASELINE_LEFT" onAction="#switchOutstandingService" prefWidth="300.0" text="Outstanding Tasks">
+                  <JFXButton fx:id="outstandingButton" alignment="BASELINE_LEFT" onAction="#switchOutstandingService" prefWidth="300.0" text="Outstanding">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -68,7 +75,7 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/list-check-free-icon-font.png" />
+                              <Image url="@../assets/grid-alt-free-icon-font (1).png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -77,7 +84,17 @@
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../assets/list-check-free-icon-font.png" />
+                              <Image url="@../assets/play-alt-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <Label text="Employees" />
+                  <JFXButton fx:id="employeeViewerButton" alignment="BASELINE_LEFT" onAction="#switchEmployeeViewer" prefWidth="300.0" text="Viewer">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/users-alt-free-icon-font (1).png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -107,9 +124,12 @@
                      </graphic>
                   </Label>
                </children>
+               <padding>
+                  <Insets left="10.0" top="10.0" />
+               </padding>
             </VBox>
          </children>
       </Pane>
-      <AnchorPane fx:id="appContent" layoutX="300.0" prefHeight="1080.0" prefWidth="1620.0" />
+      <Pane fx:id="appContent" layoutX="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1000.0" prefHeight="1080.0" prefWidth="1620.0" />
    </children>
-</AnchorPane>
+</Pane>
