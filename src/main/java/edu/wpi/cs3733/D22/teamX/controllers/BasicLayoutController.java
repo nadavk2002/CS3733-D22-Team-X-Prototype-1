@@ -196,11 +196,15 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication() throws IOException, loadSaveFromCSVException {
+  void ExitApplication()
+      throws IOException, loadSaveFromCSVException {
     playButtonPressSound();
     if (CSVFileSaverController.loaded) {
       Platform.exit();
-      DatabaseCreator.saveAllCSV("");
+      if(!CSVFileSaverController.isSaved)
+      {
+        DatabaseCreator.saveAllCSV("");
+      }
     } else {
       checkAPIData();
       App.switchScene(
