@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.PreferencePageController">
+   <center>
+      <StackPane>
+         <children>
+            <Rectangle arcHeight="150.0" arcWidth="150.0" fill="DODGERBLUE" height="700.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
+            <GridPane alignment="CENTER_LEFT">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="848.3333129882812" minWidth="10.0" prefWidth="501.3333435058594" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1118.6666564941406" minWidth="10.0" prefWidth="1118.6666564941406" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <children>
+                        <JFXToggleButton />
+                        <Slider>
+                           <padding>
+                              <Insets bottom="22.0" />
+                           </padding>
+                        </Slider>
+                     </children>
+                  </HBox>
+                  <HBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <BorderPane prefHeight="200.0" prefWidth="500.0">
+                           <top>
+                              <Label text="Label" BorderPane.alignment="CENTER" />
+                           </top>
+                           <center>
+                              <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <children>
+                                    <Rectangle arcHeight="50.0" arcWidth="50.0" fill="#161c22" height="200.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
+                                    <GridPane>
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </StackPane>
+                           </center>
+                        </BorderPane>
+                        <VBox prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Label text="Color Scheme" />
+                              <JFXComboBox>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <Label text="Color Blindess" />
+                              <JFXComboBox>
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <JFXButton />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </GridPane>
+         </children>
+      </StackPane>
+   </center>
+   <top>
+      <Label alignment="CENTER" prefHeight="150.0" prefWidth="700.0" text="User Preferences" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>

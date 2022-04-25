@@ -206,7 +206,6 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
       dropMealServiceRequest.execute("DROP TABLE SharpsDisposalRequest");
     } catch (SQLException e) {
       System.out.println("SharpsDisposalRequest not dropped");
-      e.printStackTrace();
     }
   }
 

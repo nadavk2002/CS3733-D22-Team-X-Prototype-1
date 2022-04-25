@@ -180,7 +180,6 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       statement.execute("DROP TABLE LangServiceRequest");
     } catch (SQLException e) {
       System.out.println("LangServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 

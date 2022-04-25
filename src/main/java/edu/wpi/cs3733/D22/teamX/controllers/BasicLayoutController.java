@@ -3,12 +3,21 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.api.*;
+import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequest;
+import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO;
+import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
+import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
+import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -30,6 +39,7 @@ public class BasicLayoutController implements Initializable {
   @FXML private JFXComboBox<String> ChoosePage;
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
+  private static int mealApiIDIndex = 15;
   private static final Media buttonPressSound =
       new Media(
           App.class
@@ -55,6 +65,7 @@ public class BasicLayoutController implements Initializable {
     //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
+    checkAPIData();
     try {
       playMusic();
     } catch (IOException e) {
@@ -103,6 +114,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestTable() throws IOException {
+    checkAPIData();
     playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
@@ -112,6 +124,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchGraphicalEditor() throws IOException {
+    checkAPIData();
     playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
@@ -122,6 +135,7 @@ public class BasicLayoutController implements Initializable {
   @FXML
   public void switchServiceRequestMenu() throws IOException {
     playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
     CSVFileSaverController.loaded = false;
@@ -130,6 +144,7 @@ public class BasicLayoutController implements Initializable {
   @FXML
   public void switchOutstandingService() throws IOException {
     playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass()
@@ -140,6 +155,7 @@ public class BasicLayoutController implements Initializable {
   @FXML
   public void switchMapDashboard() throws IOException {
     playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass()
@@ -150,6 +166,7 @@ public class BasicLayoutController implements Initializable {
   @FXML
   public void switchLoginScreen() throws IOException {
     playButtonPressSound();
+    checkAPIData();
     App.startScreen();
     //    App.switchScene(
     //        FXMLLoader.load(
@@ -158,8 +175,17 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchEmployeeViewer() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   public void switchAPILandingPage() throws IOException {
     playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/APILandingPage.fxml")));
@@ -167,15 +193,13 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication()
-      throws IOException, loadSaveFromCSVException, loadSaveFromCSVException,
-          edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
+  void ExitApplication() throws IOException, loadSaveFromCSVException {
     playButtonPressSound();
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
-      edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO.getDAO().saveCSV("");
     } else {
+      checkAPIData();
       App.switchScene(
           FXMLLoader.load(
               getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
@@ -186,9 +210,20 @@ public class BasicLayoutController implements Initializable {
   @FXML
   public void goToEmployeeViewer() throws IOException {
     playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  public void switchPreferencePage() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
+    App.switchScene(
+            FXMLLoader.load(
+                    getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/PreferencePage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
@@ -209,5 +244,25 @@ public class BasicLayoutController implements Initializable {
   private void playButtonPressSound() {
     buttonPressSoundPlayer.stop();
     buttonPressSoundPlayer.play();
+  }
+
+  private static void checkAPIData() {
+    // Add new meal service request data
+    List<MealServiceRequest> apiMeals = MealServiceRequestDAO.getDAO().getAllRecords();
+    while (mealApiIDIndex < apiMeals.size()) {
+      MealServiceRequest apiMeal = apiMeals.get(mealApiIDIndex);
+      edu.wpi.cs3733.D22.teamX.entity.MealServiceRequest meal =
+          new edu.wpi.cs3733.D22.teamX.entity.MealServiceRequest(
+              ServiceRequestDAO.getDAO().makeMealServiceRequestID(),
+              LocationDAO.getDAO().getRecord(apiMeal.getDestination().getNodeID()),
+              apiMeal.getStatus(),
+              EmployeeDAO.getDAO().getRecord(apiMeal.getAssignee().getEmployeeID()),
+              apiMeal.getMainCourse(),
+              apiMeal.getSide(),
+              apiMeal.getDrink(),
+              apiMeal.getPatientFor());
+      ServiceRequestDAO.getDAO().addRecord(meal);
+      mealApiIDIndex++;
+    }
   }
 }

@@ -188,7 +188,6 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       statement.execute("DROP TABLE GiftDeliveryRequest");
     } catch (SQLException e) {
       System.out.println("GiftDeliveryRequest not dropped");
-      // e.printStackTrace();
     }
   }
 
