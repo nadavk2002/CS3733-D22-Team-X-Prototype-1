@@ -7,56 +7,46 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
-<?import javafx.scene.effect.Blend?>
-<?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
+<BorderPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
    <center>
-      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" BorderPane.alignment="CENTER">
+      <StackPane fx:id="loginStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="200.0" prefHeight="600.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="1080.0" fitWidth="1920.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/Brigham-Womens-TO-USE-crop.jpg" />
-               </image>
-               <effect>
-                  <Blend>
-                     <topInput>
-                        <GaussianBlur radius="30.0" />
-                     </topInput>
-                  </Blend>
-               </effect>
-            </ImageView>
-            <Rectangle arcHeight="150.0" arcWidth="150.0" fill="#4572d9" height="800.0" smooth="false" strokeType="INSIDE" styleClass="content-background" width="1000.0">
+            <Rectangle arcHeight="150.0" arcWidth="150.0" fill="#4572d9" smooth="false" strokeType="INSIDE" styleClass="content-background">
                <StackPane.margin>
                   <Insets />
                </StackPane.margin>
             </Rectangle>
-            <VBox fx:id="loginFields" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="650.0" prefWidth="800.0" spacing="30.0">
+            <VBox fx:id="loginFields" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="200.0" prefHeight="600.0" prefWidth="800.0">
                <children>
-                  <ImageView fitHeight="180.0" fitWidth="703.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="loginImage" fitHeight="180.0" fitWidth="703.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../assets/BWHlogo.png" />
                      </image>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                   </ImageView>
                   <Label fx:id="loginTitle" styleClass="title-label" text="Login:">
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
                   </Label>
-                  <HBox prefHeight="200.0" prefWidth="800.0">
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="50.0" minWidth="200.0" prefHeight="160.0" prefWidth="800.0">
                      <children>
-                        <VBox fillWidth="false" prefHeight="200.0" prefWidth="400.0" spacing="20.0">
+                        <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="100.0" prefHeight="160.0" prefWidth="360.0" spacing="20.0">
                            <children>
-                              <TextField fx:id="username" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Username">
+                              <TextField fx:id="username" maxHeight="-Infinity" maxWidth="-Infinity" onKeyTyped="#disableLoginButton" prefHeight="50.0" prefWidth="300.0" promptText="Username">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -64,24 +54,27 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </TextField>
-                              <PasswordField fx:id="password" onAction="#validLogin" onKeyTyped="#disableLoginButton" prefHeight="53.0" prefWidth="286.0" promptText="Password">
+                              <PasswordField fx:id="password" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#validLogin" onKeyTyped="#disableLoginButton" prefHeight="50.0" prefWidth="300.0" promptText="Password">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="20.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </PasswordField>
                            </children>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
                         </VBox>
-                        <VBox fx:id="serverVBox" prefHeight="200.0" prefWidth="500.0" spacing="10.0">
+                        <VBox fx:id="serverVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="50.0" minWidth="120.0" prefHeight="160.0" prefWidth="480.0" spacing="10.0">
                            <children>
                               <Label fx:id="dbText" alignment="TOP_LEFT" prefHeight="50.0" prefWidth="450.0" text="Select a server option:" wrapText="true">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="20.0" />
+                                    <Insets />
                                  </VBox.margin>
                               </Label>
                               <JFXRadioButton fx:id="optionEmbedded" mnemonicParsing="false" prefHeight="35.0" prefWidth="181.0" selected="true" text="Embedded" textFill="#f6f9ff">
@@ -97,6 +90,9 @@
                                  <font>
                                     <Font size="24.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
                               </JFXRadioButton>
                               <JFXRadioButton fx:id="optionClient" mnemonicParsing="false" prefHeight="35.0" prefWidth="121.0" text="Client" textFill="#f6f9ff" toggleGroup="$serverOptions">
                                  <selectedColor>
@@ -112,13 +108,19 @@
                            </children>
                         </VBox>
                      </children>
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="80.0" prefWidth="500.0" spacing="40.0">
+                  <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="15.0" minWidth="100.0" prefHeight="60.0" prefWidth="400.0" spacing="40.0">
                      <children>
                         <JFXButton fx:id="loginButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#validLogin" prefHeight="40.0" prefWidth="120.0" text="Login" textFill="WHITE">
                            <font>
                               <Font size="28.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
                         </JFXButton>
                         <JFXButton fx:id="loginExitButton" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#ExitApplication" prefHeight="40.0" prefWidth="90.0" text="Exit" textFill="WHITE">
                            <font>
@@ -126,15 +128,36 @@
                            </font>
                         </JFXButton>
                      </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
                   </HBox>
-                  <Label fx:id="message" prefHeight="57.0" prefWidth="438.0">
+                  <Label fx:id="message" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="10.0" minWidth="100.0" prefHeight="30.0" prefWidth="400.0">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="10.0" />
+                     </VBox.margin>
                   </Label>
                </children>
+               <StackPane.margin>
+                  <Insets left="20.0" right="20.0" />
+               </StackPane.margin>
             </VBox>
          </children>
       </StackPane>
    </center>
+   <top>
+      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </top>
+   <left>
+      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </left>
+   <right>
+      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </right>
+   <bottom>
+      <Region prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
