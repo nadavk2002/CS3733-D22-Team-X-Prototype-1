@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AboutPageController">
+   <top>
+      <Label styleClass="title-label" text="About Us" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin>
+            <Insets top="75.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="72.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox maxWidth="-Infinity" prefHeight="500.0" prefWidth="1200.0" StackPane.alignment="CENTER">
+               <children>
+                  <GridPane prefHeight="550.0" prefWidth="400.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../assets/Theo_Coppola.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <image>
+                                <Image url="@../assets/DARREN KWEE (1).jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                            <image>
+                                <Image url="@../assets/Dylan Nguyen.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                            <image>
+                                <Image url="@../assets/JordanWecler.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                            <image>
+                                <Image url="@../assets/moy.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                            <image>
+                                <Image url="@../assets/Nadav.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                            <image>
+                                <Image url="@../assets/NickMarkou.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
+                            <image>
+                                <Image url="@../assets/Sharon Wu.jpg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                            <image>
+                                <Image url="@../assets/Spencer Belleville.jpeg" />
+                            </image>
+                        </ImageView>
+                        <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <image>
+                                <Image url="@../assets/Zhuofan Lu.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="Theo Coppola" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Sharon Wu" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Jordan Wecler" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Zhuofan Lu" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Nicholas Markou" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Darren Kwee" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Nicholas Moy" GridPane.columnIndex="3" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Spencer Belleville" GridPane.columnIndex="4" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Nadav Konstantine" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Dylan Nguyen" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="75.0" />
+                     </VBox.margin>
+                  </GridPane>
+               </children>
+               <StackPane.margin>
+                  <Insets />
+               </StackPane.margin>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <Label text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes." BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </bottom>
+</BorderPane>

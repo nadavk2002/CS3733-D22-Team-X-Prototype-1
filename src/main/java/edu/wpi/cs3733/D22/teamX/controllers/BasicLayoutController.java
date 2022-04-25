@@ -152,8 +152,15 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  void ExitApplication()
-      throws IOException, loadSaveFromCSVException {
+  public void goToAboutPage() throws IOException {
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/AboutPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  void ExitApplication() throws IOException, loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
