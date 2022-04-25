@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
+
 /** Represents a gift delivery service request */
 public class GiftDeliveryRequest extends ServiceRequest { // rename to GiftServiceRequest
   String notes;
@@ -19,6 +21,21 @@ public class GiftDeliveryRequest extends ServiceRequest { // rename to GiftServi
       String notes,
       String giftType) {
     super(requestID, destination, status, assignee);
+    this.notes = notes;
+    this.giftType = giftType;
+  }
+
+  public GiftDeliveryRequest(
+          String requestID,
+          Location destination,
+          String status,
+          Employee assignee,
+          LocalDateTime creationTime,
+          LocalDateTime PROCTime,
+          LocalDateTime DONETime,
+          String notes,
+          String giftType) {
+    super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.notes = notes;
     this.giftType = giftType;
   }
