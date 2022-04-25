@@ -19,6 +19,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -28,6 +30,12 @@ public class BasicLayoutController implements Initializable {
   @FXML private JFXComboBox<String> ChoosePage;
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
+  private static final Media buttonPressSound =
+      new Media(
+          App.class
+              .getResource("/edu/wpi/cs3733/D22/teamX/sounds/Wii_sound_basic_button_press.mp3")
+              .toExternalForm());
+  private static final MediaPlayer buttonPressSoundPlayer = new MediaPlayer(buttonPressSound);
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -95,6 +103,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestTable() throws IOException {
+    playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
@@ -103,6 +112,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchGraphicalEditor() throws IOException {
+    playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
@@ -111,6 +121,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestMenu() throws IOException {
+    playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
     CSVFileSaverController.loaded = false;
@@ -118,6 +129,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchOutstandingService() throws IOException {
+    playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
             getClass()
@@ -127,6 +139,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchMapDashboard() throws IOException {
+    playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
             getClass()
@@ -136,6 +149,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchLoginScreen() throws IOException {
+    playButtonPressSound();
     App.startScreen();
     //    App.switchScene(
     //        FXMLLoader.load(
@@ -145,6 +159,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchAPILandingPage() throws IOException {
+    playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/APILandingPage.fxml")));
@@ -155,6 +170,7 @@ public class BasicLayoutController implements Initializable {
   void ExitApplication()
       throws IOException, loadSaveFromCSVException, loadSaveFromCSVException,
           edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
+    playButtonPressSound();
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
@@ -169,6 +185,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void goToEmployeeViewer() throws IOException {
+    playButtonPressSound();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
@@ -187,5 +204,10 @@ public class BasicLayoutController implements Initializable {
             new KeyFrame(Duration.seconds(1)));
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
+  }
+
+  private void playButtonPressSound() {
+    buttonPressSoundPlayer.stop();
+    buttonPressSoundPlayer.play();
   }
 }
