@@ -11,7 +11,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 public class PreferencePageController implements Initializable {
-  @FXML private JFXToggleButton muteToggle;
+  @FXML private JFXToggleButton muteSoundsToggle;
+  @FXML private JFXToggleButton muteMusicToggle;
   @FXML private JFXSlider volumeSlider;
   private static final Media menuButtonPressSound =
       new Media(
@@ -20,9 +21,14 @@ public class PreferencePageController implements Initializable {
               .toExternalForm());
   private static final MediaPlayer menuButtonPressSoundPlayer =
       new MediaPlayer(menuButtonPressSound);
+  private static boolean muteSoundsToggleOn = false;
+  private static boolean muteMusicToggleOn = false;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    muteSoundsToggle.setSelected(muteSoundsToggleOn);
+    muteMusicToggle.setSelected(muteMusicToggleOn);
+    menuButtonPressSoundPlayer.setVolume(.50);
     volumeSlider.setValue(InvisibleMusicPlayerController.mediaPlayer.getVolume() * 100);
     volumeSlider
         .valueProperty()
@@ -35,11 +41,28 @@ public class PreferencePageController implements Initializable {
   @FXML
   private void muteBackgroundMusic() {
     playMenuButtonPressSound();
-    InvisibleMusicPlayerController.mediaPlayer.setMute(muteToggle.isSelected());
+    if (muteMusicToggle.isSelected()) {
+      muteMusicToggleOn = true;
+    } else {
+      muteMusicToggleOn = false;
+    }
+    InvisibleMusicPlayerController.mediaPlayer.setMute(muteMusicToggleOn);
   }
 
   private void playMenuButtonPressSound() {
     menuButtonPressSoundPlayer.stop();
     menuButtonPressSoundPlayer.play();
+  }
+
+  @FXML
+  private void muteSounds() {
+    if (muteSoundsToggle.isSelected()) {
+      muteSoundsToggleOn = true;
+    } else {
+      playMenuButtonPressSound();
+      muteSoundsToggleOn = false;
+    }
+    BasicLayoutController.buttonPressSoundPlayer.setMute(muteSoundsToggleOn);
+    menuButtonPressSoundPlayer.setMute(muteSoundsToggleOn);
   }
 }

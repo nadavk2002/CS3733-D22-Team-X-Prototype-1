@@ -45,7 +45,7 @@ public class BasicLayoutController implements Initializable {
           App.class
               .getResource("/edu/wpi/cs3733/D22/teamX/sounds/Wii_sound_basic_button_press.mp3")
               .toExternalForm());
-  private static final MediaPlayer buttonPressSoundPlayer = new MediaPlayer(buttonPressSound);
+  public static final MediaPlayer buttonPressSoundPlayer = new MediaPlayer(buttonPressSound);
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -68,6 +68,7 @@ public class BasicLayoutController implements Initializable {
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
+    buttonPressSoundPlayer.setVolume(.50);
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
     checkAPIData();

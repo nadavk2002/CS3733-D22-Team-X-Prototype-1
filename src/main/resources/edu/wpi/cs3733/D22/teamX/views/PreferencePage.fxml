@@ -34,7 +34,12 @@
                <children>
                   <HBox alignment="BOTTOM_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <children>
-                        <JFXToggleButton fx:id="muteToggle" contentDisplay="RIGHT" onAction="#muteBackgroundMusic" text="Mute Music" />
+                        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="116.0" prefWidth="156.0">
+                           <children>
+                              <JFXToggleButton fx:id="muteSoundsToggle" contentDisplay="RIGHT" onAction="#muteSounds" text="Mute Sounds" />
+                              <JFXToggleButton fx:id="muteMusicToggle" contentDisplay="RIGHT" onAction="#muteBackgroundMusic" text="   Mute Music" />
+                           </children>
+                        </VBox>
                         <Label alignment="CENTER_RIGHT" prefHeight="58.0" prefWidth="76.0" text="Volume  " />
                         <JFXSlider fx:id="volumeSlider" prefHeight="55.0" prefWidth="140.0" />
                      </children>
