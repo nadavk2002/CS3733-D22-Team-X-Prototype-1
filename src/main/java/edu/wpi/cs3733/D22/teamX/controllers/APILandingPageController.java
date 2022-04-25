@@ -3,6 +3,7 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamD.API.EmployeeAPI;
 import edu.wpi.cs3733.D22.teamD.API.StartAPI;
 import edu.wpi.cs3733.D22.teamD.entities.EmployeeObj;
+import edu.wpi.cs3733.D22.teamE.Run;
 import edu.wpi.cs3733.D22.teamX.api.MealRequestAPI;
 import edu.wpi.cs3733.D22.teamX.api.exceptions.ServiceException;
 import edu.wpi.cs3733.D22.teamX.entity.Employee;
@@ -11,7 +12,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.Initializable;
 
 public class APILandingPageController implements Initializable {
@@ -41,7 +41,6 @@ public class APILandingPageController implements Initializable {
       StartAPI.appLaunch(
           100, 100, 300, 300, "/edu/wpi/cs3733/D22/teamX/stylesheets/default.css", "FDEPT00101");
       EmployeeAPI sanitationEmpAPI = new EmployeeAPI();
-      List<EmployeeObj> apiEmpsList = sanitationEmpAPI.getAllEmployees();
       while (sanitationEmpAPI.getAllEmployees().size() > 0) {
         sanitationEmpAPI.removeEmployee(sanitationEmpAPI.getAllEmployees().get(0));
       }
@@ -62,6 +61,17 @@ public class APILandingPageController implements Initializable {
   }
 
   public void runFloralAPI() {
-
+    try {
+      Run.run(
+          100,
+          100,
+          800,
+          800,
+          "/edu/wpi/cs3733/D22/teamX/stylesheets/default.css",
+          "FDEPT00101",
+          "FDEPT00102");
+    } catch (javax.xml.rpc.ServiceException e) {
+      System.out.println(e.getMessage());
+    }
   }
 }

@@ -3,6 +3,8 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamD.API.SanitationReqAPI;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
+import edu.wpi.cs3733.D22.teamE.APIDatabase.dao.FloralRequestDAOImpl;
+import edu.wpi.cs3733.D22.teamE.entity.FloralServiceRequest;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.api.*;
@@ -13,6 +15,7 @@ import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -226,5 +229,13 @@ public class BasicLayoutController implements Initializable {
       ServiceRequestDAO.getDAO().addRecord(jsr);
       sanitationAPIIndex++;
     }
+
+//    try {
+//      for (FloralServiceRequest flsr : new FloralRequestDAOImpl().get) {
+//        System.out.println(flsr.getFlower());
+//      }
+//    } catch (SQLException e) {
+//      System.out.println("cannot print");
+//    }
   }
 }
