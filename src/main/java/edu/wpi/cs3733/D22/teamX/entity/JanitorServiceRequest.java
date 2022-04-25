@@ -22,14 +22,14 @@ public class JanitorServiceRequest extends ServiceRequest {
   }
 
   public JanitorServiceRequest(
-          String requestID,
-          Location destination,
-          String status,
-          Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,
-          String serviceType) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String serviceType) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.description = serviceType;
   }
