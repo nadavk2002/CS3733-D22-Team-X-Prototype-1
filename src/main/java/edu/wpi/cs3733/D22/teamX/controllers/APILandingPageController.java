@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 public class APILandingPageController implements Initializable {
+  public static boolean mealAPILoaded = true;
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     //

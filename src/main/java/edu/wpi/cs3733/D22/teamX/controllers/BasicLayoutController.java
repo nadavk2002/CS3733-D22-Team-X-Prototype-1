@@ -4,13 +4,19 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.api.*;
+import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequest;
+import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
+import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
+import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
+import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -29,6 +35,7 @@ public class BasicLayoutController implements Initializable {
   @FXML private JFXComboBox<String> ChoosePage;
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
+  private static int mealApiIDIndex = 15;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -48,6 +55,7 @@ public class BasicLayoutController implements Initializable {
     //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
+    checkAPIData();
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
     //            "Choose a Page",
@@ -80,6 +88,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestTable() throws IOException {
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
@@ -88,6 +97,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchGraphicalEditor() throws IOException {
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
@@ -96,6 +106,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestMenu() throws IOException {
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
     CSVFileSaverController.loaded = false;
@@ -103,6 +114,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchOutstandingService() throws IOException {
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass()
@@ -112,6 +124,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchMapDashboard() throws IOException {
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass()
@@ -121,6 +134,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchLoginScreen() throws IOException {
+    checkAPIData();
     App.startScreen();
     //    App.switchScene(
     //        FXMLLoader.load(
@@ -139,6 +153,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchAPILandingPage() throws IOException {
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/APILandingPage.fxml")));
@@ -147,18 +162,26 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   void ExitApplication()
-      throws IOException, loadSaveFromCSVException, loadSaveFromCSVException,
-          edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
+      throws IOException, loadSaveFromCSVException {
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       DatabaseCreator.saveAllCSV("");
-      edu.wpi.cs3733.D22.teamX.api.DatabaseCreator.saveAllCSV("");
     } else {
+      checkAPIData();
       App.switchScene(
           FXMLLoader.load(
               getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CSVFileSaver.fxml")));
       CSVFileSaverController.loaded = true;
     }
+  }
+
+  @FXML
+  public void goToEmployeeViewer() throws IOException {
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+    CSVFileSaverController.loaded = false;
   }
 
   private void initClock() {
@@ -175,4 +198,24 @@ public class BasicLayoutController implements Initializable {
     clock.play();
   }
 
+
+  private static void checkAPIData() {
+    // Add new meal service request data
+    List<MealServiceRequest> apiMeals = MealServiceRequestDAO.getDAO().getAllRecords();
+    while (mealApiIDIndex < apiMeals.size()) {
+      MealServiceRequest apiMeal = apiMeals.get(mealApiIDIndex);
+      edu.wpi.cs3733.D22.teamX.entity.MealServiceRequest meal =
+          new edu.wpi.cs3733.D22.teamX.entity.MealServiceRequest(
+              ServiceRequestDAO.getDAO().makeMealServiceRequestID(),
+              LocationDAO.getDAO().getRecord(apiMeal.getDestination().getNodeID()),
+              apiMeal.getStatus(),
+              EmployeeDAO.getDAO().getRecord(apiMeal.getAssignee().getEmployeeID()),
+              apiMeal.getMainCourse(),
+              apiMeal.getSide(),
+              apiMeal.getDrink(),
+              apiMeal.getPatientFor());
+      ServiceRequestDAO.getDAO().addRecord(meal);
+      mealApiIDIndex++;
+    }
+  }
 }

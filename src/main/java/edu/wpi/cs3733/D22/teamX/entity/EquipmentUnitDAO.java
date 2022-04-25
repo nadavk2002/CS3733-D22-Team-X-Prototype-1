@@ -202,7 +202,6 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
       dropEquipmentUnit.execute("DROP TABLE EquipmentUnit");
     } catch (SQLException e) {
       System.out.println("EquipmentUnit not dropped");
-      e.printStackTrace();
     }
   }
 

@@ -182,7 +182,6 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
       statement.execute("DROP TABLE LaundryServiceRequest");
     } catch (SQLException e) {
       System.out.println("LaundryServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 

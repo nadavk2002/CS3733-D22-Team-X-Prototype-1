@@ -183,7 +183,6 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
       statement.execute("DROP TABLE MaintenanceServiceRequest");
     } catch (SQLException e) {
       System.out.println("MaintenanceServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 

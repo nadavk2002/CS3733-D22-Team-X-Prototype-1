@@ -63,6 +63,9 @@ public class OutstandingServiceController implements Initializable {
           }
         });
     table.setItems(FXCollections.observableList(listOfRequests()));
+    assignee.setSortType(TableColumn.SortType.ASCENDING);
+    table.getSortOrder().add(assignee);
+    table.sort();
   }
 
   public List<ServiceRequest> listOfRequests() {
