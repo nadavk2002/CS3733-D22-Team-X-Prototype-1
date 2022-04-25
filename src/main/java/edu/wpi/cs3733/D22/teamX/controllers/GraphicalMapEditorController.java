@@ -304,6 +304,35 @@ public class GraphicalMapEditorController implements Initializable {
           loadLocationInfo(locNode);
         });
     menu.getItems().add(deleteButton);
+
+    MenuItem editEquipment = new MenuItem("Edit Equipment");
+    editEquipment.setOnAction(
+        event -> {
+          FXMLLoader fxmlLoader =
+              new FXMLLoader(
+                  getClass()
+                      .getResource("/edu/wpi/cs3733/D22/teamX/views/EquipmentUnitEditor.fxml"));
+          Stage popup = new Stage();
+          EquipmentUnit newEquipment = (EquipmentUnit) rect.getUserData();
+          popup.setTitle(newEquipment.getUnitID());
+          popup.setOnHidden(
+              close -> {
+                loadLocation(newEquipment.getCurrLocation().getFloor());
+                loadLocationInfo(newEquipment.getCurrLocation().getNodeID());
+              });
+          EquipmentUnitEditorController eq = new EquipmentUnitEditorController(newEquipment);
+          fxmlLoader.setController(eq);
+          Pane editEquipPane = null;
+          try {
+            editEquipPane = fxmlLoader.load();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+          Scene scene = new Scene(editEquipPane);
+          popup.setScene(scene);
+          popup.show();
+        });
+    menu.getItems().add(editEquipment);
     return menu;
   }
 

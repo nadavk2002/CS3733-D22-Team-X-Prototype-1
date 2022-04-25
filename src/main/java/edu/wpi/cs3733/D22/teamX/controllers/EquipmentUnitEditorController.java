@@ -38,7 +38,8 @@ public class EquipmentUnitEditorController implements Initializable {
                 .getAllRecords()
                 .get(equipLocationChoice.getSelectionModel().getSelectedIndex()));
     try {
-      equipDAO.updateRecord(newEquipment);
+      equipDAO.deleteRecord(equipment);
+      equipDAO.addRecord(newEquipment);
     } catch (Exception e) {
       equipDAO.addRecord(newEquipment);
     }
