@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -46,12 +47,16 @@
             </HBox>
             <VBox alignment="CENTER" layoutX="825.0" layoutY="93.0" prefHeight="937.0" prefWidth="775.0" spacing="15.0">
                <children>
-                  <Label text="At this location:">
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" text="At this location:">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <VBox fx:id="infoVBox" prefHeight="876.0" prefWidth="768.0" />
+                  <ScrollPane prefHeight="895.0" prefWidth="775.0">
+                     <content>
+                        <VBox fx:id="infoVBox" />
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
             <JFXCheckBox fx:id="showLocCheck" layoutX="305.0" layoutY="105.0" text="Show Locations" />
