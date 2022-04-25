@@ -1,4 +1,4 @@
-RequestID,Destination,Status,assignee,equipmentType,Quantity
+RequestID,Destination,Status,assignee,CreationTime,PROCTime,DONETime,equipmentType,Quantity
 MESR0001,xPATI00103,PROC,EMPL0001,5555555555,5555555555,0,X-Ray,1
 MESR0002,xPATI00203,PROC,EMPL0002,5555557895,5555557895,0,Infusion Pump,1
 MESR0003,xPATI00303,PROC,EMPL0003,5555560235,5555560235,0,Infusion Pump,3

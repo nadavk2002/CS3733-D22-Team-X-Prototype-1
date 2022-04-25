@@ -315,7 +315,8 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("RequestID,Destination,Status,assignee,CreationTime,PROCTime,DONETime,equipmentType,Quantity");
+      csvFile.write(
+          "RequestID,Destination,Status,assignee,CreationTime,PROCTime,DONETime,equipmentType,Quantity");
       for (int i = 0; i < medicalEquipmentServiceRequests.size(); i++) {
         csvFile.write("\n" + medicalEquipmentServiceRequests.get(i).getRequestID() + ",");
         if (medicalEquipmentServiceRequests.get(i).getDestination() == null) {

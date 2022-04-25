@@ -277,7 +277,8 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID, destination, status, assignee,CreationTime,PROCTime,DONETime, notes, giftType");
+      csvFile.write(
+          "requestID, destination, status, assignee,CreationTime,PROCTime,DONETime, notes, giftType");
       for (int i = 0; i < giftDeliveryRequests.size(); i++) {
         csvFile.write("\n" + giftDeliveryRequests.get(i).getRequestID() + ",");
         if (giftDeliveryRequests.get(i).getDestination() == null) {
