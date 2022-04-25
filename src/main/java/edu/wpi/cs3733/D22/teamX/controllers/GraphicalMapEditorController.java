@@ -45,7 +45,6 @@ public class GraphicalMapEditorController implements Initializable {
 
   @FXML private Button ToMainMenu;
 
-  @FXML private HBox hBox1;
   @FXML private VBox mapBox, infoVBox;
 
   @FXML private Group imageGroup;
@@ -59,8 +58,8 @@ public class GraphicalMapEditorController implements Initializable {
   private EquipmentUnitDAO equipDAO = EquipmentUnitDAO.getDAO();
   private EquipmentTypeDAO equipmentTypeDAO = EquipmentTypeDAO.getDAO();
   private GesturePane gesturePane;
-  @FXML private StackPane parentPage;
-  @FXML private AnchorPane anchorRoot;
+  // @FXML private StackPane parentPage;
+  @FXML private BorderPane anchorRoot;
 
   /**
    * Returns to the main menu of the JavaFX App
@@ -77,7 +76,7 @@ public class GraphicalMapEditorController implements Initializable {
                         "/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorDashboard.fxml")));
     Scene scene = pane.getScene();
     root.translateXProperty().set(-scene.getWidth());
-    parentPage.getChildren().add(root);
+    // parentPage.getChildren().add(root);
     Timeline timeline = new Timeline();
     KeyValue kv = new KeyValue(root.translateXProperty(), 0, Interpolator.EASE_BOTH);
     KeyFrame kf = new KeyFrame(Duration.seconds(.5), kv);
@@ -85,7 +84,7 @@ public class GraphicalMapEditorController implements Initializable {
     timeline.getKeyFrames().add(kf);
     timeline.setOnFinished(
         event -> {
-          parentPage.getChildren().remove(anchorRoot);
+          // parentPage.getChildren().remove(anchorRoot);
         });
     timeline.play();
   }
@@ -652,7 +651,7 @@ public class GraphicalMapEditorController implements Initializable {
     mapBox.getChildren().remove(imageGroup);
     pane = new GesturePane(imageGroup);
     mapBox.setMinWidth(610);
-    mapBox.getChildren().add(pane);
+    mapBox.getChildren().add(2, pane);
     pane.setMinScale(1);
     pane.setMaxScale(4.5);
     pane.setScrollBarPolicy(GesturePane.ScrollBarPolicy.NEVER);
@@ -660,7 +659,6 @@ public class GraphicalMapEditorController implements Initializable {
     showLocCheck.setSelected(true);
     showEquipCheck.setSelected(true);
     showRequestCheck.setSelected(true);
-    hBox1.setSpacing(90);
 
     showEquipCheck.setOnAction(
         new EventHandler<ActionEvent>() {
