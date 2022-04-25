@@ -114,8 +114,8 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestTable() throws IOException {
-    checkAPIData();
     playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ServiceRequestTable.fxml")));
@@ -124,8 +124,8 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchGraphicalEditor() throws IOException {
-    checkAPIData();
     playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditor.fxml")));
@@ -176,6 +176,8 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchEmployeeViewer() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
@@ -208,22 +210,12 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void goToEmployeeViewer() throws IOException {
-    playButtonPressSound();
-    checkAPIData();
-    App.switchScene(
-        FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
-    CSVFileSaverController.loaded = false;
-  }
-
-  @FXML
   public void switchPreferencePage() throws IOException {
     playButtonPressSound();
     checkAPIData();
     App.switchScene(
-            FXMLLoader.load(
-                    getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/PreferencePage.fxml")));
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/PreferencePage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
