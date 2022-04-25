@@ -388,6 +388,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setEquipmentType(results.getString("equipmentType"));
         toAdd.setQuantity(results.getInt("quantity"));
         medicalEquipmentServiceRequests.add(toAdd);
