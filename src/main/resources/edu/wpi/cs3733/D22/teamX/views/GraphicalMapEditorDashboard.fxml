@@ -39,7 +39,7 @@
                   </Label>
                   <VBox fx:id="towerBox">
                      <children>
-                        <VBox fx:id="l5Master" style="-fx-background-radius: 10; -fx-border-color: DARKGRAY; -fx-background-color: DARKGRAY; -fx-border-radius: 10; -fx-border-width: 5;">
+                        <VBox fx:id="l5Master" style="-fx-background-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-radius: 10; -fx-border-width: 5;">
                            <children>
                               <StackPane>
                                  <children>
@@ -53,7 +53,7 @@
                               </StackPane>
                               <VBox fx:id="l5Vbox" alignment="TOP_CENTER" prefHeight="52.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                                  <children>
-                                    <StackPane fx:id="l5Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l5Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levFiveDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -63,7 +63,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l5StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l5StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFiveIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levFiveIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -73,7 +73,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l5StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l5StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFiveClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levFiveCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -87,7 +87,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l4Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: DARKGRAY; -fx-background-color: DARKGRAY; -fx-border-width: 5;">
+                        <VBox fx:id="l4Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
                            <children>
                               <StackPane>
                                  <children>
@@ -101,7 +101,7 @@
                               </StackPane>
                               <VBox fx:id="l4Vbox">
                                  <children>
-                                    <StackPane fx:id="l4Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l4Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFourDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levFourDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -111,7 +111,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l4StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l4StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFourIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levFourIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -121,7 +121,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l4StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l4StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFourClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levFourCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -135,7 +135,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l3Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: DARKGRAY; -fx-background-color: DARKGRAY; -fx-border-width: 5;">
+                        <VBox fx:id="l3Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
                            <children>
                               <StackPane>
                                  <children>
@@ -149,7 +149,7 @@
                               </StackPane>
                               <VBox fx:id="l3Vbox">
                                  <children>
-                                    <StackPane fx:id="l3Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l3Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levThreeDirtyText" strokeType="OUTSIDE" strokeWidth="0.0">
@@ -159,7 +159,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l3StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l3StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levThreeIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levThreeIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -169,7 +169,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l3StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l3StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levThreeClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levThreeCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -183,7 +183,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: DARKGRAY; -fx-background-color: DARKGRAY; -fx-border-width: 5;">
+                        <VBox fx:id="l2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
                            <children>
                               <StackPane>
                                  <children>
@@ -197,7 +197,7 @@
                               </StackPane>
                               <VBox fx:id="l2Vbox">
                                  <children>
-                                    <StackPane fx:id="l2Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l2Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -207,7 +207,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -217,7 +217,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -231,7 +231,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: DARKGRAY; -fx-background-color: DARKGRAY; -fx-border-width: 5;">
+                        <VBox fx:id="l1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
                            <children>
                               <StackPane>
                                  <children>
@@ -245,7 +245,7 @@
                               </StackPane>
                               <VBox fx:id="l1Vbox">
                                  <children>
-                                    <StackPane fx:id="l1Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l1Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -255,7 +255,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -265,7 +265,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="levOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -279,7 +279,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="ll1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: DARKGRAY; -fx-background-color: DARKGRAY; -fx-border-width: 5;">
+                        <VBox fx:id="ll1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
                            <children>
                               <StackPane>
                                  <children>
@@ -293,7 +293,7 @@
                               </StackPane>
                               <VBox fx:id="ll1Vbox">
                                  <children>
-                                    <StackPane fx:id="ll1Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll1Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="llOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -303,7 +303,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="llOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -313,7 +313,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="llOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -327,7 +327,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="ll2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: DARKGRAY; -fx-background-color: DARKGRAY; -fx-border-width: 5;">
+                        <VBox fx:id="ll2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
                            <children>
                               <StackPane prefHeight="0.0" prefWidth="778.0">
                                  <children>
@@ -341,7 +341,7 @@
                               </StackPane>
                               <VBox fx:id="ll2Vbox">
                                  <children>
-                                    <StackPane fx:id="ll2Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll2Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="llTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -351,7 +351,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="llTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
@@ -361,7 +361,7 @@
                                           </Text>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #7596ab; -fx-background-radius: 10; -fx-border-color: #7596ab; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: gray; -fx-background-radius: 10; -fx-border-color: gray; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15;" width="200.0" />
                                           <Text fx:id="llTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
