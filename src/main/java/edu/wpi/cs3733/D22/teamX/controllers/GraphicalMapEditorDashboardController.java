@@ -29,7 +29,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -620,101 +619,9 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         inUseAmount++;
       }
     }
-    int dirtyWidth = (int) ((double) (dirtyAmount) / (double) (equipList.size()) * 600.0);
-    int cleanWidth = (int) ((double) (cleanAmount) / (double) (equipList.size()) * 600.0);
-    int inUseWidth = (int) ((double) (inUseAmount) / (double) (equipList.size()) * 600.0);
-    if (cleanAmount == 0 && dirtyAmount == 0 && inUseAmount == 0) {
-      clean.setWidth(200);
-      dirty.setWidth(200);
-      inUse.setWidth(200);
-      clean.setFill(Color.LIGHTGRAY);
-      dirty.setFill(Color.LIGHTGRAY);
-      inUse.setFill(Color.LIGHTGRAY);
-    } else if (dirtyAmount == 0 && cleanAmount == 0) {
-      clean.setWidth(70);
-      dirty.setWidth(70);
-      inUse.setWidth(460.0);
-      clean.setFill(Color.LIGHTGRAY);
-      dirty.setFill(Color.LIGHTGRAY);
-
-    } else if (cleanAmount == 0 && inUseAmount == 0) {
-      clean.setWidth(70);
-      inUse.setWidth(70);
-      dirty.setWidth(460.0);
-      clean.setFill(Color.LIGHTGRAY);
-      inUse.setFill(Color.LIGHTGRAY);
-
-    } else if (dirtyAmount == 0 && inUseAmount == 0) {
-      inUse.setWidth(70);
-      dirty.setWidth(70);
-      clean.setWidth(460);
-      inUse.setFill(Color.LIGHTGRAY);
-      dirty.setFill(Color.LIGHTGRAY);
-
-    } else if (cleanAmount == 0) {
-      clean.setWidth(70);
-      dirty.setWidth(
-          (int) ((double) (cleanAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
-      inUse.setWidth(
-          (int) ((double) (inUseAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
-      clean.setFill(Color.LIGHTGRAY);
-    } else if (dirtyAmount == 0) {
-      dirty.setWidth(70);
-      clean.setWidth(
-          (int) ((double) (cleanAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
-      inUse.setWidth(
-          (int) ((double) (inUseAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
-      dirty.setFill(Color.LIGHTGRAY);
-    } else if (inUseAmount == 0) {
-      inUse.setWidth(70);
-      dirty.setWidth(
-          (int) ((double) (dirtyAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
-      clean.setWidth(
-          (int) ((double) (cleanAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
-      inUse.setFill(Color.LIGHTGRAY);
-    } else if (dirtyWidth <= 70 && cleanWidth <= 70) {
-      clean.setWidth(70);
-      dirty.setWidth(70);
-      inUse.setWidth(
-          (int)
-              ((double) (inUseAmount)
-                  / (double) (equipList.size() - cleanAmount - dirtyAmount)
-                  * 460.0));
-    } else if (cleanWidth <= 70 && inUseWidth <= 70) {
-      clean.setWidth(70);
-      inUse.setWidth(70);
-      dirty.setWidth((int) ((double) (inUseAmount) / (double) (equipList.size()) * 460.0));
-    } else if (dirtyWidth <= 70 && inUseWidth <= 70) {
-      inUse.setWidth(70);
-      dirty.setWidth(70);
-      clean.setWidth(
-          (int)
-              ((double) (inUseAmount)
-                  / (double) (equipList.size() - inUseAmount - dirtyAmount)
-                  * 460.0));
-    } else if (dirtyWidth <= 70) {
-      dirty.setWidth(70);
-      clean.setWidth(
-          (int) ((double) (cleanAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
-      inUse.setWidth(
-          (int) ((double) (inUseAmount) / (double) (equipList.size() - dirtyAmount) * 530.0));
-    } else if (cleanWidth <= 70) {
-      clean.setWidth(70);
-      dirty.setWidth(
-          (int) ((double) (cleanAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
-      inUse.setWidth(
-          (int) ((double) (inUseAmount) / (double) (equipList.size() - cleanAmount) * 530.0));
-    } else if (inUseWidth <= 70) {
-      dirty.setWidth(
-          (int) ((double) (dirtyAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
-      clean.setWidth(
-          (int) ((double) (cleanAmount) / (double) (equipList.size() - inUseAmount) * 530.0));
-      inUse.setWidth(70);
-    } else {
-      dirty.setWidth((int) ((double) (dirtyAmount) / (double) (equipList.size()) * 600.0));
-      clean.setWidth((int) ((double) (cleanAmount) / (double) (equipList.size()) * 600.0));
-      inUse.setWidth((int) ((double) (inUseAmount) / (double) (equipList.size()) * 600.0));
-    }
+    dirty.setWidth((int) ((double) (dirtyAmount) / (double) (equipList.size()) * 600.0));
+    clean.setWidth((int) ((double) (cleanAmount) / (double) (equipList.size()) * 600.0));
+    inUse.setWidth((int) ((double) (inUseAmount) / (double) (equipList.size()) * 600.0));
   }
 
   private ObservableList<EquipmentUnit> sortEquipmentByFloor(String floor) {
