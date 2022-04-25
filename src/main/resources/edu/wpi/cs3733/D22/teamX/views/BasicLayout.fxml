@@ -90,7 +90,7 @@
                      </graphic>
                   </JFXButton>
                   <Label text="Employees" />
-                  <JFXButton fx:id="employeeViewerButton" onAction="#switchEmployeeViewer" alignment="BASELINE_LEFT" prefWidth="300.0" text="Viewer">
+                  <JFXButton fx:id="employeeViewerButton"  alignment="BASELINE_LEFT" onAction="#switchEmployeeViewer" prefWidth="300.0" text="Viewer">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>

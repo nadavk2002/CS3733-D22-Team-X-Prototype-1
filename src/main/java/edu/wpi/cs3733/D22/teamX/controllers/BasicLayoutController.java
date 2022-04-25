@@ -136,7 +136,7 @@ public class BasicLayoutController implements Initializable {
                             .getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
     CSVFileSaverController.loaded = false;
   }
-    //
+
   @FXML
   public void switchAPILandingPage() throws IOException {
     App.switchScene(
@@ -144,7 +144,7 @@ public class BasicLayoutController implements Initializable {
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/APILandingPage.fxml")));
     CSVFileSaverController.loaded = false;
   }
-
+ //
   @FXML
   void ExitApplication()
       throws IOException, loadSaveFromCSVException, loadSaveFromCSVException,
