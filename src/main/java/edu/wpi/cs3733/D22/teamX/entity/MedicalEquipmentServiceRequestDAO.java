@@ -315,7 +315,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("RequestID,Destination,Status,assignee,equipmentType,Quantity");
+      csvFile.write("RequestID,Destination,Status,assignee,CreationTime,PROCTime,DONETime,equipmentType,Quantity");
       for (int i = 0; i < medicalEquipmentServiceRequests.size(); i++) {
         csvFile.write("\n" + medicalEquipmentServiceRequests.get(i).getRequestID() + ",");
         if (medicalEquipmentServiceRequests.get(i).getDestination() == null) {
@@ -388,9 +388,15 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
-        toAdd.setCreationTime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
-        toAdd.setPROCTime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
-        toAdd.setDONETime(LocalDateTime.ofEpochSecond(Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
+        toAdd.setCreationTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setEquipmentType(results.getString("equipmentType"));
         toAdd.setQuantity(results.getInt("quantity"));
         medicalEquipmentServiceRequests.add(toAdd);
