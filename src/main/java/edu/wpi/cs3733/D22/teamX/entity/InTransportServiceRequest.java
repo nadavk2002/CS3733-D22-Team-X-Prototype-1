@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
+
 /** Represents a transport service request */
 public class InTransportServiceRequest extends ServiceRequest {
   private String patientName;
@@ -19,6 +21,21 @@ public class InTransportServiceRequest extends ServiceRequest {
       String status,
       Location destination) {
     super(requestID, destination, status, assignee);
+    this.patientName = patientName;
+    this.transportFrom = transportFrom;
+  }
+
+  public InTransportServiceRequest(
+          String requestID,
+          String patientName,
+          String transportFrom,
+          Employee assignee,
+          LocalDateTime creationTime,
+          LocalDateTime PROCTime,
+          LocalDateTime DONETime,
+          String status,
+          Location destination) {
+    super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.patientName = patientName;
     this.transportFrom = transportFrom;
   }
