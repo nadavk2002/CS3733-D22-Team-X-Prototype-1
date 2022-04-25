@@ -397,7 +397,7 @@ public class AppController implements Initializable {
       searchBox.setPromptText("Listening...");
       while (true) {
         long estimatedTime = System.currentTimeMillis() - startTime;
-        System.out.println(estimatedTime);
+        //System.out.println(estimatedTime);
         byte[] data = new byte[6400];
         audio.read(data);
         if (estimatedTime > 5000) { // 5 seconds max
