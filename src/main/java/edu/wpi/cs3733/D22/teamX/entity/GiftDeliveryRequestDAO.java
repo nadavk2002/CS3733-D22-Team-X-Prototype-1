@@ -6,6 +6,7 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -117,7 +118,13 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
                 + recordObject.getStatus()
                 + "', assignee = '"
                 + recordObject.getAssigneeID()
-                + "', notes = '"
+                    + "', CreationTime = "
+                    + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                    + ", PROCTime = "
+                    + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                    + ", DONETime = "
+                    + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+                + ", notes = '"
                 + recordObject.getNotes()
                 + "', giftType = '"
                 + recordObject.getGiftType()

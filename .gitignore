@@ -162,3 +162,18 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/java,macos,gradle,intellij+all
 
+TowerLocationsX.csv
+SharpsDisposalRequests.csv
+MedicineDeliveryRequests.csv
+MedicalEquipmentUnits.csv
+MealRequests.csv
+MedEquipReq.csv
+MaintenanceServiceRequests.csv
+LaundryServiceRequests.csv
+LanguageInterpreterRequests.csv
+LabServiceRequests.csv
+JanitorServiceRequests.csv
+InTransportServiceRequest.csv
+GiftDeliveryRequests.csv
+Employees.csv
+EquipmentTypes.csv
