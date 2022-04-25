@@ -3,12 +3,11 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamD.API.EmployeeAPI;
 import edu.wpi.cs3733.D22.teamD.API.StartAPI;
 import edu.wpi.cs3733.D22.teamD.entities.EmployeeObj;
-import edu.wpi.cs3733.D22.teamE.Run;
 import edu.wpi.cs3733.D22.teamX.api.MealRequestAPI;
 import edu.wpi.cs3733.D22.teamX.api.exceptions.ServiceException;
 import edu.wpi.cs3733.D22.teamX.entity.Employee;
 import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
-import java.io.IOException;
+import edu.wpi.teamW.API;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -38,8 +37,14 @@ public class APILandingPageController implements Initializable {
 
   public void runSanitationAPI() {
     try {
-      StartAPI.appLaunch(
-          100, 100, 300, 300, "/edu/wpi/cs3733/D22/teamX/stylesheets/default.css", "FDEPT00101");
+      StartAPI sanAPI = new StartAPI();
+      sanAPI.run(
+          470,
+          180,
+          300,
+          300,
+          "/edu/wpi/cs3733/D22/teamX/stylesheets/application.css",
+          "FDEPT00101");
       EmployeeAPI sanitationEmpAPI = new EmployeeAPI();
       while (sanitationEmpAPI.getAllEmployees().size() > 0) {
         sanitationEmpAPI.removeEmployee(sanitationEmpAPI.getAllEmployees().get(0));
@@ -55,22 +60,22 @@ public class APILandingPageController implements Initializable {
                 EmployeeObj.EmployeeType.ADMINISTRATOR,
                 0));
       }
-    } catch (IOException e) {
+    } catch (edu.wpi.cs3733.D22.teamD.API.ServiceException e) {
       System.out.println(e.getMessage());
     }
   }
 
-  public void runFloralAPI() {
+  public void runLangAPI() {
     try {
-      Run.run(
-          100,
-          100,
-          800,
-          800,
-          "/edu/wpi/cs3733/D22/teamX/stylesheets/default.css",
+      API.run(
+          750,
+          180,
+          600,
+          600,
+          "/edu/wpi/cs3733/D22/teamX/stylesheets/application.css",
           "FDEPT00101",
           "FDEPT00102");
-    } catch (javax.xml.rpc.ServiceException e) {
+    } catch (edu.wpi.teamW.ServiceException e) {
       System.out.println(e.getMessage());
     }
   }

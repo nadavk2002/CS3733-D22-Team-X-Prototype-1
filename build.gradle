@@ -49,7 +49,7 @@ dependencies {
 
     implementation name: 'CS3733-D22-Team-X-MealServiceRequestAPI'
     implementation name: 'CS3733-D22-Team-D-SanitationRequestAPI-all'
-    implementation name: 'edu.wpi.cs3733.D22.teamE'
+    implementation name: 'LanguageInterpAPI'
 
 }
 
