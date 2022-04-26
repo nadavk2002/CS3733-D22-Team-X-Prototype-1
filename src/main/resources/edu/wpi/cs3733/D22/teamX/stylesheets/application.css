@@ -86,14 +86,14 @@
 #username {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-navy-blue;
     -fx-prompt-text-fill: -fx-navy-blue;
 }
 
 #password {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-navy-blue;
     -fx-prompt-text-fill: -fx-navy-blue;
 }
 
@@ -169,7 +169,10 @@
 
 #loginStackPane {
     -fx-background-color: -fx-dark-blue;
-    -fx-border-radius: 20px;
+    /*-fx-border-radius: 20px;*/
+    -fx-background-radius: 50px;
+    -fx-background-size: 50px;
+    /*-fx-border-radius: 50 50 50 50;*/
 }
 /*.label {*/
 /*    -fx-font-family: "Corbel";*/
