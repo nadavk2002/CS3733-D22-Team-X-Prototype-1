@@ -1,23 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.RequestGraphController">
-   <top>
-      <Label text="Requests Burndown Chart" BorderPane.alignment="CENTER" />
-   </top>
-   <center>
-      <LineChart prefHeight="858.0" prefWidth="1376.0" title="lineChart" BorderPane.alignment="CENTER">
-        <xAxis>
-          <CategoryAxis label="Time in hours" side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis label="Work left to be completed" side="LEFT" />
-        </yAxis>
-      </LineChart>
-   </center>
-</BorderPane>
+<BorderPane fx:id="pane" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.RequestGraphController" />

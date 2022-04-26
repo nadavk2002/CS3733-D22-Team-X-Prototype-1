@@ -132,6 +132,15 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchGraphDashboard() throws IOException {
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/RequestGraph.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   public void switchLoginScreen() throws IOException {
     checkAPIData();
     App.startScreen();

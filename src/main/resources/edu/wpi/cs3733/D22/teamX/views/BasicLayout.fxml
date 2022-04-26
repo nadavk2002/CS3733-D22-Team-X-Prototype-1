@@ -89,6 +89,15 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="chartButton" alignment="BASELINE_LEFT" onAction="#switchGraphDashboard" prefWidth="300.0" text="Show Burndown Chart">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/play-alt-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <Label text="Employees" />
                   <JFXButton fx:id="employeeViewerButton" alignment="BASELINE_LEFT" onAction="#switchEmployeeViewer" prefWidth="300.0" text="Viewer">
                      <graphic>
