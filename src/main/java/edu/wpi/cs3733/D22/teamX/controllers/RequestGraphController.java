@@ -33,7 +33,9 @@ public class RequestGraphController implements Initializable {
     requests = ServiceRequestDAO.getDAO().getServiceRequests();
     int[] days = new int[365];
     for (ServiceRequest r : requests) {
-      if (r.getCreationTime().getYear() != LocalDate.now().getYear()) continue;
+      if (r.getCreationTime().getYear() != LocalDate.now().getYear()
+          && (r.getDONETime().getYear() != LocalDate.now().getYear()
+              || r.getDONETime().getYear() != 1970)) continue;
       int finalday = 365;
       if (r.getDONETime().toEpochSecond(ZoneOffset.UTC) != 0)
         finalday = r.getDONETime().getDayOfYear();
