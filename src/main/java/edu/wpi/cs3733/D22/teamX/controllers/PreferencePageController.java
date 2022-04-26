@@ -29,6 +29,7 @@ public class PreferencePageController implements Initializable {
     muteSoundsToggle.setSelected(muteSoundsToggleOn);
     muteMusicToggle.setSelected(muteMusicToggleOn);
     menuButtonPressSoundPlayer.setVolume(.50);
+    menuButtonPressSoundPlayer.setVolume(0); // remove this line eventually
     volumeSlider.setValue(InvisibleMusicPlayerController.mediaPlayer.getVolume() * 100);
     volumeSlider
         .valueProperty()
