@@ -6,10 +6,6 @@ import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
-import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,7 +27,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 import net.kurobako.gesturefx.GesturePane;
 
 /**
@@ -68,6 +63,7 @@ public class GraphicalMapEditorController implements Initializable {
    */
   @FXML
   private void ToDashboard() throws IOException {
+    /*
     Parent root =
         FXMLLoader.load(
             Objects.requireNonNull(
@@ -87,6 +83,12 @@ public class GraphicalMapEditorController implements Initializable {
           // parentPage.getChildren().remove(anchorRoot);
         });
     timeline.play();
+       */
+    // RIP ANIMATION FOR NOW?
+    App.switchScene(
+        FXMLLoader.load(
+            getClass()
+                .getResource("/edu/wpi/cs3733/D22/teamX/views/GraphicalMapEditorDashboard.fxml")));
   }
 
   @FXML
