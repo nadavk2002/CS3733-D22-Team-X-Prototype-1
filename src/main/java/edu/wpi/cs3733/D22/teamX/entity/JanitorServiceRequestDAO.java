@@ -146,7 +146,7 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
     try {
       Statement statement = connection.createStatement();
       StringBuilder sql = new StringBuilder();
-      sql.append("INSERT INTO LangServiceRequest VALUES(");
+      sql.append("INSERT INTO JanitorServiceRequest VALUES(");
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
