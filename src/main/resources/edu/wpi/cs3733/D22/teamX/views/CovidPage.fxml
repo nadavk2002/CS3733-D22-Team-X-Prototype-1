@@ -21,7 +21,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../../../Downloads/medical-lab.png" />
+                  <Image url="@../assets/medical-lab.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="135.0" prefWidth="256.0" text="Testing" textAlignment="CENTER" textFill="#446fdc">
@@ -32,7 +32,7 @@
             <ImageView fitHeight="150.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="150.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../../../Downloads/vaccine.png" />
+                  <Image url="@../assets/vaccine.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="255.0" text="Vaccine" textAlignment="CENTER" textFill="#446fdc">
@@ -43,7 +43,7 @@
             <ImageView fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="146.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../../../Downloads/info.png" />
+                  <Image url="@../assets/info.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="338.0" text=" More Information" textAlignment="CENTER" textFill="#446fdc">
@@ -93,12 +93,12 @@
       </HBox>
       <ImageView fitHeight="275.0" fitWidth="245.0" layoutX="21.0" layoutY="745.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../../../../Downloads/ambulance.png" />
+            <Image url="@../assets/ambulance.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="205.0" fitWidth="199.0" layoutX="842.0" layoutY="757.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../../../../Downloads/medical-team.png" />
+            <Image url="@../assets/medical-team.png" />
          </image>
       </ImageView>
       <VBox layoutX="289.0" layoutY="695.095703125">
