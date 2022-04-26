@@ -11,7 +11,6 @@ import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -193,6 +192,15 @@ public class BasicLayoutController implements Initializable {
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/APILandingPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  public void goToAboutPage() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/AboutPage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 

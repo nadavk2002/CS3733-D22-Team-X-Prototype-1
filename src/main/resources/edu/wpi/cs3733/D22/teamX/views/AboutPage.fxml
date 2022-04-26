@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AboutPageController">
+   <top>
+      <Label styleClass="title-label" text="About Us" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin>
+            <Insets top="100.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="72.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox fx:id="pictureVBox" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1200.0" StackPane.alignment="CENTER">
+               <children>
+                  <StackPane maxHeight="-Infinity" prefHeight="800.0" prefWidth="1200.0">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <GridPane fx:id="pictureGridpane" maxHeight="-Infinity" prefHeight="550.0" prefWidth="400.0">
+                          <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXButton fx:id="theo" contentDisplay="TOP" onAction="#showTheoText" text="Theo Coppola">
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/Theo_Coppola.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="jordan" contentDisplay="TOP" onAction="#showJordanText" text="Jordan Wecler" GridPane.columnIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/JordanWecler.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="sharon" contentDisplay="TOP" onAction="#showSharonText" text="Sharon Wu" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/Sharon Wu.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="zhuofan" contentDisplay="TOP" onAction="#showZhuofanText" text="Zhuofan Lu" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/Zhuofan Lu.png" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="markou" contentDisplay="TOP" onAction="#showMarkouText" text="Nicholas Markou" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/NickMarkou.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="darren" contentDisplay="TOP" onAction="#showDarrenText" text="Darren Kwee" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/DARREN KWEE (1).jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="moy" contentDisplay="TOP" onAction="#showMoyText" text="Nicholas Moy" GridPane.columnIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/moy.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="dylan" contentDisplay="TOP" onAction="#showDylanText" text="Dylan Nguyen" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/Dylan Nguyen.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="spencer" contentDisplay="TOP" onAction="#showSpencerText" text="Spencer Belleville" GridPane.columnIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/SpencerBelleville.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="nadav" contentDisplay="TOP" onAction="#showNadavText" text="Nadav Konstantine" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                            <Image url="@../assets/Nadav.jpg" />
+                                        </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </GridPane>
+                        <Label fx:id="description" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="750.0" textAlignment="CENTER" wrapText="true" StackPane.alignment="CENTER">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </children>
+               <StackPane.margin>
+                  <Insets bottom="150.0" top="100.0" />
+               </StackPane.margin>
+            </VBox>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <Label text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes." textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </bottom>
+</BorderPane>
