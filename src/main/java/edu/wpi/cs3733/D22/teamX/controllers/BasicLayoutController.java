@@ -5,10 +5,8 @@ import edu.wpi.cs3733.D22.teamD.API.SanitationReqAPI;
 import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
-import edu.wpi.cs3733.D22.teamX.api.*;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequest;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import edu.wpi.teamW.API;
@@ -163,7 +161,8 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void switchGraphDashboard() throws IOException {
+  public void switchRequestGraph() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(

@@ -80,7 +80,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="chartButton" alignment="BASELINE_LEFT" onAction="#switchGraphDashboard" prefWidth="300.0" text="Show Burndown Chart">
+                  <JFXButton fx:id="chartButton" alignment="BASELINE_LEFT" onAction="#switchRequestGraph" prefWidth="300.0" text="Burndown Chart">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
