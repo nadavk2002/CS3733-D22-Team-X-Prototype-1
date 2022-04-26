@@ -236,7 +236,7 @@ public class GraphicalMapEditorController implements Initializable {
           EditLocationMenuController controller =
               new EditLocationMenuController((Location) rect.getUserData(), popup);
           fxmlLoader.setController(controller);
-          AnchorPane pane = null;
+          Pane pane = null;
           try {
             pane = fxmlLoader.load();
           } catch (IOException e) {
@@ -613,7 +613,7 @@ public class GraphicalMapEditorController implements Initializable {
               });
           EditLocationMenuController controller = new EditLocationMenuController(loc, popup);
           fxmlLoader.setController(controller);
-          AnchorPane pane = null;
+          BorderPane pane = null;
           try {
             pane = fxmlLoader.load();
           } catch (IOException e) {
