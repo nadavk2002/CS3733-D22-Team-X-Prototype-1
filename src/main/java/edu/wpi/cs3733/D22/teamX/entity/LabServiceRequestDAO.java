@@ -276,7 +276,8 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,service,patientFor");
+      csvFile.write(
+          "requestID,destination,status,assignee,CreationTime,PROCTime,DONETime,service,patientFor");
       for (int i = 0; i < labServiceRequests.size(); i++) {
         csvFile.write("\n" + labServiceRequests.get(i).getRequestID() + ",");
         if (labServiceRequests.get(i).getDestination() == null) {
