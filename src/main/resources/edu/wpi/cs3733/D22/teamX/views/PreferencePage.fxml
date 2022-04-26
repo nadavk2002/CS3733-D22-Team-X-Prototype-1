@@ -20,8 +20,8 @@
    <center>
       <StackPane>
          <children>
-            <Rectangle arcHeight="150.0" arcWidth="150.0" fill="DODGERBLUE" height="700.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1200.0" />
-            <GridPane alignment="CENTER_LEFT">
+            <Rectangle arcHeight="150.0" arcWidth="150.0" fill="DODGERBLUE" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <GridPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="848.3333129882812" minWidth="10.0" prefWidth="501.3333435058594" />
                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="1118.6666564941406" minWidth="10.0" prefWidth="1118.6666564941406" />
