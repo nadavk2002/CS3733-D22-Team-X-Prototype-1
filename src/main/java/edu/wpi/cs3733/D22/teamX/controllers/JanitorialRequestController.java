@@ -38,8 +38,11 @@ public class JanitorialRequestController implements Initializable {
     // resetFields();
     submitButton.setDisable(true);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
+    serviceStatus.setValue("");
     serviceType.getItems().addAll("Bodily Fluids", "Chemical Spills", "Disinfection");
+    serviceType.setValue("");
     assignStaff.setItems(getEmployeeIDs());
+    assignStaff.setValue("");
     //    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
