@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -118,7 +120,13 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-              + "', language = '"
+                  + "', CreationTime = "
+                  + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                  + ", PROCTime = "
+                  + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                  + ", DONETime = "
+                  + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + ", language = '"
               + recordObject.getLanguage()
               + "' WHERE requestID = '"
               + recordObject.getRequestID()
@@ -140,6 +148,9 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       sql.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       sql.append("'" + recordObject.getStatus() + "'" + ", ");
       sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      sql.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      sql.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      sql.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       sql.append("'" + recordObject.getLanguage() + "'");
       sql.append(")");
       initialization.execute(sql.toString());
@@ -159,6 +170,9 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
+                  + "CreationTime BIGINT,"
+                  + "PROCTime BIGINT,"
+                  + "DONETime BIGINT,"
               + "language VARCHAR(20),"
               + "CONSTRAINT LASR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
@@ -194,14 +208,17 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
       String nextFileLine;
       while ((nextFileLine = medCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 5) {
+        if (currLine.length == 8) {
           LangServiceRequest node =
               new LangServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplAssignee.getRecord(currLine[3]),
-                  currLine[4]);
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  currLine[7]);
           langServiceRequests.add(node);
           node.getDestination().addRequest(node);
         } else {
@@ -228,6 +245,10 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         sql.append("'" + langServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getStatus() + "'" + ", ");
         sql.append("'" + langServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        sql.append(
+                langServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(langServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(langServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append("'" + langServiceRequests.get(i).getLanguage() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
@@ -262,6 +283,24 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         } else {
           csvFile.write(langServiceRequests.get(i).getAssigneeID() + ",");
         }
+        if (langServiceRequests.get(i).getCreationTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+                  langServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (langServiceRequests.get(i).getPROCTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+                  langServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (langServiceRequests.get(i).getDONETime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+                  langServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
         if (langServiceRequests.get(i).getLanguage() == null) {
           csvFile.write(',');
         } else {
@@ -295,6 +334,15 @@ public class LangServiceRequestDAO implements DAO<LangServiceRequest> {
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(
+                LocalDateTime.ofEpochSecond(
+                        Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+                LocalDateTime.ofEpochSecond(
+                        Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+                LocalDateTime.ofEpochSecond(
+                        Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setLanguage(results.getString("language"));
         langServiceRequests.add(toAdd);
         toAdd.getDestination().addRequest(toAdd);
