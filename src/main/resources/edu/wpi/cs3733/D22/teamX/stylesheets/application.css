@@ -83,6 +83,20 @@
     -fx-wrap-text: true;
 }
 
+#username {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-navy-blue;
+    -fx-prompt-text-fill: -fx-navy-blue;
+}
+
+#password {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-navy-blue;
+    -fx-prompt-text-fill: -fx-navy-blue;
+}
+
 #loginExitButton {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
@@ -149,6 +163,14 @@
     -fx-background-color: -fx-light-blue;
 }
 
+#loginPane {
+    -fx-background-image: url('../assets/Brigham-Womens-TO-USE-blur.jpg');
+}
+
+#loginStackPane {
+    -fx-background-color: -fx-dark-blue;
+    -fx-border-radius: 20px;
+}
 /*.label {*/
 /*    -fx-font-family: "Corbel";*/
 /*}*/
