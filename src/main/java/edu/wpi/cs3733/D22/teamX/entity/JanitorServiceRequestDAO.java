@@ -173,9 +173,9 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-                  + "CreationTime BIGINT,"
-                  + "PROCTime BIGINT,"
-                  + "DONETime BIGINT,"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "description VARCHAR(140),"
               + "CONSTRAINT JSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
@@ -218,9 +218,9 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
                   currLine[7]);
           janitorServiceRequests.add(node);
           node.getDestination().addRequest(node);
@@ -248,14 +248,9 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
         sql.append("'" + janitorServiceRequests.get(i).getStatus() + "'" + ", ");
         sql.append("'" + janitorServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append(
-                janitorServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                        + ",");
-        sql.append(
-                janitorServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                        + ",");
-        sql.append(
-                janitorServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
-                        + ",");
+            janitorServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(janitorServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(janitorServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append("'" + janitorServiceRequests.get(i).getDescription() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
@@ -272,7 +267,8 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,CreationTime,PROCTime,DONETime,description");
+      csvFile.write(
+          "requestID,destination,status,assignee,CreationTime,PROCTime,DONETime,description");
       for (int i = 0; i < janitorServiceRequests.size(); i++) {
         csvFile.write("\n" + janitorServiceRequests.get(i).getRequestID() + ",");
         if (janitorServiceRequests.get(i).getDestination() == null) {
@@ -294,22 +290,19 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  janitorServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                          + ",");
+              janitorServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (janitorServiceRequests.get(i).getPROCTime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  janitorServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                          + ",");
+              janitorServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (janitorServiceRequests.get(i).getDONETime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  janitorServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
-                          + ",");
+              janitorServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (janitorServiceRequests.get(i).getDescription() == null) {
           csvFile.write(',');
@@ -345,14 +338,14 @@ public class JanitorServiceRequestDAO implements DAO<JanitorServiceRequest> {
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
         toAdd.setCreationTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
         toAdd.setPROCTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
         toAdd.setDONETime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setDescription(results.getString("description"));
         janitorServiceRequests.add(toAdd);
         toAdd.getDestination().addRequest(toAdd);
