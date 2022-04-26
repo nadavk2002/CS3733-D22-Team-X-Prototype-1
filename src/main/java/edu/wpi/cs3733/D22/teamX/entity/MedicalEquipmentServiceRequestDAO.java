@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -134,7 +136,13 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-              + "', equipmentType = '"
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + ", equipmentType = '"
               + recordObject.getEquipmentType()
               + "', quantity = "
               + recordObject.getQuantity()
@@ -158,6 +166,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
       medEquipReq.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getStatus() + "'" + ", ");
       medEquipReq.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      medEquipReq.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      medEquipReq.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      medEquipReq.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       medEquipReq.append("'" + recordObject.getEquipmentType() + "'" + ", ");
       medEquipReq.append(recordObject.getQuantity());
       medEquipReq.append(")");
@@ -190,6 +201,9 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "equipmentType VARCHAR(20),"
               + "quantity INT,"
               + "CONSTRAINT MESR_dest_fk "
@@ -230,21 +244,25 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
       String nextFileLine;
       while ((nextFileLine = medCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 6) {
+        if (currLine.length == 9) {
           MedicalEquipmentServiceRequest mesrNode =
               new MedicalEquipmentServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                  currLine[4],
-                  Integer.parseInt(currLine[5]));
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  currLine[7],
+                  Integer.parseInt(currLine[8]));
           medicalEquipmentServiceRequests.add(mesrNode);
           mesrNode
               .getDestination()
               .addRequest(mesrNode); // add mesr to destination's list of service requests
         } else {
           System.out.println("MedEquipReq CSV file formatted improperly");
+          System.out.println(currLine);
           System.exit(1);
         }
       }
@@ -271,6 +289,15 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         medEquipReq.append(
+            medicalEquipmentServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                + ",");
+        medEquipReq.append(
+            medicalEquipmentServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                + ",");
+        medEquipReq.append(
+            medicalEquipmentServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
+                + ",");
+        medEquipReq.append(
             "'" + medicalEquipmentServiceRequests.get(i).getEquipmentType() + "'" + ", ");
         medEquipReq.append(medicalEquipmentServiceRequests.get(i).getQuantity());
         medEquipReq.append(")");
@@ -288,7 +315,8 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("RequestID,Destination,Status,assignee,equipmentType,Quantity");
+      csvFile.write(
+          "RequestID,Destination,Status,assignee,CreationTime,PROCTime,DONETime,equipmentType,Quantity");
       for (int i = 0; i < medicalEquipmentServiceRequests.size(); i++) {
         csvFile.write("\n" + medicalEquipmentServiceRequests.get(i).getRequestID() + ",");
         if (medicalEquipmentServiceRequests.get(i).getDestination() == null) {
@@ -305,6 +333,27 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
           csvFile.write(',');
         } else {
           csvFile.write(medicalEquipmentServiceRequests.get(i).getAssigneeID() + ",");
+        }
+        if (medicalEquipmentServiceRequests.get(i).getCreationTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              medicalEquipmentServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                  + ",");
+        }
+        if (medicalEquipmentServiceRequests.get(i).getPROCTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              medicalEquipmentServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                  + ",");
+        }
+        if (medicalEquipmentServiceRequests.get(i).getDONETime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              medicalEquipmentServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC)
+                  + ",");
         }
         if (medicalEquipmentServiceRequests.get(i).getEquipmentType() == null) {
           csvFile.write(',');
@@ -340,6 +389,15 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setEquipmentType(results.getString("equipmentType"));
         toAdd.setQuantity(results.getInt("quantity"));
         medicalEquipmentServiceRequests.add(toAdd);
