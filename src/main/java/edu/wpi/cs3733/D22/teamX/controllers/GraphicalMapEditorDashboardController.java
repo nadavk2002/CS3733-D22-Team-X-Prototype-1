@@ -158,8 +158,10 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       l2Master,
       l1Master,
       ll1Master,
-      ll2Master;
+      ll2Master,
+      infoBox;
   @FXML private NestedBarChart nestedBarChart;
+
   @FXML private Axis yAxis;
   ChartItem chartItem = new ChartItem("Clean", 43, Color.RED, Instant.ofEpochSecond(1));
   ChartItem chartItem2 = new ChartItem("Clean", 433, Color.GREEN, Instant.ofEpochSecond(1));
@@ -184,6 +186,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     //    coxcombChart.addItem(chartItem);
     //    coxcombChart.addItem(chartItem2);
     alertBox.setVisible(false);
+    infoBox.setSpacing(30);
     masterBox.setSpacing(5);
     towerBox.setSpacing(3);
     buttonBox.setSpacing(6);
@@ -201,7 +204,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     l1Master.setSpacing(3);
     ll1Master.setSpacing(3);
     ll2Master.setSpacing(3);
-
+    yAxis.setAutoFontSize(false);
+    yAxis.setTickLabelFontSize(20);
     cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     cleanPodB.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -363,7 +367,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   private ChartItemSeries<ChartItem> fillChartData(ObservableList<EquipmentUnit> floorEquip) {
     ChartItemSeries<ChartItem> nestedBarList =
         new ChartItemSeries<>(
-            ChartType.NESTED_BAR, "Penis", Paint.valueOf("#009688"), Paint.valueOf("#009688"));
+            ChartType.NESTED_BAR, "Beds", Paint.valueOf("#446fdc"), Paint.valueOf("#446fdc"));
     List<ChartItem> itemList = new ArrayList<>();
     int dirtyAmount = 0;
     int cleanAmount = 0;
@@ -384,11 +388,14 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       }
     }
     ChartItem clean =
-        new ChartItem("Clean", cleanAmount, Color.GREEN, Instant.ofEpochSecond(1), false);
+        new ChartItem(
+            "Clean", cleanAmount, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem dirty =
-        new ChartItem("Clean", dirtyAmount, Color.RED, Instant.ofEpochSecond(1), false);
+        new ChartItem(
+            "Dirty", dirtyAmount, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem inuse =
-        new ChartItem("Clean", inUseAmount, Color.YELLOW, Instant.ofEpochSecond(1), false);
+        new ChartItem(
+            "In Use", inUseAmount, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
     itemList.add(clean);
     itemList.add(dirty);
     itemList.add(inuse);
