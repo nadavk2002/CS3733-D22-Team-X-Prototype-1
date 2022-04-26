@@ -11,6 +11,8 @@ import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
+import edu.wpi.teamW.API;
+import edu.wpi.teamW.dB.LanguageRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -36,6 +38,7 @@ public class BasicLayoutController implements Initializable {
   private HashMap<String, String> pages;
   private static int mealApiIDIndex = 15;
   private static int sanitationAPIIndex = 0;
+  private static int langAPIIndex = 0;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -207,6 +210,7 @@ public class BasicLayoutController implements Initializable {
       mealApiIDIndex++;
     }
 
+    // Add new Janitor Service Request data
     List<SanitationIRequest> apiSanReqs = new SanitationReqAPI().getAllRequests();
     while (sanitationAPIIndex < apiSanReqs.size()) {
       SanitationIRequest sanReq = apiSanReqs.get(sanitationAPIIndex);
@@ -225,6 +229,22 @@ public class BasicLayoutController implements Initializable {
       }
       ServiceRequestDAO.getDAO().addRecord(jsr);
       sanitationAPIIndex++;
+    }
+
+    // Add new LangServiceRequest
+    List<LanguageRequest> apiLangReqs = API.getAllRequests();
+    while (langAPIIndex < apiLangReqs.size()) {
+      LanguageRequest langReq = apiLangReqs.get(langAPIIndex);
+      LangServiceRequest lsr =
+          new LangServiceRequest(
+              ServiceRequestDAO.getDAO().makeLangServiceRequestID(),
+              LocationDAO.getDAO().getRecord(langReq.getNodeID()),
+              "",
+              EmployeeDAO.getDAO()
+                  .getRecord(String.format("EMPL%04d", langReq.getEmployee().getEmployeeID())),
+              langReq.getLanguage());
+      ServiceRequestDAO.getDAO().addRecord(lsr);
+      langAPIIndex++;
     }
   }
 }

@@ -7,17 +7,20 @@ import edu.wpi.cs3733.D22.teamX.api.MealRequestAPI;
 import edu.wpi.cs3733.D22.teamX.api.exceptions.ServiceException;
 import edu.wpi.cs3733.D22.teamX.entity.Employee;
 import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
+import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.teamW.API;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import edu.wpi.teamW.dB.enums.Languages;
 import javafx.fxml.Initializable;
 
 public class APILandingPageController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //
   }
 
   public void runMealRequestAPI() {
@@ -77,6 +80,24 @@ public class APILandingPageController implements Initializable {
           "FDEPT00102");
     } catch (edu.wpi.teamW.ServiceException e) {
       System.out.println(e.getMessage());
+    }
+    try {
+      API.deleteAllEmployees();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    for(Employee e : EmployeeDAO.getDAO().getAllRecords())
+    {
+      try {
+        API.addEmployeeWithLanguage(
+                new edu.wpi.teamW.dB.Employee(Integer.parseInt(
+                        e.getEmployeeID().substring(4)),
+                        e.getFirstName(),
+                        e.getLastName()),
+                Languages.values()[0]);
+      } catch (SQLException ex) {
+        System.out.println(ex.getMessage());
+      }
     }
   }
 }
