@@ -69,6 +69,7 @@ public class BasicLayoutController implements Initializable {
       throw new RuntimeException(e);
     }
     buttonPressSoundPlayer.setVolume(.50);
+    buttonPressSoundPlayer.setVolume(0); // remove this line eventually
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
     checkAPIData();
