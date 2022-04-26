@@ -242,7 +242,7 @@ public class AppController implements Initializable {
         equipmentRequest,
         ReqSharps,
         ReqMaintenance);
-    searchBox.setPromptText("Search here.");
+    //    searchBox.setPromptText("Search here.");
     //        firstRow.getChildren().addAll(equipmentRequest, graphicalMapEditor, EquipReqTable);
     //        secondRow.getChildren().addAll(ReqMedicineDelivery, LabRequest, ReqInTransport,
     // ReqLang);
@@ -267,10 +267,8 @@ public class AppController implements Initializable {
 
   @FXML
   private void voiceSearchButtons(MouseEvent mouseEvent) {
+    searchBox.setPromptText("Listening...");
     try {
-      // searchBox.setText("request");
-      //      searchBox.setText(streamingMicRecognize());
-
       String input = streamingMicRecognize();
       switch (input.toLowerCase()) {
         case "request equipment delivery":
@@ -300,7 +298,20 @@ public class AppController implements Initializable {
         case "request lab service":
           LabRequestButton();
           break;
+        case "request sharps disposal":
+          ReqSharpsButton();
+          break;
+        case "request maintenance":
+          ReqMaintenanceButton();
+          break;
         default:
+          if (input.equals("")) {
+            searchBox.setPromptText("error. please try again!");
+          } else {
+            searchBox.setText(input);
+            searchBox.setPromptText("Search...");
+          }
+          //              toVoiceSearchPopup();
       }
 
     } catch (Exception e) {
@@ -348,6 +359,7 @@ public class AppController implements Initializable {
                 stringBuilder.append(alternative.getTranscript());
               }
               transcript[0] = new String(stringBuilder);
+              searchBox.setPromptText("Search here.");
             }
 
             public void onError(Throwable t) {
@@ -394,7 +406,6 @@ public class AppController implements Initializable {
       long startTime = System.currentTimeMillis();
       // Audio Input Stream
       AudioInputStream audio = new AudioInputStream(targetDataLine);
-      searchBox.setPromptText("Listening...");
       while (true) {
         long estimatedTime = System.currentTimeMillis() - startTime;
         // System.out.println(estimatedTime);
@@ -416,9 +427,22 @@ public class AppController implements Initializable {
     } catch (Exception e) {
       System.out.println(e);
     }
-    searchBox.setPromptText("Search here.");
     responseObserver.onComplete();
     System.out.println("Transcript: " + transcript[0]);
     return transcript[0];
   }
+
+  //  public void toVoiceSearchPopup() throws IOException {
+  //    FXMLLoader fxmlLoader =
+  //        new FXMLLoader(
+  //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/VoiceSearchPopup.fxml"));
+  //
+  //    Parent root1 = (Parent) fxmlLoader.load();
+  //    Stage stage = new Stage();
+  //    stage.initModality(Modality.APPLICATION_MODAL);
+  //    stage.initStyle(StageStyle.DECORATED);
+  //    stage.setTitle("ERROR");
+  //    stage.setScene(new Scene(root1));
+  //    stage.show();
+  //  }
 }

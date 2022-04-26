@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.views.VoiceSearchPopup">
+   <children>
+      <TextArea editable="false" prefHeight="200.0" prefWidth="200.0" text="Voice input not recognized.&#10;&#10;&#10;Only commands that match the &#10;below service requests &#10;are supported." />
+   </children>
+</AnchorPane>
