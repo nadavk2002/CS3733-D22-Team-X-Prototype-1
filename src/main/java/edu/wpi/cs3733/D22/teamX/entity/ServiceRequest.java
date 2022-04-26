@@ -1,14 +1,21 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Objects;
 
 /** Represents a general service request */
 public abstract class ServiceRequest {
+  private LocalDateTime nullTime =
+      LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC); // 1 - 1 - 1970
 
   private String requestID;
   private Location destination;
   private String status;
   private Employee assignee;
+  private LocalDateTime CreationTime;
+  private LocalDateTime PROCTime;
+  private LocalDateTime DONETime;
 
   // did this do anything
 
@@ -19,6 +26,34 @@ public abstract class ServiceRequest {
     this.destination = destination;
     this.status = status;
     this.assignee = assignee;
+    this.CreationTime = LocalDateTime.now();
+    if (status == "PROC") {
+      this.PROCTime = CreationTime;
+      this.DONETime = nullTime;
+    } else if (status == "DONE") {
+      this.PROCTime = CreationTime;
+      this.DONETime = CreationTime;
+    } else {
+      this.PROCTime = nullTime;
+      this.DONETime = nullTime;
+    }
+  }
+
+  public ServiceRequest(
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime) {
+    this.requestID = requestID;
+    this.destination = destination;
+    this.status = status;
+    this.assignee = assignee;
+    this.CreationTime = creationTime;
+    this.PROCTime = PROCTime;
+    this.DONETime = DONETime;
   }
 
   public ServiceRequest() {
@@ -26,6 +61,9 @@ public abstract class ServiceRequest {
     this.destination = new Location();
     this.status = "";
     this.assignee = new Employee();
+    this.CreationTime = LocalDateTime.now();
+    this.PROCTime = nullTime;
+    this.DONETime = nullTime;
   }
 
   public String getRequestID() {
@@ -53,6 +91,19 @@ public abstract class ServiceRequest {
   }
 
   public void setStatus(String status) {
+    // this may violate ECB but allows for this to be applied to all SRs without having to update
+    // controllers but DAOs still have to be updated.
+    if (this.status != status) {
+      if (status == "PROC") {
+        this.PROCTime = LocalDateTime.now();
+        this.DONETime = nullTime;
+      } else if (status == "DONE") {
+        DONETime = LocalDateTime.now();
+        if (PROCTime.equals(nullTime)) {
+          PROCTime = DONETime;
+        }
+      }
+    }
     this.status = status;
   }
 
@@ -66,6 +117,30 @@ public abstract class ServiceRequest {
 
   public String getLocationShortName() {
     return destination.getShortName();
+  }
+
+  public LocalDateTime getCreationTime() {
+    return CreationTime;
+  }
+
+  public void setCreationTime(LocalDateTime creationTime) {
+    CreationTime = creationTime;
+  }
+
+  public LocalDateTime getPROCTime() {
+    return PROCTime;
+  }
+
+  public void setPROCTime(LocalDateTime PROCTime) {
+    this.PROCTime = PROCTime;
+  }
+
+  public LocalDateTime getDONETime() {
+    return DONETime;
+  }
+
+  public void setDONETime(LocalDateTime DONETime) {
+    this.DONETime = DONETime;
   }
 
   @Override
