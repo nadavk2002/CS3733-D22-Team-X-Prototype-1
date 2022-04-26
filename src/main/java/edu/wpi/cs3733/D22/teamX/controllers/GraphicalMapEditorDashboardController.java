@@ -166,15 +166,6 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   ChartItem chartItem = new ChartItem("Clean", 43, Color.RED, Instant.ofEpochSecond(1));
   ChartItem chartItem2 = new ChartItem("Clean", 433, Color.GREEN, Instant.ofEpochSecond(1));
   MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
-  // floor constants--------------------------------------
-  private final int cleanXloc = 718;
-  private final int YF5 = 96;
-  private final int YF4 = 96 + 112 + 12;
-  private final int YF3 = 96 + 112 * 2 + 12 * 2;
-  private final int YF2 = 96 + 112 * 3 + 12 * 3;
-  private final int YF1 = 96 + 112 * 4 + 12 * 4;
-  private final int YLL1 = 96 + 112 * 5 + 12 * 5;
-  private final int YLL2 = 96 + 112 * 6 + 12 * 6;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
