@@ -62,15 +62,6 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <JFXButton fx:id="outstandingButton" alignment="BASELINE_LEFT" onAction="#switchOutstandingService" prefWidth="300.0" text="Outstanding">
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/list-check-free-icon-font.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
                   <JFXButton fx:id="tableButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestTable" prefWidth="300.0" text="Table">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">

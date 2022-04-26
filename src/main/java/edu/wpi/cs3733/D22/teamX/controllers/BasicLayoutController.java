@@ -143,17 +143,6 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void switchOutstandingService() throws IOException {
-    playButtonPressSound();
-    checkAPIData();
-    App.switchScene(
-        FXMLLoader.load(
-            getClass()
-                .getResource("/edu/wpi/cs3733/D22/teamX/views/OutstandingServiceRequest.fxml")));
-    CSVFileSaverController.loaded = false;
-  }
-
-  @FXML
   public void switchMapDashboard() throws IOException {
     playButtonPressSound();
     checkAPIData();
