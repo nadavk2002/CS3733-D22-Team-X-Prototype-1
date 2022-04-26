@@ -147,16 +147,17 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       l1Master,
       ll1Master,
       ll2Master;
+
   MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
   // floor constants--------------------------------------
-  private final int cleanXloc = 705;
-  private final int YF5 = 156 + 5 + 25;
-  private final int YF4 = 259 + 10 + 25;
-  private final int YF3 = 365 + 15 + 25;
-  private final int YF2 = 472 + 20 + 25;
-  private final int YF1 = 578 + 25 + 25;
-  private final int YLL2 = 789 + 30 + 25;
-  private final int YLL1 = 684 + 35 + 25;
+  private final int cleanXloc = 718;
+  private final int YF5 = 96;
+  private final int YF4 = 96 + 112 + 12;
+  private final int YF3 = 96 + 112 * 2 + 12 * 2;
+  private final int YF2 = 96 + 112 * 3 + 12 * 3;
+  private final int YF1 = 96 + 112 * 4 + 12 * 4;
+  private final int YLL1 = 96 + 112 * 5 + 12 * 5;
+  private final int YLL2 = 96 + 112 * 6 + 12 * 6;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -225,172 +226,109 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         sortByDirty(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
         addToPodC(sortEquipmentByFloor("5")),
-        cleanXloc,
-        YF5,
-        l5Stack,
-        l5Hbox);
+        l5Stack);
     fillTable(
         sortByDirty(sortEquipmentByFloor("4")),
         addToPodB(sortEquipmentByFloor("4")),
         addToPodC(sortEquipmentByFloor("4")),
-        cleanXloc,
-        YF4,
-        l4Stack,
-        l4Hbox);
+        l4Stack);
     fillTable(
         sortByDirty(sortEquipmentByFloor("3")),
         addToPodB(sortEquipmentByFloor("3")),
         addToPodC(sortEquipmentByFloor("3")),
-        cleanXloc,
-        YF3,
-        l3Stack,
-        l3Hbox);
+        l3Stack);
     fillTable(
         sortByDirty(sortEquipmentByFloor("2")),
         addToPodB(sortEquipmentByFloor("2")),
         addToPodC(sortEquipmentByFloor("2")),
-        cleanXloc,
-        YF2,
-        l2Stack,
-        l2Hbox);
+        l2Stack);
     fillTable(
         sortByDirty(sortEquipmentByFloor("1")),
         addToPodB(sortEquipmentByFloor("1")),
         addToPodC(sortEquipmentByFloor("1")),
-        cleanXloc,
-        YF1,
-        l1Stack,
-        l1Hbox);
+        l1Stack);
     fillTable(
         sortByDirty(sortEquipmentByFloor("L1")),
         addToPodB(sortEquipmentByFloor("L1")),
         addToPodC(sortEquipmentByFloor("L1")),
-        cleanXloc,
-        YLL1,
-        ll1Stack,
-        ll1Hbox);
+        ll1Stack);
     fillTable(
         sortByDirty(sortEquipmentByFloor("L2")),
         addToPodB(sortEquipmentByFloor("L2")),
         addToPodC(sortEquipmentByFloor("L2")),
-        cleanXloc,
-        YLL2,
-        ll2Stack,
-        ll2Hbox);
+        ll2Stack);
 
     fillTable(
         sortByClean(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
         addToPodC(sortEquipmentByFloor("5")),
-        cleanXloc,
-        YF5,
-        l5StackC,
-        l5Hbox);
+        l5StackC);
     fillTable(
         sortByClean(sortEquipmentByFloor("4")),
         addToPodB(sortEquipmentByFloor("4")),
         addToPodC(sortEquipmentByFloor("4")),
-        cleanXloc,
-        YF4,
-        l4StackC,
-        l4Hbox);
+        l4StackC);
     fillTable(
         sortByClean(sortEquipmentByFloor("3")),
         addToPodB(sortEquipmentByFloor("3")),
         addToPodC(sortEquipmentByFloor("3")),
-        cleanXloc,
-        YF3,
-        l3StackC,
-        l3Hbox);
+        l3StackC);
     fillTable(
         sortByClean(sortEquipmentByFloor("2")),
         addToPodB(sortEquipmentByFloor("2")),
         addToPodC(sortEquipmentByFloor("2")),
-        cleanXloc,
-        YF2,
-        l2StackC,
-        l2Hbox);
+        l2StackC);
     fillTable(
         sortByClean(sortEquipmentByFloor("1")),
         addToPodB(sortEquipmentByFloor("1")),
         addToPodC(sortEquipmentByFloor("1")),
-        cleanXloc,
-        YF1,
-        l1StackC,
-        l1Hbox);
+        l1StackC);
     fillTable(
         sortByClean(sortEquipmentByFloor("L1")),
         addToPodB(sortEquipmentByFloor("L1")),
         addToPodC(sortEquipmentByFloor("L1")),
-        cleanXloc,
-        YLL1,
-        ll1StackC,
-        ll1Hbox);
+        ll1StackC);
     fillTable(
         sortByClean(sortEquipmentByFloor("L2")),
         addToPodB(sortEquipmentByFloor("L2")),
         addToPodC(sortEquipmentByFloor("L2")),
-        cleanXloc,
-        YLL2,
-        ll2StackC,
-        ll2Hbox);
+        ll2StackC);
 
     fillTable(
         sortByInUse(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
         addToPodC(sortEquipmentByFloor("5")),
-        cleanXloc,
-        YF5,
-        l5StackIU,
-        l5Hbox);
+        l5StackIU);
     fillTable(
         sortByInUse(sortEquipmentByFloor("4")),
         addToPodB(sortEquipmentByFloor("4")),
         addToPodC(sortEquipmentByFloor("4")),
-        cleanXloc,
-        YF4,
-        l4StackIU,
-        l4Hbox);
+        l4StackIU);
     fillTable(
         sortByInUse(sortEquipmentByFloor("3")),
         addToPodB(sortEquipmentByFloor("3")),
         addToPodC(sortEquipmentByFloor("3")),
-        cleanXloc,
-        YF3,
-        l3StackIU,
-        l3Hbox);
+        l3StackIU);
     fillTable(
         sortByInUse(sortEquipmentByFloor("2")),
         addToPodB(sortEquipmentByFloor("2")),
         addToPodC(sortEquipmentByFloor("2")),
-        cleanXloc,
-        YF2,
-        l2StackIU,
-        l2Hbox);
+        l2StackIU);
     fillTable(
         sortByInUse(sortEquipmentByFloor("1")),
         addToPodB(sortEquipmentByFloor("1")),
         addToPodC(sortEquipmentByFloor("1")),
-        cleanXloc,
-        YF1,
-        l1StackIU,
-        l1Hbox);
+        l1StackIU);
     fillTable(
         sortByInUse(sortEquipmentByFloor("L1")),
         addToPodB(sortEquipmentByFloor("L1")),
         addToPodC(sortEquipmentByFloor("L1")),
-        cleanXloc,
-        YLL1,
-        ll1StackIU,
-        ll1Hbox);
+        ll1StackIU);
     fillTable(
         sortByInUse(sortEquipmentByFloor("L2")),
         addToPodB(sortEquipmentByFloor("L2")),
         addToPodC(sortEquipmentByFloor("L2")),
-        cleanXloc,
-        YLL2,
-        ll2StackIU,
-        ll2Hbox);
+        ll2StackIU);
     // dirtyPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("3")));
     // dirtyPodB.getItems().addAll(addToPod1(sortEquipmentByFloor("4")));
     // cleanPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("5")));
@@ -495,60 +433,16 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       ObservableList<EquipmentUnit> equipment,
       ObservableList<EquipmentUnit> podB,
       ObservableList<EquipmentUnit> podC,
-      int XfloorVal,
-      int YfloorVal,
-      StackPane floor,
-      HBox floorBox) {
+      StackPane floor) {
+
     floor.setOnMouseClicked(
-        event -> {
-          floor.toFront();
-        });
-    floor.setOnMouseEntered(
         event6 -> {
           if (equipment.size() > 0) {
             cleanTableBox.setVisible(true);
             cleanTable.setItems(equipment);
             cleanPodB.setItems(podB);
             cleanPodC.setItems(podC);
-            cleanTableBox.setLayoutX(XfloorVal);
-            cleanTableBox.setLayoutY(YfloorVal);
-          } else {
-            cleanTableBox.setVisible(false);
           }
-          cleanTableBox.setOnMouseEntered(
-              event2 -> {
-                if (equipment.size() > 0) {
-                  cleanTableBox.setVisible(true);
-                  cleanTable.setItems(equipment);
-                  cleanPodB.setItems(podB);
-                  cleanPodC.setItems(podC);
-                  cleanTableBox.setLayoutX(XfloorVal);
-                  cleanTableBox.setLayoutY(YfloorVal);
-                } else {
-                  cleanTableBox.setVisible(false);
-                }
-              });
-          floorBox.setOnMouseEntered(
-              event3 -> {
-                if (equipment.size() > 0) {
-                  cleanTableBox.setVisible(true);
-                  cleanTable.setItems(equipment);
-                  cleanPodB.setItems(podB);
-                  cleanPodC.setItems(podC);
-                  cleanTableBox.setLayoutX(XfloorVal);
-                  cleanTableBox.setLayoutY(YfloorVal);
-                } else {
-                  cleanTableBox.setVisible(false);
-                }
-              });
-        });
-    floor.setOnMouseExited(
-        event -> {
-          cleanTableBox.setVisible(false);
-          cleanTableBox.setOnMouseExited(
-              event2 -> {
-                cleanTableBox.setVisible(false);
-              });
         });
   }
 

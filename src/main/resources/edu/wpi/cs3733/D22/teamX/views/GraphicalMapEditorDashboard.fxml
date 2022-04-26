@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -39,7 +40,7 @@
                   </Label>
                   <VBox fx:id="towerBox">
                      <children>
-                        <VBox fx:id="l5Master" style="-fx-background-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-radius: 10; -fx-border-width: 5;">
+                        <VBox fx:id="l5Master" style="-fx-background-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-radius: 10; -fx-border-width: 8;">
                            <children>
                               <StackPane>
                                  <children>
@@ -65,6 +66,9 @@
                                                    </font>
                                                 </Text>
                                              </children>
+                                             <effect>
+                                                <DropShadow blurType="TWO_PASS_BOX" radius="11.17" width="25.68" />
+                                             </effect>
                                           </HBox>
                                        </children>
                                     </StackPane>
@@ -102,7 +106,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l4Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
+                        <VBox fx:id="l4Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
                               <StackPane>
                                  <children>
@@ -165,7 +169,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l3Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
+                        <VBox fx:id="l3Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
                               <StackPane>
                                  <children>
@@ -228,7 +232,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
+                        <VBox fx:id="l2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
                               <StackPane>
                                  <children>
@@ -291,7 +295,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="l1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
+                        <VBox fx:id="l1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
                               <StackPane>
                                  <children>
@@ -354,7 +358,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="ll1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
+                        <VBox fx:id="ll1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
                               <StackPane>
                                  <children>
@@ -417,7 +421,7 @@
                               </VBox>
                            </children>
                         </VBox>
-                        <VBox fx:id="ll2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 5;">
+                        <VBox fx:id="ll2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
                               <StackPane prefHeight="0.0" prefWidth="778.0">
                                  <children>
@@ -491,56 +495,7 @@
                   </HBox>
                </children>
             </VBox>
-            <HBox fx:id="cleanTableBox" alignment="CENTER" layoutX="895.0" layoutY="281.0" prefHeight="203.0" prefWidth="538.0">
-               <children>
-                  <ImageView fitHeight="34.0" fitWidth="32.0" style="-fx-rotate: 90;">
-                     <image>
-                        <Image url="@../assets/blackArrow.png" />
-                     </image>
-                  </ImageView>
-                  <TabPane minHeight="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: transparent; -fx-border-width: 3 3 3 2; -fx-border-color: GRAY; -fx-border-radius: 2 3 3 2;">
-                     <tabs>
-                        <Tab text="All Clean Equipment">
-                           <content>
-                              <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="168.0" prefWidth="445.0" style="-fx-border-radius: 10;">
-                                 <columns>
-                                    <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
-                                    <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="availabilityC" prefWidth="75.0" text="Availability" />
-                                    <TableColumn fx:id="currLocC" prefWidth="75.0" text="Current Location" />
-                                 </columns>
-                              </TableView>
-                           </content>
-                        </Tab>
-                        <Tab text="Equipment in Pod B">
-                           <content>
-                              <TableView fx:id="cleanPodB" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
-                                 <columns>
-                                    <TableColumn fx:id="unitIDCPodA" prefWidth="75.0" text="Unit ID" />
-                                    <TableColumn fx:id="typeCPodA" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="availabilityCPodA" prefWidth="75.0" text="Availability" />
-                                    <TableColumn fx:id="currLocCPodA" prefWidth="75.0" text="Current Location" />
-                                 </columns>
-                              </TableView>
-                           </content>
-                        </Tab>
-                        <Tab text="Equipment in Pod C">
-                           <content>
-                              <TableView fx:id="cleanPodC" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
-                                 <columns>
-                                    <TableColumn fx:id="unitIDCPodB" prefWidth="75.0" text="Unit ID" />
-                                    <TableColumn fx:id="typeCPodB" prefWidth="75.0" text="Type" />
-                                    <TableColumn fx:id="availabilityCPodB" prefWidth="75.0" text="Availability" />
-                                    <TableColumn fx:id="currLocCPodB" prefWidth="75.0" text="Current Location" />
-                                 </columns>
-                              </TableView>
-                           </content>
-                        </Tab>
-                     </tabs>
-                  </TabPane>
-               </children>
-            </HBox>
-            <VBox fx:id="alertBox" alignment="CENTER" layoutX="988.0" layoutY="31.0" prefHeight="90.0" prefWidth="406.0" style="-fx-background-color: #446fdc;">
+            <VBox fx:id="alertBox" alignment="CENTER" layoutX="931.0" layoutY="33.0" prefHeight="90.0" prefWidth="406.0" style="-fx-background-color: #446fdc;">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="158.0" text="ALERT!" textFill="WHITE">
                      <font>
@@ -554,6 +509,54 @@
                   </Label>
                </children>
             </VBox>
+            <HBox fx:id="cleanTableBox" alignment="TOP_CENTER" layoutX="810.0" layoutY="137.0" prefHeight="213.0" prefWidth="650.0">
+               <children>
+                  <HBox style="-fx-border-color: #446fdc; -fx-border-width: 3; -fx-border-radius: 0 3 3 2;">
+                     <children>
+                        <TabPane minHeight="-Infinity" prefHeight="423.0" prefWidth="568.0">
+                           <tabs>
+                              <Tab text="All Clean Equipment">
+                                 <content>
+                                    <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="254.0" prefWidth="568.0" style="-fx-border-radius: 10;">
+                                       <columns>
+                                          <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
+                                          <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
+                                          <TableColumn fx:id="availabilityC" prefWidth="75.0" text="Availability" />
+                                          <TableColumn fx:id="currLocC" prefWidth="75.0" text="Current Location" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Equipment in Pod B">
+                                 <content>
+                                    <TableView fx:id="cleanPodB" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                                       <columns>
+                                          <TableColumn fx:id="unitIDCPodA" prefWidth="75.0" text="Unit ID" />
+                                          <TableColumn fx:id="typeCPodA" prefWidth="75.0" text="Type" />
+                                          <TableColumn fx:id="availabilityCPodA" prefWidth="75.0" text="Availability" />
+                                          <TableColumn fx:id="currLocCPodA" prefWidth="75.0" text="Current Location" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                              <Tab text="Equipment in Pod C">
+                                 <content>
+                                    <TableView fx:id="cleanPodC" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                                       <columns>
+                                          <TableColumn fx:id="unitIDCPodB" prefWidth="75.0" text="Unit ID" />
+                                          <TableColumn fx:id="typeCPodB" prefWidth="75.0" text="Type" />
+                                          <TableColumn fx:id="availabilityCPodB" prefWidth="75.0" text="Availability" />
+                                          <TableColumn fx:id="currLocCPodB" prefWidth="75.0" text="Current Location" />
+                                       </columns>
+                                    </TableView>
+                                 </content>
+                              </Tab>
+                           </tabs>
+                        </TabPane>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
    </children>
