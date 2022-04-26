@@ -53,7 +53,8 @@ public class AboutPageController implements Initializable {
               + "Lead Software Developer\n"
               + "\n"
               + "Contributions\n"
-              + "Handled merge conflicts and code organization, service request APIs, embedded/client database options, csv file loading/saving, and music and sounds");
+              + "Handled merge conflicts and code organization, service request APIs, embedded/client database options, csv file loading/saving, and music and sounds\n"
+              + "\n");
     }
   }
 
@@ -89,7 +90,8 @@ public class AboutPageController implements Initializable {
               + "Assistant Lead Front-End Developer\n"
               + "\n"
               + "Contributions\n"
-              + "Graphical Map Editor, Language Interpreter Service Request, Service Request Table, Barcode Scanner Feature, Burndown Service Request Chart");
+              + "Graphical Map Editor, Language Interpreter Service Request, Service Request Table, Barcode Scanner Feature, Burndown Service Request Chart\n"
+              + "\n");
     }
   }
 
@@ -107,7 +109,10 @@ public class AboutPageController implements Initializable {
               + "Full Time Back-End Developer\n"
               + "\n"
               + "Contributions\n"
-              + "InTransport Service Request, Employee Database, DAO Facade");
+              + "InTransport Service Request, Employee Database, DAO Facade\n"
+              + "\n"
+              + "\n"
+              + "\n");
     }
   }
 
@@ -125,7 +130,8 @@ public class AboutPageController implements Initializable {
               + "Scrum Master, Part Time Back-End Developer\n"
               + "\n"
               + "Contributions\n"
-              + "Wrote Several Back-End Data Access objects, and created the Employee Viewer, Sharps Disposal Service Request, and Lighting Control System");
+              + "Wrote Several Back-End Data Access objects, and created the Employee Viewer, Sharps Disposal Service Request, and Lighting Control System\n"
+              + "\n");
     }
   }
 
@@ -143,7 +149,9 @@ public class AboutPageController implements Initializable {
               + "Full Time Front-End Developer\n"
               + "\n"
               + "Contributions\n"
-              + "About Us Page, Edit Service Request Pages, Medicine Delivery Request, Janitorial Service Request, Contributed to the UI of the application");
+              + "About Us Page, Edit Service Request Pages, Medicine Delivery Request, Janitorial Service Request, Contributed to the UI of the application\n"
+              + "\n"
+              + "\n");
     }
   }
 
@@ -161,7 +169,9 @@ public class AboutPageController implements Initializable {
               + "Documentation Analyst, Part Time Front-End Developer\n"
               + "\n"
               + "Contributions\n"
-              + "Lab Service Request, Gift Delivery Service Request, Outstanding Tasks Table, COVID-19 Page, Help Page");
+              + "Lab Service Request, Gift Delivery Service Request, Outstanding Tasks Table, COVID-19 Page, Help Page\n"
+              + "\n"
+              + "\n");
     }
   }
 
@@ -179,7 +189,8 @@ public class AboutPageController implements Initializable {
               + "Assistant Lead Back-End Developer\n"
               + "\n"
               + "Contributions\n"
-              + "Several service request DAOs and SQL Table creation, facade and singleton DAO design, speech to text search, Maintenance Service Request controller/fxml");
+              + "Several service request DAOs and SQL Table creation, facade and singleton DAO design, speech to text search, Maintenance Service Request controller/fxml\n"
+              + "\n");
     }
   }
 
@@ -197,7 +208,9 @@ public class AboutPageController implements Initializable {
               + "Full Time Front-End Developer\n"
               + "\n"
               + "Contributions\n"
-              + "Lab Service Request, Equipment Delivery Service Request, Meal Service Request, Graphical Map Editor Dashboard");
+              + "Lab Service Request, Equipment Delivery Service Request, Meal Service Request, Graphical Map Editor Dashboard\n"
+              + "\n"
+              + "\n");
     }
   }
 
@@ -215,7 +228,9 @@ public class AboutPageController implements Initializable {
               + "Project Manager\n"
               + "\n"
               + "Contributions\n"
-              + "Laundry Service Request Page, login capabilities, facial recognition on login, live clock, Contributed to the UI of the application");
+              + "Laundry Service Request Page, login capabilities, facial recognition on login, live clock, Contributed to the UI of the application\n"
+              + "\n"
+              + "\n");
     }
   }
 }
