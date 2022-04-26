@@ -11,6 +11,7 @@ import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
+import edu.wpi.cs3733.c22.teamD.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -25,7 +26,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /** This represents the blue bar at the top of the app */
@@ -35,6 +40,12 @@ public class BasicLayoutController implements Initializable {
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
   private static int mealApiIDIndex = 15;
+  private static final Media buttonPressSound =
+      new Media(
+          App.class
+              .getResource("/edu/wpi/cs3733/D22/teamX/sounds/Wii_sound_basic_button_press.mp3")
+              .toExternalForm());
+  public static final MediaPlayer buttonPressSoundPlayer = new MediaPlayer(buttonPressSound);
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -52,6 +63,12 @@ public class BasicLayoutController implements Initializable {
     //    pages.put("Request Gift Delivery", "GiftDelivery.fxml");
     //    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
     //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
+    try {
+      playMusic();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    buttonPressSoundPlayer.setVolume(.50);
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
     checkAPIData();
@@ -85,8 +102,20 @@ public class BasicLayoutController implements Initializable {
   //    }
   //  }
 
+  private void playMusic() throws IOException {
+    Stage stage = new Stage();
+    stage.setOpacity(0);
+    Scene scene =
+        new Scene(
+            FXMLLoader.load(
+                getClass()
+                    .getResource("/edu/wpi/cs3733/D22/teamX/views/InvisibleMusicPlayer.fxml")));
+    stage.setScene(scene);
+  }
+
   @FXML
   public void switchServiceRequestTable() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -96,6 +125,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchGraphicalEditor() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -105,6 +135,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestMenu() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
@@ -113,6 +144,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchOutstandingService() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -123,6 +155,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchMapDashboard() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -133,6 +166,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchLoginScreen() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.startScreen();
     //    App.switchScene(
@@ -143,6 +177,8 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchEmployeeViewer() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
     App.switchScene(
         FXMLLoader.load(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
@@ -151,6 +187,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchAPILandingPage() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -162,15 +199,18 @@ public class BasicLayoutController implements Initializable {
   public void goToAboutPage() throws IOException {
     checkAPIData();
     App.switchScene(
-        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/AboutPage.fxml")));
+            FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/AboutPage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
   @FXML
   void ExitApplication() throws IOException, loadSaveFromCSVException {
+    playButtonPressSound();
     if (CSVFileSaverController.loaded) {
       Platform.exit();
-      DatabaseCreator.saveAllCSV("");
+      if (!CSVFileSaverController.isSaved) {
+        DatabaseCreator.saveAllCSV("");
+      }
     } else {
       checkAPIData();
       App.switchScene(
@@ -181,11 +221,12 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void goToEmployeeViewer() throws IOException {
+  public void switchPreferencePage() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/PreferencePage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
@@ -201,6 +242,11 @@ public class BasicLayoutController implements Initializable {
             new KeyFrame(Duration.seconds(1)));
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
+  }
+
+  private void playButtonPressSound() {
+    buttonPressSoundPlayer.stop();
+    buttonPressSoundPlayer.play();
   }
 
   private static void checkAPIData() {

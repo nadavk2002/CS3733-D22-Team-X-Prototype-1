@@ -11,7 +11,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane fx:id="csvSaverPane" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CSVFileSaverController">
    <center>
       <StackPane alignment="TOP_CENTER" prefHeight="100.0" prefWidth="420.0" styleClass="content-container" BorderPane.alignment="TOP_CENTER">
@@ -19,7 +18,7 @@
             <Group>
                <children>
                   <Rectangle arcHeight="100.0" arcWidth="100.0" fill="#d1d1d1" height="200.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="content-background" width="850.0" />
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="850.0" spacing="20.0" styleClass="content-container">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="850.0" spacing="10.0" styleClass="content-container">
                      <children>
                         <Label text="Choose directory to save CSV files">
                            <font>
@@ -40,6 +39,7 @@
                               </JFXButton>
                            </children>
                         </HBox>
+                        <Label fx:id="saveSuccessful" text="CSV files successfully saved!" textFill="#2cac2e" visible="false"/>
                      </children>
                   </VBox>
                </children>

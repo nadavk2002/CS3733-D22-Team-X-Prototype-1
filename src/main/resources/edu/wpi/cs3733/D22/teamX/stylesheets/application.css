@@ -58,6 +58,22 @@
     -fx-text-fill: -fx-dark-blue;
 }
 
+.reset-button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-off-white;
+    -fx-background-radius: 20px;
+}
+
+.submit-button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-off-white;
+    -fx-background-radius: 20px;
+}
+
 /* LOGIN SCREEN */
 #loginTitle {
     -fx-font-family: "Poppins";
@@ -65,6 +81,20 @@
     -fx-font-size: 30;
     -fx-text-fill: -fx-off-white;
     -fx-wrap-text: true;
+}
+
+#username {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-navy-blue;
+    -fx-prompt-text-fill: -fx-navy-blue;
+}
+
+#password {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-text-fill: -fx-navy-blue;
+    -fx-prompt-text-fill: -fx-navy-blue;
 }
 
 #loginExitButton {
@@ -133,6 +163,14 @@
     -fx-background-color: -fx-light-blue;
 }
 
+#loginPane {
+    -fx-background-image: url('../assets/Brigham-Womens-TO-USE-blur.jpg');
+}
+
+#loginStackPane {
+    -fx-background-color: -fx-dark-blue;
+    -fx-border-radius: 20px;
+}
 /*.label {*/
 /*    -fx-font-family: "Corbel";*/
 /*}*/
