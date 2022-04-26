@@ -19,4 +19,20 @@ public class CovidPageController implements Initializable {
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CovidTestingPage.fxml")));
     CSVFileSaverController.loaded = false;
   }
+
+  @FXML
+  public void switchVaccine() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CovidVaccinePage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  public void switchInfo() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CovidInfoPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
 }

@@ -79,12 +79,12 @@
                   <Font size="28.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="vaccineLearnMore" buttonType="RAISED" prefHeight="100.0" prefWidth="572.0" text="Learn More" textAlignment="CENTER" underline="true">
+            <JFXButton fx:id="vaccineLearnMore" buttonType="RAISED" onAction="#switchVaccine" prefHeight="100.0" prefWidth="572.0" text="Learn More" textAlignment="CENTER" underline="true">
                <font>
                   <Font size="28.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="infoLearnMore" buttonType="RAISED" prefHeight="100.0" prefWidth="559.0" text="Learn More" textAlignment="CENTER" underline="true">
+            <JFXButton fx:id="infoLearnMore" buttonType="RAISED" onAction="#switchInfo" prefHeight="100.0" prefWidth="559.0" text="Learn More" textAlignment="CENTER" underline="true">
                <font>
                   <Font size="28.0" />
                </font>
@@ -154,5 +154,10 @@
             </Text>
          </children>
       </VBox>
+      <Text layoutX="211.0" layoutY="1074.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The U.S. Centers for Disease Control and Prevention (CDC) will continue to provide updated guidance about COVID-19" wrappingWidth="1191.0610656738281">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

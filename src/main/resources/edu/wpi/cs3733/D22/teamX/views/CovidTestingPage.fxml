@@ -246,5 +246,10 @@
             </VBox>
          </children>
       </HBox>
+      <Text layoutX="211.0" layoutY="1063.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The U.S. Centers for Disease Control and Prevention (CDC) will continue to provide updated guidance about COVID-19" wrappingWidth="1191.0610656738281">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
