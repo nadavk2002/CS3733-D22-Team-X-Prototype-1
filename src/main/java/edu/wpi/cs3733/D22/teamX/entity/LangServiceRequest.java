@@ -18,10 +18,14 @@ public class LangServiceRequest extends ServiceRequest {
   }
 
   public LangServiceRequest(
-          String requestID, Location destination, String status, Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime, String language) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String language) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.language = language;
   }
