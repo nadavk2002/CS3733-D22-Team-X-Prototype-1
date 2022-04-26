@@ -27,20 +27,20 @@ public class RequestGraphController implements Initializable {
     yAxis.setLabel("Unfulfilled Jobs");
     lineChart = new LineChart<Number, Number>(xAxis, yAxis);
     lineChart.setCreateSymbols(false);
-    lineChart.setTitle("Service Request Burndown Chart");
+    lineChart.setTitle("Unfulfilled Service Request on Each Day");
     XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
-    series.setName("Data");
+    series.setName("Incomplete Service Requests");
     requests = ServiceRequestDAO.getDAO().getServiceRequests();
     int[] days = new int[365];
     for (ServiceRequest r : requests) {
       if (r.getCreationTime().getYear() != LocalDate.now().getYear()
           && (r.getDONETime().getYear() != LocalDate.now().getYear()
               || r.getDONETime().getYear() != 1970)) continue;
-      int finalday = 365;
+      int finalDay = 365;
       if (r.getDONETime().toEpochSecond(ZoneOffset.UTC) != 0)
-        finalday = r.getDONETime().getDayOfYear();
+        finalDay = r.getDONETime().getDayOfYear();
       // System.out.println(r.getCreationTime() + " - " + r.getDONETime());
-      for (int i = r.getCreationTime().getDayOfYear(); i < finalday; i++) {
+      for (int i = r.getCreationTime().getDayOfYear(); i < finalDay; i++) {
         days[i]++;
       }
     }
