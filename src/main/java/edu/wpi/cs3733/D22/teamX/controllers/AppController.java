@@ -306,7 +306,7 @@ public class AppController implements Initializable {
           break;
         default:
           if (input.equals("")) {
-            searchBox.setPromptText("error. please try again!");
+            searchBox.setPromptText("Error, please try again!");
           } else {
             searchBox.setText(input);
             searchBox.setPromptText("Search...");
