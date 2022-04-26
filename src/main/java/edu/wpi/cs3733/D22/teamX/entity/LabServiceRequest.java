@@ -20,17 +20,17 @@ public class LabServiceRequest extends ServiceRequest {
     this.patientFor = patientFor;
   }
 
-  //added constructors
+  // added constructors
   public LabServiceRequest(
-          String requestID,
-          Location destination,
-          String status,
-          Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,
-          String service,
-          String patientFor) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String service,
+      String patientFor) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.service = service;
     this.patientFor = patientFor;
