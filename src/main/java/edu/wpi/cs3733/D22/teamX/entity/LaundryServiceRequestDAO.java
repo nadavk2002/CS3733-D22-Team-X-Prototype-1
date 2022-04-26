@@ -123,12 +123,12 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-                  + "', CreationTime = "
-                  + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", PROCTime = "
-                  + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", DONETime = "
-                  + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
               + ", service = '"
               + recordObject.getService()
               + "' WHERE requestID = '"
@@ -172,9 +172,9 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-                  + "CreationTime BIGINT,"
-                  + "PROCTime BIGINT,"
-                  + "DONETime BIGINT,"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "service VARCHAR(140),"
               + "CONSTRAINT LYSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
@@ -217,9 +217,9 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
                   currLine[7]);
           laundyServiceRequests.add(node);
           node.getDestination().addRequest(node);
@@ -247,7 +247,7 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
         sql.append("'" + laundyServiceRequests.get(i).getStatus() + "'" + ", ");
         sql.append("'" + laundyServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append(
-                laundyServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+            laundyServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append(laundyServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append(laundyServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append("'" + laundyServiceRequests.get(i).getService() + "'");
@@ -288,19 +288,19 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  laundyServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+              laundyServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (laundyServiceRequests.get(i).getPROCTime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  laundyServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+              laundyServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (laundyServiceRequests.get(i).getDONETime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  laundyServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+              laundyServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (laundyServiceRequests.get(i).getService() == null) {
           csvFile.write(',');
@@ -336,14 +336,14 @@ public class LaundryServiceRequestDAO implements DAO<LaundyServiceRequest> {
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
         toAdd.setCreationTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
         toAdd.setPROCTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
         toAdd.setDONETime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setService(results.getString("service"));
         laundyServiceRequests.add(toAdd);
         toAdd.getDestination().addRequest(toAdd);

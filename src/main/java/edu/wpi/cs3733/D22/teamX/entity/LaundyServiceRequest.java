@@ -16,15 +16,19 @@ public class LaundyServiceRequest extends ServiceRequest {
     super(requestID, destination, status, assignee);
     this.service = service;
   }
+
   public LaundyServiceRequest(
-          String requestID, Location destination, String status, Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime, String service) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String service) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.service = service;
   }
-
 
   public String getService() {
     return service;
