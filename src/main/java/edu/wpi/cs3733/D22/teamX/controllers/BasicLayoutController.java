@@ -22,7 +22,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -145,9 +144,8 @@ public class BasicLayoutController implements Initializable {
   @FXML
   public void switchEmployeeViewer() throws IOException {
     App.switchScene(
-            FXMLLoader.load(
-                    getClass()
-                            .getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
@@ -204,7 +202,6 @@ public class BasicLayoutController implements Initializable {
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
   }
-
 
   private static void checkAPIData() {
     // Add new meal service request data
