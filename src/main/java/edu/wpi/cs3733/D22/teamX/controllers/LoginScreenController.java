@@ -16,7 +16,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
@@ -29,6 +31,9 @@ public class LoginScreenController implements Initializable {
   @FXML private TextField username;
   @FXML private JFXButton loginButton, exitButton;
   @FXML private Label message;
+  @FXML private ImageView loginImage;
+  @FXML private VBox loginFields;
+  @FXML private BorderPane loginPane;
   public static String currentUsername;
 
   @FXML
@@ -91,5 +96,8 @@ public class LoginScreenController implements Initializable {
       serverVBox.setDisable(true);
       serverVBox.setVisible(false);
     }
+
+    loginImage.fitWidthProperty().bind(loginFields.widthProperty());
+    loginImage.fitHeightProperty().bind(loginFields.heightProperty());
   }
 }

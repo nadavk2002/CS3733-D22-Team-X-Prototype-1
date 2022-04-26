@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -119,6 +121,12 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
               + "', service = '"
               + recordObject.getService()
               + "', patientFor = '"
@@ -144,6 +152,9 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       lsr.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       lsr.append("'" + recordObject.getStatus() + "'" + ", ");
       lsr.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      lsr.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      lsr.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      lsr.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       lsr.append("'" + recordObject.getService() + "'" + ", ");
       lsr.append("'" + recordObject.getPatientFor() + "'");
       lsr.append(")");
@@ -164,6 +175,9 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "service VARCHAR(15),"
               + "patientFor VARCHAR(15),"
               + "CONSTRAINT LBSR_dest_fk "
@@ -186,7 +200,6 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       dropLabServiceRequest.execute("DROP TABLE LabServiceRequest");
     } catch (SQLException e) {
       System.out.println("LabServiceRequest not dropped");
-      e.printStackTrace();
     }
   }
 
@@ -201,15 +214,18 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
       String nextFileLine;
       while ((nextFileLine = labCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 6) {
+        if (currLine.length == 9) {
           LabServiceRequest labNode =
               new LabServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplAssignee.getRecord(currLine[3]),
-                  currLine[4],
-                  currLine[5]);
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  currLine[7],
+                  currLine[8]);
           labServiceRequests.add(labNode);
           labNode.getDestination().addRequest(labNode);
 
@@ -237,6 +253,12 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
             "'" + labServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         labServiceReq.append("'" + labServiceRequests.get(i).getStatus() + "'" + ", ");
         labServiceReq.append("'" + labServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        labServiceReq.append(
+            labServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        labServiceReq.append(
+            labServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        labServiceReq.append(
+            labServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         labServiceReq.append("'" + labServiceRequests.get(i).getService() + "'" + ", ");
         labServiceReq.append("'" + labServiceRequests.get(i).getPatientFor() + "'");
         labServiceReq.append(")");
@@ -254,7 +276,8 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,service,patientFor");
+      csvFile.write(
+          "requestID,destination,status,assignee,CreationTime,PROCTime,DONETime,service,patientFor");
       for (int i = 0; i < labServiceRequests.size(); i++) {
         csvFile.write("\n" + labServiceRequests.get(i).getRequestID() + ",");
         if (labServiceRequests.get(i).getDestination() == null) {
@@ -271,6 +294,24 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
           csvFile.write(',');
         } else {
           csvFile.write(labServiceRequests.get(i).getAssigneeID() + ",");
+        }
+        if (labServiceRequests.get(i).getCreationTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              labServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (labServiceRequests.get(i).getPROCTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              labServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (labServiceRequests.get(i).getDONETime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              labServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (labServiceRequests.get(i).getService() == null) {
           csvFile.write(',');
@@ -311,6 +352,15 @@ public class LabServiceRequestDAO implements DAO<LabServiceRequest> {
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setService(results.getString("service"));
         toAdd.setPatientFor(results.getString("patientFor"));
         labServiceRequests.add(toAdd);

@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -117,7 +119,13 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
                 + recordObject.getStatus()
                 + "', assignee = '"
                 + recordObject.getAssigneeID()
-                + "', notes = '"
+                + "', CreationTime = "
+                + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                + ", PROCTime = "
+                + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+                + ", DONETime = "
+                + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+                + ", notes = '"
                 + recordObject.getNotes()
                 + "', giftType = '"
                 + recordObject.getGiftType()
@@ -146,6 +154,9 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       sql.append(recordObject.getDestination().getNodeID() + ", ");
       sql.append(recordObject.getStatus() + ", ");
       sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      sql.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      sql.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      sql.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       sql.append("'" + recordObject.getNotes() + "'" + ", ");
       sql.append("'" + recordObject.getGiftType() + "'");
       sql.append(")");
@@ -166,6 +177,9 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "notes VARCHAR(140),"
               + "giftType CHAR(10), "
               + "CONSTRAINT GDR_dest_fk "
@@ -188,7 +202,6 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       statement.execute("DROP TABLE GiftDeliveryRequest");
     } catch (SQLException e) {
       System.out.println("GiftDeliveryRequest not dropped");
-      // e.printStackTrace();
     }
   }
 
@@ -203,15 +216,18 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
       EmployeeDAO emplDAO = EmployeeDAO.getDAO();
       while ((nextFileLine = tlCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 6) {
+        if (currLine.length == 9) {
           GiftDeliveryRequest node =
               new GiftDeliveryRequest(
                   currLine[0],
                   locationDAO.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                  currLine[4],
-                  currLine[5]);
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  currLine[7],
+                  currLine[8]);
           giftDeliveryRequests.add(node);
           node.getDestination().addRequest(node);
         } else {
@@ -240,6 +256,10 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         sql.append("'" + giftDeliveryRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getStatus() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getAssigneeID() + "'" + ", ");
+        sql.append(
+            giftDeliveryRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(giftDeliveryRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(giftDeliveryRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append("'" + giftDeliveryRequests.get(i).getNotes() + "'" + ", ");
         sql.append("'" + giftDeliveryRequests.get(i).getGiftType() + "'");
         sql.append(")");
@@ -257,7 +277,8 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID, destination, status, assignee, notes, giftType");
+      csvFile.write(
+          "requestID, destination, status, assignee,CreationTime,PROCTime,DONETime, notes, giftType");
       for (int i = 0; i < giftDeliveryRequests.size(); i++) {
         csvFile.write("\n" + giftDeliveryRequests.get(i).getRequestID() + ",");
         if (giftDeliveryRequests.get(i).getDestination() == null) {
@@ -274,6 +295,24 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
           csvFile.write(',');
         } else {
           csvFile.write(giftDeliveryRequests.get(i).getAssigneeID() + ",");
+        }
+        if (giftDeliveryRequests.get(i).getCreationTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              giftDeliveryRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (giftDeliveryRequests.get(i).getPROCTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              giftDeliveryRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (giftDeliveryRequests.get(i).getDONETime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              giftDeliveryRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (giftDeliveryRequests.get(i).getNotes() == null) {
           csvFile.write(',');
@@ -311,6 +350,15 @@ public class GiftDeliveryRequestDAO implements DAO<GiftDeliveryRequest> {
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setNotes(results.getString("notes"));
         toAdd.setGiftType(results.getString("giftType"));
         giftDeliveryRequests.add(toAdd);

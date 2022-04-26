@@ -1,17 +1,16 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.cs3733.D22.teamD.API.SanitationReqAPI;
+import edu.wpi.cs3733.D22.teamD.request.SanitationIRequest;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
-import edu.wpi.cs3733.D22.teamX.api.*;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequest;
 import edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO;
-import edu.wpi.cs3733.D22.teamX.api.exceptions.*;
-import edu.wpi.cs3733.D22.teamX.entity.EmployeeDAO;
-import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
-import edu.wpi.cs3733.D22.teamX.entity.ServiceRequestDAO;
+import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import edu.wpi.cs3733.c22.teamD.*;
+import edu.wpi.teamW.API;
+import edu.wpi.teamW.dB.LanguageRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -26,7 +25,11 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /** This represents the blue bar at the top of the app */
@@ -36,6 +39,14 @@ public class BasicLayoutController implements Initializable {
   @FXML private Label timeLabel;
   private HashMap<String, String> pages;
   private static int mealApiIDIndex = 15;
+  private static int sanitationAPIIndex = 0;
+  private static int langAPIIndex = 0;
+  private static final Media buttonPressSound =
+      new Media(
+          App.class
+              .getResource("/edu/wpi/cs3733/D22/teamX/sounds/Wii_sound_basic_button_press.mp3")
+              .toExternalForm());
+  public static final MediaPlayer buttonPressSoundPlayer = new MediaPlayer(buttonPressSound);
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -53,8 +64,20 @@ public class BasicLayoutController implements Initializable {
     //    pages.put("Request Gift Delivery", "GiftDelivery.fxml");
     //    pages.put("Graphical Map Editor", "GraphicalMapEditor.fxml");
     //    pages.put("Service Request Table", "ServiceRequestTable.fxml");
+    try {
+      playMusic();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+    buttonPressSoundPlayer.setVolume(.50);
+    buttonPressSoundPlayer.setVolume(0); // remove this line eventually
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
+    SanitationReqAPI sanReqAPI = new SanitationReqAPI();
+    // this api saves data after app closes, so this erases that previous data
+    while (sanReqAPI.getAllRequests().size() > 0) {
+      sanReqAPI.deleteRequest(sanReqAPI.getAllRequests().get(0));
+    }
     checkAPIData();
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
@@ -86,8 +109,20 @@ public class BasicLayoutController implements Initializable {
   //    }
   //  }
 
+  private void playMusic() throws IOException {
+    Stage stage = new Stage();
+    stage.setOpacity(0);
+    Scene scene =
+        new Scene(
+            FXMLLoader.load(
+                getClass()
+                    .getResource("/edu/wpi/cs3733/D22/teamX/views/InvisibleMusicPlayer.fxml")));
+    stage.setScene(scene);
+  }
+
   @FXML
   public void switchServiceRequestTable() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -97,6 +132,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchGraphicalEditor() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -106,6 +142,7 @@ public class BasicLayoutController implements Initializable {
 
   @FXML
   public void switchServiceRequestMenu() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
@@ -113,17 +150,8 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void switchOutstandingService() throws IOException {
-    checkAPIData();
-    App.switchScene(
-        FXMLLoader.load(
-            getClass()
-                .getResource("/edu/wpi/cs3733/D22/teamX/views/OutstandingServiceRequest.fxml")));
-    CSVFileSaverController.loaded = false;
-  }
-
-  @FXML
   public void switchMapDashboard() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -133,7 +161,18 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchRequestGraph() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/RequestGraph.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   public void switchLoginScreen() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.startScreen();
     //    App.switchScene(
@@ -143,7 +182,18 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void switchEmployeeViewer() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   public void switchAPILandingPage() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
@@ -152,10 +202,22 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
+  public void goToAboutPage() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/AboutPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
   void ExitApplication() throws IOException, loadSaveFromCSVException {
+    playButtonPressSound();
     if (CSVFileSaverController.loaded) {
       Platform.exit();
-      DatabaseCreator.saveAllCSV("");
+      if (!CSVFileSaverController.isSaved) {
+        DatabaseCreator.saveAllCSV("");
+      }
     } else {
       checkAPIData();
       App.switchScene(
@@ -166,11 +228,12 @@ public class BasicLayoutController implements Initializable {
   }
 
   @FXML
-  public void goToEmployeeViewer() throws IOException {
+  public void switchPreferencePage() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/EmployeeViewer.fxml")));
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/PreferencePage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
@@ -186,6 +249,11 @@ public class BasicLayoutController implements Initializable {
             new KeyFrame(Duration.seconds(1)));
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
+  }
+
+  private void playButtonPressSound() {
+    buttonPressSoundPlayer.stop();
+    buttonPressSoundPlayer.play();
   }
 
   private static void checkAPIData() {
@@ -205,6 +273,43 @@ public class BasicLayoutController implements Initializable {
               apiMeal.getPatientFor());
       ServiceRequestDAO.getDAO().addRecord(meal);
       mealApiIDIndex++;
+    }
+
+    // Add new Janitor Service Request data
+    List<SanitationIRequest> apiSanReqs = new SanitationReqAPI().getAllRequests();
+    while (sanitationAPIIndex < apiSanReqs.size()) {
+      SanitationIRequest sanReq = apiSanReqs.get(sanitationAPIIndex);
+      JanitorServiceRequest jsr =
+          new JanitorServiceRequest(
+              ServiceRequestDAO.getDAO().makeJanitorServiceRequestID(),
+              LocationDAO.getDAO().getRecord("FDEPT00101"),
+              "",
+              EmployeeDAO.getDAO().getRecord(sanReq.getAssigneeID().substring(0, 8)),
+              sanReq.getSanitationType());
+      if (sanReq.getCleanStatus().name().equals("IN_PROGRESS")) {
+        jsr.setStatus("PROC");
+      }
+      if (sanReq.getCleanStatus().name().equals("COMPLETED")) {
+        jsr.setStatus("DONE");
+      }
+      ServiceRequestDAO.getDAO().addRecord(jsr);
+      sanitationAPIIndex++;
+    }
+
+    // Add new LangServiceRequest
+    List<LanguageRequest> apiLangReqs = API.getAllRequests();
+    while (langAPIIndex < apiLangReqs.size()) {
+      LanguageRequest langReq = apiLangReqs.get(langAPIIndex);
+      LangServiceRequest lsr =
+          new LangServiceRequest(
+              ServiceRequestDAO.getDAO().makeLangServiceRequestID(),
+              LocationDAO.getDAO().getRecord(langReq.getNodeID()),
+              "",
+              EmployeeDAO.getDAO()
+                  .getRecord(String.format("EMPL%04d", langReq.getEmployee().getEmployeeID())),
+              langReq.getLanguage());
+      ServiceRequestDAO.getDAO().addRecord(lsr);
+      langAPIIndex++;
     }
   }
 }

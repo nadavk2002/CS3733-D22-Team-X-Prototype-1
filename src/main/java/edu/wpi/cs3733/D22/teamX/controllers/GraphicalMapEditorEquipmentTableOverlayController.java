@@ -33,10 +33,10 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
     availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 
-    searchEqipment();
+    searchEquipment();
   }
 
-  void searchEqipment() {
+  void searchEquipment() {
     FilteredList<EquipmentUnit> filteredData = new FilteredList<>(equipmentListFill(), b -> true);
     searchEquipmentField
         .textProperty()

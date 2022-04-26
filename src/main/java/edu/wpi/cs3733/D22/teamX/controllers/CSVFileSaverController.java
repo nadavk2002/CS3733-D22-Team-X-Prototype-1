@@ -8,18 +8,22 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
+import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
+import javafx.util.Duration;
 
 public class CSVFileSaverController implements Initializable {
   public JFXButton browser;
   @FXML public BorderPane csvSaverPane;
   public static boolean loaded = false;
+  @FXML private Label saveSuccessful;
+  public static boolean isSaved = false;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -36,16 +40,16 @@ public class CSVFileSaverController implements Initializable {
     }
     String csvSaverDirStr = csvSaverDir.getPath() + "\\";
     DatabaseCreator.saveAllCSV(csvSaverDirStr);
-    edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO.getDAO().saveCSV(csvSaverDirStr);
-    Platform.exit();
+    showSuccess();
+    isSaved = true;
   }
 
   public void saveToDefault(ActionEvent actionEvent)
       throws loadSaveFromCSVException,
           edu.wpi.cs3733.D22.teamX.api.exceptions.loadSaveFromCSVException {
     DatabaseCreator.saveAllCSV("");
-    edu.wpi.cs3733.D22.teamX.api.entity.MealServiceRequestDAO.getDAO().saveCSV("");
-    Platform.exit();
+    showSuccess();
+    isSaved = true;
   }
 
   @FXML
@@ -53,5 +57,13 @@ public class CSVFileSaverController implements Initializable {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
     loaded = false;
+  }
+
+  private void showSuccess() {
+    saveSuccessful.setVisible(true);
+    FadeTransition ft = new FadeTransition(Duration.seconds(3), saveSuccessful);
+    ft.setFromValue(2.0);
+    ft.setToValue(0.0);
+    ft.play();
   }
 }
