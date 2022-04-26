@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import eu.hansolo.fx.charts.Axis?>
+<?import eu.hansolo.fx.charts.NestedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorDashboardController">
    <children>
-      <AnchorPane fx:id="anchorRoot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" style="-fx-effect: BLUR;">
+      <AnchorPane fx:id="anchorRoot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0">
          <children>
-            <JFXButton fx:id="toMapEditor" layoutX="1480.0" layoutY="500.0" onAction="#ToMapEditor" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #446fdc; -fx-rotate: 270; -fx-background-radius: 0;" text="Map Editor" textFill="WHITE">
+            <JFXButton fx:id="toMapEditor" layoutX="1480.0" layoutY="500.0" onAction="#ToMapEditor" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #446fdc; -fx-rotate: 270; -fx-background-radius: 20 20 0 0;" text="Map Editor" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -42,7 +46,7 @@
                      <children>
                         <VBox fx:id="l5Master" style="-fx-background-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-radius: 10; -fx-border-width: 8;">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="l5Stack">
                                  <children>
                                     <Rectangle fx:id="cleanEquStor11" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 5">
@@ -54,7 +58,7 @@
                               </StackPane>
                               <VBox fx:id="l5Vbox" alignment="TOP_CENTER" prefHeight="52.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                                  <children>
-                                    <StackPane fx:id="l5Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l5StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
                                           <HBox alignment="CENTER_LEFT">
@@ -108,7 +112,7 @@
                         </VBox>
                         <VBox fx:id="l4Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="l4Stack">
                                  <children>
                                     <Rectangle fx:id="cleanEquStor12" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4">
@@ -120,7 +124,7 @@
                               </StackPane>
                               <VBox fx:id="l4Vbox">
                                  <children>
-                                    <StackPane fx:id="l4Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l4StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levFourDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
                                           <HBox>
@@ -171,7 +175,7 @@
                         </VBox>
                         <VBox fx:id="l3Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="l3Stack">
                                  <children>
                                     <Rectangle fx:id="cleanEquStor13" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 3">
@@ -183,7 +187,7 @@
                               </StackPane>
                               <VBox fx:id="l3Vbox">
                                  <children>
-                                    <StackPane fx:id="l3Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l3StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
                                           <HBox>
@@ -234,7 +238,7 @@
                         </VBox>
                         <VBox fx:id="l2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="l2Stack">
                                  <children>
                                     <Rectangle fx:id="cleanEquStor14" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2">
@@ -246,7 +250,7 @@
                               </StackPane>
                               <VBox fx:id="l2Vbox">
                                  <children>
-                                    <StackPane fx:id="l2Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
                                           <HBox>
@@ -297,7 +301,7 @@
                         </VBox>
                         <VBox fx:id="l1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="l1Stack">
                                  <children>
                                     <Rectangle fx:id="cleanEquStor15" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 1">
@@ -309,7 +313,7 @@
                               </StackPane>
                               <VBox fx:id="l1Vbox">
                                  <children>
-                                    <StackPane fx:id="l1Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="levOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
                                           <HBox>
@@ -360,7 +364,7 @@
                         </VBox>
                         <VBox fx:id="ll1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
-                              <StackPane>
+                              <StackPane fx:id="ll1Stack">
                                  <children>
                                     <Rectangle fx:id="cleanEquStor16" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 1">
@@ -372,7 +376,7 @@
                               </StackPane>
                               <VBox fx:id="ll1Vbox">
                                  <children>
-                                    <StackPane fx:id="ll1Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
                                           <HBox>
@@ -423,7 +427,7 @@
                         </VBox>
                         <VBox fx:id="ll2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
                            <children>
-                              <StackPane prefHeight="0.0" prefWidth="778.0">
+                              <StackPane fx:id="ll2Stack" prefHeight="0.0" prefWidth="778.0">
                                  <children>
                                     <Rectangle fx:id="cleanEquStor17" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
                                     <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 2">
@@ -435,7 +439,7 @@
                               </StackPane>
                               <VBox fx:id="ll2Vbox">
                                  <children>
-                                    <StackPane fx:id="ll2Stack" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
                                        <children>
                                           <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
                                           <HBox>
@@ -509,52 +513,61 @@
                   </Label>
                </children>
             </VBox>
-            <HBox fx:id="cleanTableBox" alignment="TOP_CENTER" layoutX="810.0" layoutY="137.0" prefHeight="213.0" prefWidth="650.0">
+            <TabPane layoutX="908.0" layoutY="140.0" minHeight="-Infinity" prefHeight="420.0" prefWidth="600.0" style="-fx-border-width: 10; -fx-border-color: #446fdc; -fx-border-radius: 10;">
+               <tabs>
+                  <Tab text="All Clean Equipment">
+                     <content>
+                        <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="254.0" prefWidth="568.0">
+                           <columns>
+                              <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
+                              <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="availabilityC" prefWidth="75.0" text="Availability" />
+                              <TableColumn fx:id="currLocC" prefWidth="75.0" text="Current Location" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                  <Tab text="Equipment in Pod B">
+                     <content>
+                        <TableView fx:id="cleanPodB" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                           <columns>
+                              <TableColumn fx:id="unitIDCPodA" prefWidth="75.0" text="Unit ID" />
+                              <TableColumn fx:id="typeCPodA" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="availabilityCPodA" prefWidth="75.0" text="Availability" />
+                              <TableColumn fx:id="currLocCPodA" prefWidth="75.0" text="Current Location" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+                  <Tab text="Equipment in Pod C">
+                     <content>
+                        <TableView fx:id="cleanPodC" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                           <columns>
+                              <TableColumn fx:id="unitIDCPodB" prefWidth="75.0" text="Unit ID" />
+                              <TableColumn fx:id="typeCPodB" prefWidth="75.0" text="Type" />
+                              <TableColumn fx:id="availabilityCPodB" prefWidth="75.0" text="Availability" />
+                              <TableColumn fx:id="currLocCPodB" prefWidth="75.0" text="Current Location" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </Tab>
+               </tabs>
+               <effect>
+                  <InnerShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
+                     <color>
+                        <Color red="1.0" green="1.0" blue="1.0" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </TabPane>
+            <HBox layoutX="826.0" layoutY="571.0" prefHeight="475.0" prefWidth="676.0">
                <children>
-                  <HBox style="-fx-border-color: #446fdc; -fx-border-width: 3; -fx-border-radius: 0 3 3 2;">
-                     <children>
-                        <TabPane minHeight="-Infinity" prefHeight="423.0" prefWidth="568.0">
-                           <tabs>
-                              <Tab text="All Clean Equipment">
-                                 <content>
-                                    <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="254.0" prefWidth="568.0" style="-fx-border-radius: 10;">
-                                       <columns>
-                                          <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
-                                          <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
-                                          <TableColumn fx:id="availabilityC" prefWidth="75.0" text="Availability" />
-                                          <TableColumn fx:id="currLocC" prefWidth="75.0" text="Current Location" />
-                                       </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                              <Tab text="Equipment in Pod B">
-                                 <content>
-                                    <TableView fx:id="cleanPodB" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
-                                       <columns>
-                                          <TableColumn fx:id="unitIDCPodA" prefWidth="75.0" text="Unit ID" />
-                                          <TableColumn fx:id="typeCPodA" prefWidth="75.0" text="Type" />
-                                          <TableColumn fx:id="availabilityCPodA" prefWidth="75.0" text="Availability" />
-                                          <TableColumn fx:id="currLocCPodA" prefWidth="75.0" text="Current Location" />
-                                       </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                              <Tab text="Equipment in Pod C">
-                                 <content>
-                                    <TableView fx:id="cleanPodC" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
-                                       <columns>
-                                          <TableColumn fx:id="unitIDCPodB" prefWidth="75.0" text="Unit ID" />
-                                          <TableColumn fx:id="typeCPodB" prefWidth="75.0" text="Type" />
-                                          <TableColumn fx:id="availabilityCPodB" prefWidth="75.0" text="Availability" />
-                                          <TableColumn fx:id="currLocCPodB" prefWidth="75.0" text="Current Location" />
-                                       </columns>
-                                    </TableView>
-                                 </content>
-                              </Tab>
-                           </tabs>
-                        </TabPane>
-                     </children>
-                  </HBox>
+                  <Axis fx:id="yAxis" maxValue="20.0" mediumTickMarksVisible="false" minorTickMarksVisible="false" prefHeight="423.0" prefWidth="103.0" tickLabelFontSize="30.0" tickLabelOrientation="ORTHOGONAL">
+                     <minorTickMarkColor>
+                        <Color opacity="0.0" />
+                     </minorTickMarkColor>
+                  </Axis>
+                  <NestedBarChart fx:id="nestedBarChart" prefHeight="458.0" prefWidth="575.0" />
                </children>
             </HBox>
          </children>

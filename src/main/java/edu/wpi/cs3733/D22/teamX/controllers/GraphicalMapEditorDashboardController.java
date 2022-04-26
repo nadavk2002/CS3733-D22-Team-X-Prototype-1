@@ -5,8 +5,14 @@ import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnit;
 import edu.wpi.cs3733.D22.teamX.entity.EquipmentUnitDAO;
 import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequest;
 import edu.wpi.cs3733.D22.teamX.entity.MedicalEquipmentServiceRequestDAO;
+import eu.hansolo.fx.charts.Axis;
+import eu.hansolo.fx.charts.ChartType;
+import eu.hansolo.fx.charts.NestedBarChart;
+import eu.hansolo.fx.charts.data.ChartItem;
+import eu.hansolo.fx.charts.series.ChartItemSeries;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
 import java.util.*;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -25,10 +31,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -38,13 +43,13 @@ import javafx.util.Duration;
 
 public class GraphicalMapEditorDashboardController implements Initializable {
   @FXML
-  private StackPane l5Stack,
-      l4Stack,
-      l3Stack,
-      l2Stack,
-      l1Stack,
-      ll1Stack,
-      ll2Stack,
+  private StackPane l5StackD,
+      l4StackD,
+      l3StackD,
+      l2StackD,
+      l1StackD,
+      ll1StackD,
+      ll2StackD,
       l5StackC,
       l4StackC,
       l3StackC,
@@ -58,7 +63,14 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       l2StackIU,
       l1StackIU,
       ll1StackIU,
-      ll2StackIU;
+      ll2StackIU,
+      l5Stack,
+      l4Stack,
+      l3Stack,
+      l2Stack,
+      l1Stack,
+      ll1Stack,
+      ll2Stack;
   @FXML public AnchorPane anchorRoot;
   @FXML public StackPane parentPage;
   @FXML private JFXButton toMapEditor;
@@ -147,7 +159,10 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       l1Master,
       ll1Master,
       ll2Master;
-
+  @FXML private NestedBarChart nestedBarChart;
+  @FXML private Axis yAxis;
+  ChartItem chartItem = new ChartItem("Clean", 43, Color.RED, Instant.ofEpochSecond(1));
+  ChartItem chartItem2 = new ChartItem("Clean", 433, Color.GREEN, Instant.ofEpochSecond(1));
   MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
   // floor constants--------------------------------------
   private final int cleanXloc = 718;
@@ -161,6 +176,13 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    nestedBarChart.addSeries(fillChartData(sortEquipmentByFloor("5")));
+    nestedBarChart.addSeries(fillChartData(sortEquipmentByFloor("4")));
+    nestedBarChart.addSeries(fillChartData(sortEquipmentByFloor("3")));
+    fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems();
+    yAxis.setMaxValue(fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems());
+    //    coxcombChart.addItem(chartItem);
+    //    coxcombChart.addItem(chartItem2);
     alertBox.setVisible(false);
     masterBox.setSpacing(5);
     towerBox.setSpacing(3);
@@ -184,8 +206,6 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
     cleanPodB.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     cleanPodC.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
-    cleanTableBox.setVisible(false);
 
     unitIDC.setCellValueFactory(new PropertyValueFactory<>("unitID"));
     typeC.setCellValueFactory(new PropertyValueFactory<>("typeName"));
@@ -226,37 +246,37 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         sortByDirty(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
         addToPodC(sortEquipmentByFloor("5")),
-        l5Stack);
+        l5StackD);
     fillTable(
         sortByDirty(sortEquipmentByFloor("4")),
         addToPodB(sortEquipmentByFloor("4")),
         addToPodC(sortEquipmentByFloor("4")),
-        l4Stack);
+        l4StackD);
     fillTable(
         sortByDirty(sortEquipmentByFloor("3")),
         addToPodB(sortEquipmentByFloor("3")),
         addToPodC(sortEquipmentByFloor("3")),
-        l3Stack);
+        l3StackD);
     fillTable(
         sortByDirty(sortEquipmentByFloor("2")),
         addToPodB(sortEquipmentByFloor("2")),
         addToPodC(sortEquipmentByFloor("2")),
-        l2Stack);
+        l2StackD);
     fillTable(
         sortByDirty(sortEquipmentByFloor("1")),
         addToPodB(sortEquipmentByFloor("1")),
         addToPodC(sortEquipmentByFloor("1")),
-        l1Stack);
+        l1StackD);
     fillTable(
         sortByDirty(sortEquipmentByFloor("L1")),
         addToPodB(sortEquipmentByFloor("L1")),
         addToPodC(sortEquipmentByFloor("L1")),
-        ll1Stack);
+        ll1StackD);
     fillTable(
         sortByDirty(sortEquipmentByFloor("L2")),
         addToPodB(sortEquipmentByFloor("L2")),
         addToPodC(sortEquipmentByFloor("L2")),
-        ll2Stack);
+        ll2StackD);
 
     fillTable(
         sortByClean(sortEquipmentByFloor("5")),
@@ -338,6 +358,44 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     //    }
     //    System.out.println(addToPod1(sortEquipmentByFloor("3")).size());
     displayAlert();
+  }
+
+  private ChartItemSeries<ChartItem> fillChartData(ObservableList<EquipmentUnit> floorEquip) {
+    ChartItemSeries<ChartItem> nestedBarList =
+        new ChartItemSeries<>(
+            ChartType.NESTED_BAR, "Penis", Paint.valueOf("#009688"), Paint.valueOf("#009688"));
+    List<ChartItem> itemList = new ArrayList<>();
+    int dirtyAmount = 0;
+    int cleanAmount = 0;
+    int inUseAmount = 0;
+    for (EquipmentUnit equipmentUnit : floorEquip) {
+      if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("stor")
+              && equipmentUnit.getIsAvailableChar() == 'Y')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'Y')) {
+        cleanAmount++;
+      } else if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("dirt")
+              && equipmentUnit.getIsAvailableChar() == 'N')
+          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
+              && equipmentUnit.getIsAvailableChar() == 'N')) {
+        dirtyAmount++;
+      } else {
+        inUseAmount++;
+      }
+    }
+    ChartItem clean =
+        new ChartItem("Clean", cleanAmount, Color.GREEN, Instant.ofEpochSecond(1), false);
+    ChartItem dirty =
+        new ChartItem("Clean", dirtyAmount, Color.RED, Instant.ofEpochSecond(1), false);
+    ChartItem inuse =
+        new ChartItem("Clean", inUseAmount, Color.YELLOW, Instant.ofEpochSecond(1), false);
+    itemList.add(clean);
+    itemList.add(dirty);
+    itemList.add(inuse);
+
+    nestedBarList.setItems(itemList);
+
+    return nestedBarList;
   }
 
   private void displayAlert() {
@@ -429,6 +487,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     inUse.setText(Integer.toString(inUseAmount));
   }
 
+  private void fillChart() {}
+
   private void fillTable(
       ObservableList<EquipmentUnit> equipment,
       ObservableList<EquipmentUnit> podB,
@@ -436,9 +496,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       StackPane floor) {
 
     floor.setOnMouseClicked(
-        event6 -> {
+        event -> {
           if (equipment.size() > 0) {
-            cleanTableBox.setVisible(true);
             cleanTable.setItems(equipment);
             cleanPodB.setItems(podB);
             cleanPodC.setItems(podC);
