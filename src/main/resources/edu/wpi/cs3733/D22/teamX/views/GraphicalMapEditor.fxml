@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
    <center>
       <VBox fx:id="mapBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1020.0" prefWidth="606.0" BorderPane.alignment="CENTER">
          <children>

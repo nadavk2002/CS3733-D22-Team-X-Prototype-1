@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
@@ -17,6 +18,7 @@ public class EquipmentUnitEditorController implements Initializable {
   private List<EquipmentType> types;
 
   @FXML private JFXCheckBox availableCheck;
+  @FXML private Button submitEquipment;
 
   @FXML private ChoiceBox<String> equipLocationChoice, typeChoice;
 
@@ -46,6 +48,11 @@ public class EquipmentUnitEditorController implements Initializable {
     ((Stage) availableCheck.getScene().getWindow()).close();
   }
 
+  private void activateSubmit() {
+    submitEquipment.setDisable(
+        typeChoice.getValue().equals("") || equipLocationChoice.getValue().equals(""));
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     for (Location l : locations) {
@@ -61,5 +68,8 @@ public class EquipmentUnitEditorController implements Initializable {
     }
     availableCheck.setSelected(equipment.isAvailable());
     equipLocationChoice.setValue(equipment.getCurrLocation().getShortName());
+    activateSubmit();
+    equipLocationChoice.setOnAction(event -> activateSubmit());
+    typeChoice.setOnAction(event -> activateSubmit());
   }
 }
