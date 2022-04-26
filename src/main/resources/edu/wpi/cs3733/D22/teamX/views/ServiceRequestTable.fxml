@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -23,6 +24,7 @@
                   <Insets bottom="50.0" />
                </padding>
             </Label>
+            <JFXCheckBox fx:id="filterTasks" text="Filter Outstanding Tasks" />
             <TableView fx:id="table" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="1246.0">
               <columns>
                   <TableColumn fx:id="serviceType" prefWidth="167.199951171875" text="Service Type" />

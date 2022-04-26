@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="roomChoiceBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CovidPageController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="503.0" layoutY="18.0" prefHeight="115.0" prefWidth="697.0" text="COVID-19 Vaccine and Boosters" textAlignment="CENTER" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="46.0" />
+         </font>
+      </Label>
+      <HBox layoutX="39.0" layoutY="68.0" prefHeight="183.0" prefWidth="1552.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="427.0" prefWidth="1869.0" text="All currently approved or authorized COVID-19 vaccines are safe and effective and reduce your risk of severe illness. Vaccination can reduce the spread of disease, which helps protect those who get vaccinated and the people around them." textAlignment="CENTER" textFill="#eb1d1d" wrapText="true">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="1.0" layoutY="218.0" prefHeight="124.0" prefWidth="1619.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="124.0" prefWidth="22.0" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="124.0" prefWidth="387.0" text="                  Adults                    (ages 18 and older)" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="124.0" prefWidth="56.0" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="124.0" prefWidth="309.0" text="             Teens               (ages 12 to 17)" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="124.0" prefWidth="78.0" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="139.0" prefWidth="341.0" text="          Children            (ages 5 to 11)" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="124.0" prefWidth="56.0" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="139.0" prefWidth="341.0" text="Young Children  (under age 5)" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="8.0" layoutY="327.0" prefHeight="752.0" prefWidth="1606.0">
+         <children>
+            <VBox prefHeight="752.0" prefWidth="20.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="748.0" prefWidth="429.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="148.0" prefWidth="429.0" text="- Adults should receive two doses of either the two-dose Pfizer or Moderna vaccine or the one-dose Johnson &amp; Johnson vaccine to complete their primary vaccine series." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="252.0" prefWidth="429.0" text="- Booster shots have been shown to increase circulating antibodies against the virus and greatly reduce the likelihood of severe illness and hospitalization. While boosted individuals can still contract the virus, illness is much milder. BWH leadership strongly recommends all healthcare workers receive the booster." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="118.0" prefWidth="429.0" text=" - Adults should receive an initial COVID-19 booster shot after their primary vaccine series if it’s been at least:" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="73.0" prefWidth="429.0" text=" - Five months since your second dose of the Pfizer or Moderna vaccine." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="- For those who received the J&amp;J vaccine, the U.S. Centers for Disease Control (CDC) recommends you receive a booster with either the Pfizer or Moderna vaccine." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="752.0" prefWidth="24.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="369.0" prefWidth="365.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="148.0" prefWidth="429.0" text="- Teens should receive two doses of the Pfizer vaccine to complete their primary vaccine series." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="155.0" prefWidth="429.0" text="- Teens should receive a Pfizer booster shot when it has been at least five months since their primary vaccine series." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="752.0" prefWidth="24.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="754.0" prefWidth="369.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="148.0" prefWidth="429.0" text="- Children should receive two doses of the Pfizer vaccine  to complete their primary vaccine series." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="155.0" prefWidth="429.0" text="- Children should receive a Pfizer booster shot once it has been at least five months since their primary vaccine series." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="752.0" prefWidth="24.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="754.0" prefWidth="369.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="128.0" prefWidth="367.0" text="- Young children cannot receive a COVID-19 vaccination at this time." wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Text layoutX="218.0" layoutY="1070.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The U.S. Centers for Disease Control and Prevention (CDC) will continue to provide updated guidance about COVID-19" wrappingWidth="1191.0610656738281">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

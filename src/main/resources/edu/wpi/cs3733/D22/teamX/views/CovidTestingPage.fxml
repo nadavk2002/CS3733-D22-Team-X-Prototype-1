@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="roomChoiceBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CovidPageController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="580.0" layoutY="18.0" prefHeight="115.0" prefWidth="425.0" text="COVID-19 TESTING" textAlignment="CENTER" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="46.0" />
+         </font>
+      </Label>
+      <HBox layoutX="10.0" layoutY="142.0" prefHeight="140.0" prefWidth="1593.0">
+         <children>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="57.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="352.0" text="Where to Get a Test" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="218.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="338.0" text="When to Get Tested" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="214.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="441.0" text="What are the different types of COVID-19 tests?" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="134.0" prefWidth="46.0" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="11.0" layoutY="281.0" prefHeight="778.0" prefWidth="1593.0">
+         <children>
+            <VBox prefHeight="795.0" prefWidth="415.0">
+               <children>
+                  <Text fill="#2c53b5" strokeType="OUTSIDE" strokeWidth="0.0" text="NEW: The federal government has launched a new website, COVIDTests.gov, where you can learn how to:" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Order four (4) free at-home COVID-19 tests that will be mailed to you" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Learn about how your health insurance company will pay you back for 8 at-home tests per month for each person on your plan" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#2c53b5" strokeType="OUTSIDE" strokeWidth="0.0" text="Physician-Ordered Testing Information: " textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="If your physician orders COVID-19 testing at BWH, check this webpage for current hours of operation. For results, call your primary care provider or ordering physician, or check your myChart patient portal." wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text fill="#2c53b5" strokeType="OUTSIDE" strokeWidth="0.0" text="State Testing Sites:" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Find a COVID-19 testing location near you.   " textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox prefHeight="795.0" prefWidth="114.0" />
+            <VBox prefHeight="778.0" prefWidth="435.0">
+               <children>
+                  <Text fill="#2c53b5" strokeType="OUTSIDE" strokeWidth="0.0" text="Here’s when the CDC says you should consider getting a COVID-19 test:" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- If you have symptoms of COVID-19. " wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- If you have close contact with someone who has COVID-19. Close contact means you were within six feet of them for 15 minutes or more over a 24-hour period starting from two days before they began noticing symptoms. Fully vaccinated people with no COVID-19 symptoms do not need to be tested following an exposure to someone with COVID-19." wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- If you participated in activities that increase your risk of COVID-19 — for example, if you traveled, attended a large gathering or were in a crowded indoor setting. " wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- If you have been asked to get or referred for testing by your doctor or your local or state department of health. " wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+            <VBox prefHeight="795.0" prefWidth="147.0" />
+            <VBox prefHeight="778.0" prefWidth="435.0">
+               <children>
+                  <Text fill="#2c53b5" strokeType="OUTSIDE" strokeWidth="0.0" text="There are three types of COVID-19 testing at locations across the state." textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Diagnostics lab tests can show if you have an active coronavirus infection by detecting genetic materials (or mRNA) of the virus from a DNA sample, usually by nasal or throat swab, or a saliva sample. The sample gets sent to a laboratory to determine results, which may take a few days to get to you. " wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- A rapid diagnostic test checks for active coronavirus infection (mRNA), but this test is performed on-site with results available in 24 hours. " wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- A rapid antigen test can quickly detect the presence of a specific viral antigen. This helps determine if someone is actively infected with COVID-19. This type of test may be purchased at your local pharmacy" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Your health care provider can help you make a decision about which test is best for you." wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="437.32177734375">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Text layoutX="211.0" layoutY="1063.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The U.S. Centers for Disease Control and Prevention (CDC) will continue to provide updated guidance about COVID-19" wrappingWidth="1191.0610656738281">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

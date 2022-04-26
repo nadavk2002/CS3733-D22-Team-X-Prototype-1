@@ -1,25 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXToggleButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane fx:id="landingPagePane" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AppController">
+<BorderPane fx:id="landingPagePane" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.AppController">
    <center>
       <ScrollPane fx:id="landingPageScrollPane" prefHeight="1080.0" prefWidth="1620.0">
         <content>
@@ -288,14 +278,19 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="searchBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="45.0" prefWidth="300.0" promptText="Search...">
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </TextField>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <TextField fx:id="searchBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="294.0" promptText="Search...">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </TextField>
+                        <Button fx:id="voice" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="0.0" prefWidth="306.0" text="Voice Navigation" textAlignment="CENTER" />
+                     </children>
+                  </HBox>
                   <JFXToggleButton fx:id="nameToggle" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#nameToggleButton" prefHeight="60.0" prefWidth="225.0" size="15.0" text="Show Names" textFill="#446fdc" toggleColor="#446fdc" toggleLineColor="#aec2ef">
                      <font>
                         <Font name="System Bold" size="16.0" />
