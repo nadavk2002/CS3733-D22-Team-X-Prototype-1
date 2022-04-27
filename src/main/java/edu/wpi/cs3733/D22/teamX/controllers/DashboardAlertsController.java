@@ -36,7 +36,16 @@ public class DashboardAlertsController implements Initializable {
     destination.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     floors.addAll("5", "4", "3", "2", "1", "L2", "L1");
-    for (Location l : locationDAO.getAllRecords()) {
+    updateAlerts();
+  }
+
+  public ObservableList getAlerts() {
+    if (alertTable != null) return alertTable.getItems();
+    return null;
+  }
+
+  public void updateAlerts() {
+    for (Location l : LocationDAO.getDAO().getAllRecords()) {
       sendBedRequest(sortByBeds(sortByDirty(getEquipmentAtLocation(l))));
     }
     for (String f : floors) {
@@ -49,7 +58,7 @@ public class DashboardAlertsController implements Initializable {
   private void sendBedRequest(ObservableList<EquipmentUnit> beds) {
     MedicalEquipmentServiceRequest MESR = new MedicalEquipmentServiceRequest();
     ObservableList<MedicalEquipmentServiceRequest> mesrList = FXCollections.observableArrayList();
-    if (beds.size() >= 6) {
+    if (beds.size() >= 3) {
       MESR.setRequestID(ServiceRequestDAO.getDAO().makeMedicalEquipmentServiceRequestID());
       MESR.setDestination(locationDAO.getRecord("xSTOR001L1"));
       MESR.setStatus("PROC");

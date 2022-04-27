@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.controllers.DashboardAlertsController;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -141,6 +142,9 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+
+    DashboardAlertsController dashboardAlertsController = new DashboardAlertsController();
+    dashboardAlertsController.updateAlerts();
   }
 
   @Override
