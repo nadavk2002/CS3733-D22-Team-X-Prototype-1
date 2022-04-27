@@ -4,6 +4,8 @@ import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -14,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 public class GraphicalMapEditorEquipmentTableOverlayController implements Initializable {
   @FXML private TableView<EquipmentUnit> table;
@@ -29,7 +32,7 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
   public void initialize(URL url, ResourceBundle resourceBundle) {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     unitID.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    type.setCellValueFactory(new PropertyValueFactory<>("type"));
+    type.setCellValueFactory(new PropertyValueFactory<>("typeName"));
     availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 

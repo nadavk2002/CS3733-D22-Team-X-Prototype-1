@@ -2,189 +2,87 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
-   <children>
-      <AnchorPane fx:id="anchorRoot" prefHeight="1080.0" prefWidth="1620.0" style="-fx-background-color: #FFFFFF;">
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+   <center>
+      <VBox fx:id="mapBox" alignment="TOP_CENTER" prefHeight="1020.0" prefWidth="606.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="hBox1" layoutX="157.0" layoutY="111.0" prefHeight="650.0" prefWidth="668.0">
+            <HBox fx:id="filterHBox" alignment="TOP_CENTER" prefHeight="27.0" prefWidth="622.0">
                <children>
-                  <VBox fx:id="mapBox" prefHeight="650.0" prefWidth="657.0">
-                     <children>
-                        <HBox prefHeight="35.0" prefWidth="669.0">
-                           <children>
-                              <JFXButton fx:id="LL2Button" onAction="#LL2Click" text="LL2 Floor" />
-                              <JFXButton fx:id="LL1Button" onAction="#LL1Click" text="LL1 Floor" />
-                              <JFXButton fx:id="OneButton" onAction="#firstClick" text="First Floor" />
-                              <JFXButton fx:id="TwoButton" onAction="#secondClick" text="Second Floor" />
-                              <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
-                              <JFXButton fx:id="FourButton" onAction="#fourthClick" text="Fourth Floor" />
-                              <JFXButton fx:id="fiveButton" onAction="#fifthClick" text="Fifth Floor" />
-                           </children>
-                        </HBox>
-                        <Group fx:id="imageGroup">
-                           <children>
-                              <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/G.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Group>
-                     </children>
-                  </VBox>
+                  <JFXCheckBox fx:id="showLocCheck" text="Show Locations" />
+                  <JFXCheckBox fx:id="showEquipCheck" text="Show Equipment" />
+                  <JFXCheckBox fx:id="showRequestCheck" text="Show Requests" />
                </children>
             </HBox>
-            <VBox alignment="CENTER" layoutX="825.0" layoutY="30.0" prefHeight="1000.0" prefWidth="775.0" spacing="15.0">
+            <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="610.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="60.0" prefWidth="504.0" text="Hospital Locations" textAlignment="CENTER" textFill="#446fdc">
-                     <font>
-                        <Font name="System Bold" size="36.0" />
-                     </font>
-                  </Label>
-                  <Label text="At this location:">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </Label>
-                  <VBox fx:id="infoVBox" prefHeight="580.0" prefWidth="688.0" />
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <GridPane prefHeight="60.0" prefWidth="298.0" vgap="5.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.20001220703125" minWidth="10.0" prefWidth="131.2000244140625" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.00001525878906" minWidth="10.0" prefWidth="167.19997558593747" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <ChoiceBox fx:id="equipmentChoice" minHeight="-Infinity" minWidth="-Infinity" onAction="#equipmentSelected" prefWidth="150.0" GridPane.columnIndex="1" GridPane.vgrow="NEVER" />
-                              <Label prefHeight="18.0" prefWidth="130.0" text="Choose Equipment:" />
-                           </children>
-                        </GridPane>
-                        <GridPane prefHeight="137.0" prefWidth="371.0" vgap="5.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.20001220703125" minWidth="10.0" prefWidth="110.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.0" minWidth="10.0" prefWidth="217.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.4000244140625" minWidth="10.0" prefWidth="74.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
-                           <children>
-                              <TextField fx:id="unitIdText" prefHeight="24.0" prefWidth="226.0" GridPane.columnIndex="1" />
-                              <TextField fx:id="typeText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label text="Unit ID:" />
-                              <Label text="Type: " GridPane.rowIndex="1" />
-                              <Label text="Available: " GridPane.rowIndex="2" />
-                              <Label text="Current location:" GridPane.rowIndex="3" />
-                              <JFXCheckBox fx:id="availableCheck" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <ChoiceBox fx:id="equipLocationChoice" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <JFXButton fx:id="autofiller" mnemonicParsing="false" onAction="#autofillUnitIDBox" text="Auto" GridPane.columnIndex="2" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <JFXButton fx:id="submitEquipmentButton" onAction="#submitEquipment" text="Add/Update Equipment" textFill="#446fdc">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </HBox>
+                  <JFXButton fx:id="LL2Button" onAction="#LL2Click" text="LL2 Floor" />
+                  <JFXButton fx:id="LL1Button" onAction="#LL1Click" text="LL1 Floor" />
+                  <JFXButton fx:id="OneButton" onAction="#firstClick" text="First Floor" />
+                  <JFXButton fx:id="TwoButton" onAction="#secondClick" text="Second Floor" />
+                  <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
+                  <JFXButton fx:id="FourButton" onAction="#fourthClick" text="Fourth Floor" />
+                  <JFXButton fx:id="fiveButton" onAction="#fifthClick" text="Fifth Floor" />
                </children>
-            </VBox>
-            <GridPane layoutX="129.0" layoutY="766.0" prefHeight="60.0" prefWidth="326.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="155.20001220703125" minWidth="10.0" prefWidth="111.000048828125" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.00001525878906" minWidth="10.0" prefWidth="214.999951171875" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="30.4" minHeight="10.0" prefHeight="30.4" vgrow="SOMETIMES" />
-              </rowConstraints>
+            </HBox>
+            <Group fx:id="imageGroup">
                <children>
-                  <ChoiceBox fx:id="locationChoice" minHeight="-Infinity" minWidth="-Infinity" onAction="#locationSelected" prefWidth="150.0" GridPane.columnIndex="1" GridPane.vgrow="NEVER" />
-                  <Label prefHeight="18.0" prefWidth="117.0" text="Choose location:" />
+                  <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/G.png" />
+                     </image>
+                  </ImageView>
                </children>
-            </GridPane>
-            <GridPane layoutX="470.0" layoutY="766.0" prefHeight="189.0" prefWidth="371.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="181.20001220703125" minWidth="10.0" prefWidth="99.5999755859375" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="272.4000244140625" minWidth="10.0" prefWidth="272.4000244140625" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            </Group>
+            <HBox alignment="CENTER" prefHeight="8.0" prefWidth="622.0" spacing="30.0">
                <children>
-                  <TextField fx:id="nodeIdText" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="xCordText" />
-                  <Label text="Node ID:" />
-                  <Label text="X Coordinate:" GridPane.rowIndex="1" />
-                  <Label text="Y Coordinate: " GridPane.rowIndex="2" />
-                  <Label text="Floor: " GridPane.rowIndex="3" />
-                  <Label text="Building:" GridPane.rowIndex="4" />
-                  <Label text="Node Type:" GridPane.rowIndex="5" />
-                  <Label text="Long Name:" GridPane.rowIndex="6" />
-                  <Label text="Short Name:" GridPane.rowIndex="7" />
-                  <TextField fx:id="yCordText" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="floorText" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField fx:id="buildingText" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="nodeTypeText" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <TextField fx:id="longNameText" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField fx:id="shortNameText" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <JFXButton fx:id="toLocationTable" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
+                  <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
                </children>
-            </GridPane>
-            <JFXButton fx:id="submitLocationButton" layoutX="295.0" layoutY="933.0" onAction="#submitLocation" text="Add/Update Location" textFill="#446fdc">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
-            <JFXCheckBox fx:id="showLocCheck" layoutX="157.0" layoutY="77.0" text="Show Locations" />
-            <JFXCheckBox fx:id="showEquipCheck" layoutX="276.0" layoutY="77.0" text="Show Equipment" />
-            <JFXButton fx:id="toLocationTable" layoutX="520.0" layoutY="73.0" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
-            <JFXButton layoutX="653.0" layoutY="73.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
-            <JFXCheckBox fx:id="showRequestCheck" layoutX="402.0" layoutY="77.0" text="Show Requests" />
-            <JFXButton layoutX="-82.0" layoutY="417.0" onAction="#ToDashboard" prefHeight="60.0" prefWidth="223.0" style="-fx-rotate: 90; -fx-background-color: #446fdc; -fx-background-radius: 0;" text="Map Editor Dashboard" textFill="WHITE">
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <right>
+      <VBox alignment="TOP_CENTER" prefHeight="1004.0" prefWidth="775.0" spacing="15.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" text="At this location:">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
-            </JFXButton>
-            <ImageView fitHeight="18.0" fitWidth="20.0" layoutX="41.0" layoutY="438.0" style="-fx-rotate: 90;">
-               <image>
-                  <Image url="@../assets/upArrow.png" />
-               </image>
-            </ImageView>
+            </Label>
+            <ScrollPane prefHeight="895.0" prefWidth="775.0" style="-fx-background-color: transparent;">
+               <content>
+                  <VBox fx:id="infoVBox" />
+               </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ScrollPane>
          </children>
-      </AnchorPane>
-   </children>
-</StackPane>
+         <BorderPane.margin>
+            <Insets right="5.0" />
+         </BorderPane.margin>
+      </VBox>
+   </right>
+   <top>
+      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hospital Locations" textAlignment="CENTER" textFill="#446fdc" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="System Bold" size="36.0" />
+         </font>
+      </Label>
+   </top>
+</BorderPane>
