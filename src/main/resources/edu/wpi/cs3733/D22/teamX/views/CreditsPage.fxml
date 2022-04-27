@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CreditsPageController">
+   <top>
+      <Label styleClass="title-label" text="Credits and Acknowledgements" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin>
+            <Insets top="100.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="72.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="1051.0" prefWidth="671.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="357.0" text="APIs" textAlignment="CENTER">
+                           <font>
+                              <Font size="45.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="174.0" fitWidth="343.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/googleCloudAPI.png" />
+                           </image>
+                        </ImageView>
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="357.0" text="Google Cloud APIs" textAlignment="CENTER">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="357.0" textAlignment="CENTER">
+                           <font>
+                              <Font size="35.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="39.0" prefWidth="357.0" text="HanSolo JavaFX Library" textAlignment="CENTER">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="https://github.com/HanSolo/tilesfx" textAlignment="CENTER" wrappingWidth="336.3546142578125">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Text>
+                     </children></VBox>
+                  <VBox prefHeight="873.0" prefWidth="1566.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="56.0" prefWidth="1216.0" text="Logos" textAlignment="CENTER">
+                           <font>
+                              <Font size="45.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="41.0" prefWidth="1090.0" text="All the logos in the application are from Flaticon.com. Detailed references shown below:" textAlignment="CENTER" textFill="#dd0a0a">
+                           <font>
+                              <Font size="23.0" />
+                           </font>
+                        </Label>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1178.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medical equipment: &lt;a href=&quot;https://www.flaticon.com/free-icons/doctor&quot; title=&quot;doctor icons&quot;&gt;Doctor icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1226.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Janitory Service: &lt;a href=&quot;https://www.flaticon.com/free-icons/broomstick&quot; title=&quot;broomstick icons&quot;&gt;Broomstick icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1234.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Meal: &lt;a href=&quot;https://www.flaticon.com/free-icons/lunch&quot; title=&quot;lunch icons&quot;&gt;Lunch icons created by Freepik - Flaticon&lt;/a&gt;" wrappingWidth="1239.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medicine: &lt;a href=&quot;https://www.flaticon.com/free-icons/health&quot; title=&quot;health icons&quot;&gt;Health icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1253.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Laudry: &lt;a href=&quot;https://www.flaticon.com/free-icons/laundry&quot; title=&quot;laundry icons&quot;&gt;Laundry icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1269.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Gift: &lt;a href=&quot;https://www.flaticon.com/free-icons/birthday-and-party&quot; title=&quot;birthday and party icons&quot;&gt;Birthday and party icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1266.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Language: &lt;a href=&quot;https://www.flaticon.com/free-icons/translation&quot; title=&quot;translation icons&quot;&gt;Translation icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1276.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Transportation: &lt;a href=&quot;https://www.flaticon.com/free-icons/healthcare-and-medical&quot; title=&quot;healthcare and medical icons&quot;&gt;Healthcare and medical icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1262.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lab Service: &lt;a href=&quot;https://www.flaticon.com/free-icons/beaker&quot; title=&quot;beaker icons&quot;&gt;Beaker icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1246.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sharp Disposal: &lt;a href=&quot;https://www.flaticon.com/free-icons/wellbeing&quot; title=&quot;wellbeing icons&quot;&gt;Wellbeing icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1254.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maintenance: &lt;a href=&quot;https://www.flaticon.com/free-icons/rule&quot; title=&quot;rule icons&quot;&gt;Rule icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1281.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Covid Testing: &lt;a href=&quot;https://www.flaticon.com/free-icons/biology&quot; title=&quot;biology icons&quot;&gt;Biology icons created by kosonicon - Flaticon&lt;/a&gt;" wrappingWidth="1264.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Vaccine Logo: &lt;a href=&quot;https://www.flaticon.com/free-icons/vaccine&quot; title=&quot;vaccine icons&quot;&gt;Vaccine icons created by itim2101 - Flaticon&lt;/a&gt;" wrappingWidth="1250.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Covid Info: &lt;a href=&quot;https://www.flaticon.com/free-icons/information&quot; title=&quot;information icons&quot;&gt;Information icons created by Smashicons - Flaticon&lt;/a&gt;" wrappingWidth="1242.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Medical Doctor Logo: &lt;a href=&quot;https://www.flaticon.com/free-icons/medical-doctor&quot; title=&quot;medical doctor icons&quot;&gt;Medical doctor icons created by Freepik - Flaticon&lt;/a&gt;" wrappingWidth="1227.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1208.511474609375">
+                           <font>
+                              <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ambulance: &lt;a href=&quot;https://www.flaticon.com/free-icons/ambulance&quot; title=&quot;ambulance icons&quot;&gt;Ambulance icons created by Freepik - Flaticon&lt;/a&gt;" wrappingWidth="1241.511474609375">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <Label text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes." textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </bottom>
+</BorderPane>

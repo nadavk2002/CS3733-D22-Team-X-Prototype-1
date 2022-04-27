@@ -301,6 +301,25 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  @FXML
+  public void switchHelpPage() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/HelpPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  public void switchCreditsPage() throws IOException {
+    playButtonPressSound();
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CreditsPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
   /** Starts the clock */
   private void initClock() {
     Timeline clock =
