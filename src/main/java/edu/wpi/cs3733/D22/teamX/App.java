@@ -36,6 +36,18 @@ public class App extends Application {
     Parent root = mainMenu.getScene().getRoot();
     List<Node> children = ((Pane) root).getChildren();
     children.set(indexOfSceneReplacement, scene);
+    mainMenu
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              scene.setPrefWidth(mainMenu.getWidth() - 300);
+            });
+    mainMenu
+        .heightProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              scene.setPrefHeight(mainMenu.getHeight());
+            });
   }
 
   public static void switchRoot() throws IOException {
@@ -52,6 +64,18 @@ public class App extends Application {
     List<Node> children = ((Pane) root).getChildren();
     indexOfSceneReplacement = children.indexOf(insertPage);
     children.set(indexOfSceneReplacement, MainMenu);
+    mainMenu
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              MainMenu.setPrefWidth(mainMenu.getWidth() - 300);
+            });
+    mainMenu
+        .heightProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              MainMenu.setPrefHeight(mainMenu.getHeight());
+            });
     mainMenu.setScene(scene);
     mainMenu.setFullScreen(true);
     mainMenu.setMinHeight(minHeight);
