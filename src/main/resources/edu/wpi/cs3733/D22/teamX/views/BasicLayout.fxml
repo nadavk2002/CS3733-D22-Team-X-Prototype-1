@@ -16,24 +16,29 @@
          <content>
             <VBox fx:id="sideBar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
                <children>
-                  <Label fx:id="userName" alignment="CENTER" text="Hello, Admin" />
-                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/portrait-free-icon-font (1).png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="86.0" right="86.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" text="Log out">
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/sign-out-free-icon-font.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
+                  <VBox fx:id="userInfo">
+                     <children>
+                        <Label fx:id="userName" alignment="CENTER" prefHeight="18.0" prefWidth="274.0" text="Hello, Admin" />
+                        <Label alignment="CENTER" prefHeight="128.0" prefWidth="274.0">
+                           <graphic>
+                              <ImageView fitHeight="128.0" fitWidth="410.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/portrait-free-icon-font (1).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" prefHeight="40.0" prefWidth="265.0" text="Log out">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/logout.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </VBox>
                   <Label text="Map" />
                   <JFXButton alignment="BASELINE_LEFT" onAction="#switchMapDashboard" prefWidth="300.0" text="Dashboard">
                      <graphic>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
+   <children>
+      <AnchorPane fx:id="anchorRoot" prefHeight="1080.0" prefWidth="1620.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <HBox fx:id="hBox1" layoutX="174.0" layoutY="129.0" prefHeight="650.0" prefWidth="610.0">
+               <children>
+                  <VBox fx:id="mapBox" prefHeight="650.0" prefWidth="610.0">
+                     <children>
+                        <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="610.0">
+                           <children>
+                              <JFXButton fx:id="LL2Button" onAction="#LL2Click" text="LL2 Floor" />
+                              <JFXButton fx:id="LL1Button" onAction="#LL1Click" text="LL1 Floor" />
+                              <JFXButton fx:id="OneButton" onAction="#firstClick" text="First Floor" />
+                              <JFXButton fx:id="TwoButton" onAction="#secondClick" text="Second Floor" />
+                              <JFXButton fx:id="ThreeButton" onAction="#thirdClick" text="Third Floor" />
+                              <JFXButton fx:id="FourButton" onAction="#fourthClick" text="Fourth Floor" />
+                              <JFXButton fx:id="fiveButton" onAction="#fifthClick" text="Fifth Floor" />
+                           </children>
+                        </HBox>
+                        <Group fx:id="imageGroup">
+                           <children>
+                              <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/G.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Group>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" layoutX="825.0" layoutY="93.0" prefHeight="937.0" prefWidth="775.0" spacing="15.0">
+               <children>
+                  <Label alignment="TOP_CENTER" contentDisplay="TOP" text="At this location:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <ScrollPane prefHeight="895.0" prefWidth="775.0">
+                     <content>
+                        <VBox fx:id="infoVBox" />
+                     </content>
+                  </ScrollPane>
+               </children>
+            </VBox>
+            <JFXCheckBox fx:id="showLocCheck" layoutX="305.0" layoutY="105.0" text="Show Locations" />
+            <JFXCheckBox fx:id="showEquipCheck" layoutX="424.0" layoutY="105.0" text="Show Equipment" />
+            <JFXButton fx:id="toLocationTable" layoutX="322.0" layoutY="783.0" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
+            <JFXButton layoutX="470.0" layoutY="783.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
+            <JFXCheckBox fx:id="showRequestCheck" layoutX="550.0" layoutY="105.0" text="Show Requests" />
+            <JFXButton layoutX="-82.0" layoutY="417.0" onAction="#ToDashboard" prefHeight="60.0" prefWidth="223.0" style="-fx-rotate: 90; -fx-background-color: #446fdc; -fx-background-radius: 0;" text="Map Editor Dashboard" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="18.0" fitWidth="20.0" layoutX="41.0" layoutY="438.0" style="-fx-rotate: 90;">
+               <image>
+                  <Image url="@../assets/upArrow.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="536.0" layoutY="14.0" prefHeight="60.0" prefWidth="504.0" text="Hospital Locations" textAlignment="CENTER" textFill="#446fdc">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

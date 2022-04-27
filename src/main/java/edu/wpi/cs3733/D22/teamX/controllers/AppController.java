@@ -11,7 +11,6 @@ import com.google.protobuf.ByteString;
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.App;
 import java.awt.*;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -226,6 +225,12 @@ public class AppController implements Initializable {
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/MaintenanceRequest.fxml")));
   }
 
+  @FXML
+  private void goToSecretPage() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/SecretPage.fxml")));
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     buttonList.addAll(
@@ -304,6 +309,9 @@ public class AppController implements Initializable {
         case "request maintenance":
           ReqMaintenanceButton();
           break;
+        case "secret page":
+          goToSecretPage();
+          break;
         default:
           if (input.equals("")) {
             searchBox.setPromptText("Error, please try again!");
@@ -326,9 +334,9 @@ public class AppController implements Initializable {
     // code is based on sample from Google Cloud
     // https://cloud.google.com/speech-to-text/docs/streaming-recognize
 
-    String jsonPath = "team-x-347714-448a74675b18.json";
+    String jsonPath = "/edu/wpi/cs3733/D22/teamX/team-x-347714-448a74675b18.json";
     GoogleCredentials credentials =
-        GoogleCredentials.fromStream(new FileInputStream(jsonPath))
+        GoogleCredentials.fromStream(App.class.getResourceAsStream(jsonPath))
             .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
 
     ResponseObserver<StreamingRecognizeResponse> responseObserver = null;
