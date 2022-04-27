@@ -34,24 +34,23 @@ public class MealServiceRequest extends ServiceRequest {
   }
 
   public MealServiceRequest(
-          String requestID,
-          Location destination,
-          String status,
-          Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,
-          String mainCourse,
-          String side,
-          String drink,
-          String patientFor) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String mainCourse,
+      String side,
+      String drink,
+      String patientFor) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.mainCourse = mainCourse;
     this.side = side;
     this.drink = drink;
     this.patientFor = patientFor;
   }
-
 
   public String getMainCourse() {
     return mainCourse;
