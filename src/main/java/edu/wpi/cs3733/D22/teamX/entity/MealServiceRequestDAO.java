@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -119,7 +121,13 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-              + "', mainCourse = '"
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + ", mainCourse = '"
               + recordObject.getMainCourse()
               + "', side = '"
               + recordObject.getSide()
@@ -148,6 +156,9 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
       msr.append("'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       msr.append("'" + recordObject.getStatus() + "'" + ", ");
       msr.append("'" + recordObject.getAssigneeID() + "'" + ", ");
+      msr.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      msr.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      msr.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       msr.append("'" + recordObject.getMainCourse() + "'" + ", ");
       msr.append("'" + recordObject.getSide() + "'" + ", ");
       msr.append("'" + recordObject.getDrink() + "'" + ", ");
@@ -170,6 +181,9 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "mainCourse VARCHAR(25),"
               + "side VARCHAR(25),"
               + "drink VARCHAR(25),"
@@ -208,17 +222,20 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
       String nextFileLine;
       while ((nextFileLine = PMSRCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 8) {
+        if (currLine.length == 11) {
           MealServiceRequest PMSRnode =
               new MealServiceRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                  currLine[4],
-                  currLine[5],
-                  currLine[6],
-                  currLine[7]);
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  currLine[7],
+                  currLine[8],
+                  currLine[9],
+                  currLine[10]);
           mealServiceRequests.add(PMSRnode);
           PMSRnode.getDestination().addRequest(PMSRnode);
         } else {
@@ -245,6 +262,12 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
             "'" + mealServiceRequests.get(i).getDestination().getNodeID() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getStatus() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getAssigneeID() + "'" + ", ");
+        MealServiceRequest.append(
+            mealServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        MealServiceRequest.append(
+            mealServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        MealServiceRequest.append(
+            mealServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getMainCourse() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getSide() + "'" + ", ");
         MealServiceRequest.append("'" + mealServiceRequests.get(i).getDrink() + "'" + ", ");
@@ -264,7 +287,8 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,service,patientFor");
+      csvFile.write(
+          "requestID,destination,status,assignee,CreationTime,PROCTime,DONETime,mainCourse,Side,Drink,patientFor");
       for (int i = 0; i < mealServiceRequests.size(); i++) {
         csvFile.write("\n" + mealServiceRequests.get(i).getRequestID() + ",");
         if (mealServiceRequests.get(i).getDestination() == null) {
@@ -281,6 +305,24 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
           csvFile.write(',');
         } else {
           csvFile.write(mealServiceRequests.get(i).getAssigneeID() + ",");
+        }
+        if (mealServiceRequests.get(i).getCreationTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              mealServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (mealServiceRequests.get(i).getPROCTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              mealServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (mealServiceRequests.get(i).getDONETime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              mealServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (mealServiceRequests.get(i).getMainCourse() == null) {
           csvFile.write(',');
@@ -331,6 +373,15 @@ public class MealServiceRequestDAO implements DAO<MealServiceRequest> {
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setMainCourse(results.getString("mainCourse"));
         toAdd.setSide(results.getString("side"));
         toAdd.setDrink(results.getString("drink"));

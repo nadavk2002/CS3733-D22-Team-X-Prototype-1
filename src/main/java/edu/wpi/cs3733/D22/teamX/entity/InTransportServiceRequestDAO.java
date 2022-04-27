@@ -17,6 +17,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
       new ArrayList<InTransportServiceRequest>();
 
   private static String csv = "InTransportServiceRequest.csv";
+  private PatientDAO patientDAO = PatientDAO.getDAO();
 
   /** Creates a new InTransportServiceRequest object. */
   private InTransportServiceRequestDAO() {
@@ -115,7 +116,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
             "UPDATE InTransportServiceRequest SET requestID = '"
                 + recordObject.getRequestID()
                 + "', patientName = '"
-                + recordObject.getPatientName()
+                + recordObject.getPatientName().getPatientID()
                 + "', transportFrom = '"
                 + recordObject.getTransportFrom()
                 + "', assignee = '"
@@ -152,7 +153,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
       StringBuilder sql = new StringBuilder();
       sql.append("INSERT INTO InTransportServiceRequest VALUES(");
       sql.append("'" + recordObject.getRequestID() + "'" + ", ");
-      sql.append("'" + recordObject.getPatientName() + "'" + ", ");
+      sql.append("'" + recordObject.getPatientName().getPatientID() + "'" + ", ");
       sql.append("'" + recordObject.getTransportFrom() + "'" + ", ");
       sql.append("'" + recordObject.getAssigneeID() + "'" + ", ");
       sql.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
@@ -175,16 +176,19 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
       Statement initialization = connection.createStatement();
       initialization.execute(
           "CREATE TABLE InTransportServiceRequest(requestID CHAR(8) PRIMARY KEY NOT NULL, "
-              + "patientName VARCHAR(15),"
+              + "patientName CHAR(8),"
               + "transportFrom VARCHAR(30),"
               + "assignee CHAR(8),"
               + "CreationTime BIGINT,"
               + "PROCTime BIGINT,"
               + "DONETime BIGINT,"
               + "status CHAR(4),"
-              + "destination CHAR(10),"
+              + "destination CHAR(10), "
               + "CONSTRAINT INSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
+              + "ON DELETE SET NULL, "
+              + "CONSTRAINT INSR_patient_fk "
+              + "FOREIGN KEY (patientName) REFERENCES Patient(patientID) "
               + "ON DELETE SET NULL, "
               + "CONSTRAINT INSR_assignee_fk "
               + "FOREIGN KEY (assignee) REFERENCES Employee(employeeID) "
@@ -211,6 +215,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
     try {
       LocationDAO locDestination = LocationDAO.getDAO();
       EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+      PatientDAO patientDAO = PatientDAO.getDAO();
       InputStream stream = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
       BufferedReader insrCSVReader = new BufferedReader(new InputStreamReader(stream));
       insrCSVReader.readLine();
@@ -221,7 +226,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
           InTransportServiceRequest node =
               new InTransportServiceRequest(
                   currLine[0],
-                  currLine[1],
+                  patientDAO.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
                   LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
@@ -251,7 +256,8 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO InTransportServiceRequest VALUES(");
         sql.append("'" + inTransportServiceRequests.get(i).getRequestID() + "'" + ", ");
-        sql.append("'" + inTransportServiceRequests.get(i).getPatientName() + "'" + ", ");
+        sql.append(
+            "'" + inTransportServiceRequests.get(i).getPatientName().getPatientID() + "'" + ", ");
         sql.append("'" + inTransportServiceRequests.get(i).getTransportFrom() + "'" + ", ");
         sql.append("'" + inTransportServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append(
@@ -285,7 +291,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
         if (inTransportServiceRequests.get(i).getPatientName() == null) {
           csvFile.write(',');
         } else {
-          csvFile.write(inTransportServiceRequests.get(i).getPatientName() + ",");
+          csvFile.write(inTransportServiceRequests.get(i).getPatientName().getPatientID() + ",");
         }
         if (inTransportServiceRequests.get(i).getTransportFrom() == null) {
           csvFile.write(',');
@@ -359,7 +365,7 @@ public class InTransportServiceRequestDAO implements DAO<InTransportServiceReque
             LocalDateTime.ofEpochSecond(
                 Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setTransportFrom(results.getString("transportFrom"));
-        toAdd.setPatientName(results.getString("patientName"));
+        toAdd.setPatientName(patientDAO.getRecord(results.getString("patientName")));
         inTransportServiceRequests.add(toAdd);
         toAdd.getDestination().addRequest(toAdd);
       }

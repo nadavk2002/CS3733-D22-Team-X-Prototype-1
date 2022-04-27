@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
+
 /** Represents a meal service request */
 public class MealServiceRequest extends ServiceRequest {
   String mainCourse;
@@ -25,6 +27,25 @@ public class MealServiceRequest extends ServiceRequest {
       String drink,
       String patientFor) {
     super(requestID, destination, status, assignee);
+    this.mainCourse = mainCourse;
+    this.side = side;
+    this.drink = drink;
+    this.patientFor = patientFor;
+  }
+
+  public MealServiceRequest(
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String mainCourse,
+      String side,
+      String drink,
+      String patientFor) {
+    super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.mainCourse = mainCourse;
     this.side = side;
     this.drink = drink;

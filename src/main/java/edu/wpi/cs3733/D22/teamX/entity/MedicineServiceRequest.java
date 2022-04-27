@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
+
 /** Represents a medicine delivery service request */
 public class MedicineServiceRequest extends ServiceRequest {
   // needs patientFor
@@ -20,6 +22,21 @@ public class MedicineServiceRequest extends ServiceRequest {
       String rxNum,
       String patientFor) {
     super(requestID, destination, status, assignee);
+    this.rxNum = rxNum;
+    this.patientFor = patientFor;
+  }
+
+  public MedicineServiceRequest(
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String rxNum,
+      String patientFor) {
+    super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.rxNum = rxNum;
     this.patientFor = patientFor;
   }
