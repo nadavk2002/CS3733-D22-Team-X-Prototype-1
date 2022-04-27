@@ -17,11 +17,16 @@ public class SharpsDisposalRequest extends ServiceRequest {
     super(requestID, destination, status, assignee);
     this.type = type;
   }
+
   public SharpsDisposalRequest(
-          String requestID, Location destination, String status, Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,String type) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String type) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.type = type;
   }

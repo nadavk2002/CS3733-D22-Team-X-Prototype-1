@@ -119,12 +119,12 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-                  + "', CreationTime = "
-                  + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", PROCTime = "
-                  + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", DONETime = "
-                  + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
               + ", rxNum = '"
               + recordObject.getRxNum()
               + "', patientFor = '"
@@ -150,9 +150,12 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
           "'" + recordObject.getDestination().getNodeID() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getStatus() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getAssigneeID() + "'" + ", ");
-      medicineDeliveryServiceRequest.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
-      medicineDeliveryServiceRequest.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
-      medicineDeliveryServiceRequest.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+      medicineDeliveryServiceRequest.append(
+          recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      medicineDeliveryServiceRequest.append(
+          recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      medicineDeliveryServiceRequest.append(
+          recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       medicineDeliveryServiceRequest.append("'" + recordObject.getRxNum() + "'" + ", ");
       medicineDeliveryServiceRequest.append("'" + recordObject.getPatientFor() + "'");
       medicineDeliveryServiceRequest.append(")");
@@ -175,9 +178,9 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-                  + "CreationTime BIGINT,"
-                  + "PROCTime BIGINT,"
-                  + "DONETime BIGINT,"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "rxNum CHAR(8),"
               + "patientFor CHAR(8),"
               + "CONSTRAINT MDSR_dest_fk "
@@ -222,9 +225,9 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
                   currLine[7],
                   currLine[8]);
           medicineServiceRequests.add(mesrNode);
@@ -257,9 +260,11 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
         medEquipReq.append("'" + medicineServiceRequests.get(i).getStatus() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         medEquipReq.append(
-                medicineServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
-        medEquipReq.append(medicineServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
-        medEquipReq.append(medicineServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+            medicineServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        medEquipReq.append(
+            medicineServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        medEquipReq.append(
+            medicineServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getRxNum() + "'" + ", ");
         medEquipReq.append("'" + medicineServiceRequests.get(i).getPatientFor() + "'");
         medEquipReq.append(")");
@@ -277,7 +282,8 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
   public boolean saveCSV(String dirPath) {
     try {
       FileWriter csvFile = new FileWriter(dirPath + csv, false);
-      csvFile.write("requestID,destination,status,assignee,CreationTime,PROCTime,DONETime,rxNumber,patientFor");
+      csvFile.write(
+          "requestID,destination,status,assignee,CreationTime,PROCTime,DONETime,rxNumber,patientFor");
       for (int i = 0; i < medicineServiceRequests.size(); i++) {
         csvFile.write("\n" + medicineServiceRequests.get(i).getRequestID() + ",");
         if (medicineServiceRequests.get(i).getDestination() == null) {
@@ -299,19 +305,19 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
           csvFile.write(',');
         } else {
           csvFile.write(
-                  medicineServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+              medicineServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (medicineServiceRequests.get(i).getPROCTime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  medicineServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+              medicineServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (medicineServiceRequests.get(i).getDONETime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  medicineServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+              medicineServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (medicineServiceRequests.get(i).getRxNum() == null) {
           csvFile.write(',');
@@ -352,14 +358,14 @@ public class MedicineDeliverServiceRequestDAO implements DAO<MedicineServiceRequ
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
         toAdd.setCreationTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
         toAdd.setPROCTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
         toAdd.setDONETime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setRxNum(results.getString("rxNum"));
         toAdd.setPatientFor(results.getString("patientFor"));
         medicineServiceRequests.add(toAdd);

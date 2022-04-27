@@ -27,15 +27,15 @@ public class MedicineServiceRequest extends ServiceRequest {
   }
 
   public MedicineServiceRequest(
-          String requestID,
-          Location destination,
-          String status,
-          Employee assignee,
-          LocalDateTime creationTime,
-          LocalDateTime PROCTime,
-          LocalDateTime DONETime,
-          String rxNum,
-          String patientFor) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String rxNum,
+      String patientFor) {
     super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.rxNum = rxNum;
     this.patientFor = patientFor;
