@@ -20,8 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.TextAlignment;
 
 public class LoginScreenController implements Initializable {
   @FXML private VBox serverVBox;
@@ -75,9 +73,7 @@ public class LoginScreenController implements Initializable {
             }
           });
     } else {
-      message.setText("    Your username or password is incorrect");
-      message.setTextFill(Color.rgb(210, 39, 30));
-      message.setTextAlignment(TextAlignment.CENTER);
+      message.setText("Your username or password is incorrect");
     }
   }
 

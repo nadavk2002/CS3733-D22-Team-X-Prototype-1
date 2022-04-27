@@ -11,66 +11,72 @@
 /*}*/
 
 .root {
-    -fx-off-white: #F6F9FF;
-    /*-fx-light-blue: #81BAD6;*/
-    -fx-light-blue: #4E8FF8;
-    /*-fx-dark-blue: #102B4A;*/
-    -fx-navy-blue: #1D4E86;
-    -fx-dark-blue: #2562A7;
+    /*-fx-off-white: #F6F9FF;*/
+    /*-fx-light-blue: #4E8FF8;*/
+    /*-fx-navy-blue: #1D4E86;*/
+    /*-fx-dark-blue: #2562A7;*/
+    -fx-color-1: #F7FDFF;
+    -fx-color-2: #9ED5FF;
+    -fx-color-3: #378BCC;
+    -fx-color-4: #16629C;
+    -fx-color-5: #899091;
     -fx-font-family: "Poppins";
 }
 
 .content-container > .label {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
-    -fx-text-fill: -fx-off-white;
+    -fx-font-size: 20;
+    -fx-text-fill: -fx-color-1;
+
 }
 
 .content-container > .button {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
-    -fx-background-color: -fx-light-blue;
-    -fx-text-fill: -fx-off-white;
+    -fx-font-size: 20;
+    -fx-background-color: -fx-color-2;
+    -fx-text-fill: -fx-color-1;
     -fx-background-radius: 20px;
 }
 
 .content-container > .button:hover {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
-    -fx-background-color: -fx-off-white;
-    -fx-text-fill: -fx-light-blue;
+    -fx-font-size: 20;
+    -fx-background-color: -fx-color-1;
+    -fx-text-fill: -fx-color-2;
 }
 
 .content-container > .text-field {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
-    -fx-background-color: -fx-off-white;
-    -fx-text-fill: -fx-dark-blue;
+    -fx-font-size: 20;
+    -fx-background-color: -fx-color-1;
+    -fx-text-fill: -fx-color-3;
 }
 
 .content-background {
-    -fx-fill: -fx-dark-blue;
+    -fx-background-color: -fx-color-3;
+    -fx-background-radius: 50px;
+    -fx-background-size: 50px;
 }
 
 .title-label {
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
-    -fx-text-fill: -fx-dark-blue;
+    -fx-text-fill: -fx-color-3;
 }
 
 .reset-button {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
-    -fx-background-color: -fx-light-blue;
-    -fx-text-fill: -fx-off-white;
+    -fx-font-size: 20;
+    -fx-background-color: -fx-color-2;
+    -fx-text-fill: -fx-color-1;
     -fx-background-radius: 20px;
 }
 
 .submit-button {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
-    -fx-background-color: -fx-light-blue;
-    -fx-text-fill: -fx-off-white;
+    -fx-font-size: 20;
+    -fx-background-color: -fx-color-2;
+    -fx-text-fill: -fx-color-1;
     -fx-background-radius: 20px;
 }
 
@@ -79,96 +85,110 @@
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
     -fx-font-size: 30;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-color-1;
     -fx-wrap-text: true;
 }
 
 #username {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-navy-blue;
-    -fx-prompt-text-fill: -fx-navy-blue;
+    -fx-text-fill: -fx-color-3;
+    -fx-prompt-text-fill: -fx-color-5;
 }
 
 #password {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-navy-blue;
-    -fx-prompt-text-fill: -fx-navy-blue;
+    -fx-text-fill: -fx-color-3;
+    -fx-prompt-text-fill: -fx-color-5;
 }
 
 #loginExitButton {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-background-color: -fx-light-blue;
-    -fx-text-fill: -fx-off-white;
-    -fx-background-radius: 20px;
+    -fx-background-color: -fx-color-4;
+    -fx-text-fill: -fx-color-1;
+    -fx-background-radius: 15px;
 }
 
 #loginExitButton:hover {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-background-color: -fx-off-white;
-    -fx-text-fill: -fx-light-blue;
+    -fx-background-color: -fx-color-4;
+    -fx-text-fill: -fx-color-1;
+    -fx-border-radius: 15px;
+    -fx-border-width: 2px;
+    -fx-border-color: -fx-color-1;
+}
+
+#loginExitButton:pressed {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-color-1;
+    -fx-text-fill: -fx-color-4;
 }
 
 #loginButton {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-background-color: -fx-light-blue;
-    -fx-text-fill: -fx-off-white;
-    -fx-background-radius: 20px;
+    -fx-background-color: -fx-color-4;
+    -fx-text-fill: -fx-color-1;
+    -fx-background-radius: 15px;
 }
 
 #loginButton:hover {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-background-color: -fx-off-white;
-    -fx-text-fill: -fx-light-blue;
+    -fx-background-color: -fx-color-4;
+    -fx-text-fill: -fx-color-1;
+    -fx-border-radius: 15px;
+    -fx-border-width: 2px;
+    -fx-border-color: -fx-color-1;
+}
+
+#loginButton:pressed {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 28;
+    -fx-background-color: -fx-color-1;
+    -fx-text-fill: -fx-color-4;
+}
+
+#message {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-color-1;
 }
 
 #dbText {
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
     -fx-font-size: 30;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-color-1;
     -fx-wrap-text: true;
 }
 
 #optionEmbedded {
     -fx-font-family: "Oxygen";
     -fx-font-size: 24;
-    -fx-text-fill: -fx-off-white;
-}
-
-#optionEmbedded .radio {
-    -fx-background-color: -fx-off-white;
-}
-
-#optionEmbedded .radio:selected {
-    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-color-1;
+    -jfx-selected-color : -fx-color-4;
+    -jfx-unselected-color : -fx-color-1;
 }
 
 #optionClient {
     -fx-font-family: "Oxygen";
     -fx-font-size: 24;
-    -fx-text-fill: -fx-off-white;
-}
-
-#optionClient.radio {
-    -fx-background-color: -fx-off-white;
-}
-
-#optionClient .radio:selected {
-    -fx-background-color: -fx-light-blue;
+    -fx-text-fill: -fx-color-1;
+    -jfx-selected-color : -fx-color-4;
+    -jfx-unselected-color : -fx-color-1;
 }
 
 #loginPane {
     -fx-background-image: url('../assets/Brigham-Womens-TO-USE-blur.jpg');
 }
 
-#loginStackPane {
-    -fx-background-color: -fx-dark-blue;
+#loginFields {
+    -fx-background-color: -fx-color-3;
     /*-fx-border-radius: 20px;*/
     -fx-background-radius: 50px;
     -fx-background-size: 50px;
@@ -185,19 +205,19 @@
 /*SIDEBAR FORMATTING*/
 
 #sideBar {
-    -fx-background-color: -fx-dark-blue;
+    -fx-background-color: -fx-color-3;
 }
 
 #sideBar > .button {
     -fx-font-family: "Oxygen";
     -fx-font-size: 24;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-color-1;
     -fx-graphic-text-gap: 8px;
     -fx-padding: 10px;
 }
 
 #sideBar > .button:hover {
-    -fx-background-color: -fx-light-blue;
+    -fx-background-color: -fx-color-2;
     -fx-underline: true;
 }
 
@@ -205,7 +225,32 @@
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
     -fx-font-size: 24;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-color-1;
+    -fx-padding: 10px;
+}
+
+#userInfo {
+    -fx-background-color: -fx-color-3;
+}
+
+#userInfo > .button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-color-1;
+    -fx-graphic-text-gap: 8px;
+    -fx-padding: 10px;
+}
+
+#userInfo > .button:hover {
+    -fx-background-color: -fx-color-2;
+    -fx-underline: true;
+}
+
+#userInfo > .label {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-color-1;
     -fx-padding: 10px;
 }
 
@@ -242,19 +287,19 @@
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
     -fx-font-size: 48;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-color-1;
 }
 
 #landingPagePane {
-    -fx-background-color: -fx-navy-blue;
+    -fx-background-color: -fx-color-4;
 }
 
 #landingPageScrollPane {
-    -fx-background-color: -fx-navy-blue;
+    -fx-background-color: -fx-color-4;
 }
 
 #landingPageStackPane {
-    -fx-background-color: -fx-navy-blue;
+    -fx-background-color: -fx-color-4;
 }
 
 /*#landingPageContent{*/
@@ -262,41 +307,38 @@
 /*}*/
 
 #landingPageBackground {
-    -fx-background-color: -fx-off-white;
+    -fx-background-color: -fx-color-1;
 }
 
 #landingPageContent > .label {
     -fx-font-family: "Poppins";
     -fx-font-size: 18;
     -fx-font-style: italic;
-    -fx-text-fill: -fx-light-blue;
+    -fx-text-fill: -fx-color-2;
 }
 
 #searchBarText {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-color-1;
 }
 
 #landingPageContent > .button {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-light-blue;
+    -fx-text-fill: -fx-color-2;
 }
 
 #landingPageContent > .button:hover {
     -fx-font-family: "Oxygen";
     -fx-font-size: 28;
-    -fx-text-fill: -fx-light-blue;
+    -fx-text-fill: -fx-color-2;
 }
 
 #nameToggle {
-    -fx-text-fill: -fx-off-white;
+    -fx-text-fill: -fx-color-1;
 }
 
-/*{*/
-/*    -fx-font-family: "Poppins";*/
-/*    -fx-font-size: 24;*/
-/*    -fx-text-fill: -fx-light-blue;*/
-/*}*/
-
+#amountAvailable {
+    -fx-font-size: 16;
+}

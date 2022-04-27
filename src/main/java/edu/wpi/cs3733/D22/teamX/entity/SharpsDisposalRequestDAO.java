@@ -6,6 +6,8 @@ import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -136,7 +138,13 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-              + "', type = '"
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + ", type = '"
               + recordObject.getType()
               + "' WHERE requestID = '"
               + recordObject.getRequestID()
@@ -164,6 +172,9 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
       SDSR.append("'" + recordObject.getDestination().getNodeID() + "', ");
       SDSR.append("'" + recordObject.getStatus() + "', ");
       SDSR.append("'" + recordObject.getAssigneeID() + "', ");
+      SDSR.append(recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      SDSR.append(recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+      SDSR.append(recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
       SDSR.append("'" + recordObject.getType() + "'");
       SDSR.append(")");
       initialization.execute(SDSR.toString());
@@ -184,6 +195,9 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "type VARCHAR(25),"
               + "CONSTRAINT SDSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID) "
@@ -225,14 +239,17 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
       String nextFileLine;
       while ((nextFileLine = SDSRCSVReader.readLine()) != null) {
         String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
-        if (currLine.length == 5) {
+        if (currLine.length == 8) {
           SharpsDisposalRequest SDSRnode =
               new SharpsDisposalRequest(
                   currLine[0],
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                  currLine[4]);
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  currLine[7]);
           sharpsDisposalRequests.add(SDSRnode);
           SDSRnode.getDestination().addRequest(SDSRnode);
         } else {
@@ -261,6 +278,12 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
         sharpsDisposalRequest.append("'" + sharpsDisposalRequests.get(i).getStatus() + "'" + ", ");
         sharpsDisposalRequest.append(
             "'" + sharpsDisposalRequests.get(i).getAssigneeID() + "'" + ", ");
+        sharpsDisposalRequest.append(
+            sharpsDisposalRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sharpsDisposalRequest.append(
+            sharpsDisposalRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sharpsDisposalRequest.append(
+            sharpsDisposalRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         sharpsDisposalRequest.append("'" + sharpsDisposalRequests.get(i).getType() + "'");
         sharpsDisposalRequest.append(")");
         initialization.execute(sharpsDisposalRequest.toString());
@@ -301,6 +324,24 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
         } else {
           csvFile.write(sharpsDisposalRequests.get(i).getAssigneeID() + ",");
         }
+        if (sharpsDisposalRequests.get(i).getCreationTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              sharpsDisposalRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (sharpsDisposalRequests.get(i).getPROCTime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              sharpsDisposalRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
+        if (sharpsDisposalRequests.get(i).getDONETime() == null) {
+          csvFile.write(',');
+        } else {
+          csvFile.write(
+              sharpsDisposalRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+        }
         if (sharpsDisposalRequests.get(i).getType() == null) {
           csvFile.write(',');
         } else {
@@ -335,6 +376,15 @@ public class SharpsDisposalRequestDAO implements DAO<SharpsDisposalRequest> {
         toAdd.setDestination(LocationDAO.getDAO().getRecord(results.getString("destination")));
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
+        toAdd.setCreationTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+        toAdd.setPROCTime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+        toAdd.setDONETime(
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setType(results.getString("type"));
         sharpsDisposalRequests.add(toAdd);
         toAdd.getDestination().addRequest(toAdd);
