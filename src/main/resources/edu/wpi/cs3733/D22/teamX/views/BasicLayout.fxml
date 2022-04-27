@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -11,28 +12,33 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1280.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="280.0" prefHeight="1080.0" prefWidth="300.0">
-         <children>
-            <VBox fx:id="sideBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
+      <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
+         <content>
+            <VBox fx:id="sideBar" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="300.0">
                <children>
-                  <Label fx:id="userName" alignment="CENTER" text="Hello, Admin" />
-                  <ImageView fitHeight="128.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/portrait-free-icon-font (1).png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets left="86.0" right="86.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" text="Log out">
-                     <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/sign-out-free-icon-font.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </JFXButton>
+                  <VBox fx:id="userInfo">
+                     <children>
+                        <Label fx:id="userName" alignment="CENTER" prefHeight="18.0" prefWidth="274.0" text="Hello, Admin" />
+                        <Label alignment="CENTER" prefHeight="128.0" prefWidth="274.0">
+                           <graphic>
+                              <ImageView fitHeight="128.0" fitWidth="410.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/portrait-free-icon-font (1).png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" prefHeight="40.0" prefWidth="265.0" text="Log out">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/logout.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </VBox>
                   <Label text="Map" />
                   <JFXButton alignment="BASELINE_LEFT" onAction="#switchMapDashboard" prefWidth="300.0" text="Dashboard">
                      <graphic>
@@ -109,6 +115,15 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="switchCovidPage" alignment="BASELINE_LEFT" onAction="#switchCovidPage" prefWidth="300.0" text="COVID-19 Information">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/heart-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="aboutButton" alignment="BASELINE_LEFT" onAction="#goToAboutPage" prefWidth="300.0" text="About Us" />
                   <JFXButton fx:id="exitButton" alignment="BASELINE_LEFT" onAction="#ExitApplication" prefWidth="300.0" text="Exit">
                      <graphic>
@@ -119,7 +134,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <Label fx:id="timeLabel" prefHeight="37.0" prefWidth="300.0" text="Time">
+                  <Label fx:id="timeLabel" prefHeight="37.0" prefWidth="337.0" text="Time">
                      <graphic>
                         <SVGPath content="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,21a9,9,0,1,1,9-9A9.01,9.01,0,0,1,12,21ZM10.5,11.055l-2.4,1.5a1.5,1.5,0,0,0-.475,2.068h0a1.5,1.5,0,0,0,2.068.475l2.869-1.8a2,2,0,0,0,.938-1.7V7.772a1.5,1.5,0,0,0-1.5-1.5h0a1.5,1.5,0,0,0-1.5,1.5Z" disable="true" fill="WHITE" />
                      </graphic>
@@ -129,8 +144,8 @@
                   <Insets left="10.0" top="10.0" />
                </padding>
             </VBox>
-         </children>
-      </Pane>
+         </content>
+      </ScrollPane>
       <Pane fx:id="appContent" layoutX="300.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="720.0" minWidth="1000.0" prefHeight="1080.0" prefWidth="1620.0" />
    </children>
 </Pane>

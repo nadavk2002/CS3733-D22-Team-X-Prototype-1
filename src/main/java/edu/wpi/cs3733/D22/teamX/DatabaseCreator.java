@@ -21,6 +21,7 @@ public class DatabaseCreator {
   private static SharpsDisposalRequestDAO sharpDAO;
   private static MaintenanceServiceRequestDAO maintenanceDAO;
   private static InTransportServiceRequestDAO transportDAO;
+  private static PatientDAO patientDAO;
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
@@ -65,6 +66,7 @@ public class DatabaseCreator {
     langDAO.dropTable();
     labDAO.dropTable();
     mesrDAO.dropTable();
+    patientDAO.dropTable();
     equDAO.dropTable();
     eqtDAO.dropTable();
     emplDAO.dropTable();
@@ -77,6 +79,7 @@ public class DatabaseCreator {
     emplDAO.createTable();
     eqtDAO.createTable();
     equDAO.createTable();
+    patientDAO.createTable();
     mesrDAO.createTable();
     labDAO.createTable();
     langDAO.createTable();
@@ -99,6 +102,7 @@ public class DatabaseCreator {
         || !emplDAO.loadCSV()
         || !eqtDAO.loadCSV()
         || !equDAO.loadCSV()
+        || !patientDAO.loadCSV()
         || !mesrDAO.loadCSV()
         || !labDAO.loadCSV()
         || !langDAO.loadCSV()
@@ -127,6 +131,7 @@ public class DatabaseCreator {
         || !emplDAO.saveCSV(dirPath)
         || !eqtDAO.saveCSV(dirPath)
         || !equDAO.saveCSV(dirPath)
+        || !patientDAO.saveCSV(dirPath)
         || !mesrDAO.saveCSV(dirPath)
         || !labDAO.saveCSV(dirPath)
         || !langDAO.saveCSV(dirPath)
@@ -148,6 +153,7 @@ public class DatabaseCreator {
     locDAO = LocationDAO.getDAO();
     emplDAO = EmployeeDAO.getDAO();
     eqtDAO = EquipmentTypeDAO.getDAO();
+    patientDAO = PatientDAO.getDAO();
     mesrDAO = MedicalEquipmentServiceRequestDAO.getDAO();
     labDAO = LabServiceRequestDAO.getDAO();
     giftDAO = GiftDeliveryRequestDAO.getDAO();
