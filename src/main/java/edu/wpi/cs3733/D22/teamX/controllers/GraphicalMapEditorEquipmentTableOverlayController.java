@@ -15,11 +15,9 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import org.krysalis.barcode4j.impl.code128.Code128Bean;
 import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 
@@ -40,13 +38,27 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
     type.setCellValueFactory(new PropertyValueFactory<>("type"));
     availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
-
-    table.setOnMouseClicked(
-        (MouseEvent event) -> {
-          try {
-            generateBarCode(table.getSelectionModel().getSelectedItem().getUnitID());
-          } catch (IOException e) {
-            e.printStackTrace();
+    table.setRowFactory(
+        new Callback<TableView<EquipmentUnit>, TableRow<EquipmentUnit>>() {
+          @Override
+          public TableRow<EquipmentUnit> call(TableView<EquipmentUnit> param) {
+            TableRow<EquipmentUnit> equipmentRow = new TableRow<>();
+            ContextMenu menu = new ContextMenu();
+            MenuItem genBarCode = new MenuItem("Generate Barcode");
+            genBarCode.setOnAction(
+                event -> {
+                  try {
+                    generateBarCode(table.getSelectionModel().getSelectedItem().getUnitID());
+                  } catch (IOException e) {
+                    e.printStackTrace();
+                  }
+                });
+            menu.getItems().add(genBarCode);
+            equipmentRow.setOnContextMenuRequested(
+                event -> {
+                  menu.show(equipmentRow, event.getScreenX(), event.getScreenY());
+                });
+            return equipmentRow;
           }
         });
 
