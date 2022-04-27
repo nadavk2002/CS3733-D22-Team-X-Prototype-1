@@ -29,6 +29,8 @@ public class UpdateInTransportRequestController implements Initializable {
   private List<Employee> employees;
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
   private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
+  private List<Patient> patients;
+  private PatientDAO patientDAO = PatientDAO.getDAO();
 
   private InTransportServiceRequest request;
 
@@ -40,23 +42,10 @@ public class UpdateInTransportRequestController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
+    patients = patientDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(false);
-    selectPatient
-        .getItems()
-        .addAll(
-            new String[] {
-              "PATT0001",
-              "PATT0002",
-              "PATT0003",
-              "PATT0004",
-              "PATT0005",
-              "PATT0006",
-              "PATT0007",
-              "PATT0008",
-              "PATT0009",
-              "PATT0010"
-            });
+    selectPatient.setItems(this.getPatientIDs());
     assignStaff.setItems(this.getEmployeeIDs());
     //    selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
     serviceStatus.getItems().addAll(" ", "PROC", "DONE");
@@ -69,7 +58,7 @@ public class UpdateInTransportRequestController implements Initializable {
     // serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
     destination.setOnAction((ActionEvent event) -> enableSubmitButton());
 
-    selectPatient.setValue(this.request.getPatientName());
+    selectPatient.setValue(request.getPatientName().getPatientID());
     selectStartLocation.setItems(this.getLocationNames());
     destination.setItems(this.getLocationNames());
     assignStaff.setValue(this.request.getAssigneeID());
@@ -89,6 +78,14 @@ public class UpdateInTransportRequestController implements Initializable {
       locationNames.add(locations.get(i).getShortName());
     }
     return locationNames;
+  }
+
+  public ObservableList<String> getPatientIDs() {
+    ObservableList<String> patientIDs = FXCollections.observableArrayList();
+    for (int i = 0; i < patients.size(); i++) {
+      patientIDs.add(patients.get(i).getPatientID());
+    }
+    return patientIDs;
   }
 
   public ObservableList<String> getEmployeeIDs() {
@@ -124,7 +121,7 @@ public class UpdateInTransportRequestController implements Initializable {
     InTransportServiceRequest request = new InTransportServiceRequest();
 
     request.setRequestID(this.request.getRequestID());
-    request.setPatientName(selectPatient.getValue());
+    request.setPatientName(patientDAO.getRecord(selectPatient.getValue()));
     request.setTransportFrom(selectStartLocation.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setStatus(serviceStatus.getValue());
