@@ -245,6 +245,14 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  @FXML
+  public void switchHelpPage() throws IOException {
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/HelpPage.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
   private void initClock() {
     Timeline clock =
         new Timeline(

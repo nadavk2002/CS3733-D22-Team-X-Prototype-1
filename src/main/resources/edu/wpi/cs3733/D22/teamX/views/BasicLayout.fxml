@@ -119,6 +119,15 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="HelpPage" alignment="BASELINE_LEFT" onAction="#switchHelpPage" prefWidth="300.0" text="Help">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/heart-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="aboutButton" alignment="BASELINE_LEFT" onAction="#goToAboutPage" prefWidth="300.0" text="About Us" />
                   <JFXButton fx:id="exitButton" alignment="BASELINE_LEFT" onAction="#ExitApplication" prefWidth="300.0" text="Exit">
                      <graphic>

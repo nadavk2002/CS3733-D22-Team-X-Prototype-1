@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.HelpPageController">
+   <top>
+      <Label styleClass="title-label" text="How to use the system" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin>
+            <Insets top="100.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="72.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane prefHeight="1018.0" prefWidth="1688.0">
+               <content>
+                  <HBox prefHeight="858.0" prefWidth="1602.0">
+                     <children>
+                        <VBox prefHeight="1486.0" prefWidth="31.0" />
+                        <VBox prefHeight="976.0" prefWidth="630.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Login" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Navigate to the software" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="390.0" fitWidth="623.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/LoginScreen.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Navigate to the software. The starting screen is the login information" textAlignment="CENTER" wrappingWidth="549.6900367736816">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 2: Choose the server option" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="393.0" fitWidth="618.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/ServerOption.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the server based on your requirnments or preferences" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="613.0" text="Step 3: Enter the username and password" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="389.0" fitWidth="624.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/LoginBoxed.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter the username and password provided to you. Then click Login" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1486.0" prefWidth="31.0" />
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <Label text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes." textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </bottom>
+</BorderPane>
