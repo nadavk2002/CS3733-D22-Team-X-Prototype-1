@@ -124,6 +124,7 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#switchRoomControl" prefWidth="300.0" text="Room Control" />
                   <JFXButton fx:id="aboutButton" alignment="BASELINE_LEFT" onAction="#goToAboutPage" prefWidth="300.0" text="About Us" />
                   <JFXButton fx:id="exitButton" alignment="BASELINE_LEFT" onAction="#ExitApplication" prefWidth="300.0" text="Exit">
                      <graphic>

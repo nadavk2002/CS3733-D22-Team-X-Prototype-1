@@ -245,6 +245,15 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  @FXML
+  public void switchRoomControl() throws IOException {
+    checkAPIData();
+    App.switchScene(
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/RoomSystemControl.fxml")));
+    CSVFileSaverController.loaded = false;
+  }
+
   private void initClock() {
     Timeline clock =
         new Timeline(
