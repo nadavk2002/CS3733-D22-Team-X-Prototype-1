@@ -22,13 +22,13 @@
 
 .content-container > .label {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
+    -fx-font-size: 20;
     -fx-text-fill: -fx-off-white;
 }
 
 .content-container > .button {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
+    -fx-font-size: 20;
     -fx-background-color: -fx-light-blue;
     -fx-text-fill: -fx-off-white;
     -fx-background-radius: 20px;
@@ -36,20 +36,22 @@
 
 .content-container > .button:hover {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
+    -fx-font-size: 20;
     -fx-background-color: -fx-off-white;
     -fx-text-fill: -fx-light-blue;
 }
 
 .content-container > .text-field {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
+    -fx-font-size: 20;
     -fx-background-color: -fx-off-white;
     -fx-text-fill: -fx-dark-blue;
 }
 
 .content-background {
-    -fx-fill: -fx-dark-blue;
+    -fx-background-color: -fx-dark-blue;
+    -fx-background-radius: 50px;
+    -fx-background-size: 50px;
 }
 
 .title-label {
@@ -60,7 +62,7 @@
 
 .reset-button {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
+    -fx-font-size: 20;
     -fx-background-color: -fx-light-blue;
     -fx-text-fill: -fx-off-white;
     -fx-background-radius: 20px;
@@ -68,7 +70,7 @@
 
 .submit-button {
     -fx-font-family: "Oxygen";
-    -fx-font-size: 28;
+    -fx-font-size: 20;
     -fx-background-color: -fx-light-blue;
     -fx-text-fill: -fx-off-white;
     -fx-background-radius: 20px;
@@ -324,4 +326,8 @@
 /*    -fx-font-size: 24;*/
 /*    -fx-text-fill: -fx-light-blue;*/
 /*}*/
+
+#amountAvailable {
+    -fx-font-size: 16;
+}
 
