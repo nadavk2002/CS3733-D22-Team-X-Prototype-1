@@ -6,7 +6,6 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 import edu.wpi.cs3733.D22.teamX.LoginManager;
-import edu.wpi.cs3733.D22.teamX.entity.GiftDeliveryRequest;
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
 import java.io.IOException;
 import java.net.URL;
@@ -22,7 +21,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -30,32 +28,22 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class LoginScreenController implements Initializable {
-  @FXML
-  private VBox serverVBox;
-  @FXML
-  private JFXRadioButton optionEmbedded;
-  @FXML
-  private JFXRadioButton optionClient;
-  @FXML
-  private PasswordField password;
-  @FXML
-  private TextField username;
-  @FXML
-  private JFXButton loginButton, exitButton;
-  @FXML
-  private Label message;
-  @FXML
-  private ImageView loginImage;
-  @FXML
-  private VBox loginFields;
-  @FXML
-  private BorderPane loginPane;
+  @FXML private VBox serverVBox;
+  @FXML private JFXRadioButton optionEmbedded;
+  @FXML private JFXRadioButton optionClient;
+  @FXML private PasswordField password;
+  @FXML private TextField username;
+  @FXML private JFXButton loginButton, exitButton, faceButton;
+  @FXML private Label message;
+  @FXML private ImageView loginImage;
+  @FXML private VBox loginFields;
+  @FXML private BorderPane loginPane;
   public static String currentUsername;
 
   @FXML
   public void validLogin() throws IOException {
     if (LoginManager.getInstance()
-            .isValidLogin(username.getText(), password.getText().hashCode())) {
+        .isValidLogin(username.getText(), password.getText().hashCode())) {
       currentUsername = username.getText();
       if (!ConnectionSingleton.getConnectionSingleton().isConnectionEstablished()) {
         if (optionEmbedded.isSelected()) {
@@ -81,15 +69,15 @@ public class LoginScreenController implements Initializable {
       }
       App.switchRoot();
       password.setOnKeyPressed(
-              event -> {
-                if (event.getCode() == KeyCode.ENTER) {
-                  try {
-                    App.switchRoot();
-                  } catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                }
-              });
+          event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+              try {
+                App.switchRoot();
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+            }
+          });
     } else {
       message.setText("Your username or password is incorrect");
     }
@@ -119,7 +107,9 @@ public class LoginScreenController implements Initializable {
   private void goToFaceDetection() throws IOException {
     try {
       FaceDetectionController controller = new FaceDetectionController();
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/FaceDetection.fxml"));
+      FXMLLoader fxmlLoader =
+          new FXMLLoader(
+              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/FaceDetection.fxml"));
       fxmlLoader.setController(controller);
       Parent root1 = fxmlLoader.load();
       Stage stage = new Stage();
@@ -131,7 +121,7 @@ public class LoginScreenController implements Initializable {
     } catch (Exception e) {
     }
     App.switchScene(
-            FXMLLoader.load(
-                    getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/LoginScreen.fxml")));
+        FXMLLoader.load(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/LoginScreen.fxml")));
   }
 }
