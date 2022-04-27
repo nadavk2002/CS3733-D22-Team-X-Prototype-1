@@ -1,9 +1,11 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.web.WebView;
 
@@ -24,5 +26,12 @@ public class SecretPageController implements Initializable {
     secretVideo
         .getEngine()
         .load(App.class.getResource("/edu/wpi/cs3733/D22/teamX/secretPage.html").toExternalForm());
+  }
+
+  @FXML
+  private void stopSecretPage() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
+    secretVideo.getEngine().load("");
   }
 }
