@@ -18,7 +18,6 @@ public class Main {
     //    }
 
     App.launch(App.class, args);
-    // OpenCV.loadLocally();
     System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     try {
       DatabaseCreator.closeDB();

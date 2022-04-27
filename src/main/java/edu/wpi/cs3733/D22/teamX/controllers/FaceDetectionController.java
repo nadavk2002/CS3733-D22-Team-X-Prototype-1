@@ -14,14 +14,13 @@ import javafx.scene.layout.AnchorPane;
 import nu.pattern.OpenCV;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
-import org.opencv.imgproc.Imgproc;
+import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.videoio.VideoCapture;
 
 public class FaceDetectionController {
-  @FXML private Button start_btn;
+  @FXML private Button start_btn, backToLoginScreen;
   @FXML private ImageView currentFrame;
-
-  private AnchorPane rootElement;
+  @FXML private AnchorPane rootElement;
   private Timer timer;
 
   private VideoCapture capture = new VideoCapture();
@@ -83,7 +82,7 @@ public class FaceDetectionController {
         // if the frame is not empty, process it
         if (!frame.empty()) {
           // convert the image to gray scale
-          Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
+          // Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
           // convert the Mat object (OpenCV) to Image (JavaFX)
           imageToShow = mat2Image(frame);
         }
@@ -99,7 +98,8 @@ public class FaceDetectionController {
     // create a temporary buffer
     MatOfByte buffer = new MatOfByte();
     // encode the frame in the buffer
-    // Highgui.imencode(".png", frame, buffer);
+    Imgcodecs Highgui = new Imgcodecs();
+    Highgui.imencode(".png", frame, buffer);
     // build and return an Image created from the image encoded in the buffer
     return new Image(new ByteArrayInputStream(buffer.toArray()));
   }
