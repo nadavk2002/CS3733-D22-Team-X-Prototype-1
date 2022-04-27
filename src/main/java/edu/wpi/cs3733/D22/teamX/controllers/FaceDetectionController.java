@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import nu.pattern.OpenCV;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
 import org.opencv.imgproc.Imgproc;
@@ -27,6 +28,7 @@ public class FaceDetectionController {
 
   @FXML
   protected void startCamera(ActionEvent event) {
+    OpenCV.loadLocally();
     // check: the main class is accessible?
     if (this.rootElement != null) {
       // get the ImageView object for showing the video stream

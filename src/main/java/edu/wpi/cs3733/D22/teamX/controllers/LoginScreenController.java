@@ -26,7 +26,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import nu.pattern.OpenCV;
 
 public class LoginScreenController implements Initializable {
   @FXML private VBox serverVBox;
@@ -106,7 +105,7 @@ public class LoginScreenController implements Initializable {
 
   @FXML
   private void goToFaceDetection() throws IOException {
-    OpenCV.loadLocally();
+    // OpenCV.loadLocally();
     FaceDetectionController controller = new FaceDetectionController();
     FXMLLoader fxmlLoader =
         new FXMLLoader(
