@@ -1,6 +1,11 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.entity.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -14,6 +19,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import org.krysalis.barcode4j.impl.code128.Code128Bean;
+import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
 
 public class GraphicalMapEditorEquipmentTableOverlayController implements Initializable {
   @FXML private TableView<EquipmentUnit> table;
@@ -32,6 +40,15 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
     type.setCellValueFactory(new PropertyValueFactory<>("type"));
     availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
+
+    table.setOnMouseClicked(
+        (MouseEvent event) -> {
+          try {
+            generateBarCode(table.getSelectionModel().getSelectedItem().getUnitID());
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        });
 
     searchEquipment();
   }
@@ -80,5 +97,20 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
 
   private void populateTable(ObservableList<EquipmentUnit> equipmentUnits) {
     table.setItems(equipmentUnits);
+  }
+
+  private void generateBarCode(String barcode) throws IOException {
+    Code128Bean bean = new Code128Bean();
+    File file = new File("barcodes/" + barcode + ".png");
+    File dir = file.getParentFile();
+    if (!dir.exists()) dir.mkdir();
+    if (file.exists()) return;
+    OutputStream output = new FileOutputStream(file);
+    BitmapCanvasProvider canvas =
+        new BitmapCanvasProvider(
+            output, "image/x-png", 150, BufferedImage.TYPE_BYTE_BINARY, false, 0);
+    bean.generateBarcode(canvas, barcode);
+    canvas.finish();
+    output.close();
   }
 }
