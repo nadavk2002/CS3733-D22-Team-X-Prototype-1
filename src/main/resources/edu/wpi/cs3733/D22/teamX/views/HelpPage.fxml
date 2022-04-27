@@ -48,7 +48,12 @@
                                     <Image url="@../assets/LoginScreen.png" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Navigate to the software. The starting screen is the login information" textAlignment="CENTER" wrappingWidth="549.6900367736816">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Navigate to the software. The starting screen is the login information" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -64,6 +69,11 @@
                                  </image>
                               </ImageView>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the server based on your requirnments or preferences" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
