@@ -32,16 +32,7 @@ public class GraphicalMapEditorEquipmentTableOverlayController implements Initia
   public void initialize(URL url, ResourceBundle resourceBundle) {
     table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     unitID.setCellValueFactory(new PropertyValueFactory<>("unitID"));
-    // type.setCellValueFactory(new PropertyValueFactory<>("type"));
-    type.setCellValueFactory(
-        new Callback<
-            TableColumn.CellDataFeatures<EquipmentUnit, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TableColumn.CellDataFeatures<EquipmentUnit, String> param) {
-            return new SimpleStringProperty(param.getValue().getType().getModel());
-          }
-        });
+    type.setCellValueFactory(new PropertyValueFactory<>("typeName"));
     availability.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
     currLoc.setCellValueFactory(new PropertyValueFactory<>("currLocationShortName"));
 
