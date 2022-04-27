@@ -169,11 +169,28 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    nestedBarChart.addSeries(fillChartData(sortEquipmentByFloor("5")));
-    nestedBarChart.addSeries(fillChartData(sortEquipmentByFloor("4")));
-    nestedBarChart.addSeries(fillChartData(sortEquipmentByFloor("3")));
-    fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems();
-    yAxis.setMaxValue(fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems());
+    //    nestedBarChart.addSeries(
+    //        sortByBeds(
+    //            sortByClean(sortEquipmentByFloor("5")),
+    //            sortByInUse(sortEquipmentByFloor("5")),
+    //            sortByDirty(sortEquipmentByFloor("5"))));
+    //    nestedBarChart.addSeries(
+    //        sortByPump(
+    //            sortByClean(sortEquipmentByFloor("5")),
+    //            sortByInUse(sortEquipmentByFloor("5")),
+    //            sortByDirty(sortEquipmentByFloor("5"))));
+    //    nestedBarChart.addSeries(
+    //        sortByRecliners(
+    //            sortByClean(sortEquipmentByFloor("5")),
+    //            sortByInUse(sortEquipmentByFloor("5")),
+    //            sortByDirty(sortEquipmentByFloor("5"))));
+    //    nestedBarChart.addSeries(
+    //        sortByXray(
+    //            sortByClean(sortEquipmentByFloor("5")),
+    //            sortByInUse(sortEquipmentByFloor("5")),
+    //            sortByDirty(sortEquipmentByFloor("5"))));
+    // fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems();
+    // yAxis.setMaxValue(fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems());
     //    coxcombChart.addItem(chartItem);
     //    coxcombChart.addItem(chartItem2);
     alertBox.setVisible(false);
@@ -241,109 +258,466 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         sortByDirty(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
         addToPodC(sortEquipmentByFloor("5")),
-        l5StackD);
+        l5StackD,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5")))));
     fillTable(
         sortByDirty(sortEquipmentByFloor("4")),
         addToPodB(sortEquipmentByFloor("4")),
         addToPodC(sortEquipmentByFloor("4")),
-        l4StackD);
+        l4StackD,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4")))));
     fillTable(
         sortByDirty(sortEquipmentByFloor("3")),
         addToPodB(sortEquipmentByFloor("3")),
         addToPodC(sortEquipmentByFloor("3")),
-        l3StackD);
+        l3StackD,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3")))));
     fillTable(
         sortByDirty(sortEquipmentByFloor("2")),
         addToPodB(sortEquipmentByFloor("2")),
         addToPodC(sortEquipmentByFloor("2")),
-        l2StackD);
+        l2StackD,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2")))));
     fillTable(
         sortByDirty(sortEquipmentByFloor("1")),
         addToPodB(sortEquipmentByFloor("1")),
         addToPodC(sortEquipmentByFloor("1")),
-        l1StackD);
+        l1StackD,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1")))));
     fillTable(
         sortByDirty(sortEquipmentByFloor("L1")),
         addToPodB(sortEquipmentByFloor("L1")),
         addToPodC(sortEquipmentByFloor("L1")),
-        ll1StackD);
+        ll1StackD,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1")))));
     fillTable(
         sortByDirty(sortEquipmentByFloor("L2")),
         addToPodB(sortEquipmentByFloor("L2")),
         addToPodC(sortEquipmentByFloor("L2")),
-        ll2StackD);
+        ll2StackD,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2")))));
 
     fillTable(
         sortByClean(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
         addToPodC(sortEquipmentByFloor("5")),
-        l5StackC);
+        l5StackC,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5")))));
     fillTable(
         sortByClean(sortEquipmentByFloor("4")),
         addToPodB(sortEquipmentByFloor("4")),
         addToPodC(sortEquipmentByFloor("4")),
-        l4StackC);
+        l4StackC,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4")))));
     fillTable(
         sortByClean(sortEquipmentByFloor("3")),
         addToPodB(sortEquipmentByFloor("3")),
         addToPodC(sortEquipmentByFloor("3")),
-        l3StackC);
+        l3StackC,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3")))));
     fillTable(
         sortByClean(sortEquipmentByFloor("2")),
         addToPodB(sortEquipmentByFloor("2")),
         addToPodC(sortEquipmentByFloor("2")),
-        l2StackC);
+        l2StackC,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2")))));
     fillTable(
         sortByClean(sortEquipmentByFloor("1")),
         addToPodB(sortEquipmentByFloor("1")),
         addToPodC(sortEquipmentByFloor("1")),
-        l1StackC);
+        l1StackC,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1")))));
     fillTable(
         sortByClean(sortEquipmentByFloor("L1")),
         addToPodB(sortEquipmentByFloor("L1")),
         addToPodC(sortEquipmentByFloor("L1")),
-        ll1StackC);
+        ll1StackC,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1")))));
     fillTable(
         sortByClean(sortEquipmentByFloor("L2")),
         addToPodB(sortEquipmentByFloor("L2")),
         addToPodC(sortEquipmentByFloor("L2")),
-        ll2StackC);
+        ll2StackC,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2")))));
 
     fillTable(
         sortByInUse(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
         addToPodC(sortEquipmentByFloor("5")),
-        l5StackIU);
+        l5StackIU,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("5")),
+                sortByInUse(sortEquipmentByFloor("5")),
+                sortByDirty(sortEquipmentByFloor("5")))));
     fillTable(
         sortByInUse(sortEquipmentByFloor("4")),
         addToPodB(sortEquipmentByFloor("4")),
         addToPodC(sortEquipmentByFloor("4")),
-        l4StackIU);
+        l4StackIU,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("4")),
+                sortByInUse(sortEquipmentByFloor("4")),
+                sortByDirty(sortEquipmentByFloor("4")))));
     fillTable(
         sortByInUse(sortEquipmentByFloor("3")),
         addToPodB(sortEquipmentByFloor("3")),
         addToPodC(sortEquipmentByFloor("3")),
-        l3StackIU);
+        l3StackIU,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("3")),
+                sortByInUse(sortEquipmentByFloor("3")),
+                sortByDirty(sortEquipmentByFloor("3")))));
     fillTable(
         sortByInUse(sortEquipmentByFloor("2")),
         addToPodB(sortEquipmentByFloor("2")),
         addToPodC(sortEquipmentByFloor("2")),
-        l2StackIU);
+        l2StackIU,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("2")),
+                sortByInUse(sortEquipmentByFloor("2")),
+                sortByDirty(sortEquipmentByFloor("2")))));
     fillTable(
         sortByInUse(sortEquipmentByFloor("1")),
         addToPodB(sortEquipmentByFloor("1")),
         addToPodC(sortEquipmentByFloor("1")),
-        l1StackIU);
+        l1StackIU,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("1")),
+                sortByInUse(sortEquipmentByFloor("1")),
+                sortByDirty(sortEquipmentByFloor("1")))));
     fillTable(
         sortByInUse(sortEquipmentByFloor("L1")),
         addToPodB(sortEquipmentByFloor("L1")),
         addToPodC(sortEquipmentByFloor("L1")),
-        ll1StackIU);
+        ll1StackIU,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("L1")),
+                sortByInUse(sortEquipmentByFloor("L1")),
+                sortByDirty(sortEquipmentByFloor("L1")))));
     fillTable(
         sortByInUse(sortEquipmentByFloor("L2")),
         addToPodB(sortEquipmentByFloor("L2")),
         addToPodC(sortEquipmentByFloor("L2")),
-        ll2StackIU);
+        ll2StackIU,
+        delEmptyBarSeries(
+            sortByBeds(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByXray(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByRecliners(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2"))),
+            sortByPump(
+                sortByClean(sortEquipmentByFloor("L2")),
+                sortByInUse(sortEquipmentByFloor("L2")),
+                sortByDirty(sortEquipmentByFloor("L2")))));
     // dirtyPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("3")));
     // dirtyPodB.getItems().addAll(addToPod1(sortEquipmentByFloor("4")));
     // cleanPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("5")));
@@ -355,44 +729,189 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     displayAlert();
   }
 
-  private ChartItemSeries<ChartItem> fillChartData(ObservableList<EquipmentUnit> floorEquip) {
+  private ChartItemSeries<ChartItem> sortByBeds(
+      ObservableList<EquipmentUnit> clean,
+      ObservableList<EquipmentUnit> inUse,
+      ObservableList<EquipmentUnit> dirty) {
     ChartItemSeries<ChartItem> nestedBarList =
         new ChartItemSeries<>(
             ChartType.NESTED_BAR, "Beds", Paint.valueOf("#446fdc"), Paint.valueOf("#446fdc"));
     List<ChartItem> itemList = new ArrayList<>();
-    int dirtyAmount = 0;
-    int cleanAmount = 0;
-    int inUseAmount = 0;
-    for (EquipmentUnit equipmentUnit : floorEquip) {
-      if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("stor")
-              && equipmentUnit.getIsAvailableChar() == 'Y')
-          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
-              && equipmentUnit.getIsAvailableChar() == 'Y')) {
-        cleanAmount++;
-      } else if ((equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("dirt")
-              && equipmentUnit.getIsAvailableChar() == 'N')
-          || (equipmentUnit.getCurrLocation().getNodeType().toLowerCase().contains("hall")
-              && equipmentUnit.getIsAvailableChar() == 'N')) {
-        dirtyAmount++;
-      } else {
-        inUseAmount++;
+    int cleanBeds = 0;
+    for (EquipmentUnit c : clean) {
+      if (c.getType().getModel().equals("Bed")) {
+        cleanBeds++;
       }
     }
-    ChartItem clean =
+    int inUseBeds = 0;
+    for (EquipmentUnit IU : inUse) {
+      if (IU.getType().getModel().equals("Bed")) {
+        inUseBeds++;
+      }
+    }
+    int dirtyBeds = 0;
+    for (EquipmentUnit d : dirty) {
+      if (d.getType().getModel().equals("Bed")) {
+        dirtyBeds++;
+      }
+    }
+    ChartItem cleanCI =
         new ChartItem(
-            "Clean", cleanAmount, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
-    ChartItem dirty =
+            "Clean", cleanBeds, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
+    ChartItem dirtyCI =
         new ChartItem(
-            "Dirty", dirtyAmount, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
-    ChartItem inuse =
+            "Dirty", dirtyBeds, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
+    ChartItem inuseCI =
         new ChartItem(
-            "In Use", inUseAmount, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
-    itemList.add(clean);
-    itemList.add(dirty);
-    itemList.add(inuse);
-
+            "In Use", inUseBeds, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
+    itemList.add(cleanCI);
+    itemList.add(dirtyCI);
+    itemList.add(inuseCI);
     nestedBarList.setItems(itemList);
+    return nestedBarList;
+  }
 
+  private ChartItemSeries<ChartItem> sortByRecliners(
+      ObservableList<EquipmentUnit> clean,
+      ObservableList<EquipmentUnit> inUse,
+      ObservableList<EquipmentUnit> dirty) {
+    ChartItemSeries<ChartItem> nestedBarList =
+        new ChartItemSeries<>(
+            ChartType.NESTED_BAR, "Recliners", Paint.valueOf("#446fdc"), Paint.valueOf("#446fdc"));
+    List<ChartItem> itemList = new ArrayList<>();
+    int cleanRecliners = 0;
+    for (EquipmentUnit c : clean) {
+      if (c.getType().getModel().equals("Recliner")) {
+        cleanRecliners++;
+      }
+    }
+    int inUseRecliners = 0;
+    for (EquipmentUnit IU : inUse) {
+      if (IU.getType().getModel().equals("Recliner")) {
+        inUseRecliners++;
+      }
+    }
+    int dirtyRecliners = 0;
+    for (EquipmentUnit d : dirty) {
+      if (d.getType().getModel().equals("Recliner")) {
+        dirtyRecliners++;
+      }
+    }
+    ChartItem cleanCI =
+        new ChartItem(
+            "Clean",
+            cleanRecliners,
+            Color.valueOf("#78ff78"),
+            Instant.ofEpochSecond(1),
+            true,
+            5000);
+    ChartItem dirtyCI =
+        new ChartItem(
+            "Dirty",
+            dirtyRecliners,
+            Color.valueOf("#ff7474"),
+            Instant.ofEpochSecond(1),
+            true,
+            5000);
+    ChartItem inuseCI =
+        new ChartItem(
+            "In Use",
+            inUseRecliners,
+            Color.valueOf("#feff75"),
+            Instant.ofEpochSecond(1),
+            true,
+            5000);
+    itemList.add(cleanCI);
+    itemList.add(dirtyCI);
+    itemList.add(inuseCI);
+    nestedBarList.setItems(itemList);
+    return nestedBarList;
+  }
+
+  private ChartItemSeries<ChartItem> sortByPump(
+      ObservableList<EquipmentUnit> clean,
+      ObservableList<EquipmentUnit> inUse,
+      ObservableList<EquipmentUnit> dirty) {
+    ChartItemSeries<ChartItem> nestedBarList =
+        new ChartItemSeries<>(
+            ChartType.NESTED_BAR,
+            "Infusion Pumps",
+            Paint.valueOf("#446fdc"),
+            Paint.valueOf("#446fdc"));
+    List<ChartItem> itemList = new ArrayList<>();
+    int cleanPumps = 0;
+    for (EquipmentUnit c : clean) {
+      if (c.getType().getModel().equals("Infusion Pump")) {
+        cleanPumps++;
+      }
+    }
+    int inUsePumps = 0;
+    for (EquipmentUnit IU : inUse) {
+      if (IU.getType().getModel().equals("Infusion Pump")) {
+        inUsePumps++;
+      }
+    }
+    int dirtyPumps = 0;
+    for (EquipmentUnit d : dirty) {
+      if (d.getType().getModel().equals("Infusion Pump")) {
+        dirtyPumps++;
+      }
+    }
+    ChartItem cleanCI =
+        new ChartItem(
+            "Clean", cleanPumps, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
+    ChartItem dirtyCI =
+        new ChartItem(
+            "Dirty", dirtyPumps, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
+    ChartItem inuseCI =
+        new ChartItem(
+            "In Use", inUsePumps, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
+    itemList.add(cleanCI);
+    itemList.add(dirtyCI);
+    itemList.add(inuseCI);
+    nestedBarList.setItems(itemList);
+    return nestedBarList;
+  }
+
+  private ChartItemSeries<ChartItem> sortByXray(
+      ObservableList<EquipmentUnit> clean,
+      ObservableList<EquipmentUnit> inUse,
+      ObservableList<EquipmentUnit> dirty) {
+    ChartItemSeries<ChartItem> nestedBarList =
+        new ChartItemSeries<>(
+            ChartType.NESTED_BAR, "X-Ray", Paint.valueOf("#446fdc"), Paint.valueOf("#446fdc"));
+    List<ChartItem> itemList = new ArrayList<>();
+    int cleanXrays = 0;
+    for (EquipmentUnit c : clean) {
+      if (c.getType().getModel().equals("X-Ray")) {
+        cleanXrays++;
+      }
+    }
+    int inUseXrays = 0;
+    for (EquipmentUnit IU : inUse) {
+      if (IU.getType().getModel().equals("X-Ray")) {
+        inUseXrays++;
+      }
+    }
+    int dirtyXrays = 0;
+    for (EquipmentUnit d : dirty) {
+      if (d.getType().getModel().equals("X-Ray")) {
+        dirtyXrays++;
+      }
+    }
+    ChartItem cleanCI =
+        new ChartItem(
+            "Clean", cleanXrays, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
+    ChartItem dirtyCI =
+        new ChartItem(
+            "Dirty", dirtyXrays, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
+    ChartItem inuseCI =
+        new ChartItem(
+            "In Use", inUseXrays, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
+    itemList.add(cleanCI);
+    itemList.add(dirtyCI);
+    itemList.add(inuseCI);
+    nestedBarList.setItems(itemList);
     return nestedBarList;
   }
 
@@ -485,13 +1004,76 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     inUse.setText(Integer.toString(inUseAmount));
   }
 
-  private void fillChart() {}
+  private List<ChartItemSeries<ChartItem>> delEmptyBarSeries(
+      ChartItemSeries<ChartItem> bed,
+      ChartItemSeries<ChartItem> xray,
+      ChartItemSeries<ChartItem> recliner,
+      ChartItemSeries<ChartItem> pump) {
+    List<ChartItemSeries<ChartItem>> chartList = new ArrayList<>();
+    if (bed.getItems().size() == 0
+        && xray.getItems().size() == 0
+        && recliner.getItems().size() == 0
+        && pump.getItems().size() == 0) {
+      return chartList;
+    } else if (bed.getItems().size() == 0
+        && xray.getItems().size() == 0
+        && recliner.getItems().size() == 0) {
+      chartList.add(pump);
+    } else if (xray.getItems().size() == 0
+        && recliner.getItems().size() == 0
+        && pump.getItems().size() == 0) {
+      chartList.add(bed);
+    } else if (bed.getItems().size() == 0
+        && recliner.getItems().size() == 0
+        && pump.getItems().size() == 0) {
+      chartList.add(xray);
+    } else if (bed.getItems().size() == 0
+        && xray.getItems().size() == 0
+        && pump.getItems().size() == 0) {
+      chartList.add(recliner);
+    } else if (bed.getItems().size() == 0 && xray.getItems().size() == 0) {
+      chartList.add(recliner);
+      chartList.add(pump);
+    } else if (recliner.getItems().size() == 0 && pump.getItems().size() == 0) {
+      chartList.add(recliner);
+      chartList.add(pump);
+    } else if (xray.getItems().size() == 0 && recliner.getItems().size() == 0) {
+      chartList.add(bed);
+      chartList.add(pump);
+    } else if (bed.getItems().size() == 0 && pump.getItems().size() == 0) {
+      chartList.add(recliner);
+      chartList.add(xray);
+    } else if (bed.getItems().size() == 0) {
+      chartList.add(recliner);
+      chartList.add(pump);
+      chartList.add(xray);
+    } else if (xray.getItems().size() == 0) {
+      chartList.add(recliner);
+      chartList.add(pump);
+      chartList.add(bed);
+    } else if (recliner.getItems().size() == 0) {
+      chartList.add(bed);
+      chartList.add(pump);
+      chartList.add(xray);
+    } else if (pump.getItems().size() == 0) {
+      chartList.add(recliner);
+      chartList.add(bed);
+      chartList.add(xray);
+    } else {
+      chartList.add(recliner);
+      chartList.add(pump);
+      chartList.add(xray);
+      chartList.add(bed);
+    }
+    return chartList;
+  }
 
   private void fillTable(
       ObservableList<EquipmentUnit> equipment,
       ObservableList<EquipmentUnit> podB,
       ObservableList<EquipmentUnit> podC,
-      StackPane floor) {
+      StackPane floor,
+      List<ChartItemSeries<ChartItem>> chartItems) {
 
     floor.setOnMouseClicked(
         event -> {
@@ -499,6 +1081,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
             cleanTable.setItems(equipment);
             cleanPodB.setItems(podB);
             cleanPodC.setItems(podC);
+            nestedBarChart.setSeries(chartItems);
           }
         });
   }
