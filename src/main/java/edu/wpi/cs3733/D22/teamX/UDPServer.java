@@ -25,6 +25,64 @@ public class UDPServer {
     return SingletonHelper.udpServer;
   }
 
+  public String receive() {
+    try {
+      return receiveMessage(server);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void send(String msg, SocketAddress serverAddress) {
+    try {
+      sendMessage(server, msg, serverAddress);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void getValue(String msg, SocketAddress serverAddress) {
+    try {
+      sendMessage(server, ("GET" + msg), serverAddress);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void setTemp(double Temp, SocketAddress serverAddress) {
+    try {
+      sendMessage(server, ("TEM" + Temp), serverAddress);
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void setFan(boolean isOn, SocketAddress serverAddress) {
+    try {
+      if (isOn) {
+        sendMessage(server, ("FAN" + "on"), serverAddress);
+      } else {
+        sendMessage(server, ("FAN" + "off"), serverAddress);
+      }
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  public void setLamp(boolean isOn, SocketAddress serverAddress) {
+    try {
+      if (isOn) {
+        sendMessage(server, ("LIT" + "on"), serverAddress);
+      } else {
+        sendMessage(server, ("LIT" + "off"), serverAddress);
+      }
+
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   private static DatagramChannel startServer() throws IOException {
     InetSocketAddress address = new InetSocketAddress("192.168.137.1", 6587);
     DatagramChannel server = bindChannel(address);
@@ -50,22 +108,6 @@ public class UDPServer {
       return message;
     }
     return "";
-  }
-
-  public String receive() {
-    try {
-      return receiveMessage(server);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
-  }
-
-  public void send(String msg, SocketAddress serverAddress) {
-    try {
-      sendMessage(server, msg, serverAddress);
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 
   public static DatagramChannel openChannel() throws IOException {
