@@ -3,122 +3,117 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MealReqController">
    <top>
-      <Label fx:id="choiceBoxLabel12" styleClass="title-label" text="Request Patient Meal" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+      <Label fx:id="choiceBoxLabel12" alignment="CENTER" contentDisplay="TOP" prefHeight="100.0" prefWidth="800.0" styleClass="title-label" text="Request Patient Meal" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
          <font>
             <Font name="System Bold" size="72.0" />
          </font>
          <BorderPane.margin>
-            <Insets top="200.0" />
+            <Insets top="250.0" />
          </BorderPane.margin>
       </Label>
    </top>
    <center>
-      <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" BorderPane.alignment="TOP_CENTER">
-         <children>
-            <Rectangle arcHeight="100.0" arcWidth="100.0" fill="#deefff" height="500.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1100.0">
-               <StackPane.margin>
-                  <Insets bottom="100.0" />
-               </StackPane.margin></Rectangle>
-            <VBox alignment="CENTER" prefHeight="500.0" prefWidth="1000.0" StackPane.alignment="CENTER">
-               <children>
-                  <GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="300.0" prefWidth="1000.0" translateY="-50.0">
-                    <columnConstraints>
-                      <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
-                        <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="250.0" />
-                        <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
-                      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <Label fx:id="choiceBoxLabel" text="Patient Names">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel1" text="Drink Selection" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel2" text="Assigned Staff" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel11" text="Side Selection" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel3" text="Request Status" GridPane.rowIndex="2">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel111" alignment="CENTER" text="Main Selection" GridPane.columnIndex="2">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel1111" alignment="CENTER" text="Destination" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="choiceBoxLabel11111" alignment="CENTER" layoutX="10.0" layoutY="436.0" text="Exemptions" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                           <font>
-                              <Font size="24.0" />
-                           </font>
-                        </Label>
-                        <JFXComboBox fx:id="destinationDrop" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <JFXComboBox fx:id="mainSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" />
-                        <JFXComboBox fx:id="serviceStatus" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <JFXComboBox fx:id="sideSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <JFXComboBox fx:id="assignStaff" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <JFXComboBox fx:id="drinkSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                        <JFXComboBox fx:id="exemptionSel" layoutX="360.0" layoutY="432.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <JFXComboBox fx:id="patientNames" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                     </children>
-                  </GridPane>
-                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="500.0" spacing="125.0">
-                     <children>
-                        <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" styleClass="reset-button" text="Reset Form" textAlignment="CENTER" textFill="#446fdc">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" styleClass="submit-button" text="Submit Request" textFill="#446fdc">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" styleClass="content-background" BorderPane.alignment="TOP_CENTER">
          <BorderPane.margin>
             <Insets top="50.0" />
          </BorderPane.margin>
-      </StackPane>
+         <children>
+            <GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="320.0" prefWidth="1000.0" styleClass="content-container">
+              <columnConstraints>
+                <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+                <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="250.0" />
+                  <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="choiceBoxLabel" text="Patient Names">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel1" text="Drink Selection" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel2" text="Assigned Staff" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel11" text="Side Selection" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel3" text="Request Status" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel111" alignment="CENTER" text="Main Selection" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel1111" alignment="CENTER" text="Destination" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="choiceBoxLabel11111" alignment="CENTER" layoutX="10.0" layoutY="436.0" text="Exemptions" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="destinationDrop" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXComboBox fx:id="mainSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                  <JFXComboBox fx:id="serviceStatus" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXComboBox fx:id="sideSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="assignStaff" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="drinkSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <JFXComboBox fx:id="exemptionSel" layoutX="360.0" layoutY="432.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <JFXComboBox fx:id="patientNames" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="200.0" prefHeight="80.0" prefWidth="600.0" spacing="125.0" styleClass="content-container">
+               <children>
+                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" styleClass="reset-button" text="Reset Form" textAlignment="CENTER" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" styleClass="submit-button" text="Submit Request" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="50.0" top="50.0" />
+         </padding>
+      </VBox>
    </center>
 </BorderPane>

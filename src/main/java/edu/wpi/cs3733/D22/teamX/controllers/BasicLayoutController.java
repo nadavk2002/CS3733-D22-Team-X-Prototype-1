@@ -70,14 +70,8 @@ public class BasicLayoutController implements Initializable {
       throw new RuntimeException(e);
     }
     buttonPressSoundPlayer.setVolume(.50);
-    buttonPressSoundPlayer.setVolume(0); // remove this line eventually
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
-    SanitationReqAPI sanReqAPI = new SanitationReqAPI();
-    // this api saves data after app closes, so this erases that previous data
-    while (sanReqAPI.getAllRequests().size() > 0) {
-      sanReqAPI.deleteRequest(sanReqAPI.getAllRequests().get(0));
-    }
     checkAPIData();
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
@@ -109,6 +103,11 @@ public class BasicLayoutController implements Initializable {
   //    }
   //  }
 
+  /**
+   * Starts and loops the background music
+   *
+   * @throws IOException
+   */
   private void playMusic() throws IOException {
     Stage stage = new Stage();
     stage.setOpacity(0);
@@ -120,6 +119,11 @@ public class BasicLayoutController implements Initializable {
     stage.setScene(scene);
   }
 
+  /**
+   * Shows the sent service requests page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchServiceRequestTable() throws IOException {
     playButtonPressSound();
@@ -130,6 +134,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the map editor page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchGraphicalEditor() throws IOException {
     playButtonPressSound();
@@ -140,6 +149,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the main service request page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchServiceRequestMenu() throws IOException {
     playButtonPressSound();
@@ -149,6 +163,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the map dashboard page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchMapDashboard() throws IOException {
     playButtonPressSound();
@@ -160,6 +179,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the burndown chart page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchRequestGraph() throws IOException {
     playButtonPressSound();
@@ -170,6 +194,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Logs out and returns to the login screen
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchLoginScreen() throws IOException {
     playButtonPressSound();
@@ -181,6 +210,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the employee information page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchEmployeeViewer() throws IOException {
     playButtonPressSound();
@@ -191,6 +225,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the API landing page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchAPILandingPage() throws IOException {
     playButtonPressSound();
@@ -201,6 +240,11 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the about page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void goToAboutPage() throws IOException {
     playButtonPressSound();
@@ -213,6 +257,7 @@ public class BasicLayoutController implements Initializable {
   @FXML
   void ExitApplication() throws IOException, loadSaveFromCSVException {
     playButtonPressSound();
+    checkAPIData();
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       if (!CSVFileSaverController.isSaved) {
@@ -227,6 +272,11 @@ public class BasicLayoutController implements Initializable {
     }
   }
 
+  /**
+   * Shows the preference page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchPreferencePage() throws IOException {
     playButtonPressSound();
@@ -237,14 +287,21 @@ public class BasicLayoutController implements Initializable {
     CSVFileSaverController.loaded = false;
   }
 
+  /**
+   * Shows the covid information page
+   *
+   * @throws IOException if unable to switch scenes
+   */
   @FXML
   public void switchCovidPage() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CovidPage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
+  /** Starts the clock */
   private void initClock() {
     Timeline clock =
         new Timeline(
@@ -259,11 +316,13 @@ public class BasicLayoutController implements Initializable {
     clock.play();
   }
 
+  /** Plays the basic button sound */
   private void playButtonPressSound() {
     buttonPressSoundPlayer.stop();
     buttonPressSoundPlayer.play();
   }
 
+  /** updates DAOs with data retrieved from API usage */
   private static void checkAPIData() {
     // Add new meal service request data
     List<MealServiceRequest> apiMeals = MealServiceRequestDAO.getDAO().getAllRecords();
