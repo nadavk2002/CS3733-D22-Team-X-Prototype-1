@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -9,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -18,7 +18,7 @@ public class MedicalEquipmentDeliveryController {
   @FXML private Label amountAvailable;
   @FXML private Button ToMainMenu;
   @FXML
-  private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus, selectAssignee;
+  private JFXComboBox<String> selectEquipmentType, selectDestination, selectStatus, selectAssignee;
   @FXML private TextField amountField;
   @FXML private Button submitButton;
 
