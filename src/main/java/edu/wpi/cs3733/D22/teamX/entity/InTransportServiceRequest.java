@@ -4,18 +4,18 @@ import java.time.LocalDateTime;
 
 /** Represents a transport service request */
 public class InTransportServiceRequest extends ServiceRequest {
-  private String patientName;
+  private Patient patientName;
   private String transportFrom; // this is destination, this is unecessary
 
   public InTransportServiceRequest() {
     super();
-    this.patientName = "";
+    this.patientName = new Patient();
     this.transportFrom = "";
   }
 
   public InTransportServiceRequest(
       String requestID,
-      String patientName,
+      Patient patientName,
       String transportFrom,
       Employee assignee,
       String status,
@@ -27,7 +27,7 @@ public class InTransportServiceRequest extends ServiceRequest {
 
   public InTransportServiceRequest(
       String requestID,
-      String patientName,
+      Patient patientName,
       String transportFrom,
       Employee assignee,
       LocalDateTime creationTime,
@@ -44,7 +44,7 @@ public class InTransportServiceRequest extends ServiceRequest {
     this.transportFrom = transportFrom;
   }
 
-  public String getPatientName() {
+  public Patient getPatientName() {
     return patientName;
   }
 
@@ -52,7 +52,7 @@ public class InTransportServiceRequest extends ServiceRequest {
     return transportFrom;
   }
 
-  public void setPatientName(String patientName) {
+  public void setPatientName(Patient patientName) {
     this.patientName = patientName;
   }
 }

@@ -1,523 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import eu.hansolo.fx.charts.Axis?>
+<?import eu.hansolo.fx.charts.NestedBarChart?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <StackPane fx:id="parentPage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorDashboardController">
    <children>
-      <AnchorPane fx:id="anchorRoot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" style="-fx-background-color: #FFFFFF;">
+      <AnchorPane fx:id="anchorRoot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0">
          <children>
-            <JFXButton fx:id="toMapEditor" layoutX="1480.0" layoutY="500.0" onAction="#ToMapEditor" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #446fdc; -fx-rotate: 270; -fx-background-radius: 0;" text="Map Editor" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="1562.0" layoutY="519.0" style="-fx-rotate: 270;">
-               <image>
-                  <Image url="@../assets/upArrow.png" />
-               </image>
-            </ImageView>
-            <VBox fx:id="masterBox" alignment="CENTER" layoutX="106.0" layoutY="103.0" prefHeight="595.0" prefWidth="406.0">
+            <VBox fx:id="infoBox" layoutX="799.0" prefHeight="1080.0" prefWidth="821.0" style="-fx-background-color: #adadad; -fx-border-color: #adadad; -fx-border-width: 95 95 90 50; -fx-background-radius: 30 0 0 30; -fx-border-radius: 30 0 0 30;">
                <children>
-                  <Label text="Tower Levels">
-                     <font>
-                        <Font name="System Bold" size="48.0" />
-                     </font>
-                  </Label>
-                  <VBox fx:id="L5" layoutX="600.0" layoutY="209.0" prefHeight="595.0" prefWidth="406.0" style="-fx-border-color: #000000; -fx-border-width: 3;">
-                     <children>
-                        <StackPane prefHeight="17.0" prefWidth="318.0">
-                           <children>
-                              <Rectangle fx:id="cleanEquStor11" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 5">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                        <HBox fx:id="l5Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="405.0">
-                           <children>
-                              <StackPane fx:id="l5Stack" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../assets/dirtyIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levFiveDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l5StackIU" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levFiveIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text fx:id="levFiveIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l5StackC" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levFiveClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="42.0">
-                                             <image>
-                                                <Image url="@../assets/cleanIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levFiveCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="21.0">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </HBox>
-                        <StackPane prefHeight="2.0" prefWidth="778.0">
-                           <children>
-                              <Rectangle fx:id="cleanEquStor12" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                        <HBox fx:id="l4Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <StackPane fx:id="l4Stack" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levFourDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../assets/dirtyIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levFourDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l4StackIU" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levFourIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text fx:id="levFourIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l4StackC" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levFourClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="42.0">
-                                             <image>
-                                                <Image url="@../assets/cleanIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levFourCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </HBox>
-                        <StackPane prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <Rectangle fx:id="cleanEquStor13" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 3">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                        <HBox fx:id="l3Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <StackPane fx:id="l3Stack" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../assets/dirtyIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levThreeDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l3StackIU" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levThreeIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text fx:id="levThreeIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l3StackC" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levThreeClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="42.0">
-                                             <image>
-                                                <Image url="@../assets/cleanIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levThreeCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="25.0">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </HBox>
-                        <StackPane prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <Rectangle fx:id="cleanEquStor14" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                        <HBox fx:id="l2Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <StackPane fx:id="l2Stack" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../assets/dirtyIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="22.33331298828125">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l2StackIU" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levTwoIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text fx:id="levTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l2StackC" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="42.0">
-                                             <image>
-                                                <Image url="@../assets/cleanIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="21.0">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </HBox>
-                        <StackPane prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <Rectangle fx:id="cleanEquStor15" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 1">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                        <HBox fx:id="l1Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <StackPane fx:id="l1Stack" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../assets/dirtyIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="22.33331298828125">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l1StackIU" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levOneIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text fx:id="levOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="l1StackC" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="levOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="42.0">
-                                             <image>
-                                                <Image url="@../assets/cleanIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="levOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </HBox>
-                        <StackPane prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <Rectangle fx:id="cleanEquStor16" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 1">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                        <HBox fx:id="ll1Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <StackPane fx:id="ll1Stack" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="llOneDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../assets/dirtyIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="llOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="ll1StackIU" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="llOneIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text fx:id="llOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="ll1StackC" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="llOneClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="42.0">
-                                             <image>
-                                                <Image url="@../assets/cleanIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="llOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="23.6666259765625">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </HBox>
-                        <StackPane prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <Rectangle fx:id="cleanEquStor17" fill="#446fdc" height="60.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="600.0" />
-                              <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 2">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </Text>
-                           </children>
-                        </StackPane>
-                        <HBox fx:id="ll2Hbox" alignment="CENTER" prefHeight="0.0" prefWidth="778.0">
-                           <children>
-                              <StackPane fx:id="ll2Stack" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="34.0">
-                                             <image>
-                                                <Image url="@../assets/dirtyIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="llTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="25.0">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="ll2StackIU" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="llTwoIU" fill="#feff75" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Text fx:id="llTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="19.66668701171875">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                              <StackPane fx:id="ll2StackC" prefHeight="150.0" prefWidth="200.0">
-                                 <children>
-                                    <Rectangle fx:id="llTwoClean" fill="#78ff78" height="40.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="200.0" />
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <ImageView fitHeight="34.0" fitWidth="42.0">
-                                             <image>
-                                                <Image url="@../assets/cleanIcon.png" />
-                                             </image>
-                                          </ImageView>
-                                          <Text fx:id="llTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="26.333251953125">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </StackPane>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-                  <JFXButton fx:id="showAlerts" minHeight="-Infinity" minWidth="-Infinity" onAction="#ShowAlerts" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #446fdc;" text="Alerts" textFill="WHITE" />
-               </children>
-            </VBox>
-            <HBox fx:id="cleanTableBox" alignment="CENTER" layoutX="895.0" layoutY="281.0" prefHeight="203.0" prefWidth="538.0">
-               <children>
-                  <ImageView fitHeight="34.0" fitWidth="32.0" style="-fx-rotate: 90;">
-                     <image>
-                        <Image url="@../assets/blackArrow.png" />
-                     </image>
-                  </ImageView>
-                  <TabPane minHeight="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #ffffff;">
+                  <TabPane minHeight="-Infinity" prefHeight="420.0" prefWidth="600.0" style="-fx-border-width: 10; -fx-border-color: #446fdc; -fx-border-radius: 10;">
                      <tabs>
                         <Tab text="All Clean Equipment">
                            <content>
-                              <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
+                              <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="254.0" prefWidth="568.0">
                                  <columns>
                                     <TableColumn fx:id="unitIDC" prefWidth="75.0" text="Unit ID" />
                                     <TableColumn fx:id="typeC" prefWidth="75.0" text="Type" />
@@ -527,7 +41,7 @@
                               </TableView>
                            </content>
                         </Tab>
-                        <Tab text="Clean Equipment in Pod B">
+                        <Tab text="Equipment in Pod B">
                            <content>
                               <TableView fx:id="cleanPodB" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
                                  <columns>
@@ -539,7 +53,7 @@
                               </TableView>
                            </content>
                         </Tab>
-                        <Tab text="Clean Equipment in Pod C">
+                        <Tab text="Equipment in Pod C">
                            <content>
                               <TableView fx:id="cleanPodC" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
                                  <columns>
@@ -552,17 +66,511 @@
                            </content>
                         </Tab>
                      </tabs>
+                     <effect>
+                        <InnerShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
+                           <color>
+                              <Color red="1.0" green="1.0" blue="1.0" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
                   </TabPane>
+                  <HBox prefHeight="475.0" prefWidth="676.0">
+                     <children>
+                        <Axis fx:id="yAxis" maxValue="20.0" mediumTickMarksVisible="false" minorTickMarksVisible="false" prefHeight="423.0" prefWidth="103.0" tickLabelFontSize="30.0" tickLabelOrientation="ORTHOGONAL">
+                           <minorTickMarkColor>
+                              <Color opacity="0.0" />
+                           </minorTickMarkColor>
+                        </Axis>
+                        <NestedBarChart fx:id="nestedBarChart" prefHeight="475.0" prefWidth="710.0" seriesTitleVisible="true" style="-fx-effect: dropshadow(two-pass-box, rgba(0, 0, 0, 0.6), 5, 0.0, 0, -1);;" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-            <VBox fx:id="alertBox" alignment="CENTER" layoutX="354.0" layoutY="21.0" prefHeight="70.0" prefWidth="907.0" style="-fx-background-color: #446fdc;">
+               <effect>
+                  <DropShadow height="11.0" radius="5.0" width="11.0" />
+               </effect>
+            </VBox>
+            <JFXButton fx:id="toMapEditor" layoutX="1480.0" layoutY="500.0" onAction="#ToMapEditor" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #446fdc; -fx-rotate: 270; -fx-background-radius: 20 20 0 0;" text="Map Editor" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="20.0" fitWidth="18.0" layoutX="1562.0" layoutY="519.0" style="-fx-rotate: 270;">
+               <image>
+                  <Image url="@../assets/upArrow.png" />
+               </image>
+            </ImageView>
+            <VBox fx:id="masterBox" alignment="CENTER" layoutX="102.0" layoutY="21.0" prefHeight="814.0" prefWidth="600.0">
+               <children>
+                  <Label text="Tower Levels">
+                     <font>
+                        <Font name="System Bold" size="48.0" />
+                     </font>
+                  </Label>
+                  <VBox fx:id="towerBox">
+                     <children>
+                        <VBox fx:id="l5Master" style="-fx-background-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-radius: 10; -fx-border-width: 8;">
+                           <children>
+                              <StackPane fx:id="l5Stack">
+                                 <children>
+                                    <Rectangle fx:id="cleanEquStor11" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 5">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="l5Vbox" alignment="TOP_CENTER" prefHeight="52.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                                 <children>
+                                    <StackPane fx:id="l5StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox alignment="CENTER_LEFT">
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levFiveDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                             <effect>
+                                                <DropShadow blurType="TWO_PASS_BOX" radius="11.17" width="25.68" />
+                                             </effect>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l5StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levFiveIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levFiveIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l5StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levFiveClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levFiveCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="l4Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
+                           <children>
+                              <StackPane fx:id="l4Stack">
+                                 <children>
+                                    <Rectangle fx:id="cleanEquStor12" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 4">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="l4Vbox">
+                                 <children>
+                                    <StackPane fx:id="l4StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levFourDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levFourDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l4StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levFourIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levFourIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l4StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levFourClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levFourCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="l3Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
+                           <children>
+                              <StackPane fx:id="l3Stack">
+                                 <children>
+                                    <Rectangle fx:id="cleanEquStor13" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 3">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="l3Vbox">
+                                 <children>
+                                    <StackPane fx:id="l3StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levThreeDirtyText" strokeType="OUTSIDE" strokeWidth="0.0">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l3StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levThreeIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levThreeIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l3StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levThreeClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levThreeCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="l2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
+                           <children>
+                              <StackPane fx:id="l2Stack">
+                                 <children>
+                                    <Rectangle fx:id="cleanEquStor14" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 2">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="l2Vbox">
+                                 <children>
+                                    <StackPane fx:id="l2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="l1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
+                           <children>
+                              <StackPane fx:id="l1Stack">
+                                 <children>
+                                    <Rectangle fx:id="cleanEquStor15" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Level 1">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="l1Vbox">
+                                 <children>
+                                    <StackPane fx:id="l1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="l1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="levOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="levOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="ll1Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
+                           <children>
+                              <StackPane fx:id="ll1Stack">
+                                 <children>
+                                    <Rectangle fx:id="cleanEquStor16" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 1">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="ll1Vbox">
+                                 <children>
+                                    <StackPane fx:id="ll1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="llOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="llOneDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="ll1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="llOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="llOneIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="ll1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="llOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="llOneCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox fx:id="ll2Master" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #446fdc; -fx-background-color: #446fdc; -fx-border-width: 8;">
+                           <children>
+                              <StackPane fx:id="ll2Stack" prefHeight="0.0" prefWidth="778.0">
+                                 <children>
+                                    <Rectangle fx:id="cleanEquStor17" fill="#446fdc" height="30.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 20; -fx-arc-width: 20;" width="600.0" />
+                                    <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Lower Level 2">
+                                       <font>
+                                          <Font size="22.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </StackPane>
+                              <VBox fx:id="ll2Vbox">
+                                 <children>
+                                    <StackPane fx:id="ll2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="llTwoDirtyText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="ll2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="llTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="llTwoIUText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                    <StackPane fx:id="ll2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                       <children>
+                                          <Rectangle fx:id="llTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <HBox>
+                                             <children>
+                                                <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
+                                                <Text fx:id="llTwoCleanText" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
+                                                   <font>
+                                                      <Font size="16.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <HBox fx:id="buttonBox" alignment="CENTER" prefHeight="19.0" prefWidth="600.0">
+                     <children>
+                        <JFXButton fx:id="toLocationTable" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="132.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
+                        <JFXButton fx:id="showAlerts" minHeight="-Infinity" minWidth="-Infinity" onAction="#ShowAlerts" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Alerts" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="alertBox" alignment="CENTER" layoutX="341.0" layoutY="-10.0" prefHeight="90.0" prefWidth="406.0" style="-fx-background-color: #446fdc;">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="158.0" text="ALERT!" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="alertLabel" alignment="CENTER" textFill="WHITE">
+                  <Label fx:id="alertLabel" alignment="CENTER" prefHeight="35.0" prefWidth="392.0" textFill="WHITE">
                      <font>
                         <Font size="24.0" />
                      </font>
