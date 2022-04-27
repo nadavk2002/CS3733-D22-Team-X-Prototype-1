@@ -96,7 +96,21 @@ public class LoginScreenController implements Initializable {
       serverVBox.setDisable(true);
       serverVBox.setVisible(false);
     }
-
+    //Use this temporarily!
+    username.setOnKeyPressed(
+        event -> {
+          if (event.getCode() == KeyCode.SPACE) {
+            try {
+              DatabaseCreator.initializeDB();
+              ConnectionSingleton.getConnectionSingleton().setEmbedded();
+              App.switchRoot();
+            } catch (IOException e) {
+              e.printStackTrace();
+            } catch (loadSaveFromCSVException e) {
+              throw new RuntimeException(e);
+            }
+          }
+        });
     loginImage.fitWidthProperty().bind(loginFields.widthProperty());
     loginImage.fitHeightProperty().bind(loginFields.heightProperty());
   }
