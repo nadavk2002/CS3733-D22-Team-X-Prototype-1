@@ -84,7 +84,7 @@ public class UDPServer {
   }
 
   private static DatagramChannel startServer() throws IOException {
-    InetSocketAddress address = new InetSocketAddress("192.168.137.1", 6587);
+    InetSocketAddress address = new InetSocketAddress("0.0.0.0", 6587);
     DatagramChannel server = bindChannel(address);
     System.out.println("Server started at #" + address);
     server.configureBlocking(false);
