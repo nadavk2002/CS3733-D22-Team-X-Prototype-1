@@ -26,6 +26,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import nu.pattern.OpenCV;
 
 public class LoginScreenController implements Initializable {
   @FXML private VBox serverVBox;
@@ -98,30 +99,28 @@ public class LoginScreenController implements Initializable {
       serverVBox.setDisable(true);
       serverVBox.setVisible(false);
     }
-
+    faceButton.setDisable(false);
     loginImage.fitWidthProperty().bind(loginFields.widthProperty());
     loginImage.fitHeightProperty().bind(loginFields.heightProperty());
   }
 
   @FXML
   private void goToFaceDetection() throws IOException {
-    try {
-      FaceDetectionController controller = new FaceDetectionController();
-      FXMLLoader fxmlLoader =
-          new FXMLLoader(
-              getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/FaceDetection.fxml"));
-      fxmlLoader.setController(controller);
-      Parent root1 = fxmlLoader.load();
-      Stage stage = new Stage();
-      stage.initModality(Modality.APPLICATION_MODAL);
-      stage.initStyle(StageStyle.DECORATED);
-      stage.setTitle("ARE YOU A ROBOT?");
-      stage.setScene(new Scene(root1));
-      stage.show();
-    } catch (Exception e) {
-    }
-    App.switchScene(
-        FXMLLoader.load(
-            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/LoginScreen.fxml")));
+    OpenCV.loadLocally();
+    FaceDetectionController controller = new FaceDetectionController();
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/FaceDetection.fxml"));
+    // fxmlLoader.setController(controller);
+    Parent root1 = fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("ARE YOU A ROBOT?");
+    stage.setScene(new Scene(root1));
+    stage.show();
+    //    App.switchScene(
+    //        FXMLLoader.load(
+    //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/LoginScreen.fxml")));
   }
 }

@@ -22,6 +22,7 @@ public class FaceDetectionController {
 
   private AnchorPane rootElement;
   private Timer timer;
+
   private VideoCapture capture = new VideoCapture();
 
   @FXML
