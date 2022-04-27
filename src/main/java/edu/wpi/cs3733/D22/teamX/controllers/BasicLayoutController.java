@@ -110,6 +110,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Starts and loops the background music
+   *
    * @throws IOException
    */
   private void playMusic() throws IOException {
@@ -125,6 +126,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the sent service requests page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -139,6 +141,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the map editor page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -153,6 +156,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the main service request page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -166,6 +170,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the map dashboard page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -181,6 +186,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the burndown chart page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -195,6 +201,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Logs out and returns to the login screen
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -210,6 +217,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the employee information page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -224,6 +232,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the API landing page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -238,6 +247,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the about page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -252,6 +262,7 @@ public class BasicLayoutController implements Initializable {
   @FXML
   void ExitApplication() throws IOException, loadSaveFromCSVException {
     playButtonPressSound();
+    checkAPIData();
     if (CSVFileSaverController.loaded) {
       Platform.exit();
       if (!CSVFileSaverController.isSaved) {
@@ -268,6 +279,7 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the preference page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
@@ -282,19 +294,19 @@ public class BasicLayoutController implements Initializable {
 
   /**
    * Shows the covid information page
+   *
    * @throws IOException if unable to switch scenes
    */
   @FXML
   public void switchCovidPage() throws IOException {
+    playButtonPressSound();
     checkAPIData();
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/CovidPage.fxml")));
     CSVFileSaverController.loaded = false;
   }
 
-  /**
-   * Starts the clock
-   */
+  /** Starts the clock */
   private void initClock() {
     Timeline clock =
         new Timeline(
@@ -309,17 +321,13 @@ public class BasicLayoutController implements Initializable {
     clock.play();
   }
 
-  /**
-   * Plays the basic button sound
-   */
+  /** Plays the basic button sound */
   private void playButtonPressSound() {
     buttonPressSoundPlayer.stop();
     buttonPressSoundPlayer.play();
   }
 
-  /**
-   * updates DAOs with data retrieved from API usage
-   */
+  /** updates DAOs with data retrieved from API usage */
   private static void checkAPIData() {
     // Add new meal service request data
     List<MealServiceRequest> apiMeals = MealServiceRequestDAO.getDAO().getAllRecords();

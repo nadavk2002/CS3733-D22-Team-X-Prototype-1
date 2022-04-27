@@ -21,6 +21,9 @@ public class APILandingPageController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 
+  /**
+   * Run the MealRequestAPI
+   */
   public void runMealRequestAPI() {
     try {
       MealRequestAPI.run(
@@ -36,6 +39,9 @@ public class APILandingPageController implements Initializable {
     }
   }
 
+  /**
+   * Run the SanitationRequestAPI
+   */
   public void runSanitationAPI() {
     try {
       StartAPI sanAPI = new StartAPI();
@@ -46,6 +52,7 @@ public class APILandingPageController implements Initializable {
           300,
           "/edu/wpi/cs3733/D22/teamX/stylesheets/application.css",
           "FDEPT00101");
+      // Delete previous employees and add the employees from EmployeeDAO
       EmployeeAPI sanitationEmpAPI = new EmployeeAPI();
       while (sanitationEmpAPI.getAllEmployees().size() > 0) {
         sanitationEmpAPI.removeEmployee(sanitationEmpAPI.getAllEmployees().get(0));
@@ -66,6 +73,9 @@ public class APILandingPageController implements Initializable {
     }
   }
 
+  /**
+   * Run the langRequestAPI
+   */
   public void runLangAPI() {
     try {
       API.run(
@@ -79,6 +89,7 @@ public class APILandingPageController implements Initializable {
     } catch (edu.wpi.teamW.ServiceException e) {
       System.out.println(e.getMessage());
     }
+    // Delete previous employees and add the employees from EmployeeDAO
     try {
       API.deleteAllEmployees();
     } catch (Exception e) {
