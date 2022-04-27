@@ -15,16 +15,16 @@
 
 <BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorController">
    <center>
-      <VBox fx:id="mapBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1020.0" prefWidth="606.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="mapBox" alignment="TOP_CENTER" prefHeight="1020.0" prefWidth="606.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="filterHBox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="622.0">
+            <HBox fx:id="filterHBox" alignment="TOP_CENTER" prefHeight="27.0" prefWidth="622.0">
                <children>
                   <JFXCheckBox fx:id="showLocCheck" text="Show Locations" />
                   <JFXCheckBox fx:id="showEquipCheck" text="Show Equipment" />
                   <JFXCheckBox fx:id="showRequestCheck" text="Show Requests" />
                </children>
             </HBox>
-            <HBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="610.0">
+            <HBox alignment="TOP_CENTER" prefHeight="35.0" prefWidth="610.0">
                <children>
                   <JFXButton fx:id="LL2Button" onAction="#LL2Click" text="LL2 Floor" />
                   <JFXButton fx:id="LL1Button" onAction="#LL1Click" text="LL1 Floor" />
@@ -35,7 +35,7 @@
                   <JFXButton fx:id="fiveButton" onAction="#fifthClick" text="Fifth Floor" />
                </children>
             </HBox>
-            <Group fx:id="imageGroup" VBox.vgrow="ALWAYS">
+            <Group fx:id="imageGroup">
                <children>
                   <ImageView fx:id="imageView" fitHeight="610.0" fitWidth="610.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -44,50 +44,42 @@
                   </ImageView>
                </children>
             </Group>
-            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="8.0" prefWidth="622.0" spacing="30.0">
+            <HBox alignment="CENTER" prefHeight="8.0" prefWidth="622.0" spacing="30.0">
                <children>
                   <JFXButton fx:id="toLocationTable" onAction="#ToLocationTable" prefHeight="26.0" prefWidth="116.0" style="-fx-background-color: #446fdc;" text="Location Table" textFill="WHITE" />
                   <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" prefHeight="26.0" prefWidth="134.0" style="-fx-background-color: #446fdc;" text="Equipment Table" textFill="WHITE" />
                </children>
             </HBox>
          </children>
+         <BorderPane.margin>
+            <Insets left="5.0" />
+         </BorderPane.margin>
       </VBox>
    </center>
-   <left>
-      <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToDashboard" prefHeight="60.0" prefWidth="223.0" style="-fx-rotate: 90; -fx-background-color: #446fdc; -fx-background-radius: 0;" text="Map Editor Dashboard" textFill="WHITE" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="18.0" fitWidth="20.0" style="-fx-rotate: 90;">
-               <image>
-                  <Image url="@../assets/upArrow.png" />
-               </image>
-            </ImageView>
-         </graphic>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </JFXButton>
-   </left>
    <right>
-      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1004.0" prefWidth="775.0" spacing="15.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" prefHeight="1004.0" prefWidth="775.0" spacing="15.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="TOP_CENTER" contentDisplay="TOP" text="At this location:">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ScrollPane prefHeight="895.0" prefWidth="775.0">
+            <ScrollPane prefHeight="895.0" prefWidth="775.0" style="-fx-background-color: transparent;">
                <content>
                   <VBox fx:id="infoVBox" />
                </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
             </ScrollPane>
          </children>
+         <BorderPane.margin>
+            <Insets right="5.0" />
+         </BorderPane.margin>
       </VBox>
    </right>
    <top>
-      <Label alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" text="Hospital Locations" textAlignment="CENTER" textFill="#446fdc" BorderPane.alignment="TOP_CENTER">
+      <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Hospital Locations" textAlignment="CENTER" textFill="#446fdc" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>

@@ -653,6 +653,7 @@ public class GraphicalMapEditorController implements Initializable {
     mapBox.getChildren().remove(imageGroup);
     pane = new GesturePane(imageGroup);
     mapBox.setMinWidth(610);
+    pane.setMaxWidth(610);
     mapBox.getChildren().add(2, pane);
     pane.setMinScale(1);
     pane.setMaxScale(4.5);
@@ -683,6 +684,8 @@ public class GraphicalMapEditorController implements Initializable {
             showDots();
           }
         });
+    // infoVBox.setBorder(
+    // new Border(new BorderStroke(Paint.valueOf("BLACK"), BorderStrokeStyle.SOLID, null, null)));
 
     loadLocation("1");
   }
