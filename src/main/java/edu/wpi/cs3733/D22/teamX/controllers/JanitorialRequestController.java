@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import javafx.scene.control.*;
 
 public class JanitorialRequestController implements Initializable {
   @FXML private Button mainMenu, submitButton;
-  @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
+  @FXML private JFXComboBox<String> roomNum, serviceStatus, assignStaff, serviceType;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private ServiceRequestDAO janitorDAO = ServiceRequestDAO.getDAO();
