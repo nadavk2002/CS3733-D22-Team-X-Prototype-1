@@ -4,8 +4,10 @@ import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +25,7 @@ public class ReqLangController implements Initializable {
   //  private LangServiceRequestDAO langDAO = LangServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
+  private final ObservableList<LangServiceRequest> langList = FXCollections.observableArrayList();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
 
   @Override
@@ -32,7 +35,11 @@ public class ReqLangController implements Initializable {
     resetFields();
     submitButton.setDisable(true);
     assignStaff.setItems(this.getEmployeeIDs());
-    selectLang.getItems().addAll(new String[] {"English", "Spanish", "French"});
+    List<String> availableLangs = new ArrayList<String>();
+    for (LangServiceRequest lang : getLangRequests()) {
+      availableLangs.add(lang.getLanguage());
+    }
+    selectLang.getItems().addAll(availableLangs.stream().distinct().collect(Collectors.toList()));
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     //    assignStaff.getItems().addAll("Staff1", "Staff2", "Staff3");
     roomNum.setItems(getLocationNames());
@@ -60,6 +67,11 @@ public class ReqLangController implements Initializable {
       employeeNames.add(employees.get(i).getEmployeeID());
     }
     return employeeNames;
+  }
+
+  private ObservableList<LangServiceRequest> getLangRequests() {
+    langList.addAll(requestDAO.getAllLangServiceRequests());
+    return langList;
   }
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */

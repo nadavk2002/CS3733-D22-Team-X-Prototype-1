@@ -27,6 +27,7 @@
     -fx-font-family: "Oxygen";
     -fx-font-size: 20;
     -fx-text-fill: -fx-color-1;
+
 }
 
 .content-container > .button {
@@ -228,6 +229,31 @@
     -fx-padding: 10px;
 }
 
+#userInfo {
+    -fx-background-color: -fx-color-3;
+}
+
+#userInfo > .button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-color-1;
+    -fx-graphic-text-gap: 8px;
+    -fx-padding: 10px;
+}
+
+#userInfo > .button:hover {
+    -fx-background-color: -fx-color-2;
+    -fx-underline: true;
+}
+
+#userInfo > .label {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-color-1;
+    -fx-padding: 10px;
+}
+
 /*CSVFileSaver*/
 
 /*#csvSaverPane {*/
@@ -311,4 +337,8 @@
 
 #nameToggle {
     -fx-text-fill: -fx-color-1;
+}
+
+#amountAvailable {
+    -fx-font-size: 16;
 }

@@ -1,3 +1,11 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.2.0"
+    }
+}
 plugins {
     id 'application'
     id 'java'
@@ -5,6 +13,13 @@ plugins {
     id 'com.diffplug.gradle.spotless' version '3.27.1'
     id "io.freefair.lombok" version "5.0.0-rc6"
     id 'org.openjfx.javafxplugin' version '0.0.10'
+}
+sourceCompatibility = '11.0'
+targetCompatibility = '11.0'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+shadowJar {
+    mergeServiceFiles()
 }
 mainClassName = 'edu.wpi.cs3733.D22.teamX.Main'
 
@@ -48,8 +63,8 @@ dependencies {
     )
 
     implementation name: 'CS3733-D22-Team-X-MealServiceRequestAPI'
-    implementation name: 'InternalTranspoAPI'
-
+    implementation name: 'CS3733-D22-Team-D-SanitationRequestAPI_v2.0'
+    implementation name: 'LanguageInterpAPI'
 
     implementation platform("com.google.cloud:libraries-bom:20.6.0")
     implementation("com.google.cloud:google-cloud-speech")
