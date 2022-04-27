@@ -12,147 +12,130 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="900.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
    <center>
-      <StackPane fx:id="loginStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="450.0" minWidth="850.0" prefHeight="700.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="loginFields" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="350.0" minWidth="450.0" prefHeight="700.0" prefWidth="900.0">
          <children>
-            <Rectangle arcHeight="150.0" arcWidth="150.0" fill="#4572d9" smooth="false" strokeType="INSIDE" styleClass="content-background">
-               <StackPane.margin>
+            <ImageView fx:id="loginImage" fitHeight="180.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/BWHlogo.png" />
+               </image>
+               <VBox.margin>
                   <Insets />
-               </StackPane.margin>
-            </Rectangle>
-            <VBox fx:id="loginFields" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="150.0" minWidth="200.0" prefHeight="600.0" prefWidth="800.0">
+               </VBox.margin>
+            </ImageView>
+            <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="120.0" minWidth="400.0" prefHeight="240.0" prefWidth="800.0">
                <children>
-                  <ImageView fx:id="loginImage" fitHeight="180.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../assets/BWHlogo.png" />
-                     </image>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </ImageView>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="80.0" minWidth="300.0" prefHeight="240.0" prefWidth="800.0">
+                  <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="80.0" minWidth="100.0" prefHeight="240.0" prefWidth="480.0" spacing="20.0">
                      <children>
-                        <VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="80.0" minWidth="100.0" prefHeight="240.0" prefWidth="360.0" spacing="20.0">
-                           <children>
-                              <Label fx:id="loginTitle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="100.0" prefHeight="50.0" prefWidth="300.0" styleClass="title-label" text="Login:">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Label>
-                              <TextField fx:id="username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="100.0" onKeyTyped="#disableLoginButton" prefHeight="50.0" prefWidth="300.0" promptText="Username">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </TextField>
-                              <PasswordField fx:id="password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="100.0" onAction="#validLogin" onKeyTyped="#disableLoginButton" prefHeight="50.0" prefWidth="300.0" promptText="Password">
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </PasswordField>
-                           </children>
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </VBox>
-                        <VBox fx:id="serverVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="80.0" minWidth="120.0" prefHeight="240.0" prefWidth="480.0" spacing="10.0">
-                           <children>
-                              <Label fx:id="dbText" alignment="TOP_LEFT" minHeight="20.0" minWidth="100.0" prefHeight="50.0" prefWidth="300.0" text="Server Option:" wrapText="true">
-                                 <font>
-                                    <Font size="30.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Label>
-                              <JFXRadioButton fx:id="optionEmbedded" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" selected="true" text="Embedded" textFill="#f6f9ff">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="serverOptions" />
-                                 </toggleGroup>
-                                 <unSelectedColor>
-                                    <Color red="0.9647058844566345" green="0.9764705896377563" blue="1.0" />
-                                 </unSelectedColor>
-                                 <selectedColor>
-                                    <Color red="0.30588236451148987" green="0.5607843399047852" blue="0.9725490212440491" />
-                                 </selectedColor>
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </JFXRadioButton>
-                              <JFXRadioButton fx:id="optionClient" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Client" textFill="#f6f9ff" toggleGroup="$serverOptions">
-                                 <selectedColor>
-                                    <Color red="0.30588236451148987" green="0.5607843399047852" blue="0.9725490212440491" />
-                                 </selectedColor>
-                                 <unSelectedColor>
-                                    <Color red="0.9647058844566345" green="0.9764705896377563" blue="1.0" />
-                                 </unSelectedColor>
-                                 <font>
-                                    <Font size="24.0" />
-                                 </font>
-                              </JFXRadioButton>
-                           </children>
-                        </VBox>
+                        <Label fx:id="loginTitle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="100.0" prefHeight="50.0" prefWidth="300.0" styleClass="title-label" text="Login:">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <font>
+                              <Font size="30.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="100.0" onKeyTyped="#disableLoginButton" prefHeight="50.0" prefWidth="300.0" promptText="Username">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <PasswordField fx:id="password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="100.0" onAction="#validLogin" onKeyTyped="#disableLoginButton" prefHeight="50.0" prefWidth="300.0" promptText="Password">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </PasswordField>
                      </children>
-                     <VBox.margin>
-                        <Insets top="30.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="15.0" minWidth="100.0" prefHeight="80.0" prefWidth="400.0" spacing="40.0">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox fx:id="serverVBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="80.0" minWidth="120.0" prefHeight="240.0" prefWidth="480.0" spacing="10.0">
                      <children>
-                        <JFXButton fx:id="loginButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" onAction="#validLogin" prefHeight="80.0" prefWidth="120.0" text="Login" textFill="WHITE">
+                        <Label fx:id="dbText" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="100.0" prefHeight="50.0" prefWidth="300.0" text="Server Option:" wrapText="true">
                            <font>
-                              <Font size="28.0" />
+                              <Font size="30.0" />
                            </font>
-                           <HBox.margin>
-                              <Insets right="30.0" />
-                           </HBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="loginExitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="30.0" onAction="#ExitApplication" prefHeight="80.0" prefWidth="90.0" text="Exit" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <JFXRadioButton fx:id="optionEmbedded" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" selected="true" text="Embedded" textFill="#f6f9ff">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="serverOptions" />
+                           </toggleGroup>
+                           <unSelectedColor>
+                              <Color red="0.9647058844566345" green="0.9764705896377563" blue="1.0" />
+                           </unSelectedColor>
                            <font>
-                              <Font size="28.0" />
+                              <Font size="24.0" />
                            </font>
-                        </JFXButton>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <selectedColor>
+                              <Color red="0.30588236451148987" green="0.5607843399047852" blue="0.9725490212440491" />
+                           </selectedColor>
+                        </JFXRadioButton>
+                        <JFXRadioButton fx:id="optionClient" mnemonicParsing="false" prefHeight="40.0" prefWidth="180.0" text="Client" textFill="#f6f9ff" toggleGroup="$serverOptions">
+                           <selectedColor>
+                              <Color red="0.30588236451148987" green="0.5607843399047852" blue="0.9725490212440491" />
+                           </selectedColor>
+                           <unSelectedColor>
+                              <Color red="0.9647058844566345" green="0.9764705896377563" blue="1.0" />
+                           </unSelectedColor>
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </JFXRadioButton>
                      </children>
-                     <VBox.margin>
-                        <Insets top="20.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <Label fx:id="message" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="10.0" minWidth="100.0" prefHeight="30.0" prefWidth="400.0">
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="15.0" minWidth="200.0" prefHeight="80.0" prefWidth="800.0" spacing="40.0">
+               <children>
+                  <JFXButton fx:id="loginButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" onAction="#validLogin" prefHeight="60.0" prefWidth="120.0" text="Login" textFill="WHITE">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="28.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets bottom="20.0" top="10.0" />
-                     </VBox.margin>
+                     <HBox.margin>
+                        <Insets right="30.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="loginExitButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="30.0" onAction="#ExitApplication" prefHeight="60.0" prefWidth="90.0" text="Exit" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </JFXButton>
+                  <Label fx:id="message" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="10.0" minWidth="100.0" prefHeight="80.0" prefWidth="400.0" textAlignment="CENTER" wrapText="true">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
                   </Label>
                </children>
-               <StackPane.margin>
-                  <Insets left="20.0" right="20.0" />
-               </StackPane.margin>
-            </VBox>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
          <padding>
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
          </padding>
-      </StackPane>
+      </VBox>
    </center>
    <top>
       <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="50.0" minWidth="10.0" prefHeight="90.0" prefWidth="200.0" BorderPane.alignment="CENTER" />

@@ -36,6 +36,20 @@ public class App extends Application {
     Parent root = mainMenu.getScene().getRoot();
     List<Node> children = ((Pane) root).getChildren();
     children.set(indexOfSceneReplacement, scene);
+    mainMenu
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              scene.setPrefWidth(mainMenu.getWidth() - 300);
+              scene.setPrefHeight(mainMenu.getHeight());
+            });
+    mainMenu
+        .heightProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              scene.setPrefWidth(mainMenu.getWidth() - 300);
+              scene.setPrefHeight(mainMenu.getHeight());
+            });
   }
 
   public static void switchRoot() throws IOException {
