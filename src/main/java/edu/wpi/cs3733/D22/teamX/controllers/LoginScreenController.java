@@ -111,7 +111,6 @@ public class LoginScreenController implements Initializable {
     FXMLLoader fxmlLoader =
         new FXMLLoader(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/FaceDetection.fxml"));
-    // fxmlLoader.setController(controller);
     Parent root1 = fxmlLoader.load();
     Stage stage = new Stage();
     stage.initModality(Modality.APPLICATION_MODAL);
@@ -119,8 +118,5 @@ public class LoginScreenController implements Initializable {
     stage.setTitle("ARE YOU A ROBOT?");
     stage.setScene(new Scene(root1));
     stage.show();
-    //    App.switchScene(
-    //        FXMLLoader.load(
-    //            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/LoginScreen.fxml")));
   }
 }
