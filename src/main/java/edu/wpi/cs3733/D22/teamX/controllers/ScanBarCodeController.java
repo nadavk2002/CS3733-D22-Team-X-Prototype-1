@@ -52,9 +52,11 @@ public class ScanBarCodeController implements Initializable {
               }
               Scene scene = new Scene(editEquipPane);
               popup.setScene(scene);
+              BasicLayoutController.buttonPressSoundPlayer.stop();
+              BasicLayoutController.buttonPressSoundPlayer.play();
               popup.show();
             } catch (Exception e) {
-              scanLabel.setText("Scan bar code now\nError reading, please try again");
+              scanLabel.setText("Error reading, please try again");
             }
           }
         });
