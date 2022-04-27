@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.net.URL;
 import java.util.List;
@@ -10,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 public class SharpsDisposalRequestController implements Initializable {
@@ -25,7 +25,7 @@ public class SharpsDisposalRequestController implements Initializable {
   private List<Employee> employees;
 
   // FXML things
-  @FXML private ChoiceBox<String> roomDropDown, statusChoiceBox, assigneeDropDown, typeDropDown;
+  @FXML private JFXComboBox<String> roomDropDown, statusChoiceBox, assigneeDropDown, typeDropDown;
   @FXML private JFXButton submitButton, resetButton;
 
   @FXML private Label errorText;

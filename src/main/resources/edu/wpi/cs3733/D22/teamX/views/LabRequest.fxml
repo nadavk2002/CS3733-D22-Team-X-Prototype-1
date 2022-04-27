@@ -1,60 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LabRequestController">
-   <children>
-      <Label layoutX="640.0" layoutY="334.0" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
-      </Label>
-      <VBox fx:id="submitCol" layoutX="664.0" layoutY="453.0" prefHeight="200.0" prefWidth="281.0">
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LabRequestController">
+   <center>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" styleClass="content-background" BorderPane.alignment="TOP_CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="1000.0" styleClass="content-container">
+               <columnConstraints>
+                  <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+               </rowConstraints>
                <children>
-                  <VBox fx:id="labelCol" alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Patient Name" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Select Service" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Assign Staff " />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service Status" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Destination" />
-                     </children>
-                  </VBox>
-                  <VBox fx:id="dropdownCol" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <ChoiceBox fx:id="patientName" prefHeight="30.0" prefWidth="159.0" />
-                        <ChoiceBox fx:id="selectLab" prefHeight="30.0" prefWidth="159.0" />
-                        <ChoiceBox fx:id="assigneeDrop" prefHeight="30.0" prefWidth="159.0" />
-                        <ChoiceBox fx:id="serviceStatus" prefHeight="30.0" prefWidth="159.0" />
-                        <ChoiceBox fx:id="selectDestination" prefHeight="30.0" prefWidth="159.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox fx:id="buttonRow" alignment="CENTER" prefHeight="62.0" prefWidth="346.0">
-               <children>
-                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" prefHeight="30.0" prefWidth="114.0" text="Reset Form" textFill="#446fdc">
+                  <Label text="Destination" GridPane.rowIndex="3">
                      <font>
-                        <Font name="System Bold" size="13.0" />
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Assigned Staff" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Request Status" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Patient Name">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="patientName" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <JFXComboBox fx:id="assigneeDrop" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXComboBox fx:id="selectDestination" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXComboBox fx:id="serviceStatus" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Service Type" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="selectLab" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets right="40.0" />
+               </padding>
+            </GridPane>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="200.0" prefHeight="80.0" prefWidth="600.0" spacing="125.0" styleClass="content-container">
+               <children>
+                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" styleClass="reset-button" text="Reset Form" textAlignment="CENTER" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="submitRequest" mnemonicParsing="false" onAction="#submitRequest" prefHeight="30.0" prefWidth="127.0" text="Submit Request" textFill="#446fdc">
+                  <JFXButton fx:id="submitRequest" mnemonicParsing="false" onAction="#submitRequest" ripplerFill="#446fdb" styleClass="submit-button" text="Submit Request" textFill="#446fdc">
                      <font>
-                        <Font name="System Bold" size="13.0" />
+                        <Font name="System Bold" size="24.0" />
                      </font>
                   </JFXButton>
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="50.0" top="50.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
       </VBox>
-   </children>
-</AnchorPane>
+   </center>
+   <top>
+      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="200.0" prefWidth="1000.0" styleClass="title-label" text="Request Lab Service" textAlignment="CENTER" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+         <font>
+            <Font name="System Bold" size="72.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="150.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+</BorderPane>

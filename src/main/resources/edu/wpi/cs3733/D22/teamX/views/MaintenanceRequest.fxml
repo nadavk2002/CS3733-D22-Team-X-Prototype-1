@@ -1,55 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MaintenanceRequestController">
-   <children>
-      <VBox layoutX="732.0" layoutY="434.0" prefHeight="163.0" prefWidth="147.0" spacing="11.0">
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MaintenanceRequestController">
+   <center>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" styleClass="content-background" BorderPane.alignment="TOP_CENTER">
          <children>
-            <ChoiceBox fx:id="roomNum" prefWidth="150.0" />
-            <ChoiceBox fx:id="assignee" prefWidth="150.0" />
-            <ChoiceBox fx:id="serviceStatus" prefWidth="150.0" />
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="320.0" prefWidth="1000.0" styleClass="content-container">
+               <children>
+                  <GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="320.0" prefWidth="400.0" styleClass="content-container">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="50.0" />
+                      <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Assigned Staff">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Destination" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label text="Request Status" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <JFXComboBox fx:id="assignee" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <JFXComboBox fx:id="roomNum" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <JFXComboBox fx:id="serviceStatus" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="25.0" right="50.0" />
+                     </HBox.margin>
+                  </GridPane>
+                  <VBox alignment="TOP_CENTER" prefHeight="307.0" prefWidth="277.0" styleClass="content-container">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Description">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="description" prefHeight="200.0" prefWidth="187.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="80.0" prefWidth="500.0" spacing="125.0" styleClass="content-container">
+               <children>
+                  <JFXButton mnemonicParsing="false" onAction="#resetFields" styleClass="reset-button" text="Reset Form" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" styleClass="submit-button" text="Submit Request" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="50.0" top="50.0" />
+         </padding>
       </VBox>
-      <JFXButton fx:id="submitButton" layoutX="756.0" layoutY="585.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
+   </center>
+   <top>
+      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="200.0" prefWidth="1200.0" styleClass="title-label" text="Request Maintenance Service" textFill="#446fdc" BorderPane.alignment="CENTER">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="72.0" />
          </font>
-      </JFXButton>
-      <VBox layoutX="731.0" layoutY="473.0" spacing="10.0" />
-      <JFXButton layoutX="768.0" layoutY="620.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Form" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="13.0" />
-         </font>
-      </JFXButton>
-      <VBox alignment="TOP_RIGHT" layoutX="631.0" layoutY="434.0" spacing="18.0">
-         <children>
-            <Label text="Room Number:">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <Label text="Assignee:">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-            <Label text="Status:">
-               <font>
-                  <Font size="13.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <Label layoutX="565.0" layoutY="354.0" text="Request Maintenance Service" textFill="#446fdc">
-         <font>
-            <Font name="System Bold" size="36.0" />
-         </font>
+         <BorderPane.margin>
+            <Insets top="200.0" />
+         </BorderPane.margin>
       </Label>
-      <TextArea fx:id="description" layoutX="929.0" layoutY="428.0" prefHeight="200.0" prefWidth="200.0" />
-      <Label layoutX="999.0" layoutY="408.0" text="Description" />
-   </children>
-</AnchorPane>
+   </top>
+</BorderPane>

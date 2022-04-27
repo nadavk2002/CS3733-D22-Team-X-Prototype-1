@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -14,16 +15,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class LabRequestController implements Initializable {
-  @FXML private VBox dropdownCol;
-  @FXML private VBox labelCol;
-  @FXML private VBox submitCol;
-  @FXML private HBox buttonRow;
   @FXML private TableColumn<LabServiceRequest, String> requestID;
   @FXML private TableColumn<LabServiceRequest, String> patientID;
   @FXML private TableColumn<LabServiceRequest, String> assigneeTable;
@@ -33,7 +27,11 @@ public class LabRequestController implements Initializable {
   @FXML private Button ReturnToMain;
   @FXML private Button submitRequest;
   @FXML
-  private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus, selectDestination;
+  private JFXComboBox<String> selectLab,
+      patientName,
+      assigneeDrop,
+      serviceStatus,
+      selectDestination;
   private List<Location> locations;
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
@@ -70,10 +68,6 @@ public class LabRequestController implements Initializable {
         .getItems()
         .addAll("Blood Work", "MRI", "Urine Sample", "Stool Sample", "Saliva Sample");
 
-    submitCol.setSpacing(20);
-    buttonRow.setSpacing(20);
-    dropdownCol.setSpacing(20);
-    labelCol.setSpacing(28);
     // TABLE COLUMN PLACING----------------------------------------------------
 
   }
@@ -104,7 +98,7 @@ public class LabRequestController implements Initializable {
     selectDestination.setValue("");
   }
 
-  public void checkAllBoxes(ChoiceBox<String> choiceBox) {
+  public void checkAllBoxes(JFXComboBox<String> choiceBox) {
     choiceBox
         .getSelectionModel()
         .selectedItemProperty()
@@ -114,7 +108,7 @@ public class LabRequestController implements Initializable {
                     patientName.getValue().matches("")
                         || selectLab.getValue().matches("")
                         || assigneeDrop.getValue().matches("")
-                        || serviceStatus.getValue().matches("")
+                        //                        || serviceStatus.getValue().matches("")
                         || selectDestination.getValue().matches("")));
   }
 
