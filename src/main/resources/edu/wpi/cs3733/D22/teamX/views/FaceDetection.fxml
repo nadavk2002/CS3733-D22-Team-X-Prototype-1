@@ -5,9 +5,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.FaceDetectionController">
+<AnchorPane fx:id="rootElement" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.FaceDetectionController">
    <children>
       <ImageView fx:id="currentFrame" fitHeight="307.0" fitWidth="313.0" layoutX="144.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="button" layoutX="274.0" layoutY="331.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="button" layoutX="168.0" layoutY="330.0" mnemonicParsing="false" text="Button" />
+      <Button fx:id="BackToLoginScreen" layoutX="357.0" layoutY="330.0" mnemonicParsing="false" onAction="#switchLoginScreen" text="ToLogin" />
    </children>
 </AnchorPane>

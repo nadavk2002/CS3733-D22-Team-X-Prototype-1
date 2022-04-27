@@ -1,87 +1,126 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
 import java.awt.*;
+import java.io.ByteArrayInputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class FaceDetectionController {
-  @FXML private ImageView currentFrame;
-  @FXML private Button button;
+  @FXML
+  private Button start_btn;
+  @FXML
+  private ImageView currentFrame;
 
-  // a timer for acquiring the video stream
+  private AnchorPane rootElement;
   private Timer timer;
-  // the OpenCV object that realizes the video capture
   private VideoCapture capture = new VideoCapture();
-  // a flag to change the button behavior
-  private boolean cameraActive = false;
-  private Image i,histo;
 
   @FXML
-  protected void startCamera()
+  protected void startCamera(ActionEvent event)
   {
-    if (!this.cameraActive)
+    // check: the main class is accessible?
+    if (this.rootElement != null)
     {
-      // start the video capture
-      this.capture.open(0);
-
-      // is the video stream available?
-      if (this.capture.isOpened())
+      // get the ImageView object for showing the video stream
+      final ImageView frameView = currentFrame;
+      // check if the capture stream is opened
+      if (!this.capture.isOpened())
       {
-        this.cameraActive = true;
-
+        // start the video capture
+        this.capture.open(0);
         // grab a frame every 33 ms (30 frames/sec)
         TimerTask frameGrabber = new TimerTask() {
           @Override
           public void run()
           {
+            Image tmp = grabFrame();
             Platform.runLater(new Runnable() {
               @Override
-              public void run() {
-                currentFrame.setImage(i);
+              public void run()
+              {
+                frameView.setImage(tmp);
               }
             });
+
           }
         };
         this.timer = new Timer();
+        //set the timer scheduling, this allow you to perform frameGrabber every 33ms;
         this.timer.schedule(frameGrabber, 0, 33);
-
-        // update the button content
-        this.button.setText("Stop Camera");
+        this.start_btn.setText("Stop Camera");
       }
       else
       {
-        // log the error
-        System.err.println("Impossible to open the camera connection...");
-      }
-    }
-    else
-    {
-      // the camera is not active at this point
-      this.cameraActive = false;
-      // update again the button content
-      this.button.setText("Start Camera");
-      // stop the timer
-      if (this.timer != null)
-      {
-        this.timer.cancel();
-        this.timer = null;
-      }
-      // release the camera
-      this.capture.release();
-      // clean the image area
-      Platform.runLater(new Runnable() {
-        @Override
-        public void run() {
-          currentFrame.setImage(null);
+        this.start_btn.setText("Start Camera");
+        // stop the timer
+        if (this.timer != null)
+        {
+          this.timer.cancel();
+          this.timer = null;
         }
-      });
+        // release the camera
+        this.capture.release();
+        // clear the image container
+        frameView.setImage(null);
+      }
     }
   }
+
+  private Image grabFrame()
+  {
+    //init
+    Image imageToShow = null;
+    Mat frame = new Mat();
+    // check if the capture is open
+    if (this.capture.isOpened())
+    {
+      try
+      {
+        // read the current frame
+        this.capture.read(frame);
+        // if the frame is not empty, process it
+        if (!frame.empty())
+        {
+          // convert the image to gray scale
+          Imgproc.cvtColor(frame, frame, Imgproc.COLOR_BGR2GRAY);
+          // convert the Mat object (OpenCV) to Image (JavaFX)
+          imageToShow = mat2Image(frame);
+        }
+      }
+      catch (Exception e)
+      {
+        // log the error
+        System.err.println("ERROR: " + e.getMessage());
+      }
+    }
+    return imageToShow;
+  }
+
+  private Image mat2Image(Mat frame)
+  {
+    // create a temporary buffer
+    MatOfByte buffer = new MatOfByte();
+    // encode the frame in the buffer
+    Highgui.imencode(".png", frame, buffer);
+    // build and return an Image created from the image encoded in the buffer
+    return new Image(new ByteArrayInputStream(buffer.toArray()));
+  }
+
+  public void setRootElement(AnchorPane root)
+  {
+    this.rootElement = root;
+  }
+
 }
