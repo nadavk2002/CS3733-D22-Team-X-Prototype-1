@@ -25,11 +25,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /** This represents the blue bar at the top of the app */
@@ -161,6 +164,19 @@ public class BasicLayoutController implements Initializable {
     App.switchScene(
         FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/app.fxml")));
     CSVFileSaverController.loaded = false;
+  }
+
+  @FXML
+  public void switchBarCode() throws IOException {
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/ScanBarCode.fxml"));
+    Parent root1 = (Parent) fxmlLoader.load();
+    Stage stage = new Stage();
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("Bar code scanner");
+    stage.setScene(new Scene(root1));
+    stage.show();
   }
 
   /**

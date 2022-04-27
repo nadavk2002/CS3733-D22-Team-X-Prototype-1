@@ -58,6 +58,15 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="barCodeButton" alignment="BASELINE_LEFT" onAction="#switchBarCode" prefWidth="300.0" text="Scan Barcode">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/play-alt-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <Label text="Service Requests" />
                   <JFXButton fx:id="requestMenuButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestMenu" prefWidth="300.0" text="Menu">
                      <graphic>
