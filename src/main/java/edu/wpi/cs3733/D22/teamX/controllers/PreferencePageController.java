@@ -38,6 +38,9 @@ public class PreferencePageController implements Initializable {
                     volumeSlider.getValue() / 100));
   }
 
+  /**
+   * Mutes the background music if the mute toggle is selected, unmutes if unselected
+   */
   @FXML
   private void muteBackgroundMusic() {
     playMenuButtonPressSound();
@@ -49,11 +52,17 @@ public class PreferencePageController implements Initializable {
     InvisibleMusicPlayerController.mediaPlayer.setMute(muteMusicToggleOn);
   }
 
+  /**
+   * Plays the menu button sound
+   */
   private void playMenuButtonPressSound() {
     menuButtonPressSoundPlayer.stop();
     menuButtonPressSoundPlayer.play();
   }
 
+  /**
+   * Mutes all button press sounds if mute toggle is selected, unmutes if unselected
+   */
   @FXML
   private void muteSounds() {
     if (muteSoundsToggle.isSelected()) {

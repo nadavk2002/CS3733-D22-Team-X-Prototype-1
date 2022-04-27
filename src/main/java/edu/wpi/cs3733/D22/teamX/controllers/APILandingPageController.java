@@ -21,9 +21,7 @@ public class APILandingPageController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
 
-  /**
-   * Run the MealRequestAPI
-   */
+  /** Run the MealRequestAPI */
   public void runMealRequestAPI() {
     try {
       MealRequestAPI.run(
@@ -39,9 +37,7 @@ public class APILandingPageController implements Initializable {
     }
   }
 
-  /**
-   * Run the SanitationRequestAPI
-   */
+  /** Run the SanitationRequestAPI */
   public void runSanitationAPI() {
     try {
       StartAPI sanAPI = new StartAPI();
@@ -73,9 +69,7 @@ public class APILandingPageController implements Initializable {
     }
   }
 
-  /**
-   * Run the langRequestAPI
-   */
+  /** Run the langRequestAPI */
   public void runLangAPI() {
     try {
       API.run(
@@ -103,7 +97,9 @@ public class APILandingPageController implements Initializable {
                 Integer.parseInt(e.getEmployeeID().substring(4)),
                 e.getFirstName(),
                 e.getLastName()),
-            Languages.values()[rng.nextInt(Languages.values().length)]);
+            Languages.values()[
+                rng.nextInt(
+                    Languages.values().length)]); // Assign each employee to a random language
       } catch (SQLException ex) {
         System.out.println(ex.getMessage());
       }

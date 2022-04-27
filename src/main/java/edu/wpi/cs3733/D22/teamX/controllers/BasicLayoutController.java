@@ -72,11 +72,6 @@ public class BasicLayoutController implements Initializable {
     buttonPressSoundPlayer.setVolume(.50);
     initClock();
     userName.setText("Hello, " + LoginScreenController.currentUsername);
-    SanitationReqAPI sanReqAPI = new SanitationReqAPI();
-    // this api saves data after app closes, so this erases that previous data
-    while (sanReqAPI.getAllRequests().size() > 0) {
-      sanReqAPI.deleteRequest(sanReqAPI.getAllRequests().get(0));
-    }
     checkAPIData();
     //    ChoosePage.setItems(
     //        FXCollections.observableArrayList(
