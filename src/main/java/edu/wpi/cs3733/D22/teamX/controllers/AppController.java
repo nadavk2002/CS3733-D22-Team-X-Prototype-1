@@ -226,6 +226,12 @@ public class AppController implements Initializable {
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/MaintenanceRequest.fxml")));
   }
 
+  @FXML
+  private void goToSecretPage() throws IOException {
+    App.switchScene(
+        FXMLLoader.load(getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/SecretPage.fxml")));
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     buttonList.addAll(
@@ -303,6 +309,9 @@ public class AppController implements Initializable {
           break;
         case "request maintenance":
           ReqMaintenanceButton();
+          break;
+        case "secret page":
+          goToSecretPage();
           break;
         default:
           if (input.equals("")) {
