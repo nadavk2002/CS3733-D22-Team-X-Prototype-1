@@ -43,7 +43,7 @@
                   <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="choiceBoxLabel" text="Patient Names">
+                  <Label fx:id="choiceBoxLabel" text="Patient Name">
                      <font>
                         <Font size="24.0" />
                      </font>
