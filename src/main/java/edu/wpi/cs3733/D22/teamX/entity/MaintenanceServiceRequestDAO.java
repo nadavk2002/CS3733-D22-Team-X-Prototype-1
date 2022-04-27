@@ -123,12 +123,12 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
               + recordObject.getStatus()
               + "', assignee = '"
               + recordObject.getAssigneeID()
-                  + "', CreationTime = "
-                  + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", PROCTime = "
-                  + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
-                  + ", DONETime = "
-                  + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
+              + "', CreationTime = "
+              + recordObject.getCreationTime().toEpochSecond(ZoneOffset.UTC)
+              + ", PROCTime = "
+              + recordObject.getPROCTime().toEpochSecond(ZoneOffset.UTC)
+              + ", DONETime = "
+              + recordObject.getDONETime().toEpochSecond(ZoneOffset.UTC)
               + ", description = '"
               + recordObject.getDescription()
               + "' WHERE requestID = '"
@@ -173,9 +173,9 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
               + "destination CHAR(10),"
               + "status CHAR(4),"
               + "assignee CHAR(8),"
-                  + "CreationTime BIGINT,"
-                  + "PROCTime BIGINT,"
-                  + "DONETime BIGINT,"
+              + "CreationTime BIGINT,"
+              + "PROCTime BIGINT,"
+              + "DONETime BIGINT,"
               + "description VARCHAR(140),"
               + "CONSTRAINT MSR_dest_fk "
               + "FOREIGN KEY (destination) REFERENCES Location(nodeID)"
@@ -218,9 +218,9 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
                   locDestination.getRecord(currLine[1]),
                   currLine[2],
                   emplDAO.getRecord(currLine[3]),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
-                      LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[4]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[5]), 0, ZoneOffset.UTC),
+                  LocalDateTime.ofEpochSecond(Long.parseLong(currLine[6]), 0, ZoneOffset.UTC),
                   currLine[7]);
           maintenanceServiceRequests.add(node);
           node.getDestination().addRequest(node);
@@ -249,9 +249,12 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
         sql.append("'" + maintenanceServiceRequests.get(i).getStatus() + "'" + ", ");
         sql.append("'" + maintenanceServiceRequests.get(i).getAssigneeID() + "'" + ", ");
         sql.append(
-                maintenanceServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
-        sql.append(maintenanceServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
-        sql.append(maintenanceServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+            maintenanceServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                + ",");
+        sql.append(
+            maintenanceServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+        sql.append(
+            maintenanceServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         sql.append("'" + maintenanceServiceRequests.get(i).getDescription() + "'");
         sql.append(")");
         initialization.execute(sql.toString());
@@ -290,19 +293,20 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
           csvFile.write(',');
         } else {
           csvFile.write(
-                  maintenanceServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC) + ",");
+              maintenanceServiceRequests.get(i).getCreationTime().toEpochSecond(ZoneOffset.UTC)
+                  + ",");
         }
         if (maintenanceServiceRequests.get(i).getPROCTime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  maintenanceServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
+              maintenanceServiceRequests.get(i).getPROCTime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (maintenanceServiceRequests.get(i).getDONETime() == null) {
           csvFile.write(',');
         } else {
           csvFile.write(
-                  maintenanceServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
+              maintenanceServiceRequests.get(i).getDONETime().toEpochSecond(ZoneOffset.UTC) + ",");
         }
         if (maintenanceServiceRequests.get(i).getDescription() == null) {
           csvFile.write(',');
@@ -333,14 +337,14 @@ public class MaintenanceServiceRequestDAO implements DAO<MaintenanceServiceReque
         toAdd.setStatus(results.getString("status"));
         toAdd.setAssignee(EmployeeDAO.getDAO().getRecord(results.getString("assignee")));
         toAdd.setCreationTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("CreationTime")), 0, ZoneOffset.UTC));
         toAdd.setPROCTime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("PROCTime")), 0, ZoneOffset.UTC));
         toAdd.setDONETime(
-                LocalDateTime.ofEpochSecond(
-                        Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
+            LocalDateTime.ofEpochSecond(
+                Long.parseLong(results.getString("DONETime")), 0, ZoneOffset.UTC));
         toAdd.setDescription(results.getString("description"));
         maintenanceServiceRequests.add(toAdd);
         toAdd.getDestination().addRequest(toAdd);

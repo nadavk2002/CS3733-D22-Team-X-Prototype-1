@@ -24,11 +24,11 @@ public class MaintenanceServiceRequest extends ServiceRequest {
   }
 
   public MaintenanceServiceRequest(
-          String requestID,
-          Location destination,
-          String status,
-          Employee assignee,
-          String description) {
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      String description) {
     super(requestID, destination, status, assignee);
     this.description = description;
   }
