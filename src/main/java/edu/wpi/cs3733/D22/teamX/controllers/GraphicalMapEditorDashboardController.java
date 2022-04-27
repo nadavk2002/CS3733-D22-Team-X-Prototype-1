@@ -221,7 +221,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     //    System.out.println(addToPod1(sortEquipmentByFloor("3")).size());
     displayAlert();
     DashboardAlertsController dashboardAlertsController = new DashboardAlertsController();
-    if (!dashboardAlertsController.getAlerts().isEmpty()) {
+    if (!dashboardAlertsController.getAlertsEmpty()) {
       try {
         ShowAlerts();
       } catch (IOException e) {
