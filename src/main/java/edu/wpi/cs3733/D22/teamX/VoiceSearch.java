@@ -9,7 +9,6 @@ import com.google.cloud.speech.v1.*;
 import com.google.common.collect.Lists;
 import com.google.protobuf.ByteString;
 import java.awt.*;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import javax.sound.sampled.*;
 
@@ -25,9 +24,9 @@ public class VoiceSearch {
     // code is based on sample from Google Cloud
     // https://cloud.google.com/speech-to-text/docs/streaming-recognize
 
-    String jsonPath = "team-x-347714-448a74675b18.json";
+    String jsonPath = "/edu/wpi/cs3733/D22/teamX/team-x-347714-448a74675b18.json";
     GoogleCredentials credentials =
-        GoogleCredentials.fromStream(new FileInputStream(jsonPath))
+        GoogleCredentials.fromStream(App.class.getResourceAsStream(jsonPath))
             .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
 
     ResponseObserver<StreamingRecognizeResponse> responseObserver = null;
