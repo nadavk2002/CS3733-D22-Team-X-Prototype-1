@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="roomChoiceBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.CovidPageController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="436.0" layoutY="37.0" prefHeight="115.0" prefWidth="890.0" text="COVID-19: Lastest Information and Resources" textAlignment="CENTER" textFill="#446fdc">
+         <font>
+            <Font name="System Bold" size="46.0" />
+         </font>
+      </Label>
+      <HBox layoutX="30.0" layoutY="151.0" prefHeight="150.0" prefWidth="1609.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/medical-lab.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="135.0" prefWidth="256.0" text="Testing" textAlignment="CENTER" textFill="#446fdc">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="150.0" fitWidth="165.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/vaccine.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="255.0" text="Vaccine" textAlignment="CENTER" textFill="#446fdc">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="150.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="146.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../assets/info.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="150.0" prefWidth="338.0" text=" More Information" textAlignment="CENTER" textFill="#446fdc">
+               <font>
+                  <Font size="44.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutX="7.0" layoutY="315.0" prefHeight="208.0" prefWidth="1634.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Are you feeling sick? Does someone in your household have symptoms? Have you been exposed to someone with COVID-19? " textAlignment="CENTER" wrappingWidth="521.6270952224731">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 vaccinations and booster shots protect you and your loved ones from severe illness and hospitalization. " textAlignment="CENTER" wrappingWidth="557.6848754882812">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+            <Text stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="COVID-19 vaccinations and booster shots protect you and your loved ones from severe illness and hospitalization. " textAlignment="CENTER" wrappingWidth="536.6694946289062">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <HBox layoutX="8.0" layoutY="530.0" prefHeight="100.0" prefWidth="1629.0">
+         <children>
+            <JFXButton fx:id="testingLearnMore" buttonType="RAISED" onAction="#switchTesting" prefHeight="100.0" prefWidth="499.0" text="Learn More" textAlignment="CENTER" underline="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="vaccineLearnMore" buttonType="RAISED" onAction="#switchVaccine" prefHeight="100.0" prefWidth="572.0" text="Learn More" textAlignment="CENTER" underline="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="infoLearnMore" buttonType="RAISED" onAction="#switchInfo" prefHeight="100.0" prefWidth="559.0" text="Learn More" textAlignment="CENTER" underline="true">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+      <ImageView fitHeight="275.0" fitWidth="245.0" layoutX="21.0" layoutY="745.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/ambulance.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="205.0" fitWidth="199.0" layoutX="842.0" layoutY="757.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/medical-team.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="289.0" layoutY="695.095703125">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="WHEN TO GO TO THE HOSPITAL">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="1.0">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="In emergency or life-threatening situations, the hospital is the best place to go for the care you need — even if cases of COVID-19 are surging in your community. But avoid going to a hospital emergency department for symptoms or conditions that can be treated by your primary care provider or an urgent care center.  " textAlignment="CENTER" wrappingWidth="521.6270952224731">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Text layoutX="1126.0" layoutY="727.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TREATMENT FOR COVID-19">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Text>
+      <Text layoutX="1068.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you recently tested positive for COVID-19, there are treatments that can prevent your symptoms from getting worse and keep you out of the hospital." textAlignment="CENTER" wrappingWidth="521.6270952224731">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <VBox layoutX="1073.0" layoutY="902.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="We're providing the following treatments:" textAlignment="CENTER" wrappingWidth="521.6270952224731">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Monoclonal antibodies (one-time infusion)" wrappingWidth="521.6270952224731">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Intravenous Remdesivir (3-day course)" wrappingWidth="521.6270952224731">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- Oral Molnupiravir" wrappingWidth="521.6270952224731">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Text layoutX="211.0" layoutY="1074.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The U.S. Centers for Disease Control and Prevention (CDC) will continue to provide updated guidance about COVID-19" wrappingWidth="1191.0610656738281">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXCheckBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -33,7 +34,8 @@ public class ServiceRequestTableController implements Initializable {
   @FXML private TableColumn<ServiceRequest, String> requestID; // spike c RequestID
   @FXML private TableColumn<ServiceRequest, String> serviceType;
   @FXML private TableColumn<ServiceRequest, ChoiceBox<String>> modStatus;
-  @FXML TextField modifyID;
+  @FXML private TextField modifyID;
+  @FXML private JFXCheckBox filterTasks;
   private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
 
   public String previousID;
@@ -73,6 +75,14 @@ public class ServiceRequestTableController implements Initializable {
           }
         });
     table.setItems(FXCollections.observableList(listOfRequests()));
+
+    filterTasks.setOnAction(
+        event -> {
+          table.getItems().clear();
+          if (filterTasks.isSelected())
+            table.setItems(FXCollections.observableList(getNotCompletedRequests()));
+          else table.setItems(FXCollections.observableList(listOfRequests()));
+        });
   }
 
   public String getID() {
@@ -285,6 +295,17 @@ public class ServiceRequestTableController implements Initializable {
     //    requests.addAll(LaundryServiceRequestDAO.getDAO().getAllRecords());
     //    requests.addAll(MedicineDeliverServiceRequestDAO.getDAO().getAllRecords());
     return requestDAO.getServiceRequests();
+  }
+
+  private List<ServiceRequest> getNotCompletedRequests() {
+    List<ServiceRequest> requests = ServiceRequestDAO.getDAO().getServiceRequests();
+    for (int i = 0; i < requests.size(); i++) {
+      if (requests.get(i).getStatus().equals("DONE")) {
+        requests.remove(i);
+        i--;
+      }
+    }
+    return requests;
   }
 
   @FXML

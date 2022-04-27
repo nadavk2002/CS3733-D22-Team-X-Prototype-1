@@ -48,8 +48,8 @@ dependencies {
     )
 
     implementation name: 'CS3733-D22-Team-X-MealServiceRequestAPI'
-    implementation name: 'InternalTranspoAPI'
-
+    implementation name: 'CS3733-D22-Team-D-SanitationRequestAPI_v2.0'
+    implementation name: 'LanguageInterpAPI'
 
     implementation platform("com.google.cloud:libraries-bom:20.6.0")
     implementation("com.google.cloud:google-cloud-speech")

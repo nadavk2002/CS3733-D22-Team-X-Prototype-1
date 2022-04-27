@@ -209,6 +209,31 @@
     -fx-padding: 10px;
 }
 
+#userInfo {
+    -fx-background-color: -fx-dark-blue;
+}
+
+#userInfo > .button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-off-white;
+    -fx-graphic-text-gap: 8px;
+    -fx-padding: 10px;
+}
+
+#userInfo > .button:hover {
+    -fx-background-color: -fx-light-blue;
+    -fx-underline: true;
+}
+
+#userInfo > .label {
+    -fx-font-family: "Poppins";
+    -fx-font-weight: bold;
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-off-white;
+    -fx-padding: 10px;
+}
+
 /*CSVFileSaver*/
 
 /*#csvSaverPane {*/

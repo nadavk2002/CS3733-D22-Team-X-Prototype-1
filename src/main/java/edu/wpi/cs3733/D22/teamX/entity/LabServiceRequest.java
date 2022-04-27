@@ -1,5 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
+import java.time.LocalDateTime;
+
 /** Represents a lab work service request */
 public class LabServiceRequest extends ServiceRequest {
   private String service;
@@ -14,6 +16,22 @@ public class LabServiceRequest extends ServiceRequest {
       String service,
       String patientFor) {
     super(requestID, destination, status, assignee);
+    this.service = service;
+    this.patientFor = patientFor;
+  }
+
+  // added constructors
+  public LabServiceRequest(
+      String requestID,
+      Location destination,
+      String status,
+      Employee assignee,
+      LocalDateTime creationTime,
+      LocalDateTime PROCTime,
+      LocalDateTime DONETime,
+      String service,
+      String patientFor) {
+    super(requestID, destination, status, assignee, creationTime, PROCTime, DONETime);
     this.service = service;
     this.patientFor = patientFor;
   }
