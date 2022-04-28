@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
@@ -39,6 +40,10 @@ public class App extends Application {
     children.set(indexOfSceneReplacement, scene);
     scene.setPrefWidth(mainMenu.getWidth() - 300);
     scene.setPrefHeight(mainMenu.getHeight());
+    if (mainMenu.isFullScreen())
+      ((ScrollPane) ((Pane) root).lookup("#scrollLayout")).setPrefHeight(mainMenu.getHeight());
+    else
+      ((ScrollPane) ((Pane) root).lookup("#scrollLayout")).setPrefHeight(mainMenu.getHeight() - 25);
     mainMenu
         .widthProperty()
         .addListener(
@@ -50,6 +55,12 @@ public class App extends Application {
         .addListener(
             (obs, oldVal, newVal) -> {
               scene.setPrefHeight(mainMenu.getHeight());
+              if (mainMenu.isFullScreen())
+                ((ScrollPane) ((Pane) root).lookup("#scrollLayout"))
+                    .setPrefHeight(mainMenu.getHeight());
+              else
+                ((ScrollPane) ((Pane) root).lookup("#scrollLayout"))
+                    .setPrefHeight(mainMenu.getHeight() - 25);
             });
   }
 
@@ -85,6 +96,9 @@ public class App extends Application {
     children.set(indexOfSceneReplacement, MainMenu);
     MainMenu.setPrefWidth(mainMenu.getWidth() - 300);
     MainMenu.setPrefHeight(mainMenu.getHeight());
+    if (!mainMenu.isFullScreen())
+      ((ScrollPane) scene.lookup("#scrollLayout")).setPrefHeight(mainMenu.getHeight() - 25);
+    else ((ScrollPane) scene.lookup("#scrollLayout")).setPrefHeight(mainMenu.getHeight());
     mainMenu
         .widthProperty()
         .addListener(
@@ -96,6 +110,10 @@ public class App extends Application {
         .addListener(
             (obs, oldVal, newVal) -> {
               MainMenu.setPrefHeight(mainMenu.getHeight());
+              if (!mainMenu.isFullScreen())
+                ((ScrollPane) scene.lookup("#scrollLayout"))
+                    .setPrefHeight(mainMenu.getHeight() - 25);
+              else ((ScrollPane) scene.lookup("#scrollLayout")).setPrefHeight(mainMenu.getHeight());
             });
     mainMenu.setScene(scene);
     mainMenu.setFullScreen(true);
