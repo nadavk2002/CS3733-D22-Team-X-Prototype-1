@@ -33,6 +33,10 @@ public class ServiceRequestTableController implements Initializable {
   @FXML private TableColumn<ServiceRequest, String> destination; // spike c destination
   @FXML private TableColumn<ServiceRequest, String> requestID; // spike c RequestID
   @FXML private TableColumn<ServiceRequest, String> serviceType;
+  //  @FXML private TableColumn<ServiceRequest, String> createTime;
+  //  @FXML private TableColumn<ServiceRequest, String> PROCTime;
+  //  @FXML private TableColumn<ServiceRequest, String> DONETime;
+
   @FXML private TableColumn<ServiceRequest, ChoiceBox<String>> modStatus;
   @FXML private TextField modifyID;
   @FXML private JFXCheckBox filterTasks;
@@ -74,6 +78,15 @@ public class ServiceRequestTableController implements Initializable {
             return new SimpleStringProperty(param.getValue().getAssigneeID());
           }
         });
+    //    createTime.setCellValueFactory(
+    //        param -> new SimpleStringProperty(param.getValue().getCreationTime().toString()));
+    //    PROCTime.setCellValueFactory(
+    //        param -> new SimpleStringProperty(param.getValue().getPROCTime().toString()));
+    //    DONETime.setCellValueFactory(
+    //        param ->
+    //            param.getValue().getDONETime() == ServiceRequest.nullTime
+    //                ? new SimpleStringProperty(param.getValue().getDONETime().toString())
+    //                : new SimpleStringProperty(""));
     table.setItems(FXCollections.observableList(listOfRequests()));
 
     filterTasks.setOnAction(

@@ -29,7 +29,7 @@
                <children>
                   <TabPane minHeight="-Infinity" prefHeight="420.0" prefWidth="600.0" style="-fx-border-width: 10; -fx-border-color: #446fdc; -fx-border-radius: 10;">
                      <tabs>
-                        <Tab text="All Clean Equipment">
+                        <Tab text="Equipment">
                            <content>
                               <TableView fx:id="cleanTable" minHeight="-Infinity" minWidth="-Infinity" prefHeight="254.0" prefWidth="568.0">
                                  <columns>
@@ -76,7 +76,19 @@
                   </TabPane>
                   <HBox prefHeight="475.0" prefWidth="676.0">
                      <children>
-                        <Axis fx:id="yAxis" maxValue="20.0" mediumTickMarksVisible="false" minorTickMarksVisible="false" prefHeight="423.0" prefWidth="103.0" tickLabelFontSize="30.0" tickLabelOrientation="ORTHOGONAL">
+                        <VBox fx:id="axisVbox" alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0">
+                           <children>
+                              <Text fx:id="maxVal" strokeType="OUTSIDE" strokeWidth="0.0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font></Text>
+                              <Text fx:id="minVal" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font></Text>
+                           </children>
+                        </VBox>
+                        <Axis fx:id="yAxis" dateTimeFormatPattern="" maxValue="10.0" mediumTickMarksVisible="false" minorTickMarksVisible="false" prefHeight="423.0" prefWidth="103.0" tickLabelFontSize="30.0" tickLabelOrientation="ORTHOGONAL" type="TEXT">
                            <minorTickMarkColor>
                               <Color opacity="0.0" />
                            </minorTickMarkColor>
@@ -563,7 +575,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="alertBox" alignment="CENTER" layoutX="341.0" layoutY="-10.0" prefHeight="90.0" prefWidth="406.0" style="-fx-background-color: #446fdc;">
+            <VBox fx:id="alertBox" alignment="CENTER" layoutX="869.0" layoutY="-10.0" prefHeight="90.0" prefWidth="640.0" style="-fx-background-color: #446fdc;">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="158.0" text="ALERT!" textFill="WHITE">
                      <font>
