@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.entity.GiftDeliveryRequest;
@@ -19,12 +20,15 @@ import javafx.stage.Stage;
 public class UpdateGiftRequestController implements Initializable {
   @FXML private TextField giftNoteField;
   @FXML
-  private ChoiceBox<String> selectGiftDestination, selectAssignStaff, selectStatus, selectGiftType;
+  private JFXComboBox<String> selectGiftDestination,
+      selectAssignStaff,
+      selectStatus,
+      selectGiftType;
   @FXML private Button submitButton;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
-  // private ServiceRequestDAO giftDAO = ServiceRequestDAO.getDAO();
+  //  private ServiceRequestDAO giftDAO = ServiceRequestDAO.getDAO();
   private List<Location> locations;
   private List<Employee> employees;
   private TableColumn<GiftDeliveryRequest, String> idColumn = new TableColumn("Request ID");
@@ -51,8 +55,8 @@ public class UpdateGiftRequestController implements Initializable {
     giftNoteField.setText("");
     selectAssignStaff.setItems(this.getEmployeeIDs());
     //    selectAssignStaff.getItems().addAll("Staff1", "Staff2", "Staff3", "Staff4");
-    selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
-    selectGiftType.getItems().addAll("Toy", "Flower", "Chocolate");
+    //    selectGiftDestination.getItems().addAll("Room1", "Room2", "Room3");
+    selectGiftType.getItems().addAll("Toy", "Flowers", "Chocolate");
     selectGiftDestination.setItems(getLocationNames());
 
     selectGiftType.setOnAction((ActionEvent event) -> enableSubmitButton());

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 public class UpdateInTransportRequestController implements Initializable {
   @FXML private Button resetFields, submitButton;
   @FXML
-  private ChoiceBox<String> selectPatient,
+  private JFXComboBox<String> selectPatient,
       selectStartLocation,
       serviceStatus,
       assignStaff,
@@ -62,8 +63,8 @@ public class UpdateInTransportRequestController implements Initializable {
     selectStartLocation.setItems(this.getLocationNames());
     destination.setItems(this.getLocationNames());
     assignStaff.setValue(this.request.getAssigneeID());
-    selectStartLocation.setValue(request.getLocationShortName());
-    destination.setValue(request.getLocationShortName());
+    selectStartLocation.setValue(request.getTransportFrom());
+    destination.setValue(request.getDestination().getShortName());
     serviceStatus.setValue(this.request.getStatus());
   }
 

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -13,17 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class UpdateLabRequestController implements Initializable {
-  @FXML private VBox dropdownCol;
-  @FXML private VBox labelCol;
-  @FXML private VBox submitCol;
-  @FXML private HBox buttonRow;
   @FXML private TableColumn<LabServiceRequest, String> requestID;
   @FXML private TableColumn<LabServiceRequest, String> patientID;
   @FXML private TableColumn<LabServiceRequest, String> assigneeTable;
@@ -32,7 +26,11 @@ public class UpdateLabRequestController implements Initializable {
   @FXML private TableColumn<LabServiceRequest, String> destination;
   @FXML private Button submitRequest;
   @FXML
-  private ChoiceBox<String> selectLab, patientName, assigneeDrop, serviceStatus, selectDestination;
+  private JFXComboBox<String> selectLab,
+      patientName,
+      assigneeDrop,
+      serviceStatus,
+      selectDestination;
   private List<Location> locations;
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
@@ -66,19 +64,22 @@ public class UpdateLabRequestController implements Initializable {
     checkAllBoxes(selectDestination);
     // FORMATTING----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "PROC", "DONE");
-    patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
+//    patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
     assigneeDrop.setItems(this.getEmployeeIDs());
     //    assigneeDrop
     //        .getItems()
     //        .addAll("Doctor 1", "Doctor 2", "Doctor 3", "Nurse 1", "Nurse 2", "Nurse 3");
     selectLab
         .getItems()
-        .addAll("Blood Work", "MRI", "Urine Sample", "Stool Sample", "Saliva Sample");
+        .addAll(
+            "Blood Sample",
+            "MRI",
+            "Urine Sample",
+            "Stool Sample",
+            "Saliva Sample",
+            "X-Ray",
+            "CAT Scan");
 
-    submitCol.setSpacing(20);
-    buttonRow.setSpacing(20);
-    dropdownCol.setSpacing(20);
-    labelCol.setSpacing(28);
     // TABLE COLUMN PLACING----------------------------------------------------
 
     patientName.setValue(this.request.getPatientFor());
@@ -115,7 +116,7 @@ public class UpdateLabRequestController implements Initializable {
     selectDestination.setValue("");
   }
 
-  public void checkAllBoxes(ChoiceBox<String> choiceBox) {
+  public void checkAllBoxes(JFXComboBox<String> choiceBox) {
     choiceBox
         .getSelectionModel()
         .selectedItemProperty()
