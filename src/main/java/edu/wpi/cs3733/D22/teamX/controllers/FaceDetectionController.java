@@ -17,7 +17,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -34,14 +33,17 @@ public class FaceDetectionController implements Initializable {
   @FXML private Button cameraButton;
   @FXML private ImageView originalFrame;
   @FXML private AnchorPane rootElement;
-  @FXML private CheckBox haarClassifier, lbpClassifier;
+  // @FXML private CheckBox haarClassifier, lbpClassifier;
   private Timer timer;
 
+  private static final String CLASSIFIER_FILE = "haarcascade_frontalface_alt.xml";
+  private static final String CLASSIFIER_RESOURCE = "haarcascades/haarcascade_frontalface_alt.xml";
   private VideoCapture capture = new VideoCapture();
   private boolean cameraActive;
   private CascadeClassifier faceCascade = new CascadeClassifier();
-  private int absoluteFaceSize;
+  private int absoluteFaceSize = 20;
   private Image camStream;
+  private boolean faceDetected = false;
 
   public static void copyResource(String res, String dest, Class c) throws IOException {
     InputStream src = c.getResourceAsStream(res);
@@ -50,26 +52,11 @@ public class FaceDetectionController implements Initializable {
 
   public void initialize(URL location, ResourceBundle resources) {
     try {
-      copyResource(
-          "haarcascades/haarcascade_frontalface_alt.xml",
-          "haarcascade_frontalface_alt.xml",
-          App.class);
-      ;
+      copyResource(CLASSIFIER_RESOURCE, CLASSIFIER_FILE, App.class);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    try {
-      copyResource(
-          "lbpcascades/lbpcascade_frontalface.xml", "lbpcascade_frontalface.xml", App.class);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-  }
-
-  protected void init() {
-    this.capture = new VideoCapture();
-    this.faceCascade = new CascadeClassifier();
-    this.absoluteFaceSize = 0;
+    this.faceCascade.load(CLASSIFIER_FILE);
   }
 
   @FXML
@@ -78,8 +65,6 @@ public class FaceDetectionController implements Initializable {
     OpenCV.loadLocally();
     // check: the main class is accessible?
     if (!this.cameraActive) {
-      this.haarClassifier.setDisable(true);
-      this.lbpClassifier.setDisable(true);
       // start the video capture
       this.capture.open(0);
       // get the ImageView object for showing the video stream
@@ -115,9 +100,6 @@ public class FaceDetectionController implements Initializable {
     } else {
       this.cameraActive = false;
       this.cameraButton.setText("Start Camera");
-      // enable setting checkboxes
-      this.haarClassifier.setDisable(false);
-      this.lbpClassifier.setDisable(false);
 
       // stop the timer
       if (this.timer != null) {
@@ -196,28 +178,7 @@ public class FaceDetectionController implements Initializable {
     for (int i = 0; i < facesArray.length; i++)
       Imgproc.rectangle(
           frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
-  }
-
-  /**
-   * When the Haar checkbox is selected, deselect the other one and load the proper XML classifier
-   */
-  @FXML
-  protected void haarSelected() {
-    // check whether the lpb checkbox is selected and deselect it
-    if (this.lbpClassifier.isSelected()) this.lbpClassifier.setSelected(false);
-
-    this.checkboxSelection("haarcascade_frontalface_alt.xml");
-  }
-
-  /**
-   * When the LBP checkbox is selected, deselect the other one and load the proper XML classifier
-   */
-  @FXML
-  protected void lbpSelected() {
-    // check whether the haar checkbox is selected and deselect it
-    if (this.haarClassifier.isSelected()) this.haarClassifier.setSelected(false);
-
-    this.checkboxSelection("lbpcascade_frontalface.xml");
+    faceDetected = facesArray.length > 0;
   }
 
   /**
@@ -226,17 +187,14 @@ public class FaceDetectionController implements Initializable {
    * @param classifierPath the absolute path where the XML file representing a training set for a
    *     classifier is present
    */
-  private void checkboxSelection(String... classifierPath) {
-    // load the classifier(s)
-    // CascadeClassifier a = new CascadeClassifier();
-    for (String xmlClassifier : classifierPath) {
-      // a.load(xmlClassifier);
-      this.faceCascade.load(xmlClassifier);
-    }
-
-    // now the capture can start
-    this.cameraButton.setDisable(false);
-  }
+  //  private void checkboxSelection(String... classifierPath) {
+  //    // load the classifier(s)
+  //    // CascadeClassifier a = new CascadeClassifier();
+  //    for (String xmlClassifier : classifierPath) {
+  //      // a.load(xmlClassifier);
+  //      this.faceCascade.load(xmlClassifier);
+  //    }
+  //  }
 
   /**
    * Convert a Mat object (OpenCV) in the corresponding Image for JavaFX

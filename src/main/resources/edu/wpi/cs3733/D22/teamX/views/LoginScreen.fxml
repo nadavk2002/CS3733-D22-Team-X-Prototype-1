@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -131,11 +132,11 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <JFXButton fx:id="faceButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" onAction="#goToFaceDetection" prefHeight="82.0" prefWidth="338.0" text="Are you a robot?">
+            <JFXCheckBox fx:id="faceButton" onAction="#goToFaceDetection" text="Are you a robot?" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
-            </JFXButton>
+            </JFXCheckBox>
          </children>
          <padding>
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

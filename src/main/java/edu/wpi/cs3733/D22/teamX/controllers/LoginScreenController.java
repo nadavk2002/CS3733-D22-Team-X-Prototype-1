@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
@@ -34,11 +35,12 @@ public class LoginScreenController implements Initializable {
   @FXML private JFXRadioButton optionClient;
   @FXML private PasswordField password;
   @FXML private TextField username;
-  @FXML private JFXButton loginButton, exitButton, faceButton;
+  @FXML private JFXButton loginButton, exitButton;
   @FXML private Label message;
   @FXML private ImageView loginImage;
   @FXML private VBox loginFields;
   @FXML private BorderPane loginPane;
+  @FXML private JFXCheckBox faceButton;
   public static String currentUsername;
 
   @FXML
