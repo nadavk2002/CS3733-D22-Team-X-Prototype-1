@@ -1202,6 +1202,21 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         allEquipInPod1.add(indvPod);
       }
     }
+    ObservableList<EquipmentUnit> allLocCleanPods = FXCollections.observableArrayList();
+
+    for (EquipmentUnit allPods : equipOnFloor) {
+      if (allPods.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+        allLocCleanPods.add(allPods);
+      }
+    }
+    for (EquipmentUnit indvPod : allLocCleanPods) {
+
+      String[] patientRoom = indvPod.getCurrLocation().getLongName().split("");
+      List<String> seperated = Arrays.asList(patientRoom);
+      if (seperated.get(24).equals("2")) {
+        allEquipInPod1.add(indvPod);
+      }
+    }
     return allEquipInPod1;
   }
 
@@ -1221,6 +1236,21 @@ public class GraphicalMapEditorDashboardController implements Initializable {
           || seperated.get(13).equals("2")
           || seperated.get(13).equals("3")
           || seperated.get(13).equals("4")) {
+        allEquipInPod1.add(indvPod);
+      }
+    }
+    ObservableList<EquipmentUnit> allLocCleanPods = FXCollections.observableArrayList();
+
+    for (EquipmentUnit allPods : equipOnFloor) {
+      if (allPods.getCurrLocation().getShortName().toLowerCase().contains("clean")) {
+        allLocCleanPods.add(allPods);
+      }
+    }
+    for (EquipmentUnit indvPod : allLocCleanPods) {
+
+      String[] patientRoom = indvPod.getCurrLocation().getLongName().split("");
+      List<String> seperated = Arrays.asList(patientRoom);
+      if (seperated.get(24).equals("1")) {
         allEquipInPod1.add(indvPod);
       }
     }
