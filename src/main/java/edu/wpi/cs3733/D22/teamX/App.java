@@ -22,10 +22,6 @@ public class App extends Application {
   private static Stage mainMenu;
   private static Stage loginScreen;
   private static int indexOfSceneReplacement;
-  private static int minWidth = 900;
-  private static int maxWidth = 1920;
-  private static int minHeight = 500;
-  private static int maxHeight = 1080;
 
   public static Stage getPrimaryStage() {
     return loginScreen;
@@ -41,6 +37,8 @@ public class App extends Application {
     Parent root = mainMenu.getScene().getRoot();
     List<Node> children = ((Pane) root).getChildren();
     children.set(indexOfSceneReplacement, scene);
+    scene.setPrefWidth(mainMenu.getWidth() - 300);
+    scene.setPrefHeight(mainMenu.getHeight());
     mainMenu
         .widthProperty()
         .addListener(
@@ -85,6 +83,8 @@ public class App extends Application {
     List<Node> children = ((Pane) root).getChildren();
     indexOfSceneReplacement = children.indexOf(insertPage);
     children.set(indexOfSceneReplacement, MainMenu);
+    MainMenu.setPrefWidth(mainMenu.getWidth() - 300);
+    MainMenu.setPrefHeight(mainMenu.getHeight());
     mainMenu
         .widthProperty()
         .addListener(
@@ -99,10 +99,6 @@ public class App extends Application {
             });
     mainMenu.setScene(scene);
     mainMenu.setFullScreen(true);
-    mainMenu.setMinHeight(minHeight);
-    mainMenu.setMaxHeight(maxHeight);
-    mainMenu.setMinWidth(minWidth);
-    mainMenu.setMaxWidth(maxWidth);
   }
 
   @Override
@@ -127,10 +123,6 @@ public class App extends Application {
     primaryStage.setScene(scene);
     primaryStage.setFullScreen(true);
     primaryStage.setFullScreen(true);
-    primaryStage.setMinHeight(minHeight);
-    primaryStage.setMaxHeight(maxHeight);
-    primaryStage.setMinWidth(minWidth);
-    primaryStage.setMaxWidth(maxWidth);
     primaryStage.show();
     root.requestFocus();
   }
@@ -145,10 +137,6 @@ public class App extends Application {
     scene.getStylesheets().add(css);
     mainMenu.setScene(scene);
     mainMenu.setFullScreen(true);
-    mainMenu.setMinHeight(minHeight);
-    mainMenu.setMaxHeight(maxHeight);
-    mainMenu.setMinWidth(minWidth);
-    mainMenu.setMaxWidth(maxWidth);
     mainMenu.show();
     root.requestFocus();
   }
