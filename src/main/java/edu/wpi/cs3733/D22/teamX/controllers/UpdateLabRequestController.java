@@ -34,6 +34,7 @@ public class UpdateLabRequestController implements Initializable {
   private List<Location> locations;
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private EmployeeDAO emplDAO = EmployeeDAO.getDAO();
+  private final ObservableList<String> patientNamesList = FXCollections.observableArrayList();
   private List<Employee> employees;
   //  private LabServiceRequestDAO labDAO = LabServiceRequestDAO.getDAO()
   private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
@@ -64,7 +65,7 @@ public class UpdateLabRequestController implements Initializable {
     checkAllBoxes(selectDestination);
     // FORMATTING----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "PROC", "DONE");
-//    patientName.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient 5");
+    patientName.setItems(getPatients());
     assigneeDrop.setItems(this.getEmployeeIDs());
     //    assigneeDrop
     //        .getItems()
@@ -82,7 +83,10 @@ public class UpdateLabRequestController implements Initializable {
 
     // TABLE COLUMN PLACING----------------------------------------------------
 
-    patientName.setValue(this.request.getPatientFor());
+    patientName.setValue(
+        PatientDAO.getDAO().getRecord(this.request.getPatientFor()).getFirstName()
+            + " "
+            + PatientDAO.getDAO().getRecord(this.request.getPatientFor()).getLastName());
     selectLab.setValue(this.request.getService());
     selectDestination.setItems(this.getLocationNames());
     assigneeDrop.setValue(this.request.getAssigneeID());
@@ -116,6 +120,14 @@ public class UpdateLabRequestController implements Initializable {
     selectDestination.setValue("");
   }
 
+  private ObservableList<String> getPatients() {
+    List<Patient> patients = PatientDAO.getDAO().getAllRecords();
+    for (Patient patient : patients) {
+      patientNamesList.add(patient.getFirstName() + " " + patient.getLastName());
+    }
+    return patientNamesList;
+  }
+
   public void checkAllBoxes(JFXComboBox<String> choiceBox) {
     choiceBox
         .getSelectionModel()
@@ -143,7 +155,11 @@ public class UpdateLabRequestController implements Initializable {
     LabServiceRequest request = new LabServiceRequest();
 
     request.setRequestID(this.request.getRequestID());
-    request.setPatientFor(patientName.getValue());
+    request.setPatientFor(
+        PatientDAO.getDAO()
+            .getAllRecords()
+            .get(patientName.getSelectionModel().getSelectedIndex())
+            .getPatientID());
     request.setAssignee(emplDAO.getRecord(assigneeDrop.getValue()));
     request.setService(selectLab.getValue());
     request.setStatus(serviceStatus.getValue());

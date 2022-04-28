@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 public class UpdateMaintenanceRequestController implements Initializable {
   @FXML private Button submitButton;
-  @FXML private ChoiceBox<String> roomNum, status, assignee;
+  @FXML private JFXComboBox<String> roomNum, serviceStatus, assignee;
   @FXML private TextArea description;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
@@ -47,19 +48,19 @@ public class UpdateMaintenanceRequestController implements Initializable {
     employees = emplDAO.getAllRecords();
     resetFields();
     submitButton.setDisable(false);
-    status.getItems().addAll("", "PROC", "DONE");
+    serviceStatus.getItems().addAll("", "PROC", "DONE");
     assignee.setItems(getEmployeeIDs());
     roomNum.setItems(getLocationNames());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     // description.setOnAction((ActionEvent event) -> enableSubmitButton());
     assignee.setOnAction((ActionEvent event) -> enableSubmitButton());
-    status.setOnAction((ActionEvent event) -> enableSubmitButton());
+    serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
     roomNum.setItems(this.getLocationNames());
     assignee.setValue(this.request.getAssigneeID());
     roomNum.setValue(request.getLocationShortName());
     description.setText(this.request.getDescription());
-    status.setValue(this.request.getStatus());
+    serviceStatus.setValue(this.request.getStatus());
   }
 
   /**
@@ -96,7 +97,7 @@ public class UpdateMaintenanceRequestController implements Initializable {
   public void resetFields() {
     assignee.setValue("");
     roomNum.setValue("");
-    status.setValue("");
+    serviceStatus.setValue("");
     description.clear();
   }
 
@@ -106,7 +107,7 @@ public class UpdateMaintenanceRequestController implements Initializable {
     MaintenanceServiceRequest request = new MaintenanceServiceRequest();
     request.setRequestID(this.request.getRequestID());
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
-    request.setStatus(status.getValue());
+    request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignee.getValue()));
     request.setDescription(description.getText());
     // maintenanceDAO.addRecord(request);
