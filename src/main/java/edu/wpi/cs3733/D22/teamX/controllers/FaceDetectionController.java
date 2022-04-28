@@ -51,12 +51,16 @@ public class FaceDetectionController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     try {
       copyResource(
-          "haarcascades/haarcascade_frontalface_alt.xml", "haar_classifier.xml", App.class);
+          "haarcascades/haarcascade_frontalface_alt.xml",
+          "haarcascade_frontalface_alt.xml",
+          App.class);
+      ;
     } catch (IOException e) {
       e.printStackTrace();
     }
     try {
-      copyResource("lbpcascades/lbpcascade_frontalface.xml", "lbp_classifier.xml", App.class);
+      copyResource(
+          "lbpcascades/lbpcascade_frontalface.xml", "lbpcascade_frontalface.xml", App.class);
     } catch (IOException e) {
       e.printStackTrace();
     }
