@@ -26,7 +26,7 @@
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane prefHeight="855.0" prefWidth="2540.0">
+            <ScrollPane hbarPolicy="NEVER" prefHeight="855.0" prefWidth="2540.0" vbarPolicy="NEVER">
                <content>
                   <HBox prefHeight="858.0" prefWidth="1602.0">
                      <children>
