@@ -2,6 +2,7 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.controllers.DashboardAlertsController;
 import edu.wpi.cs3733.D22.teamX.exceptions.Subject;
 import java.io.*;
 import java.sql.ResultSet;
@@ -146,10 +147,11 @@ public class EquipmentUnitDAO extends Subject implements DAO<EquipmentUnit> {
     notifyAllObservers();
   }
 
-  //  public void notifyAllObservers() {
-  //    DashboardAlertsController dashboardAlertsController = new DashboardAlertsController();
-  //    dashboardAlertsController.update();
-  //  }
+  @Override
+  public void notifyAllObservers() {
+    DashboardAlertsController dashboardAlertsController = new DashboardAlertsController();
+    dashboardAlertsController.update();
+  }
 
   @Override
   public void addRecord(EquipmentUnit recordObject) {

@@ -5,7 +5,6 @@ import edu.wpi.cs3733.D22.teamX.Observer;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import edu.wpi.cs3733.D22.teamX.exceptions.Subject;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -20,9 +19,6 @@ public class DashboardAlertsController extends Observer implements Initializable
   @FXML
   private TableView<MedicalEquipmentServiceRequest> alertTable =
       new TableView<MedicalEquipmentServiceRequest>();
-
-  private static final ArrayList<MedicalEquipmentServiceRequest> alerts =
-      new ArrayList<MedicalEquipmentServiceRequest>();
 
   @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requestID;
   @FXML private TableColumn<MedicalEquipmentServiceRequest, String> type;
@@ -44,19 +40,13 @@ public class DashboardAlertsController extends Observer implements Initializable
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     alertTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    //    alertTable.setItems(MESRDAO.getAlerts());
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     type.setCellValueFactory(new PropertyValueFactory<>("equipmentType"));
     destination.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     floors.addAll("5", "4", "3", "2", "1", "L2", "L1");
-    update();
-  }
-
-  public boolean getAlertsEmpty() {
-    if (alerts != null && !alerts.isEmpty()) {
-      return false;
-    }
-    return true;
+    //    update();
   }
 
   @Override
@@ -69,12 +59,13 @@ public class DashboardAlertsController extends Observer implements Initializable
           sortByInfusionPumps(sortByDirty(sortEquipmentByFloor(f))),
           sortByClean(sortEquipmentByFloor(f)));
     }
+    alertTable.setItems(MESRDAO.getAlerts());
   }
 
   private void sendBedRequest(ObservableList<EquipmentUnit> beds) {
     MedicalEquipmentServiceRequest MESR = new MedicalEquipmentServiceRequest();
     ObservableList<MedicalEquipmentServiceRequest> mesrList = FXCollections.observableArrayList();
-    if (beds.size() >= 3) {
+    if (beds.size() >= 2) {
       MESR.setRequestID(ServiceRequestDAO.getDAO().makeMedicalEquipmentServiceRequestID());
       MESR.setDestination(locationDAO.getRecord("xSTOR001L1"));
       MESR.setStatus("PROC");
@@ -83,8 +74,13 @@ public class DashboardAlertsController extends Observer implements Initializable
       MESR.setQuantity(beds.size());
       requestDAO.addRecord(MESR);
       mesrList.add(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
-      alertTable.setItems(mesrList);
-      alerts.add(MESR);
+      //      alertTable.setItems(mesrList);
+      //      for (MedicalEquipmentServiceRequest r : MESRDAO.getAlerts()) {
+      //        if (r.equals(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()))) {
+      //
+      //        }
+      //      }
+
       MESRDAO.addAlert(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
     }
   }
@@ -94,7 +90,7 @@ public class DashboardAlertsController extends Observer implements Initializable
     MedicalEquipmentServiceRequest MESR = new MedicalEquipmentServiceRequest();
     ObservableList<MedicalEquipmentServiceRequest> mesrList = FXCollections.observableArrayList();
 
-    if (infusionPumps.size() >= 10 || (cleanInfPumpNum < 5 && infusionPumps.size() > 0)) {
+    if (infusionPumps.size() >= 4 || (cleanInfPumpNum < 5 && infusionPumps.size() > 0)) {
       MESR.setRequestID(ServiceRequestDAO.getDAO().makeMedicalEquipmentServiceRequestID());
       MESR.setDestination(locationDAO.getRecord("xSTOR00201"));
       MESR.setStatus("PROC");
@@ -103,7 +99,8 @@ public class DashboardAlertsController extends Observer implements Initializable
       MESR.setQuantity(infusionPumps.size());
       requestDAO.addRecord(MESR);
       mesrList.add(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
-      alertTable.setItems(mesrList);
+      //      alertTable.setItems(mesrList);
+      MESRDAO.addAlert(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
     }
   }
 
