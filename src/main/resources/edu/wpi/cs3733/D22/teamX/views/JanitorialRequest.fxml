@@ -84,7 +84,7 @@
       </VBox>
    </center>
    <top>
-      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="100.0" prefWidth="1000.0" styleClass="title-label" text="Request Janitorial Service" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="100.0" prefWidth="1000.0" styleClass="title-label" text="Request Janitorial Service" textFill="#446fdc" BorderPane.alignment="TOP_CENTER">
          <font>
             <Font name="System Bold" size="72.0" />
          </font>
