@@ -106,7 +106,7 @@ public class RoomSystemControlController implements Initializable {
                     CanUpdateRoom = true;
                   }
                 }),
-            new KeyFrame(Duration.seconds(0.1)));
+            new KeyFrame(Duration.seconds(0.01)));
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
   }
