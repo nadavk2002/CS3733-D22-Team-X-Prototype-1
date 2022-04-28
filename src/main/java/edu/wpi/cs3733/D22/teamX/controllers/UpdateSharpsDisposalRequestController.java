@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -13,7 +14,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -29,7 +29,7 @@ public class UpdateSharpsDisposalRequestController implements Initializable {
   private List<Employee> employees;
 
   // FXML things
-  @FXML private ChoiceBox<String> roomDropDown, statusChoiceBox, assigneeDropDown, typeDropDown;
+  @FXML private JFXComboBox<String> roomDropDown, statusChoiceBox, assigneeDropDown, typeDropDown;
   @FXML private JFXButton submitButton, resetButton;
 
   @FXML private Label errorText;
@@ -59,9 +59,9 @@ public class UpdateSharpsDisposalRequestController implements Initializable {
     assigneeDropDown.setOnAction((ActionEvent event) -> enableSubmitButton());
     typeDropDown.setOnAction((ActionEvent event) -> enableSubmitButton());
 
-    roomDropDown.setItems(this.getLocationNames());
+    // roomDropDown.setItems(this.getLocationNames());
     assigneeDropDown.setValue(this.request.getAssigneeID());
-    roomDropDown.setValue(request.getLocationShortName());
+    roomDropDown.setValue(request.getDestination().getShortName());
     typeDropDown.setValue(this.request.getType());
     statusChoiceBox.setValue(this.request.getStatus());
   }
@@ -69,7 +69,8 @@ public class UpdateSharpsDisposalRequestController implements Initializable {
   public ObservableList<String> getLocationNames() {
     ObservableList<String> locationNames = FXCollections.observableArrayList();
     for (Location location : locations) {
-      locationNames.add(location.getNodeID()); // this should probably be something that is unique.
+      locationNames.add(
+          location.getShortName()); // this should probably be something that is unique.
     }
     return locationNames;
   }
@@ -111,7 +112,7 @@ public class UpdateSharpsDisposalRequestController implements Initializable {
       SharpsDisposalRequest request = new SharpsDisposalRequest();
       // populate fields
       request.setAssignee(employeeDAO.getRecord(assigneeDropDown.getValue()));
-      request.setDestination(locationDAO.getRecord(roomDropDown.getValue()));
+      request.setDestination(locations.get(roomDropDown.getSelectionModel().getSelectedIndex()));
       request.setStatus(statusChoiceBox.getValue());
       request.setType(typeDropDown.getValue());
       // TODO use acctual makeID system in SharpsDisposal

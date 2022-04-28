@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -15,13 +16,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.stage.Stage;
 
 public class UpdateMealRequestController implements Initializable {
-  @FXML private Button submitButton;
+  @FXML private Button resetFields, submitButton;
   @FXML
-  private ChoiceBox<String> patientNames,
+  private JFXComboBox<String> patientNames,
       drinkSel,
       mainSel,
       sideSel,
@@ -52,7 +52,7 @@ public class UpdateMealRequestController implements Initializable {
     resetFields();
     submitButton.setDisable(false);
     // status choice box ----------------------------------------------------
-    serviceStatus.getItems().addAll(" ", "DONE", "PROC");
+    serviceStatus.getItems().addAll("", "DONE", "PROC");
     // patient names choice box---------------------------------------
     patientNames.setItems(getPatients());
 
@@ -155,7 +155,7 @@ public class UpdateMealRequestController implements Initializable {
   }
 
   @FXML
-  void submitRequest() throws IOException {
+  void submitButton() throws IOException {
     MealServiceRequest request = new MealServiceRequest();
     request.setRequestID(this.request.getRequestID());
     request.setDestination(locations.get(destinationDrop.getSelectionModel().getSelectedIndex()));

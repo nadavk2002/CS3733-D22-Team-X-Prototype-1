@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import javafx.stage.Stage;
 
 public class UpdateLangRequestController implements Initializable {
   @FXML private Button submitButton;
-  @FXML private ChoiceBox<String> selectLang, roomNum, serviceStatus, assignStaff;
+  @FXML private JFXComboBox<String> selectLang, roomNum, serviceStatus, assignStaff;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
