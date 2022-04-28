@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXSlider?>
 <?import com.jfoenix.controls.JFXToggleButton?>
@@ -17,15 +16,14 @@
 
 <BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.PreferencePageController">
    <center>
-      <GridPane alignment="CENTER_LEFT" hgap="30.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" BorderPane.alignment="TOP_CENTER">
+      <GridPane alignment="CENTER" hgap="30.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="750.0" BorderPane.alignment="TOP_CENTER">
          <columnConstraints>
-            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="600.0" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="150.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="500.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="200.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="200.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="150.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="150.0" valignment="TOP" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="30.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
@@ -54,15 +52,15 @@
 <!--                              <Insets bottom="50.0" />-->
 <!--                           </VBox.margin>-->
 <!--                        </JFXComboBox>-->
-<!--                        <Label text="Accessibility Options" />-->
-<!--                        <JFXComboBox fx:id="accessOptionsCombo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="150.0">-->
-<!--                           <VBox.margin>-->
-<!--                              <Insets bottom="50.0" />-->
-<!--                           </VBox.margin>-->
-<!--                        </JFXComboBox>-->
+                        <Label text="Color Blind Options" />
+                        <JFXComboBox fx:id="accessOptionsCombo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="150.0">
+                           <VBox.margin>
+                              <Insets bottom="50.0" />
+                           </VBox.margin>
+                        </JFXComboBox>
                      </children>
                   </VBox>
-                  <JFXToggleButton fx:id="darkModeToggle" contentDisplay="RIGHT" text="Dark Mode" />
+<!--                  <JFXToggleButton fx:id="darkModeToggle" contentDisplay="RIGHT" text="Dark Mode" />-->
                </children>
             </HBox>
             <Label text="Audio">
@@ -75,14 +73,6 @@
                   <Insets top="10.0" />
                </GridPane.margin>
             </Label>
-            <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="content-container" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
-               <children>
-<!--                  <JFXButton fx:id="applyChangesButton" onAction="#applyChanges" text="Apply Changes" />-->
-<!--                  <JFXButton fx:id="setDefaultButton" onAction="#setDefault" text="Set Default" />-->
-<!--                  <JFXButton fx:id="revertDefaultButton" onAction="#revertDefault" text="Revert to Default" />-->
-               </children>
-            </HBox>
-            <Label text="Label" visible="false" GridPane.rowIndex="2" />
          </children>
          <styleClass>
             <String fx:value="content-background" />

@@ -15,11 +15,11 @@
     /*-fx-light-blue: #4E8FF8;*/
     /*-fx-navy-blue: #1D4E86;*/
     /*-fx-dark-blue: #2562A7;*/
-    -fx-color-1: #061B2C;
-    -fx-color-2: #0F273A;
-    -fx-color-3: #004274;
-    -fx-color-4: #00698C;
-    -fx-color-5: #9FA7AB;
+    -fx-color-1: #F7FDFF;
+    -fx-color-2: #9ED5FF;
+    -fx-color-3: #378BCC;
+    -fx-color-4: #16629C;
+    -fx-color-5: #899091;
     -fx-color-dirty: #c45454;
     -fx-color-clean: #6cc454;
     -fx-color-inuse: #dea51b;
@@ -37,7 +37,7 @@
 .content-container > .button {
     -fx-font-family: "Oxygen";
     -fx-font-size: 18;
-    -fx-background-color: -fx-color-3;
+    -fx-background-color: -fx-color-4;
     -fx-text-fill: -fx-color-1;
     -fx-background-radius: 20px;
 }
@@ -63,6 +63,20 @@
     -fx-prompt-text-fill: -fx-color-5;
 }
 
+.content-container > .toggle-button {
+    -fx-text-fill: -fx-color-1;
+    -jfx-toggle-color: -fx-color-4;
+    -jfx-untoggle-color: -fx-color-5;
+    -jfx-toggle-line-color: -fx-color-2;
+    -jfx-untoggle-line-color: -fx-color-1;
+
+}
+
+.content-container > .jfx-slider {
+    -jfx-default-thumb: -fx-color-4;
+    -jfx-default-track: -fx-color-1;
+}
+
 .content-background {
     -fx-background-color: -fx-color-3;
     -fx-background-radius: 50px;
@@ -72,7 +86,7 @@
 .title-label {
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
-    -fx-font-size: 36;
+    -fx-font-size: 48;
     -fx-text-fill: -fx-color-3;
 }
 
