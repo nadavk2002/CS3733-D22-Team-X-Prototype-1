@@ -40,15 +40,27 @@ public class PreferencePageController implements Initializable {
             .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/application.css")
             .toExternalForm();
     initPalettes();
-    String cssDark =
+    String cssProtanopia =
         App.class
-            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/applicationDark.css")
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/applicationProtanopia.css")
+            .toExternalForm();
+    String cssAchromatomaly =
+        App.class
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/applicationAchromatomaly.css")
+            .toExternalForm();
+    String cssTritanopia =
+        App.class
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/applicationTritanopia.css")
+            .toExternalForm();
+    String cssAchromatopsia =
+        App.class
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/applicationAchromatopsia.css")
             .toExternalForm();
     muteSoundsToggle.setSelected(muteSoundsToggleOn);
     muteMusicToggle.setSelected(muteMusicToggleOn);
-    darkModeToggle.setSelected(darkModeToggleOn);
+    //    darkModeToggle.setSelected(darkModeToggleOn);
     //    colorSchemeCombo.getSelectionModel().select(colorSchemeLast);
-    //    accessOptionsCombo.getSelectionModel().select(accessOptionsLast);
+    accessOptionsCombo.getSelectionModel().select(accessOptionsLast);
     menuButtonPressSoundPlayer.setVolume(.50);
     volumeSlider.setValue(InvisibleMusicPlayerController.mediaPlayer.getVolume() * 100);
     volumeSlider
@@ -80,37 +92,38 @@ public class PreferencePageController implements Initializable {
     //          darkModeToggle.getScene().getStylesheets().add(css);
     //        });
     //
-    //    accessOptionsCombo.setOnAction(
-    //        (event) -> {
-    //          String currentScheme = colorSchemeCurrent;
-    //          accessOptionsCurrent = accessOptionsCombo.getSelectionModel().getSelectedItem();
-    //
-    //          if (accessOptionsCombo.getSelectionModel().getSelectedItem() != "None") {
-    //            currentScheme += " " + accessOptionsCombo.getSelectionModel().getSelectedItem();
-    //          }
-    //          if (darkModeToggle.isSelected()) {
-    //            currentScheme += " " + "Dark";
-    //          }
-    //
-    //          System.out.println(currentScheme);
-    //
-    //          String[] selectedScheme = palettes.get(currentScheme);
-    //          System.out.println(selectedScheme[0]);
-    //          App.changeColorStyle(selectedScheme);
-    //          //          darkModeToggle.getScene().getRoot().getStylesheets().clear();
-    //          darkModeToggle.getScene().getRoot().getStylesheets().add(css);
-    //        });
-
-    darkModeToggle.setOnAction(
+    accessOptionsCombo.setOnAction(
         (event) -> {
-          if (darkModeToggle.isSelected()) {
-            darkModeToggle.getScene().getRoot().getStylesheets().clear();
-            darkModeToggle.getScene().getRoot().getStylesheets().add(cssDark);
+          accessOptionsCurrent = accessOptionsCombo.getSelectionModel().getSelectedItem();
+
+          if (accessOptionsCombo.getSelectionModel().getSelectedItem() == "None") {
+            accessOptionsCombo.getScene().getRoot().getStylesheets().clear();
+            accessOptionsCombo.getScene().getRoot().getStylesheets().add(css);
+          } else if (accessOptionsCombo.getSelectionModel().getSelectedItem() == "Protanopia") {
+            accessOptionsCombo.getScene().getRoot().getStylesheets().clear();
+            accessOptionsCombo.getScene().getRoot().getStylesheets().add(cssProtanopia);
+          } else if (accessOptionsCombo.getSelectionModel().getSelectedItem() == "Achromatopsia") {
+            accessOptionsCombo.getScene().getRoot().getStylesheets().clear();
+            accessOptionsCombo.getScene().getRoot().getStylesheets().add(cssAchromatopsia);
+          } else if (accessOptionsCombo.getSelectionModel().getSelectedItem() == "Tritanopia") {
+            accessOptionsCombo.getScene().getRoot().getStylesheets().clear();
+            accessOptionsCombo.getScene().getRoot().getStylesheets().add(cssTritanopia);
           } else {
-            darkModeToggle.getScene().getRoot().getStylesheets().clear();
-            darkModeToggle.getScene().getRoot().getStylesheets().add(css);
+            accessOptionsCombo.getScene().getRoot().getStylesheets().clear();
+            accessOptionsCombo.getScene().getRoot().getStylesheets().add(cssAchromatomaly);
           }
         });
+
+    //    darkModeToggle.setOnAction(
+    //        (event) -> {
+    //          if (darkModeToggle.isSelected()) {
+    //            darkModeToggle.getScene().getRoot().getStylesheets().clear();
+    //            darkModeToggle.getScene().getRoot().getStylesheets().add(cssDark);
+    //          } else {
+    //            darkModeToggle.getScene().getRoot().getStylesheets().clear();
+    //            darkModeToggle.getScene().getRoot().getStylesheets().add(css);
+    //          }
+    //        });
   }
 
   private void initPalettes() {
@@ -137,9 +150,12 @@ public class PreferencePageController implements Initializable {
     //    palettes.put("Blue Protanopia Dark", blueDarkProtanopiaPalette);
     //
     //    String[] schemeNames = {"Blue", "Green"};
-    //    String[] accessNames = {"Protanopia"};
     //    colorSchemeCombo.getItems().addAll(schemeNames);
-    //    accessOptionsCombo.getItems().addAll(accessNames);
+    accessOptionsCombo.getItems().add("None");
+    accessOptionsCombo.getItems().add("Protanopia");
+    accessOptionsCombo.getItems().add("Achromatopsia");
+    accessOptionsCombo.getItems().add("Tritanopia");
+    accessOptionsCombo.getItems().add("Achromatomaly");
     //    accessOptionsCombo.getItems().add("None");
   }
 

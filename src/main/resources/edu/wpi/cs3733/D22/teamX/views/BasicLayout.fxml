@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.SVGPath?>
 
 <Pane fx:id="basePane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController">
    <children>
@@ -28,15 +27,7 @@
                               </ImageView>
                            </graphic>
                         </Label>
-                        <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" prefHeight="40.0" prefWidth="265.0" text="Log out">
-                           <graphic>
-                              <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/logout.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </JFXButton>
+                        <JFXButton mnemonicParsing="false" onAction="#switchLoginScreen" prefHeight="40.0" prefWidth="265.0" text="Log out" />
                      </children>
                   </VBox>
                   <Label text="Map" />
@@ -178,14 +169,10 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
-                  <Label fx:id="timeLabel" prefHeight="37.0" prefWidth="337.0" text="Time">
-                     <graphic>
-                        <SVGPath content="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,21a9,9,0,1,1,9-9A9.01,9.01,0,0,1,12,21ZM10.5,11.055l-2.4,1.5a1.5,1.5,0,0,0-.475,2.068h0a1.5,1.5,0,0,0,2.068.475l2.869-1.8a2,2,0,0,0,.938-1.7V7.772a1.5,1.5,0,0,0-1.5-1.5h0a1.5,1.5,0,0,0-1.5,1.5Z" disable="true" fill="WHITE" />
-                     </graphic>
-                  </Label>
+                  <Label fx:id="timeLabel" prefHeight="37.0" prefWidth="337.0" text="Time" />
                </children>
                <padding>
-                  <Insets left="10.0" top="10.0" />
+                  <Insets bottom="50.0" left="10.0" top="10.0" />
                </padding>
             </VBox>
          </content>

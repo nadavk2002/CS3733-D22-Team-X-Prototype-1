@@ -72,7 +72,7 @@ public class AboutPageController implements Initializable {
               + "Product Owner\n"
               + "\n"
               + "Contributions\n"
-              + "Organized sprint planning meetings, filling/sizing/assigning Jira tasks, collaborating with all front-end developers to achieve a consistent and intuitive UI using stylesheets, implemented a preferences page, and a delighter feature");
+              + "Organized sprint planning meetings, filling/sizing/assigning Jira tasks, collaborating with all front-end developers to achieve a consistent and intuitive UI using stylesheets, and implemented a preferences page.");
     }
   }
 
