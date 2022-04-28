@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.RoomSystemControlController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.RoomSystemControlController">
    <center>
       <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
@@ -17,7 +24,6 @@
             <GridPane alignment="CENTER" vgap="10.0">
               <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
@@ -35,10 +41,6 @@
                   <TextField fx:id="ipField" onAction="#updateIP" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <JFXToggleButton fx:id="FanToggle" onAction="#updateFan" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXToggleButton fx:id="lampToggle" onAction="#updateLamp" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="tempLabel" text="72.5F" GridPane.columnIndex="2" />
-                  <Label fx:id="fanText" text="on" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label fx:id="lampText" text="off" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label fx:id="ipText" text="192.168.137.27" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </children>
