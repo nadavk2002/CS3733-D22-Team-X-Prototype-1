@@ -492,11 +492,21 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total a" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total amount of available equipments are listed below the &quot;amount&quot; button" textAlignment="CENTER" wrappingWidth="621.1367530822754">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 6: Submit the form" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/EquipBox.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </VBox>
                      </children>
