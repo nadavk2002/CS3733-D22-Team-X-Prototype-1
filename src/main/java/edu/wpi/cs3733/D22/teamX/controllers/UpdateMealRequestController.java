@@ -37,6 +37,7 @@ public class UpdateMealRequestController implements Initializable {
   private final ObservableList<MealServiceRequest> mealList = FXCollections.observableArrayList();
   private final ObservableList<String> employeeIDs = FXCollections.observableArrayList();
   private final ObservableList<String> locationNames = FXCollections.observableArrayList();
+  private final ObservableList<String> patientNamesList = FXCollections.observableArrayList();
   private final ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
   private MealServiceRequest request;
 
@@ -53,11 +54,9 @@ public class UpdateMealRequestController implements Initializable {
     // status choice box ----------------------------------------------------
     serviceStatus.getItems().addAll(" ", "DONE", "PROC");
     // patient names choice box---------------------------------------
-    List<MealServiceRequest> meals = getMealRequests();
-    for (MealServiceRequest meal : meals) {
-      patientNames.getItems().add(meal.getPatientFor());
-    }
+    patientNames.setItems(getPatients());
 
+    List<MealServiceRequest> meals = getMealRequests();
     // drinks choice box---------------------------------------
     List<String> mealDrinks = new ArrayList<String>();
     for (MealServiceRequest meal : meals) {
@@ -91,7 +90,10 @@ public class UpdateMealRequestController implements Initializable {
     destinationDrop.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
-    patientNames.setValue(this.request.getPatientFor());
+    patientNames.setValue(
+        PatientDAO.getDAO().getRecord(this.request.getPatientFor()).getFirstName()
+            + " "
+            + PatientDAO.getDAO().getRecord(this.request.getPatientFor()).getLastName());
     drinkSel.setValue(this.request.getDrink());
     assignStaff.setValue(this.request.getAssigneeID());
     sideSel.setValue(this.request.getSide());
@@ -128,6 +130,14 @@ public class UpdateMealRequestController implements Initializable {
     return employeeNames;
   }
 
+  private ObservableList<String> getPatients() {
+    List<Patient> patients = PatientDAO.getDAO().getAllRecords();
+    for (Patient patient : patients) {
+      patientNamesList.add(patient.getFirstName() + " " + patient.getLastName());
+    }
+    return patientNamesList;
+  }
+
   @FXML
   void resetFields() {
     patientNames.setValue("");
@@ -154,7 +164,11 @@ public class UpdateMealRequestController implements Initializable {
     request.setMainCourse(mainSel.getValue());
     request.setDrink(drinkSel.getValue());
     request.setSide(sideSel.getValue());
-    request.setPatientFor(patientNames.getValue());
+    request.setPatientFor(
+        PatientDAO.getDAO()
+            .getAllRecords()
+            .get(patientNames.getSelectionModel().getSelectedIndex())
+            .getPatientID());
 
     // requestDAO.addRecord(request);
     ServiceRequestDAO.getDAO().updateRecord(request);
