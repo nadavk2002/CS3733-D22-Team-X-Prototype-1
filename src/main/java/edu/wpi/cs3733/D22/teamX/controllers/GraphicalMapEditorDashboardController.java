@@ -161,7 +161,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       ll2Master,
       infoBox;
   @FXML private NestedBarChart nestedBarChart;
-
+  @FXML private VBox axisVbox;
+  @FXML Text maxVal;
   @FXML private Axis yAxis;
   ChartItem chartItem = new ChartItem("Clean", 43, Color.RED, Instant.ofEpochSecond(1));
   ChartItem chartItem2 = new ChartItem("Clean", 433, Color.GREEN, Instant.ofEpochSecond(1));
@@ -169,30 +170,6 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    //    nestedBarChart.addSeries(
-    //        sortByBeds(
-    //            sortByClean(sortEquipmentByFloor("5")),
-    //            sortByInUse(sortEquipmentByFloor("5")),
-    //            sortByDirty(sortEquipmentByFloor("5"))));
-    //    nestedBarChart.addSeries(
-    //        sortByPump(
-    //            sortByClean(sortEquipmentByFloor("5")),
-    //            sortByInUse(sortEquipmentByFloor("5")),
-    //            sortByDirty(sortEquipmentByFloor("5"))));
-    //    nestedBarChart.addSeries(
-    //        sortByRecliners(
-    //            sortByClean(sortEquipmentByFloor("5")),
-    //            sortByInUse(sortEquipmentByFloor("5")),
-    //            sortByDirty(sortEquipmentByFloor("5"))));
-    //    nestedBarChart.addSeries(
-    //        sortByXray(
-    //            sortByClean(sortEquipmentByFloor("5")),
-    //            sortByInUse(sortEquipmentByFloor("5")),
-    //            sortByDirty(sortEquipmentByFloor("5"))));
-    // fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems();
-    // yAxis.setMaxValue(fillChartData(sortEquipmentByFloor("5")).getSumOfAllItems());
-    //    coxcombChart.addItem(chartItem);
-    //    coxcombChart.addItem(chartItem2);
     alertBox.setVisible(false);
     infoBox.setSpacing(30);
     masterBox.setSpacing(5);
@@ -212,13 +189,15 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     l1Master.setSpacing(3);
     ll1Master.setSpacing(3);
     ll2Master.setSpacing(3);
-    yAxis.setAutoFontSize(false);
-    yAxis.setTickLabelFontSize(20);
+    //    yAxis.setAutoFontSize(false);
+    //    yAxis.setTickLabelFontSize(20);
+    // axisVbox.setVisible(false);
+    //    yAxis.setMaxValue(20);
     cleanTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
     cleanPodB.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     cleanPodC.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
+    axisVbox.setSpacing(450);
     unitIDC.setCellValueFactory(new PropertyValueFactory<>("unitID"));
     typeC.setCellValueFactory(new PropertyValueFactory<>("typeName"));
     availabilityC.setCellValueFactory(new PropertyValueFactory<>("isAvailableChar"));
@@ -254,6 +233,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
 
     dynamicSizeRectangles(llTwoDirty, llTwoClean, llTwoIU, sortEquipmentByFloor("L2"));
     rectangleNumber(llTwoDirtyText, llTwoCleanText, llTwoIUText, sortEquipmentByFloor("L2"));
+    // yAxis.setMaxValue(0);
     fillTable(
         sortByDirty(sortEquipmentByFloor("5")),
         addToPodB(sortEquipmentByFloor("5")),
@@ -718,14 +698,6 @@ public class GraphicalMapEditorDashboardController implements Initializable {
                 sortByClean(sortEquipmentByFloor("L2")),
                 sortByInUse(sortEquipmentByFloor("L2")),
                 sortByDirty(sortEquipmentByFloor("L2")))));
-    // dirtyPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("3")));
-    // dirtyPodB.getItems().addAll(addToPod1(sortEquipmentByFloor("4")));
-    // cleanPodA.getItems().addAll(addToPod1(sortEquipmentByFloor("5")));
-    // cleanPodB.getItems().addAll(addToPod1(sortEquipmentByFloor("5")));
-    //    for (EquipmentUnit e : addToPod1(sortEquipmentByFloor("3"))) {
-    //      System.out.println(e.getCurrLocation().getLongName());
-    //    }
-    //    System.out.println(addToPod1(sortEquipmentByFloor("3")).size());
     displayAlert();
   }
 
@@ -1009,6 +981,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       ChartItemSeries<ChartItem> xray,
       ChartItemSeries<ChartItem> recliner,
       ChartItemSeries<ChartItem> pump) {
+
     List<ChartItemSeries<ChartItem>> chartList = new ArrayList<>();
     if (bed.getItems().size() == 0
         && xray.getItems().size() == 0
@@ -1060,12 +1033,22 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       chartList.add(bed);
       chartList.add(xray);
     } else {
-      chartList.add(recliner);
-      chartList.add(pump);
-      chartList.add(xray);
-      chartList.add(bed);
+      chartList.add(pump); // 4
+      chartList.add(recliner); // 3
+      chartList.add(xray); // 2
+      chartList.add(bed); // 1
     }
     return chartList;
+  }
+
+  private double findMaxAxisVal(
+      ChartItemSeries<ChartItem> bed,
+      ChartItemSeries<ChartItem> xray,
+      ChartItemSeries<ChartItem> recliner,
+      ChartItemSeries<ChartItem> pump) {
+    return Math.max(
+        Math.max(bed.getSumOfAllItems(), xray.getSumOfAllItems()),
+        Math.max(recliner.getSumOfAllItems(), pump.getSumOfAllItems()));
   }
 
   private void fillTable(
@@ -1074,6 +1057,11 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       ObservableList<EquipmentUnit> podC,
       StackPane floor,
       List<ChartItemSeries<ChartItem>> chartItems) {
+    List<Double> maxList = new ArrayList<>();
+    for (ChartItemSeries<ChartItem> c : chartItems) {
+      maxList.add(c.getSumOfAllItems());
+    }
+    double maxSize = Collections.max(maxList);
 
     floor.setOnMouseClicked(
         event -> {
@@ -1083,6 +1071,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
             cleanPodC.setItems(podC);
             nestedBarChart.setSeries(chartItems);
           }
+          // yAxis.setMaxValue(maxSize);
+          maxVal.setText(String.valueOf((int) maxSize));
         });
   }
 
