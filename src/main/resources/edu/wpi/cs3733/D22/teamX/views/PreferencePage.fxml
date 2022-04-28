@@ -48,18 +48,18 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="150.0" styleClass="content-container">
                      <children>
-                        <Label text="Color Scheme" />
-                        <JFXComboBox fx:id="colorSchemeCombo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="150.0">
-                           <VBox.margin>
-                              <Insets bottom="50.0" />
-                           </VBox.margin>
-                        </JFXComboBox>
-                        <Label text="Accessibility Options" />
-                        <JFXComboBox fx:id="accessOptionsCombo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="150.0">
-                           <VBox.margin>
-                              <Insets bottom="50.0" />
-                           </VBox.margin>
-                        </JFXComboBox>
+<!--                        <Label text="Color Scheme" />-->
+<!--                        <JFXComboBox fx:id="colorSchemeCombo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="150.0">-->
+<!--                           <VBox.margin>-->
+<!--                              <Insets bottom="50.0" />-->
+<!--                           </VBox.margin>-->
+<!--                        </JFXComboBox>-->
+<!--                        <Label text="Accessibility Options" />-->
+<!--                        <JFXComboBox fx:id="accessOptionsCombo" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="150.0">-->
+<!--                           <VBox.margin>-->
+<!--                              <Insets bottom="50.0" />-->
+<!--                           </VBox.margin>-->
+<!--                        </JFXComboBox>-->
                      </children>
                   </VBox>
                   <JFXToggleButton fx:id="darkModeToggle" contentDisplay="RIGHT" text="Dark Mode" />
@@ -77,9 +77,9 @@
             </Label>
             <HBox alignment="CENTER_LEFT" spacing="30.0" styleClass="content-container" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <children>
-                  <JFXButton fx:id="applyChangesButton" onAction="#applyChanges" text="Apply Changes" />
-                  <JFXButton fx:id="setDefaultButton" onAction="#setDefault" text="Set Default" />
-                  <JFXButton fx:id="revertDefaultButton" onAction="#revertDefault" text="Revert to Default" />
+<!--                  <JFXButton fx:id="applyChangesButton" onAction="#applyChanges" text="Apply Changes" />-->
+<!--                  <JFXButton fx:id="setDefaultButton" onAction="#setDefault" text="Set Default" />-->
+<!--                  <JFXButton fx:id="revertDefaultButton" onAction="#revertDefault" text="Revert to Default" />-->
                </children>
             </HBox>
             <Label text="Label" visible="false" GridPane.rowIndex="2" />

@@ -183,7 +183,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     infoBox.setSpacing(30);
     masterBox.setSpacing(5);
     towerBox.setSpacing(3);
-    buttonBox.setSpacing(6);
+    // buttonBox.setSpacing(6);
     l5Vbox.setSpacing(3);
     l4Vbox.setSpacing(3);
     l3Vbox.setSpacing(3);
@@ -726,7 +726,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       ObservableList<EquipmentUnit> dirty) {
     ChartItemSeries<ChartItem> nestedBarList =
         new ChartItemSeries<>(
-            ChartType.NESTED_BAR, "Beds", Paint.valueOf("#446fdc"), Paint.valueOf("#446fdc"));
+            ChartType.NESTED_BAR, "Beds", Paint.valueOf("#899091"), Paint.valueOf("#899091"));
     List<ChartItem> itemList = new ArrayList<>();
     int cleanBeds = 0;
     for (EquipmentUnit c : clean) {
@@ -748,13 +748,13 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     }
     ChartItem cleanCI =
         new ChartItem(
-            "Clean", cleanBeds, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
+            "Clean", cleanBeds, Color.valueOf("#6cc454"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem dirtyCI =
         new ChartItem(
-            "Dirty", dirtyBeds, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
+            "Dirty", dirtyBeds, Color.valueOf("#c45454"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem inuseCI =
         new ChartItem(
-            "In Use", inUseBeds, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
+            "In Use", inUseBeds, Color.valueOf("#dea51b"), Instant.ofEpochSecond(1), true, 5000);
     itemList.add(cleanCI);
     itemList.add(dirtyCI);
     itemList.add(inuseCI);
@@ -768,7 +768,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       ObservableList<EquipmentUnit> dirty) {
     ChartItemSeries<ChartItem> nestedBarList =
         new ChartItemSeries<>(
-            ChartType.NESTED_BAR, "Recliners", Paint.valueOf("#446fdc"), Paint.valueOf("#446fdc"));
+            ChartType.NESTED_BAR, "Recliners", Paint.valueOf("#899091"), Paint.valueOf("#899091"));
     List<ChartItem> itemList = new ArrayList<>();
     int cleanRecliners = 0;
     for (EquipmentUnit c : clean) {
@@ -792,7 +792,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         new ChartItem(
             "Clean",
             cleanRecliners,
-            Color.valueOf("#78ff78"),
+            Color.valueOf("#6cc454"),
             Instant.ofEpochSecond(1),
             true,
             5000);
@@ -800,7 +800,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         new ChartItem(
             "Dirty",
             dirtyRecliners,
-            Color.valueOf("#ff7474"),
+            Color.valueOf("#c45454"),
             Instant.ofEpochSecond(1),
             true,
             5000);
@@ -808,7 +808,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         new ChartItem(
             "In Use",
             inUseRecliners,
-            Color.valueOf("#feff75"),
+            Color.valueOf("#dea51b"),
             Instant.ofEpochSecond(1),
             true,
             5000);
@@ -827,8 +827,8 @@ public class GraphicalMapEditorDashboardController implements Initializable {
         new ChartItemSeries<>(
             ChartType.NESTED_BAR,
             "Infusion Pumps",
-            Paint.valueOf("#446fdc"),
-            Paint.valueOf("#446fdc"));
+            Paint.valueOf("#899091"),
+            Paint.valueOf("#899091"));
     List<ChartItem> itemList = new ArrayList<>();
     int cleanPumps = 0;
     for (EquipmentUnit c : clean) {
@@ -850,13 +850,13 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     }
     ChartItem cleanCI =
         new ChartItem(
-            "Clean", cleanPumps, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
+            "Clean", cleanPumps, Color.valueOf("#6cc454"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem dirtyCI =
         new ChartItem(
-            "Dirty", dirtyPumps, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
+            "Dirty", dirtyPumps, Color.valueOf("#c45454"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem inuseCI =
         new ChartItem(
-            "In Use", inUsePumps, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
+            "In Use", inUsePumps, Color.valueOf("#dea51b"), Instant.ofEpochSecond(1), true, 5000);
     itemList.add(cleanCI);
     itemList.add(dirtyCI);
     itemList.add(inuseCI);
@@ -870,7 +870,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
       ObservableList<EquipmentUnit> dirty) {
     ChartItemSeries<ChartItem> nestedBarList =
         new ChartItemSeries<>(
-            ChartType.NESTED_BAR, "X-Ray", Paint.valueOf("#446fdc"), Paint.valueOf("#446fdc"));
+            ChartType.NESTED_BAR, "X-Ray", Paint.valueOf("#899091"), Paint.valueOf("#899091"));
     List<ChartItem> itemList = new ArrayList<>();
     int cleanXrays = 0;
     for (EquipmentUnit c : clean) {
@@ -892,13 +892,13 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     }
     ChartItem cleanCI =
         new ChartItem(
-            "Clean", cleanXrays, Color.valueOf("#78ff78"), Instant.ofEpochSecond(1), true, 5000);
+            "Clean", cleanXrays, Color.valueOf("#6cc454"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem dirtyCI =
         new ChartItem(
-            "Dirty", dirtyXrays, Color.valueOf("#ff7474"), Instant.ofEpochSecond(1), true, 5000);
+            "Dirty", dirtyXrays, Color.valueOf("#c45454"), Instant.ofEpochSecond(1), true, 5000);
     ChartItem inuseCI =
         new ChartItem(
-            "In Use", inUseXrays, Color.valueOf("#feff75"), Instant.ofEpochSecond(1), true, 5000);
+            "In Use", inUseXrays, Color.valueOf("#dea51b"), Instant.ofEpochSecond(1), true, 5000);
     itemList.add(cleanCI);
     itemList.add(dirtyCI);
     itemList.add(inuseCI);
