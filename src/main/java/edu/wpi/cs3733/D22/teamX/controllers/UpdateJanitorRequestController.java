@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -17,8 +18,7 @@ import javafx.stage.Stage;
 
 public class UpdateJanitorRequestController implements Initializable {
   @FXML private Button submitButton;
-  @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff;
-  @FXML private TextField serviceType;
+  @FXML private JFXComboBox<String> roomNum, serviceStatus, assignStaff, serviceType;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private ServiceRequestDAO janitorDAO = ServiceRequestDAO.getDAO();
@@ -44,10 +44,19 @@ public class UpdateJanitorRequestController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
-    resetFields();
+    //    resetFields();
     submitButton.setDisable(false);
     serviceStatus.getItems().addAll("", "PROC", "DONE");
-    serviceType.setText("");
+    serviceType
+        .getItems()
+        .addAll(
+            "Bodily Fluids",
+            "Chemical Spill",
+            "Sanitation",
+            "Trash",
+            "Trash and Recycling",
+            "Recycling",
+            "Trash and Sanitation");
     assignStaff.setItems(getEmployeeIDs());
     //    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
@@ -57,7 +66,7 @@ public class UpdateJanitorRequestController implements Initializable {
     // serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
     roomNum.setItems(this.getLocationNames());
-    serviceType.setText(this.request.getDescription());
+    serviceType.setValue(request.getDescription());
     assignStaff.setValue(this.request.getAssigneeID());
     roomNum.setValue(request.getLocationShortName());
     serviceStatus.setValue(this.request.getStatus());
@@ -95,7 +104,7 @@ public class UpdateJanitorRequestController implements Initializable {
   /** Resets all fields on the page. */
   @FXML
   public void resetFields() {
-    serviceType.setText("");
+    serviceType.setValue("");
     roomNum.setValue("");
     serviceStatus.setValue("");
     assignStaff.setValue("");
@@ -110,7 +119,7 @@ public class UpdateJanitorRequestController implements Initializable {
     request.setDestination(locations.get(roomNum.getSelectionModel().getSelectedIndex()));
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
-    request.setDescription(serviceType.getText());
+    request.setDescription(serviceType.getValue());
     // janitorDAO.updateRecord(request);
     ServiceRequestDAO.getDAO().updateRecord(request);
     Stage stage = (Stage) submitButton.getScene().getWindow();

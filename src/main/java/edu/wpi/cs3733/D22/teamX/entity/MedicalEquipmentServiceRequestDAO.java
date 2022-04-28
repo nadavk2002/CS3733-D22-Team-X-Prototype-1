@@ -18,7 +18,7 @@ public class MedicalEquipmentServiceRequestDAO implements DAO<MedicalEquipmentSe
   private static List<MedicalEquipmentServiceRequest> medicalEquipmentServiceRequests =
       new ArrayList<MedicalEquipmentServiceRequest>();
   private static String csv = "MedEquipReq.csv";
-  private static ObservableList<MedicalEquipmentServiceRequest> alerts =
+  public static ObservableList<MedicalEquipmentServiceRequest> alerts =
       FXCollections.observableArrayList();
   /** Creates a new LocationDAO object. */
   private MedicalEquipmentServiceRequestDAO() {

@@ -1,8 +1,12 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.D22.teamX.Observer;
+import edu.wpi.cs3733.D22.teamX.Subject;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -13,8 +17,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-public class DashboardAlertsController implements Initializable {
+public class DashboardAlertsController extends Observer implements Initializable {
   @FXML private TableView<MedicalEquipmentServiceRequest> alertTable;
+
   @FXML private TableColumn<MedicalEquipmentServiceRequest, String> requestID;
   @FXML private TableColumn<MedicalEquipmentServiceRequest, String> type;
   @FXML private TableColumn<MedicalEquipmentServiceRequest, String> destination;
@@ -28,18 +33,32 @@ public class DashboardAlertsController implements Initializable {
   private ObservableList<String> floors = FXCollections.observableArrayList();
   private MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
 
+  private static List<String> floors2 =
+      new ArrayList<String>(Arrays.asList("5", "4", "3", "2", "1", "L2", "L1"));
+
+  public DashboardAlertsController() {
+    super(new Subject());
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     alertTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    // alertTable.getItems().clear();
     requestID.setCellValueFactory(new PropertyValueFactory<>("requestID"));
     type.setCellValueFactory(new PropertyValueFactory<>("equipmentType"));
     destination.setCellValueFactory(new PropertyValueFactory<>("locationShortName"));
     quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
     floors.addAll("5", "4", "3", "2", "1", "L2", "L1");
-    for (Location l : locationDAO.getAllRecords()) {
+    alertTable.setItems(MESRDAO.getAlerts());
+    //    update();
+  }
+
+  @Override
+  public void update() {
+    for (Location l : LocationDAO.getDAO().getAllRecords()) {
       sendBedRequest(sortByBeds(sortByDirty(getEquipmentAtLocation(l))));
     }
-    for (String f : floors) {
+    for (String f : floors2) {
       sendInfusionPumpRequest(
           sortByInfusionPumps(sortByDirty(sortEquipmentByFloor(f))),
           sortByClean(sortEquipmentByFloor(f)));
@@ -58,8 +77,6 @@ public class DashboardAlertsController implements Initializable {
       MESR.setQuantity(beds.size());
       requestDAO.addRecord(MESR);
       mesrList.add(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
-      alertTable.setItems(mesrList);
-
       MESRDAO.addAlert(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
     }
   }
@@ -78,7 +95,7 @@ public class DashboardAlertsController implements Initializable {
       MESR.setQuantity(infusionPumps.size());
       requestDAO.addRecord(MESR);
       mesrList.add(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
-      alertTable.setItems(mesrList);
+      MESRDAO.addAlert(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
     }
   }
 

@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -17,7 +18,7 @@ import javafx.stage.Stage;
 
 public class UpdateMedicineDeliveryRequestController implements Initializable {
   @FXML private Button submitRequest;
-  @FXML private ChoiceBox<String> patientName, roomNum, serviceStatus, assignStaff;
+  @FXML private JFXComboBox<String> patientName, roomNum, serviceStatus, assignStaff;
   @FXML private TextField rxNum;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
@@ -33,6 +34,7 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
   private TableColumn<MedicineServiceRequest, String> rxColumn = new TableColumn("Rx Number");
   private TableColumn<MedicineServiceRequest, String> statusColumn =
       new TableColumn("Request Status");
+  private final ObservableList<String> patientNamesList = FXCollections.observableArrayList();
   private MedicineServiceRequest request;
 
   public UpdateMedicineDeliveryRequestController(MedicineServiceRequest request) {
@@ -48,7 +50,8 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
     serviceStatus.getItems().addAll("", "PROC", "DONE");
     assignStaff.setItems(this.getEmployeeIDs());
     //    assignStaff.getItems().addAll("Staff 1", "Staff 2", "Staff 3", "Staff 4");
-    patientName.getItems().addAll("Patient1", "Patient2", "Patient3", "Patient4");
+    //    patientName.getItems().addAll("Patient1", "Patient2", "Patient3", "Patient4");
+    patientName.setItems(getPatients());
     roomNum.setItems(getLocationNames());
     patientName.setOnAction((ActionEvent event) -> enableSubmitButton());
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -56,7 +59,10 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
     rxNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     //    serviceStatus.setOnAction((ActionEvent event) -> enableSubmitButton());
 
-    patientName.setValue(this.request.getPatientFor());
+    patientName.setValue(
+        PatientDAO.getDAO().getRecord(this.request.getPatientFor()).getFirstName()
+            + " "
+            + PatientDAO.getDAO().getRecord(this.request.getPatientFor()).getLastName());
     roomNum.setItems(this.getLocationNames());
     assignStaff.setValue(this.request.getAssigneeID());
     roomNum.setValue(request.getLocationShortName());
@@ -96,6 +102,14 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
     //            || assignStaff.getValue().equals(""));
   }
 
+  private ObservableList<String> getPatients() {
+    List<Patient> patients = PatientDAO.getDAO().getAllRecords();
+    for (Patient patient : patients) {
+      patientNamesList.add(patient.getFirstName() + " " + patient.getLastName());
+    }
+    return patientNamesList;
+  }
+
   /** resets all fields on the page. */
   @FXML
   public void resetFields() {
@@ -108,7 +122,7 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
 
   /** Creates a service request from the fields on the javafx page */
   @FXML
-  public void submitRequest() throws IOException {
+  public void submitForm() throws IOException {
     MedicineServiceRequest request = new MedicineServiceRequest();
 
     request.setRequestID(this.request.getRequestID());
@@ -116,7 +130,11 @@ public class UpdateMedicineDeliveryRequestController implements Initializable {
     request.setStatus(serviceStatus.getValue());
     request.setAssignee(emplDAO.getRecord(assignStaff.getValue()));
     request.setRxNum(rxNum.getText());
-    request.setPatientFor(patientName.getValue());
+    request.setPatientFor(
+        PatientDAO.getDAO()
+            .getAllRecords()
+            .get(patientName.getSelectionModel().getSelectedIndex())
+            .getPatientID());
     // requestDAO.addRecord(request);
     ServiceRequestDAO.getDAO().updateRecord(request);
     Stage stage = (Stage) submitRequest.getScene().getWindow();

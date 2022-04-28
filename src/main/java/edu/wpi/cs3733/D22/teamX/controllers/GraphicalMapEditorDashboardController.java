@@ -168,9 +168,18 @@ public class GraphicalMapEditorDashboardController implements Initializable {
   ChartItem chartItem2 = new ChartItem("Clean", 433, Color.GREEN, Instant.ofEpochSecond(1));
   MedicalEquipmentServiceRequestDAO MESRDAO = MedicalEquipmentServiceRequestDAO.getDAO();
 
+  private static boolean alertIsVisible = false;
+  private static String alertLabelString = "";
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    alertBox.setVisible(false);
+    alertBox.setVisible(alertIsVisible);
+    alertIsVisible = false;
+    alertLabel.setText(alertLabelString);
+    alertLabelString = "";
+    masterBox.setSpacing(30);
+
+    // alertBox.setVisible(false);
     infoBox.setSpacing(30);
     masterBox.setSpacing(5);
     towerBox.setSpacing(3);
@@ -698,7 +707,17 @@ public class GraphicalMapEditorDashboardController implements Initializable {
                 sortByClean(sortEquipmentByFloor("L2")),
                 sortByInUse(sortEquipmentByFloor("L2")),
                 sortByDirty(sortEquipmentByFloor("L2")))));
+
     displayAlert();
+
+    //    if (MESRDAO.getAlerts().size() > 0) {
+    //      //      DashboardAlertsController dashboardAlertsController = new
+    // DashboardAlertsController();
+    //      //        ShowAlerts();
+    //      //      dashboardAlertsController.update();
+    //      //      dashboardAlertsController.updateTable();
+    //      displayAlert();
+    //    }
   }
 
   private ChartItemSeries<ChartItem> sortByBeds(
@@ -900,17 +919,22 @@ public class GraphicalMapEditorDashboardController implements Initializable {
                 .get(MESRDAO.getAllRecords().size() - 1)
                 .getEquipmentType()
                 .equals("Bed")) {
-              alertBox.setVisible(true);
-              alertLabel.setText("Service Request for Beds have been sent to the OR Bed Park");
+              // alertBox.setVisible(true);
+              alertIsVisible = true;
+              // alertLabel.setText("Service Request for Beds have been sent to the OR Bed Park");
+              alertLabelString = "Service Request for Beds have been sent to the OR Bed Park";
             }
             if (MESRDAO
                 .getAllRecords()
                 .get(MESRDAO.getAllRecords().size() - 1)
                 .getEquipmentType()
                 .equals("Infusion Pump")) {
-              alertLabel.setVisible(true);
-              alertLabel.setText(
-                  "Service Request for Infusion Pumps have been sent to the West Plaza");
+              //              alertLabel.setVisible(true);
+              alertIsVisible = true;
+              // alertLabel.setText(
+              //  "Service Request for Infusion Pumps have been sent to the West Plaza");
+              alertLabelString =
+                  "Service Request for Infusion Pumps have been sent to the West Plaza";
             }
           }
         });

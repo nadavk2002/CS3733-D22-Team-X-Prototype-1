@@ -2,6 +2,8 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.Subject;
+import edu.wpi.cs3733.D22.teamX.controllers.DashboardAlertsController;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
+public class EquipmentUnitDAO extends Subject implements DAO<EquipmentUnit> {
   private static List<EquipmentUnit> equipmentUnits = new ArrayList<EquipmentUnit>();
   private static String csv = "MedicalEquipmentUnits.csv";
   private static EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
@@ -88,6 +90,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
     if (recordObject.getIsAvailableChar() == 'Y') {
       eqtDAO.decreaseAvailability(recordObject.getType(), 1);
     }
+    notifyAllObservers();
   }
 
   @Override
@@ -141,6 +144,13 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
     } catch (SQLException e) {
       e.printStackTrace();
     }
+    notifyAllObservers();
+  }
+
+  @Override
+  public void notifyAllObservers() {
+    DashboardAlertsController dashboardAlertsController = new DashboardAlertsController();
+    dashboardAlertsController.update();
   }
 
   @Override
@@ -171,6 +181,7 @@ public class EquipmentUnitDAO implements DAO<EquipmentUnit> {
     recordObject
         .getCurrLocation()
         .addUnit(recordObject); // add unit to currLocation's list of units
+    notifyAllObservers();
   }
 
   @Override
