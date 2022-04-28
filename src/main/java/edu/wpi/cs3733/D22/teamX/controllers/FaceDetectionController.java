@@ -56,7 +56,7 @@ public class FaceDetectionController implements Initializable {
       e.printStackTrace();
     }
     try {
-      copyResource("lbpcascades/lbp_frontalfacealt.xml", "lbp_classifier.xml", App.class);
+      copyResource("lbpcascades/lbpcascade_frontalface.xml", "lbp_classifier.xml", App.class);
     } catch (IOException e) {
       e.printStackTrace();
     }
