@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.RoomSystemControlController">
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="room" />
+                  <ChoiceBox fx:id="roomChoice" prefWidth="150.0" />
+               </children>
+            </HBox>
+            <GridPane alignment="CENTER" vgap="10.0">
+              <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Temp:" />
+                  <Label text="Fan:" GridPane.rowIndex="1" />
+                  <Label text="lamp:" GridPane.rowIndex="2" />
+                  <Label text="ip Adress:" GridPane.rowIndex="3" />
+                  <TextField fx:id="tempField" onAction="#updateTemp" GridPane.columnIndex="1" />
+                  <TextField fx:id="ipField" onAction="#updateIP" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXToggleButton fx:id="FanToggle" onAction="#updateFan" text=" " GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXToggleButton fx:id="lampToggle" onAction="#updateLamp" text=" " GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label fx:id="tempLabel" text="72.5F" GridPane.columnIndex="2" />
+                  <Label fx:id="fanText" text="on" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="lampText" text="off" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="ipText" text="192.168.137.27" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+               </children>
+            </GridPane>
+         </children>
+      </VBox>
+   </center>
+   <top>
+      <Label fx:id="Title" text="Room Control" BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

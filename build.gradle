@@ -57,6 +57,7 @@ dependencies {
     implementation 'junit:junit:4.13.2'
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'net.kurobako:gesturefx:0.7.1'
+    implementation 'net.sf.barcode4j:barcode4j:2.1'
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
@@ -75,12 +76,6 @@ dependencies {
 
 test {
     useJUnit()
-}
-
-jar {
-    manifest {
-        attributes 'Main-Class': mainClassName
-    }
 }
 
 def codeCoverageExcludes = [
@@ -135,9 +130,6 @@ spotless {
         googleJavaFormat()
     }
 }
-
-// Include dependent libraries in archive.
-mainClassName = "edu.wpi.cs3733.D22.teamX.Main"
 
 jar {
     manifest {

@@ -1,56 +1,104 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GiftDeliveryController">
-<children>
-    <ChoiceBox fx:id="selectAssignStaff" layoutX="734.0" layoutY="530.0" prefWidth="150.0">
-        <opaqueInsets>
-            <Insets />
-        </opaqueInsets>
-    </ChoiceBox>
-    <TextField fx:id="giftNoteField" layoutX="735.0" layoutY="561.0" prefHeight="26.0" prefWidth="150.0" />
-    <Label layoutX="656.0" layoutY="531.0" text="Assign Staff:" />
-    <Label layoutX="672.0" layoutY="563.0" text="Gift Note:" />
-    <JFXButton fx:id="submitButton" layoutX="802.0" layoutY="633.0" mnemonicParsing="false" onAction="#submitButton" text="Submit Request" textFill="#446fdc">
-        <font>
-            <Font name="System Bold" size="13.0" />
-        </font>
-    </JFXButton>
-      <JFXButton fx:id="resetFields" layoutX="713.0" layoutY="633.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
-          <font>
-              <Font name="System Bold" size="13.0" />
-          </font>
-      </JFXButton>
-      <Label fx:id="requestStatus" layoutX="766.0" layoutY="696.0" />
-      <ChoiceBox fx:id="selectGiftDestination" layoutX="734.0" layoutY="498.0" prefWidth="150.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ChoiceBox>
-      <Label layoutX="636.0" layoutY="499.0" text="Gift Destination: " />
-      <ChoiceBox fx:id="selectStatus" layoutX="734.0" layoutY="595.0" prefWidth="150.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ChoiceBox>
-      <Label layoutX="685.0" layoutY="598.0" text="Status:" />
-      <Label layoutX="669.0" layoutY="468.0" text="Gift Type:" />
-      <ChoiceBox fx:id="selectGiftType" layoutX="735.0" layoutY="464.0" prefWidth="150.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ChoiceBox>
-      <Label layoutX="630.0" layoutY="335.0" text="Gift Delivery Request" textFill="#446fdc">
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GiftDeliveryController">
+   <center>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" styleClass="content-background" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="350.0" prefWidth="1000.0" styleClass="content-container">
+               <columnConstraints>
+                  <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Destination" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Gift Note" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Request Status" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Gift Type">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="selectGiftType" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <JFXComboBox fx:id="selectAssignStaff" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXComboBox fx:id="selectGiftDestination" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXComboBox fx:id="selectStatus" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Assigned Staff" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="giftNoteField" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets right="40.0" />
+               </padding>
+            </GridPane>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="30.0" minWidth="200.0" prefHeight="80.0" prefWidth="600.0" spacing="125.0" styleClass="content-container">
+               <children>
+                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" styleClass="reset-button" text="Reset Form" textAlignment="CENTER" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitButton" ripplerFill="#446fdb" styleClass="submit-button" text="Submit Request" textFill="#446fdc">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="50.0" top="50.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <top>
+      <Label alignment="CENTER" contentDisplay="TOP" prefHeight="100.0" prefWidth="800.0" styleClass="title-label" text="Gift Delivery Request" textFill="#446fdc" BorderPane.alignment="TOP_CENTER">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="72.0" />
          </font>
+         <BorderPane.margin>
+            <Insets top="250.0" />
+         </BorderPane.margin>
       </Label>
-</children>
-</AnchorPane>
+   </top>
+</BorderPane>

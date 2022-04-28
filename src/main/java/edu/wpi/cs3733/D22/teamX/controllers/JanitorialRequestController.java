@@ -46,6 +46,7 @@ public class JanitorialRequestController implements Initializable {
     assignStaff.setValue("");
     //    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
+    roomNum.setValue("");
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());
     assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -78,7 +79,6 @@ public class JanitorialRequestController implements Initializable {
     submitButton.setDisable(
         roomNum.getValue().equals("")
             || serviceType.getValue().equals("")
-            || serviceStatus.getValue().equals("")
             || assignStaff.getValue().equals(""));
   }
 

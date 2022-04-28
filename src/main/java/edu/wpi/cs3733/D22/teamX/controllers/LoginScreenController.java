@@ -102,6 +102,13 @@ public class LoginScreenController implements Initializable {
     faceButton.setDisable(false);
     loginImage.fitWidthProperty().bind(loginFields.widthProperty());
     loginImage.fitHeightProperty().bind(loginFields.heightProperty());
+
+    loginFields
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              loginImage.setFitWidth(loginFields.getWidth() - 150);
+            });
   }
 
   @FXML

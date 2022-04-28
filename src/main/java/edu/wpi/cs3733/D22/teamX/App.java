@@ -1,5 +1,10 @@
 package edu.wpi.cs3733.D22.teamX;
 
+import edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController;
+import edu.wpi.cs3733.D22.teamX.controllers.InvisibleMusicPlayerController;
+import edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController;
+import edu.wpi.cs3733.D22.teamX.controllers.PreferencePageController;
+import edu.wpi.cs3733.D22.teamX.entity.UserPreferenceDAO;
 import java.io.IOException;
 import java.util.List;
 import javafx.application.Application;
@@ -17,10 +22,6 @@ public class App extends Application {
   private static Stage mainMenu;
   private static Stage loginScreen;
   private static int indexOfSceneReplacement;
-  private static int minWidth = 900;
-  private static int maxWidth = 1920;
-  private static int minHeight = 500;
-  private static int maxHeight = 1080;
 
   public static Stage getPrimaryStage() {
     return loginScreen;
@@ -36,6 +37,8 @@ public class App extends Application {
     Parent root = mainMenu.getScene().getRoot();
     List<Node> children = ((Pane) root).getChildren();
     children.set(indexOfSceneReplacement, scene);
+    scene.setPrefWidth(mainMenu.getWidth() - 300);
+    scene.setPrefHeight(mainMenu.getHeight());
     mainMenu
         .widthProperty()
         .addListener(
@@ -51,6 +54,22 @@ public class App extends Application {
   }
 
   public static void switchRoot() throws IOException {
+    // Establish volume settings
+    PreferencePageController.muteMusicToggleOn =
+        UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getMuteMusic();
+    PreferencePageController.muteSoundsToggleOn =
+        UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getMuteSounds();
+    InvisibleMusicPlayerController.mediaPlayer.setVolume(
+        UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getVolume());
+    PreferencePageController.menuButtonPressSoundPlayer.setMute(
+        UserPreferenceDAO.getDAO()
+            .getRecord(LoginScreenController.currentUsername)
+            .getMuteSounds());
+    BasicLayoutController.buttonPressSoundPlayer.setMute(
+        UserPreferenceDAO.getDAO()
+            .getRecord(LoginScreenController.currentUsername)
+            .getMuteSounds());
+
     Parent root = FXMLLoader.load(App.class.getResource("views/BasicLayout.fxml"));
     Scene scene = new Scene(root);
     Pane insertPage = (Pane) scene.lookup("#appContent");
@@ -64,6 +83,8 @@ public class App extends Application {
     List<Node> children = ((Pane) root).getChildren();
     indexOfSceneReplacement = children.indexOf(insertPage);
     children.set(indexOfSceneReplacement, MainMenu);
+    MainMenu.setPrefWidth(mainMenu.getWidth() - 300);
+    MainMenu.setPrefHeight(mainMenu.getHeight());
     mainMenu
         .widthProperty()
         .addListener(
@@ -78,10 +99,6 @@ public class App extends Application {
             });
     mainMenu.setScene(scene);
     mainMenu.setFullScreen(true);
-    mainMenu.setMinHeight(minHeight);
-    mainMenu.setMaxHeight(maxHeight);
-    mainMenu.setMinWidth(minWidth);
-    mainMenu.setMaxWidth(maxWidth);
   }
 
   @Override
@@ -106,10 +123,6 @@ public class App extends Application {
     primaryStage.setScene(scene);
     primaryStage.setFullScreen(true);
     primaryStage.setFullScreen(true);
-    primaryStage.setMinHeight(minHeight);
-    primaryStage.setMaxHeight(maxHeight);
-    primaryStage.setMinWidth(minWidth);
-    primaryStage.setMaxWidth(maxWidth);
     primaryStage.show();
     root.requestFocus();
   }
@@ -124,10 +137,6 @@ public class App extends Application {
     scene.getStylesheets().add(css);
     mainMenu.setScene(scene);
     mainMenu.setFullScreen(true);
-    mainMenu.setMinHeight(minHeight);
-    mainMenu.setMaxHeight(maxHeight);
-    mainMenu.setMinWidth(minWidth);
-    mainMenu.setMaxWidth(maxWidth);
     mainMenu.show();
     root.requestFocus();
   }
@@ -135,5 +144,20 @@ public class App extends Application {
   @Override
   public void stop() {
     log.info("Shutting Down");
+  }
+
+  public static void changeColorStyle(String[] hexCodes) {
+    for (int i = 0; i < hexCodes.length; i++) {
+      String color = ("-fx-color-") + (i + 1) + (": #") + (hexCodes[i]) + (";");
+      mainMenu.getScene().getRoot().setStyle(color);
+    }
+  }
+
+  public static void applyColorChanges() {
+    String css =
+        App.class
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/application.css")
+            .toExternalForm();
+    mainMenu.getScene().getRoot().getStylesheets().add(css);
   }
 }

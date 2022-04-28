@@ -58,6 +58,15 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton fx:id="barCodeButton" alignment="BASELINE_LEFT" onAction="#switchBarCode" prefWidth="300.0" text="Scan Barcode">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/play-alt-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <Label text="Service Requests" />
                   <JFXButton fx:id="requestMenuButton" alignment="BASELINE_LEFT" onAction="#switchServiceRequestMenu" prefWidth="300.0" text="Menu">
                      <graphic>
@@ -124,7 +133,18 @@
                         </ImageView>
                      </graphic>
                   </JFXButton>
+                  <JFXButton alignment="BASELINE_LEFT" onAction="#switchRoomControl" prefWidth="300.0" text="Room Control" />
+                  <JFXButton fx:id="HelpPage" alignment="BASELINE_LEFT" onAction="#switchHelpPage" prefWidth="300.0" text="Help">
+                     <graphic>
+                        <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../assets/heart-free-icon-font.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="aboutButton" alignment="BASELINE_LEFT" onAction="#goToAboutPage" prefWidth="300.0" text="About Us" />
+                  <JFXButton fx:id="CreditsButton" alignment="BASELINE_LEFT" onAction="#switchCreditsPage" prefWidth="300.0" text="Credits" />
                   <JFXButton fx:id="exitButton" alignment="BASELINE_LEFT" onAction="#ExitApplication" prefWidth="300.0" text="Exit">
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">

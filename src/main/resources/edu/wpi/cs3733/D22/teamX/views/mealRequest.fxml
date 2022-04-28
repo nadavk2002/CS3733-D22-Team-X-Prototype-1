@@ -14,7 +14,7 @@
 
 <BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MealReqController">
    <top>
-      <Label fx:id="choiceBoxLabel12" alignment="CENTER" contentDisplay="TOP" prefHeight="100.0" prefWidth="800.0" styleClass="title-label" text="Request Patient Meal" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+      <Label fx:id="choiceBoxLabel12" alignment="CENTER" contentDisplay="TOP" prefHeight="100.0" prefWidth="800.0" styleClass="title-label" text="Request Patient Meal" textFill="#446fdc" BorderPane.alignment="TOP_CENTER">
          <font>
             <Font name="System Bold" size="72.0" />
          </font>
@@ -78,18 +78,12 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="choiceBoxLabel11111" alignment="CENTER" layoutX="10.0" layoutY="436.0" text="Exemptions" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
                   <JFXComboBox fx:id="destinationDrop" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <JFXComboBox fx:id="mainSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" />
                   <JFXComboBox fx:id="serviceStatus" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXComboBox fx:id="sideSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <JFXComboBox fx:id="assignStaff" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXComboBox fx:id="drinkSel" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <JFXComboBox fx:id="exemptionSel" layoutX="360.0" layoutY="432.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                   <JFXComboBox fx:id="patientNames" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
                </children>
                <VBox.margin>

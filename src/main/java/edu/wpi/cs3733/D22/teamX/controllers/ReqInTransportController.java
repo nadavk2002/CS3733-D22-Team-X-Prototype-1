@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -18,7 +19,7 @@ public class ReqInTransportController implements Initializable {
 
   @FXML private Button resetFields, submitButton;
   @FXML
-  private ChoiceBox<String> selectPatient,
+  private JFXComboBox<String> selectPatient,
       selectStartLocation,
       serviceStatus,
       assignStaff,
