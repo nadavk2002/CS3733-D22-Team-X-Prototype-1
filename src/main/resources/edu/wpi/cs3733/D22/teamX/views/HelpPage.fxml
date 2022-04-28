@@ -165,7 +165,7 @@
                         </VBox>
                         <VBox prefHeight="1924.0" prefWidth="648.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Graphical editor" textAlignment="CENTER">
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="    Graphical editor" textAlignment="CENTER">
                                  <font>
                                     <Font size="43.0" />
                                  </font>
@@ -195,22 +195,17 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 2: Search service request" textAlignment="CENTER">
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: Choose floor" textAlignment="CENTER">
                                  <font>
                                     <Font size="35.0" />
                                  </font>
                               </Label>
                               <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/Menuwithbox.png" />
+                                    <Image url="@../assets/mapSelection.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fitHeight="352.0" fitWidth="662.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../assets/searchbar.png" />
-                                 </image>
-                              </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Or type the keywords of the service in the search bar." textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the desired floor and what type of information you want to display on the map editor" textAlignment="CENTER" wrappingWidth="618.9028663635254">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
@@ -220,22 +215,27 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 2: Choose the server option" textAlignment="CENTER" wrapText="true">
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Select the location you want to edit" textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="35.0" />
                                  </font>
                               </Label>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the server based on your requirnments or preferences" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/MapDragBox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the location icon you want to edit, the details will show on the left page" textAlignment="CENTER" wrappingWidth="621.1367530822754">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You can also drag the equipment to a desired location. For example, you can move a recliner to another location" textAlignment="CENTER" wrappingWidth="621.1367530822754">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click location table or equipment table will show a pop-up window with details" textAlignment="CENTER" wrappingWidth="621.1367530822754">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
