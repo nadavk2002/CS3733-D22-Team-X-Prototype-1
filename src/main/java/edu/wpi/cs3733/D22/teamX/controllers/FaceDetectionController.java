@@ -42,7 +42,7 @@ public class FaceDetectionController {
 
   @FXML
   protected void startCamera(ActionEvent event) {
-    //System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     OpenCV.loadLocally();
     // check: the main class is accessible?
     if (!this.cameraActive) {
@@ -51,7 +51,7 @@ public class FaceDetectionController {
       // start the video capture
       this.capture.open(0);
       // get the ImageView object for showing the video stream
-      final ImageView frameView = originalFrame;
+      // final ImageView frameView = originalFrame;
       // check if the capture stream is opened
       if (!this.capture.isOpened()) {
         this.cameraActive = true;
@@ -78,22 +78,24 @@ public class FaceDetectionController {
         this.timer.schedule(frameGrabber, 0, 33);
         this.cameraButton.setText("Stop Camera");
       } else {
-        this.cameraActive = false;
-        this.cameraButton.setText("Start Camera");
-        // enable setting checkboxes
-        this.haarClassifier.setDisable(false);
-        this.lbpClassifier.setDisable(false);
-
-        // stop the timer
-        if (this.timer != null) {
-          this.timer.cancel();
-          this.timer = null;
-        }
-        // release the camera
-        this.capture.release();
-        // clear the image container
-        originalFrame.setImage(null);
+        System.err.println("Failed to open camera connection...");
       }
+    } else {
+      this.cameraActive = false;
+      this.cameraButton.setText("Start Camera");
+      // enable setting checkboxes
+      this.haarClassifier.setDisable(false);
+      this.lbpClassifier.setDisable(false);
+
+      // stop the timer
+      if (this.timer != null) {
+        this.timer.cancel();
+        this.timer = null;
+      }
+      // release the camera
+      this.capture.release();
+      // clear the image container
+      originalFrame.setImage(null);
     }
   }
 
