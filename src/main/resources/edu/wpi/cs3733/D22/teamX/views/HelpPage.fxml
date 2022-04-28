@@ -524,6 +524,85 @@
                               </Text>
                            </children>
                         </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Exit" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click exit button" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/systemexit.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the exit button on the side bar" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: Choose CSV file location" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/CSV1.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose directory to save CSV files. You can click &quot;Default Directory&quot; to store CSV files in the default locations on your computer" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/csvdefault.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Choose custom directory" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/csvchoose.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the &quot;Browse&quot; button, choose the directory you want to store the CSV file" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Then you can close the window to exit the system" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                </content>
