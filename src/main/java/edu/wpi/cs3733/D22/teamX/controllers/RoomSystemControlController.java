@@ -14,13 +14,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.util.Duration;
 
 public class RoomSystemControlController implements Initializable {
   // fxml
-  @FXML private Label tempLabel, fanText, lampText, ipText, Title;
+  // @FXML private Label tempLabel, fanText, lampText, ipText;
   @FXML private TextField tempField, ipField;
   @FXML private JFXToggleButton FanToggle, lampToggle;
   @FXML private ChoiceBox<String> roomChoice;
@@ -81,11 +80,11 @@ public class RoomSystemControlController implements Initializable {
                     String infoText = serverText.substring(3);
                     switch (typeText) {
                       case "TEM":
-                        tempLabel.setText(infoText);
+                        // tempLabel.setText(infoText);
                         tempField.setText(infoText);
                         break;
                       case "LIT":
-                        lampText.setText(infoText);
+                        // lampText.setText(infoText);
                         if (infoText.equals("on")) {
                           lampToggle.setSelected(true);
                         } else if (infoText.equals("off")) {
@@ -93,7 +92,7 @@ public class RoomSystemControlController implements Initializable {
                         }
                         break;
                       case "FAN":
-                        fanText.setText(infoText);
+                        // fanText.setText(infoText);
                         if (infoText.equals("on")) {
                           FanToggle.setSelected(true);
                         } else if (infoText.equals("off")) {
@@ -101,7 +100,7 @@ public class RoomSystemControlController implements Initializable {
                         }
                         break;
                       default:
-                        tempLabel.setText(serverText);
+                        // tempLabel.setText(serverText);
                     }
                     CanUpdateRoom = true;
                   }
@@ -132,7 +131,7 @@ public class RoomSystemControlController implements Initializable {
   public void updateIP(ActionEvent actionEvent) {
     if (CanUpdateRoom) {
       remAddress = new InetSocketAddress(ipField.getText(), 6587);
-      ipText.setText(ipField.getText());
+      // ipText.setText(ipField.getText());
       updateTempText();
       updateFanText();
       updatelampText();
@@ -141,7 +140,7 @@ public class RoomSystemControlController implements Initializable {
 
   public void updateIPIntern(String IP) {
     remAddress = new InetSocketAddress(IP, 6587);
-    ipText.setText(ipField.getText());
+    // ipText.setText(ipField.getText());
     updateTempText();
     updateFanText();
     updatelampText();
