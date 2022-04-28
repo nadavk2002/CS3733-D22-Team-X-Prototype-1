@@ -244,11 +244,6 @@
                                     <Font size="43.0" />
                                  </font>
                               </Label>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Text>
                               <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click table" textAlignment="CENTER">
                                  <font>
                                     <Font size="35.0" />
@@ -452,17 +447,52 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
-                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Update info" textAlignment="CENTER" wrapText="true">
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Choose destination " textAlignment="CENTER" wrapText="true">
                                  <font>
                                     <Font size="35.0" />
                                  </font>
                               </Label>
                               <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../assets/viewerdemo.png" />
+                                    <Image url="@../assets/Equip3.png" />
                                  </image>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="After choose the employee, you can edit employee's profile. You can also add a new employee but clicking the add new employee button" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="After choose the assignee, choose the destination from the drop down list" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 4: Select equipment" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Equip5.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the equipment you want to request" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 5: Input the amount" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Equip5.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type the amount of equipment you want to request" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total a" textAlignment="CENTER" wrappingWidth="621.1367530822754">
                                  <font>
                                     <Font size="24.0" />
                                  </font>
