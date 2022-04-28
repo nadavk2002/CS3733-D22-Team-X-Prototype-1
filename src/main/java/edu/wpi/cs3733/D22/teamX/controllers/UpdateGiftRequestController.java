@@ -92,11 +92,11 @@ public class UpdateGiftRequestController implements Initializable {
 
   /** Checks if the submit button can be enabled depending on the inputs in fields on the page. */
   public void enableSubmitButton() {
-    //    submitButton.setDisable(
-    //        selectGiftType.getValue().equals("")
-    //            || selectGiftDestination.getValue().equals("")
-    //            || selectAssignStaff.getValue().equals("")
-    //            || giftNoteField.getText().equals(""));
+    submitButton.setDisable(
+        selectGiftType.getValue().equals("")
+            || selectGiftDestination.getValue().equals("")
+            || selectAssignStaff.getValue().equals("")
+            || giftNoteField.getText().isEmpty());
   }
 
   @FXML

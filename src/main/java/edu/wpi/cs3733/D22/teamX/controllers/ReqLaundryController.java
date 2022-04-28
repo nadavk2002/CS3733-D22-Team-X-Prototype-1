@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -13,16 +14,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class ReqLaundryController implements Initializable {
-  @FXML private VBox selectionMenuColumn;
-  @FXML private VBox labelColumn;
-  @FXML private VBox submitColumn;
-  @FXML private HBox buttonRow;
   @FXML private Button ToMainMenu, submitButton;
-  @FXML private ChoiceBox<String> selectLaundryType, roomNum, serviceStatus, assignStaff;
+  @FXML private JFXComboBox<String> selectLaundryType, roomNum, serviceStatus, assignStaff;
   // @FXML private TextField assignStaff;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
@@ -39,10 +34,6 @@ public class ReqLaundryController implements Initializable {
     locations = locationDAO.getAllRecords();
     employees = emplDAO.getAllRecords();
     resetFields();
-    selectionMenuColumn.setSpacing(20);
-    labelColumn.setSpacing(28);
-    submitColumn.setSpacing(20);
-    buttonRow.setSpacing(20);
     roomNum.setItems(getLocationNames());
     assignStaff.setItems(this.getEmployeeIDs());
     submitButton.setDisable(true);

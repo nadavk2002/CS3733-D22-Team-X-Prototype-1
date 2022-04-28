@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import javafx.scene.control.*;
 
 public class MedicineDeliveryController implements Initializable {
   @FXML private Button ReturnToMain, submitRequest;
-  @FXML private ChoiceBox<String> patientName, roomNum, serviceStatus, assignStaff;
+  @FXML private JFXComboBox<String> patientName, roomNum, serviceStatus, assignStaff;
   @FXML private TextField rxNum;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
@@ -77,7 +78,7 @@ public class MedicineDeliveryController implements Initializable {
         roomNum.getValue().equals("")
             || rxNum.getText().equals("")
             || rxNum.getText().length() > 8
-            || serviceStatus.getValue().equals("")
+            || patientName.getValue().equals("")
             || assignStaff.getValue().equals(""));
   }
 

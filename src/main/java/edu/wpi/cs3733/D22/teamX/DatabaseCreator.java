@@ -21,6 +21,8 @@ public class DatabaseCreator {
   private static SharpsDisposalRequestDAO sharpDAO;
   private static MaintenanceServiceRequestDAO maintenanceDAO;
   private static InTransportServiceRequestDAO transportDAO;
+  private static PatientDAO patientDAO;
+  private static UserPreferenceDAO userPreferenceDAO;
 
   /** Initializes the database with tables and establishes a connection */
   public static void initializeDB()
@@ -54,6 +56,7 @@ public class DatabaseCreator {
 
   /** Drops all database tables */
   public static void dropAllTables() {
+    userPreferenceDAO.dropTable();
     transportDAO.dropTable();
     maintenanceDAO.dropTable();
     sharpDAO.dropTable();
@@ -65,6 +68,7 @@ public class DatabaseCreator {
     langDAO.dropTable();
     labDAO.dropTable();
     mesrDAO.dropTable();
+    patientDAO.dropTable();
     equDAO.dropTable();
     eqtDAO.dropTable();
     emplDAO.dropTable();
@@ -77,6 +81,7 @@ public class DatabaseCreator {
     emplDAO.createTable();
     eqtDAO.createTable();
     equDAO.createTable();
+    patientDAO.createTable();
     mesrDAO.createTable();
     labDAO.createTable();
     langDAO.createTable();
@@ -88,6 +93,7 @@ public class DatabaseCreator {
     sharpDAO.createTable();
     maintenanceDAO.createTable();
     transportDAO.createTable();
+    userPreferenceDAO.createTable();
   }
 
   /**
@@ -99,6 +105,7 @@ public class DatabaseCreator {
         || !emplDAO.loadCSV()
         || !eqtDAO.loadCSV()
         || !equDAO.loadCSV()
+        || !patientDAO.loadCSV()
         || !mesrDAO.loadCSV()
         || !labDAO.loadCSV()
         || !langDAO.loadCSV()
@@ -109,7 +116,8 @@ public class DatabaseCreator {
         || !laundryDAO.loadCSV()
         || !sharpDAO.loadCSV()
         || !maintenanceDAO.loadCSV()
-        || !transportDAO.loadCSV()) {
+        || !transportDAO.loadCSV()
+        || !userPreferenceDAO.loadCSV()) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;
@@ -127,6 +135,7 @@ public class DatabaseCreator {
         || !emplDAO.saveCSV(dirPath)
         || !eqtDAO.saveCSV(dirPath)
         || !equDAO.saveCSV(dirPath)
+        || !patientDAO.saveCSV(dirPath)
         || !mesrDAO.saveCSV(dirPath)
         || !labDAO.saveCSV(dirPath)
         || !langDAO.saveCSV(dirPath)
@@ -137,7 +146,8 @@ public class DatabaseCreator {
         || !laundryDAO.saveCSV(dirPath)
         || !sharpDAO.saveCSV(dirPath)
         || !maintenanceDAO.saveCSV(dirPath)
-        || !transportDAO.saveCSV(dirPath)) {
+        || !transportDAO.saveCSV(dirPath)
+        || !userPreferenceDAO.saveCSV(dirPath)) {
       throw new loadSaveFromCSVException("Error when writing to CSV file.");
     }
     return true;
@@ -148,6 +158,7 @@ public class DatabaseCreator {
     locDAO = LocationDAO.getDAO();
     emplDAO = EmployeeDAO.getDAO();
     eqtDAO = EquipmentTypeDAO.getDAO();
+    patientDAO = PatientDAO.getDAO();
     mesrDAO = MedicalEquipmentServiceRequestDAO.getDAO();
     labDAO = LabServiceRequestDAO.getDAO();
     giftDAO = GiftDeliveryRequestDAO.getDAO();
@@ -160,5 +171,6 @@ public class DatabaseCreator {
     sharpDAO = SharpsDisposalRequestDAO.getDAO();
     maintenanceDAO = MaintenanceServiceRequestDAO.getDAO();
     transportDAO = InTransportServiceRequestDAO.getDAO();
+    userPreferenceDAO = UserPreferenceDAO.getDAO();
   }
 }
