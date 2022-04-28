@@ -202,7 +202,7 @@ public class FaceDetectionController implements Initializable {
     // check whether the lpb checkbox is selected and deselect it
     if (this.lbpClassifier.isSelected()) this.lbpClassifier.setSelected(false);
 
-    this.checkboxSelection("resources/haarcascades/haarcascade_frontalface_alt.xml");
+    this.checkboxSelection("haarcascade_frontalface_alt.xml");
   }
 
   /**
@@ -213,7 +213,7 @@ public class FaceDetectionController implements Initializable {
     // check whether the haar checkbox is selected and deselect it
     if (this.haarClassifier.isSelected()) this.haarClassifier.setSelected(false);
 
-    this.checkboxSelection("resources/lbpcascades/lbpcascade_frontalface.xml");
+    this.checkboxSelection("lbpcascade_frontalface.xml");
   }
 
   /**
@@ -224,7 +224,9 @@ public class FaceDetectionController implements Initializable {
    */
   private void checkboxSelection(String... classifierPath) {
     // load the classifier(s)
+    // CascadeClassifier a = new CascadeClassifier();
     for (String xmlClassifier : classifierPath) {
+      // a.load(xmlClassifier);
       this.faceCascade.load(xmlClassifier);
     }
 
