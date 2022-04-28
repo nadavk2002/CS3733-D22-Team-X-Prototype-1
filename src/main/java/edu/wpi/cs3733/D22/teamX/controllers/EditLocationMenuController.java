@@ -3,16 +3,20 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 import edu.wpi.cs3733.D22.teamX.entity.Location;
 import edu.wpi.cs3733.D22.teamX.entity.LocationDAO;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class EditLocationMenuController implements Initializable {
   private Location loc;
   private Stage stage;
+  private List<String> floors = Arrays.asList("L1", "L2", "1", "2", "3", "4", "5");
 
   public EditLocationMenuController(Location loc, Stage stage) {
     this.loc = loc;
@@ -32,6 +36,8 @@ public class EditLocationMenuController implements Initializable {
   @FXML private TextField xCordText;
 
   @FXML private TextField yCordText;
+
+  @FXML private Button submitButton;
 
   @FXML
   void updateLocation(ActionEvent event) {
@@ -61,6 +67,17 @@ public class EditLocationMenuController implements Initializable {
     this.stage.close();
   }
 
+  private void activateSubmit() {
+    submitButton.setDisable(
+        (xCordText.getText().equals("") || !xCordText.getText().matches("[0-9]+"))
+            || (yCordText.getText().equals("") || !yCordText.getText().matches("[0-9]+"))
+            || !floors.contains(floorText.getText())
+            || buildingText.getText().equals("")
+            || nodeTypeText.getText().equals("")
+            || longNameText.getText().equals("")
+            || shortNameText.getText().equals(""));
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     buildingText.setText(loc.getBuilding());
@@ -70,5 +87,13 @@ public class EditLocationMenuController implements Initializable {
     shortNameText.setText(loc.getShortName());
     xCordText.setText(Integer.toString(loc.getxCoord()));
     yCordText.setText(Integer.toString(loc.getyCoord()));
+    buildingText.setOnKeyTyped(event -> activateSubmit());
+    floorText.setOnKeyTyped(event -> activateSubmit());
+    longNameText.setOnKeyTyped(event -> activateSubmit());
+    nodeTypeText.setOnKeyTyped(event -> activateSubmit());
+    shortNameText.setOnKeyTyped(event -> activateSubmit());
+    xCordText.setOnKeyTyped(event -> activateSubmit());
+    yCordText.setOnKeyTyped(event -> activateSubmit());
+    activateSubmit();
   }
 }

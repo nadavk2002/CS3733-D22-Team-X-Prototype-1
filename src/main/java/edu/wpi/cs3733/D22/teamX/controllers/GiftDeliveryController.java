@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -18,7 +19,10 @@ public class GiftDeliveryController implements Initializable {
   @FXML private Button ReturnToMain;
   @FXML private TextField giftNoteField;
   @FXML
-  private ChoiceBox<String> selectGiftDestination, selectAssignStaff, selectStatus, selectGiftType;
+  private JFXComboBox<String> selectGiftDestination,
+      selectAssignStaff,
+      selectStatus,
+      selectGiftType;
   @FXML private Button submitButton;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
@@ -81,8 +85,8 @@ public class GiftDeliveryController implements Initializable {
         selectGiftType.getValue().equals("")
             || selectGiftDestination.getValue().equals("")
             || selectAssignStaff.getValue().equals("")
-            || giftNoteField.getText().equals("")
-            || selectStatus.getValue().equals(""));
+            || giftNoteField.getText().equals(""));
+    //            || selectStatus.getValue().equals(""));
   }
 
   @FXML

@@ -3,6 +3,9 @@ derby.log
 
 # DB
 embed_db/
+BaW_database/
+LanguageInterpAPIDB/
+MealRequestAPI_embed_db/
 
 # Created by https://www.gitignore.io/api/java,macos,gradle,intellij+all
 # Edit at https://www.gitignore.io/?templates=java,macos,gradle,intellij+all
@@ -178,42 +181,4 @@ GiftDeliveryRequests.csv
 Employees.csv
 EquipmentTypes.csv
 MedEquipReq.csv
-GiftDeliveryRequests.csv
-BaW_database/db.lck
-BaW_database/log/log.ctrl
-BaW_database/log/log1.dat
-BaW_database/seg0/c490.dat
-BaW_database/log/logmirror.ctrl
-BaW_database/seg0/c4a1.dat
-BaW_database/seg0/c4c1.dat
-BaW_database/seg0/c4b0.dat
-BaW_database/seg0/c4d0.dat
-BaW_database/seg0/c60.dat
-BaW_database/seg0/c4e1.dat
-BaW_database/seg0/d520.dat
-BaW_database/seg0/c81.dat
-BaW_database/seg0/d530.dat
-BaW_database/seg0/d540.dat
-LanguageInterpreterRequests.csv
-LaundryServiceRequests.csv
-MaintenanceServiceRequests.csv
-MealRequests.csv
-SharpsDisposalRequests.csv
-MedicineDeliveryRequests.csv
-BaW_database/db.lck
-BaW_database/log/log.ctrl
-BaW_database/seg0/c490.dat
-BaW_database/log/logmirror.ctrl
-BaW_database/seg0/c4a1.dat
-BaW_database/seg0/c4c1.dat
-BaW_database/seg0/c4b0.dat
-BaW_database/seg0/c4d0.dat
-BaW_database/seg0/c60.dat
-BaW_database/seg0/c4e1.dat
-BaW_database/seg0/c81.dat
-LanguageInterpreterRequests.csv
-LaundryServiceRequests.csv
-MaintenanceServiceRequests.csv
-MealRequests.csv
-SharpsDisposalRequests.csv
-MedicineDeliveryRequests.csv
+GiftDeliveryRequests.cs
