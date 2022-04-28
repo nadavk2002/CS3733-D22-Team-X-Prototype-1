@@ -85,7 +85,7 @@ public class FaceDetectionController implements Initializable {
       // get the ImageView object for showing the video stream
       // final ImageView frameView = originalFrame;
       // check if the capture stream is opened
-      if (!this.capture.isOpened()) {
+      if (this.capture.isOpened()) {
         this.cameraActive = true;
 
         // grab a frame every 33 ms (30 frames/sec)
