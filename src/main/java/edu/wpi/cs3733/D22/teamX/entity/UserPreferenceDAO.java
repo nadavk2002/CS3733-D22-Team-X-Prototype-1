@@ -1,7 +1,10 @@
 package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
+import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
 
+import java.io.*;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -191,7 +194,52 @@ public class UserPreferenceDAO implements DAO<UserPreference> {
      */
     @Override
     public boolean loadCSV() {
-        return false;
+        try {
+            InputStream userPrefCSV = DatabaseCreator.class.getResourceAsStream(csvFolderPath + csv);
+            BufferedReader userPrefCSVReader = new BufferedReader(new InputStreamReader(userPrefCSV));
+            userPrefCSVReader.readLine();
+            String nextFileLine;
+            while ((nextFileLine = userPrefCSVReader.readLine()) != null) {
+                String[] currLine = nextFileLine.replaceAll("\r\n", "").split(",");
+                if (currLine.length == 4) {
+                    UserPreference userPrefNode =
+                            new UserPreference(currLine[0], currLine[1].charAt(0), currLine[2].charAt(0), Integer.parseInt(currLine[3]));
+                    userPreferences.add(userPrefNode);
+                } else {
+                    System.out.println("UserPreference CSV file formatted improperly");
+                    System.exit(1);
+                }
+            }
+            userPrefCSV.close();
+            userPrefCSVReader.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("File not found!");
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // Insert Employee from EmployeesCSV into db table
+        for (int i = 0; i < userPreferences.size(); i++) {
+            try {
+                Statement initialization = connection.createStatement();
+                StringBuilder userPreference = new StringBuilder();
+                userPreference.append("INSERT INTO UserPreference VALUES(");
+                userPreference.append("'" + userPreferences.get(i).getUsername() + "'" + ", ");
+                userPreference.append("'" + userPreferences.get(i).getMuteSoundsChar() + "'" + ", ");
+                userPreference.append("'" + userPreferences.get(i).getMuteMusicChar() + "'" + ", ");
+                userPreference.append(userPreferences.get(i).getVolume());
+                userPreference.append(")");
+                initialization.execute(userPreference.toString());
+            } catch (SQLException e) {
+                System.out.println("Input for UserPreference " + i + " failed");
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -202,7 +250,23 @@ public class UserPreferenceDAO implements DAO<UserPreference> {
      */
     @Override
     public boolean saveCSV(String dirPath) {
-        return false;
+        try {
+            FileWriter csvFile = new FileWriter(dirPath + csv, false);
+            csvFile.write("username,muteSounds,muteMusic,volume");
+            for (int i = 0; i < userPreferences.size(); i++) {
+                csvFile.write("\n" + userPreferences.get(i).getUsername() + ",");
+                csvFile.write(userPreferences.get(i).getMuteSoundsChar() + ",");
+                csvFile.write(userPreferences.get(i).getMuteMusicChar() + ",");
+                csvFile.write(userPreferences.get(i).getVolume());
+            }
+            csvFile.flush();
+            csvFile.close();
+        } catch (IOException e) {
+            System.out.println("Error occurred when updating UserPreferences csv file.");
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -212,7 +276,23 @@ public class UserPreferenceDAO implements DAO<UserPreference> {
      */
     @Override
     public boolean fillFromTable() {
-        return false;
+        try {
+            userPreferences.clear();
+            Statement fromTable = connection.createStatement();
+            ResultSet results = fromTable.executeQuery("SELECT * FROM UserPreference");
+            while (results.next()) {
+                UserPreference toAdd = new UserPreference();
+                toAdd.setUsername(results.getString("username"));
+                toAdd.setMuteSounds(results.getString("muteSounds").charAt(0));
+                toAdd.setMuteMusic(results.getString("muteMusic").charAt(0));
+                toAdd.setVolume(results.getInt("volume"));
+                userPreferences.add(toAdd);
+            }
+        } catch (SQLException e) {
+            System.out.println("UserPreferenceDAO could not be filled from the sql table");
+            return false;
+        }
+        return true;
     }
 
     /**
