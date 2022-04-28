@@ -7,25 +7,41 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ServiceRequestTableController">
-   <children>
-      <VBox alignment="CENTER" prefHeight="1080.0" prefWidth="1620.0">
+
+<BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ServiceRequestTableController">
+   <bottom>
+      <VBox alignment="CENTER" fillWidth="false" styleClass="content-container" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="120.0" prefWidth="597.0" styleClass="scene-title" text="All Service Requests" textAlignment="CENTER" textFill="#446fdc">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Request">
                <font>
-                  <Font name="System Bold" size="48.0" />
+                  <Font size="18.0" />
                </font>
-               <padding>
-                  <Insets bottom="50.0" />
-               </padding>
-            </Label>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="modifyID" maxWidth="300.0" minWidth="-Infinity" promptText="Enter Request ID..." />
+            <JFXButton onAction="#goToUpdatePage" style="-fx-background-color: #446fdc;" text="Edit Request" textFill="WHITE">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+      </VBox>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
             <JFXCheckBox fx:id="filterTasks" text="Filter Outstanding Tasks" />
-            <TableView fx:id="table" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="538.0" prefWidth="1246.0">
+            <TableView fx:id="table" VBox.vgrow="ALWAYS">
               <columns>
                   <TableColumn fx:id="serviceType" prefWidth="167.199951171875" text="Service Type" />
                   <TableColumn fx:id="requestID" prefWidth="108.80007934570312" text="Request ID" />
@@ -37,21 +53,23 @@
 <!--                  <TableColumn fx:id="DONETime" prefWidth="130.0" text="Completed At" />-->
               </columns>
             </TableView>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Request">
-               <font>
-                  <Font size="18.0" />
-               </font>
-               <VBox.margin>
-                  <Insets bottom="10.0" top="50.0" />
-               </VBox.margin>
-            </Text>
-            <TextField fx:id="modifyID" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" promptText="Enter Request ID...">
-               <VBox.margin>
-                  <Insets bottom="10.0" />
-               </VBox.margin>
-            </TextField>
-            <JFXButton onAction="#goToUpdatePage" style="-fx-background-color: #446fdc;" text="Edit Request" textFill="WHITE" />
          </children>
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
       </VBox>
-   </children>
-</AnchorPane>
+   </center>
+   <top>
+      <Label alignment="CENTER" styleClass="title-label" text="All Service Requests" textAlignment="CENTER" textFill="#446fdc" BorderPane.alignment="TOP_CENTER">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets bottom="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <padding>
+      <Insets bottom="20.0" />
+   </padding>
+</BorderPane>
