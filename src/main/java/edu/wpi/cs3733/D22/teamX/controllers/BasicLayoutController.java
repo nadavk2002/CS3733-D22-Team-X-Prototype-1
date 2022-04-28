@@ -28,6 +28,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
@@ -40,6 +42,8 @@ public class BasicLayoutController implements Initializable {
   public Label userName;
   @FXML private JFXComboBox<String> ChoosePage;
   @FXML private Label timeLabel;
+  @FXML private ScrollPane scrollLayout;
+  @FXML private Pane basePane;
   private HashMap<String, String> pages;
   private static int mealApiIDIndex = 15;
   private static int sanitationAPIIndex = 0;
