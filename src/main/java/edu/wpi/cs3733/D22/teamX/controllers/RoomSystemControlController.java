@@ -20,7 +20,7 @@ import javafx.util.Duration;
 
 public class RoomSystemControlController implements Initializable {
   // fxml
-  @FXML private Label tempLabel, fanText, lampText, ipText;
+  @FXML private Label tempLabel, fanText, lampText, ipText, Title;
   @FXML private TextField tempField, ipField;
   @FXML private JFXToggleButton FanToggle, lampToggle;
   @FXML private ChoiceBox<String> roomChoice;
@@ -36,9 +36,8 @@ public class RoomSystemControlController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initUDPchecker();
-    updateTempText();
-    updateFanText();
-    updatelampText();
+    ipField.setText("192.168.137.27");
+    updateIPIntern("192.168.137.27");
     // updateIpText();
 
     // populate choicebox
@@ -75,6 +74,8 @@ public class RoomSystemControlController implements Initializable {
                   // tempLabel.setText(server.receive());
                   String serverText = server.receive();
                   if (serverText != "") {
+                    // Title.setText(serverText);
+                    System.out.println(serverText);
                     CanUpdateRoom = false;
                     String typeText = serverText.substring(0, 3);
                     String infoText = serverText.substring(3);
@@ -136,5 +137,13 @@ public class RoomSystemControlController implements Initializable {
       updateFanText();
       updatelampText();
     }
+  }
+
+  public void updateIPIntern(String IP) {
+    remAddress = new InetSocketAddress(IP, 6587);
+    ipText.setText(ipField.getText());
+    updateTempText();
+    updateFanText();
+    updatelampText();
   }
 }
