@@ -1,6 +1,5 @@
-package edu.wpi.cs3733.D22.teamX.exceptions;
+package edu.wpi.cs3733.D22.teamX;
 
-import edu.wpi.cs3733.D22.teamX.Observer;
 import java.util.ArrayList;
 import java.util.List;
 

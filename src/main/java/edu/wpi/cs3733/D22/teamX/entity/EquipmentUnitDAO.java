@@ -2,8 +2,8 @@ package edu.wpi.cs3733.D22.teamX.entity;
 
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
 import edu.wpi.cs3733.D22.teamX.DatabaseCreator;
+import edu.wpi.cs3733.D22.teamX.Subject;
 import edu.wpi.cs3733.D22.teamX.controllers.DashboardAlertsController;
-import edu.wpi.cs3733.D22.teamX.exceptions.Subject;
 import java.io.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -90,7 +90,7 @@ public class EquipmentUnitDAO extends Subject implements DAO<EquipmentUnit> {
     if (recordObject.getIsAvailableChar() == 'Y') {
       eqtDAO.decreaseAvailability(recordObject.getType(), 1);
     }
-    //    notifyAllObservers();
+    notifyAllObservers();
   }
 
   @Override
@@ -181,7 +181,7 @@ public class EquipmentUnitDAO extends Subject implements DAO<EquipmentUnit> {
     recordObject
         .getCurrLocation()
         .addUnit(recordObject); // add unit to currLocation's list of units
-    //    notifyAllObservers();
+    notifyAllObservers();
   }
 
   @Override

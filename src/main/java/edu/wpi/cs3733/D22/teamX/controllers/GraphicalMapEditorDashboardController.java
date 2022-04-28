@@ -179,7 +179,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
     alertLabelString = "";
     masterBox.setSpacing(30);
 
-    //alertBox.setVisible(false);
+    // alertBox.setVisible(false);
     infoBox.setSpacing(30);
     masterBox.setSpacing(5);
     towerBox.setSpacing(3);
@@ -707,6 +707,7 @@ public class GraphicalMapEditorDashboardController implements Initializable {
                 sortByClean(sortEquipmentByFloor("L2")),
                 sortByInUse(sortEquipmentByFloor("L2")),
                 sortByDirty(sortEquipmentByFloor("L2")))));
+
     displayAlert();
 
     //    if (MESRDAO.getAlerts().size() > 0) {

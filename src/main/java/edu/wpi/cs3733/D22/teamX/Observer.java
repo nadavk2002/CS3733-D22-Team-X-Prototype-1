@@ -1,7 +1,5 @@
 package edu.wpi.cs3733.D22.teamX;
 
-import edu.wpi.cs3733.D22.teamX.exceptions.Subject;
-
 public abstract class Observer {
   protected Subject subject;
 

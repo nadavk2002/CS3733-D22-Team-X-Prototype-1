@@ -2,8 +2,8 @@ package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.cs3733.D22.teamX.Observer;
+import edu.wpi.cs3733.D22.teamX.Subject;
 import edu.wpi.cs3733.D22.teamX.entity.*;
-import edu.wpi.cs3733.D22.teamX.exceptions.Subject;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,10 +65,6 @@ public class DashboardAlertsController extends Observer implements Initializable
     }
   }
 
-  public void updateTable() {
-    alertTable.setItems(MESRDAO.getAlerts());
-  }
-
   private void sendBedRequest(ObservableList<EquipmentUnit> beds) {
     MedicalEquipmentServiceRequest MESR = new MedicalEquipmentServiceRequest();
     ObservableList<MedicalEquipmentServiceRequest> mesrList = FXCollections.observableArrayList();
@@ -81,13 +77,6 @@ public class DashboardAlertsController extends Observer implements Initializable
       MESR.setQuantity(beds.size());
       requestDAO.addRecord(MESR);
       mesrList.add(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
-      //      alertTable.setItems(mesrList);
-      //      for (MedicalEquipmentServiceRequest r : MESRDAO.getAlerts()) {
-      //        if (r.equals(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()))) {
-      //
-      //        }
-      //      }
-
       MESRDAO.addAlert(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
     }
   }
@@ -106,7 +95,6 @@ public class DashboardAlertsController extends Observer implements Initializable
       MESR.setQuantity(infusionPumps.size());
       requestDAO.addRecord(MESR);
       mesrList.add(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
-      //      alertTable.setItems(mesrList);
       MESRDAO.addAlert(requestDAO.getMedicalEquipmentServiceRequest(MESR.getRequestID()));
     }
   }
