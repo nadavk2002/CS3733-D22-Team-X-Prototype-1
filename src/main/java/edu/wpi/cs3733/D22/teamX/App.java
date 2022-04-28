@@ -56,6 +56,7 @@ public class App extends Application {
   }
 
   public static void switchRoot() throws IOException {
+    // Establish volume settings
     PreferencePageController.muteMusicToggleOn =
         UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getMuteMusic();
     PreferencePageController.muteSoundsToggleOn =
@@ -70,6 +71,7 @@ public class App extends Application {
         UserPreferenceDAO.getDAO()
             .getRecord(LoginScreenController.currentUsername)
             .getMuteSounds());
+
     Parent root = FXMLLoader.load(App.class.getResource("views/BasicLayout.fxml"));
     Scene scene = new Scene(root);
     Pane insertPage = (Pane) scene.lookup("#appContent");
