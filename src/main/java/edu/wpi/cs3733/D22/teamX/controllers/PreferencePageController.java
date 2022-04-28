@@ -23,16 +23,14 @@ public class PreferencePageController implements Initializable {
               .toExternalForm());
   public static final MediaPlayer menuButtonPressSoundPlayer =
       new MediaPlayer(menuButtonPressSound);
-  private static boolean muteSoundsToggleOn = false;
-  private static boolean muteMusicToggleOn = false;
+  public static boolean muteSoundsToggleOn = false;
+  public static boolean muteMusicToggleOn = false;
   private static boolean darkModeToggleOn = false;
   private static String colorSchemeLast = "Blue";
   private static String accessOptionsLast = "None";
   private static String colorSchemeCurrent = colorSchemeLast;
   private static String accessOptionsCurrent = accessOptionsLast;
   private HashMap<String, String[]> palettes;
-  public static boolean muteSoundsToggleOn = false;
-  public static boolean muteMusicToggleOn = false;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -54,6 +52,7 @@ public class PreferencePageController implements Initializable {
     colorSchemeCombo.setOnAction(
         (event) -> {
           String currentScheme = "";
+          colorSchemeCurrent = colorSchemeCombo.getSelectionModel().getSelectedItem();
 
           if (accessOptionsCurrent != "None") {
             currentScheme += " " + accessOptionsCurrent;
@@ -65,12 +64,14 @@ public class PreferencePageController implements Initializable {
           System.out.println(currentScheme);
 
           String[] selectedScheme = palettes.get(currentScheme);
+          System.out.println(selectedScheme[0]);
           App.changeColorStyle(selectedScheme);
         });
 
     accessOptionsCombo.setOnAction(
         (event) -> {
           String currentScheme = colorSchemeCurrent;
+          accessOptionsCurrent = accessOptionsCombo.getSelectionModel().getSelectedItem();
 
           if (accessOptionsCombo.getSelectionModel().getSelectedItem() != "None") {
             currentScheme += " " + accessOptionsCombo.getSelectionModel().getSelectedItem();
@@ -82,6 +83,7 @@ public class PreferencePageController implements Initializable {
           System.out.println(currentScheme);
 
           String[] selectedScheme = palettes.get(currentScheme);
+          System.out.println(selectedScheme[0]);
           App.changeColorStyle(selectedScheme);
         });
 
@@ -99,6 +101,7 @@ public class PreferencePageController implements Initializable {
           System.out.println(currentScheme);
 
           String[] selectedScheme = palettes.get(currentScheme);
+          System.out.println(selectedScheme[0]);
           App.changeColorStyle(selectedScheme);
         });
   }

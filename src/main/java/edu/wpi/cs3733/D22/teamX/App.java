@@ -159,6 +159,7 @@ public class App extends Application {
   public static void changeColorStyle(String[] hexCodes) {
     for (int i = 0; i < hexCodes.length; i++) {
       String color = ("-fx-color-") + (i + 1) + (": #") + (hexCodes[i]) + (";");
+      System.out.println(color);
       mainMenu.getScene().getRoot().setStyle(color);
     }
   }
