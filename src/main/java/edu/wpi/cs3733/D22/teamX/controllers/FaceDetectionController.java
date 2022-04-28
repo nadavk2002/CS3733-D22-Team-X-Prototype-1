@@ -27,6 +27,7 @@ public class FaceDetectionController {
 
   @FXML
   protected void startCamera(ActionEvent event) {
+    // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     OpenCV.loadLocally();
     // check: the main class is accessible?
     if (this.rootElement != null) {
