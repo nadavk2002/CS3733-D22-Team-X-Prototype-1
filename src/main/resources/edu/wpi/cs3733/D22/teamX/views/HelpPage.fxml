@@ -400,6 +400,75 @@
                               </Text>
                            </children>
                         </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Service request" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click service requests icon" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/ServiceBox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Take Request Equipment as an exmaple, click the icon" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: Choose assignee" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Equip2.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose asignee from the drop down list" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Update info" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/viewerdemo.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="After choose the employee, you can edit employee's profile. You can also add a new employee but clicking the add new employee button" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
                      </children>
                   </HBox>
                </content>
