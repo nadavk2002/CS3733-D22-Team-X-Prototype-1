@@ -90,7 +90,7 @@ public class EquipmentUnitDAO extends Subject implements DAO<EquipmentUnit> {
     if (recordObject.getIsAvailableChar() == 'Y') {
       eqtDAO.decreaseAvailability(recordObject.getType(), 1);
     }
-    notifyAllObservers();
+    //    notifyAllObservers();
   }
 
   @Override
@@ -181,7 +181,7 @@ public class EquipmentUnitDAO extends Subject implements DAO<EquipmentUnit> {
     recordObject
         .getCurrLocation()
         .addUnit(recordObject); // add unit to currLocation's list of units
-    notifyAllObservers();
+    //    notifyAllObservers();
   }
 
   @Override
