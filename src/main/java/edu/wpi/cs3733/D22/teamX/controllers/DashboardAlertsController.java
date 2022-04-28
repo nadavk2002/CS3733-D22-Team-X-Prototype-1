@@ -68,7 +68,7 @@ public class DashboardAlertsController extends Observer implements Initializable
   private void sendBedRequest(ObservableList<EquipmentUnit> beds) {
     MedicalEquipmentServiceRequest MESR = new MedicalEquipmentServiceRequest();
     ObservableList<MedicalEquipmentServiceRequest> mesrList = FXCollections.observableArrayList();
-    if (beds.size() >= 2) {
+    if (beds.size() >= 6) {
       MESR.setRequestID(ServiceRequestDAO.getDAO().makeMedicalEquipmentServiceRequestID());
       MESR.setDestination(locationDAO.getRecord("xSTOR001L1"));
       MESR.setStatus("PROC");
@@ -86,7 +86,7 @@ public class DashboardAlertsController extends Observer implements Initializable
     MedicalEquipmentServiceRequest MESR = new MedicalEquipmentServiceRequest();
     ObservableList<MedicalEquipmentServiceRequest> mesrList = FXCollections.observableArrayList();
 
-    if (infusionPumps.size() >= 5 || (cleanInfPumpNum < 5 && infusionPumps.size() > 0)) {
+    if (infusionPumps.size() >= 10 || (cleanInfPumpNum < 5 && infusionPumps.size() > 0)) {
       MESR.setRequestID(ServiceRequestDAO.getDAO().makeMedicalEquipmentServiceRequestID());
       MESR.setDestination(locationDAO.getRecord("xSTOR00201"));
       MESR.setStatus("PROC");
