@@ -35,9 +35,6 @@ public class RoomSystemControlController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initUDPchecker();
-    ipField.setText("192.168.137.27");
-    updateIPIntern("192.168.137.27");
-    // updateIpText();
 
     // populate choicebox
     roomChoice.getItems().addAll("room 1"); // place holder for someone.
@@ -62,6 +59,10 @@ public class RoomSystemControlController implements Initializable {
 
   public void updateRoom() {
     // set remAdress to IP of room at port 6587;
+    if (roomChoice.getValue().equals("room 1")) {
+      updateIPIntern("192.168.137.162");
+      ipField.setText("192.168.137.162");
+    }
   }
 
   private void initUDPchecker() {
