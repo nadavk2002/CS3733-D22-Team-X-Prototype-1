@@ -1,12 +1,21 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import edu.wpi.cs3733.D22.teamX.App;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
@@ -21,7 +30,7 @@ import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.objdetect.Objdetect;
 import org.opencv.videoio.VideoCapture;
 
-public class FaceDetectionController {
+public class FaceDetectionController implements Initializable {
   @FXML private Button cameraButton;
   @FXML private ImageView originalFrame;
   @FXML private AnchorPane rootElement;
@@ -33,6 +42,25 @@ public class FaceDetectionController {
   private CascadeClassifier faceCascade;
   private int absoluteFaceSize;
   private Image camStream;
+
+  public static void copyResource(String res, String dest, Class c) throws IOException {
+    InputStream src = c.getResourceAsStream(res);
+    Files.copy(src, Paths.get(dest), StandardCopyOption.REPLACE_EXISTING);
+  }
+
+  public void initialize(URL location, ResourceBundle resources) {
+    try {
+      copyResource(
+          "haarcascades/haarcascade_frontalface_alt.xml", "haar_classifier.xml", App.class);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    try {
+      copyResource("lbpcascades/lbp_frontalface_alt.xml", "lbp_classifier.xml", App.class);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 
   protected void init() {
     this.capture = new VideoCapture();
