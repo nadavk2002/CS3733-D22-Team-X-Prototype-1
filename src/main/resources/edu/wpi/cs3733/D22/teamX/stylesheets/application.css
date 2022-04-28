@@ -33,7 +33,7 @@
 .content-container > .button {
     -fx-font-family: "Oxygen";
     -fx-font-size: 20;
-    -fx-background-color: -fx-color-2;
+    -fx-background-color: -fx-color-3;
     -fx-text-fill: -fx-color-1;
     -fx-background-radius: 20px;
 }
@@ -42,7 +42,7 @@
     -fx-font-family: "Oxygen";
     -fx-font-size: 20;
     -fx-background-color: -fx-color-1;
-    -fx-text-fill: -fx-color-2;
+    -fx-text-fill: -fx-color-3;
 }
 
 .content-container > .text-field {
@@ -61,6 +61,7 @@
 .title-label {
     -fx-font-family: "Poppins";
     -fx-font-weight: bold;
+    -fx-font-size: 36;
     -fx-text-fill: -fx-color-3;
 }
 
@@ -185,6 +186,7 @@
 
 #loginPane {
     -fx-background-image: url('../assets/Brigham-Womens-TO-USE-blur.jpg');
+    -fx-background-size: cover;
 }
 
 #loginFields {
@@ -343,7 +345,66 @@
     -fx-font-size: 16;
 }
 
+/*DASHBOARD*/
 
+.dashboard-buttons > .button {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 18;
+    -fx-background-color: -fx-color-3;
+    -fx-text-fill: -fx-color-1;
+    -fx-background-radius: 10px;
+}
 
+.dashboard-buttons > .button:hover {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 18;
+    -fx-background-color: -fx-color-3;
+    -fx-text-fill: -fx-color-1;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-color: -fx-color-1;
+}
+
+.dashboard-buttons > .button:pressed {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 18;
+    -fx-background-color: -fx-color-1;
+    -fx-text-fill: -fx-color-3;
+    -fx-background-radius: 10px;
+}
+
+.dashboard-level {
+    -fx-background-radius: 10;
+    -fx-background-color: -fx-color-3;
+    -fx-border-radius: 10;
+    -fx-border-color: -fx-color-3;
+    -fx-border-width: 8;
+}
+
+.level-title-bar {
+    -fx-fill: -fx-color-3;
+    -fx-arc-height: 20px;
+    -fx-arc-width: 20px;
+}
+
+.level-title {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 24;
+    -fx-text-fill: -fx-color-1;
+}
+
+.dirty-count-bar {
+    -fx-fill: -fx-color-4;
+    -fx-arc-height: 15px;
+    -fx-arc-width: 15px;
+    -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
+.count-bar-text {
+    -fx-font-family: "Oxygen";
+    -fx-font-size: 16;
+    -fx-fill: -fx-color-1;
+}
 
 

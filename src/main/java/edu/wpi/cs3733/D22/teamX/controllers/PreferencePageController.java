@@ -35,6 +35,10 @@ public class PreferencePageController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     initPalettes();
+    String css =
+        App.class
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/application.css")
+            .toExternalForm();
     muteSoundsToggle.setSelected(muteSoundsToggleOn);
     muteMusicToggle.setSelected(muteMusicToggleOn);
     darkModeToggle.setSelected(darkModeToggleOn);
@@ -66,6 +70,8 @@ public class PreferencePageController implements Initializable {
           String[] selectedScheme = palettes.get(currentScheme);
           System.out.println(selectedScheme[0]);
           App.changeColorStyle(selectedScheme);
+          darkModeToggle.getScene().getStylesheets().remove(css);
+          darkModeToggle.getScene().getStylesheets().add(css);
         });
 
     accessOptionsCombo.setOnAction(
@@ -85,6 +91,8 @@ public class PreferencePageController implements Initializable {
           String[] selectedScheme = palettes.get(currentScheme);
           System.out.println(selectedScheme[0]);
           App.changeColorStyle(selectedScheme);
+          darkModeToggle.getScene().getRoot().getStylesheets().clear();
+          darkModeToggle.getScene().getRoot().getStylesheets().add(css);
         });
 
     darkModeToggle.setOnAction(
@@ -103,6 +111,8 @@ public class PreferencePageController implements Initializable {
           String[] selectedScheme = palettes.get(currentScheme);
           System.out.println(selectedScheme[0]);
           App.changeColorStyle(selectedScheme);
+          darkModeToggle.getScene().getRoot().getStylesheets().clear();
+          darkModeToggle.getScene().getRoot().getStylesheets().add(css);
         });
   }
 
