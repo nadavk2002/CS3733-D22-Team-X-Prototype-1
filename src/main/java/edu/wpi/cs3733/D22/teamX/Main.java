@@ -2,7 +2,6 @@ package edu.wpi.cs3733.D22.teamX;
 // import edu.wpi.cs3733.c
 
 import edu.wpi.cs3733.D22.teamX.exceptions.loadSaveFromCSVException;
-import org.opencv.core.Core;
 
 public class Main {
 
@@ -18,7 +17,7 @@ public class Main {
     //    }
 
     App.launch(App.class, args);
-    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     try {
       DatabaseCreator.closeDB();
     } catch (loadSaveFromCSVException e) {
