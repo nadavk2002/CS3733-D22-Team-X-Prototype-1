@@ -32,6 +32,9 @@
                   <TableColumn fx:id="requestStatus" prefWidth="142.39996337890625" text="Request Status" />
                   <TableColumn fx:id="destination" prefWidth="130.93310546875" text="Destination" />
                   <TableColumn fx:id="assignee" prefWidth="75.0" text="Assignee" />
+<!--                  <TableColumn fx:id="createTime" prefWidth="130.0" text="Created At" />-->
+<!--                  <TableColumn fx:id="PROCTime" prefWidth="130.0" text="Began Processing At" />-->
+<!--                  <TableColumn fx:id="DONETime" prefWidth="130.0" text="Completed At" />-->
               </columns>
             </TableView>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Request">
