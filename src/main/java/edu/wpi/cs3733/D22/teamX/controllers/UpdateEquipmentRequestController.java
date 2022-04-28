@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -9,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -17,15 +17,18 @@ import javafx.stage.Stage;
 public class UpdateEquipmentRequestController {
   @FXML private Label quanityGreaterThan;
   @FXML private Label amountAvailable;
-  @FXML private ChoiceBox<String> selectEquipmentType, selectDestination, selectStatus;
+  @FXML
+  private JFXComboBox<String> selectEquipmentType, selectDestination, selectStatus, selectAssignee;
   @FXML private TextField amountField;
   @FXML private Button submitButton;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
-  private MedicalEquipmentServiceRequestDAO equipmentDAO =
-      MedicalEquipmentServiceRequestDAO.getDAO();
+  private EmployeeDAO employeeDAO = EmployeeDAO.getDAO();
+  //  private MedicalEquipmentServiceRequestDAO equipmentDAO =
+  //      MedicalEquipmentServiceRequestDAO.getDAO();
   private EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
   private List<Location> locations;
+  private List<Employee> employees;
   private MedicalEquipmentServiceRequest request;
 
   private ServiceRequestDAO requestDAO = ServiceRequestDAO.getDAO();
@@ -36,9 +39,9 @@ public class UpdateEquipmentRequestController {
 
   @FXML
   public void initialize() {
-    selectDestination.setValue(request.getLocationShortName());
     locations = locationDAO.getAllRecords();
-    resetFields();
+    employees = employeeDAO.getAllRecords();
+    //    resetFields();
     submitButton.setDisable(false);
     selectStatus.getItems().addAll("", "PROC", "DONE");
     EquipmentTypeDAO eqtDAO = EquipmentTypeDAO.getDAO();
@@ -46,6 +49,9 @@ public class UpdateEquipmentRequestController {
       selectEquipmentType.getItems().add(eqtDAO.getAllRecords().get(i).getModel());
     }
     selectDestination.setItems(this.getLocationNames());
+    selectDestination.setValue(request.getLocationShortName());
+    selectAssignee.setItems(this.getEmployeeIDs());
+    selectAssignee.setValue(request.getAssigneeID());
     selectEquipmentType.setValue(this.request.getEquipmentType());
     selectStatus.setValue(this.request.getStatus());
     String updateAmount = String.valueOf(this.request.getQuantity());
@@ -69,6 +75,15 @@ public class UpdateEquipmentRequestController {
     selectEquipmentType.setValue("");
     selectDestination.setValue("");
     selectStatus.setValue("");
+    selectAssignee.setValue("");
+  }
+
+  private ObservableList<String> getEmployeeIDs() {
+    ObservableList<String> employeeID = FXCollections.observableArrayList();
+    for (int i = 0; i < employees.size(); i++) {
+      employeeID.add(employees.get(i).getEmployeeID());
+    }
+    return employeeID;
   }
 
   @FXML
@@ -98,7 +113,7 @@ public class UpdateEquipmentRequestController {
     request.setDestination(locations.get(selectDestination.getSelectionModel().getSelectedIndex()));
     request.setStatus(selectStatus.getValue());
     request.setQuantity(Integer.parseInt(amountField.getText()));
-    request.setAssignee(EmployeeDAO.getDAO().getRecord("EMPL0001"));
+    request.setAssignee(employees.get(selectAssignee.getSelectionModel().getSelectedIndex()));
     if (request.getQuantity()
         > eqtDAO.getRecord(request.getEquipmentType()).getNumUnitsAvailable()) {
       quanityGreaterThan.setVisible(true);
