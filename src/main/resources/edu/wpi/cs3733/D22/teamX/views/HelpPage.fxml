@@ -244,6 +244,11 @@
                                     <Font size="43.0" />
                                  </font>
                               </Label>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
                               <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click table" textAlignment="CENTER">
                                  <font>
                                     <Font size="35.0" />
