@@ -9,7 +9,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,9 +24,9 @@
    <children>
       <AnchorPane fx:id="anchorRoot" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0">
          <children>
-            <VBox fx:id="infoBox" layoutX="799.0" prefHeight="1080.0" prefWidth="821.0" style="-fx-background-color: #adadad; -fx-border-color: #adadad; -fx-border-width: 95 95 90 50; -fx-background-radius: 30 0 0 30; -fx-border-radius: 30 0 0 30;">
+            <VBox fx:id="infoBox" layoutX="799.0" prefHeight="1080.0" prefWidth="821.0" styleClass="background-box">
                <children>
-                  <TabPane minHeight="-Infinity" prefHeight="420.0" prefWidth="600.0" style="-fx-border-width: 10; -fx-border-color: #446fdc; -fx-border-radius: 10;">
+                  <TabPane minHeight="-Infinity" prefHeight="420.0" prefWidth="600.0" style="-fx-border-width: 10; -fx-border-color: #899091; -fx-border-radius: 10;">
                      <tabs>
                         <Tab text="Equipment">
                            <content>
@@ -66,13 +65,6 @@
                            </content>
                         </Tab>
                      </tabs>
-                     <effect>
-                        <InnerShadow blurType="GAUSSIAN" height="20.0" radius="9.5" width="20.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </InnerShadow>
-                     </effect>
                   </TabPane>
                   <HBox prefHeight="475.0" prefWidth="676.0">
                      <children>
@@ -101,7 +93,7 @@
                   <DropShadow height="11.0" radius="5.0" width="11.0" />
                </effect>
             </VBox>
-            <JFXButton fx:id="toMapEditor" layoutX="1480.0" layoutY="500.0" onAction="#ToMapEditor" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #446fdc; -fx-rotate: 270; -fx-background-radius: 20 20 0 0;" text="Map Editor" textFill="WHITE">
+            <JFXButton fx:id="toMapEditor" layoutX="1480.0" layoutY="500.0" onAction="#ToMapEditor" prefHeight="60.0" prefWidth="223.0" style="-fx-background-color: #378BCC; -fx-rotate: 270; -fx-background-radius: 20 20 0 0;" text="Map Editor" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
@@ -134,7 +126,7 @@
                               </StackPane>
                               <VBox fx:id="l5Vbox" alignment="TOP_CENTER" prefHeight="52.0" prefWidth="600.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
                                  <children>
-                                    <StackPane fx:id="l5StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l5StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
                                           <Rectangle fx:id="levFiveDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="dirty-count-bar" width="200.0" />
                                           <HBox alignment="CENTER_LEFT">
@@ -152,9 +144,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l5StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l5StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levFiveIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levFiveIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="inuse-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -167,9 +159,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l5StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-image-width: 3; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l5StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levFiveClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levFiveClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="clean-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -200,7 +192,7 @@
                               </StackPane>
                               <VBox fx:id="l4Vbox">
                                  <children>
-                                    <StackPane fx:id="l4StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l4StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
                                           <Rectangle fx:id="levFourDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="dirty-count-bar" width="200.0" />
                                           <HBox>
@@ -215,9 +207,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l4StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l4StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levFourIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levFourIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="inuse-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -230,9 +222,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l4StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l4StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levFourClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levFourClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="clean-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -263,7 +255,7 @@
                               </StackPane>
                               <VBox fx:id="l3Vbox">
                                  <children>
-                                    <StackPane fx:id="l3StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l3StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
                                           <Rectangle fx:id="levThreeDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="dirty-count-bar" width="200.0" />
                                           <HBox>
@@ -278,9 +270,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l3StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l3StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levThreeIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levThreeIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="inuse-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -293,9 +285,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l3StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l3StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levThreeClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levThreeClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="clean-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -326,7 +318,7 @@
                               </StackPane>
                               <VBox fx:id="l2Vbox">
                                  <children>
-                                    <StackPane fx:id="l2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
                                           <Rectangle fx:id="levTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="dirty-count-bar" width="200.0" />
                                           <HBox>
@@ -341,9 +333,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="inuse-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -356,9 +348,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="clean-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -389,7 +381,7 @@
                               </StackPane>
                               <VBox fx:id="l1Vbox">
                                  <children>
-                                    <StackPane fx:id="l1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
                                           <Rectangle fx:id="levOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="dirty-count-bar" width="200.0" />
                                           <HBox>
@@ -404,9 +396,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="inuse-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -419,9 +411,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="l1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="l1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="levOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="levOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="clean-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -452,7 +444,7 @@
                               </StackPane>
                               <VBox fx:id="ll1Vbox">
                                  <children>
-                                    <StackPane fx:id="ll1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll1StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
                                           <Rectangle fx:id="llOneDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="dirty-count-bar" width="200.0" />
                                           <HBox>
@@ -467,9 +459,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll1StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="llOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="llOneIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="inuse-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -482,9 +474,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll1StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="llOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="llOneClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="clean-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -515,7 +507,7 @@
                               </StackPane>
                               <VBox fx:id="ll2Vbox">
                                  <children>
-                                    <StackPane fx:id="ll2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll2StackD" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
                                           <Rectangle fx:id="llTwoDirty" fill="#ff7474" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="dirty-count-bar" width="200.0" />
                                           <HBox>
@@ -530,9 +522,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll2StackIU" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="llTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="llTwoIU" fill="#feff75" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="inuse-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -545,9 +537,9 @@
                                           </HBox>
                                        </children>
                                     </StackPane>
-                                    <StackPane fx:id="ll2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" style="-fx-background-color: #adadad; -fx-background-radius: 10; -fx-border-color: #adadad; -fx-border-radius: 10; -fx-border-width: 4;">
+                                    <StackPane fx:id="ll2StackC" alignment="CENTER_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="608.0" styleClass="background-bar">
                                        <children>
-                                          <Rectangle fx:id="llTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-arc-height: 15; -fx-arc-width: 15; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);" width="200.0" />
+                                          <Rectangle fx:id="llTwoClean" fill="#78ff78" height="15.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="clean-count-bar" width="200.0" />
                                           <HBox>
                                              <children>
                                                 <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="5.0" />
@@ -566,16 +558,16 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <HBox fx:id="buttonBox" alignment="CENTER" prefHeight="19.0" prefWidth="600.0" styleClass="dashboard-buttons">
+                  <HBox fx:id="buttonBox" alignment="CENTER" prefHeight="19.0" prefWidth="600.0" spacing="15.0">
                      <children>
-                        <JFXButton fx:id="toLocationTable" onAction="#ToLocationTable" text="Location Table" textFill="WHITE" />
-                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" text="Equipment Table" textFill="WHITE" />
-                        <JFXButton fx:id="showAlerts" minHeight="-Infinity" minWidth="-Infinity" onAction="#ShowAlerts" text="Alerts" textFill="WHITE" />
+                        <JFXButton fx:id="toLocationTable" onAction="#ToLocationTable" styleClass="dashboard-buttons" text="Location Table" textFill="WHITE" />
+                        <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#ToEquipmentTable" styleClass="dashboard-buttons" text="Equipment Table" textFill="WHITE" />
+                        <JFXButton fx:id="showAlerts" minHeight="-Infinity" minWidth="-Infinity" onAction="#ShowAlerts" styleClass="dashboard-buttons" text="Alerts" textFill="WHITE" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <VBox fx:id="alertBox" alignment="CENTER" layoutX="869.0" layoutY="-10.0" prefHeight="90.0" prefWidth="640.0" style="-fx-background-color: #446fdc;">
+            <VBox fx:id="alertBox" alignment="CENTER" layoutX="869.0" layoutY="-10.0" prefHeight="90.0" prefWidth="640.0" style="-fx-background-color: #378BCC;">
                <children>
                   <Label alignment="CENTER" prefHeight="35.0" prefWidth="158.0" text="ALERT!" textFill="WHITE">
                      <font>
@@ -587,6 +579,36 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+               </children>
+            </VBox>
+            <VBox layoutX="106.0" layoutY="26.0" prefHeight="47.0" prefWidth="196.0">
+               <children>
+                  <HBox prefHeight="45.0" prefWidth="112.0" spacing="15.0">
+                     <children>
+                        <Label text="Clean">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="In Use">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Dirty">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="15.0" prefWidth="35.0" spacing="50.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#6cc454" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#dea51b" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#c45454" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

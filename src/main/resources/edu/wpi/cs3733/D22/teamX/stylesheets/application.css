@@ -20,6 +20,10 @@
     -fx-color-3: #378BCC;
     -fx-color-4: #16629C;
     -fx-color-5: #899091;
+    -fx-color-dirty: #c45454;
+    -fx-color-clean: #6cc454;
+    -fx-color-inuse: #dea51b;
+
     -fx-font-family: "Poppins";
 }
 
@@ -347,7 +351,7 @@
 
 /*DASHBOARD*/
 
-.dashboard-buttons > .button {
+.dashboard-buttons {
     -fx-font-family: "Oxygen";
     -fx-font-size: 18;
     -fx-background-color: -fx-color-3;
@@ -355,24 +359,15 @@
     -fx-background-radius: 10px;
 }
 
-.dashboard-buttons > .button:hover {
-    -fx-font-family: "Oxygen";
-    -fx-font-size: 18;
-    -fx-background-color: -fx-color-3;
-    -fx-text-fill: -fx-color-1;
-    -fx-background-radius: 10px;
-    -fx-border-radius: 10px;
-    -fx-border-width: 2px;
-    -fx-border-color: -fx-color-1;
-}
-
-.dashboard-buttons > .button:pressed {
+.dashboard-buttons:hover {
     -fx-font-family: "Oxygen";
     -fx-font-size: 18;
     -fx-background-color: -fx-color-1;
     -fx-text-fill: -fx-color-3;
     -fx-background-radius: 10px;
 }
+
+
 
 .dashboard-level {
     -fx-background-radius: 10;
@@ -395,16 +390,43 @@
 }
 
 .dirty-count-bar {
-    -fx-fill: -fx-color-4;
+    -fx-fill: -fx-color-dirty;
     -fx-arc-height: 15px;
     -fx-arc-width: 15px;
     -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
-
+.clean-count-bar {
+    -fx-fill: -fx-color-clean;
+    -fx-arc-height: 15px;
+    -fx-arc-width: 15px;
+    -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+.inuse-count-bar {
+    -fx-fill: -fx-color-inuse;
+    -fx-arc-height: 15px;
+    -fx-arc-width: 15px;
+    -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
 .count-bar-text {
     -fx-font-family: "Oxygen";
     -fx-font-size: 16;
     -fx-fill: -fx-color-1;
 }
+.background-bar {
+    -fx-background-color: -fx-color-5;
+    -fx-background-radius: 10;
+    -fx-border-width: 4;
+    -fx-border-color: -fx-color-5;
+    -fx-border-radius: 10;
+}
+.background-box{
+    -fx-background-color: -fx-color-3;
+    -fx-border-color: -fx-color-3;
+    -fx-border-width: 95 95 90 50;
+    -fx-background-radius: 30 0 0 30;
+    -fx-border-radius: 30 0 0 30;
+    -fx-effect:  dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
+}
+
 
 
