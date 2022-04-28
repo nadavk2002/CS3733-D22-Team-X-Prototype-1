@@ -12,7 +12,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.ReqInTransportController">
    <center>
       <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" styleClass="content-background" BorderPane.alignment="TOP_CENTER">
@@ -92,7 +91,7 @@
       </VBox>
    </center>
    <top>
-        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="200.0" prefWidth="1400.0" styleClass="title-label" text="Request Inpatient Transportation" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+        <Label alignment="CENTER" contentDisplay="TOP" prefHeight="100.0" prefWidth="1400.0" styleClass="title-label" text="Request Inpatient Transportation" textFill="#446fdc" BorderPane.alignment="TOP_CENTER">
             <font>
                 <Font name="System Bold" size="72.0" />
             </font>
