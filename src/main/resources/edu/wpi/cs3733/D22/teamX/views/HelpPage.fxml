@@ -91,7 +91,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click Dashboard in the side bar" textAlignment="CENTER">
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click dashboard" textAlignment="CENTER">
                                  <font>
                                     <Font size="35.0" />
                                  </font>
@@ -170,7 +170,7 @@
                                     <Font size="43.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Home page" textAlignment="CENTER">
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click graphic editor" textAlignment="CENTER">
                                  <font>
                                     <Font size="35.0" />
                                  </font>
@@ -240,6 +240,90 @@
                                     <Font size="24.0" />
                                  </font>
                               </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Service table" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click table" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Tablebox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the table button on the side bar" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: View service table" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Servicetable.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Edit service" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Editservice.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You can edit the service by input the service id, then click edit request" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You can also drag the equipment to a desired location. For example, you can move a recliner to another location" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click location table or equipment table will show a pop-up window with details" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Edit service" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
