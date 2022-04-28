@@ -136,4 +136,19 @@ public class App extends Application {
   public void stop() {
     log.info("Shutting Down");
   }
+
+  public static void changeColorStyle(String[] hexCodes) {
+    for (int i = 0; i < hexCodes.length; i++) {
+      String color = ("-fx-color-") + (i + 1) + (": #") + (hexCodes[i]) + (";");
+      mainMenu.getScene().getRoot().setStyle(color);
+    }
+  }
+
+  public static void applyColorChanges() {
+    String css =
+        App.class
+            .getResource("/edu/wpi/cs3733/D22/teamX/stylesheets/application.css")
+            .toExternalForm();
+    mainMenu.getScene().getRoot().getStylesheets().add(css);
+  }
 }
