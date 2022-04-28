@@ -49,6 +49,7 @@ public class MealReqController implements Initializable {
   private final ObservableList<MealServiceRequest> mealList = FXCollections.observableArrayList();
   private final ObservableList<String> employeeIDs = FXCollections.observableArrayList();
   private final ObservableList<String> locationNames = FXCollections.observableArrayList();
+  private final ObservableList<String> patientNamesList = FXCollections.observableArrayList();
 
   @FXML
   public void initialize(URL location, ResourceBundle resources) {
@@ -70,10 +71,9 @@ public class MealReqController implements Initializable {
     // patient names choice box---------------------------------------
     // patientNames.getItems().addAll("Patient 1", "Patient 2", "Patient 3", "Patient 4", "Patient
     // 5");
+    patientNames.setItems(getPatients());
+
     List<MealServiceRequest> meals = getMealRequests();
-    for (MealServiceRequest meal : meals) {
-      patientNames.getItems().add(meal.getPatientFor());
-    }
 
     // drinks choice box---------------------------------------
     // drinkSel.getItems().addAll("Water", "Orange Juice", "Apple Juice", "Gatorade");
@@ -167,6 +167,14 @@ public class MealReqController implements Initializable {
     return mealList;
   }
 
+  private ObservableList<String> getPatients() {
+    List<Patient> patients = PatientDAO.getDAO().getAllRecords();
+    for (Patient patient : patients) {
+      patientNamesList.add(patient.getFirstName() + " " + patient.getLastName());
+    }
+    return patientNamesList;
+  }
+
   @FXML
   void submitButton() {
     MealServiceRequest request = new MealServiceRequest();
@@ -179,7 +187,11 @@ public class MealReqController implements Initializable {
     request.setMainCourse(mainSel.getValue());
     request.setDrink(drinkSel.getValue());
     request.setSide(sideSel.getValue());
-    request.setPatientFor(patientNames.getValue());
+    request.setPatientFor(
+        PatientDAO.getDAO()
+            .getAllRecords()
+            .get(patientNames.getSelectionModel().getSelectedIndex())
+            .getPatientID());
 
     requestDAO.addRecord(request);
     this.resetFields();

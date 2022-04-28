@@ -36,7 +36,7 @@ repositories {
 
 javafx {
     version = "17"
-    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media']
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.web']
 }
 
 
@@ -51,10 +51,12 @@ dependencies {
             'org.apache.derby:derbytools:10.15.2.0',
             'org.slf4j:slf4j-api:1.7.36',
             'org.slf4j:slf4j-simple:1.7.36',
+            'eu.hansolo.fx:charts:11.11',
     )
     implementation 'junit:junit:4.13.2'
     implementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'net.kurobako:gesturefx:0.7.1'
+    implementation 'net.sf.barcode4j:barcode4j:2.1'
 
     testCompile(
             "org.testfx:testfx-core:4.0.16-alpha",
@@ -73,12 +75,6 @@ dependencies {
 
 test {
     useJUnit()
-}
-
-jar {
-    manifest {
-        attributes 'Main-Class': mainClassName
-    }
 }
 
 def codeCoverageExcludes = [
@@ -133,9 +129,6 @@ spotless {
         googleJavaFormat()
     }
 }
-
-// Include dependent libraries in archive.
-mainClassName = "edu.wpi.cs3733.D22.teamX.Main"
 
 jar {
     manifest {

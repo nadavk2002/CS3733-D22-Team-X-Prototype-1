@@ -1,5 +1,6 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.entity.*;
 import java.io.IOException;
@@ -16,7 +17,7 @@ import javafx.scene.control.*;
 
 public class JanitorialRequestController implements Initializable {
   @FXML private Button mainMenu, submitButton;
-  @FXML private ChoiceBox<String> roomNum, serviceStatus, assignStaff, serviceType;
+  @FXML private JFXComboBox<String> roomNum, serviceStatus, assignStaff, serviceType;
 
   private LocationDAO locationDAO = LocationDAO.getDAO();
   private ServiceRequestDAO janitorDAO = ServiceRequestDAO.getDAO();
@@ -45,6 +46,7 @@ public class JanitorialRequestController implements Initializable {
     assignStaff.setValue("");
     //    assignStaff.getItems().addAll("Janitor 1", "Janitor 2", "Janitor 3", "Janitor 4");
     roomNum.setItems(getLocationNames());
+    roomNum.setValue("");
     roomNum.setOnAction((ActionEvent event) -> enableSubmitButton());
     serviceType.setOnAction((ActionEvent event) -> enableSubmitButton());
     assignStaff.setOnAction((ActionEvent event) -> enableSubmitButton());
@@ -77,7 +79,6 @@ public class JanitorialRequestController implements Initializable {
     submitButton.setDisable(
         roomNum.getValue().equals("")
             || serviceType.getValue().equals("")
-            || serviceStatus.getValue().equals("")
             || assignStaff.getValue().equals(""));
   }
 

@@ -93,7 +93,11 @@ public class LoginScreenController implements Initializable {
       serverVBox.setVisible(false);
     }
 
-    loginImage.fitWidthProperty().bind(loginFields.widthProperty());
-    loginImage.fitHeightProperty().bind(loginFields.heightProperty());
+    loginFields
+        .widthProperty()
+        .addListener(
+            (obs, oldVal, newVal) -> {
+              loginImage.setFitWidth(loginFields.getWidth() - 150);
+            });
   }
 }

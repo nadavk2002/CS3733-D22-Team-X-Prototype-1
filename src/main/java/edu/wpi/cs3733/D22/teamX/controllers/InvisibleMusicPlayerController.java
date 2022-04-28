@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import edu.wpi.cs3733.D22.teamX.App;
+import edu.wpi.cs3733.D22.teamX.entity.UserPreferenceDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -24,8 +25,9 @@ public class InvisibleMusicPlayerController implements Initializable {
    */
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    mediaPlayer.setVolume(0); // remove this line eventually
     mediaPlayer.setAutoPlay(true);
+    mediaPlayer.setMute(
+        UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getMuteMusic());
     mediaPlayer.setOnStopped(() -> mediaPlayer.play());
   }
 }

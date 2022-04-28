@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.TreeTableColumn?>
-<?import javafx.scene.layout.AnchorPane?>
-
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<AnchorPane fx:id="content" prefHeight="476.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorLocationTableOverlayController">
-   <children>
-      <TableView fx:id="table" layoutX="23.0" layoutY="62.0">
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+
+
+<BorderPane prefHeight="476.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.GraphicalMapEditorLocationTableOverlayController">
+   <center>
+      <TableView fx:id="table" BorderPane.alignment="CENTER">
          <columns>
             <TableColumn fx:id="nodeID" prefWidth="75.0" text="Node ID" />
             <TableColumn prefWidth="75.0" text="X Coordinate" fx:id="xCoord" />
@@ -21,6 +20,8 @@
             <TableColumn fx:id="shortName" prefWidth="75.0" text="Short Name" />
          </columns>
       </TableView>
-      <TextField fx:id="searchLocationsField" layoutX="23.0" layoutY="11.0" prefHeight="37.0" prefWidth="395.0" promptText="Search Locations..." />
-   </children>
-</AnchorPane>
+   </center>
+   <top>
+      <TextField fx:id="searchLocationsField" prefHeight="37.0" prefWidth="395.0" promptText="Search Locations..." BorderPane.alignment="CENTER" />
+   </top>
+</BorderPane>

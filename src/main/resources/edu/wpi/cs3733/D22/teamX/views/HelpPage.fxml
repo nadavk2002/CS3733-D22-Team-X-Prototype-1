@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.HelpPageController">
+   <top>
+      <Label styleClass="title-label" text="How to use the system" textFill="#446fdc" BorderPane.alignment="BOTTOM_CENTER">
+         <BorderPane.margin>
+            <Insets top="100.0" />
+         </BorderPane.margin>
+         <font>
+            <Font name="System Bold" size="72.0" />
+         </font>
+      </Label>
+   </top>
+   <center>
+      <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ScrollPane prefHeight="855.0" prefWidth="2540.0">
+               <content>
+                  <HBox prefHeight="858.0" prefWidth="1602.0">
+                     <children>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="656.0" text="Main menu" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="661.0" text="Step 1: Home page" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/HomePage1.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="After log into the system, the home page shows the different service requests. You can click the reservice type you want to request." textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 2: Search service request" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Menuwithbox.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fitHeight="373.0" fitWidth="654.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/searchbar.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Or type the keywords of the service in the search bar." textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Dashboard" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click dashboard" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../../../Desktop/dashboardbox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the dashboard button on the side bar" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 2: View Information" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Dashboard.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the level you want to choose, the left page shows the details of equipments type, quantity, and location" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Additional location and equipment table" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../../../../../../../Desktop/dashboarddetailbox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click location table, equipment table, or alerts. A window will pop up showing the requested information." textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="This location table is an example." textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="397.0" fitWidth="756.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/locationtable.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="    Graphical editor" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click graphic editor" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/graphicalMap.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the graphical editor button on the side bar" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: Choose floor" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/mapSelection.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the desired floor and what type of information you want to display on the map editor" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Select the location you want to edit" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/MapDragBox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the location icon you want to edit, the details will show on the left page" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You can also drag the equipment to a desired location. For example, you can move a recliner to another location" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click location table or equipment table will show a pop-up window with details" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Service table" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click table" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Tablebox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the table button on the side bar" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: View service table" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Servicetable.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Edit service" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Editservice.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You can edit the service by input the service id, then click edit request" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="You can also drag the equipment to a desired location. For example, you can move a recliner to another location" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 4: Filter outstanding service request" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/oustandingtable.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the filter outstanding service button, the services were not done will appear" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Employee viewer" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click employee viewer" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/viewerbox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the viewer button on the side bar" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: View employee detail" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Viewer.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Update info" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/viewerdemo.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="After choose the employee, you can edit employee's profile. You can also add a new employee but clicking the add new employee button" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Service request" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click service requests icon" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/ServiceBox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Take Request Equipment as an exmaple, click the icon" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: Choose assignee" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Equip2.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose asignee from the drop down list" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Choose destination " textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Equip3.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="After choose the assignee, choose the destination from the drop down list" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 4: Select equipment" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Equip5.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose the equipment you want to request" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 5: Input the amount" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/Equip5.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Type the amount of equipment you want to request" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total amount of available equipments are listed below the &quot;amount&quot; button" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 6: Submit the form" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/EquipBox.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the submit request button after filling all the information" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Otherwise, click the reset button if you typed any incorrct information" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="1924.0" prefWidth="648.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="73.0" prefWidth="560.0" text="Exit" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="43.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="Step 1: Click exit button" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="430.0" fitWidth="653.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/systemexit.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the exit button on the side bar" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="602.0" text="       Step 2: Choose CSV file location" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/CSV1.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Choose directory to save CSV files. You can click &quot;Default Directory&quot; to store CSV files in the default locations on your computer" textAlignment="CENTER" wrappingWidth="618.9028663635254">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/csvdefault.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Label alignment="CENTER" prefHeight="43.0" prefWidth="624.0" text="Step 3: Choose custom directory" textAlignment="CENTER" wrapText="true">
+                                 <font>
+                                    <Font size="35.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fitHeight="363.0" fitWidth="645.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../assets/csvchoose.png" />
+                                 </image>
+                              </ImageView>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Click the &quot;Browse&quot; button, choose the directory you want to store the CSV file" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Then you can close the window to exit the system" textAlignment="CENTER" wrappingWidth="621.1367530822754">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </StackPane>
+   </center>
+   <bottom>
+      <Label text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes." textAlignment="CENTER" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </bottom>
+</BorderPane>

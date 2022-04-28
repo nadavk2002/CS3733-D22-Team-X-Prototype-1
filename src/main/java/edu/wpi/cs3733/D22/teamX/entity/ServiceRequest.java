@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /** Represents a general service request */
 public abstract class ServiceRequest {
-  private LocalDateTime nullTime =
+  public static LocalDateTime nullTime =
       LocalDateTime.ofEpochSecond(0, 0, ZoneOffset.UTC); // 1 - 1 - 1970
 
   private String requestID;

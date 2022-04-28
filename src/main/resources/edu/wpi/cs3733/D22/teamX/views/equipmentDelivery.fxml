@@ -1,55 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MedicalEquipmentDeliveryController">
-<children>
-    <ChoiceBox fx:id="selectEquipmentType" layoutX="718.0" layoutY="432.0" prefWidth="150.0">
-        <opaqueInsets>
-            <Insets />
-        </opaqueInsets>
-    </ChoiceBox>
-    <TextField fx:id="amountField" layoutX="718.0" layoutY="497.0" onKeyReleased="#checkForInt" prefHeight="26.0" prefWidth="150.0" />
-    <Label layoutX="585.0" layoutY="436.0" text="Equipment Selection:" />
-    <Label layoutX="650.0" layoutY="501.0" text="Amount:" />
-    <JFXButton fx:id="submitButton" layoutX="785.0" layoutY="569.0" mnemonicParsing="false" onAction="#submitRequest" text="Submit Request" textFill="#446fdc">
-        <font>
-            <Font name="System Bold" size="13.0" />
-        </font>
-    </JFXButton>
-      <JFXButton fx:id="resetFields" layoutX="696.0" layoutY="569.0" mnemonicParsing="false" onAction="#resetFields" text="Reset Fields" textFill="#446fdc">
-          <font>
-              <Font name="System Bold" size="13.0" />
-          </font>
-      </JFXButton>
-      <ChoiceBox fx:id="selectDestination" layoutX="718.0" layoutY="400.0" prefWidth="150.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ChoiceBox>
-      <Label layoutX="632.0" layoutY="405.0" text="Destination: " />
-      <ChoiceBox fx:id="selectStatus" layoutX="718.0" layoutY="531.0" prefWidth="150.0">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ChoiceBox>
-      <Label layoutX="654.0" layoutY="536.0" text="Status:" />
-      <Label layoutX="557.0" layoutY="278.0" text="Request Equipment Delivery" textFill="#446fdc">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="1080.0" prefWidth="1620.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.MedicalEquipmentDeliveryController">
+   <center>
+      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="1000.0" styleClass="content-background" BorderPane.alignment="TOP_CENTER">
+         <children>
+            <GridPane alignment="CENTER" hgap="20.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="320.0" prefWidth="1000.0" styleClass="content-container">
+              <columnConstraints>
+                <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" minWidth="10.0" prefWidth="50.0" />
+                <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="200.0" />
+                  <ColumnConstraints fillWidth="false" halignment="RIGHT" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="10.0" prefWidth="250.0" />
+                  <ColumnConstraints fillWidth="false" halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="125.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="80.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="-Infinity" minHeight="40.0" prefHeight="140.0" valignment="TOP" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Assignee">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Destination" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <Label text="Request Status" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                <Label text="Equipment Selection" GridPane.columnIndex="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                <Label text="Amount" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                <TextField fx:id="amountField" onKeyReleased="#checkForInt" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label fx:id="quanityGreaterThan" text="Invalid Quantity" textFill="#c90000" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="selectAssignee" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                  <JFXComboBox fx:id="selectDestination" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="selectStatus" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <JFXComboBox fx:id="selectEquipmentType" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="3" />
+                  <Label fx:id="amountAvailable" alignment="BOTTOM_LEFT" prefHeight="163.0" prefWidth="283.0" textFill="#446fdc" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </GridPane>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="80.0" prefWidth="500.0" spacing="125.0" styleClass="content-container">
+               <children>
+                  <JFXButton fx:id="resetFields" mnemonicParsing="false" onAction="#resetFields" styleClass="reset-button" text="Reset Form" textFill="#446fdc">
+                      <font>
+                          <Font name="System Bold" size="24.0" />
+                      </font>
+                  </JFXButton>
+                <JFXButton fx:id="submitButton" mnemonicParsing="false" onAction="#submitRequest" styleClass="submit-button" text="Submit Request" textFill="#446fdc">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </JFXButton>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets top="50.0" />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="50.0" top="50.0" />
+         </padding>
+      </VBox>
+   </center>
+   <top>
+      <Label styleClass="title-label" text="Request Equipment Delivery" textFill="#446fdc" BorderPane.alignment="TOP_CENTER">
          <font>
-            <Font name="System Bold" size="36.0" />
+            <Font name="System Bold" size="72.0" />
          </font>
+         <BorderPane.margin>
+            <Insets top="250.0" />
+         </BorderPane.margin>
       </Label>
-      <Label fx:id="amountAvailable" alignment="TOP_CENTER" layoutX="550.0" layoutY="671.0" prefHeight="100.0" prefWidth="472.0" textFill="#446fdc" />
-      <Label fx:id="quanityGreaterThan" layoutX="899.0" layoutY="501.0" text="Quantity must be less than the amount available" textFill="#c90000" />
-      <ChoiceBox fx:id="selectAssignee" layoutX="718.0" layoutY="464.0" prefWidth="150.0">
-          <opaqueInsets>
-              <Insets />
-          </opaqueInsets>
-      </ChoiceBox>
-      <Label layoutX="646.0" layoutY="468.0" text="Assignee:" />
-</children>
-</AnchorPane>
+   </top>
+</BorderPane>
