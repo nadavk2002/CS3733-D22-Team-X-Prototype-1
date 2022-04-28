@@ -39,7 +39,7 @@ public class FaceDetectionController implements Initializable {
 
   private VideoCapture capture = new VideoCapture();
   private boolean cameraActive;
-  private CascadeClassifier faceCascade;
+  private CascadeClassifier faceCascade = new CascadeClassifier();
   private int absoluteFaceSize;
   private Image camStream;
 
@@ -74,7 +74,7 @@ public class FaceDetectionController implements Initializable {
 
   @FXML
   protected void startCamera(ActionEvent event) {
-    // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+    System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     OpenCV.loadLocally();
     // check: the main class is accessible?
     if (!this.cameraActive) {
