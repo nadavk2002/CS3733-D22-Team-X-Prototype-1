@@ -219,6 +219,7 @@ public class BasicLayoutController implements Initializable {
   public void switchLoginScreen() throws IOException {
     playButtonPressSound();
     checkAPIData();
+    InvisibleMusicPlayerController.mediaPlayer.setMute(true);
     App.startScreen();
     //    App.switchScene(
     //        FXMLLoader.load(

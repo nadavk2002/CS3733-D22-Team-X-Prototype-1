@@ -77,12 +77,6 @@ test {
     useJUnit()
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': mainClassName
-    }
-}
-
 def codeCoverageExcludes = [
         'edu.wpi.cs3733.D22.teamX.App',
         'edu.wpi.cs3733.D22.teamX.Main',
@@ -135,9 +129,6 @@ spotless {
         googleJavaFormat()
     }
 }
-
-// Include dependent libraries in archive.
-mainClassName = "edu.wpi.cs3733.D22.teamX.Main"
 
 jar {
     manifest {

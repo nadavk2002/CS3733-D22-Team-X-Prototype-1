@@ -1,5 +1,10 @@
 package edu.wpi.cs3733.D22.teamX;
 
+import edu.wpi.cs3733.D22.teamX.controllers.BasicLayoutController;
+import edu.wpi.cs3733.D22.teamX.controllers.InvisibleMusicPlayerController;
+import edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController;
+import edu.wpi.cs3733.D22.teamX.controllers.PreferencePageController;
+import edu.wpi.cs3733.D22.teamX.entity.UserPreferenceDAO;
 import java.io.IOException;
 import java.util.List;
 import javafx.application.Application;
@@ -51,6 +56,20 @@ public class App extends Application {
   }
 
   public static void switchRoot() throws IOException {
+    PreferencePageController.muteMusicToggleOn =
+        UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getMuteMusic();
+    PreferencePageController.muteSoundsToggleOn =
+        UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getMuteSounds();
+    InvisibleMusicPlayerController.mediaPlayer.setVolume(
+        UserPreferenceDAO.getDAO().getRecord(LoginScreenController.currentUsername).getVolume());
+    PreferencePageController.menuButtonPressSoundPlayer.setMute(
+        UserPreferenceDAO.getDAO()
+            .getRecord(LoginScreenController.currentUsername)
+            .getMuteSounds());
+    BasicLayoutController.buttonPressSoundPlayer.setMute(
+        UserPreferenceDAO.getDAO()
+            .getRecord(LoginScreenController.currentUsername)
+            .getMuteSounds());
     Parent root = FXMLLoader.load(App.class.getResource("views/BasicLayout.fxml"));
     Scene scene = new Scene(root);
     Pane insertPage = (Pane) scene.lookup("#appContent");

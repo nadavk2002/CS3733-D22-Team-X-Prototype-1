@@ -19,10 +19,10 @@ public class PreferencePageController implements Initializable {
           App.class
               .getResource("/edu/wpi/cs3733/D22/teamX/sounds/Wii_sound_menu_button_press.mp3")
               .toExternalForm());
-  private static final MediaPlayer menuButtonPressSoundPlayer =
+  public static final MediaPlayer menuButtonPressSoundPlayer =
       new MediaPlayer(menuButtonPressSound);
-  private static boolean muteSoundsToggleOn = false;
-  private static boolean muteMusicToggleOn = false;
+  public static boolean muteSoundsToggleOn = false;
+  public static boolean muteMusicToggleOn = false;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
