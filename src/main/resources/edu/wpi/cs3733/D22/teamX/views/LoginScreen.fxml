@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -18,7 +19,7 @@
 
 <BorderPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="900.0" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.D22.teamX.controllers.LoginScreenController">
    <center>
-      <VBox fx:id="loginFields" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="350.0" minWidth="450.0" prefHeight="700.0" prefWidth="900.0">
+      <VBox fx:id="loginFields" fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="350.0" minWidth="450.0" prefHeight="865.0" prefWidth="900.0">
          <children>
             <ImageView fx:id="loginImage" fitHeight="180.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -106,9 +107,9 @@
                   <Insets top="30.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="15.0" minWidth="200.0" prefHeight="80.0" prefWidth="800.0" spacing="40.0">
+            <HBox alignment="CENTER_LEFT" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="15.0" minWidth="200.0" prefHeight="110.0" prefWidth="799.0" spacing="40.0">
                <children>
-                  <JFXButton fx:id="loginButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" onAction="#validLogin" prefHeight="60.0" prefWidth="120.0" text="Login" textFill="WHITE">
+                  <JFXButton fx:id="loginButton" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="20.0" minWidth="40.0" onAction="#validLogin" prefHeight="64.0" prefWidth="120.0" text="Login" textFill="WHITE">
                      <font>
                         <Font size="28.0" />
                      </font>
@@ -121,7 +122,7 @@
                         <Font size="28.0" />
                      </font>
                   </JFXButton>
-                  <Label fx:id="message" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="10.0" minWidth="100.0" prefHeight="80.0" prefWidth="400.0" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="message" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="10.0" minWidth="100.0" prefHeight="80.0" prefWidth="418.0" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -131,6 +132,11 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
+            <JFXCheckBox fx:id="faceCheckBox" onAction="#goToFaceDetection" text="Are you a robot?" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </JFXCheckBox>
          </children>
          <padding>
             <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />

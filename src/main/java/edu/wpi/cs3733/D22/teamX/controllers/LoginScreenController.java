@@ -1,6 +1,7 @@
 package edu.wpi.cs3733.D22.teamX.controllers;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import edu.wpi.cs3733.D22.teamX.App;
 import edu.wpi.cs3733.D22.teamX.ConnectionSingleton;
@@ -11,8 +12,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -20,6 +25,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import nu.pattern.OpenCV;
 
 public class LoginScreenController implements Initializable {
   @FXML private VBox serverVBox;
@@ -32,7 +41,9 @@ public class LoginScreenController implements Initializable {
   @FXML private ImageView loginImage;
   @FXML private VBox loginFields;
   @FXML private BorderPane loginPane;
+  @FXML private JFXCheckBox faceCheckBox;
   public static String currentUsername;
+  private SimpleBooleanProperty property = new SimpleBooleanProperty(false);
 
   @FXML
   public void validLogin() throws IOException {
@@ -78,7 +89,8 @@ public class LoginScreenController implements Initializable {
   }
 
   public void disableLoginButton() {
-    loginButton.setDisable(username.getText().isEmpty() || password.getText().isEmpty());
+    loginButton.setDisable(
+        username.getText().isEmpty() || password.getText().isEmpty() || !property.get());
   }
 
   @FXML
@@ -92,6 +104,9 @@ public class LoginScreenController implements Initializable {
       serverVBox.setDisable(true);
       serverVBox.setVisible(false);
     }
+    faceCheckBox.setDisable(false);
+    loginImage.fitWidthProperty().bind(loginFields.widthProperty());
+    loginImage.fitHeightProperty().bind(loginFields.heightProperty());
 
     loginFields
         .widthProperty()
@@ -99,5 +114,25 @@ public class LoginScreenController implements Initializable {
             (obs, oldVal, newVal) -> {
               loginImage.setFitWidth(loginFields.getWidth() - 150);
             });
+  }
+
+  @FXML
+  private void goToFaceDetection() throws IOException {
+    OpenCV.loadLocally();
+    FXMLLoader fxmlLoader =
+        new FXMLLoader(
+            getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/FaceDetection.fxml"));
+    Stage stage = new Stage();
+    fxmlLoader.setController(new FaceDetectionController(property, stage));
+    Parent root1 = fxmlLoader.load();
+    stage.setOnCloseRequest(
+        event -> {
+          disableLoginButton();
+        });
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initStyle(StageStyle.DECORATED);
+    stage.setTitle("ARE YOU A ROBOT?");
+    stage.setScene(new Scene(root1));
+    stage.show();
   }
 }

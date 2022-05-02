@@ -17,7 +17,6 @@ public class Main {
     //    }
 
     App.launch(App.class, args);
-
     try {
       DatabaseCreator.closeDB();
     } catch (loadSaveFromCSVException e) {
