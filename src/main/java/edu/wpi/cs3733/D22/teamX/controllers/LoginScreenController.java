@@ -40,7 +40,7 @@ public class LoginScreenController implements Initializable {
   @FXML private ImageView loginImage;
   @FXML private VBox loginFields;
   @FXML private BorderPane loginPane;
-  @FXML private JFXCheckBox faceButton;
+  @FXML private JFXCheckBox faceCheckBox;
   public static String currentUsername;
 
   @FXML
@@ -101,7 +101,7 @@ public class LoginScreenController implements Initializable {
       serverVBox.setDisable(true);
       serverVBox.setVisible(false);
     }
-    faceButton.setDisable(false);
+    faceCheckBox.setDisable(false);
     loginImage.fitWidthProperty().bind(loginFields.widthProperty());
     loginImage.fitHeightProperty().bind(loginFields.heightProperty());
 

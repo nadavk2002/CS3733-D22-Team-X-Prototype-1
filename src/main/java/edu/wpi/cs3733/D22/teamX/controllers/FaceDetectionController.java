@@ -13,10 +13,8 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -30,7 +28,6 @@ import org.opencv.objdetect.Objdetect;
 import org.opencv.videoio.VideoCapture;
 
 public class FaceDetectionController implements Initializable {
-  @FXML private Button cameraButton;
   @FXML private ImageView originalFrame;
   @FXML private AnchorPane rootElement;
   // @FXML private CheckBox haarClassifier, lbpClassifier;
@@ -57,10 +54,11 @@ public class FaceDetectionController implements Initializable {
       e.printStackTrace();
     }
     this.faceCascade.load(CLASSIFIER_FILE);
+    this.startCamera();
   }
 
   @FXML
-  protected void startCamera(ActionEvent event) {
+  protected void startCamera() {
     // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     OpenCV.loadLocally();
     // check: the main class is accessible?
@@ -93,13 +91,11 @@ public class FaceDetectionController implements Initializable {
         this.timer = new Timer();
         // set the timer scheduling, this allow you to perform frameGrabber every 33ms;
         this.timer.schedule(frameGrabber, 0, 33);
-        this.cameraButton.setText("Stop Camera");
       } else {
         System.err.println("Failed to open camera connection...");
       }
     } else {
       this.cameraActive = false;
-      this.cameraButton.setText("Start Camera");
 
       // stop the timer
       if (this.timer != null) {
