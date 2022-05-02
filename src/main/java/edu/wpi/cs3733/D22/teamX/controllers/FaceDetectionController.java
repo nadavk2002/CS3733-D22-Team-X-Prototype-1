@@ -80,7 +80,11 @@ public class FaceDetectionController implements Initializable {
               camStream = grabFrame();
               if (property.get()) {
                 capture.release();
-                Platform.runLater(() -> stage.close());
+                Platform.runLater(
+                    () -> {
+                      stage.close();
+                      timer.cancel();
+                    });
               }
               Platform.runLater(
                   new Runnable() {

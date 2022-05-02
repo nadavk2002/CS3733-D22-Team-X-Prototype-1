@@ -114,6 +114,10 @@ public class LoginScreenController implements Initializable {
             (obs, oldVal, newVal) -> {
               loginImage.setFitWidth(loginFields.getWidth() - 150);
             });
+    this.property.addListener(
+        event -> {
+          disableLoginButton();
+        });
   }
 
   @FXML
