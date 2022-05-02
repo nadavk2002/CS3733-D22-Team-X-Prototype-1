@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,6 +43,7 @@ public class LoginScreenController implements Initializable {
   @FXML private BorderPane loginPane;
   @FXML private JFXCheckBox faceCheckBox;
   public static String currentUsername;
+  private SimpleBooleanProperty property = new SimpleBooleanProperty(false);
 
   @FXML
   public void validLogin() throws IOException {
@@ -87,7 +89,8 @@ public class LoginScreenController implements Initializable {
   }
 
   public void disableLoginButton() {
-    loginButton.setDisable(username.getText().isEmpty() || password.getText().isEmpty());
+    loginButton.setDisable(
+        username.getText().isEmpty() || password.getText().isEmpty() || !property.get());
   }
 
   @FXML
@@ -119,8 +122,13 @@ public class LoginScreenController implements Initializable {
     FXMLLoader fxmlLoader =
         new FXMLLoader(
             getClass().getResource("/edu/wpi/cs3733/D22/teamX/views/FaceDetection.fxml"));
-    Parent root1 = fxmlLoader.load();
     Stage stage = new Stage();
+    fxmlLoader.setController(new FaceDetectionController(property, stage));
+    Parent root1 = fxmlLoader.load();
+    stage.setOnCloseRequest(
+        event -> {
+          disableLoginButton();
+        });
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.initStyle(StageStyle.DECORATED);
     stage.setTitle("ARE YOU A ROBOT?");

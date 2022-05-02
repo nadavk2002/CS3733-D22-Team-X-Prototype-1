@@ -13,11 +13,12 @@ import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javax.swing.*;
 import nu.pattern.OpenCV;
 import org.opencv.core.*;
@@ -29,18 +30,20 @@ import org.opencv.videoio.VideoCapture;
 
 public class FaceDetectionController implements Initializable {
   @FXML private ImageView originalFrame;
-  @FXML private AnchorPane rootElement;
-  // @FXML private CheckBox haarClassifier, lbpClassifier;
   private Timer timer;
-
   private static final String CLASSIFIER_FILE = "haarcascade_frontalface_alt.xml";
   private static final String CLASSIFIER_RESOURCE = "haarcascades/haarcascade_frontalface_alt.xml";
-  private VideoCapture capture = new VideoCapture();
-  private boolean cameraActive;
+  private static VideoCapture capture = new VideoCapture();
   private CascadeClassifier faceCascade = new CascadeClassifier();
   private int absoluteFaceSize = 20;
   private Image camStream;
-  private boolean faceDetected = false;
+  private final SimpleBooleanProperty property;
+  private final Stage stage;
+
+  public FaceDetectionController(SimpleBooleanProperty property, Stage stage) {
+    this.property = property;
+    this.stage = stage;
+  }
 
   public static void copyResource(String res, String dest, Class c) throws IOException {
     InputStream src = c.getResourceAsStream(res);
@@ -62,50 +65,39 @@ public class FaceDetectionController implements Initializable {
     // System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     OpenCV.loadLocally();
     // check: the main class is accessible?
-    if (!this.cameraActive) {
-      // start the video capture
-      this.capture.open(0);
-      // get the ImageView object for showing the video stream
-      // final ImageView frameView = originalFrame;
-      // check if the capture stream is opened
-      if (this.capture.isOpened()) {
-        this.cameraActive = true;
+    // start the video capture
+    this.capture.open(0);
+    // get the ImageView object for showing the video stream
+    // final ImageView frameView = originalFrame;
+    // check if the capture stream is opened
+    if (this.capture.isOpened()) {
 
-        // grab a frame every 33 ms (30 frames/sec)
-        TimerTask frameGrabber =
-            new TimerTask() {
-              @Override
-              public void run() {
-                camStream = grabFrame();
-                Platform.runLater(
-                    new Runnable() {
-                      @Override
-                      public void run() {
-                        originalFrame.setImage(camStream);
-                        originalFrame.setFitWidth(600);
-                        originalFrame.setPreserveRatio(true);
-                      }
-                    });
+      // grab a frame every 33 ms (30 frames/sec)
+      TimerTask frameGrabber =
+          new TimerTask() {
+            @Override
+            public void run() {
+              camStream = grabFrame();
+              if (property.get()) {
+                capture.release();
+                Platform.runLater(() -> stage.close());
               }
-            };
-        this.timer = new Timer();
-        // set the timer scheduling, this allow you to perform frameGrabber every 33ms;
-        this.timer.schedule(frameGrabber, 0, 33);
-      } else {
-        System.err.println("Failed to open camera connection...");
-      }
+              Platform.runLater(
+                  new Runnable() {
+                    @Override
+                    public void run() {
+                      originalFrame.setImage(camStream);
+                      originalFrame.setFitWidth(600);
+                      originalFrame.setPreserveRatio(true);
+                    }
+                  });
+            }
+          };
+      this.timer = new Timer();
+      // set the timer scheduling, this allow you to perform frameGrabber every 33ms;
+      this.timer.schedule(frameGrabber, 0, 33);
     } else {
-      this.cameraActive = false;
-
-      // stop the timer
-      if (this.timer != null) {
-        this.timer.cancel();
-        this.timer = null;
-      }
-      // release the camera
-      this.capture.release();
-      // clear the image container
-      originalFrame.setImage(null);
+      System.err.println("Failed to open camera connection...");
     }
   }
 
@@ -174,7 +166,7 @@ public class FaceDetectionController implements Initializable {
     for (int i = 0; i < facesArray.length; i++)
       Imgproc.rectangle(
           frame, facesArray[i].tl(), facesArray[i].br(), new Scalar(0, 255, 0, 255), 3);
-    faceDetected = facesArray.length > 0;
+    property.set(facesArray.length > 0);
   }
 
   /**
@@ -206,9 +198,5 @@ public class FaceDetectionController implements Initializable {
     Highgui.imencode(".png", frame, buffer);
     // build and return an Image created from the image encoded in the buffer
     return new Image(new ByteArrayInputStream(buffer.toArray()));
-  }
-
-  public void setRootElement(AnchorPane root) {
-    this.rootElement = root;
   }
 }
